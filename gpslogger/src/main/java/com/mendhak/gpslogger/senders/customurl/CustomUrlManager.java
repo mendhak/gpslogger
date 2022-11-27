@@ -176,24 +176,22 @@ public class CustomUrlManager extends FileSender {
     }
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password){
-        sendByHttp(url, method, body, headers, username, password, null);
+        if(preferenceHelper.shouldCustomURLLoggingDiscardOfflineLocations()){
+            AppSettings.getJobManager().cancelJobsInBackground(cancelResult -> {
+                debugIfNotEmpty(cancelResult.getCancelledJobs(), "Custom URL: cancelled %d http requests with outdated locations");
+                debugIfNotEmpty(cancelResult.getFailedToCancel(), "Custom URL: failed to cancel %d http requests with outdated locations");
+                sendByHttp(url, method, body, headers, username, password, CustomUrlJob.TAG_DISCARDABLE);
+            }, TagConstraint.ANY, CustomUrlJob.TAG_DISCARDABLE);
+        }
+        else {
+            sendByHttp(url, method, body, headers, username, password, null);
+        }
     }
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password, String jobTag) {
         JobManager jobManager = AppSettings.getJobManager();
         jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(url, method,
                 body, headers, username, password), new UploadEvents.CustomUrl(), jobTag));
-    }
-
-    public void cancelHttpRequests(Runnable cancelCallback, String jobTag) {
-        AppSettings.getJobManager().cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-            @Override
-            public void onCancelled(CancelResult cancelResult) {
-                debugIfNotEmpty(cancelResult.getCancelledJobs(), "Custom URL: cancelled %d http requests with outdated locations");
-                debugIfNotEmpty(cancelResult.getFailedToCancel(), "Custom URL: failed to cancel %d http requests with outdated locations");
-                cancelCallback.run();
-            }
-        }, TagConstraint.ANY, jobTag);
     }
 
     private void debugIfNotEmpty(Collection<Job> jobs, String message) {
