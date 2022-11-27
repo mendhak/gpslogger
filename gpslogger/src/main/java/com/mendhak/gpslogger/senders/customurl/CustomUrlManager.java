@@ -177,6 +177,10 @@ public class CustomUrlManager extends FileSender {
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password){
         if(preferenceHelper.shouldCustomURLLoggingDiscardOfflineLocations()){
+            if(!Systems.isNetworkAvailable(AppSettings.getInstance())){
+                LOG.debug("Device offline, will not log to Custom URL");
+                return;
+            }
             AppSettings.getJobManager().cancelJobsInBackground(cancelResult -> {
                 debugIfNotEmpty(cancelResult.getCancelledJobs(), "Custom URL: cancelled %d http requests with outdated locations");
                 debugIfNotEmpty(cancelResult.getFailedToCancel(), "Custom URL: failed to cancel %d http requests with outdated locations");
