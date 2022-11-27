@@ -28,6 +28,7 @@ import com.birbit.android.jobqueue.Job;
 import com.birbit.android.jobqueue.Params;
 import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -67,7 +68,7 @@ public class CustomUrlJob extends Job {
 
     private static Params buildParams(String tag) {
         Params params = new Params(1).requireNetwork().persist();
-        if (tag != null && !"".equals(tag)) {
+        if (!Strings.isNullOrEmpty(tag)) {
             return params.addTags(tag);
         }
         return params;
