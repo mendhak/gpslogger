@@ -1,2 +1,2 @@
 * Custom URL - added option to discard offline locations; this allows sending latest location only.
-* Custom URL will retry maximum 3 times instead of 5 times.
+* Custom URL - will retry maximum 3 times instead of 5 times.
