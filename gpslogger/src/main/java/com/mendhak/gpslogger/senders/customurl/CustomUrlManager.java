@@ -172,13 +172,6 @@ public class CustomUrlManager extends FileSender {
     }
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password){
-        if(preferenceHelper.shouldCustomURLLoggingDiscardOfflineLocations()) {
-            if (!Systems.isNetworkAvailable(AppSettings.getInstance())) {
-                LOG.debug("Device offline, will not log to Custom URL");
-                return;
-            }
-        }
-
         JobManager jobManager = AppSettings.getJobManager();
         jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(url, method,
                 body, headers, username, password), new UploadEvents.CustomUrl()));

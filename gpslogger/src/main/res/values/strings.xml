@@ -342,7 +342,7 @@
     <string name="log_customurl_summary">Send logging info to your own server over HTTP</string>
     <string name="autosend_customurl_summary">(This feature enables CSV logging) Sends requests in bulk to the Custom URL, one for each line in the CSV file. Depends on the auto-send interval.</string>
     <string name="log_customurl_discard_offline_locations">Discard offline locations</string>
-    <string name="log_customurl_discard_offline_locations_summary">Log locations to Custom URL only while a network connection is available</string>
+    <string name="log_customurl_discard_offline_locations_summary">Log locations to Custom URL only while a network connection is available (does not affect auto send)</string>
 
     <string name="txt_annotation">Annotation:</string>
     <string name="txt_time_isoformat">Time UTC (2011-12-25T15:27:33Z):</string>
