@@ -86,8 +86,7 @@ public class FileLoggerFactory {
                     preferenceHelper.getCustomLoggingHTTPBody(),
                     preferenceHelper.getCustomLoggingHTTPHeaders(),
                     preferenceHelper.getCustomLoggingBasicAuthUsername(),
-                    preferenceHelper.getCustomLoggingBasicAuthPassword(),
-                    preferenceHelper.shouldCustomURLLoggingDiscardOfflineLocations()));
+                    preferenceHelper.getCustomLoggingBasicAuthPassword()));
         }
 
         if(preferenceHelper.shouldLogToGeoJSON()){
