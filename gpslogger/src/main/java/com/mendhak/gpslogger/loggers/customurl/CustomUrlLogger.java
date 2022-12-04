@@ -44,11 +44,9 @@ public class CustomUrlLogger implements FileLogger {
     private final String basicAuthUsername;
     private final String basicAuthPassword;
     private final boolean batteryCharging;
-    private final boolean shouldDiscardOfflineLocations;
 
     public CustomUrlLogger(String customLoggingUrl, Context context, String httpMethod, String httpBody,
-                           String httpHeaders, String basicAuthUsername, String basicAuthPassword,
-                           boolean shouldDiscardOfflineLocations) {
+                           String httpHeaders, String basicAuthUsername, String basicAuthPassword) {
         this.customLoggingUrl = customLoggingUrl;
         BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
         this.batteryLevel = batteryInfo.BatteryLevel;
@@ -58,7 +56,6 @@ public class CustomUrlLogger implements FileLogger {
         this.httpHeaders = httpHeaders;
         this.basicAuthUsername = basicAuthUsername;
         this.basicAuthPassword = basicAuthPassword;
-        this.shouldDiscardOfflineLocations = shouldDiscardOfflineLocations;
     }
 
     @Override
@@ -71,7 +68,7 @@ public class CustomUrlLogger implements FileLogger {
     @Override
     public void annotate(String description, Location loc) throws Exception {
 
-        if(shouldDiscardOfflineLocations) {
+        if(PreferenceHelper.getInstance().shouldCustomURLLoggingDiscardOfflineLocations()) {
             if (!Systems.isNetworkAvailable(AppSettings.getInstance())) {
                 return;
             }
@@ -101,7 +98,6 @@ public class CustomUrlLogger implements FileLogger {
                 Session.getInstance().getTotalTravelled());
 
         manager.sendByHttp(finalUrl, httpMethod, finalBody, finalHeaders, basicAuthUsername, basicAuthPassword);
-
     }
 
 
