@@ -1,2 +1,3 @@
 * Custom URL - added option to discard offline locations; useful for sending latest location.
 * Custom URL - will retry maximum 3 times instead of 5 times.
+* Bugfix: running for a long time resulted in negative hours displayed
