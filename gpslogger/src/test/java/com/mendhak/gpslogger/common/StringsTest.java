@@ -273,7 +273,14 @@ public class StringsTest {
     public void GetDescriptiveTimeString_9001Seconds_ReturnsCorrespondingHours(){
         String actual = Strings.getDescriptiveDurationString(9001, GetDescriptiveTimeString_Context());
         String expected = "2h 30m 1s";
-        assertThat("9001 seconds returns correspnding time", actual, is(expected));
+        assertThat("9001 seconds returns corresponding time", actual, is(expected));
+    }
+
+    @Test
+    public void GetDescriptiveTimeString_MoreThanIntmaxvalueSeconds_ReturnsCorrespondingHours(){
+        String actual = Strings.getDescriptiveDurationString( (2147493647L) / 1000, GetDescriptiveTimeString_Context());
+        String expected = "596h 31m 33s";
+        assertThat("Seconds larger than int32.maxvalue returns hours and doesn't overflow", actual, is(expected));
     }
 
     @Test
