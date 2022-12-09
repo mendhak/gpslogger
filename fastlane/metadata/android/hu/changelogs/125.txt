@@ -1,2 +1,3 @@
 * Egyéni URL – opció az offline helyek elvetésére; hasznos a legfrissebb hely elküldéséhez.
 * Egyéni URL – 5 alkalom helyett legfeljebb 3 alkalommal próbálkozik újra.
+* Hibajavítás: hosszú ideig tartó futtatás negatív órákat eredményezett
