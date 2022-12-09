@@ -547,6 +547,7 @@ public class GpsLoggingService extends Service  {
                     .setContentText(contentText)
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(contentText).setBigContentTitle(contentTitle))
                     .setOngoing(true)
+                    .setOnlyAlertOnce(true)
                     .setContentIntent(pending);
 
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
