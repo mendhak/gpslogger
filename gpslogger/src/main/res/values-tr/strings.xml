@@ -378,4 +378,6 @@
     <string name="install_conscrypt_provider_title">Conscrypt Provider Kur (SSL/TLS)</string>
     <string name="autosend_customurl_summary">(Bu özellik CSV kaydını etkinleştirir) CSV dosyasındaki her satır için bir tane olmak üzere özel bir URL\'ye toplu olarak istek gönderir. Otomatik gönderme aralığına bağlıdır.</string>
     <string name="log_customurl_summary_detailed">Bir konum noktası yakalandığında özel bir URL\'ye bir istek gönderir. Günlüğe kaydetme aralığına bağlıdır.</string>
+    <string name="log_customurl_discard_offline_locations">Çevrim dışı konumları at</string>
+    <string name="log_customurl_discard_offline_locations_summary">Konumları yalnızca bir ağ bağlantısı varken özel bir URL\'ye kaydedin (otomatik gönderimi etkilemez)</string>
 </resources>

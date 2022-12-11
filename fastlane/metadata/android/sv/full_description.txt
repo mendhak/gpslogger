@@ -36,5 +36,3 @@ Nätverkskommunikation - används vid uppladdning av filer (Dropbox, Openstreetm
 Din plats - används för att avgöra din plats baserat på GPS eller mobilmaster
 
 Systemverktyg (Starta automatiskt vid systemstart) - används om du vill starta GPSLogger vid systemstart
-
-

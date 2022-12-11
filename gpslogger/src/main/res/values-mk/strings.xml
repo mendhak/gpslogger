@@ -114,4 +114,8 @@
     <string name="customurl_all_parameters">Сите параметри:</string>
     <string name="install_conscrypt_provider_title">Инсталирај Conscrypt Провајдер (SSL/TLS)</string>
     <string name="install_conscrypt_provider_summary">Ако имате SSL/TLS проблеми со конекција на постар верзии Андроид, инсталирањето на Conscrypt Провајдерот може да помогне. (Следете го линкот, инсталирајте го АПКто, и рестартирајте ја апликацијата)</string>
+    <string name="new_file_creation_summary">Дали да се создаде нов фајл еднаш дневно или на секој старт.</string>
+    <string name="new_file_creation_onceamonth">Еднаш месечно</string>
+    <string name="new_file_creation_onceaday">Еднаш дневно</string>
+    <string name="new_file_creation_everystart">Секој старт</string>
 </resources>
