@@ -261,12 +261,17 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
     }
 
     void updateButtons(boolean enable) {
-        selectedButton.actionButton.setProgress(enable ? 0 : 50);
 
         for (ButtonWrapper btnObj : buttonList) {
-            btnObj.actionButton.setEnabled(enable);
+            if(btnObj != selectedButton){
+                btnObj.actionButton.setProgress(0);
+            }
+            else {
+                btnObj.actionButton.setProgress(1);
+            }
             btnObj.setText(btnObj.getText());
             btnObj.setColor(btnObj.getColor());
+
         }
     }
 
