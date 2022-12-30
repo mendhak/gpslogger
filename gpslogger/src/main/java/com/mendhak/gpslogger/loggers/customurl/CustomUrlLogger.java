@@ -22,6 +22,7 @@ package com.mendhak.gpslogger.loggers.customurl;
 import android.content.Context;
 import android.location.Location;
 
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.BatteryInfo;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
@@ -44,7 +45,8 @@ public class CustomUrlLogger implements FileLogger {
     private final String basicAuthPassword;
     private final boolean batteryCharging;
 
-    public CustomUrlLogger(String customLoggingUrl, Context context, String httpMethod, String httpBody, String httpHeaders, String basicAuthUsername, String basicAuthPassword) {
+    public CustomUrlLogger(String customLoggingUrl, Context context, String httpMethod, String httpBody,
+                           String httpHeaders, String basicAuthUsername, String basicAuthPassword) {
         this.customLoggingUrl = customLoggingUrl;
         BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
         this.batteryLevel = batteryInfo.BatteryLevel;
@@ -65,6 +67,12 @@ public class CustomUrlLogger implements FileLogger {
 
     @Override
     public void annotate(String description, Location loc) throws Exception {
+
+        if(PreferenceHelper.getInstance().shouldCustomURLLoggingDiscardOfflineLocations()) {
+            if (!Systems.isNetworkAvailable(AppSettings.getInstance())) {
+                return;
+            }
+        }
 
         CustomUrlManager manager = new CustomUrlManager(PreferenceHelper.getInstance());
 
@@ -89,9 +97,7 @@ public class CustomUrlLogger implements FileLogger {
                 PreferenceHelper.getInstance().getCurrentProfileName(),
                 Session.getInstance().getTotalTravelled());
 
-
-        manager.sendByHttp(finalUrl,httpMethod, finalBody, finalHeaders, basicAuthUsername, basicAuthPassword);
-
+        manager.sendByHttp(finalUrl, httpMethod, finalBody, finalHeaders, basicAuthUsername, basicAuthPassword);
     }
 
 

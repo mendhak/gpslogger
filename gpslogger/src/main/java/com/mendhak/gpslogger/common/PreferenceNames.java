@@ -44,6 +44,7 @@ public  class PreferenceNames {
     public static final String LOG_TO_URL_METHOD = "log_customurl_method";
     public static final String LOG_TO_URL_BASICAUTH_USERNAME = "log_customurl_basicauth_username";
     public static final String LOG_TO_URL_BASICAUTH_PASSWORD = "log_customurl_basicauth_password";
+    public static final String LOG_TO_URL_DISCARD_OFFLINE_LOCATIONS_ENABLED = "log_customurl_discard_offline_locations_enabled";
     public static final String AUTOSEND_CUSTOMURL_ENABLED = "autocustomurl_enabled";
     public static final String LOG_TO_OPENGTS = "log_opengts";
     public static final String LOG_PASSIVE_LOCATIONS="log_passive_locations";

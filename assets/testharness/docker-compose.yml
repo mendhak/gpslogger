@@ -1,69 +1,72 @@
-nextcloud-server:
-  container_name: gpslogger-nextcloud-server
-  image: nextcloud:latest
-  ports:
-    - "80:80"
-  environment:
-    - SQLITE_DATABASE=whatever
-    - NEXTCLOUD_ADMIN_USER=admin
-    - NEXTCLOUD_ADMIN_PASSWORD=admin
-    - NEXTCLOUD_TRUSTED_DOMAINS=${SERVERIP}
+version: '3'
+services:
 
-ftpd-server:
-  container_name: gpslogger-ftpd-server
-  image: stilliard/pure-ftpd
-  ports:
-    - "21:21"
-    - "30000-30009:30000-30009"
-  environment:
-    PUBLICHOST: ${SERVERIP}
+  nextcloud-server:
+    container_name: gpslogger-nextcloud-server
+    image: nextcloud:latest
+    ports:
+      - "80:80"
+    environment:
+      - SQLITE_DATABASE=whatever
+      - NEXTCLOUD_ADMIN_USER=admin
+      - NEXTCLOUD_ADMIN_PASSWORD=admin
+      - NEXTCLOUD_TRUSTED_DOMAINS=${SERVERIP}
 
-mail:
-  container_name: gpslogger-mail-server
-  image: mailhog/mailhog
-  ports:
-  - "1025:1025"
-  - "8025:8025"
+  ftpd-server:
+    container_name: gpslogger-ftpd-server
+    image: stilliard/pure-ftpd
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    environment:
+      PUBLICHOST: ${SERVERIP}
+
+  mail:
+    container_name: gpslogger-mail-server
+    image: mailhog/mailhog
+    ports:
+    - "1025:1025"
+    - "8025:8025"
 
 
-udp:
-  container_name: gpslogger-udp-server
-  image: mendhak/udp-listener
-  environment:
-    - UDPPORT=4001
-  ports:
-  - "0.0.0.0:4001:4001"
-  - "0.0.0.0:4001:4001/udp"
+  udp:
+    container_name: gpslogger-udp-server
+    image: mendhak/udp-listener
+    environment:
+      - UDPPORT=4001
+    ports:
+    - "0.0.0.0:4001:4001"
+    - "0.0.0.0:4001:4001/udp"
 
-https:
-  container_name: gpslogger-https-server
-  image: mendhak/http-https-echo:18
-  ports:
-    - "0.0.0.0:8081:8080"
-    - "0.0.0.0:8443:8443"
+  https:
+    container_name: gpslogger-https-server
+    image: mendhak/http-https-echo:18
+    ports:
+      - "0.0.0.0:8081:8080"
+      - "0.0.0.0:8443:8443"
 
-postfix:
-  container_name: gpslogger-securemail-server
-  image: catatnight/postfix
-  ports:
-    - "525:25"
-    - "587:587"
-  environment: #noreply@COFFEE.home username is case sensitive
-    - maildomain=COFFEE.home
-    - smtp_user=noreply:docker
-  volumes:
-    - ./postfixstorage/postfix/main.cf:/etc/postfix/main.cf
-    - /etc/ssl/certs/ssl-cert-snakeoil.pem:/etc/ssl/certs/ssl-cert-snakeoil.pem:ro
-    - /etc/ssl/private/ssl-cert-snakeoil.key:/etc/ssl/private/ssl-cert-snakeoil.key:ro
+  postfix:
+    container_name: gpslogger-securemail-server
+    image: catatnight/postfix
+    ports:
+      - "525:25"
+      - "587:587"
+    environment: #noreply@COFFEE.home username is case sensitive
+      - maildomain=COFFEE.home
+      - smtp_user=noreply:docker
+    volumes:
+      - ./postfixstorage/postfix/main.cf:/etc/postfix/main.cf
+      - /etc/ssl/certs/ssl-cert-snakeoil.pem:/etc/ssl/certs/ssl-cert-snakeoil.pem:ro
+      - /etc/ssl/private/ssl-cert-snakeoil.key:/etc/ssl/private/ssl-cert-snakeoil.key:ro
 
-sftpserver:
-  container_name: gpslogger-sftp
-  image: jdeathe/centos-ssh:centos-7
-  ports:
-    - "2999:22"
-  environment:
-    - SSH_USER=joe
-    - SSH_USER_PASSWORD=hunter2
-#You need the vagrant private key to connect to this container:
-#https://github.com/mitchellh/vagrant/blob/master/keys/vagrant
+  sftpserver:
+    container_name: gpslogger-sftp
+    image: jdeathe/centos-ssh:centos-7
+    ports:
+      - "2999:22"
+    environment:
+      - SSH_USER=joe
+      - SSH_USER_PASSWORD=hunter2
+  #You need the vagrant private key to connect to this container:
+  #https://github.com/mitchellh/vagrant/blob/master/keys/vagrant
 

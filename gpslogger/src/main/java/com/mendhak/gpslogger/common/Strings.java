@@ -41,15 +41,15 @@ public class Strings {
      * @param numberOfSeconds
      * @return
      */
-    public static String getDescriptiveDurationString(int numberOfSeconds,
+    public static String getDescriptiveDurationString(long numberOfSeconds,
                                                       Context context) {
 
         String descriptive;
-        int hours;
-        int minutes;
-        int seconds;
+        long hours;
+        long minutes;
+        long seconds;
 
-        int remainingSeconds;
+        long remainingSeconds;
 
         // Special cases
         if(numberOfSeconds==0){

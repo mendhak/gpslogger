@@ -34,10 +34,10 @@
     <string name="sharing_mylocation">내 위치</string>
     <string name="sharing_via">공유하기</string>
     <!-- general -->
-    <string name="foot">&#160;피트</string>
-    <string name="feet">&#160;피트</string>
-    <string name="meter">&#160;미터</string>
-    <string name="meters">&#160;미터</string>
+    <string name="foot"> 피트</string>
+    <string name="feet"> 피트</string>
+    <string name="meter"> 미터</string>
+    <string name="meters"> 미터</string>
     <string name="error">오류</string>
     <string name="error_connection">연결 오류 발생. 디바이스 설정을 확인하시기 바랍니다.</string>
     <string name="seconds">초</string>
@@ -53,21 +53,21 @@
     <string name="success">성공</string>
     <string name="direction_roughly">대략 %s</string>
     <string name="direction_north">북</string>
-    <string name="direction_northnortheast">북미북동</string>
+    <string name="direction_northnortheast">북북동</string>
     <string name="direction_northeast">북동</string>
-    <string name="direction_eastnortheast">동미북동</string>
+    <string name="direction_eastnortheast">동북동</string>
     <string name="direction_east">동</string>
-    <string name="direction_eastsoutheast">동미남동</string>
+    <string name="direction_eastsoutheast">동남동</string>
     <string name="direction_southeast">남동</string>
-    <string name="direction_southsoutheast">남미남동</string>
+    <string name="direction_southsoutheast">남남동</string>
     <string name="direction_south">남</string>
-    <string name="direction_southsouthwest">남미남서</string>
+    <string name="direction_southsouthwest">남남서</string>
     <string name="direction_southwest">남서</string>
-    <string name="direction_westsouthwest">서미남서</string>
+    <string name="direction_westsouthwest">서남서</string>
     <string name="direction_west">서</string>
-    <string name="direction_westnorthwest">서미북서</string>
+    <string name="direction_westnorthwest">서북서</string>
     <string name="direction_northwest">북서</string>
-    <string name="direction_northnorthwest">북미북서</string>
+    <string name="direction_northnorthwest">북북서</string>
     <string name="time_onesecond">1초</string>
     <string name="time_halfminute">30초</string>
     <string name="time_oneminute">1분</string>
@@ -84,12 +84,12 @@
     <string name="settings_enter_meters">거리 입력(최대 9999미터)</string>
     <!-- Settings -->
     <string name="pref_logging_title">로깅 세부사항</string>
-    <string name="log_gpx_title">GPX로 기록하기</string>
+    <string name="log_gpx_title">GPX로 기록</string>
     <string name="log_gpx_summary">GPX v1.0 파일로 위치 기록</string>
-    <string name="log_gpx_11_title">GPX 1.1 사용하기</string>
-    <string name="log_gpx_11_summary">GPX 1.0 대신 GPX 1.1 포멧을 사용</string>
-    <string name="log_kml_title">KML로 기록하기</string>
-    <string name="log_kml_summary">KML v2.2 파일로 위치 기록</string>
+    <string name="log_gpx_11_title">GPX 1.1 사용</string>
+    <string name="log_gpx_11_summary">GPX 1.0 대신 GPX 1.1 포맷을 사용함</string>
+    <string name="log_kml_title">KML로 기록</string>
+    <string name="log_kml_summary">KML v2.2 파일로 위치 기록함</string>
     <string name="log_plain_text_title">CSV로 기록하기</string>
     <string name="log_plain_text_summary">CSV 파일로 위치 기록</string>
     <string name="log_json_title">GeoJSON으로 기록하기</string>
@@ -314,4 +314,12 @@
     <string name="customurl_http_method">HTTP 방식</string>
     <string name="customurl_http_basicauthentication">일반 인증</string>
     <string name="hide_notification_from_status_bar_disallowed">Android Oreo버전부터 알림 숨기기 기능은 적용되지 않습니다</string>
+    <string name="hide">숨김</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="meters_per_second"> m/s</string>
+    <string name="feet_per_second"> ft/s</string>
+    <string name="miles_per_hour"> mi/h</string>
+    <string name="miles"> 마일</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="kilometers"> 킬로미터</string>
 </resources>

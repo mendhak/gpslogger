@@ -673,6 +673,11 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED, false);
     }
 
+    @ProfilePreference(name= PreferenceNames.LOG_TO_URL_DISCARD_OFFLINE_LOCATIONS_ENABLED)
+    public boolean shouldCustomURLLoggingDiscardOfflineLocations() {
+        return prefs.getBoolean(PreferenceNames.LOG_TO_URL_DISCARD_OFFLINE_LOCATIONS_ENABLED, false);
+    }
+
 
     /**
      * Whether to log to OpenGTS.  See their <a href="http://opengts.sourceforge.net/OpenGTS_Config.pdf">installation guide</a>

@@ -375,4 +375,8 @@
     <string name="google_drive_folder_path_summary_2">Ha egyetlen mappanevet használ, létrehozása után áthelyezhető máshová a Google Drive-ban. A mappa elérése lassabb, mert az elérési út minden részét ellenőrizni kell vagy létre kell hozni a fájlok feltöltése előtt.</string>
     <string name="install_conscrypt_provider_title">Conscrypt Provider (SSL/TLS) telepítése</string>
     <string name="install_conscrypt_provider_summary">Ha régebbi Android-eszközökön SSL/TLS csatlakozási problémákat tapasztal, a Conscrypt Provider telepítése segíthet. (Kövesse ezt a linket, telepítse az APK-t, majd indítsa újra az alkalmazást)</string>
+    <string name="autosend_customurl_summary">(Ez a funkció lehetővé teszi a CSV-naplózást) Tömegesen küld kéréseket az egyéni URL-re, a CSV-fájl minden sorához egyet. Az automatikus küldési időköztől függ.</string>
+    <string name="log_customurl_summary_detailed">Kérést küld az egyéni URL-címre, amikor egy helypont rögzítésre kerül. a naplózási intervallumtól függ.</string>
+    <string name="log_customurl_discard_offline_locations">Offline helyadatokat eldobása</string>
+    <string name="log_customurl_discard_offline_locations_summary">Csak a legújabb helyadatokat naplózza az egyéni URL-re miután a hálózati kapcsolat helyreállt. (Nincs hatással az automatikus küldésre)</string>
 </resources>

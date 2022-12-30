@@ -36,4 +36,3 @@ Mrežna komunikacija - koristi se pri prijenosu datoteke (Dropbox, Openstreetmap
 Vaša lokacija - koristi se za određivanje svog položaja temeljem GPS-a ili baznu stanicu
 
 Sistemski alati (automatsko izvršavanje pri pokretanja sustava) - koristiti se ako uključite GPSLogger-a da se pokrene prilikom starta uređaja
-

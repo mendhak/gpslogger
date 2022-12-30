@@ -1,6 +1,5 @@
 package com.mendhak.gpslogger.senders.customurl;
 
-import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 
@@ -25,7 +24,6 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -178,7 +176,6 @@ public class CustomUrlManager extends FileSender {
         jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(url, method,
                 body, headers, username, password), new UploadEvents.CustomUrl()));
     }
-
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
         return getFormattedTextblock(textToFormat, loc, loc.getDescription(), Systems.getAndroidId(),

@@ -36,4 +36,3 @@ Network communication - usato quando si caricano files su OpenStreetMap o DropBo
 Your location - usato per determinare la vostra posizione
 
 System tools (automatically start at boot) - usato se attivate l'opzione di avvio automatico all'accensione del telefonino
-

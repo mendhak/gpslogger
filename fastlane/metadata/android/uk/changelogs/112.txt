@@ -1,0 +1,1 @@
+* Bugfix: Tasker getstatus command was not sending a status broadcast.

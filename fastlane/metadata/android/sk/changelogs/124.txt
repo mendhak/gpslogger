@@ -1,0 +1,3 @@
+* Oprava chyby - počiatočný dialóg týkajúci sa oprávnení nebolo možné odstrániť
+* Oprava chyby - ujasnenie rozdielu medzi funkciou automatického zaznamenávanie na používateľskú URL adresu a funkciou pre automatické odosielanie
+* Oprava chyby - správna kontrola na načítanie poskytovateľa conscrypt, ak bola vykonaná inštalácia z F-Droid

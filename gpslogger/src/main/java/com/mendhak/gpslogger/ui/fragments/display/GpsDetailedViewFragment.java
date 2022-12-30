@@ -395,7 +395,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         Date d = new Date(startTime);
         long currentTime = System.currentTimeMillis();
 
-        String duration = Strings.getDescriptiveDurationString((int) (currentTime - startTime) / 1000, getActivity());
+        String duration = Strings.getDescriptiveDurationString( (currentTime - startTime) / 1000, getActivity());
 
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());

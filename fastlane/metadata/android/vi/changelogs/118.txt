@@ -1,0 +1,5 @@
+* Tùy chọn Dark Theme mới, nó sẽ tự động tuân theo chế độ ngày / đêm của hệ thống.
+* Bạn cũng có thể đặt Chủ đề sáng / tối theo cách thủ công trong Cài đặt chung.
+* Làm lại màn hình cài đặt, để hiển thị các giá trị đã chọn của người dùng nếu có thể.
+* Đã thêm bộ chọn tệp và thư mục. Ứng dụng sẽ yêu cầu thêm quyền trên Android 11+ cho các đường dẫn tùy chỉnh.
+* SFTP hiện có thể kết nối bằng các thuật toán SSH hiện đại.

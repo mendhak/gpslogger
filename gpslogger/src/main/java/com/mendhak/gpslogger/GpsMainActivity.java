@@ -239,6 +239,7 @@ public class GpsMainActivity extends AppCompatActivity
                             + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_battery_optimization)
                             )
                     .neut(getString(R.string.privacy_policy))
+                    .cancelable(false)
                     .show(this, "PERMISSIONS_START");
 
         }

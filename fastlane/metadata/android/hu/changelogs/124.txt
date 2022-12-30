@@ -1,0 +1,3 @@
+* Hibajavítás – kezdeti engedélyezési párbeszédpanel visszautasíthatatlan
+* Hibajavítás – tisztázza a különbséget az egyéni URL-naplózás és az automatikus küldés funkció között
+* Hibajavítás - helyesen ellenőrzi és tölti be a conscrypt szolgáltatót, ha az F-Droidról lett telepítve

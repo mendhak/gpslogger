@@ -58,6 +58,7 @@ public class CustomUrlJob extends Job {
         this.urlRequest = urlRequest;
     }
 
+
     @Override
     public void onAdded() {
     }
@@ -111,6 +112,6 @@ public class CustomUrlJob extends Job {
 
     @Override
     protected int getRetryLimit() {
-        return 5;
+        return 3;
     }
 }

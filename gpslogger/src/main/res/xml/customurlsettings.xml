@@ -5,11 +5,19 @@
     <SwitchPreferenceCompat
         android:key="log_customurl_enabled"
         android:title="@string/log_customurl_title"
+        android:summary="@string/log_customurl_summary_detailed"
         app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
         android:key="autocustomurl_enabled"
         android:title="@string/autosend_enabled"
+        android:summary="@string/autosend_customurl_summary"
+        app:iconSpaceReserved="false" />
+
+    <SwitchPreferenceCompat
+        android:key="log_customurl_discard_offline_locations_enabled"
+        android:title="@string/log_customurl_discard_offline_locations"
+        android:summary="@string/log_customurl_discard_offline_locations_summary"
         app:iconSpaceReserved="false" />
 
     <Preference
