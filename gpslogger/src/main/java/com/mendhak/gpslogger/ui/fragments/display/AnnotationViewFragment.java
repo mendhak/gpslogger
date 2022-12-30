@@ -26,12 +26,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
+import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
@@ -62,6 +59,7 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
     private final Session session = Session.getInstance();
 
     List<ButtonObj> btnList = new ArrayList<>();
+    ButtonObj selectedButton;
 
     @Override
     public void onClick(View v) {
@@ -71,21 +69,24 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
     static class ButtonObj {
 
         String color;
-        Button btn;
+        String text;
+        ActionProcessButton btn;
 
-        ButtonObj(Button btn)
+        ButtonObj(ActionProcessButton btn)
         {
             this.btn = btn;
+            this.btn.setMode(ActionProcessButton.Mode.ENDLESS);
         }
 
         String getText()
         {
-            return String.valueOf(btn.getText());
+            return String.valueOf(this.text);
         }
 
         void setText(String str)
         {
-            btn.setText(str);
+            this.text = str;
+            btn.setText(this.text);
         }
 
         public void setColor(String color) {
@@ -264,6 +265,7 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
 
     private void onBtnClick(ButtonObj  btn) {
         LOG.info("Notification Annotation entered : " + btn.getText());
+        selectedButton = btn;
         Intent serviceIntent = new Intent(getContext(), GpsLoggingService.class);
         serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, btn.getText());
         ContextCompat.startForegroundService(getContext(),  serviceIntent);
@@ -271,15 +273,19 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
 
     void updateButtons(boolean enable)
     {
+        selectedButton.btn.setProgress(enable ? 0 : 50);
+
         for(ButtonObj btnObj : btnList)
         {
             btnObj.btn.setEnabled(enable);
+            btnObj.setText(btnObj.getText());
+            btnObj.setColor(btnObj.getColor());
         }
     }
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.WaitingForLocation waitingForLocation){
-        //updateButtons(!waitingForLocation.waiting);
+        updateButtons(!waitingForLocation.waiting);
     }
 
     @EventBusHook
