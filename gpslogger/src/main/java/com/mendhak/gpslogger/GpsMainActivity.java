@@ -1245,7 +1245,7 @@ public class GpsMainActivity extends AppCompatActivity
 
 
         Dialogs.autoSuggestDialog(GpsMainActivity.this, "annotations",
-                getString(R.string.add_description), getString(R.string.letters_numbers), "");
+                getString(R.string.add_description), getString(R.string.letters_numbers), session.getDescription());
 
     }
 

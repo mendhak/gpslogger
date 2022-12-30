@@ -38,6 +38,7 @@ import com.mendhak.gpslogger.common.IntentConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
@@ -49,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.ColorField;
 import eltos.simpledialogfragment.form.Input;
@@ -255,9 +257,7 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
     private void onBtnClick(ButtonWrapper wrapper) {
         LOG.info("Notification Annotation entered : " + wrapper.getText());
         selectedButton = wrapper;
-        Intent serviceIntent = new Intent(getContext(), GpsLoggingService.class);
-        serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, wrapper.getText());
-        ContextCompat.startForegroundService(getContext(), serviceIntent);
+        EventBus.getDefault().post(new CommandEvents.Annotate(wrapper.getText()));
     }
 
     void updateButtons(boolean enable) {
