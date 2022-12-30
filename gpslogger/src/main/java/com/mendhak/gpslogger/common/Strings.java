@@ -522,6 +522,10 @@ public class Strings {
         }
     }
 
+    public static String getHexColorCodeFromInt(int color){
+        return String.format("#%06X", (0xFFFFFF & color));
+    }
+
     /**
      * F-Droid requires API keys be kept in source control
      * Here is a little obscurity.
