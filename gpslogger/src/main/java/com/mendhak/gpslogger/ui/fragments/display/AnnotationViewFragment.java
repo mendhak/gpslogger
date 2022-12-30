@@ -37,6 +37,7 @@ import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.IntentConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
+import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
@@ -49,6 +50,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.ColorField;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 
@@ -186,11 +188,11 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
                 return true;
             }
 
-            ButtonWrapper btn = buttonList.get(idx);
+            ButtonWrapper buttonWrapper = buttonList.get(idx);
             String enteredText = extras.getString("annotations");
-            String color = extras.getString("color");
-            btn.setText(enteredText);
-            btn.setColor(color);
+            int color = extras.getInt("color");
+            buttonWrapper.setText(enteredText);
+            buttonWrapper.setColor(Strings.getHexColorCodeFromInt(color));
             saveSettings();
             return true;
         }
@@ -234,11 +236,9 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
                                     Input.plain("annotations")
                                             .hint(R.string.annotation_value)
                                             .text(String.valueOf(buttonWrapper.getText())),
-                                    Input.plain("color")
-                                            .text(String.valueOf(buttonWrapper.getColor()))
-                                            .hint(R.string.annotation_color)
-                                            .validatePattern("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
-                                                    R.string.annotation_color_error)
+                                    ColorField.picker("color")
+                                            .label("Button color").allowCustom(true)
+                                            .color(Color.parseColor(buttonWrapper.getColor()))
                             ).show(fragment, "btn" + btnIdx);
                     return true;
                 }
