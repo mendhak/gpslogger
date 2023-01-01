@@ -20,7 +20,6 @@
 package com.mendhak.gpslogger.ui.fragments.display;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,15 +27,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import com.dd.processbutton.iml.ActionProcessButton;
-import com.mendhak.gpslogger.GpsLoggingService;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.IntentConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
@@ -57,20 +52,15 @@ import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 
 
-public class AnnotationViewFragment extends GenericViewFragment implements View.OnClickListener, SimpleDialog.OnDialogResultListener {
+public class AnnotationViewFragment extends GenericViewFragment implements SimpleDialog.OnDialogResultListener {
 
     Context context;
     private static final Logger LOG = Logs.of(AnnotationViewFragment.class);
     private final PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-    private final Session session = Session.getInstance();
 
     List<ButtonWrapper> buttonList = new ArrayList<>();
     ButtonWrapper selectedButton;
 
-    @Override
-    public void onClick(View v) {
-
-    }
 
     static class ButtonWrapper {
 
@@ -104,11 +94,6 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
         public String getColor() {
             return this.color;
         }
-
-    }
-
-    public AnnotationViewFragment() {
-
     }
 
     private void saveSettings() {
@@ -180,8 +165,7 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
             Integer idx = null;
             try {
                 idx = Integer.valueOf(dialogTag.substring(3));
-            }
-            catch (NumberFormatException ignored) {
+            } catch (NumberFormatException ignored) {
 
             }
 
@@ -206,10 +190,8 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
 
         View rootView = inflater.inflate(R.layout.fragment_annotation_view, container, false);
 
-
         if (getActivity() != null) {
             this.context = getActivity().getApplicationContext();
-
         }
 
         buttonList.add(new ButtonWrapper(rootView.findViewById(R.id.an_b11)));
@@ -228,26 +210,22 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
             buttonWrapper.setText("Annotation " + i);
             buttonWrapper.setColor("#808080");
             final int btnIdx = i;
-            buttonWrapper.actionButton.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    SimpleFormDialog.build()
-                            .title(R.string.annotation_edit_btn_title)
-                            .msg(R.string.annotation_edit_btn_msg)
-                            .fields(
-                                    Input.plain("annotations")
-                                            .hint(R.string.annotation_value)
-                                            .text(String.valueOf(buttonWrapper.getText())),
-                                    ColorField.picker("color")
-                                            .label("Button color").allowCustom(true)
-                                            .color(Color.parseColor(buttonWrapper.getColor()))
-                            ).show(fragment, "btn" + btnIdx);
-                    return true;
-                }
+            buttonWrapper.actionButton.setOnLongClickListener(v -> {
+                SimpleFormDialog.build()
+                        .title(R.string.annotation_edit_btn_title)
+                        .msg(R.string.annotation_edit_btn_msg)
+                        .fields(
+                                Input.plain("annotations")
+                                        .hint(R.string.annotation_value)
+                                        .text(String.valueOf(buttonWrapper.getText())),
+                                ColorField.picker("color")
+                                        .label("Button color").allowCustom(true)
+                                        .color(Color.parseColor(buttonWrapper.getColor()))
+                        ).show(fragment, "btn" + btnIdx);
+                return true;
             });
             buttonWrapper.actionButton.setOnClickListener((b) -> onBtnClick(buttonWrapper));
             i++;
-
         }
         loadSettings();
 
@@ -263,15 +241,13 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
     void updateButtons(boolean pending) {
 
         for (ButtonWrapper btnObj : buttonList) {
-            if(btnObj != selectedButton){
+            if (btnObj != selectedButton) {
                 btnObj.actionButton.setProgress(0);
-            }
-            else {
+            } else {
                 btnObj.actionButton.setProgress(pending ? 1 : 0);
             }
             btnObj.setText(btnObj.getText());
             btnObj.setColor(btnObj.getColor());
-
         }
     }
 
@@ -281,8 +257,8 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.AnnotationStatus annotationStatus){
-        if(annotationStatus.annotationWritten){
+    public void onEventMainThread(ServiceEvents.AnnotationStatus annotationStatus) {
+        if (annotationStatus.annotationWritten) {
             selectedButton = null;
         }
         updateButtons(!annotationStatus.annotationWritten);
