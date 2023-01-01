@@ -568,14 +568,14 @@ public class StringsTest {
     public void getHexColorCodeFromInt_whenGreen_returnGreen(){
         String expected = "#00FF00";
         String actual = Strings.getHexColorCodeFromInt(0xff00ff00); //0xff00ff00 or -16711936
-        assertThat("0xff00ff00 or -16711936 matches green", actual, is(expected));
+        assertThat("0xff00ff00 or -16711936 matches hex code green", actual, is(expected));
     }
 
     @Test
     public void getHexColorCodeFromInt_whenEmpty_returnBlack(){
         String expected = "#000000";
-        String actual = Strings.getHexColorCodeFromInt(0); //0xff00ff00 or -16711936
-        assertThat("0 matches black", actual, is(expected));
+        String actual = Strings.getHexColorCodeFromInt(0);
+        assertThat("0 matches hex code black", actual, is(expected));
     }
 
 }
