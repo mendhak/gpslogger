@@ -78,7 +78,7 @@ public class AnnotationViewFragment extends GenericViewFragment implements Simpl
         }
 
         void setText(String str) {
-            this.text = str;
+            this.text = Strings.cleanDescriptionForJson(str);
             this.actionButton.setText(this.text);
         }
 
@@ -105,7 +105,7 @@ public class AnnotationViewFragment extends GenericViewFragment implements Simpl
             ButtonWrapper btn = itr.next();
             settings.append("{");
             settings.append("\"idx\":").append(idx).append(",");
-            settings.append("\"label\":\"").append(btn.getText()).append("\",");
+            settings.append("\"label\":\"").append(Strings.cleanDescriptionForJson(btn.getText())).append("\",");
             settings.append("\"color\":\"").append(btn.getColor()).append("\"");
             settings.append("}");
             idx++;
