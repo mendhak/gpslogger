@@ -212,14 +212,15 @@ public class AnnotationViewFragment extends GenericViewFragment implements Simpl
             final int btnIdx = i;
             buttonWrapper.actionButton.setOnLongClickListener(v -> {
                 SimpleFormDialog.build()
-                        .title(R.string.annotation_edit_btn_title)
-                        .msg(R.string.annotation_edit_btn_msg)
+                        .pos(R.string.ok)
+                        .neg(R.string.cancel)
+                        .title(R.string.annotation_edit_button_label)
                         .fields(
                                 Input.plain("annotations")
-                                        .hint(R.string.annotation_value)
+                                        .hint(R.string.letters_numbers)
                                         .text(String.valueOf(buttonWrapper.getText())),
                                 ColorField.picker("color")
-                                        .label("Button color").allowCustom(true)
+                                        .label(R.string.annotation_edit_button_color).allowCustom(true)
                                         .color(Color.parseColor(buttonWrapper.getColor()))
                         ).show(fragment, "btn" + btnIdx);
                 return true;
