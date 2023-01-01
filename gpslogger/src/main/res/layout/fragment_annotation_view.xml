@@ -4,7 +4,7 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="100dp"
+    android:paddingBottom="55dp"
     android:orientation="vertical">
 
     <com.dd.processbutton.iml.ActionProcessButton
