@@ -260,14 +260,14 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
         EventBus.getDefault().post(new CommandEvents.Annotate(wrapper.getText()));
     }
 
-    void updateButtons(boolean enable) {
+    void updateButtons(boolean pending) {
 
         for (ButtonWrapper btnObj : buttonList) {
             if(btnObj != selectedButton){
                 btnObj.actionButton.setProgress(0);
             }
             else {
-                btnObj.actionButton.setProgress(1);
+                btnObj.actionButton.setProgress(pending ? 1 : 0);
             }
             btnObj.setText(btnObj.getText());
             btnObj.setColor(btnObj.getColor());
@@ -277,11 +277,14 @@ public class AnnotationViewFragment extends GenericViewFragment implements View.
 
     @EventBusHook
     public void onEventMainThread(ServiceEvents.WaitingForLocation waitingForLocation) {
-        updateButtons(!waitingForLocation.waiting);
+        updateButtons(waitingForLocation.waiting);
     }
 
     @EventBusHook
-    public void onEventMainThread(ServiceEvents.LoggingStatus loggingStatus) {
-        //updateButtons(loggingStatus.loggingStarted);
+    public void onEventMainThread(ServiceEvents.AnnotationStatus annotationStatus){
+        if(annotationStatus.annotationWritten){
+            selectedButton = null;
+        }
+        updateButtons(!annotationStatus.annotationWritten);
     }
 }
