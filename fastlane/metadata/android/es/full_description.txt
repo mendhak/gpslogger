@@ -36,4 +36,3 @@ Comunicación de red - Usada cuando se suben los archivos (Dropbox, OpenStreetMa
 Su localización - Usada para determinar su posición, basado en GPS o en la red celular
 
 Herramientas del sistema (Inicio automático al encender el teléfono) - Usado si usted deseea iniciar GPSLoggee en el inicio del teléfono
-

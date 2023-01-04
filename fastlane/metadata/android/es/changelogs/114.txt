@@ -1,0 +1,2 @@
+* Añadir una barra de desplazamiento a la vista simple para adaptarla al tamaño de la pantalla del sistema y al tamaño de la fuente.
+* El teclado debería aparecer automáticamente al utilizar el cuadro de texto de anotación.
