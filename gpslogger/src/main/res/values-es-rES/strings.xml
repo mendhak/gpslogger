@@ -373,4 +373,6 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="google_drive_folder_path">Ruta al directorio de Google Drive</string>
     <string name="google_drive_folder_path_summary_1">Utilice un nombre simple (ej. GPSLogger), o una ruta (ej. aaa/bbb/ccc). Los directorios deben ser creados por esta aplicación.</string>
     <string name="google_drive_folder_path_summary_2">Si se usa un nombre de directorio simple, puede ser movido a cualquier otro lugar de Google Drive tras la creación. Rutas a directorios son mas lentas porque cada parte de la ruta debe ser comprobada o creada antes de que se suban los ficheros.</string>
+    <string name="log_customurl_summary_detailed">Envía una solicitud a la URL personalizada cada vez que se captura un punto de ubicación. Depende del intervalo de registro.</string>
+    <string name="autosend_customurl_summary">(Esta función activa el registro en CSV). Envía solicitudes a la URL del usuario de forma masiva, una para cada fila del archivo CSV. La configuración depende del intervalo de envío automático.</string>
 </resources>
