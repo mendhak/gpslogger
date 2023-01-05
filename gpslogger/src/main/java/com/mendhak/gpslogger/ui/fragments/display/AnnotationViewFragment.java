@@ -34,6 +34,7 @@ import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
@@ -263,5 +264,10 @@ public class AnnotationViewFragment extends GenericViewFragment implements Simpl
             selectedButton = null;
         }
         updateButtons(!annotationStatus.annotationWritten);
+    }
+
+    @EventBusHook
+    public void onEventMainThread(ProfileEvents.SwitchToProfile switchToProfile){
+        loadSettings();
     }
 }
