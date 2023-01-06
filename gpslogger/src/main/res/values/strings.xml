@@ -366,6 +366,7 @@
     <string name="view_detailed">Detailed View</string>
     <string name="view_big">Big View</string>
     <string name="view_log">Log View</string>
+    <string name="view_annotation">Annotation View</string>
     <string name="bigview_taptotoggle">Tap to start/stop logging</string>
     <string name="summary_autosendtargets">Upload to:</string>
 
@@ -487,6 +488,7 @@
     <string name="install_conscrypt_provider_summary">If you are encountering SSL/TLS connectivity issues on older Android devices, installing the Conscrypt Provider might help. (Follow this link, install APK, then restart app)</string>
     <string name="install_conscrypt_provider_title">Install Conscrypt Provider (SSL/TLS)</string>
 
-
+    <string name="annotation_edit_button_label">Edit annotation button</string>
+    <string name="annotation_edit_button_color">Button color</string>
 
 </resources>

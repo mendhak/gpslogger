@@ -142,5 +142,7 @@ public  class PreferenceNames {
     public static final String SFTP_KNOWN_HOST_KEY ="sftp_known_host_key";
     public static final String SFTP_REMOTE_SERVER_PATH ="sftp_remote_server_path";
 
+    public static final String ANNOTATIONS_BUTTON_SETTINGS = "annotations_buttons";
+
 
 }
