@@ -1,0 +1,1 @@
+* Corrección de errores: el comando getstatus de Tasker no enviaba una transmisión del estado.

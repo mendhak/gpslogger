@@ -1,0 +1,9 @@
+* Arreglo para ownCloud / NextCloud carga no funciona
+* Debido a las nuevas restricciones de almacenamiento de Android, sólo se puede escribir en las propias carpetas de la aplicación.
+
+* En Android 10+, el flujo de trabajo de permisos ahora solicitará el permiso "permitir todo el tiempo".
+* El flujo de trabajo de permisos también solicitará desactivar la optimización de la batería
+* El flujo de trabajo de permisos es molesto, lo siento, es necesario para ayudar con numerosas peticiones de soporte relacionadas con las limitaciones de fondo.
+* Iconos adaptables, gracias a @kanru
+* Añadida una opción para resetear la app (borra todos los archivos y permisos de la app), en Ajustes generales.
+* Traducciones actualizadas de Crowdin
