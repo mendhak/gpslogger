@@ -1,0 +1,5 @@
+* Añadido un selector de archivos y carpetas. Se utiliza para la ruta de guardado de GPSLogger.  También para la clave privada SFTP.
+* Nueva biblioteca SSH para permitir la conexión utilizando algoritmos SSH más modernos, cuando se utiliza la función SFTP.
+* Corrección de permisos de archivos para Android 11+. Ahora puede establecer una ruta de archivo personalizada, y se le pedirá para dar permisos de administrador de archivos.
+* Nuevo permiso añadido, MANAGE_EXTERNAL_STORAGE.  Esto es para permitir la función de ruta de archivo personalizada en Android 11+.
+* Corrección de errores: Permitir caracteres UTF-8 en el nombre de la carpeta FTP.
