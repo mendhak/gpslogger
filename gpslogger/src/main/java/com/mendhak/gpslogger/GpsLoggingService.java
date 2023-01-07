@@ -162,6 +162,11 @@ public class GpsLoggingService extends Service  {
     @Override
     public void onLowMemory() {
         LOG.error("Android is low on memory!");
+        Intent i = new Intent(this, GpsLoggingService.class);
+        i.putExtra(IntentConstants.GET_NEXT_POINT, true);
+        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+        nextPointAlarmManager.cancel(pi);
+        nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 300000, pi);
         super.onLowMemory();
     }
 
