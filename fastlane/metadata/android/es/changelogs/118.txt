@@ -1,0 +1,5 @@
+* Nueva opción para tema oscuro. Debe realizarse automáticamente según el modo día/noche.
+* El tema claro/oscuro también se puede configurar manualmente, en la configuración general.
+* Configuración revisada para mostrar los valores del usuario cuando sea posible.
+* Componente agregado para la selección de archivos y carpetas. La aplicación requerirá un permiso especial en Android 11+, para rutas definidas por el usuario.
+* Con SFTP, debería ser posible conectarse usando algoritmos SSH modernos.
