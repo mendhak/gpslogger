@@ -1,0 +1,3 @@
+* Opción agregada para permitir mostrar la notificación de GPSLogger en la pantalla de bloqueo.
+* Para dispositivos anteriores a Android 10, opción para instalar Conscrypt Provider si necesita GPSLogger para conectarse a los servicios TLS 1.3 o tiene problemas de conectividad SSL.
+* Muchas traducciones actualizadas de la comunidad de Weblate, gracias como siempre a todos ustedes.

@@ -1,38 +1,47 @@
-Un Capturador de Datos GPS ligero, con poco consumo de batería. El propósito de esta aplicación es registrar tus coordenadas GPS a intervalos específicos de tiempo en un archivo en la tarjeta SD.  Esta aplicación corre en segundo plano. Puedes estar caminando, dándo un paseo, en un vuelo, en una sesión de fotos o inclusive puedes ir a comprar leche y tener la aplicación corriendo tanto tiempo como sea posible.   Una vez estés de vuelta en tu PC, puedes usar los archivos para geoetiquetar fotos, subirlas a web's de viajes, verlas en Google Earth, entre otros. 
-
-***Características:
-
-* Especificar intervalos de tiempo
-* Especificar intervalos de distancias
-* Geolocalización por estación base (Antena celular) o satélites GPS
-* Archivos GPX y/o Archivos KML
-* Mostrar notificaciones
-* Usar la hora del teléfono o la hora del satélite
-* Puede usar unidades Imperiales
-* Inicio automático al encender el teléfono
-* Auto envío de mails cada pocas horas
-* OpenStreetMap - Subir datos el muestreo GPS
-* Dropbox - Subir archivos GPX/KML/ZIP
+Un registrador de datos simple y de ahorro de energía del sistema GPS. El propósito de esta aplicación es registrar sus coordenadas GPS a intervalos establecidos en un archivo en la tarjeta SD. Esta aplicación se ejecuta en segundo plano, por lo que puede ejecutarla durante una caminata larga, una caminata, un vuelo o una sesión de fotos, o incluso cuando solo va a la tienda a comprar leche, por ejemplo. Una vez que regrese a su computadora, puede usar los archivos resultantes para geoetiquetar fotos, enviar los datos a sitios de viajes o verlos usando Google Earth.
 
 
-Para Errores / Fallos, Peticiones de nuevas funcionalidades o preguntas, por favor envíelas a github.com/mendhak/gpslogger (Gestor de requerimientos).  
+Para obtener más información, consulte <a href="https://gpslogger.app">https://gpslogger.app</a>
 
-***Notas:
+<b>Nota</b>: Recuerde configurar el permiso <b>Permitir siempre</b> para esta aplicación en su sistema operativo para que pueda registrar la ubicación en segundo plano.
 
-GPSLogger no es un sustituto de "OpenTracks".  OpenTracks está diseñado para ser usado durante periodos cortos de tiempo (ya que tiene muchas características ejecutándose), GPSLogger está diseñado para ejecutarse durante mucho tiempo.
+<b>Características y funciones</b>
 
-La conexión de datos es usada por esta aplicación sólo si se usa la opción "Auto-Email" en Dropbox u OpenStreetMap.
+<ul>
+<li>Puede grabar en formatos GPX, KML, CSV, NMEA y CSV. También puede grabar usando una URL de usuario o solo con visualización en la pantalla.</li>
+<li>Registra puntos GPX como rutas y segmentos de ruta</li>
+<li>También registra la velocidad, la dirección y la altitud, si están disponibles.</li>
+<li>Permite agregar una descripción al punto, utilizando el menú de notas y anotaciones, se agregan como waypoints</li>
+<li>Permite configurar intervalos de tiempo entre puntos</li>
+<li>Es posible el filtrado de distancia mínima entre puntos o el filtrado centrado en la precisión</li>
+<li>Icono de notificación con coordenadas y acciones rápidas</li>
+<li>Uso de ocultadores de señales móviles para la ubicación cuando el GPS está desactivado</li>
+<li>Selección de red selectiva, GPS y proveedores de localización pasivos</li>
+<li>Envíe automáticamente el archivo al servidor o por correo electrónico, a intervalos establecidos. El envío es posible a la dirección de correo electrónico, servidor FTP, Dropbox, OpenStreetMap, Google Drive, URL de usuario.</li>
+<li>Comparta la ubicación o registre archivos a través de SMS/correo electrónico (y otras aplicaciones como Facebook o Twitter, dependiendo de lo que haya instalado)</li>
+<li>Empezar a grabar cuando se inicie el sistema operativo del teléfono</li>
+<li>Invocar acciones usando el componente Tasker u otras aplicaciones de automatización.</li>
+<li>Capacidad de crear un archivo con la configuración predeterminada para ser distribuido</li>
+<li>Posibilidad de utilizar múltiples perfiles con diferentes configuraciones</li>
+</ul>
 
-Aunque la aplicación permite frecuencias de refresco de 0 segundos, no es recomendable, ya que el registro sucede muy rápido; Ésto puede causar inestabilidad o cuelgues en la aplicación. Es mejorprobar con 1 ó 3 segundos.
+Envíe errores, solicitudes de funciones y preguntas en github.com/mendhak/gpslogger (seguimiento de problemas).  
 
-Si consideras que hay alguna característica que la aplicación debería de tener, puedes solicitar la característica en la web de GitHub.
+<b>Notas</b>
 
-***Explicación de permisos requeridos por la app:
+Esta aplicación solo usa una conexión de datos cuando configura el envío automático o funciones para una URL de usuario
 
-Almacenamiento - Leer y escribir archivos en la carpeta "GPSLogger" en su tarjeta SD
+Aunque la aplicación le permite establecer el intervalo en 0 segundos, no se recomienda porque la grabación y la grabación son demasiado rápidas. Tal configuración puede hacer que la aplicación se vuelva inestable o se bloquee. Recomendamos establecer un intervalo de 1 a 3 segundos.
 
-Comunicación de red - Usada cuando se suben los archivos (Dropbox, OpenStreetMap) o cuando se envían correos electrónicos o cuando usted se autentica con Dropbox u OpenStreetMap
 
-Su localización - Usada para determinar su posición, basado en GPS o en la red celular
+<b>Explicación de autorizaciones</b>
 
-Herramientas del sistema (Inicio automático al encender el teléfono) - Usado si usted deseea iniciar GPSLoggee en el inicio del teléfono
+Almacenamiento: lectura y escritura de archivos en la carpeta de la aplicación GPSLogger en la tarjeta SD
+
+Comunicación de red: se utiliza al enviar archivos (Dropbox, Openstreetmap) o al enviar correos electrónicos o autorizar con Dropbox, Openstreetmap
+
+Su ubicación: se utiliza para determinar su ubicación mediante GPS o buscadores de señales celulares
+
+Herramientas del sistema (inicio automático al inicio): se usa cuando elige ejecutar una aplicación cuando se inicia el sistema operativo
+
+Permisos de almacenamiento compartido: en Android 11, se usan para escribir archivos en rutas de archivos especificadas por el usuario
