@@ -1,47 +1,47 @@
-Un registrador de datos simple y de ahorro de energía del sistema GPS. El propósito de esta aplicación es registrar sus coordenadas GPS a intervalos establecidos en un archivo en la tarjeta SD. Esta aplicación se ejecuta en segundo plano, por lo que puede ejecutarla durante una caminata larga, una caminata, un vuelo o una sesión de fotos, o incluso cuando solo va a la tienda a comprar leche, por ejemplo. Una vez que regrese a su computadora, puede usar los archivos resultantes para geoetiquetar fotos, enviar los datos a sitios de viajes o verlos usando Google Earth.
+Un registrador de GPS liviano y de bajo consumo de batería. El propósito de esta aplicación es registrar sus coordenadas GPS a intervalos específicos en un archivo en su tarjeta SD.  Esta aplicación se ejecuta en segundo plano para que pueda realizar una caminata larga, una caminata, un viaje en avión o una sesión de fotos o incluso ir a comprar un poco de leche y tenerla funcionando el mayor tiempo posible.   Una vez que regrese a su computadora, puede usar los archivos para geoetiquetar fotos, subirlas a sitios de viajes, verlas en Google Earth, etc.
 
 
 Para obtener más información, consulte <a href="https://gpslogger.app">https://gpslogger.app</a>
 
-<b>Nota</b>: Recuerde configurar el permiso <b>Permitir siempre</b> para esta aplicación en su sistema operativo para que pueda registrar la ubicación en segundo plano.
+<b>Nota</b>: recuerde <b>Permitir todo el tiempo</b> para esta aplicación en la configuración de su sistema operativo, para permitirle registrar ubicaciones en segundo plano.
 
-<b>Características y funciones</b>
+<b>Características</b>
 
 <ul>
-<li>Puede grabar en formatos GPX, KML, CSV, NMEA y CSV. También puede grabar usando una URL de usuario o solo con visualización en la pantalla.</li>
-<li>Registra puntos GPX como rutas y segmentos de ruta</li>
-<li>También registra la velocidad, la dirección y la altitud, si están disponibles.</li>
-<li>Permite agregar una descripción al punto, utilizando el menú de notas y anotaciones, se agregan como waypoints</li>
-<li>Permite configurar intervalos de tiempo entre puntos</li>
-<li>Es posible el filtrado de distancia mínima entre puntos o el filtrado centrado en la precisión</li>
+<li>Puede iniciar sesión en formatos GPX, KML, CSV, NMEA y CSV. También puede iniciar sesión en una URL personalizada o solo en la pantalla.</li>
+<li>Registra puntos GPX como pistas y segmentos de pista</li>
+<li>También registra la velocidad, la dirección y la altitud, si están disponibles</li>
+<li>Agregue una descripción a un punto usando el menú de anotación, se agrega como un punto de referencia</li>
+<li>Configurar intervalos de tiempo entre puntos</li>
+<li>Configurar un filtro de distancia mínima entre puntos o un filtro de precisión</li>
 <li>Icono de notificación con coordenadas y acciones rápidas</li>
-<li>Uso de ocultadores de señales móviles para la ubicación cuando el GPS está desactivado</li>
-<li>Selección de red selectiva, GPS y proveedores de localización pasivos</li>
-<li>Envíe automáticamente el archivo al servidor o por correo electrónico, a intervalos establecidos. El envío es posible a la dirección de correo electrónico, servidor FTP, Dropbox, OpenStreetMap, Google Drive, URL de usuario.</li>
-<li>Comparta la ubicación o registre archivos a través de SMS/correo electrónico (y otras aplicaciones como Facebook o Twitter, dependiendo de lo que haya instalado)</li>
-<li>Empezar a grabar cuando se inicie el sistema operativo del teléfono</li>
-<li>Invocar acciones usando el componente Tasker u otras aplicaciones de automatización.</li>
-<li>Capacidad de crear un archivo con la configuración predeterminada para ser distribuido</li>
-<li>Posibilidad de utilizar múltiples perfiles con diferentes configuraciones</li>
+<li>Utiliza torres de telefonía móvil para la ubicación cuando el GPS está desactivado</li>
+<li>Elegir selectivamente proveedores de red, gps y localización pasiva</li>
+<li>Cargue automáticamente o envíe por correo electrónico el archivo a intervalos establecidos a destinos como correo electrónico, FTP, Dropbox, OpenStreetMap, Google Drive, URL personalizada.</li>
+<li>Comparta la ubicación o registre archivos a través de SMS/correo electrónico (y otras aplicaciones como Facebook o Twitter, según lo que tenga instalado)</li>
+<li>Empezar a iniciar sesión en el arranque del teléfono</li>
+<li>Invoque operaciones desde Tasker u otras aplicaciones de automatización.</li>
+<li>Puedes darle un archivo predeterminado con tus propios valores para distribución</li>
+<li>Son posibles múltiples perfiles con diferentes configuraciones</li>
 </ul>
 
-Envíe errores, solicitudes de funciones y preguntas en github.com/mendhak/gpslogger (seguimiento de problemas).  
+Errores, solicitudes de funciones, preguntas: envíelas a github.com/mendhak/gpslogger (seguimiento de problemas).
 
 <b>Notas</b>
 
-Esta aplicación solo usa una conexión de datos cuando configura el envío automático o funciones para una URL de usuario
+Esta aplicación utiliza una conexión de datos solo si utiliza funciones de envío automático o funciones de URL personalizadas
 
-Aunque la aplicación le permite establecer el intervalo en 0 segundos, no se recomienda porque la grabación y la grabación son demasiado rápidas. Tal configuración puede hacer que la aplicación se vuelva inestable o se bloquee. Recomendamos establecer un intervalo de 1 a 3 segundos.
+Aunque la aplicación permite frecuencias de 0 segundos, no se recomienda ya que la grabación y el registro se realizan muy rápido; esto podría causar inestabilidad/bloqueos. Intente 1-3 segundos en su lugar.
 
 
-<b>Explicación de autorizaciones</b>
+<b>Explicación de permisos</b>
 
-Almacenamiento: lectura y escritura de archivos en la carpeta de la aplicación GPSLogger en la tarjeta SD
+Almacenamiento: lectura y escritura de archivos en la carpeta GPSLogger de su tarjeta SD
 
-Comunicación de red: se utiliza al enviar archivos (Dropbox, Openstreetmap) o al enviar correos electrónicos o autorizar con Dropbox, Openstreetmap
+Comunicación de red: se usa al cargar los archivos (Dropbox, Openstreetmap) o enviar correos electrónicos o autorizarlo con Dropbox, Openstreetmap
 
-Su ubicación: se utiliza para determinar su ubicación mediante GPS o buscadores de señales celulares
+Su ubicación: se utiliza para determinar su ubicación basada en GPS o torre
 
-Herramientas del sistema (inicio automático al inicio): se usa cuando elige ejecutar una aplicación cuando se inicia el sistema operativo
+Herramientas del sistema (se inician automáticamente en el arranque): se utilizan si elige iniciar GPSLogger en el arranque
 
-Permisos de almacenamiento compartido: en Android 11, se usan para escribir archivos en rutas de archivos especificadas por el usuario
+Permisos de almacenamiento compartido: en Android 11, se usa para permitir escribir archivos en rutas de archivos personalizadas
