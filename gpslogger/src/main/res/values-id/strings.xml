@@ -216,7 +216,7 @@
     <string name="gpslogger_folder_title">Simpan ke folder</string>
     <string name="gpslogger_folder_summary">Dimana untuk menyimpan catatan file ke, default ke/sdcard/GPSLogger</string>
     <string name="new_file_prefix_serial_title">Membubuhkan awalan nomor seri perangkat ke nama file</string>
-    <string name="new_file_prefix_serial_summary">Ini adalah nomor seri yang ditemukan dalam status telepon Anda </string>
+    <string name="new_file_prefix_serial_summary">Pada Android 8 dan seterusnya, ID Android unik akan digunakan. Pra-Android 8, nomor seri build, yang terdapat di status ponsel Anda, digunakan.</string>
     <string name="txt_travel_duration">Durasi:</string>
     <string name="menu_onepoint">Masuk satu titik</string>
     <string name="view_simple">Tampilan sederhana</string>
@@ -373,4 +373,8 @@
     <string name="file_logging_log_time_with_offset_title">pencatat waktu dengan zona waktu pertimbangan</string>
     <string name="install_conscrypt_provider_summary">jika anda menemui masalah sambungan SSL/TLS pada perangkat android yang lama, memasang Conscrypt Provider mungkin membantu. (ikuti tautan ini, pasang APK, lalu muat ulang aplikasi)</string>
     <string name="install_conscrypt_provider_title">memasang Conscrypt Provider (SSL/TLS)</string>
+    <string name="log_customurl_summary_detailed">Mengirim permintaan ke URL Kustom setiap kali titik lokasi diambil. Tergantung pada interval logging.</string>
+    <string name="autosend_customurl_summary">(Fitur ini mengaktifkan pencatatan CSV) Mengirim permintaan secara massal ke URL Khusus, satu permintaan untuk setiap baris dalam file CSV. Bergantung pada interval kirim otomatis.</string>
+    <string name="log_customurl_discard_offline_locations">Buang lokasi offline</string>
+    <string name="log_customurl_discard_offline_locations_summary">Mencatat lokasi ke URL Khusus hanya saat koneksi jaringan tersedia (tidak memengaruhi pengiriman otomatis)</string>
 </resources>
