@@ -36,5 +36,3 @@ Komunikacja sieciowa - używana podczas przesyłania plików (Dropbox, Openstree
 Lokalizacji - określana za pomocom wierzy telefonicznych lub GPS-u
 
 Uruchom automatycznie podczas startu systemu - Jeśli chcesz rozpocząć logowanie po starcie systemu.
-
-
