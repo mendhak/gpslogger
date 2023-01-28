@@ -1,0 +1,4 @@
+* Používateľská adresa URL - pridaná možnosť vymazanie offline polôh; dá sa použiť na odoslanie poslednej polohy.
+* Používateľská adresa URL - opakovanie maximálne 3-krát, namiesto 5-krát.
+* Oprava chyby: spustenie počas dlhej doby malo za následok zobrazenie zápornej hodnoty hodín.
+* Rozšírenie: alarmy pre automatické odosielanie sú spoľahlivejšie a mali by byť a presnejšie
