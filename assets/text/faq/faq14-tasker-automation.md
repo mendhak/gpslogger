@@ -68,6 +68,6 @@ From there in your task, you can look at the following variables
  * `%filename` - the base filename that was chosen (no extension)
  * `%startedtimestamp` - timestamp when logging was started (epoch)
  * `%duration` - seconds since the current session started
- * `%travelled` - meters travelled since the session started
+ * `%distance` - meters travelled since the session started
 
 In a custom application, receive the `com.mendhak.gpslogger.EVENT` broadcast and have a look inside the extras.
