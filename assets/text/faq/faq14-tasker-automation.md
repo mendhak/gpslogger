@@ -63,8 +63,9 @@ In Tasker, this would look like:
   
 From there in your task, you can look at the following variables
  
- * `%gpsloggerevent` - `started` or `stopped`
+ * `%gpsloggerevent` - `started` or `stopped` or `point`
  * `%filename` - the base filename that was chosen (no extension)
  * `%startedtimestamp` - timestamp when logging was started (epoch)
+ * (When the event is `point`) Raw values of `%latitude`, `%longitude`, `%accuracy`, `%altitude`, `%duration`, `%travelled`. These values will not respect user preferences.
 
 In a custom application, receive the `com.mendhak.gpslogger.EVENT` broadcast and have a look inside the extras.

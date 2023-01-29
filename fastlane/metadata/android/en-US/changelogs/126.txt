@@ -1,0 +1,2 @@
+* Experimental: New annotation button view. Long press to edit its message and color.
+* Experimental: Send a broadcast with raw values for lat, long, altitude, accuracy, duration, travelled. For use from automation tools.
