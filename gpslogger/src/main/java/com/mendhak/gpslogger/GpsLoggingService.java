@@ -428,7 +428,7 @@ public class GpsLoggingService extends Service  {
             sendIntent.putExtra("filename", session.getCurrentFormattedFileName());
             sendIntent.putExtra("startedtimestamp", session.getStartTimeStamp());
             sendIntent.putExtra("duration", (int) (System.currentTimeMillis() - session.getStartTimeStamp()) / 1000);
-            sendIntent.putExtra("travelled", session.getTotalTravelled());
+            sendIntent.putExtra("distance", session.getTotalTravelled());
 
             sendBroadcast(sendIntent);
     }
