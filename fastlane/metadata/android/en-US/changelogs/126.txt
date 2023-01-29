@@ -1,3 +1,3 @@
 * Experimental: New annotation button view. Long press to edit its message and color.
-* Experimental: Send a broadcast with raw values for lat, long, altitude, accuracy, duration, travelled. For use from automation tools.
-* Breaking: The misnamed `emailAlarm` intent is renamed to `immediateautosend`, when invoked from Tasker, initiates file uploads.
+* Experimental: Send a broadcast with raw values for latitude longitude accuracy altitude duration travelled.
+* Breaking: The misnamed emailAlarm intent is renamed to immediateautosend.  When invoked from automation tools, initiates file uploads.
