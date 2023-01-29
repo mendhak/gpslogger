@@ -1,0 +1,6 @@
+* ¡Google Drive ha vuelto! Reimplementado sin bibliotecas de código cerrado
+* Corrección de errores: la notificación aparecía aleatoriamente cuando no estaba en uso
+* Si el servicio de ubicación está deshabilitado, ahora simplemente espera (con un ícono de advertencia) y se reanuda después de volver a habilitarlo.
+* Tamaño de fuente ajustable, ancho/largo se adapta mejor
+* Alarma más precisa en lugares suprimidos en modo de repetición
+* Nueva configuración de doble acción en Configuración de carga

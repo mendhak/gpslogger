@@ -396,4 +396,6 @@ polia.
     <string name="install_conscrypt_provider_summary">Ak zaznamenávate problémy so SSL/TLS konektiviou na starších zariadenia Android, môže pomôcť nainštalovanie Conscrypt Provider. Kliknutím na tento odkaz nainštalujete APK, potom aplikáciu reštartujte</string>
     <string name="log_customurl_summary_detailed">Odošle požiadavku na používateľskú URL adresu vtedy, keď sa zaznamená bod lokalizácie. Nastavenie závisí od intervalu zaznamenávania.</string>
     <string name="autosend_customurl_summary">(Táto funkcia zapne zaznamenávanie do CSV). Hromadne odosiela požiadavky na používateľskú adresu URL, jednu na každý riadok v súbore CSV. Nastavenie je závislé od intervalu automatického odosielania.</string>
+    <string name="log_customurl_discard_offline_locations">Vymazať offline polohy</string>
+    <string name="log_customurl_discard_offline_locations_summary">Zaznamenávať polohy na používateľskú URL adresu len ak je dostupné sieťové pripojenie (netýka sa automatického odosielania)</string>
 </resources>

@@ -1,0 +1,3 @@
+*Perbaikan Bug - Buat dialog izin awal tak dapat diabaikan
+*Perbaikan Bug - Perjelas perbedaan antara fitur url logging, dan fitur pengirim otomatis
+*Perbaikan Bug - Periksa dan masukan penyedia jika dipasang dari F-Droid

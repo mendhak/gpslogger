@@ -1,0 +1,8 @@
+* Las URL personalizadas se pueden usar como remitentes automáticos, para ayudar con la confiabilidad.
+* Opción para escribir la hora con compensación de zona horaria, en Detalles de registro. (GPX, KML, GeoJSON, CSV)
+* Las URL personalizadas pueden usar el parámetro %TIMEOFFSET
+* Registro CSV: mucho para agregar.
+* Registro de CSV: opción para hacer cumplir el límite y el separador de coma decimal.
+* La vista de registro mostrará las coordenadas en el formato preferido del usuario.
+* Si se está recuperando de una parada inesperada, vuelva a iniciar sesión si ya había iniciado sesión.
+* Corrección de errores húngaros

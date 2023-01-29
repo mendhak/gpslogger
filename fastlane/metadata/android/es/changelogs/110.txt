@@ -1,6 +1,6 @@
-* En Android 10+, el flujo de trabajo de permisos ahora solicitará el permiso "permitir todo el tiempo".
-* El flujo de trabajo de permisos también solicitará desactivar la optimización de la batería
-* El flujo de trabajo de permisos es molesto, lo siento, es necesario para ayudar con numerosas solicitudes de soporte relacionadas con las limitaciones de fondo.
-* Iconos adaptables, gracias a @kanru
-* Añadida una opción para resetear la app (borra todos los archivos y permisos de la app), en Ajustes generales.
+* Android 10+ solicitará "permiso siempre" en el proceso de autorización
+* El proceso de autorización también solicita desactivar la optimización de la batería
+* En el proceso de autorización, también requiere permisos relacionados con restricciones de fondo.
+* Íconos adaptables gracias a @kanru
+* Se agregó una opción para restablecer la aplicación en la configuración general (elimina todos los archivos y permisos asociados con la aplicación)
 * Traducciones actualizadas de Crowdin

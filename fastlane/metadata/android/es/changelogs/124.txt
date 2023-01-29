@@ -1,0 +1,3 @@
+* Corrección de errores: hacer que el cuadro de diálogo de permiso inicial no se pueda descartar
+* Corrección de errores: aclare la diferencia entre la función de registro de URL personalizado y la función de envío automático
+* Corrección de errores: verifique y cargue correctamente el proveedor de conscrypt si está instalado desde F-Droid

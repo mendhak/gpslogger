@@ -262,7 +262,7 @@
     <string name="pref_filedetails_title">Detalles de archivo y carpeta</string>
     <string name="absolute_timeout_title">Tiempo absoluto para fijar al GPS</string>
     <string name="absolute_timeout_summary">Número de segundos tras los que la aplicación cancela la búsqueda de posición, ignorando los demás ajustes. Especialmente útil cuando estás en interiores para evitar que el GPS gaste batería. Establecer en 0 para evitar el tiempo de espera.</string>
-    <string name="txt_latitude_short">Lat</string>
+    <string name="txt_latitude_short">Latitud</string>
     <string name="txt_longitude_short">Long</string>
     <string name="log_nmea_title">Loguear a NMEA</string>
     <string name="log_nmea_summary">Crea un archivo NMEA en crudo durante la búsqueda de posición. Este archivo crece muy rápidamente. Sólo funciona mientras se está utilizando el GPS.</string>

@@ -1,38 +1,47 @@
-Un Capturador de Datos GPS ligero, con poco consumo de batería. El propósito de esta aplicación es registrar tus coordenadas GPS a intervalos específicos de tiempo en un archivo en la tarjeta SD.  Esta aplicación corre en segundo plano. Puedes estar caminando, dándo un paseo, en un vuelo, en una sesión de fotos o inclusive puedes ir a comprar leche y tener la aplicación corriendo tanto tiempo como sea posible.   Una vez estés de vuelta en tu PC, puedes usar los archivos para geoetiquetar fotos, subirlas a web's de viajes, verlas en Google Earth, entre otros. 
-
-***Características:
-
-* Especificar intervalos de tiempo
-* Especificar intervalos de distancias
-* Geolocalización por estación base (Antena celular) o satélites GPS
-* Archivos GPX y/o Archivos KML
-* Mostrar notificaciones
-* Usar la hora del teléfono o la hora del satélite
-* Puede usar unidades Imperiales
-* Inicio automático al encender el teléfono
-* Auto envío de mails cada pocas horas
-* OpenStreetMap - Subir datos el muestreo GPS
-* Dropbox - Subir archivos GPX/KML/ZIP
+Grabador de posiciones GPS ligero, eficiente en el uso de la batería. La finalidad de esta app es grabar tus coordinadas en intervalos de tiempo en un archivo en la tarjeta SD.  Esta aplicación se ejecuta en segundo plano por lo que puedes ir de paseo, corriendo, volando, hacer una sesión fotográfica, o simplemente salir a comprar leche, y tenerla en marcha tanto tiempo como sea posible.   Cuando vuelvas al ordenador puedes utilizar los archivos para geoetiquetar fotos, subirlos a webs de viajes, ver en Google Earth, etc.
 
 
-Para Errores / Fallos, Peticiones de nuevas funcionalidades o preguntas, por favor envíelas a github.com/mendhak/gpslogger (Gestor de requerimientos).  
+Para más información, vea <a href="https://gpslogger.app">https://gpslogger.app</a>
 
-***Notas:
+<b>Nota</b>: Por favor recuerda <b>Permitir siempre</b> esta app en las opciones del móvil para poder registrar posiciones en segundo plano.
 
-GPSLogger no es un sustituto de "OpenTracks".  OpenTracks está diseñado para ser usado durante periodos cortos de tiempo (ya que tiene muchas características ejecutándose), GPSLogger está diseñado para ejecutarse durante mucho tiempo.
+<b>Prestaciones</b>
 
-La conexión de datos es usada por esta aplicación sólo si se usa la opción "Auto-Email" en Dropbox u OpenStreetMap.
+<ul>
+<li>Puede grabar en formato GPX, KML, CSV y NMEA. También puede hacerlo en una dirección URL personalizada o simplemente en la pantalla.</li>
+<li>Grabar puntos GPX como caminos y segmentos de caminos</li>
+<li>También registra velocidad, dirección y altitud si están disponibles</li>
+<li>Añade una descripción a un punto con el menú anota, se añade como un punto de paso</li>
+<li>Configura tiempo de intervalos entre puntos</li>
+<li>Configura un filtro de distancia mínima entre puntos o un filtro de precisión</li>
+<li>Icono de notificación con coordenadas y acciones rápidas</li>
+<li>Utiliza las torres de comunicación cuando el GPS está desactivado</li>
+<li>Puedes elegir selectivamente a los proveedores de red, gps, y de posición pasiva</li>
+<li>Sube automáticamente o envía email del archivo en intervalos establecidos a destinos como Email, FTP, Dropbox, OpenStreetMap, Google Drive, URL personalizada.</li>
+<li>Comparte posición o archivos de posiciones vía SMS/Email (y otras apps como Facebook o Twitter dependiendo de qué tienes instalado)</li>
+<li>Empezar a grabar tan pronto como el móvil arranque</li>
+<li>Invocar operaciones desde Tasker u otras apps de automatización</li>
+<li>Puedes configurarla con un archivo de opciones para facilitar la distribución</li>
+<li>Puedes tener perfiles múltiples, cada uno con sus opciones</li>
+</ul>
 
-Aunque la aplicación permite frecuencias de refresco de 0 segundos, no es recomendable, ya que el registro sucede muy rápido; Ésto puede causar inestabilidad o cuelgues en la aplicación. Es mejorprobar con 1 ó 3 segundos.
+Errores, peticiones de nuevas prestaciones, cuestiones - por favor envíalas a github.com/mendhak/gpslogger (issue tracker).
 
-Si consideras que hay alguna característica que la aplicación debería de tener, puedes solicitar la característica en la web de GitHub.
+<b>Notas</b>
 
-***Explicación de permisos requeridos por la app:
+Esta app sólo utiliza conexión de datos si la has configurado para que realice envíos automáticos o URL personalizadas
 
-Almacenamiento - Leer y escribir archivos en la carpeta "GPSLogger" en su tarjeta SD
+A pesar de que la aplicación permite frecuencias de 0 segundos, no es recomendable porque la grabación y grabaciones muy rápidas; esto puede hacer la aplicación sea inestable y que se cuelgue. Elige 1-3 segundos.
 
-Comunicación de red - Usada cuando se suben los archivos (Dropbox, OpenStreetMap) o cuando se envían correos electrónicos o cuando usted se autentica con Dropbox u OpenStreetMap
 
-Su localización - Usada para determinar su posición, basado en GPS o en la red celular
+<b>Explicación de los permisos</b>
 
-Herramientas del sistema (Inicio automático al encender el teléfono) - Usado si usted deseea iniciar GPSLoggee en el inicio del teléfono
+Almacenamiento - leer y escribir archivos en la carpeta GPSLogger de tu tarjeta SD
+
+Comunicación de red - utilizado cuando se suben archivos (Dropbox, OpenStreetMap) o enviando emails o por autorización con Dropbox, OpenStreetMap
+
+Tu posición - utilizado para determinar la posición de GPS de las torres de comunicaciones
+
+Herramientas del sistema (comenzar a grabar al arrancar) - usado si eliges abrir automáticamente GPSLogger cuando el móvil arranque
+
+Permisos de almacenamiento compartido - en Android 11, utilizado para permitir escribir archivos en rutas de carpetas personalizados
