@@ -348,7 +348,7 @@
     <string name="google_drive_setup_title">Google Drive</string>
     <string name="google_drive_folder_path">alur folder Google Drive</string>
     <string name="google_drive_folder_path_summary_1">gunakan satuan nama folder (mis. GPSLogger), atau alur folder (mis. aaa/bbb/ccc). Folder harus dibuat melalui aplikasi ini.</string>
-    <string name="google_drive_folder_path_summary_2">jika anda mengunakan satuan nama folder, folder tersebut dapat dipindahkan kemanapun dalam Google Drive setelah dibuat. jalur folder lebih lambat karena setiap bagian harus diperiksa dan dibuat, sebelum file diunggah.</string>
+    <string name="google_drive_folder_path_summary_2">Jika Anda menggunakan satu nama folder, folder tersebut dapat dipindahkan ke tempat lain di Google Drive setelah dibuat. Jalur folder lebih lambat karena setiap bagian jalur harus diperiksa atau dibuat, sebelum file diunggah.</string>
     <string name="autoftp_ssltls_tls">TLS</string>
     <string name="listeners_gps_title">pencatat lokasi GPS/GNSS</string>
     <string name="listeners_gps_summary">pencatat lokasi disediakan oleh satelit berdasarkan lokasi penerima pada perangkat anda</string>
