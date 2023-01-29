@@ -203,7 +203,7 @@ public class GpsLoggingService extends Service  {
 
 
                 if (bundle.getBoolean(IntentConstants.AUTOSEND_NOW)) {
-                    LOG.info("Intent received - Send Email Now");
+                    LOG.info("Intent received - Auto Send Now");
                     EventBus.getDefault().post(new CommandEvents.AutoSend(null));
                 }
 
