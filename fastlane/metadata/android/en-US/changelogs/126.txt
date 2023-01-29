@@ -1,3 +1,3 @@
 * Experimental: New annotation button view. Long press to edit its message and color.
-* GPSLogger's start/stop/status broadcast will also include duration and distance values.
-* Breaking: The misnamed emailAlarm intent is renamed to immediateautosend.  When invoked from automation tools, initiates file uploads.
+* GPSLogger's status broadcast now includes duration and distance values.
+* Breaking: The misnamed emailAlarm intent is renamed to immediateautosend.  Use it to initiate auto-send.
