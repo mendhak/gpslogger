@@ -208,6 +208,7 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                     .fields(
                             Input.plain(PreferenceNames.LOG_TO_URL_PATH)
                                     .text(preferenceHelper.getCustomLoggingUrl())
+                                    .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
                                     .required()
                     )
                     .show(this, PreferenceNames.LOG_TO_URL_PATH);
@@ -270,6 +271,7 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
         if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_PATH)){
             String url = extras.getString(PreferenceNames.LOG_TO_URL_PATH);
+            url = url.replaceAll("\n","");
             preferenceHelper.setCustomLoggingUrl(url);
             findPreference(PreferenceNames.LOG_TO_URL_PATH).setSummary(url);
             return true;
