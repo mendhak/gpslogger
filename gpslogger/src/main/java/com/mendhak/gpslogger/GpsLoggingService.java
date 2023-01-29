@@ -419,14 +419,23 @@ public class GpsLoggingService extends Service  {
 
     }
 
-    private void notifyByBroadcast(boolean loggingStarted) {
+    private void notifyByBroadcast(String eventName) {
             LOG.debug("Sending a custom broadcast");
-            String event = (loggingStarted) ? "started" : "stopped";
+
             Intent sendIntent = new Intent();
             sendIntent.setAction("com.mendhak.gpslogger.EVENT");
-            sendIntent.putExtra("gpsloggerevent", event);
+            sendIntent.putExtra("gpsloggerevent", eventName); // started, stopped, point
             sendIntent.putExtra("filename", session.getCurrentFormattedFileName());
             sendIntent.putExtra("startedtimestamp", session.getStartTimeStamp());
+            if(eventName.equalsIgnoreCase("point") && session.getCurrentLocationInfo() != null){
+                sendIntent.putExtra("latitude", session.getCurrentLatitude());
+                sendIntent.putExtra("longitude", session.getCurrentLongitude());
+                sendIntent.putExtra("altitude", session.getCurrentLocationInfo().getAltitude());
+                sendIntent.putExtra("accuracy", session.getCurrentLocationInfo().getAccuracy());
+                sendIntent.putExtra("duration", (int) (System.currentTimeMillis() - session.getStartTimeStamp()) / 1000);
+                sendIntent.putExtra("travelled", session.getTotalTravelled());
+            }
+
             sendBroadcast(sendIntent);
     }
 
@@ -435,7 +444,7 @@ public class GpsLoggingService extends Service  {
      */
     private void notifyClientsStarted(boolean started) {
         LOG.info((started)? getString(R.string.started) : getString(R.string.stopped));
-        notifyByBroadcast(started);
+        notifyByBroadcast(started?"started":"stopped");
         EventBus.getDefault().post(new ServiceEvents.LoggingStatus(started));
     }
 
@@ -444,7 +453,7 @@ public class GpsLoggingService extends Service  {
      */
     private void notifyStatus(boolean started) {
         LOG.info((started)? getString(R.string.started) : getString(R.string.stopped));
-        notifyByBroadcast(started);
+        notifyByBroadcast(started?"started":"stopped");
     }
 
     /**
@@ -918,6 +927,7 @@ public class GpsLoggingService extends Service  {
         session.setCurrentLocationInfo(loc);
         setDistanceTraveled(loc);
         showNotification();
+        notifyByBroadcast("point");
 
         if(isPassiveLocation){
             LOG.debug("Logging passive location to file");
