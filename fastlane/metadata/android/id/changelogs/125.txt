@@ -1,0 +1,4 @@
+*Kustom URL - tambahkan opsi untuk mengganti lokasi luring; berguna untuk mengirim lokasi terbaru.
+*Kustom URL - bisa mencoba lagi maksimum 3 kali bukan 5 kali.
+*Perbaikan bug - menampilkan penggunaan dengan waktu yang lama di pengurangan waktu pemakaian
+*Peningkatan: membuat alarm autosend lebih dapat diandalkan dan mencoba untuk lebih tepat

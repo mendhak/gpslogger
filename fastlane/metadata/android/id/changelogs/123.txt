@@ -1,0 +1,3 @@
+*Tambah opsi untuk menampilkan notifikasi GPSLogger di kunci layar saat layar terkunci.
+*Untuk perangkat Android 10, silahkan instal Conscrypt Provider jika ingin GPSLogger tersambung dengan TLS 1.3 services atau masalah terkoneksi SSL.
+*Banyak terjemahan yang diperbarui dari komunitas Weblate, Terima kasih untuk kalian semua <3.
