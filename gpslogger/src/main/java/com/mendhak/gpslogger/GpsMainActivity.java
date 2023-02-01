@@ -308,6 +308,8 @@ public class GpsMainActivity extends AppCompatActivity
 
         if(dialogTag.equalsIgnoreCase("annotations") && which == BUTTON_POSITIVE){
             String enteredText = extras.getString("annotations");
+            //Replace all whitespace and newlines, with single space
+            enteredText = enteredText.replaceAll("\\s+"," ");
             LOG.info("Annotation entered : " + enteredText);
             EventBus.getDefault().post(new CommandEvents.Annotate(enteredText));
             Files.addItemToCacheFile(enteredText, "annotations", GpsMainActivity.this);

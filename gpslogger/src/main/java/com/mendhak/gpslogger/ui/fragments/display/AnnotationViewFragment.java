@@ -22,6 +22,7 @@ package com.mendhak.gpslogger.ui.fragments.display;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -177,6 +178,8 @@ public class AnnotationViewFragment extends GenericViewFragment implements Simpl
 
             ButtonWrapper buttonWrapper = buttonList.get(idx);
             String enteredText = extras.getString("annotations");
+            //Replace all whitespace and newlines, with single space
+            enteredText = enteredText.replaceAll("\\s+"," ");
             int color = extras.getInt("color");
             buttonWrapper.setText(enteredText);
             buttonWrapper.setColor(Strings.getHexColorCodeFromInt(color));
@@ -219,6 +222,7 @@ public class AnnotationViewFragment extends GenericViewFragment implements Simpl
                         .fields(
                                 Input.plain("annotations")
                                         .hint(R.string.letters_numbers)
+                                        .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
                                         .text(String.valueOf(buttonWrapper.getText())),
                                 ColorField.picker("color")
                                         .label(R.string.annotation_edit_button_color).allowCustom(true)

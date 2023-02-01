@@ -1,4 +1,4 @@
 * Experimental: New annotation button view. Long press to edit its message and color.
+* The Custom URL and Annotation input boxes now wrap text, easier to see what you're entering. Newlines will be removed.
 * GPSLogger's status broadcast now includes duration and distance values.
-* Breaking: The misnamed emailAlarm intent is renamed to immediateautosend.  Use it to initiate auto-send.
-* The Custom URL input box now wraps text, easier to see what you're entering.
+* Breaking: The misnamed emailAlarm intent is renamed to immediateautosend.  Use it to initiate file uploads.
