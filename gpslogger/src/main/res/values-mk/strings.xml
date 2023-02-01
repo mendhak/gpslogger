@@ -136,4 +136,9 @@
     <string name="display_imperial_title">Прикажи ги империјалните единици</string>
     <string name="display_imperial_summary">Прикажи стапала, милји и пинти, ништо од тие новоформирани метрички работи. (Поставките сè уште мора да бидат во метрика)</string>
     <string name="startonbootup_title">Започни при подигнување</string>
+    <string name="please_wait">Ве молиме, почекајте</string>
+    <string name="startonapplaunch_summary">Започнете со логирање кога апликацијата ќе се стартува</string>
+    <string name="startonbootup_summary">Стартувајте ја апликацијата и започни логирање кога телефонот ќе стартува</string>
+    <string name="startonapplaunch_title">Започнете со стартување на апликацијата</string>
+    <string name="autoemail_title">Имејл</string>
 </resources>
