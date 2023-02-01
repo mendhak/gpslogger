@@ -209,6 +209,7 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                             Input.plain(PreferenceNames.LOG_TO_URL_PATH)
                                     .text(preferenceHelper.getCustomLoggingUrl())
                                     .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
+                                    .validatePattern("[^\\n]+"," ")
                                     .required()
                     )
                     .show(this, PreferenceNames.LOG_TO_URL_PATH);

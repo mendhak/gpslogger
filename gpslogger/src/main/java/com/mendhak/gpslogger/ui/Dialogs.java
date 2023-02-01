@@ -22,6 +22,7 @@ package com.mendhak.gpslogger.ui;
 
 import android.app.Activity;
 import android.content.res.Configuration;
+import android.text.InputType;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -196,6 +197,7 @@ public class Dialogs {
                         Input.plain(cacheKey)
                                 .suggest(new ArrayList<>(cachedList))
                                 .hint(hint)
+                                .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
                                 .text(text)
                 )
                 .title(title)

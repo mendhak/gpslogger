@@ -70,6 +70,8 @@ public class NotificationAnnotationActivity extends AppCompatActivity implements
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
          if(dialogTag.equalsIgnoreCase("annotations") && which == BUTTON_POSITIVE){
             String enteredText = extras.getString("annotations");
+            //Replace all whitespace and newlines, with single space
+            enteredText = enteredText.replaceAll("\\s+"," ");
             LOG.info("Notification Annotation entered : " + enteredText);
             Intent serviceIntent = new Intent(getApplicationContext(), GpsLoggingService.class);
             serviceIntent.putExtra(IntentConstants.SET_DESCRIPTION, enteredText);
