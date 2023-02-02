@@ -125,4 +125,20 @@
     <string name="keep_fix_summary">Бидете внимателни, ова ќе драстично намали животот на батеријата. Користете само за висока прецизност со ниски фреквенции.</string>
     <string name="enabledisablegps_title">Вклучи/Исклучи GPS</string>
     <string name="enabledisablegps_summary">Одете во подеусвањата на телефонот за да ги вклучите или исклучите провајдерите.</string>
+    <string name="new_file_custom_summary">Можете да го користите вашето сопствено име на фајл. Изборно, додадете неколку динамички параметри како сериски број, година, час, минута итн. Многу динамичните имиња на датотеки може да не работат добро со функциите за автоматско испраќање бидејќи го испраќаат само најновиот фајл.</string>
+    <string name="retry_time_summary">По добивањето првичен фикс, продолжете да се обидувате за волку долго за да добиете точна точка што ќе одговара на подесувањата за филтер на прецизност.</string>
+    <string name="retry_time_title">Времетраење да се совпадне со прецизноста</string>
+    <string name="pref_performance_title">Перформанси</string>
+    <string name="pref_performance_summary">Тајминзи, филтри и слушатели</string>
+    <string name="time_before_logging_title">Интервал на логирање</string>
+    <string name="time_before_logging_summary">Користете 0 за максимална фреквенција, но побавно е подобро за животот на батеријата. Конфигурацијата на батеријата на ниво на системот може да го отфрли ова подесување, видете Помош и ЧПП.</string>
+    <string name="keep_fix_title">Чувајте го GPS-от вклучен помеѓу фиксови</string>
+    <string name="display_imperial_title">Прикажи ги империјалните единици</string>
+    <string name="display_imperial_summary">Прикажи стапала, милји и пинти, ништо од тие новоформирани метрички работи. (Поставките сè уште мора да бидат во метрика)</string>
+    <string name="startonbootup_title">Започни при подигнување</string>
+    <string name="please_wait">Ве молиме, почекајте</string>
+    <string name="startonapplaunch_summary">Започнете со логирање кога апликацијата ќе се стартува</string>
+    <string name="startonbootup_summary">Стартувајте ја апликацијата и започни логирање кога телефонот ќе стартува</string>
+    <string name="startonapplaunch_title">Започнете со стартување на апликацијата</string>
+    <string name="autoemail_title">Имејл</string>
 </resources>
