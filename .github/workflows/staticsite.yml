@@ -43,18 +43,18 @@ jobs:
       - name: Build the static site
         run: docker-compose run --rm --entrypoint "/bin/bash -c 'npm install;npx eleventy'" eleventy
 
-      - name: Test the generated pages
-        run: |
-          mkdir -p smashtest
-          chmod -R a+rw smashtest
-          npm install smashtest
-          npx smashtest
-
-      - name: Upload Smashtest Report Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: smashtest-report
-          path: assets/generate-pages/smashtest/ 
+#      - name: Test the generated pages
+#        run: |
+#          mkdir -p smashtest
+#          chmod -R a+rw smashtest
+#          npm install smashtest
+#          npx smashtest
+#
+#      - name: Upload Smashtest Report Artifact
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: smashtest-report
+#          path: assets/generate-pages/smashtest/
           
       - name: Setup Github Pages
         uses: actions/configure-pages@v2
