@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "Custom static site generator.",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@11ty/eleventy": "^1.0.2",
+    "@11ty/eleventy": "^2.0.0-beta.1",
     "markdown-it-anchor": "^8.6.5",
     "node-html-parser": "^6.1.1"
   }
