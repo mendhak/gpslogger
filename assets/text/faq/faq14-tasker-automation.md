@@ -33,7 +33,7 @@ To invoke it from your own Android code:
 
 > `immediatestart` - (true) Start logging    
 > `immediatestop` - (true) Stop logging  
-> `immediateautosend` - (true) Initiate auto-send file uploads (only works if logging has started) 
+> `immediateautosend` - (true) Initiate auto-send file uploads (only works if logging has started)   
 > `setnextpointdescription` - (text) Sets the annotation text to use for the next point logged  
 > `settimebeforelogging` - (number) Sets preference for logging interval option    
 > `setdistancebeforelogging` - (number) Sets preference for distance before logging option  
