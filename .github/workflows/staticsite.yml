@@ -47,7 +47,8 @@ jobs:
         run: |
           mkdir -p smashtest
           chmod -R a+rw smashtest
-          docker-compose -f docker-compose.tests.yml run --rm smashtest
+          npm install smashtest
+          npx smashtest
 
       - name: Upload Smashtest Report Artifact
         uses: actions/upload-artifact@v3
