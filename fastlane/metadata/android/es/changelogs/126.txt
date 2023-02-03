@@ -1,0 +1,4 @@
+* Experimental: Nueva vista del botón de anotación. Pulsación larga para editar su mensaje y color.
+* Los cuadros de entrada URL personalizada y Anotación ahora envuelven el texto, más fácil de ver lo que está introduciendo. Se eliminarán las nuevas líneas.
+* La emisión del estado del GPSLogger incluye ahora los valores de duración y distancia.
+* Rompiendo: El intento mal llamado emailAlarm ha sido renombrado a immediateautosend.  Utilícelo para iniciar la carga de archivos.
