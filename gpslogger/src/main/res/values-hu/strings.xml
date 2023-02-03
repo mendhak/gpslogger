@@ -379,4 +379,7 @@
     <string name="log_customurl_summary_detailed">Kérést küld az egyéni URL-címre, amikor egy helypont rögzítésre kerül. a naplózási intervallumtól függ.</string>
     <string name="log_customurl_discard_offline_locations">Offline helyadatokat eldobása</string>
     <string name="log_customurl_discard_offline_locations_summary">Csak a legújabb helyadatokat naplózza az egyéni URL-re miután a hálózati kapcsolat helyreállt. (Nincs hatással az automatikus küldésre)</string>
+    <string name="view_annotation">Helyjező nézet</string>
+    <string name="annotation_edit_button_color">Gomb színe</string>
+    <string name="annotation_edit_button_label">Helyjelző gomb szerkesztése</string>
 </resources>

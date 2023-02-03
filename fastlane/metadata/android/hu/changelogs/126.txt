@@ -1,0 +1,4 @@
+* Kísérleti: Új Helyjelző gomb nézet. Nyomja meg hosszan az üzenet és a szín szerkesztéséhez.
+* Egyéni URL és az Helyjelző beviteli mezők most tördelik a szöveget, így könnyebben látható, hogy mit ír be. Az újsorok eltávolításra kerülnek.
+* A GPSLogger állapotközvetítése mostantól tartalmazza az időtartam és a távolság értékeket.
+* Törés: A rosszul elnevezett e-mail riasztás átnevezve azonnali automatikus küldésre. Használja fájlfeltöltések kezdeményezésére.

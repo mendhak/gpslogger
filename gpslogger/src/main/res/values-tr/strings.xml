@@ -380,4 +380,7 @@
     <string name="log_customurl_summary_detailed">Bir konum noktası yakalandığında özel bir URL\'ye bir istek gönderir. Günlüğe kaydetme aralığına bağlıdır.</string>
     <string name="log_customurl_discard_offline_locations">Çevrim dışı konumları at</string>
     <string name="log_customurl_discard_offline_locations_summary">Konumları yalnızca bir ağ bağlantısı varken özel bir URL\'ye kaydedin (otomatik gönderimi etkilemez)</string>
+    <string name="view_annotation">Açıklama Görünümü</string>
+    <string name="annotation_edit_button_label">Açıklama düğmesini düzenle</string>
+    <string name="annotation_edit_button_color">Düğme rengi</string>
 </resources>
