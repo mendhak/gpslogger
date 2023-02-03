@@ -379,4 +379,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="install_conscrypt_provider_title">Instalar el proveedor de Conscrypt (SSL/TLS)</string>
     <string name="install_conscrypt_provider_summary">Si tiene problemas con la conectividad SSL/TLS en dispositivos Android más antiguos, la instalación de Conscrypt Provider puede ayudar. Haga clic en este enlace para instalar el APK, luego reinicie la aplicación</string>
     <string name="log_customurl_discard_offline_locations_summary">Registra solo los datos de ubicación más recientes en la URL personalizada después de restaurar la conexión a la red. (No afecta al envío automático)</string>
+    <string name="view_annotation">Vista de las anotaciones</string>
+    <string name="annotation_edit_button_label">Botón editar anotación</string>
+    <string name="annotation_edit_button_color">Color del boton</string>
 </resources>
