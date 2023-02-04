@@ -379,4 +379,7 @@
     <string name="autosend_customurl_summary">(Ця функція вмикає ведення журналу CSV) Надсилає запити масово на спеціальну URL-адресу, по одному для кожного рядка у файлі CSV. Залежить від інтервалу автоматичної відправки.</string>
     <string name="log_customurl_discard_offline_locations_summary">Використовуйте користувацьку URL-адресу лише тоді, коли доступне мережеве з \'єднання (це не впливає на автоматичне надсилання)</string>
     <string name="log_customurl_discard_offline_locations">Скасувати офлайн-місцезнаходження</string>
+    <string name="annotation_edit_button_color">Колір кнопки</string>
+    <string name="view_annotation">Перегляд анотації</string>
+    <string name="annotation_edit_button_label">Кнопка редагування анотації</string>
 </resources>
