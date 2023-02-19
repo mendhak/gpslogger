@@ -47,4 +47,28 @@
     <string name="time_oneandhalfhours">1½ 個鐘</string>
     <string name="time_twoandhalfhours">2½ 個鐘</string>
     <string name="time_hms_format" formatted="false">%s 時 %s 分 %s 秒</string>
+    <string name="ok">確定</string>
+    <string name="navigation_drawer_open">拉開功能選單</string>
+    <string name="navigation_drawer_close">閂埋功能選單</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="settings_screen_name">GPSLogger 設定</string>
+    <string name="cancel">取消</string>
+    <string name="hide">隱藏</string>
+    <string name="could_not_write_to_file">寫入唔到檔案</string>
+    <string name="add_description">加個描述</string>
+    <string name="letters_numbers">淨係可以用英文字母同數目字</string>
+    <string name="menu_annotate">旁註</string>
+    <string name="menu_share">分享</string>
+    <string name="menu_exit">收檔</string>
+    <string name="foot"> 呎</string>
+    <string name="feet"> 呎</string>
+    <string name="meter"> 米</string>
+    <string name="gpsprovider_unavailable">GPS 提供者欠奉。請檢查下您嘅定位設定，並啟用一個位置提供者。</string>
+    <string name="feet_per_second"> 呎/秒</string>
+    <string name="miles_per_hour"> 哩/時</string>
+    <string name="miles"> 哩</string>
+    <string name="app_theme_title">App 色系</string>
+    <string name="annotation_edit_button_color">個掣嘅色水</string>
+    <string name="pref_logging_title">紀錄詳情</string>
+    <string name="install_conscrypt_provider_title">安裝 Conscrypt 提供者 (SSL/TLS)</string>
 </resources>
