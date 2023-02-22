@@ -213,4 +213,18 @@
     <string name="google_drive_test_summary">上載一個測試檔案去 Google 雲端硬碟</string>
     <string name="pref_autosend_summary">電郵、分享同上載選項</string>
     <string name="shortcut_start">開始</string>
+    <string name="opengts_setup_title">OpenGTS</string>
+    <string name="autoopengts_server_category">OpenGTS 設定</string>
+    <string name="autoopengts_server">伺服器</string>
+    <string name="autoopengts_server_summary">主機名稱或 IP</string>
+    <string name="opengts_server_communication_method">通訊方法</string>
+    <string name="opengts_server_communication_method_summary">以 HTTP 或原始通訊埠為本嘅通訊</string>
+    <string name="autoopengts_server_path">伺服器路徑</string>
+    <string name="autoopengts_server_path_summary">自選而且僅限於 HTTP 為本嘅通訊。範例：「/gprmc/Data」</string>
+    <string name="autoopengts_device_id">裝置 ID</string>
+    <string name="autoftp_username">使用者名稱</string>
+    <string name="autoftp_advanced_settings">進階設定</string>
+    <string name="autoftp_port">連接埠</string>
+    <string name="autoftp_useftps">用 FTPS</string>
+    <string name="autoftp_password">密碼</string>
 </resources>
