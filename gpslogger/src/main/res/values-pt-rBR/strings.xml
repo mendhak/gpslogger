@@ -371,4 +371,8 @@
     <string name="app_theme_setting">Determina como definir o tema do app, claro ou escuro</string>
     <string name="file_logging_log_time_with_offset_title">Salvar o tempo com diferença de fuso horário</string>
     <string name="customurl_all_parameters">Todos os parâmetros:</string>
+    <string name="log_customurl_summary_detailed">Envie uma requisição para uma URL personalidada sempre que um ponto de localização for capturado. Depende do intervalo de registro.</string>
+    <string name="annotation_edit_button_label">Editar botão de anotação</string>
+    <string name="annotation_edit_button_color">Cor do botão</string>
+    <string name="view_annotation">Visualização de Anotação</string>
 </resources>
