@@ -1,0 +1,4 @@
+* Experimentálne: nové zobrazenie tlačidla pre anotáciu. Správu a farbu možno upraviť po dlhom stlačení.
+* Políčka na zadanie používateľskej URL a anotácie podporujú zalamovanie textu, takže je lepšie vidieť, čo zadávate. Znaky nových riadkov sa odstraňujú.
+* Stav vysielania aplikácie GPSLogger teraz zahŕňa aj trvanie a hodnoty vzdialenosti.
+* Novinka: nesprávne pomenovaný účel emailAlarm bol premenovaný na immediateautosend. Použite ho, ak chcete inicializovať odoslanie súboru.

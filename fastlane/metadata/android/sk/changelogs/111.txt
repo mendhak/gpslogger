@@ -1,6 +1,5 @@
 * Oprava nefungujúceho odosielania do ownCloud/NextCloud
 * Kvôli novým obmedzeniam úložiska Androidu je teraz možný zápis len do vlastných priečinkov aplikácie
-
 * Na Android 10+ bude systém oprávnení vyžadovať oprávnenie typu "Povoliť vždy"
 * Systém oprávnení bude tiež vyžadovať vypnutie optimalizácie batérie
 * Systém oprávnení spôsobuje nepríjemnosti, momentálne treba riešiť mnohé žiadosti o podporu kvôli obmedzovaniu na pozadí
