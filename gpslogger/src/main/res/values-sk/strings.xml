@@ -398,4 +398,7 @@ polia.
     <string name="autosend_customurl_summary">(Táto funkcia zapne zaznamenávanie do CSV). Hromadne odosiela požiadavky na používateľskú adresu URL, jednu na každý riadok v súbore CSV. Nastavenie je závislé od intervalu automatického odosielania.</string>
     <string name="log_customurl_discard_offline_locations">Vymazať offline polohy</string>
     <string name="log_customurl_discard_offline_locations_summary">Zaznamenávať polohy na používateľskú URL adresu len ak je dostupné sieťové pripojenie (netýka sa automatického odosielania)</string>
+    <string name="view_annotation">Zobrazenie anotácií</string>
+    <string name="annotation_edit_button_label">Tlačidlo pre úpravu anotácie</string>
+    <string name="annotation_edit_button_color">Farba tlačidla</string>
 </resources>
