@@ -374,4 +374,11 @@
     <string name="app_theme_light">亮</string>
     <string name="app_theme_dark">暗</string>
     <string name="app_theme_follow_system">跟随系统</string>
+    <string name="log_customurl_summary_detailed">每当捕捉到一个位置点，就向自定义URL发送一个请求。取决于记录的时间间隔。</string>
+    <string name="view_annotation">注释视图</string>
+    <string name="annotation_edit_button_label">编辑注释按钮</string>
+    <string name="annotation_edit_button_color">按钮颜色</string>
+    <string name="log_customurl_discard_offline_locations_summary">仅在网络连接可用时将位置记录到自定义 URL（不影响自动发送）</string>
+    <string name="autosend_customurl_summary">(此功能可以实现CSV记录）向自定义URL批量发送请求，CSV文件的每一行都有一个请求。取决于自动发送的时间间隔。</string>
+    <string name="log_customurl_discard_offline_locations">丢弃离线位置</string>
 </resources>
