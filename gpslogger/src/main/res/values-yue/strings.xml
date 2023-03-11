@@ -269,7 +269,7 @@
     <string name="no_files_found">咩檔案都搵唔到，冇得分享或上載。</string>
     <string name="debuglog_summary">將除錯訊息寫入去 SD 卡嘅一個檔案入面。警告：個檔案會爆 seed 大得好快。</string>
     <string name="autoemail_from_summary">一啲電郵提供者要打埋寄件人電郵地址。要就用啦。</string>
-    <string name="google_drive_testupload_success">上載好。請查看您嘅 Google Drive 係咪有個新嘅檔案。</string>
+    <string name="google_drive_testupload_success">上載好。請查看您嘅 Google 雲端硬碟係咪有個新嘅檔案。</string>
     <string name="autoftp_ssltls">SSL/TLS</string>
     <string name="autoftp_ssltls_summary">無、SSL 或者 TLS。揀「無」用返普通未加密連線。</string>
     <string name="autoftp_testing">測試緊 FTP 上載</string>
@@ -325,4 +325,20 @@
     <string name="gpslogger_custom_path_need_permission">為使 GPSLogger 用到自訂路徑，跟住落嚟個畫面請允許 GPSLogger 管理所有檔案。然之後再試多次啱先嘅動作。呢壇嘢係因應 Android 11+ 設限，所以要拆掂先。</string>
     <string name="new_file_custom_keep_changing_title">允許自訂檔名隨時進化</string>
     <string name="properties_file_url">屬性檔案嘅 URL</string>
+    <string name="osm_resetauth_summary">剷走用嚟連接您個 OSM 帳戶嘅本機授權。</string>
+    <string name="osm_visibility">公開設定</string>
+    <string name="osm_visibility_summary">設定您上載嘅 GPS 追蹤俾咩人睇到</string>
+    <string name="osm_description_summary">用嚟上載追蹤嘅描述</string>
+    <string name="osm_tags_summary">上載追蹤時要加上嘅標籤</string>
+    <string name="dropbox_authorize_description">要用 Dropbox 功能嘅話，您要授權 GPSLogger 上載檔案去您個帳戶先至得。</string>
+    <string name="dropbox_couldnotauthorize">攞唔到 Dropbox 授權，請遲啲再試下啦</string>
+    <string name="owncloud_server_summary">ownCloud 基礎 URL</string>
+    <string name="owncloud_directory_summary">用 ownCloud 伺服器上高呢個資料夾。請確定有呢個資料夾，否則上載就會失敗。</string>
+    <string name="keep_fix_summary">因住會超食電。想高啲準繩、而頻率又低時至好用。</string>
+    <string name="retry_time_summary">攞到初步定位之後，預留呢個時候繼續試下攞返精準嘅點，就返準繩篩選嘅設定。</string>
+    <string name="osm_lbl_authorize_description">您要畀呢個 app 權限至可以上載 GPS 追蹤去 OpenStreetMap。等您授權咗呢個 app 之後，就可以喺度設定標籤、描述同公開設定。</string>
+    <string name="osm_auth_error">接駁 OpenStreetMap 伺服器時發生錯誤。請查看您部機係咪連咗上網，又或者遲啲再試下啦。</string>
+    <string name="dropbox_unauthorize_description">您整好咗 Dropbox 授權。啲檔案會上載去「Apps\\GPSLogger for Android」。您鍾意嘅話，亦可以解除 GPSLogger 同 Dropbox 嘅連結。</string>
+    <string name="google_drive_clearauthorization_summary">將本機嘅 Google 雲端硬碟設定抹咗去。若要永久撤銷存取，請到 Google 帳戶設定自行參斟</string>
+    <string name="time_before_logging_summary">用 0 代表最大頻率冇停手，但隔得耐啲就會慳啲電。系統層面嘅電量設置或者會冧過呢個設定，詳見說明與問答。</string>
 </resources>
