@@ -320,4 +320,9 @@
     <string name="view_log">紀錄版面</string>
     <string name="txt_latitude_short">緯</string>
     <string name="listeners_gps">GPS</string>
+    <string name="new_file_custom_keep_changing_summary">隨住自訂檔名嘅數值變化，准目前嘅檔名跟住轉。譬如話有用到 %HOUR 嘅話，每個鐘頭就會開新檔案。若果您想一成不變嘅話，就留空呢格唔好剔嘞。</string>
+    <string name="autosend_frequency_hint">計落幾多分鐘</string>
+    <string name="gpslogger_custom_path_need_permission">為使 GPSLogger 用到自訂路徑，跟住落嚟個畫面請允許 GPSLogger 管理所有檔案。然之後再試多次啱先嘅動作。呢壇嘢係因應 Android 11+ 設限，所以要拆掂先。</string>
+    <string name="new_file_custom_keep_changing_title">允許自訂檔名隨時進化</string>
+    <string name="properties_file_url">屬性檔案嘅 URL</string>
 </resources>
