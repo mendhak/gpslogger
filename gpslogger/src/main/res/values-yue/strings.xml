@@ -339,6 +339,16 @@
     <string name="osm_lbl_authorize_description">您要畀呢個 app 權限至可以上載 GPS 追蹤去 OpenStreetMap。等您授權咗呢個 app 之後，就可以喺度設定標籤、描述同公開設定。</string>
     <string name="osm_auth_error">接駁 OpenStreetMap 伺服器時發生錯誤。請查看您部機係咪連咗上網，又或者遲啲再試下啦。</string>
     <string name="dropbox_unauthorize_description">您整好咗 Dropbox 授權。啲檔案會上載去「Apps\\GPSLogger for Android」。您鍾意嘅話，亦可以解除 GPSLogger 同 Dropbox 嘅連結。</string>
-    <string name="google_drive_clearauthorization_summary">將本機嘅 Google 雲端硬碟設定抹咗去。若要永久撤銷存取，請到 Google 帳戶設定自行參斟</string>
+    <string name="google_drive_clearauthorization_summary">將本機嘅 Google 雲端硬碟設定抹咗去。若要永久撤銷存取，請到 Google 帳戶設定自行參酌</string>
     <string name="time_before_logging_summary">用 0 代表最大頻率冇停手，但隔得耐啲就會慳啲電。系統層面嘅電量設置或者會冧過呢個設定，詳見說明與問答。</string>
+    <string name="log_customurl_summary_detailed">每次紀錄一個位置點，都傳送一個請求去自訂 URL 度。視乎紀錄相隔幾耐而定。</string>
+    <string name="autoemail_ssl">隱含 SSL</string>
+    <string name="autosend_enabled_summary">允許傳送檔案去各個目的地</string>
+    <string name="autosend_frequency_summary">紀錄檔隔幾耐傳送一次，以分鐘計。0 代表停用。</string>
+    <string name="autosend_frequency">隔幾耐一次？</string>
+    <string name="autosend_sendzip_summary">得嘅話就傳送壓縮檔。若果想啲檔案逐個單獨傳送，又或者個壓縮搞唔掂，就停用呢一欄啦</string>
+    <string name="log_customurl_title">紀落自訂 URL</string>
+    <string name="google_drive_folder_path_summary_1">齋資料夾個名 (例如 GPSLogger) 又或者資料夾路徑 (例如：甲/乙/丙)。啲資料夾事必要由呢個程式整出嚟嘅至得。</string>
+    <string name="google_drive_folder_path_summary_2">若果您齋用資料夾個名，整咗出嚟之後，您可以自由喺 Google 雲端硬碟入面搬過第個位。用資料夾路徑會慢啲，因為路徑每個部份都要先檢查或者整出嚟，然後至上載檔案。</string>
+    <string name="log_opengts_summary">傳送 GPRMC 資料去網上一個 OpenGTS 伺服器。</string>
 </resources>
