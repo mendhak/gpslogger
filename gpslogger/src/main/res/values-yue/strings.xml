@@ -340,7 +340,7 @@
     <string name="osm_auth_error">接駁 OpenStreetMap 伺服器時發生錯誤。請查看您部機係咪連咗上網，又或者遲啲再試下啦。</string>
     <string name="dropbox_unauthorize_description">您整好咗 Dropbox 授權。啲檔案會上載去「Apps\\GPSLogger for Android」。您鍾意嘅話，亦可以解除 GPSLogger 同 Dropbox 嘅連結。</string>
     <string name="google_drive_clearauthorization_summary">將本機嘅 Google 雲端硬碟設定抹咗去。若要永久撤銷存取，請到 Google 帳戶設定自行參酌</string>
-    <string name="time_before_logging_summary">用 0 代表最大頻率冇停手，但隔得耐啲就會慳啲電。系統層面嘅電量設置或者會冧過呢個設定，詳見說明與問答。</string>
+    <string name="time_before_logging_summary">用 0 代表最大頻率冇停手，但隔得耐啲就會慳啲電。系統層面嘅電量設置或者會冚過呢個設定，詳見說明與問答。</string>
     <string name="log_customurl_summary_detailed">每次紀錄一個位置點，都傳送一個請求去自訂 URL 度。視乎紀錄相隔幾耐而定。</string>
     <string name="autoemail_ssl">隱含 SSL</string>
     <string name="autosend_enabled_summary">允許傳送檔案去各個目的地</string>
