@@ -283,7 +283,7 @@ Nomes de ficheiro muito dinâmicos
     <string name="listeners_cell_summary">Regista localizações fornecidas pelo receptor no seu dispositivo de localização baseada em redes de comunicações móveis</string>
     <string name="listeners_passive">Passivo</string>
     <string name="listeners_passive_title">Registar localizações passivas</string>
-    <string name="listeners_passive_summary">Regista localizações obtidas por outras aplicações, mas note que a maioria dos filtros são ignorados. Esta configuração também é útil para receptores externos de GPS</string>
+    <string name="listeners_passive_summary">Regista locais obtidos de outras apps, mas observe que a maioria dos filtros é ignorada. Essa configuração também é útil para recetores GPS externos.</string>
     <string name="listeners_summary">Que fornecedores de localização utilizar quando disponíveis: GPS para satélites, Rede para torre de comunicações móveis/Wi-Fi, Passivo é um fornecedor especial à escuta de locais solicitados por outras aplicações.</string>
     <string name="listeners_title">Fornecedores de localização</string>
     <string name="autosend_frequency_hint">Número de minutos</string>
@@ -371,7 +371,7 @@ Nomes de ficheiro muito dinâmicos
     <string name="file_logging_log_time_with_offset_title">Tempo de registo com deslocamento de fuso horário</string>
     <string name="file_logging_log_time_with_offset_summary">Sempre que possível, escreva a hora ISO8601 com da diferença horária em vez de UTC.</string>
     <string name="logging_advanced_delete_files">Apagar ficheiros selecionados</string>
-    <string name="logging_advanced_delete_files_summary">Mantenha pressionado para selecionar vários ficheiros</string>
+    <string name="logging_advanced_delete_files_summary">Mantenha pressionado para selecionar vários ficheiros.</string>
     <string name="install_conscrypt_provider_summary">Se você estiver com problemas de conectividade SSL/TLS em dispositivos Android mais antigos, a instalação do Conscrypt Provider pode ajudar. (Siga este link, instale o APK e reinicie a aplicação)</string>
     <string name="install_conscrypt_provider_title">Instale o fornecedor Conscrypt (SSL/TLS)</string>
     <string name="google_drive_folder_path_summary_2">Se você usar um único nome na pasta, ele poderá ser movido para outro lugar no Google Drive após a criação. Os caminhos de pasta são mais lentos porque cada parte do caminho deve ser verificada ou criada antes que os arquivos sejam carregados.</string>
@@ -379,4 +379,11 @@ Nomes de ficheiro muito dinâmicos
     <string name="google_drive_folder_path_summary_1">Use um único nome na pasta (por exemplo, GPSLogger), ou um caminho para a pasta (por exemplo, aaa/bbb/ccc). As pastas devem ser criadas por esta aplicação.</string>
     <string name="log_customurl_setup_title">URL personalizado</string>
     <string name="customurl_all_parameters">Todos os parâmetros:</string>
+    <string name="log_customurl_summary_detailed">Envia uma solicitação à URL personalizada sempre que um ponto de local é capturado. Depende do intervalo de registo.</string>
+    <string name="autosend_customurl_summary">(Esse recurso permite o registo CSV) Envia solicitações em massa à URL personalizada, uma para cada linha no ficheiro de CSV. Depende do intervalo de envios automáticos.</string>
+    <string name="view_annotation">Visualização da anotação</string>
+    <string name="annotation_edit_button_label">Editar botão de anotação</string>
+    <string name="annotation_edit_button_color">Cor do botão</string>
+    <string name="log_customurl_discard_offline_locations">Descartar locais offline</string>
+    <string name="log_customurl_discard_offline_locations_summary">Registar locais para a URL personalizada somente enquanto uma conexão de rede estiver disponível (não afeta o envio automático)</string>
 </resources>
