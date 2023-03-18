@@ -351,4 +351,6 @@
     <string name="google_drive_folder_path_summary_1">齋資料夾個名 (例如 GPSLogger) 又或者資料夾路徑 (例如：甲/乙/丙)。啲資料夾事必要由呢個程式整出嚟嘅至得。</string>
     <string name="google_drive_folder_path_summary_2">若果您齋用資料夾個名，整咗出嚟之後，您可以自由喺 Google 雲端硬碟入面搬過第個位。用資料夾路徑會慢啲，因為路徑每個部份都要先檢查或者整出嚟，然後至上載檔案。</string>
     <string name="log_opengts_summary">傳送 GPRMC 資料去網上一個 OpenGTS 伺服器。</string>
+    <string name="log_customurl_summary">用 HTTP 傳送紀錄資訊去您自己嘅伺服器</string>
+    <string name="menu_faq">說明與問答</string>
 </resources>
