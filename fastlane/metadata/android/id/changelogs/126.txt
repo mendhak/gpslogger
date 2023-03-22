@@ -1,0 +1,4 @@
+* Eksperimental: Tampilan tombol anotasi baru. Tekan lama untuk mengedit pesan dan warnanya.
+* Kotak masukan URL Khusus dan Anotasi sekarang membungkus teks, lebih mudah untuk melihat apa yang Anda masukkan. Baris baru akan dihapus.
+* Siaran status GPSLogger sekarang mencakup nilai durasi dan jarak.
+* Melanggar: Maksud alarm email yang salah nama diubah namanya menjadi pengiriman otomatis segera. Gunakan untuk memulai pengunggahan file.
