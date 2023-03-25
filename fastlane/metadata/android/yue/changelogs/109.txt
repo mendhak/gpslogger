@@ -1,0 +1,2 @@
+為著喺 F-Droid 上架重新包裝 GPSLogger。
+剷走 Google 雲端硬碟、活動辨識、Play 服務嘅依賴元件。
