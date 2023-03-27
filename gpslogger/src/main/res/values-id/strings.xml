@@ -304,7 +304,7 @@
     <string name="osm_setup_title">BukaPetaJalan</string>
     <string name="emailprovider_google">Google Mail</string>
     <string name="emailprovider_yahoo">Yahoo! Mail</string>
-    <string name="emailprovider_msn">Windows Live Mail</string>
+    <string name="emailprovider_msn">Pesan Langsung Windows</string>
     <string name="emailprovider_manual">Panduan</string>
     <string name="dropbox_setup_title">Dropbox</string>
     <string name="owncloud_setup_title">ownCloud</string>
@@ -377,4 +377,7 @@
     <string name="autosend_customurl_summary">(Fitur ini mengaktifkan pencatatan CSV) Mengirim permintaan secara massal ke URL Khusus, satu permintaan untuk setiap baris dalam file CSV. Bergantung pada interval kirim otomatis.</string>
     <string name="log_customurl_discard_offline_locations">Buang lokasi offline</string>
     <string name="log_customurl_discard_offline_locations_summary">Mencatat lokasi ke URL Khusus hanya saat koneksi jaringan tersedia (tidak memengaruhi pengiriman otomatis)</string>
+    <string name="view_annotation">Tampilan Anotasi</string>
+    <string name="annotation_edit_button_label">Tombol edit anotasi</string>
+    <string name="annotation_edit_button_color">Warna tombol</string>
 </resources>

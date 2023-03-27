@@ -1,0 +1,7 @@
+* 叉電狀況現已登陸自訂 URL (%ISCHARGING) 同 CSV (battery_charging)
+* 若 OSM 同自動傳送同時啟用，開始同上載時都會問您有關 OSM 追蹤詳情
+* 有得刪除檔案 (詳見紀錄 -> 進階)
+* GPX 1.1 紀錄、新加 gpxtpx:speed 同 gpxtpx:bearing 延伸
+* Dropbox 更新咗佢哋嘅認證方法
+* 執漏：其他檔名都包含嗰個名嘅話會上載多個檔案
+* 翻譯更新

@@ -1,0 +1,3 @@
+* 有得揀 GPSLogger 通知喺鎖定畫面照騷出嚟。
+* Android 10 打下嘅機，若果要 GPSLogger 連線去 TLS 1.3 嘅服務又或者 SSL 連線有問題，有得裝 Conscrypt 提供者。
+* 大量翻譯更新，承蒙 Weblate 社群協力，特此鳴謝各位鼎力支持。

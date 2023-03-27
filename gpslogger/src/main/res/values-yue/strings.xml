@@ -353,4 +353,27 @@
     <string name="log_opengts_summary">傳送 GPRMC 資料去網上一個 OpenGTS 伺服器。</string>
     <string name="log_customurl_summary">用 HTTP 傳送紀錄資訊去您自己嘅伺服器</string>
     <string name="menu_faq">說明與問答</string>
+    <string name="autosend_customurl_summary">(呢項功能會啟用 CSV 紀錄) 將啲請求綑埋一疊傳送去自訂 URL 度，CSV 檔案裡頭每行當做一個。視乎自動傳送相隔幾耐而定。</string>
+    <string name="autoftp_useftps_summary">啟用 SSL 之下嘅 FTP。唔剔呢欄嘅話，揀 SSL/TLS 同隱含式都係嘥氣。</string>
+    <string name="autoftp_implicit">隱含式 SSL 之下嘅 FTP</string>
+    <string name="profile_default">預設設定檔</string>
+    <string name="profile_add_new">加新設定檔</string>
+    <string name="log_nmea_summary">嘗試去攞定位嗰陣時，整返個原始嘅 NMEA 檔案。個檔案會爆 seed 大得好快。淨係用 GPS 嗰陣會用得著。</string>
+    <string name="listeners_gps_summary">紀錄喺您部機上面、倚靠衛星嘅位置接收器所提供嘅位置</string>
+    <string name="listeners_cell_summary">紀錄喺您部機上面、倚靠網絡嘅位置接收器所提供嘅位置</string>
+    <string name="listeners_passive_summary">紀錄由其他 app 攞到嘅位置，惟請注意大部份篩選都會冇用。呢個設定用外置 GPS 接收器時都用得著。</string>
+    <string name="accuracy_filter_summary">一點最低限度要有呢個準繩至會儲存。唔夠準繩嘅點就會冇得留低。</string>
+    <string name="distance_filter_summary">一點同對上嗰點，最低限度要有呢個距離至會儲存，太近嗰點就會冇得留低。</string>
+    <string name="absolute_timeout_summary">幾多秒之後個 app 就罷鷲唔再試下攞定位，唔理其他設定㗎嘞。尤其係當您身處室內嗰陣時，呢個設定會幫到您避免 GPS 太食電。用 0 代表唔落閘冇時限。</string>
+    <string name="profile_delete">係咪要刪除設定檔？</string>
+    <string name="altitude_subtractoffset_title">減走海拔偏差</string>
+    <string name="altitude_subtractgeoidheight_title">用 MSL 代替 WGS84</string>
+    <string name="altitude_subtractgeoidheight_summary">用平均海平面 (MSL) 而唔係 WGS84 高度，即係話將 GPS 海拔高度減走 geoidheight (大地高)。淨係會用喺 GPS 衛星點，網絡同 NMEA 用唔著。</string>
+    <string name="new_file_custom_message">有得用 %SER 代表裝置序號，%YEAR、%MONTH、%MONTHNAME、%DAY 代表年月日，%DAYNAME 代表星期幾，%HOUR、%MIN 代表時分、%PROFILE 代表設定檔、%VER 代表版本</string>
+    <string name="txt_travel_duration">歷時：</string>
+    <string name="absolute_timeout_title">GPS 定位落閘時限</string>
+    <string name="altitude_subtractoffset_summary">GPS 海拔要減走嘅米數。負數即同海拔相加。淨係會用喺 GPS 衛星點，網絡同 NMEA 用唔著。</string>
+    <string name="profile_create_new">整個新嘅設定檔</string>
+    <string name="profile_add_from_url">嚟自 URL</string>
+    <string name="profile_switch_before_delete">請先轉去另一個設定檔，然後至刪除呢一個。</string>
 </resources>

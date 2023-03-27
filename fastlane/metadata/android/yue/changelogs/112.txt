@@ -1,0 +1,1 @@
+* 執漏：Tasker getstatus 命令未有傳送狀態廣播。

@@ -141,4 +141,8 @@
     <string name="startonbootup_summary">Стартувајте ја апликацијата и започни логирање кога телефонот ќе стартува</string>
     <string name="startonapplaunch_title">Започнете со стартување на апликацијата</string>
     <string name="autoemail_title">Имејл</string>
+    <string name="autosend_frequency_display">После %s минути</string>
+    <string name="autoemail_frequency_whenistop">Кога ќе притиснам стоп</string>
+    <string name="autoemail_target">Целни имејл адреси</string>
+    <string name="autoemail_smtp_category">Имејл Подесувања</string>
 </resources>
