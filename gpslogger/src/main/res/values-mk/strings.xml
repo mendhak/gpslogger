@@ -143,4 +143,6 @@
     <string name="autoemail_title">Имејл</string>
     <string name="autosend_frequency_display">После %s минути</string>
     <string name="autoemail_frequency_whenistop">Кога ќе притиснам стоп</string>
+    <string name="autoemail_target">Целни имејл адреси</string>
+    <string name="autoemail_smtp_category">Имејл Подесувања</string>
 </resources>
