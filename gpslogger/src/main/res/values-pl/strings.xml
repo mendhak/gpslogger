@@ -383,4 +383,7 @@
     <string name="app_theme_setting">Określa sposób ustawienia jasnego lub ciemnego motywu aplikacji</string>
     <string name="file_logging_log_time_with_offset_title">Czas logowania z przesunięciem strefy czasowej</string>
     <string name="install_conscrypt_provider_title">Zainstaluj Conscrypt Provider (SSL/TLS)</string>
+    <string name="annotation_edit_button_label">Przycisk edycji adnotacji</string>
+    <string name="annotation_edit_button_color">Kolor przycisku</string>
+    <string name="view_annotation">Widok adnotacji</string>
 </resources>
