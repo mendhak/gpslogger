@@ -20,11 +20,21 @@
 package com.mendhak.gpslogger.ui.fragments.display;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.documentfile.provider.DocumentFile;
+
+import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,6 +46,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.dd.processbutton.iml.ActionProcessButton;
+import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -46,6 +57,7 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 
 import org.slf4j.Logger;
 
+import java.io.File;
 
 
 public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {
@@ -178,6 +190,77 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static String getRealPathFromURI_API19(Context context, Uri uri) {
+        String filePath = "";
+
+        // ExternalStorageProvider
+        String docId = DocumentsContract.getDocumentId(uri);
+        String[] split = docId.split(":");
+        String type = split[0];
+
+        if ("primary".equalsIgnoreCase(type)) {
+            return Environment.getExternalStorageDirectory() + "/" + split[1];
+        } else {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+                //getExternalMediaDirs() added in API 21
+                File[] external = context.getExternalMediaDirs();
+                if (external.length > 1) {
+                    filePath = external[1].getAbsolutePath();
+                    filePath = filePath.substring(0, filePath.indexOf("Android")) + split[1];
+                }
+            } else {
+                filePath = "/storage/" + type + "/" + split[1];
+            }
+            return filePath;
+        }
+    }
+
+    // https://stackoverflow.com/questions/36869602/convert-file-path-to-treeuri-storage-access-framework
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static Uri[] getSafUris (Context context, File file) {
+
+        Uri[] uri = new Uri[2];
+        String scheme = "content";
+        String authority = "com.android.externalstorage.documents";
+
+        // Separate each element of the File path
+        // File format: "/storage/XXXX-XXXX/sub-folder1/sub-folder2..../filename"
+        // (XXXX-XXXX is external removable number
+        String[] ele = file.getPath().split(File.separator);
+        //  ele[0] = not used (empty)
+        //  ele[1] = not used (storage name)
+        //  ele[2] = storage number
+        //  ele[3 to (n)] = folders
+
+
+        // Construct folders strings using SAF format
+        StringBuilder folders = new StringBuilder();
+        if (ele.length > 4) {
+            folders.append(ele[3]);
+            for (int i = 4; i < ele.length ; ++i) folders.append("%2F").append(ele[i]);
+        }
+
+        String common = ele[2] + "%3A" + folders.toString();
+
+        // Construct TREE Uri
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme(scheme);
+        builder.authority(authority);
+        builder.encodedPath("/tree/" + common);
+        uri[0] = builder.build();
+
+        // Construct DOCUMENT Uri
+        builder = new Uri.Builder();
+        builder.scheme(scheme);
+        builder.authority(authority);
+        if (ele.length > 4) common = common + "%2F";
+        builder.encodedPath("/document/" + common + file.getName());
+        uri[1] = builder.build();
+
+        return uri;
+    }
+
     private void showCurrentFileName(String newFileName) {
         TextView txtFilename = (TextView) rootView.findViewById(R.id.simpleview_txtfilepath);
 
@@ -189,6 +272,38 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
                 Html.fromHtml( preferenceHelper.getGpsLoggerFolder() + "<br /><strong>" + Strings.getFormattedFileName() + "</strong>"));
 
 
+        txtFilename.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                File file = new File( preferenceHelper.getGpsLoggerFolder());
+
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    Uri[] output = getSafUris(context, file);
+                    Uri folderUri = DocumentsContract.buildDocumentUriUsingTree(
+                            Uri.parse("content://com.android.externalstorage.documents/tree/primary"),
+                            DocumentsContract.getTreeDocumentId(output[0]));
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    //intent.setDataAndType(folderUri, "resource/folder");
+                    //intent.setDataAndType(folderUri, "vnd.android.document/directory");
+                    intent.setDataAndType(Uri.parse("content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles"), "vnd.android.document/directory");
+                    intent.addCategory(Intent.CATEGORY_DEFAULT);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.parse("content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles"));
+                    // content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles
+                    // content://com.android.externalstorage.documents/tree/emulated%3A0%2FAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles
+                    // content://com.android.externalstorage.documents/document/emulated%3A0%2FAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles
+                    // content://com.mendhak.gpslogger.fileprovider/ext/20230331.gpx
+                    startActivity(intent);
+                }
+
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//                Uri uri = FileProvider.getUriForFile(context, "com.mendhak.gpslogger.fileprovider", file); // get the content URI to your app's "files" folder
+//                intent.setDataAndType(uri, "*/*");
+//                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(Intent.createChooser(intent, "Open folder"));
+
+            }
+        });
     }
 
     private enum IconColorIndicator {
