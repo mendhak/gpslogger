@@ -30,8 +30,6 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.documentfile.provider.DocumentFile;
 
 import android.os.Environment;
 import android.os.storage.StorageManager;
@@ -48,7 +46,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.dd.processbutton.iml.ActionProcessButton;
-import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -263,16 +260,13 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         return uri;
     }
 
+    /**
+     * For a given File URI of the file:// format, get the corresponding Document URI in the content:// format.
+     */
     @RequiresApi(Build.VERSION_CODES.R)
-    public Uri getFileUriToDocumentUri(Context context, Uri fileUri) {
-        // Get the path of the file
-        String filePath = fileUri.getPath();
-
-        // Create a file object for the file path
-        File file = new File(filePath);
-
-        // Get the volume name from the file path
-        String volumeName = getVolumeName(file);
+    public Uri getDocumentUriFromFileUri(Context context, File file) {
+        String filePath = file.getAbsolutePath();
+        String volumeName = getVolumeName(context, file);
 
         if(volumeName.equalsIgnoreCase("primary")){
             filePath = filePath.replace(Environment.getExternalStorageDirectory().getAbsolutePath(), "");
@@ -281,22 +275,21 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             filePath = filePath.replace("/storage/"+volumeName, "");
         }
 
-        // Create the document URI
+        // Create the document URI with the content:// scheme.
         Uri documentUri = DocumentsContract.buildDocumentUri("com.android.externalstorage.documents", volumeName + ":" + filePath); //file.getAbsolutePath().substring(1)
 
-        // Return the document URI
         return documentUri;
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    private String getVolumeName(File file) {
+    private String getVolumeName(Context context, File file) {
         String volumeName = null;
 
         // Get the external storage volumes
         StorageManager storageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
         StorageVolume[] storageVolumes = storageManager.getStorageVolumes().toArray(new StorageVolume[0]);
 
-        // Iterate through the volumes and find the volume for the file
+        // Go through all the volumes, find the volume for the given file
         for (StorageVolume storageVolume : storageVolumes) {
             String path = file.getAbsolutePath();
             String volumePath = storageVolume.getDirectory().getAbsolutePath();
@@ -311,7 +304,6 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             volumeName = "primary";
         }
 
-        // Return the volume name
         return volumeName;
     }
 
@@ -333,40 +325,15 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
                 public void onClick(View view) {
                     File file = new File( preferenceHelper.getGpsLoggerFolder());
 
-
-                    Uri convertedUri = getFileUriToDocumentUri(context, Uri.fromFile(file));
-//                    Uri[] output = getSafUris(context, file);
-//                    Uri folderUri = DocumentsContract.buildDocumentUriUsingTree(
-//                            Uri.parse("content://com.android.externalstorage.documents/tree"),
-//                            DocumentsContract.getTreeDocumentId(output[0]));
+                    Uri convertedUri = getDocumentUriFromFileUri(context, file);
                     Intent intent = new Intent(Intent.ACTION_VIEW);
-                    //intent.setDataAndType(folderUri, "resource/folder");
-                    //intent.setDataAndType(folderUri, "vnd.android.document/directory");
                     Uri folderUri = Uri.parse(convertedUri.toString());
                     intent.setDataAndType(folderUri, "vnd.android.document/directory");
                     intent.addCategory(Intent.CATEGORY_DEFAULT);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, folderUri);
-                    // content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles
-                    // Android 12 Yes. Android 8 crash, Invalid URI
-                    // content://com.android.externalstorage.documents/document/primary%3ADocuments%2Fgpx2
-                    // Android 12 Yes.  Android 8 opens Downloads.
-
-                    // content://com.mendhak.gpslogger.fileprovider/ext/
-                    // Android 12: Opens Downloads. Android 8: Opens Downloads.
-                    // content://com.mendhak.gpslogger.fileprovider/ext/primary%3ADocuments%2Fgpx2
-                    // Android 12: Opens Downloads. Android 8: Opens Downloads
-                    // content://com.android.externalstorage.documents/tree/emulated%3A0%2FDocuments%2Fgpx2
-                    // Android 12:  Opens Downloads   Android 8: Crashes, invalid URI
 
                     startActivity(intent);
-
-
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                Uri uri = FileProvider.getUriForFile(context, "com.mendhak.gpslogger.fileprovider", file); // get the content URI to your app's "files" folder
-//                intent.setDataAndType(uri, "*/*");
-//                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(Intent.createChooser(intent, "Open folder"));
 
                 }
             });
