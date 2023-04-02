@@ -34,6 +34,8 @@ import androidx.core.content.FileProvider;
 import androidx.documentfile.provider.DocumentFile;
 
 import android.os.Environment;
+import android.os.storage.StorageManager;
+import android.os.storage.StorageVolume;
 import android.provider.DocumentsContract;
 import android.text.Html;
 import android.view.Gravity;
@@ -217,7 +219,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     }
 
     // https://stackoverflow.com/questions/36869602/convert-file-path-to-treeuri-storage-access-framework
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     public static Uri[] getSafUris (Context context, File file) {
 
         Uri[] uri = new Uri[2];
@@ -261,6 +263,59 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         return uri;
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
+    public Uri getFileUriToDocumentUri(Context context, Uri fileUri) {
+        // Get the path of the file
+        String filePath = fileUri.getPath();
+
+        // Create a file object for the file path
+        File file = new File(filePath);
+
+        // Get the volume name from the file path
+        String volumeName = getVolumeName(file);
+
+        if(volumeName.equalsIgnoreCase("primary")){
+            filePath = filePath.replace(Environment.getExternalStorageDirectory().getAbsolutePath(), "");
+        }
+        else {
+            filePath = filePath.replace("/storage/"+volumeName, "");
+        }
+
+        // Create the document URI
+        Uri documentUri = DocumentsContract.buildDocumentUri("com.android.externalstorage.documents", volumeName + ":" + filePath); //file.getAbsolutePath().substring(1)
+
+        // Return the document URI
+        return documentUri;
+    }
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    private String getVolumeName(File file) {
+        String volumeName = null;
+
+        // Get the external storage volumes
+        StorageManager storageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
+        StorageVolume[] storageVolumes = storageManager.getStorageVolumes().toArray(new StorageVolume[0]);
+
+        // Iterate through the volumes and find the volume for the file
+        for (StorageVolume storageVolume : storageVolumes) {
+            String path = file.getAbsolutePath();
+            String volumePath = storageVolume.getDirectory().getAbsolutePath();
+            if (path.startsWith(volumePath)) {
+                volumeName = storageVolume.getUuid();
+                break;
+            }
+        }
+
+        // If the volume name is null, use the primary volume
+        if (volumeName == null) {
+            volumeName = "primary";
+        }
+
+        // Return the volume name
+        return volumeName;
+    }
+
+
     private void showCurrentFileName(String newFileName) {
         TextView txtFilename = (TextView) rootView.findViewById(R.id.simpleview_txtfilepath);
 
@@ -271,21 +326,23 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         txtFilename.setText(
                 Html.fromHtml( preferenceHelper.getGpsLoggerFolder() + "<br /><strong>" + Strings.getFormattedFileName() + "</strong>"));
 
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            txtFilename.setOnClickListener(new View.OnClickListener() {
+                @Override
+                @RequiresApi(Build.VERSION_CODES.R)
+                public void onClick(View view) {
+                    File file = new File( preferenceHelper.getGpsLoggerFolder());
 
-        txtFilename.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                File file = new File( preferenceHelper.getGpsLoggerFolder());
 
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    Uri[] output = getSafUris(context, file);
+                    Uri convertedUri = getFileUriToDocumentUri(context, Uri.fromFile(file));
+//                    Uri[] output = getSafUris(context, file);
 //                    Uri folderUri = DocumentsContract.buildDocumentUriUsingTree(
 //                            Uri.parse("content://com.android.externalstorage.documents/tree"),
 //                            DocumentsContract.getTreeDocumentId(output[0]));
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     //intent.setDataAndType(folderUri, "resource/folder");
                     //intent.setDataAndType(folderUri, "vnd.android.document/directory");
-                    Uri folderUri = Uri.parse("content://com.android.externalstorage.documents/document/primary%3ADocuments%2Fgpx2");
+                    Uri folderUri = Uri.parse(convertedUri.toString());
                     intent.setDataAndType(folderUri, "vnd.android.document/directory");
                     intent.addCategory(Intent.CATEGORY_DEFAULT);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -303,7 +360,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
                     // Android 12:  Opens Downloads   Android 8: Crashes, invalid URI
 
                     startActivity(intent);
-                }
+
 
 //                Intent intent = new Intent(Intent.ACTION_VIEW);
 //                Uri uri = FileProvider.getUriForFile(context, "com.mendhak.gpslogger.fileprovider", file); // get the content URI to your app's "files" folder
@@ -311,8 +368,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 //                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
 //                startActivity(Intent.createChooser(intent, "Open folder"));
 
-            }
-        });
+                }
+            });
+        }
+
     }
 
     private enum IconColorIndicator {
