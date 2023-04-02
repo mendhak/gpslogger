@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
@@ -36,6 +37,11 @@ import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.provider.DocumentsContract;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -319,10 +325,12 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
                 Html.fromHtml( preferenceHelper.getGpsLoggerFolder() + "<br /><strong>" + Strings.getFormattedFileName() + "</strong>"));
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            txtFilename.setOnClickListener(new View.OnClickListener() {
+            txtFilename.setTextIsSelectable(true);
+            txtFilename.setSelectAllOnFocus(true);
+
+            ClickableSpan clickSpan = new ClickableSpan() {
                 @Override
-                @RequiresApi(Build.VERSION_CODES.R)
-                public void onClick(View view) {
+                public void onClick(@NonNull View view) {
                     File file = new File( preferenceHelper.getGpsLoggerFolder());
 
                     Uri convertedUri = getDocumentUriFromFileUri(context, file);
@@ -334,9 +342,15 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
                     intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, folderUri);
 
                     startActivity(intent);
-
                 }
-            });
+            };
+
+            Spannable spanText = new SpannableString(txtFilename.getText());
+            //Make the folder path clickable but not the filename itself.
+            spanText.setSpan(clickSpan, 0, txtFilename.getText().toString().indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            txtFilename.setText(spanText, TextView.BufferType.SPANNABLE);
+            txtFilename.setMovementMethod(LinkMovementMethod.getInstance());
+
         }
 
     }
