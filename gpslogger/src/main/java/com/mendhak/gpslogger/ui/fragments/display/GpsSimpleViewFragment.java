@@ -279,20 +279,29 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     Uri[] output = getSafUris(context, file);
-                    Uri folderUri = DocumentsContract.buildDocumentUriUsingTree(
-                            Uri.parse("content://com.android.externalstorage.documents/tree/primary"),
-                            DocumentsContract.getTreeDocumentId(output[0]));
+//                    Uri folderUri = DocumentsContract.buildDocumentUriUsingTree(
+//                            Uri.parse("content://com.android.externalstorage.documents/tree"),
+//                            DocumentsContract.getTreeDocumentId(output[0]));
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     //intent.setDataAndType(folderUri, "resource/folder");
                     //intent.setDataAndType(folderUri, "vnd.android.document/directory");
-                    intent.setDataAndType(Uri.parse("content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles"), "vnd.android.document/directory");
+                    Uri folderUri = Uri.parse("content://com.android.externalstorage.documents/document/primary%3ADocuments%2Fgpx2");
+                    intent.setDataAndType(folderUri, "vnd.android.document/directory");
                     intent.addCategory(Intent.CATEGORY_DEFAULT);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.parse("content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles"));
+                    intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, folderUri);
                     // content://com.android.externalstorage.documents/document/primary%3AAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles
-                    // content://com.android.externalstorage.documents/tree/emulated%3A0%2FAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles
-                    // content://com.android.externalstorage.documents/document/emulated%3A0%2FAndroid%2Fdata%2Fcom.mendhak.gpslogger%2Ffiles
-                    // content://com.mendhak.gpslogger.fileprovider/ext/20230331.gpx
+                    // Android 12 Yes. Android 8 crash, Invalid URI
+                    // content://com.android.externalstorage.documents/document/primary%3ADocuments%2Fgpx2
+                    // Android 12 Yes.  Android 8 opens Downloads.
+
+                    // content://com.mendhak.gpslogger.fileprovider/ext/
+                    // Android 12: Opens Downloads. Android 8: Opens Downloads.
+                    // content://com.mendhak.gpslogger.fileprovider/ext/primary%3ADocuments%2Fgpx2
+                    // Android 12: Opens Downloads. Android 8: Opens Downloads
+                    // content://com.android.externalstorage.documents/tree/emulated%3A0%2FDocuments%2Fgpx2
+                    // Android 12:  Opens Downloads   Android 8: Crashes, invalid URI
+
                     startActivity(intent);
                 }
 
