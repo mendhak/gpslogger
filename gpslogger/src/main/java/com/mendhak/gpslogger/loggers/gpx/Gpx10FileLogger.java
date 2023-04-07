@@ -218,6 +218,9 @@ class Gpx10WriteHandler implements Runnable {
 
                     initialOutput.write(getBeginningXml(dateTimeString).getBytes());
                     initialOutput.write("<trk>".getBytes());
+                    initialOutput.write("<name>".getBytes());
+                    initialOutput.write(gpxFile.getName().replace(".gpx","").getBytes());
+                    initialOutput.write("</name>".getBytes());
                     initialOutput.write(getEndXml().getBytes());
                     initialOutput.flush();
                     initialOutput.close();
