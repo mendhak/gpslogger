@@ -21,9 +21,24 @@ package com.mendhak.gpslogger.loggers;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.os.storage.StorageManager;
+import android.os.storage.StorageVolume;
+import android.provider.DocumentsContract;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -304,5 +319,81 @@ public class Files {
             LOG.debug("Could not retrieve from cache", ex);
         }
         return items;
+    }
+
+    /**
+     * For a given File URI of the file:// format, get the corresponding Document URI in the content:// format.
+     */
+    @RequiresApi(Build.VERSION_CODES.R)
+    private static Uri getDocumentUriFromFileUri(Context context, File file) {
+        String filePath = file.getAbsolutePath();
+        String volumeName = getVolumeName(context, file);
+
+        if(volumeName.equalsIgnoreCase("primary")){
+            filePath = filePath.replace(Environment.getExternalStorageDirectory().getAbsolutePath(), "");
+        }
+        else {
+            filePath = filePath.replace("/storage/"+volumeName, "");
+        }
+
+        // Create the document URI with the content:// scheme.
+        Uri documentUri = DocumentsContract.buildDocumentUri("com.android.externalstorage.documents", volumeName + ":" + filePath); //file.getAbsolutePath().substring(1)
+
+        return documentUri;
+    }
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    private static String getVolumeName(Context context, File file) {
+        String volumeName = null;
+
+        // Get the external storage volumes
+        StorageManager storageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
+        StorageVolume[] storageVolumes = storageManager.getStorageVolumes().toArray(new StorageVolume[0]);
+
+        // Go through all the volumes, find the volume for the given file
+        for (StorageVolume storageVolume : storageVolumes) {
+            String path = file.getAbsolutePath();
+            String volumePath = storageVolume.getDirectory().getAbsolutePath();
+            if (path.startsWith(volumePath)) {
+                volumeName = storageVolume.getUuid();
+                break;
+            }
+        }
+
+        // If the volume name is null, use the primary volume
+        if (volumeName == null) {
+            volumeName = "primary";
+        }
+
+        return volumeName;
+    }
+
+    @RequiresApi(Build.VERSION_CODES.R)
+    public static void setFilePathAsClickableLink(Context context, TextView txtFilename, String gpsLoggerFolder){
+        txtFilename.setTextIsSelectable(true);
+        txtFilename.setSelectAllOnFocus(true);
+
+        ClickableSpan clickSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View view) {
+                File file = new File(gpsLoggerFolder);
+
+                Uri convertedUri = getDocumentUriFromFileUri(context, file);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri folderUri = Uri.parse(convertedUri.toString());
+                intent.setDataAndType(folderUri, "vnd.android.document/directory");
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, folderUri);
+
+                context.startActivity(intent);
+            }
+        };
+
+        Spannable spanText = new SpannableString(txtFilename.getText());
+        //Make the folder path clickable but not the filename itself.
+        spanText.setSpan(clickSpan, txtFilename.getText().toString().indexOf("\n"), txtFilename.getText().toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        txtFilename.setText(spanText, TextView.BufferType.SPANNABLE);
+        txtFilename.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

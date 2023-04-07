@@ -20,28 +20,12 @@
 package com.mendhak.gpslogger.ui.fragments.display;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
-
-import android.os.Environment;
-import android.os.storage.StorageManager;
-import android.os.storage.StorageVolume;
-import android.provider.DocumentsContract;
 import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +35,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.core.content.ContextCompat;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.EventBusHook;
@@ -59,10 +44,9 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 
 import org.slf4j.Logger;
-
-import java.io.File;
 
 
 public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {
@@ -195,52 +179,7 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     }
 
-    /**
-     * For a given File URI of the file:// format, get the corresponding Document URI in the content:// format.
-     */
-    @RequiresApi(Build.VERSION_CODES.R)
-    public Uri getDocumentUriFromFileUri(Context context, File file) {
-        String filePath = file.getAbsolutePath();
-        String volumeName = getVolumeName(context, file);
 
-        if(volumeName.equalsIgnoreCase("primary")){
-            filePath = filePath.replace(Environment.getExternalStorageDirectory().getAbsolutePath(), "");
-        }
-        else {
-            filePath = filePath.replace("/storage/"+volumeName, "");
-        }
-
-        // Create the document URI with the content:// scheme.
-        Uri documentUri = DocumentsContract.buildDocumentUri("com.android.externalstorage.documents", volumeName + ":" + filePath); //file.getAbsolutePath().substring(1)
-
-        return documentUri;
-    }
-
-    @RequiresApi(Build.VERSION_CODES.R)
-    private String getVolumeName(Context context, File file) {
-        String volumeName = null;
-
-        // Get the external storage volumes
-        StorageManager storageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
-        StorageVolume[] storageVolumes = storageManager.getStorageVolumes().toArray(new StorageVolume[0]);
-
-        // Go through all the volumes, find the volume for the given file
-        for (StorageVolume storageVolume : storageVolumes) {
-            String path = file.getAbsolutePath();
-            String volumePath = storageVolume.getDirectory().getAbsolutePath();
-            if (path.startsWith(volumePath)) {
-                volumeName = storageVolume.getUuid();
-                break;
-            }
-        }
-
-        // If the volume name is null, use the primary volume
-        if (volumeName == null) {
-            volumeName = "primary";
-        }
-
-        return volumeName;
-    }
 
 
     private void showCurrentFileName(String newFileName) {
@@ -250,36 +189,10 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         txtFilename.setTextIsSelectable(true);
         txtFilename.setSelectAllOnFocus(true);
 
-        txtFilename.setText(
-                Html.fromHtml( preferenceHelper.getGpsLoggerFolder() + "<br /><strong>" + Strings.getFormattedFileName() + "</strong>"));
+        txtFilename.setText(Html.fromHtml("<strong>" + Strings.getFormattedFileName() + "</strong><br />" + preferenceHelper.getGpsLoggerFolder()));
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            txtFilename.setTextIsSelectable(true);
-            txtFilename.setSelectAllOnFocus(true);
-
-            ClickableSpan clickSpan = new ClickableSpan() {
-                @Override
-                public void onClick(@NonNull View view) {
-                    File file = new File( preferenceHelper.getGpsLoggerFolder());
-
-                    Uri convertedUri = getDocumentUriFromFileUri(context, file);
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    Uri folderUri = Uri.parse(convertedUri.toString());
-                    intent.setDataAndType(folderUri, "vnd.android.document/directory");
-                    intent.addCategory(Intent.CATEGORY_DEFAULT);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, folderUri);
-
-                    startActivity(intent);
-                }
-            };
-
-            Spannable spanText = new SpannableString(txtFilename.getText());
-            //Make the folder path clickable but not the filename itself.
-            spanText.setSpan(clickSpan, 0, txtFilename.getText().toString().indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            txtFilename.setText(spanText, TextView.BufferType.SPANNABLE);
-            txtFilename.setMovementMethod(LinkMovementMethod.getInstance());
-
+            Files.setFilePathAsClickableLink(context, txtFilename, preferenceHelper.getGpsLoggerFolder());
         }
 
     }

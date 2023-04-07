@@ -21,6 +21,7 @@ package com.mendhak.gpslogger.ui.fragments.display;
 
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 
@@ -38,6 +39,7 @@ import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.FileLoggerFactory;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import org.slf4j.Logger;
 
@@ -250,8 +252,12 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         txtFilename.setTextIsSelectable(true);
         txtFilename.setSelectAllOnFocus(true);
 
-        txtFilename.setText(Strings.getFormattedFileName() + "\n (" + preferenceHelper.getGpsLoggerFolder() + ")");
+        txtFilename.setText(Strings.getFormattedFileName() + "\n" + preferenceHelper.getGpsLoggerFolder() );
 
+        //set file path textview as a clickable link
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Files.setFilePathAsClickableLink(getActivity().getApplicationContext(), txtFilename, preferenceHelper.getGpsLoggerFolder());
+        }
     }
 
 
