@@ -4,4 +4,44 @@
     <!-- general -->
     <!-- Settings activity -->
     <!-- Settings -->
+    <string name="title_drawer_uploadsettings">अपलोड सेटिङहरू</string>
+    <string name="navigation_drawer_open">नेभिगेसन ड्रयर खोल्नुहोस्</string>
+    <string name="navigation_drawer_close">नेभिगेसन ड्रयर बन्द गर्नुहोस्</string>
+    <string name="app_name">जिपिएस लगर</string>
+    <string name="settings_screen_name">जिपिएस लगर सेटिंगस्</string>
+    <string name="hide">लुकाउनुहोस्</string>
+    <string name="could_not_write_to_file">फाइलमा लेख्न सकिएन</string>
+    <string name="add_description">विवरण थप्नुहोस्</string>
+    <string name="ok">हुन्छ</string>
+    <string name="letters_numbers">अक्षर र संख्या मात्र प्रयोग गर्नुहोस्</string>
+    <string name="cancel">रद्द गर्नुहोस्</string>
+    <string name="menu_annotate">टिप्पणी</string>
+    <string name="menu_share">शेयर गर्नुहोस्</string>
+    <string name="menu_exit">बाहिर निस्कनुहोस्</string>
+    <string name="txt_latitude">अक्षांश:</string>
+    <string name="txt_longitude">देशान्तर:</string>
+    <string name="txt_altitude">उचाई:</string>
+    <string name="txt_speed">गति:</string>
+    <string name="txt_direction">दिशा:</string>
+    <string name="txt_satellites">उपग्रहहरू:</string>
+    <string name="txt_accuracy">शुद्धता:</string>
+    <string name="txt_travel_distance">यात्रा गरेको:</string>
+    <string name="btn_start_logging">लग गर्न सुरु गर्नुहोस्</string>
+    <string name="btn_stop_logging">लगिङ रोक्नुहोस्</string>
+    <string name="gpslogger_still_running">जिपिएस लगर अझै चलिरहेको छ।</string>
+    <string name="summary_loggingto">लगिङ गर्दै:</string>
+    <string name="summary_loggingto_screen">स्क्रिन मात्र</string>
+    <string name="summary_freq_every">फ्रिक्वेन्सी:</string>
+    <string name="summary_freq_max">अधिकतम</string>
+    <string name="summary_dist">दूरी:</string>
+    <string name="summary_current_filename">फाइल:</string>
+    <string name="sharing_location_only">स्थान मात्र</string>
+    <string name="sharing_mylocation">मेरो स्थान</string>
+    <string name="sharing_via">शेयर माध्यम</string>
+    <string name="foot"> .फुट</string>
+    <string name="feet"> .फिट</string>
+    <string name="meter"> .मिटर</string>
+    <string name="meters"> .मिटरहरु</string>
+    <string name="error">त्रुटि</string>
+    <string name="error_connection">जडान त्रुटि। कृपया आफ्नो फोन सेटिङ जाँच गर्नुहोस्।</string>
 </resources>
