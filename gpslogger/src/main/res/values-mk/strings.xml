@@ -145,4 +145,7 @@
     <string name="autoemail_frequency_whenistop">Кога ќе притиснам стоп</string>
     <string name="autoemail_target">Целни имејл адреси</string>
     <string name="autoemail_smtp_category">Имејл Подесувања</string>
+    <string name="autoemail_username_summary">Корисничко име со вашиот имејл провајдер</string>
+    <string name="autoemail_password_summary">Лозинка со вашиот имејл провајдер</string>
+    <string name="autoemail_ssl">Имплицитен SSL</string>
 </resources>
