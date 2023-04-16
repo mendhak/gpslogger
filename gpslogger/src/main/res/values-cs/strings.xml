@@ -110,7 +110,7 @@
     <string name="enabledisablegps_title">Povolit/zakázat GPS</string>
     <string name="enabledisablegps_summary">Přejděte do nastavení telefonu pro povolení/zakázání poskytovatelů.</string>
     <string name="startonbootup_title">Spustit při startu</string>
-    <string name="startonbootup_summary">Spuštění aplikace a zahájení zázanmu při startu telefonu</string>
+    <string name="startonbootup_summary">Spuštění aplikace a zahájení záznamu při startu telefonu</string>
     <string name="startonapplaunch_title">Spustit po startu aplikace</string>
     <string name="startonapplaunch_summary">Zahájit záznam po spuštění aplikace</string>
     <string name="please_wait">Počkejte prosím</string>
@@ -146,7 +146,7 @@
     <string name="no_files_found">Nenalezeny žádné soubory, nic ke sdílení nebo uploadu.</string>
     <string name="osm_pick_file">Vybrat soubor k uploadu</string>
     <string name="debuglog_title">Zapisovat do ladicího souboru</string>
-    <string name="debuglog_summary">Zápisuje ladicí (debug) zprávy do souboru na SD kartě. Upozornění: Soubor roste velmi rychle.     </string>
+    <string name="debuglog_summary">Zapisuje ladící (debug) zprávy do souboru na SD kartě. Upozornění: Soubor roste velmi rychle.</string>
     <string name="pref_logging_summary">Typy souborů, vytváření a pojmenování</string>
     <string name="pref_general_title">Obecné možnosti</string>
     <string name="pref_general_summary">Možnosti spouštění a zobrazení</string>
@@ -345,4 +345,19 @@
     <string name="logging_advanced_delete_files">Vymazat vybrané soubory</string>
     <string name="storage_chooser_new_folder_label">Nová složka</string>
     <string name="annotation_edit_button_color">Barva tlačítka</string>
+    <string name="emailprovider_google">Google Mail</string>
+    <string name="emailprovider_yahoo">Yahoo! Mail</string>
+    <string name="emailprovider_msn">Windows Live Mail</string>
+    <string name="storage_chooser_create_label">Vytvořit</string>
+    <string name="storage_chooser_internal_storage_text">Vnitřní úložiště</string>
+    <string name="profile_add_from_url">Z URL</string>
+    <string name="sftp_setup_title">SFTP</string>
+    <string name="app_theme_setting">Určuje, zda aplikace použije světlé nebo tmavé téma</string>
+    <string name="view_annotation">Zobrazení anotace</string>
+    <string name="app_theme_follow_system">Výchozí nastavení systému</string>
+    <string name="reset_app_title">Resetovat aplikaci</string>
+    <string name="annotation_edit_button_label">Upravit tlačítko anotace</string>
+    <string name="customurl_all_parameters">Všechny parametry:</string>
+    <string name="logging_advanced_delete_files_summary">Dlouhým stisknutím vyberete více souborů.</string>
+    <string name="app_theme_title">Téma aplikace</string>
 </resources>
