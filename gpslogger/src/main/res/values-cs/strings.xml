@@ -326,4 +326,13 @@
     <string name="log_plain_text_decimal_comma">Použít čárku (,) jako desetinný oddělovač místo tečky (.)</string>
     <string name="new_file_creation_onceamonth">Jednou za měsíc</string>
     <string name="autoemail_title">Email</string>
+    <string name="osm_setup_title">OpenStreetMap</string>
+    <string name="dropbox_setup_title">Dropbox</string>
+    <string name="owncloud_setup_title">ownCloud</string>
+    <string name="menu_upload">Nahrát</string>
+    <string name="shortcut_stop">Zastavit</string>
+    <string name="google_drive_folder_path">Cesta ke složce Disku Google</string>
+    <string name="google_drive_folder_path_summary_1">Použijte složku o jednom slovu (např. GPSLogger) nebo cestu ke složce (např. aaa/bbb/ccc). Složky musí být vytvořeny touto aplikací.</string>
+    <string name="google_drive_folder_path_summary_2">Pokud použijete složku o jednom slovu, můžete ji po vytvoření přesunout na jiné místo v Disku Google. Cesty ke složkám jsou pomalejší, protože každá část cesty musí být zkontrolována nebo vytvořena, než jsou soubory nahrány.</string>
+    <string name="shortcut_start">Spustit</string>
 </resources>
