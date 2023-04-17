@@ -361,4 +361,5 @@
     <string name="logging_advanced_delete_files_summary">Dlouhým stisknutím vyberete více souborů.</string>
     <string name="app_theme_title">Téma aplikace</string>
     <string name="txt_battery_charging">Nabíjí se</string>
+    <string name="reset_app_summary">Resetuje aplikaci, odstraní všechny předvolby, soubory GPSLoggeru a zruší oprávnění udělená této aplikaci. Všechna data budou ztracena!</string>
 </resources>
