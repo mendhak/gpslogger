@@ -214,7 +214,7 @@
     <string name="autoftp_directory">Složka</string>
     <string name="new_file_custom_message">Můžete použít %SER pro sériové číslo zařízení, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER pro verzi</string>
     <string name="new_file_prefix_serial_title">Předpona sériového čísla zařízení v názvu souboru</string>
-    <string name="new_file_prefix_serial_summary">Toto je sériové číslo vašeho telefonu </string>
+    <string name="new_file_prefix_serial_summary">Toto je sériové číslo vašeho telefonu.</string>
     <string name="txt_travel_duration">Doba trvání:</string>
     <string name="menu_onepoint">Uložit jeden bod</string>
     <string name="view_simple">Jednoduché zobrazení</string>
@@ -258,7 +258,7 @@
     <string name="hide_notification_buttons">Skrýt tlačítka notifikací</string>
     <string name="restart_required">Budete muset restartovat GPSLogger aby se toto nastavení projevilo</string>
     <string name="altitude_subtractgeoidheight_summary">Použije střední hodnotu úrovně hladiny moře místo WGS84 výšky odečtením výšky geoidu z GPS nadmořské výšky. Pouze se týká bodů z GPS satelitů, ne sítě nebo NMEA.</string>
-    <string name="altitude_subtractgeoidheight_title">Použít MSL místo WGS84.</string>
+    <string name="altitude_subtractgeoidheight_title">Použít MSL místo WGS84</string>
     <string name="altitude_subtractoffset_title">Odečíst posunutí nadmořské výšky</string>
     <string name="altitude_subtractoffset_summary">Hodnota v metrech odečítaná od nadmořské výšky z GPS. Použijte záporné číslo pro přidání hodnoty k nadmořské výšce. Aplikuje se pouze na body zaměřené pomocí GPS satelitů, nikoliv pomocí mobilní sítě nebo NMEA.</string>
     <string name="upload_failure">Nelze nahrát soubor</string>
@@ -360,4 +360,5 @@
     <string name="customurl_all_parameters">Všechny parametry:</string>
     <string name="logging_advanced_delete_files_summary">Dlouhým stisknutím vyberete více souborů.</string>
     <string name="app_theme_title">Téma aplikace</string>
+    <string name="txt_battery_charging">Nabíjí se</string>
 </resources>
