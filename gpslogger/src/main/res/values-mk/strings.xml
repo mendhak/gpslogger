@@ -153,4 +153,11 @@
     <string name="autoemail_choosepreset_summary">Одберете провајдер или одберете рачно</string>
     <string name="autoemail_test">Пратете тест имејл користејќи ги погорните подесувања</string>
     <string name="autoemail_smtp_testemail">Тестирајте имејл</string>
+    <string name="autoemail_sendingtest">Се праќа тест имејл</string>
+    <string name="autoemail_testresult_success">Имејлот беше испратен</string>
+    <string name="fix_obtained">Фикс добиен</string>
+    <string name="started_waiting">GPS започна, се чека фикс</string>
+    <string name="gps_stopped">GPS е паузиран</string>
+    <string name="stopped">Стопирано</string>
+    <string name="osm_setup_title">OpenStreetMap</string>
 </resources>
