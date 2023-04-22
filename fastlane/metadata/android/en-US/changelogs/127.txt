@@ -1,0 +1,3 @@
+* On Android R and above, the folder path is clickable
+* Monochrome icon
+* Add <name> element to <trk> tags in GPX files
