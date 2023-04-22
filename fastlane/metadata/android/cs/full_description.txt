@@ -36,5 +36,3 @@ Síťová komunikace - použitá pro upload souborů (Dropbox, Openstreetmap) ne
 Vaše umístění - použito pro určení vašeho umístění dle GPS nebo GSM
 
 Systémové nástroje (automatický start při bootu) - použito pokud jste zvolili spuštění GPSLoggeru při spuštění telefonu
-
-
