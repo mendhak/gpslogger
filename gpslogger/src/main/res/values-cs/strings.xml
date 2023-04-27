@@ -281,7 +281,7 @@
     <string name="debuglog_attach_to_email_summary">Přiloží záznam o ladění do emailu spolu s některými diagnostickými informacemi</string>
     <string name="change_language_title">Změnit jazyk</string>
     <string name="change_language_summary">Ne všechny jazyky jsou plně přeložené! Změna nastavení se projeví až po restartu aplikace.</string>
-    <string name="coordinate_display_format">Koordinovat formát zobrazení</string>
+    <string name="coordinate_display_format">Formát zobrazení souřadnic</string>
     <string name="ssl_certificate_validate">Ověřit SSL certifikát</string>
     <string name="parameters">Parametry</string>
     <string name="ssl_certificate_add_to_keystore">Přidat certifikát do místního úložiště klíčů?</string>
@@ -362,4 +362,20 @@
     <string name="app_theme_title">Téma aplikace</string>
     <string name="txt_battery_charging">Nabíjí se</string>
     <string name="reset_app_summary">Resetuje aplikaci, odstraní všechny předvolby, soubory GPSLoggeru a zruší oprávnění udělená této aplikaci. Všechna data budou ztracena!</string>
+    <string name="install_conscrypt_provider_summary">Pokud se na zařízeních se starším systémem Android setkáváte s problémy s připojením SSL/TLS, může vám pomoci instalace poskytovatele šifrování. (Klikněte na odkaz, nainstalujte APK a restartujte aplikaci)</string>
+    <string name="log_customurl_summary_detailed">Odešle požadavek na vlastní adresu URL vždy, když je zachycen bod polohy. Závisí na intervalu zapisování záznamu.</string>
+    <string name="txt_latitude_short">Šíř</string>
+    <string name="gpslogger_permissions_rationale_message_basic">Tato aplikace vyžaduje pro správný běh povolení několika oprávnění. Nyní budete postupně vyzváni k jejich povolení (omlouváme se). Zde je vysvětlení každého z nich.</string>
+    <string name="gpslogger_permissions_background_location">Chcete-li, aby program GPSLogger běžel na pozadí, musíte mu udělit další oprávnění. Na další obrazovce vyberte:</string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ignorovat optimalizaci baterie</b> - Umožnit této aplikaci běžet na pozadí snížením optimalizace baterie.</string>
+    <string name="file_logging_log_time_with_offset_title">Zapisovat čas s časovým posunem</string>
+    <string name="txt_longitude_short">Dél</string>
+    <string name="storage_chooser_free_space_text">volných</string>
+    <string name="properties_file_url">Vlastnosti souboru URL</string>
+    <string name="file_logging_log_time_with_offset_summary">Pokud je to možné, zapisovat čas ve formátu ISO8601 s časovým posunem, místo UTC (koordinovaným světovým časem).</string>
+    <string name="install_conscrypt_provider_title">Instalovat Conscrypt Providera (SSL/TLS)</string>
+    <string name="storage_chooser_text_field_error">Prázdný název složky</string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><b>Povolit neustále</b> - Povolí této aplikaci přijímat aktualizace polohy, když běží na pozadí.</string>
+    <string name="log_customurl_discard_offline_locations">Zahodit offline záznamy polohy</string>
+    <string name="log_customurl_discard_offline_locations_summary">Zapisovat záznam polohy na vlastní adresu URL pouze v době, kdy je k dispozici síťové připojení (nemá vliv na automatické odesílání)</string>
 </resources>
