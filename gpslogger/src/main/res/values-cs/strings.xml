@@ -82,7 +82,7 @@
     <string name="pref_logging_title">Podrobnosti záznamu</string>
     <string name="log_gpx_title">Zapisovat do GPX</string>
     <string name="log_gpx_summary">Záznam umístění do GPX v1.0 souboru</string>
-    <string name="log_gpx_11_title">Použití GPX 1.1</string>
+    <string name="log_gpx_11_title">Použít GPX 1.1</string>
     <string name="log_gpx_11_summary">Používá formát souboru GPX 1.1 namísto GPX 1.0</string>
     <string name="log_kml_title">Zapisovat do KML</string>
     <string name="log_kml_summary">Záznam umístění do souboru KML v2.2</string>
@@ -203,7 +203,7 @@
     <string name="autoftp_invalid_settings">Neplatné nastavení</string>
     <string name="autoftp_invalid_summary">Některá nastavení jsou neplatné. Přesvědčte se, zda že jste vyplnili všechna příslušná pole.</string>
     <string name="menu_faq">Nejčastější dotazy a nápověda</string>
-    <string name="log_customurl_title">Vlastní URL</string>
+    <string name="log_customurl_title">Zapisovat na vlastní URL</string>
     <string name="log_customurl_summary">Odeslat informace o záznamech na svůj vlastní server pomocí HTTP</string>
     <string name="txt_annotation">Poznámka:</string>
     <string name="txt_time_isoformat">Čas UTC (2011-12-25T15:27:33Z):</string>
@@ -226,7 +226,7 @@
     <string name="accuracy_filter_title">Filtr přesnosti</string>
     <string name="accuracy_filter_summary">Minimální přesnost, aby bylo možné uložit bod. Ostatní budou zahozeny.</string>
     <string name="distance_filter_title">Filtr vzdálenosti</string>
-    <string name="distance_filter_summary">Minimální vzdálenost mezi předchozím a aktuálním bodem. Ostatní budou zahozeny.</string>
+    <string name="distance_filter_summary">Minimální vzdálenost mezi předchozím a aktuálním bodem, aby byl bod uložen. Ostatní budou zahozeny.</string>
     <string name="points">bodů</string>
     <string name="txt_number_of_points">Počet bodů</string>
     <string name="save">Uložit</string>
@@ -243,7 +243,7 @@
     <string name="listeners_cell_summary">Zaznamenává pozice získané pomocí přijímače mobilního signálu ve vašem zařízení</string>
     <string name="listeners_passive">Pasivní</string>
     <string name="listeners_passive_title">Pasivní záznam lokací</string>
-    <string name="listeners_passive_summary">Zaznamenává lokace poskytnuté jinými aplikacemi, ale spousta filtrů může být ignorována. Toto nastavení použijete při připojení k externímu GPS přijímači.</string>
+    <string name="listeners_passive_summary">Zaznamenává lokace získané z jiných aplikací. Upozornění: většina filtrů bude ignorována. Toto nastavení je také užitečné pro externí přijímače GPS.</string>
     <string name="listeners_summary">Kteří poskytovatelé polohy se mají použít, když jsou k dispozici; \"GPS\" pro satelity, \"Síť\" pro mobilní vysílače/wifi, \"Pasivní\" je zvláštní poskytovatel, který naslouchá a přebírá umístění po vyžádání jinou aplikací.</string>
     <string name="listeners_title">Zjišťování polohy</string>
     <string name="autosend_frequency_hint">Počet minut</string>
@@ -373,7 +373,7 @@
     <string name="storage_chooser_free_space_text">volných</string>
     <string name="properties_file_url">Vlastnosti souboru URL</string>
     <string name="file_logging_log_time_with_offset_summary">Pokud je to možné, zapisovat čas ve formátu ISO8601 s časovým posunem, místo UTC (koordinovaným světovým časem).</string>
-    <string name="install_conscrypt_provider_title">Instalovat Conscrypt Providera (SSL/TLS)</string>
+    <string name="install_conscrypt_provider_title">Instalovat poskytovatele šifrování (SSL/TLS)</string>
     <string name="storage_chooser_text_field_error">Prázdný název složky</string>
     <string name="gpslogger_permissions_rationale_message_location_background"><b>Povolit neustále</b> - Povolí této aplikaci přijímat aktualizace polohy, když běží na pozadí.</string>
     <string name="log_customurl_discard_offline_locations">Zahodit offline záznamy polohy</string>
