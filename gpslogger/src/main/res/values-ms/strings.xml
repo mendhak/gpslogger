@@ -294,4 +294,21 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="sftp_validate_accept_host_key">Terima kunci tuan rumah ini?</string>
     <string name="txt_starttimestamp_epoch">Mula cap waktu (zaman)</string>
     <string name="txt_battery">Bateri</string>
+    <string name="time_before_logging_summary">Gunakan 0 untuk kekerapan maksimum, tetapi lebih perlahan adalah lebih baik untuk hayat bateri. Konfigurasi bateri tahap sistem boleh mengatasi tetapan ini, lihat Bantuan dan Soalan Lazim.</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="ok">okey</string>
+    <string name="hide">Sembunyi</string>
+    <string name="not_applicable">n/a</string>
+    <string name="meters_per_second"> m/s</string>
+    <string name="kilometers"> km</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
+    <string name="log_plain_text_csv_advanced_title">Log ke tetapan CSV</string>
+    <string name="log_plain_text_decimal_comma">Gunakan koma (,) sebagai pemisah perpuluhan dan bukannya titik (.)</string>
+    <string name="new_file_creation_onceamonth">Sekali sebulan</string>
+    <string name="osm_setup_title">OpenStreetMap</string>
+    <string name="emailprovider_google">Google Mail</string>
+    <string name="emailprovider_yahoo">Yahoo! Mail</string>
+    <string name="emailprovider_msn">Windows Live Mail</string>
+    <string name="emailprovider_manual">Manual</string>
+    <string name="google_drive_folder_path">Laluan folder Google Drive</string>
 </resources>
