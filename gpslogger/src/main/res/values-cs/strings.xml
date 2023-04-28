@@ -378,4 +378,7 @@
     <string name="gpslogger_permissions_rationale_message_location_background"><b>Povolit neustále</b> - Povolí této aplikaci přijímat aktualizace polohy, když běží na pozadí.</string>
     <string name="log_customurl_discard_offline_locations">Zahodit offline záznamy polohy</string>
     <string name="log_customurl_discard_offline_locations_summary">Zapisovat záznam polohy na vlastní adresu URL pouze v době, kdy je k dispozici síťové připojení (nemá vliv na automatické odesílání)</string>
+    <string name="gpslogger_custom_path_need_permission">Pokud chcete v GPSLoggeru používat vlastní cesty k souborům, povolte aplikaci správu všech souborů na další obrazovce. Poté zkuste provést akci znovu. Toto je vyžadováno systémem Android 11 a vyšším.</string>
+    <string name="autosend_customurl_summary">(Tato funkce zapne protokolování v CSV) Hromadně odešle požadavky na vlastní adresu URL, jeden pro každý řádek v souboru CSV. Závisí na intervalu automatického odesílání.</string>
+    <string name="time_before_logging_summary">Pro maximální frekvenci použijte hodnotu 0. Menší frekvence (vyšší hodnota) je ovšem lepší pro životnost baterie. Konfigurace baterie na úrovni systému může toto nastavení potlačit, viz nápověda a často kladené otázky.</string>
 </resources>
