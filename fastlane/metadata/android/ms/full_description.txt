@@ -36,5 +36,3 @@ Rangkaian komunikasi - digunakan apabila memuat naik fail (Dropbox, Openstreetma
 Lokasi anda - digunakan untuk menentukan lokasi berdasarkan GPS atau menara pemancar
 
 Peralatan sistem (bermula automatik ketika boot) - digunakan jika anda memilih untuk memulakan GPSLogger pada bootup
-
-

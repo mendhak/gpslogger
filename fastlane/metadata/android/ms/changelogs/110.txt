@@ -1,0 +1,6 @@
+* Pada Android 10+, aliran kerja kebenaran kini akan meminta kebenaran "benarkan sepanjang masa"
+* Aliran kerja kebenaran juga akan meminta melumpuhkan pengoptimuman bateri
+* Aliran kerja kebenaran menjengkelkan, maaf, anda perlu membantu dengan banyak permintaan sokongan yang berkaitan dengan pengehadan latar belakang.
+* Ikon penyesuaian, terima kasih kepada @kanru
+* Menambah pilihan untuk menetapkan semula aplikasi (memadam semua fail dan kebenaran untuk aplikasi), dalam tetapan Umum
+* Terjemahan terkini dari Crowdin

@@ -1,0 +1,2 @@
+Pakej semula GPSLogger untuk F-Droid.
+Alih keluar Google Drive, Pengecaman Aktiviti, kebergantungan Perkhidmatan Google Play.
