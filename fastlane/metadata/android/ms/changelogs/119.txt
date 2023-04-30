@@ -1,0 +1,8 @@
+* URL tersuai boleh digunakan sebagai pengirim automatik, untuk membantu dengan kebolehpercayaan.
+* Pilihan untuk menulis masa dengan zon waktu imbang, di bawah Butiran pengelogan. (GPX, KML, GeoJSON, CSV)
+* URL tersuai boleh menggunakan parameter %TIMEOFFSET
+* Pengelogan CSV: lebih banyak medan ditambah.
+* Pengelogan CSV: pilihan untuk menentukan pembatas medan dan pemisah perpuluhan koma.
+* Paparan log akan menunjukkan koordinat dalam format pilihan pengguna.
+* Jika pulih daripada perhentian yang tidak dijangka, mulakan log jika apl itu sebelum ini mengelog.
+* Pembetulan pepijat untuk bahasa Hungary

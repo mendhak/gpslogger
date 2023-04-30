@@ -1,0 +1,7 @@
+* Status pengecasan bateri dalam URL Tersuai (%ISCHARGING) dan CSV (battery_charging)
+* Jika OSM dan penghantaran automatik didayakan, anda kini akan digesa untuk mendapatkan butiran OSM semasa dimulakan dan muat naik
+* Keupayaan untuk memadam fail (di bawah pembalakan, lanjutan).
+* Pengelogan GPX 1.1, menambah sambungan gpxtpx:speed dan gpxtpx:bearing
+* Dropbox telah mengemas kini kaedah pengesahan mereka
+* Pembetulan pepijat: berbilang fail telah dimuat naik jika nama terkandung dalam nama fail lain
+* Terjemahan dikemas kini

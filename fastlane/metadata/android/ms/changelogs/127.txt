@@ -1,0 +1,3 @@
+* Pada Android R dan ke atas, laluan folder boleh diklik
+* Ikon monokrom
+* Tambahkan elemen <name> pada tag <trk> dalam fail GPX

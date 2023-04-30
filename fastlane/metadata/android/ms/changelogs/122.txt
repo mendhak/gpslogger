@@ -1,0 +1,6 @@
+* Google Drive kembali! Dilaksanakan semula tanpa perpustakaan sumber tertutup
+* Kemungkinan pembetulan pepijat untuk pemberitahuan GPSLogger muncul secara rawak apabila tidak digunakan
+* Jika perkhidmatan lokasi dilumpuhkan, apl kini hanya akan terus menunggu (dengan ikon amaran) dan disambung semula apabila ia didayakan semula.
+* Saiz fon diselaraskan dalam paparan terperinci supaya lat/panjang lebih sesuai
+* Menggunakan penggera yang lebih tepat untuk membantu lokasi yang dihalang dalam mod tidur
+* Pilihan dwi-tindakan baharu dalam Tetapan Muat Naik

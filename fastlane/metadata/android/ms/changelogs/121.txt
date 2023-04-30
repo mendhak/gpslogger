@@ -1,0 +1,5 @@
+* Parameter URL Tersuai Baharu: %ALL yang menggantikan setiap parameter URL tersuai yang tersedia
+* Pembetulan pepijat: elakkan + dalam cap masa url tersuai
+* Pembetulan pepijat: pemasa tidak ditetapkan semula apabila menukar profil
+* Pembetulan pepijat: apabila menutup laci, tutup senarai profil dahulu.
+* Pembetulan pepijat: apabila mengklik item dalam senarai profil, pastikan laci terbuka

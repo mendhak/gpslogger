@@ -1,0 +1,1 @@
+* Tambahkan bar skrol pada paparan ringkas untuk menyesuaikan saiz paparan sistem dan saiz fon yang besar.

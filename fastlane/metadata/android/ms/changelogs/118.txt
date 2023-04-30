@@ -1,0 +1,5 @@
+* Pilihan Tema Gelap Baharu, ia harus mengikut mod siang/malam sistem secara automatik.
+* Anda juga boleh menetapkan Tema Terang/Gelap secara manual dalam tetapan Umum.
+* Skrin tetapan yang diolah semula, untuk menunjukkan nilai yang dipilih pengguna jika boleh.
+* Menambah pemilih fail dan folder. Apl akan meminta kebenaran tambahan pada Android 11+ untuk laluan tersuai.
+* SFTP kini sepatutnya boleh menyambung menggunakan algoritma SSH moden.
