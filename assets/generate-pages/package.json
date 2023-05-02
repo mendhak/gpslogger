@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@11ty/eleventy": "^2.0.0-beta.1",
+    "@11ty/eleventy": "^2.0.1",
     "markdown-it-anchor": "^8.6.5",
     "node-html-parser": "^6.1.1"
   }
