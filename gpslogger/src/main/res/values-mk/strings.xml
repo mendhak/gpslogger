@@ -160,4 +160,6 @@
     <string name="gps_stopped">GPS е паузиран</string>
     <string name="stopped">Стопирано</string>
     <string name="osm_setup_title">OpenStreetMap</string>
+    <string name="osm_resetauth">Исчисти ја авторизацијата</string>
+    <string name="osm_lbl_authorize">Авторизирај ја апликацијата</string>
 </resources>
