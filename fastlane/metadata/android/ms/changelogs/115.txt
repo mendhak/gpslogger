@@ -1,0 +1,3 @@
+* Pembetulan pepijat: Benarkan aksara UTF-8 dalam nama folder FTP
+* Tambahkan bar skrol pada paparan ringkas untuk menyesuaikan saiz paparan sistem dan saiz fon yang besar.
+* Papan kekunci akan muncul secara automatik apabila menggunakan kotak teks anotasi.

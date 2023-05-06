@@ -1,0 +1,9 @@
+* Betulkan untuk muat naik ownCloud/NextCloud tidak berfungsi
+* Disebabkan sekatan storan Android baharu, anda hanya boleh menulis ke folder apl itu sendiri
+
+* Pada Android 10+, aliran kerja kebenaran kini akan meminta kebenaran "benarkan sepanjang masa".
+* Aliran kerja kebenaran juga akan meminta untuk melumpuhkan pengoptimuman bateri
+* Aliran kerja kebenaran menjengkelkan, maaf, anda perlu membantu dengan banyak permintaan sokongan yang berkaitan dengan pengehadan latar belakang.
+* Ikon penyesuaian, terima kasih kepada @kanru
+* Menambah pilihan untuk menetapkan semula apl (memadamkan semua fail dan kebenaran untuk apl), dalam tetapan Umum
+* Terjemahan dikemas kini daripada Crowdin

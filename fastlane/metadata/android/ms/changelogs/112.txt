@@ -1,0 +1,1 @@
+* Pembetulan pepijat: Perintah Tasker getstatus tidak menghantar siaran status.

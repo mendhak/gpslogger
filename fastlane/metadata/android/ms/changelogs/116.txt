@@ -1,0 +1,3 @@
+* Pembetulan kebenaran fail untuk Android 11+. Anda kini boleh menetapkan laluan fail tersuai, dan anda akan digesa untuk memberikan kebenaran pengurus fail.
+* Kebenaran baharu ditambahkan, MANAGE_EXTERNAL_STORAGE. Ini adalah untuk membenarkan ciri laluan fail tersuai pada Android 11+.
+* Pembetulan pepijat: Benarkan aksara UTF-8 dalam nama folder FTP.

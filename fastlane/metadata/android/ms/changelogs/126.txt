@@ -1,0 +1,4 @@
+* Percubaan: Paparan butang anotasi baharu. Tekan lama untuk mengedit mesej dan warnanya.
+* Kotak input URL Tersuai dan Anotasi kini membungkus teks, lebih mudah untuk melihat perkara yang anda masukkan. Baris baharu akan dialih keluar.
+* Siaran status GPSLogger kini termasuk nilai tempoh dan jarak.
+* Pemecahan: Niat penggera e-mel yang salah dinamakan dinamakan semula kepada hantaran automatik segera. Gunakannya untuk memulakan muat naik fail.

@@ -1,0 +1,4 @@
+* URL Tersuai - pilihan tambahan untuk membuang lokasi luar talian; berguna untuk menghantar lokasi terkini.
+* URL tersuai - akan mencuba semula maksimum 3 kali dan bukannya 5 kali.
+* Pembetulan pepijat: berjalan untuk masa yang lama menyebabkan jam negatif dipaparkan
+* Peningkatan: jadikan penggera hantar auto lebih dipercayai dan cuba untuk menjadi lebih tepat

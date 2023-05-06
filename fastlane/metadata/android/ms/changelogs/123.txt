@@ -1,0 +1,3 @@
+* Pilihan tambahan untuk membolehkan menunjukkan pemberitahuan GPSLogger pada skrin kunci.
+* Untuk peranti pra-Android 10, pilihan untuk memasang Conscrypt Provider jika anda memerlukan GPSLogger untuk menyambung ke perkhidmatan TLS 1.3 atau menghadapi masalah sambungan SSL.
+* Banyak terjemahan yang dikemas kini daripada komuniti Weblate, terima kasih seperti biasa kepada anda semua.

@@ -1,0 +1,3 @@
+* Pembetulan pepijat - jadikan dialog kebenaran awal tidak boleh diketepikan
+* Pembetulan pepijat - jelaskan perbezaan antara ciri pengelogan url tersuai dan ciri hantar automatik
+* Pembetulan pepijat - semak dan muatkan pembekal konsulit dengan betul jika dipasang daripada F-Droid
