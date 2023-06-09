@@ -281,4 +281,12 @@
     <string name="app_name">Registro GPS</string>
     <string name="hide">Ocultar</string>
     <string name="gpslogger_permissions_background_location">Permite el GPSLogger en segundo plano, concediendo un permiso adicional. En la siguiente pantalla selecciona:</string>
+    <string name="not_applicable">n/a</string>
+    <string name="miles_per_hour"> mph</string>
+    <string name="miles"> mi</string>
+    <string name="kilometers"> km</string>
+    <string name="time_hms_format" formatted="false">%shoras %sminutos %ssegundos</string>
+    <string name="error">Error</string>
+    <string name="kilometers_per_hour"> km/h</string>
+    <string name="log_plain_text_csv_advanced_title">Registrar configuracion de CSV</string>
 </resources>
