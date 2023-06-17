@@ -1,0 +1,2 @@
+为F-Droid重新打包。
+移除Google云端硬盘、Activity Recognition和Play服务依赖。
