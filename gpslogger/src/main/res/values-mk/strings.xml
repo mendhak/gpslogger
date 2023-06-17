@@ -162,4 +162,6 @@
     <string name="osm_setup_title">OpenStreetMap</string>
     <string name="osm_resetauth">Исчисти ја авторизацијата</string>
     <string name="osm_lbl_authorize">Авторизирај ја апликацијата</string>
+    <string name="osm_lbl_authorize_description">Ќе треба да ѝ дадете дозволи на оваа апликација за да ги прикачите GPS трејс на OpenStreetMap. Овде можете да поставите ознаки, описи и видливост откако ќе ја овластите оваа апликација.</string>
+    <string name="osm_resetauth_summary">Отстранете го локалното овластување што се користи за разговорање со вашиот OSM акаунт.</string>
 </resources>
