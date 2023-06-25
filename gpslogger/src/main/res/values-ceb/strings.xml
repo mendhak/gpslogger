@@ -5,4 +5,24 @@
     <!-- general -->
     <!-- Settings activity -->
     <!-- Settings -->
+    <string name="title_drawer_uploadsettings">Mga setting sa pag-upload</string>
+    <string name="could_not_write_to_file">Dili makasulat sa file</string>
+    <string name="add_description">Pagdugang usa ka paghulagway</string>
+    <string name="letters_numbers">Gamit ug letra ug numero lang</string>
+    <string name="menu_annotate">I-annotate</string>
+    <string name="menu_share">Ipaambit</string>
+    <string name="menu_exit">Paggawas</string>
+    <string name="txt_latitude">Latitud:</string>
+    <string name="txt_longitude">Longitude:</string>
+    <string name="txt_altitude">Altitude:</string>
+    <string name="txt_direction">Direksyon:</string>
+    <string name="txt_satellites">Mga satellite:</string>
+    <string name="txt_accuracy">Katukma:</string>
+    <string name="txt_travel_distance">Mibiyahe:</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="settings_screen_name">Mga Setting sa GPSLogger</string>
+    <string name="navigation_drawer_open">Ablihi ang navigation drawer</string>
+    <string name="cancel">Pagkanselar</string>
+    <string name="navigation_drawer_close">Isira ang navigation drawer</string>
+    <string name="hide">Tagoa</string>
 </resources>

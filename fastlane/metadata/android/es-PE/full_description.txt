@@ -36,5 +36,3 @@ Comunicación de red - usada al subir los archivos (Dropbox, Openstreetmap), al 
 Su ubicación - usada para determinar su ubicación basada en GPS o red celular
 
 Herramientas del sistema (iniciar automáticamente en el arranque) - usado si escoge iniciar GPSLogger en el arranque
-
-

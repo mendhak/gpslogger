@@ -1,0 +1,2 @@
+Reempacar GPSLogger para F-Droid.
+Remover Google Drive, Reconocimiento de actividades, Dependencias de Play servicios.
