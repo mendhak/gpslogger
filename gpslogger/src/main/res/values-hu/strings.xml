@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Navigációs menü</string>
     <string name="navigation_drawer_close">Navigációs menü bezárása</string>
     <string name="app_name">GPSLogger</string>
-    <string name="settings_screen_name">Általános beállítások</string>
+    <string name="settings_screen_name">GPSLogger Beállítások</string>
     <string name="ok">OK</string>
     <string name="cancel">Mégse</string>
     <string name="hide">Elrejt</string>
@@ -51,9 +51,9 @@
     <string name="providername_celltower">GSM adótornyok</string>
     <string name="not_applicable">nincs adat</string>
     <string name="meters_per_second"> m/s</string>
-    <string name="feet_per_second"> ft/s</string>
-    <string name="miles_per_hour"> mi/h</string>
-    <string name="miles"> mi</string>
+    <string name="feet_per_second"> láb/s</string>
+    <string name="miles_per_hour"> mérföld/h</string>
+    <string name="miles"> mérföld</string>
     <string name="kilometers_per_hour"> km/h</string>
     <string name="kilometers"> km</string>
     <string name="unknown_direction">ismeretlen</string>
@@ -170,7 +170,7 @@
     <string name="debuglog_title">Hibakeresési fájl készítése</string>
     <string name="debuglog_summary">Hibakeresési üzeneteket ír az SD-kártyán lévő fájlba. Figyelem: A fájl nagyon gyorsan növekszik.</string>
     <string name="pref_logging_summary">Fájl típusok, létrehozás és elnevezés</string>
-    <string name="pref_general_title">Általános beállítások</string>
+    <string name="pref_general_title">Általános opciók</string>
     <string name="pref_general_summary">Indítási, megjelenítési beállítások</string>
     <string name="emailprovider_google">Google Mail</string>
     <string name="emailprovider_yahoo">Yahoo! Mail</string>
@@ -200,7 +200,7 @@
     <string name="autosend_frequency">Milyen gyakran?</string>
     <string name="autosend_sendzip_title">Küldés zip-fájlként</string>
     <string name="autosend_sendzip_summary">Küldés zip fájlként, ha lehetséges. Tiltsa le, ha nem működik a zip fájl küldés</string>
-    <string name="autosend_targets_category">Automatikus küldés</string>
+    <string name="autosend_targets_category">Céloknak automatikus küldés</string>
     <string name="menu_autosend_now">Automatikus küldés most</string>
     <string name="autosend_sending">Automatikus küldés</string>
     <string name="summary_autosend">Automatikus küldés:</string>
@@ -275,7 +275,7 @@
     <string name="txt_longitude_short">H</string>
     <string name="log_nmea_title">Naplózás NMEA-ba</string>
     <string name="log_nmea_summary">Nyers NMEA fájl készítése, miközben pozíciót próbál találni. Ez a fájl nagyon gyorsan növekszik. Csak akkor működik, ha a GPS használatban van. </string>
-    <string name="autoopengts_accountname">Felhasználónév</string>
+    <string name="autoopengts_accountname">Fióknév</string>
     <string name="listeners_gps">GPS</string>
     <string name="listeners_gps_title">GPS/GLNSS helymeghatározás naplózása</string>
     <string name="listeners_gps_summary">Naplózza a műholdas helymeghatározó vevő hely adatait</string>
