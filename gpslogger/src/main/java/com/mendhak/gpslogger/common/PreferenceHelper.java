@@ -814,7 +814,7 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.AUTOSEND_ON_STOP)
     public boolean shouldAutoSendOnStopLogging() {
-        return prefs.getBoolean(PreferenceNames.AUTOSEND_ON_STOP, false);
+        return prefs.getBoolean(PreferenceNames.AUTOSEND_ON_STOP, true);
     }
 
     public void setDebugToFile(boolean writeToFile) {

@@ -21,7 +21,7 @@
         app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
-        android:defaultValue="false"
+        android:defaultValue="true"
         android:key="autosend_frequency_whenstoppressed"
         android:title="@string/autoemail_frequency_whenistop"
         app:iconSpaceReserved="false" />
