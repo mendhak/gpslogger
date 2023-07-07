@@ -55,6 +55,14 @@ public class FileLoggerFactory {
             gpxFolder.mkdirs();
         }
 
+        // If a / exists in the user provided filename, create additional directories
+        if(Strings.getFormattedFileName().contains("/")){
+            File targetDirectory = new File(gpxFolder.getPath(), Strings.getFormattedFileName()).getParentFile();
+            if(!targetDirectory.exists()){
+                targetDirectory.mkdirs();
+            }
+        }
+
         if (preferenceHelper.shouldLogToGpx()) {
             File gpxFile = new File(gpxFolder.getPath(), Strings.getFormattedFileName() + ".gpx");
             if(preferenceHelper.shouldLogAsGpx11()) {
