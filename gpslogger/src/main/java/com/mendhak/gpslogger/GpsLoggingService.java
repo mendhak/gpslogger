@@ -836,6 +836,14 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
+        // Even if it's a passive location, the time should be greater than the previous location's time.
+        if(isPassiveLocation && session.getPreviousLocationInfo() != null && loc.getTime() <= session.getPreviousLocationInfo().getTime()){
+            LOG.debug("Passive location time: " + loc.getTime() + ", previous location's time: " + session.getPreviousLocationInfo().getTime());
+            LOG.debug("Passive location received, but its time was less than the previous point's time.");
+            return;
+        }
+
+
         //Don't log a point if user has been still
         // However, if user has set an annotation, just log the point, disregard time and distance filters
         if(userHasBeenStillForTooLong()) {
