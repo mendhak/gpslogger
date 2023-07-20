@@ -1,0 +1,2 @@
+GPS-Logger für F-Droid neu verpacken.
+Abhängigkeiten für Google  Drive, Aktivitätserkennung und Play Services entfernen.
