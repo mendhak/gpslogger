@@ -36,5 +36,3 @@ Netzwerkkommunikation - wird beim Hochladen der Dateien (Dropbox, Openstreetmap)
 Ihr Standort - zur Bestimmung Ihres GPS- oder Funkzellen-basierten Standorts
 
 Systemwerkzeuge (automatisch beim Hochfahren starten) - werden verwendet, wenn Sie GPSLogger beim Hochfahren starten möchten
-
-
