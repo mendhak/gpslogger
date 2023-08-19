@@ -347,4 +347,12 @@
     <string name="summary_autosend">Anfon yn awtomatig:</string>
     <string name="log_customurl_discard_offline_locations_summary">Logio lleoliadau i URL addasiedig dim ond pan mae cysylltiad rhwydwaith ar gael (dydy\'r opsiwn yma ddim yn effeithio ar anfon awtomatig)</string>
     <string name="pref_autosend_title">Anfon yn awtomatig, ebost ac uwchlwytho</string>
+    <string name="txt_timestamp_epoch">Amsernod (epoc)</string>
+    <string name="txt_starttimestamp_epoch">Dechrau amsernod (epoc)</string>
+    <string name="customurl_http_body">Corff HTTP</string>
+    <string name="customurl_http_headers">Penynnau HTTP</string>
+    <string name="customurl_http_method">Dull HTTP</string>
+    <string name="customurl_http_basicauthentication">Awdurdodi Syml</string>
+    <string name="txt_battery">Batri</string>
+    <string name="txt_battery_charging">Yn ailwefru\'r batri</string>
 </resources>
