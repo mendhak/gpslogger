@@ -3,8 +3,8 @@
     <string name="title_drawer_uploadsettings">تنظیمات بارگزاری</string>
     <string name="navigation_drawer_open">باز کردن منو</string>
     <string name="navigation_drawer_close">بستن منو</string>
-    <string name="app_name">GPS ثبات </string>
-    <string name="settings_screen_name">تنظیمات GPS ثبات</string>
+    <string name="app_name">گزارش‌گر جی‌پی‌اس</string>
+    <string name="settings_screen_name">تنظیمات گزارش‌گر جی‌پی‌اس</string>
     <string name="ok">باشه</string>
     <string name="cancel">لغو</string>
     <string name="could_not_write_to_file">ناتوان در نوشتن در فايل</string>
