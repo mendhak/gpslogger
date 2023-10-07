@@ -34,10 +34,10 @@
     <string name="sharing_mylocation">Sijaintini</string>
     <string name="sharing_via">Jaa</string>
     <!-- general -->
-    <string name="foot">&#160;jalka</string>
-    <string name="feet">&#160;jalkaa</string>
-    <string name="meter">&#160;metri</string>
-    <string name="meters">&#160;metriä</string>
+    <string name="foot"> jalka</string>
+    <string name="feet"> jalkaa</string>
+    <string name="meter"> metri</string>
+    <string name="meters"> metriä</string>
     <string name="error">Virhe</string>
     <string name="error_connection">Yhteysvirhe. Tarkistaisitko laitteesi asetukset.</string>
     <string name="seconds">s</string>
@@ -269,4 +269,7 @@
     <string name="ssl_certificate_add_to_keystore">Lisää tämä sertifikaatti paikalliseen avainkirjastoon?</string>
     <string name="ssl_certificate_is_valid">Sertifikaatti on voimassa</string>
     <string name="hide_notification_from_status_bar">Piilota ilmoitus tilapalkista</string>
+    <string name="log_gpx_11_summary">Käytä GPX 1.1 tiedosto muotoa GPX 1.0 Sijasta</string>
+    <string name="hide">Piilota</string>
+    <string name="log_gpx_11_title">Käytä GPX 1.1</string>
 </resources>
