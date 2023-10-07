@@ -272,4 +272,8 @@
     <string name="log_gpx_11_summary">Käytä GPX 1.1 tiedosto muotoa GPX 1.0 Sijasta</string>
     <string name="hide">Piilota</string>
     <string name="log_gpx_11_title">Käytä GPX 1.1</string>
+    <string name="log_plain_text_csv_advanced_title">Kirjaa CSV asetukset</string>
+    <string name="new_file_creation_onceamonth">Kerran kuukaudessa</string>
+    <string name="log_json_title">Kirjaa GeoJSON</string>
+    <string name="google_drive_folder_path">Google Drive kansio polku</string>
 </resources>
