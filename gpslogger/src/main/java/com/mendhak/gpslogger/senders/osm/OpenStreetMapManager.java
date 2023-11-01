@@ -19,6 +19,9 @@
 
 package com.mendhak.gpslogger.senders.osm;
 
+import android.content.Context;
+import android.net.Uri;
+
 import com.birbit.android.jobqueue.CancelResult;
 import com.birbit.android.jobqueue.JobManager;
 import com.birbit.android.jobqueue.TagConstraint;
@@ -27,6 +30,11 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
+
+import net.openid.appauth.AppAuthConfiguration;
+import net.openid.appauth.AuthorizationService;
+import net.openid.appauth.AuthorizationServiceConfiguration;
+
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import org.slf4j.Logger;
@@ -42,15 +50,44 @@ public class OpenStreetMapManager extends FileSender {
 
 
     private static final Logger LOG = Logs.of(OpenStreetMapManager.class);
-    static final String OSM_REQUESTTOKEN_URL = "https://www.openstreetmap.org/oauth/request_token";
-    static final String OSM_ACCESSTOKEN_URL = "https://www.openstreetmap.org/oauth/access_token";
-    static final String OSM_AUTHORIZE_URL = "https://www.openstreetmap.org/oauth/authorize";
+    static final String OSM_REQUESTTOKEN_URL = "https://www.openstreetmap.org/oauth2/request_token";
+    static final String OSM_ACCESSTOKEN_URL = "https://www.openstreetmap.org/oauth2/access_token";
+    static final String OSM_AUTHORIZE_URL = "https://www.openstreetmap.org/oauth2/authorize";
     static final String OSM_GPSTRACE_URL = "https://www.openstreetmap.org/api/0.6/gpx/create";
     private PreferenceHelper preferenceHelper;
 
     public OpenStreetMapManager(PreferenceHelper preferenceHelper) {
         this.preferenceHelper = preferenceHelper;
 
+    }
+
+    public static String getOpenStreetMapClientID() {
+        //OAuth Client for F-Droid release key
+        return "IPhwuq5DbvDXtP7VUKLU2x5TLEucQLHyKez8DdNNgVM";
+        // The Client ID doesn't matter too much, it needs to exist, but for verification what Android
+        // does is match by SHA1 signing key + package name.
+    }
+
+    public static String getOpenStreetMapRedirect() {
+        //Needs to match in androidmanifest.xml
+        return "gpslogger://oauth2openstreetmap";
+    }
+
+    public static String[] getOpenStreetMapClientScopes() {
+        return new String[]{"write_gpx"};
+    }
+
+    public static AuthorizationService getAuthorizationService(Context context) {
+        return new AuthorizationService(context, new AppAuthConfiguration.Builder().build());
+    }
+
+    public static AuthorizationServiceConfiguration getAuthorizationServiceConfiguration() {
+        return new AuthorizationServiceConfiguration(
+                Uri.parse("https://www.openstreetmap.org/oauth2/authorize"),
+                Uri.parse("https://www.openstreetmap.org/oauth2/token"),
+                null,
+                null
+        );
     }
 
     public static OAuthProvider getOSMAuthProvider() {
