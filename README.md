@@ -100,7 +100,7 @@ Give it a minute and Android Studio will configure the projects and download the
 
 Sign up for an account with [OpenStreetMap](https://openstreetmap.org) and log in.
 
-Click on 'oauth settings'
+Click on 'My Settings', then 'OAuth2 Applications'
 
 Click on 'Register your application'
 
@@ -108,8 +108,9 @@ Fill in the form with these details
 
 ![Oauth settings](assets/osm_oauth_settings.png)
 
-After registering the application, you will receive a 'Consumer Key' and a 'Consumer Secret'.  
-Place the keys in OSMJob.java and OpenStreetMapManager.java.   
+After registering the application, you will receive a Client ID.   
+Place the keys in OpenStreetMapManager#getOpenStreetMapClientID().   
+If you used your own custom scheme, replace the value in AndroidManifest.xml and OpenStreetMapManager#getOpenStreetMapRedirect()  
 
 
 ### Dropbox Setup (Optional)
