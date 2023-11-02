@@ -61,19 +61,15 @@ public class OpenStreetMapManager extends FileSender {
 
     public OpenStreetMapManager(PreferenceHelper preferenceHelper) {
         this.preferenceHelper = preferenceHelper;
-
     }
 
     public static String getOpenStreetMapClientID() {
-        //OAuth Client for F-Droid release key
         return "IPhwuq5DbvDXtP7VUKLU2x5TLEucQLHyKez8DdNNgVM";
-        // The Client ID doesn't matter too much, it needs to exist, but for verification what Android
-        // does is match by SHA1 signing key + package name.
     }
 
     public static String getOpenStreetMapRedirect() {
         //Needs to match in androidmanifest.xml
-        return "gpslogger://oauth2openstreetmap";
+        return "com.mendhak.gpslogger://oauth2openstreetmap";
     }
 
     public static String[] getOpenStreetMapClientScopes() {
