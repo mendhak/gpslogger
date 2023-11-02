@@ -93,7 +93,7 @@ public class OpenStreetMapManager extends FileSender {
         return new OkHttpOAuthProvider(OSM_REQUESTTOKEN_URL, OSM_ACCESSTOKEN_URL, OSM_AUTHORIZE_URL);
     }
 
-    private AuthState getAuthState() {
+    public static AuthState getAuthState() {
         AuthState authState = new AuthState();
         String open_street_map_auth_state = PreferenceHelper.getInstance().getOSMAuthState();
 
