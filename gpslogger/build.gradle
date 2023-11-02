@@ -172,14 +172,6 @@ dependencies {
     //OKHTTP client
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
-    //OKHTTP interceptor, works with oauth signpost
-    implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
-
-    //OAuth signing
-    implementation('oauth.signpost:signpost-core:1.2.1.1'){
-        exclude module: 'commons-codec'
-    }
-
     //Dropbox API 3
     implementation 'com.dropbox.core:dropbox-core-sdk:5.1.1'
 

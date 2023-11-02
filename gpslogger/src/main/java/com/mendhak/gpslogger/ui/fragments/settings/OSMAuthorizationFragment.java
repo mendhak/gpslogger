@@ -25,7 +25,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Base64;
 
 import androidx.activity.result.ActivityResult;

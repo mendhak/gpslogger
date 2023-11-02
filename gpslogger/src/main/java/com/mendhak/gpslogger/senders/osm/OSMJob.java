@@ -43,7 +43,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import javax.net.ssl.X509TrustManager;
 
 import de.greenrobot.event.EventBus;
-import oauth.signpost.OAuthConsumer;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -59,17 +58,15 @@ public class OSMJob extends Job {
 
     private final AtomicBoolean taskDone = new AtomicBoolean(false);
     private String openStreetMapAccessToken;
-    //OAuthConsumer consumer;
     String gpsTraceUrl;
     File chosenFile;
     String description;
     String tags;
     String visibility;
 
-    protected OSMJob(OAuthConsumer consumer, String gpsTraceUrl, File chosenFile, String description, String tags, String visibility) {
+    protected OSMJob(String gpsTraceUrl, File chosenFile, String description, String tags, String visibility) {
         super(new Params(1).requireNetwork().persist().addTags(getJobTag(chosenFile)));
 
-//        this.consumer = consumer;
         this.gpsTraceUrl = gpsTraceUrl;
         this.chosenFile = chosenFile;
         this.description = description;

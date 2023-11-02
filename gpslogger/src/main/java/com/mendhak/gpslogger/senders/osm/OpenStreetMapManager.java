@@ -36,15 +36,8 @@ import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
 
-import oauth.signpost.OAuthConsumer;
-import oauth.signpost.OAuthProvider;
-
 import org.json.JSONException;
 import org.slf4j.Logger;
-import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
-import se.akerfeldt.okhttp.signpost.OkHttpOAuthProvider;
-
-
 import java.io.File;
 import java.util.List;
 
@@ -53,9 +46,7 @@ public class OpenStreetMapManager extends FileSender {
 
 
     private static final Logger LOG = Logs.of(OpenStreetMapManager.class);
-    static final String OSM_REQUESTTOKEN_URL = "https://www.openstreetmap.org/oauth2/request_token";
-    static final String OSM_ACCESSTOKEN_URL = "https://www.openstreetmap.org/oauth2/access_token";
-    static final String OSM_AUTHORIZE_URL = "https://www.openstreetmap.org/oauth2/authorize";
+
     static final String OSM_GPSTRACE_URL = "https://www.openstreetmap.org/api/0.6/gpx/create";
     private PreferenceHelper preferenceHelper;
 
@@ -89,9 +80,6 @@ public class OpenStreetMapManager extends FileSender {
         );
     }
 
-    public static OAuthProvider getOSMAuthProvider() {
-        return new OkHttpOAuthProvider(OSM_REQUESTTOKEN_URL, OSM_ACCESSTOKEN_URL, OSM_AUTHORIZE_URL);
-    }
 
     public static AuthState getAuthState() {
         AuthState authState = new AuthState();
@@ -111,31 +99,6 @@ public class OpenStreetMapManager extends FileSender {
 
     public boolean isOsmAuthorized() {
         return getAuthState().isAuthorized();
-    }
-
-    public static OAuthConsumer getOSMAuthConsumer() {
-
-        OAuthConsumer consumer = null;
-
-        try {
-
-            consumer = new OkHttpOAuthConsumer("NQ4ucS4F0RpQO1byUQB5JA", Strings.GetOSM());
-
-
-            String osmAccessToken =  PreferenceHelper.getInstance().getOSMAccessToken();
-            String osmAccessTokenSecret = PreferenceHelper.getInstance().getOSMAccessTokenSecret();
-
-            if (Strings.isNullOrEmpty(osmAccessToken) || Strings.isNullOrEmpty(osmAccessTokenSecret)) {
-                return consumer;
-            } else {
-                consumer.setTokenWithSecret(osmAccessToken, osmAccessTokenSecret);
-            }
-
-        } catch (Exception e) {
-            LOG.error("Error getting OAuth Consumer", e);
-        }
-
-        return consumer;
     }
 
     @Override
@@ -165,7 +128,7 @@ public class OpenStreetMapManager extends FileSender {
     public void uploadFile(String fileName) {
         File gpxFolder = new File(preferenceHelper.getGpsLoggerFolder());
         final File chosenFile = new File(gpxFolder, fileName);
-        final OAuthConsumer consumer = getOSMAuthConsumer();
+
         final String gpsTraceUrl = OSM_GPSTRACE_URL;
 
 
@@ -177,7 +140,7 @@ public class OpenStreetMapManager extends FileSender {
         jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
             @Override
             public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new OSMJob( consumer, gpsTraceUrl, chosenFile, description, tags, visibility));
+                jobManager.addJobInBackground(new OSMJob(gpsTraceUrl, chosenFile, description, tags, visibility));
             }
         }, TagConstraint.ANY, OSMJob.getJobTag(chosenFile));
 

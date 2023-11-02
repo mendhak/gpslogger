@@ -942,33 +942,6 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.OPENSTREETMAP_AUTH_STATE, auth_state_json_serialized).apply();
     }
 
-    /**
-     * Sets OpenStreetMap OAuth secret for auto send
-     */
-    public void setOSMAccessTokenSecret(String secret) {
-        prefs.edit().putString(PreferenceNames.OPENSTREETMAP_ACCESS_TOKEN_SECRET, secret).apply();
-    }
-
-    /**
-     * Gets access token secret for OpenStreetMap auto send
-     */
-    public String getOSMAccessTokenSecret() {
-        return prefs.getString(PreferenceNames.OPENSTREETMAP_ACCESS_TOKEN_SECRET, "");
-    }
-
-    /**
-     * Sets request token for OpenStreetMap auto send
-     */
-    public void setOSMRequestToken(String token) {
-        prefs.edit().putString(PreferenceNames.OPENSTREETMAP_REQUEST_TOKEN, token).apply();
-    }
-
-    /**
-     * Sets request token secret for OpenStreetMap auto send
-     */
-    public void setOSMRequestTokenSecret(String secret) {
-        prefs.edit().putString(PreferenceNames.OPENSTREETMAP_REQUEST_TOKEN_SECRET, secret).apply();
-    }
 
     /**
      * Description of uploaded trace on OpenStreetMap

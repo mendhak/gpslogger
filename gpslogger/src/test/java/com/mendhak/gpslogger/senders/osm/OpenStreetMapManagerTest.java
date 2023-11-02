@@ -19,31 +19,6 @@ import static org.mockito.Mockito.when;
 public class OpenStreetMapManagerTest {
 
     @Test
-    public void IsAvailable_WithValidValues_IsAvailable(){
-        PreferenceHelper pm = mock(PreferenceHelper.class);
-        OpenStreetMapManager osm = new OpenStreetMapManager(pm);
-        assertThat("Account and token indicate availability", osm.isAvailable(), is(false));
-
-        when(pm.getOSMAccessToken()).thenReturn("");
-        assertThat("Account and token indicate availability", osm.isAvailable(), is(false));
-
-        when(pm.getOSMAccessToken()).thenReturn("923487234");
-        assertThat("Account and token indicate availability", osm.isAvailable(), is(true));
-    }
-
-    @Test
-    public void IsAutosendAvailable_WhenUserChecked_IsAvailable(){
-        PreferenceHelper pm = mock(PreferenceHelper.class);
-        OpenStreetMapManager osm = new OpenStreetMapManager(pm);
-        when(pm.getOSMAccessToken()).thenReturn("923487234");
-
-        assertThat("Autosend available when user checked preference", osm.isAutoSendAvailable(), is(false));
-
-        when(pm.isOsmAutoSendEnabled()).thenReturn(true);
-        assertThat("Autosend available when user checked preference", osm.isAutoSendAvailable(), is(true));
-    }
-
-    @Test
     public void Accept_OnlyGpxAllowed(){
         PreferenceHelper pm = mock(PreferenceHelper.class);
         OpenStreetMapManager osm = new OpenStreetMapManager(pm);
