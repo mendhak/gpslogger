@@ -919,20 +919,6 @@ public class PreferenceHelper {
     }
 
 
-    /**
-     * Sets OpenStreetMap OAuth Token for auto send
-     */
-    public void setOSMAccessToken(String token) {
-        prefs.edit().putString(PreferenceNames.OPENSTREETMAP_ACCESS_TOKEN, token).apply();
-    }
-
-
-    /**
-     * Gets access token for OpenStreetMap auto send
-     */
-    public String getOSMAccessToken() {
-        return prefs.getString(PreferenceNames.OPENSTREETMAP_ACCESS_TOKEN, "");
-    }
 
     public String getOSMAuthState(){
         return prefs.getString(PreferenceNames.OPENSTREETMAP_AUTH_STATE, "");
