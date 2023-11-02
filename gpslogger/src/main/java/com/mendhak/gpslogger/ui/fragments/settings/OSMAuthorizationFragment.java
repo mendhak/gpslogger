@@ -92,21 +92,6 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
 
         manager = new OpenStreetMapManager(preferenceHelper);
 
-        final Intent intent = getActivity().getIntent();
-        final Uri myURI = intent.getData();
-
-        if (myURI != null && myURI.getQuery() != null
-                && myURI.getQuery().length() > 0) {
-            //User has returned! Read the verifier info from querystring
-
-            Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.please_wait));
-
-            LOG.debug("OAuth user has returned!");
-            String oAuthVerifier = myURI.getQueryParameter("oauth_verifier");
-
-
-        }
-
         setPreferencesState();
 
     }
@@ -197,11 +182,8 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
 
         if(preference.getKey().equalsIgnoreCase("osm_resetauth")){
             if (manager.isOsmAuthorized()) {
-                preferenceHelper.setOSMAccessToken("");
-                preferenceHelper.setOSMAccessTokenSecret("");
-                preferenceHelper.setOSMRequestToken("");
-                preferenceHelper.setOSMRequestTokenSecret("");
-
+                authState = new AuthState();
+                saveOpenStreetMapAuthState();
                 setPreferencesState();
 
             } else {
@@ -260,7 +242,6 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
                             LOG.error(authException.toJsonString(), authException);
                         }
                         if (authResponse != null) {
-//                            ClientAuthentication clientAuth = new ClientSecretPost(OpenStreetMapManager.getOpenStreetMapClientSecret());
                             TokenRequest tokenRequest = authResponse.createTokenExchangeRequest();
 
                             authorizationService.performTokenRequest(tokenRequest, new AuthorizationService.TokenResponseCallback() {
@@ -275,9 +256,8 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
 
                                         }
                                     }
-//                                    saveOSMAuthState();
-                                    // save the auth state to preferences now
-                                    LOG.info(authState.jsonSerializeString());
+
+                                    saveOpenStreetMapAuthState();
                                     setPreferencesState();
 
 
@@ -290,6 +270,9 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
                 }
             });
 
+    void saveOpenStreetMapAuthState() {
+        PreferenceHelper.getInstance().setOSMAuthState(authState.jsonSerializeString());
+    }
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
         if(which != BUTTON_POSITIVE){

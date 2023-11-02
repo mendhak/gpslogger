@@ -32,11 +32,14 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 
 import net.openid.appauth.AppAuthConfiguration;
+import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
+
+import org.json.JSONException;
 import org.slf4j.Logger;
 import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
 import se.akerfeldt.okhttp.signpost.OkHttpOAuthProvider;
@@ -94,9 +97,24 @@ public class OpenStreetMapManager extends FileSender {
         return new OkHttpOAuthProvider(OSM_REQUESTTOKEN_URL, OSM_ACCESSTOKEN_URL, OSM_AUTHORIZE_URL);
     }
 
+    private AuthState getAuthState() {
+        AuthState authState = new AuthState();
+        String open_street_map_auth_state = PreferenceHelper.getInstance().getOSMAuthState();
+
+        if (!Strings.isNullOrEmpty(open_street_map_auth_state)) {
+            try {
+                authState = AuthState.jsonDeserialize(open_street_map_auth_state);
+
+            } catch (JSONException e) {
+                LOG.debug(e.getMessage(), e);
+            }
+        }
+
+        return authState;
+    }
+
     public boolean isOsmAuthorized() {
-        String oAuthAccessToken = preferenceHelper.getOSMAccessToken();
-        return (oAuthAccessToken != null && oAuthAccessToken.length() > 0);
+        return getAuthState().isAuthorized();
     }
 
     public static OAuthConsumer getOSMAuthConsumer() {

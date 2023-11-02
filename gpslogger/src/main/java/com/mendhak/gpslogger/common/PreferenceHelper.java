@@ -934,6 +934,13 @@ public class PreferenceHelper {
         return prefs.getString(PreferenceNames.OPENSTREETMAP_ACCESS_TOKEN, "");
     }
 
+    public String getOSMAuthState(){
+        return prefs.getString(PreferenceNames.OPENSTREETMAP_AUTH_STATE, "");
+    }
+
+    public void setOSMAuthState(String auth_state_json_serialized){
+        prefs.edit().putString(PreferenceNames.OPENSTREETMAP_AUTH_STATE, auth_state_json_serialized).apply();
+    }
 
     /**
      * Sets OpenStreetMap OAuth secret for auto send

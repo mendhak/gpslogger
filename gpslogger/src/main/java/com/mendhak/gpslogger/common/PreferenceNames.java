@@ -85,6 +85,8 @@ public  class PreferenceNames {
     public static final String OPENSTREETMAP_ACCESS_TOKEN_SECRET = "osm_accesstokensecret";
     public static final String OPENSTREETMAP_REQUEST_TOKEN = "osm_requesttoken";
     public static final String OPENSTREETMAP_REQUEST_TOKEN_SECRET = "osm_requesttokensecret";
+    public static final String OPENSTREETMAP_AUTH_STATE = "osm_oauthstate";
+
     public static final String OPENSTREETMAP_DESCRIPTION = "osm_description";
     public static final String OPENSTREETMAP_TAGS = "osm_tags";
     public static final String OPENSTREETMAP_VISIBILITY = "osm_visibility";
