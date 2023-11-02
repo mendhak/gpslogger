@@ -35,7 +35,6 @@ import androidx.activity.result.IntentSenderRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -44,16 +43,12 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
-import com.mendhak.gpslogger.ui.Dialogs;
 
 import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
-import net.openid.appauth.ClientAuthentication;
-import net.openid.appauth.ClientSecretBasic;
-import net.openid.appauth.ClientSecretPost;
 import net.openid.appauth.ResponseTypeValues;
 import net.openid.appauth.TokenRequest;
 import net.openid.appauth.TokenResponse;
@@ -77,8 +72,6 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
     private static final Logger LOG = Logs.of(OSMAuthorizationFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
-    private Handler osmHandler = new Handler();
-
     //Must be static - when user returns from OSM, this needs to be set already
     private AuthorizationService authorizationService;
     private AuthState authState = new AuthState();
@@ -91,9 +84,7 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
         super.onCreate(savedInstanceState);
 
         manager = new OpenStreetMapManager(preferenceHelper);
-
         setPreferencesState();
-
     }
 
     @Override
@@ -228,51 +219,47 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
         return true;
     }
 
-    ActivityResultLauncher<IntentSenderRequest> openStreetMapAuthenticationWorkflow = registerForActivityResult(
-            new ActivityResultContracts.StartIntentSenderForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        LOG.debug(String.valueOf(result.getData()));
-                        AuthorizationResponse authResponse = AuthorizationResponse.fromIntent(result.getData());
-                        AuthorizationException authException = AuthorizationException.fromIntent(result.getData());
-                        authState = new AuthState(authResponse, authException);
-                        if (authException != null) {
-                            LOG.error(authException.toJsonString(), authException);
-                        }
-                        if (authResponse != null) {
-                            TokenRequest tokenRequest = authResponse.createTokenExchangeRequest();
-
-                            authorizationService.performTokenRequest(tokenRequest, new AuthorizationService.TokenResponseCallback() {
-                                @Override
-                                public void onTokenRequestCompleted(@Nullable TokenResponse response, @Nullable AuthorizationException ex) {
-                                    if (ex != null) {
-                                        authState = new AuthState();
-                                        LOG.error(ex.toJsonString(), ex);
-                                    } else {
-                                        if (response != null) {
-                                            authState.update(response, ex);
-
-                                        }
-                                    }
-
-                                    saveOpenStreetMapAuthState();
-                                    setPreferencesState();
-
+    ActivityResultLauncher<IntentSenderRequest> openStreetMapAuthenticationWorkflow = registerForActivityResult(new ActivityResultContracts.StartIntentSenderForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                LOG.debug(String.valueOf(result.getData()));
+                AuthorizationResponse authResponse = AuthorizationResponse.fromIntent(result.getData());
+                AuthorizationException authException = AuthorizationException.fromIntent(result.getData());
+                authState = new AuthState(authResponse, authException);
+                if (authException != null) {
+                    LOG.error(authException.toJsonString(), authException);
+                }
+                if (authResponse != null) {
+                    TokenRequest tokenRequest = authResponse.createTokenExchangeRequest();
+                    authorizationService.performTokenRequest(tokenRequest, new AuthorizationService.TokenResponseCallback() {
+                        @Override
+                        public void onTokenRequestCompleted(@Nullable TokenResponse response, @Nullable AuthorizationException ex) {
+                            if (ex != null) {
+                                authState = new AuthState();
+                                LOG.error(ex.toJsonString(), ex);
+                            } else {
+                                if (response != null) {
+                                    authState.update(response, ex);
 
                                 }
-                            });
+                            }
+
+                            saveOpenStreetMapAuthState();
+                            setPreferencesState();
                         }
-
-                    }
-
+                    });
                 }
-            });
+
+            }
+
+        }
+    });
 
     void saveOpenStreetMapAuthState() {
         PreferenceHelper.getInstance().setOSMAuthState(authState.jsonSerializeString());
     }
+
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {
         if(which != BUTTON_POSITIVE){
@@ -302,7 +289,5 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
 
         return false;
     }
-
-
 
 }
