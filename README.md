@@ -109,8 +109,8 @@ Fill in the form with these details. Remember to uncheck the 'Confidential Appli
 ![Oauth settings](assets/osm_oauth_settings.png)
 
 After registering the application, you will receive a Client ID.   
-Place the Client ID in OpenStreetMapManager#getOpenStreetMapClientID().   
-If you used your own custom scheme, replace the value in AndroidManifest.xml and OpenStreetMapManager#getOpenStreetMapRedirect()  
+Place the Client ID in [OpenStreetMapManager#getOpenStreetMapClientID\(\)](gpslogger/src/main/java/com/mendhak/gpslogger/senders/osm/OpenStreetMapManager.java).   
+If you used your own custom scheme, replace the value in [AndroidManifest.xml](gpslogger/src/main/AndroidManifest.xml) and [OpenStreetMapManager#getOpenStreetMapRedirect\(\)](gpslogger/src/main/java/com/mendhak/gpslogger/senders/osm/OpenStreetMapManager.java) 
 
 
 ### Dropbox Setup (Optional)
@@ -226,7 +226,7 @@ Finally upload to Github Releases.
 
 F-Droid watches the Github repository for tags, and will build those tags, and sign it using its own key. So, there isn't too much to do. 
 
-Ensure that [gpslogger/build.gradle](gpslogger/build.gradle#L47-L48) contains the latest version number to be released. 
+Ensure that [gpslogger/build.gradle](gpslogger/build.gradle#L47-L48) `versionCode` and `versionName` contains the latest version number to be released. 
 
 ## Working notes for F-Droid
 
