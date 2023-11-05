@@ -226,7 +226,7 @@ Finally upload to Github Releases.
 
 F-Droid watches the Github repository for tags, and will build those tags, and sign it using its own key. So, there isn't too much to do. 
 
-Ensure that [gpslogger/build.gradle](gpslogger/build.gradle#L47-48) contains the latest version number to be released. 
+Ensure that [gpslogger/build.gradle](gpslogger/build.gradle#L47-L48) contains the latest version number to be released. 
 
 ## Working notes for F-Droid
 
