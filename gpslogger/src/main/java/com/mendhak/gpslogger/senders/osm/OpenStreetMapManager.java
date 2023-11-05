@@ -90,7 +90,7 @@ public class OpenStreetMapManager extends FileSender {
                 authState = AuthState.jsonDeserialize(open_street_map_auth_state);
 
             } catch (JSONException e) {
-                LOG.debug(e.getMessage(), e);
+                LOG.error(e.getMessage(), e);
             }
         }
 
