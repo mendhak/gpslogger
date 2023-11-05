@@ -195,6 +195,39 @@ needed for the current run of GPSLogger.
 These objects are visible throughout the application and can be accessed directly by any class, service, activity or fragment.
 
 
+## Assembling the APK for Github release
+
+The 'assemble' Gradle task will build, and it also looks for a GPG key to sign the APK with. It needs some setup first:
+
+Create `~/.gradle/gradle.properties` which contains the release store and its key details, as well as the GPG key details
+
+```
+RELEASE_STORE_FILE=/path/to/the.keystore
+RELEASE_STORE_PASSWORD=xxxxxxxxxxxxxxxxxx
+RELEASE_KEY_ALIAS=gpsloggerkey
+RELEASE_KEY_PASSWORD=xxxxxxxxxxxxxxxxxx
+signing.gnupg.keyName=xxxxxxxxxxxxxxxxxx
+signing.gnupg.passphrase=xxxxxxxxxxxxxxxxxx
+```
+
+Ensure that gpg2 is installed
+
+```bash
+sudo apt install gnupg2
+```
+
+And ensure that the above gnupg.keyname is in the gpg keystore, have a look using `gpg2 --list-secret-keys`
+
+Once these pieces are in place, the 'assemble' task should build the APK, sign it, and create a checksum too.    
+If it doesn't appear in the gpslogger folder, run 'copyFinalAPK' so that it copies the APK, ASC and SHA256 files to the gpslogger folder.  
+Finally upload to Github Releases.  
+
+## F-Droid release
+
+F-Droid watches the Github repository for tags, and will build those tags, and sign it using its own key. So, there isn't too much to do. 
+
+Ensure that [gpslogger/build.gradle](gpslogger/build.gradle#L47-48) contains the latest version number to be released. 
+
 ## Working notes for F-Droid
 
 Use the fdroidserver docker image.  Clone the fdroid metadata repo and make changes to the com.mendhak.gpslogger.yml file. 
