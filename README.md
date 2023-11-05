@@ -228,6 +228,12 @@ F-Droid watches the Github repository for tags, and will build those tags, and s
 
 Ensure that [gpslogger/build.gradle](gpslogger/build.gradle#L47-L48) `versionCode` and `versionName` contains the latest version number to be released. 
 
+Finally tag the commit, 
+
+```bash
+git tag -s v128
+```
+
 ## Working notes for F-Droid
 
 Use the fdroidserver docker image.  Clone the fdroid metadata repo and make changes to the com.mendhak.gpslogger.yml file. 
