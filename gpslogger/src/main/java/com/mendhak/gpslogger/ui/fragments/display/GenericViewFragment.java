@@ -118,8 +118,12 @@ public abstract class GenericViewFragment extends Fragment {
 
             final List<String> cachedList = Files.getListFromCacheFile(PreferenceNames.CUSTOM_FILE_NAME, getActivity());
             formElements.add(Input.plain(PreferenceNames.CUSTOM_FILE_NAME)
+                    .required()
+                    // Don't allow *, &, %, / or \ in the file name.
+                    .validatePattern("^[^*&%/\\\\]+$", "Invalid file name")
                     .suggest(new ArrayList<>(cachedList))
-                    .text(preferenceHelper.getCustomFileName()));
+                    .text(preferenceHelper.getCustomFileName())
+            );
 
         }
 

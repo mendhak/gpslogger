@@ -20,13 +20,20 @@
 package com.mendhak.gpslogger.ui.fragments.settings;
 
 
+import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Base64;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.IntentSenderRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -35,10 +42,20 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
-import com.mendhak.gpslogger.ui.Dialogs;
+
+import net.openid.appauth.AuthState;
+import net.openid.appauth.AuthorizationException;
+import net.openid.appauth.AuthorizationRequest;
+import net.openid.appauth.AuthorizationResponse;
+import net.openid.appauth.AuthorizationService;
+import net.openid.appauth.ResponseTypeValues;
+import net.openid.appauth.TokenRequest;
+import net.openid.appauth.TokenResponse;
 
 import org.slf4j.Logger;
 
+import java.security.MessageDigest;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -46,9 +63,7 @@ import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 import eltos.simpledialogfragment.list.SimpleListDialog;
-import oauth.signpost.OAuth;
-import oauth.signpost.OAuthConsumer;
-import oauth.signpost.OAuthProvider;
+
 
 public class OSMAuthorizationFragment extends PreferenceFragmentCompat
         implements Preference.OnPreferenceClickListener, SimpleDialog.OnDialogResultListener {
@@ -56,11 +71,11 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
     private static final Logger LOG = Logs.of(OSMAuthorizationFragment.class);
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
-    private Handler osmHandler = new Handler();
-
     //Must be static - when user returns from OSM, this needs to be set already
-    private static OAuthProvider provider;
-    private static OAuthConsumer consumer;
+    private AuthorizationService authorizationService;
+    private AuthState authState = new AuthState();
+
+
     OpenStreetMapManager manager;
 
     @Override
@@ -68,25 +83,7 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
         super.onCreate(savedInstanceState);
 
         manager = new OpenStreetMapManager(preferenceHelper);
-
-        final Intent intent = getActivity().getIntent();
-        final Uri myURI = intent.getData();
-
-        if (myURI != null && myURI.getQuery() != null
-                && myURI.getQuery().length() > 0) {
-            //User has returned! Read the verifier info from querystring
-
-            Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.please_wait));
-
-            LOG.debug("OAuth user has returned!");
-            String oAuthVerifier = myURI.getQueryParameter("oauth_verifier");
-
-            new Thread(new OsmAuthorizationEndWorkflow(oAuthVerifier)).start();
-
-        }
-
         setPreferencesState();
-
     }
 
     @Override
@@ -175,26 +172,91 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
 
         if(preference.getKey().equalsIgnoreCase("osm_resetauth")){
             if (manager.isOsmAuthorized()) {
-                preferenceHelper.setOSMAccessToken("");
-                preferenceHelper.setOSMAccessTokenSecret("");
-                preferenceHelper.setOSMRequestToken("");
-                preferenceHelper.setOSMRequestTokenSecret("");
-
+                authState = new AuthState();
+                saveOpenStreetMapAuthState();
                 setPreferencesState();
 
             } else {
 
+                authorizationService = OpenStreetMapManager.getAuthorizationService(getActivity());
 
-                //User clicks. Set the consumer and provider up.
-                consumer = manager.getOSMAuthConsumer();
-                provider = manager.getOSMAuthProvider();
-                new Thread(new OsmAuthorizationBeginWorkflow()).start();
+                SecureRandom sr = new SecureRandom();
+                byte[] ba = new byte[64];
+                sr.nextBytes(ba);
+                String codeVerifier = android.util.Base64.encodeToString(ba, Base64.URL_SAFE | Base64.NO_PADDING | Base64.NO_WRAP);
+
+                try {
+                    MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                    byte[] hash = digest.digest(codeVerifier.getBytes());
+                    String codeChallenge = android.util.Base64.encodeToString(hash, Base64.URL_SAFE | Base64.NO_PADDING | Base64.NO_WRAP);
+
+                    AuthorizationRequest.Builder requestBuilder = new AuthorizationRequest.Builder(
+                            OpenStreetMapManager.getAuthorizationServiceConfiguration(),
+                            OpenStreetMapManager.getOpenStreetMapClientID(),
+                            ResponseTypeValues.CODE,
+                            Uri.parse(OpenStreetMapManager.getOpenStreetMapRedirect())
+                    ).setCodeVerifier(codeVerifier, codeChallenge, "S256");
+
+                    requestBuilder.setScopes(OpenStreetMapManager.getOpenStreetMapClientScopes());
+                    AuthorizationRequest authRequest = requestBuilder.build();
+                    Intent authIntent = authorizationService.getAuthorizationRequestIntent(authRequest);
+                    openStreetMapAuthenticationWorkflow.launch(new IntentSenderRequest.Builder(
+                            PendingIntent.getActivity(getActivity(), 53, authIntent, 0))
+                            .setFillInIntent(authIntent)
+                            .build());
+
+                } catch (Exception e) {
+                    LOG.error(e.getMessage(), e);
+                }
+
+
             }
             return true;
         }
 
 
         return true;
+    }
+
+    ActivityResultLauncher<IntentSenderRequest> openStreetMapAuthenticationWorkflow = registerForActivityResult(new ActivityResultContracts.StartIntentSenderForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result.getResultCode() == Activity.RESULT_OK) {
+                LOG.debug(String.valueOf(result.getData()));
+                AuthorizationResponse authResponse = AuthorizationResponse.fromIntent(result.getData());
+                AuthorizationException authException = AuthorizationException.fromIntent(result.getData());
+                authState = new AuthState(authResponse, authException);
+                if (authException != null) {
+                    LOG.error(authException.toJsonString(), authException);
+                }
+                if (authResponse != null) {
+                    TokenRequest tokenRequest = authResponse.createTokenExchangeRequest();
+                    authorizationService.performTokenRequest(tokenRequest, new AuthorizationService.TokenResponseCallback() {
+                        @Override
+                        public void onTokenRequestCompleted(@Nullable TokenResponse response, @Nullable AuthorizationException ex) {
+                            if (ex != null) {
+                                authState = new AuthState();
+                                LOG.error(ex.toJsonString(), ex);
+                            } else {
+                                if (response != null) {
+                                    authState.update(response, ex);
+
+                                }
+                            }
+
+                            saveOpenStreetMapAuthState();
+                            setPreferencesState();
+                        }
+                    });
+                }
+
+            }
+
+        }
+    });
+
+    void saveOpenStreetMapAuthState() {
+        PreferenceHelper.getInstance().setOSMAuthState(authState.jsonSerializeString());
     }
 
     @Override
@@ -227,91 +289,4 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
         return false;
     }
 
-    private class OsmAuthorizationEndWorkflow implements Runnable {
-
-        String oAuthVerifier;
-
-        OsmAuthorizationEndWorkflow(String oAuthVerifier) {
-            this.oAuthVerifier = oAuthVerifier;
-        }
-
-        @Override
-        public void run() {
-            try {
-                if (provider == null) {
-                    provider = OpenStreetMapManager.getOSMAuthProvider();
-                }
-
-                if (consumer == null) {
-                    //In case consumer is null, re-initialize from stored values.
-                    consumer = OpenStreetMapManager.getOSMAuthConsumer();
-                }
-
-
-                //Ask OpenStreetMap for the access token. This is the main event.
-                provider.retrieveAccessToken(consumer, oAuthVerifier);
-
-                String osmAccessToken = consumer.getToken();
-                String osmAccessTokenSecret = consumer.getTokenSecret();
-
-                //Save for use later.
-                preferenceHelper.setOSMAccessToken(osmAccessToken);
-                preferenceHelper.setOSMAccessTokenSecret(osmAccessTokenSecret);
-
-                osmHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Dialogs.hideProgress();
-                        setPreferencesState();
-                    }
-                });
-
-
-            } catch (final Exception e) {
-                LOG.error("OSM authorization error", e);
-                osmHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Dialogs.hideProgress();
-                        if(getActivity()!=null && isAdded()) {
-                            Dialogs.showError(getString(R.string.sorry), getString(R.string.osm_auth_error), e.getMessage(), e, (FragmentActivity) getActivity());
-                        }
-                    }
-                });
-            }
-        }
-    }
-
-    private class OsmAuthorizationBeginWorkflow implements Runnable {
-
-        @Override
-        public void run() {
-            try {
-                String authUrl;
-                //Get the request token and request token secret
-                authUrl = provider.retrieveRequestToken(consumer, OAuth.OUT_OF_BAND);
-
-                //Save for later
-                preferenceHelper.setOSMRequestToken(consumer.getToken());
-                preferenceHelper.setOSMRequestTokenSecret(consumer.getTokenSecret());
-
-
-                //Open browser, send user to OpenStreetMap.org
-                Uri uri = Uri.parse(authUrl);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            } catch (final Exception e) {
-                LOG.error("onClick", e);
-                osmHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(getActivity()!=null && isAdded()){
-                            Dialogs.showError(getString(R.string.sorry), getString(R.string.osm_auth_error), e.getMessage(), e,
-                                    (FragmentActivity) getActivity());
-                        }
-                    }
-                });
-            }
-        }
-    }
 }

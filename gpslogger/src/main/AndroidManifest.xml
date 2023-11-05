@@ -80,7 +80,12 @@
                 <data android:scheme="com.mendhak.gpslogger"
                     android:path="/oauth2googledrive"/>
             </intent-filter>
-
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="oauth2openstreetmap" android:scheme="com.mendhak.gpslogger" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -90,13 +95,7 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
-            <intent-filter>
-                <action android:name="com.mendhak.gpslogger.MAIN_PREFS" />
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host="authorize" android:scheme="gpslogger" />
-            </intent-filter>
+
         </activity>
 
         <activity
