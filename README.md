@@ -232,6 +232,7 @@ Finally tag the commit,
 
 ```bash
 git tag -s v128
+git push origin master --tags
 ```
 
 ## Working notes for F-Droid
