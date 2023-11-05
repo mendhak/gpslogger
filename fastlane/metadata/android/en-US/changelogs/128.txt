@@ -1,0 +1,5 @@
+* OpenStreetMap breaking change - authentication switching to OAuth2, you will need to reauthorize OpenStreetMap.
+* Default to auto send when logging stops
+* Bugfix - Check passive locations to ensure their time is greater than the previous location's time
+* Bugfix for monochrome icon on Nothing OS theme.
+
