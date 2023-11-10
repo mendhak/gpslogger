@@ -1,0 +1,5 @@
+* OpenStreetMap változása – hitelesítés átváltása OAuth2-re, újra kell engedélyeznie az OpenStreetMapet
+* Alapértelmezett automatikus küldés, amikor a naplózás leáll
+* Hibajavítás - Passzív helyek ellenőrzése, hogy megbizonyosodjon arról, hogy azok ideje meghaladja az előző hely idejét
+* Hibajavítás a monokróm ikonhoz a Nothing OS témában
+* Bizonyos karakterek letiltása a fájlnévben, mint például csillagok, perjelek
