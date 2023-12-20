@@ -170,4 +170,7 @@
     <string name="customurl_http_basicauthentication">Обична Автентикација</string>
     <string name="customurl_http_headers">HTTP заглавија</string>
     <string name="app_theme_dark">Темна тема</string>
+    <string name="osm_tags">Ознаки</string>
+    <string name="osm_description">Опис</string>
+    <string name="osm_visibility">Видливост</string>
 </resources>
