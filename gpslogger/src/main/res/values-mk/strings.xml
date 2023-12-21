@@ -173,4 +173,15 @@
     <string name="osm_tags">Ознаки</string>
     <string name="osm_description">Опис</string>
     <string name="osm_visibility">Видливост</string>
+    <string name="pref_logging_summary">Тип на фајл, создавање и именување</string>
+    <string name="emailprovider_google">Google Пошта</string>
+    <string name="view_simple">Прост вид</string>
+    <string name="emailprovider_manual">Водич</string>
+    <string name="view_detailed">Детален Вид</string>
+    <string name="gpslogger_folder_title">Сними во директориум</string>
+    <string name="menu_faq">Помош и ЧПП</string>
+    <string name="dropbox_setup_title">Dropbox</string>
+    <string name="autoftp_directory">Директориум</string>
+    <string name="osm_pick_file">Изберете фајл</string>
+    <string name="pref_general_title">Генерални Опции</string>
 </resources>
