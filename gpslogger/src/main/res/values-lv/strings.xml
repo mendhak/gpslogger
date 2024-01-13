@@ -91,4 +91,6 @@
     <string name="view_simple">Vienkāršais skats</string>
     <string name="view_detailed">Detalizētais skats</string>
     <string name="view_log">Žurnāla skats</string>
+    <string name="ok">Labi</string>
+    <string name="hide">Paslēpt</string>
 </resources>
