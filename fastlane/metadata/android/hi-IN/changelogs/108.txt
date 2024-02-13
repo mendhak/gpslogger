@@ -1,0 +1,2 @@
+F-Droid के लिए रीपैकेज GPSLogger।
+Google Drive, गतिविधि पहचान, Play सेवाएँ निर्भरताएँ हटाएँ।
