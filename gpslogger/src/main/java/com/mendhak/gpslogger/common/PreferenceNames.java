@@ -28,6 +28,7 @@ public  class PreferenceNames {
     public static final String LOGGING_RETRY_TIME = "retry_time";
     public static final String ABSOLUTE_TIMEOUT = "absolute_timeout";
     public static final String START_LOGGING_ON_APP_LAUNCH = "startonapplaunch";
+    public static final String STOP_LOGGING_ON_APP_LAUNCH = "stoponapplaunch";
     public static final String START_LOGGING_ON_BOOTUP = "startonbootup";
     public static final String LOG_TO_KML = "log_kml";
     public static final String LOG_TO_GPX = "log_gpx";

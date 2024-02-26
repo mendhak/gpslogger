@@ -174,6 +174,11 @@ public class GpsMainActivity extends AppCompatActivity
                 LOG.debug("Start logging on app launch");
                 EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(true));
             }
+
+            if(preferenceHelper.shouldStopLoggingOnAppLaunch()){
+                LOG.debug("Stop logging on app launch");
+                EventBus.getDefault().postSticky(new CommandEvents.RequestStartStop(false));
+            }
         }
     }
 
