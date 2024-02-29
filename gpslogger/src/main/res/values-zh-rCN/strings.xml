@@ -369,7 +369,7 @@
     <string name="storage_chooser_select_folder">选择</string>
     <string name="storage_chooser_overview_heading">选择存储</string>
     <string name="storage_chooser_new_folder_label">创建文件夹</string>
-    <string name="sftp_setup_title">STFP</string>
+    <string name="sftp_setup_title">SFTP</string>
     <string name="file_logging_log_time_with_offset_summary">若允许，写入带有时区偏移的 ISO8601 时间，不使用UTC。</string>
     <string name="app_theme_light">亮</string>
     <string name="app_theme_dark">暗</string>
