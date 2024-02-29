@@ -448,6 +448,14 @@ public class PreferenceHelper {
     }
 
     /**
+     * Whether to stop logging on application launch
+     */
+    @ProfilePreference(name= PreferenceNames.STOP_LOGGING_ON_APP_LAUNCH)
+    public boolean shouldStopLoggingOnAppLaunch() {
+        return prefs.getBoolean(PreferenceNames.STOP_LOGGING_ON_APP_LAUNCH, false);
+    }
+
+    /**
      * Whether to start logging when phone is booted up
      */
     @ProfilePreference(name= PreferenceNames.START_LOGGING_ON_BOOTUP)
