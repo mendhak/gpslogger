@@ -851,7 +851,9 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
-        if(!isPassiveLocation && !isFromValidListener(loc)){
+        // Check that it's a user selected valid listener, even if it's a passive location.
+        // In other words, if user wants satellite only, then don't log passive network locations.
+        if(!isFromSelectedListener(loc)){
             LOG.debug("Received location, but it's not from a selected listener. Ignoring.");
             return;
         }
@@ -967,14 +969,15 @@ public class GpsLoggingService extends Service  {
         return logLine.toString();
     }
 
-    private boolean isFromValidListener(Location loc) {
+    private boolean isFromSelectedListener(Location loc) {
 
         if(!preferenceHelper.shouldLogSatelliteLocations() && !preferenceHelper.shouldLogNetworkLocations()){
-            return true;
+            // Special case - if both satellite and network are deselected, but passive is selected, then accept all passive types!
+            return preferenceHelper.shouldLogPassiveLocations();
         }
 
         if(!preferenceHelper.shouldLogNetworkLocations()){
-            return loc.getProvider().equalsIgnoreCase(LocationManager.GPS_PROVIDER);
+            return !loc.getProvider().equalsIgnoreCase(LocationManager.NETWORK_PROVIDER);
         }
 
         if(!preferenceHelper.shouldLogSatelliteLocations()){
