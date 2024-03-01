@@ -76,8 +76,8 @@
     <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="retry_get_best_possible_accuracy"
-        android:summary="Keep trying for the accuracy duration, then select the point with the best accuracy"
-        android:title="Choose best accuracy in duration"
+        android:summary="@string/retry_get_best_possible_accuracy_summary"
+        android:title="@string/retry_get_best_possible_accuracy_title"
         app:iconSpaceReserved="false" />
 
     <Preference

@@ -56,9 +56,6 @@ public class PerformanceSettingsFragment
         findPreference(PreferenceNames.LOGGING_RETRY_TIME).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.LOGGING_RETRY_TIME).setSummary(String.valueOf(preferenceHelper.getLoggingRetryPeriod()) + getString(R.string.seconds));
 
-        SwitchPreferenceCompat shouldGetBestPossibleAccuracy = findPreference(PreferenceNames.LOGGING_RETRY_SHOULD_GET_BEST_POSSIBLE_ACCURACY);
-        shouldGetBestPossibleAccuracy.setTitle("      " + shouldGetBestPossibleAccuracy.getTitle());
-
         findPreference(PreferenceNames.ABSOLUTE_TIMEOUT).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.ABSOLUTE_TIMEOUT).setSummary(String.valueOf(preferenceHelper.getAbsoluteTimeoutForAcquiringPosition()) + getString(R.string.seconds));
 
