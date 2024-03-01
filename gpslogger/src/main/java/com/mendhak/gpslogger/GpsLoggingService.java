@@ -903,6 +903,40 @@ public class GpsLoggingService extends Service  {
                 //Success, reset timestamp for next time.
                 session.setFirstRetryTimeStamp(0);
             }
+
+//            else if(preferenceHelper.shouldGetBestPossibleAccuracy()) {
+            else if(true) {
+                //If the user wants the best possible accuracy, store the point, only if it's the best so far.
+                // Then retry until the time limit is reached.
+
+                if(session.getFirstRetryTimeStamp() == 0){
+                    //It's the first loop so reset timestamp and temporary location
+                    session.setTemporaryLocationForBestAccuracy(null);
+                    session.setFirstRetryTimeStamp(System.currentTimeMillis());
+                }
+
+                if(session.getTemporaryLocationForBestAccuracy() == null || loc.getAccuracy() < session.getTemporaryLocationForBestAccuracy().getAccuracy()){
+                    LOG.info("New point with accuracy of " + String.valueOf(loc.getAccuracy()) + " m." );
+                    session.setTemporaryLocationForBestAccuracy(loc);
+                }
+
+                if (currentTimeStamp - session.getFirstRetryTimeStamp() <= preferenceHelper.getLoggingRetryPeriod() * 1000) {
+                    // return and keep trying
+                    return;
+                }
+
+                if (currentTimeStamp - session.getFirstRetryTimeStamp() > preferenceHelper.getLoggingRetryPeriod() * 1000) {
+                    // We've reached the end of the retry period, use the best point we've got so far.
+                    LOG.debug("Retry timeout reached, using best point so far with accuracy of " + String.valueOf(session.getTemporaryLocationForBestAccuracy().getAccuracy()) + " m.");
+                    loc = session.getTemporaryLocationForBestAccuracy();
+
+                    //reset for next time
+                    session.setTemporaryLocationForBestAccuracy(null);
+                    session.setFirstRetryTimeStamp(0);
+
+                }
+
+            }
         }
 
         //Don't do anything until the user-defined distance has been traversed
