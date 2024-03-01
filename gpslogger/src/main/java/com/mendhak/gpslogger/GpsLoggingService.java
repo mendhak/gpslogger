@@ -904,8 +904,7 @@ public class GpsLoggingService extends Service  {
                 session.setFirstRetryTimeStamp(0);
             }
 
-//            else if(preferenceHelper.shouldGetBestPossibleAccuracy()) {
-            else if(true) {
+            else if(preferenceHelper.shouldGetBestPossibleAccuracy()) {
                 //If the user wants the best possible accuracy, store the point, only if it's the best so far.
                 // Then retry until the time limit is reached.
 
@@ -916,7 +915,7 @@ public class GpsLoggingService extends Service  {
                 }
 
                 if(session.getTemporaryLocationForBestAccuracy() == null || loc.getAccuracy() < session.getTemporaryLocationForBestAccuracy().getAccuracy()){
-                    LOG.info("New point with accuracy of " + String.valueOf(loc.getAccuracy()) + " m." );
+                    LOG.debug("New point with accuracy of " + String.valueOf(loc.getAccuracy()) + " m." );
                     session.setTemporaryLocationForBestAccuracy(loc);
                 }
 

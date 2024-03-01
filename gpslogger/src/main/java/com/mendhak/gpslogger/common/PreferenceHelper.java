@@ -422,6 +422,15 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.LOGGING_RETRY_TIME, String.valueOf(retryInterval)).apply();
     }
 
+    @ProfilePreference(name=PreferenceNames.LOGGING_RETRY_SHOULD_GET_BEST_POSSIBLE_ACCURACY)
+    public boolean shouldGetBestPossibleAccuracy() {
+        return prefs.getBoolean(PreferenceNames.LOGGING_RETRY_SHOULD_GET_BEST_POSSIBLE_ACCURACY, false);
+    }
+
+    public void setShouldGetBestPossibleAccuracy(boolean value){
+        prefs.edit().putBoolean(PreferenceNames.LOGGING_RETRY_SHOULD_GET_BEST_POSSIBLE_ACCURACY, value).apply();
+    }
+
     /**
      * How long to keep retrying for an accurate point before giving up
      */

@@ -26,6 +26,8 @@ public  class PreferenceNames {
     public static final String MINIMUM_ACCURACY = "accuracy_before_logging";
     public static final String KEEP_GPS_ON_BETWEEN_FIXES = "keep_fix";
     public static final String LOGGING_RETRY_TIME = "retry_time";
+
+    public static final String LOGGING_RETRY_SHOULD_GET_BEST_POSSIBLE_ACCURACY = "retry_get_best_possible_accuracy";
     public static final String ABSOLUTE_TIMEOUT = "absolute_timeout";
     public static final String START_LOGGING_ON_APP_LAUNCH = "startonapplaunch";
     public static final String STOP_LOGGING_ON_APP_LAUNCH = "stoponapplaunch";
