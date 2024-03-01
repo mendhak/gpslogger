@@ -903,10 +903,11 @@ public class GpsLoggingService extends Service  {
                 //Success, reset timestamp for next time.
                 session.setFirstRetryTimeStamp(0);
             }
-
-            else if(preferenceHelper.shouldGetBestPossibleAccuracy()) {
-                //If the user wants the best possible accuracy, store the point, only if it's the best so far.
-                // Then retry until the time limit is reached.
+            //If the user wants the best possible accuracy, store the point, only if it's the best so far.
+            // Then retry until the time limit is reached.
+            // Exception - if it's a passive location, or it's an annotation, or single point mode.
+            // I don't think we need to pick the best point in the case of passive locations (not sure).
+            else if(preferenceHelper.shouldGetBestPossibleAccuracy() && !isPassiveLocation && !session.hasDescription() && !session.isSinglePointMode()) {
 
                 if(session.getFirstRetryTimeStamp() == 0){
                     //It's the first loop so reset timestamp and temporary location
