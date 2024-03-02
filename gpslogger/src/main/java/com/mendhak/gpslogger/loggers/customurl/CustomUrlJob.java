@@ -71,7 +71,8 @@ public class CustomUrlJob extends Job {
     public void onRun() throws Throwable {
 
         boolean success = true;
-        Response errorResponse = null;
+        String responseError = null;
+        String responseThrowableMessage = null;
 
         if(urlRequests != null && urlRequests.size() > 0){
 
@@ -100,7 +101,8 @@ public class CustomUrlJob extends Job {
                 }
                 else {
                     LOG.error("HTTP request complete with unexpected response code " + response );
-                    errorResponse = response;
+                    responseError = "Unexpected code " + response;
+                    responseThrowableMessage = response.body().string();
                     success = false;
                 }
 
@@ -116,7 +118,7 @@ public class CustomUrlJob extends Job {
             EventBus.getDefault().post(callbackEvent.succeeded());
         }
         else {
-            EventBus.getDefault().post(callbackEvent.failed("Unexpected code " + errorResponse,new Throwable(errorResponse.body().string())));
+            EventBus.getDefault().post(callbackEvent.failed("Unexpected code " + responseError, new Throwable(responseThrowableMessage)));
         }
     }
 
