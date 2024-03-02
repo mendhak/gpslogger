@@ -33,6 +33,7 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 
 import org.slf4j.Logger;
 
+import java.io.File;
 import java.util.Map;
 
 import javax.net.ssl.X509TrustManager;
@@ -49,13 +50,23 @@ public class CustomUrlJob extends Job {
     private static final Logger LOG = Logs.of(CustomUrlJob.class);
 
     private UploadEvents.BaseUploadEvent callbackEvent;
-    private CustomUrlRequest urlRequest;
+
+    private File csvFile;
+    private CustomUrlRequest[] urlRequests = new CustomUrlRequest[1];
 
     public CustomUrlJob(CustomUrlRequest urlRequest, UploadEvents.BaseUploadEvent callbackEvent) {
         super(new Params(1).requireNetwork().persist());
 
         this.callbackEvent = callbackEvent;
-        this.urlRequest = urlRequest;
+        this.urlRequests[0] = urlRequest;
+    }
+
+    public CustomUrlJob(CustomUrlRequest[] urlRequests, File csvFile, UploadEvents.BaseUploadEvent callbackEvent) {
+        super(new Params(1).requireNetwork().persist());
+
+        this.callbackEvent = callbackEvent;
+        this.urlRequests = urlRequests;
+        this.csvFile = csvFile;
     }
 
 
@@ -66,35 +77,54 @@ public class CustomUrlJob extends Job {
     @Override
     public void onRun() throws Throwable {
 
-        LOG.info("HTTP Request - " + urlRequest.getLogURL());
+        boolean success = true;
+        Response errorResponse = null;
 
-        OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
-        okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()),
-                (X509TrustManager) Networks.getTrustManager(AppSettings.getInstance()));
-        Request.Builder requestBuilder = new Request.Builder().url(urlRequest.getLogURL());
+        if(urlRequests != null && urlRequests.length > 0){
 
-        for(Map.Entry<String,String> header : urlRequest.getHttpHeaders().entrySet()){
-            requestBuilder.addHeader(header.getKey(), header.getValue());
+            for (CustomUrlRequest urlRequest : urlRequests) {
+                LOG.info("HTTP Request - " + urlRequest.getLogURL());
+
+                OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
+                okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()),
+                        (X509TrustManager) Networks.getTrustManager(AppSettings.getInstance()));
+                Request.Builder requestBuilder = new Request.Builder().url(urlRequest.getLogURL());
+
+                for(Map.Entry<String,String> header : urlRequest.getHttpHeaders().entrySet()){
+                    requestBuilder.addHeader(header.getKey(), header.getValue());
+                }
+
+                if ( ! urlRequest.getHttpMethod().equalsIgnoreCase("GET")) {
+                    RequestBody body = RequestBody.create(null, urlRequest.getHttpBody());
+                    requestBuilder = requestBuilder.method(urlRequest.getHttpMethod(),body);
+                }
+
+                Request request = requestBuilder.build();
+                Response response = okBuilder.build().newCall(request).execute();
+
+                if (response.isSuccessful()) {
+                    LOG.debug("HTTP request complete with successful response code " + response);
+                }
+                else {
+                    LOG.error("HTTP request complete with unexpected response code " + response );
+                    errorResponse = response;
+                    success = false;
+                }
+
+                response.body().close();
+
+                if(!success){
+                    break;
+                }
+            }
         }
 
-        if ( ! urlRequest.getHttpMethod().equalsIgnoreCase("GET")) {
-            RequestBody body = RequestBody.create(null, urlRequest.getHttpBody());
-            requestBuilder = requestBuilder.method(urlRequest.getHttpMethod(),body);
-        }
-
-        Request request = requestBuilder.build();
-        Response response = okBuilder.build().newCall(request).execute();
-
-        if (response.isSuccessful()) {
-            LOG.debug("HTTP request complete with successful response code " + response);
+        if(success){
             EventBus.getDefault().post(callbackEvent.succeeded());
         }
         else {
-            LOG.error("HTTP request complete with unexpected response code " + response );
-            EventBus.getDefault().post(callbackEvent.failed("Unexpected code " + response,new Throwable(response.body().string())));
+            EventBus.getDefault().post(callbackEvent.failed("Unexpected code " + errorResponse,new Throwable(errorResponse.body().string())));
         }
-
-        response.body().close();
     }
 
     @Override
