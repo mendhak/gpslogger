@@ -40,7 +40,7 @@ services:
 
   https:
     container_name: gpslogger-https-server
-    image: mendhak/http-https-echo:18
+    image: mendhak/http-https-echo:31
     ports:
       - "0.0.0.0:8081:8080"
       - "0.0.0.0:8443:8443"
