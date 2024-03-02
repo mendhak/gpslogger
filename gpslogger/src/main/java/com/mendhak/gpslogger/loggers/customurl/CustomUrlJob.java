@@ -34,6 +34,7 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import org.slf4j.Logger;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.net.ssl.X509TrustManager;
@@ -52,23 +53,15 @@ public class CustomUrlJob extends Job {
     private UploadEvents.BaseUploadEvent callbackEvent;
 
     private File csvFile;
-    private CustomUrlRequest[] urlRequests = new CustomUrlRequest[1];
+    private ArrayList<CustomUrlRequest> urlRequests;
 
-    public CustomUrlJob(CustomUrlRequest urlRequest, UploadEvents.BaseUploadEvent callbackEvent) {
-        super(new Params(1).requireNetwork().persist());
-
-        this.callbackEvent = callbackEvent;
-        this.urlRequests[0] = urlRequest;
-    }
-
-    public CustomUrlJob(CustomUrlRequest[] urlRequests, File csvFile, UploadEvents.BaseUploadEvent callbackEvent) {
+    public CustomUrlJob(ArrayList<CustomUrlRequest> urlRequests, File csvFile, UploadEvents.BaseUploadEvent callbackEvent) {
         super(new Params(1).requireNetwork().persist());
 
         this.callbackEvent = callbackEvent;
         this.urlRequests = urlRequests;
         this.csvFile = csvFile;
     }
-
 
     @Override
     public void onAdded() {
@@ -80,7 +73,7 @@ public class CustomUrlJob extends Job {
         boolean success = true;
         Response errorResponse = null;
 
-        if(urlRequests != null && urlRequests.length > 0){
+        if(urlRequests != null && urlRequests.size() > 0){
 
             for (CustomUrlRequest urlRequest : urlRequests) {
                 LOG.info("HTTP Request - " + urlRequest.getLogURL());

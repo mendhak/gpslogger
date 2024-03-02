@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -170,7 +171,7 @@ public class CustomUrlManager extends FileSender {
             JobManager jobManager = AppSettings.getJobManager();
             jobManager.addJobInBackground(
                     new CustomUrlJob(
-                            requests.toArray(new CustomUrlRequest[requests.size()]),
+                            requests,
                             csvFile,
                             new UploadEvents.CustomUrl()));
         }
@@ -179,8 +180,10 @@ public class CustomUrlManager extends FileSender {
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password){
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(url, method,
-                body, headers, username, password), new UploadEvents.CustomUrl()));
+        CustomUrlRequest request = new CustomUrlRequest(url, method,
+                body, headers, username, password);
+        ArrayList<CustomUrlRequest> requests = new ArrayList<>(Arrays.asList(request));
+        jobManager.addJobInBackground(new CustomUrlJob(requests, null, new UploadEvents.CustomUrl()));
     }
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
