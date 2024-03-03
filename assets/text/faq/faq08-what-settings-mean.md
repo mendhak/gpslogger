@@ -2,6 +2,12 @@
 
 ![7b](images/7b.png)
 
+**Log GPS/GNSS locations** - Logs points from the satellite location listener. 
+
+**Log network locations** - Logs points from the cell tower location listener. 
+
+**Log passive locations** - Logs points from other apps, is subject to some restrictions. It will log GPS/network points if those were selected above. It may bypass other filters such as time, distance, and retry duration.
+
 **Logging interval** - How long to wait after a point has been logged to try logging again.
 
 **Distance filter** - When a point becomes available, the app will check to ensure that this much distance exists between the previous and current points. If it isn't this distance, the point is discarded.
