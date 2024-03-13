@@ -1,0 +1,5 @@
+* Perubahan di OpenStreetMap - otentikasi berubah ke OAuth2, kamu perlu untuk otorisasi ulang OpenStreetMap
+* Bawaan untuk kirim otomatis ketika pencatatan berhenti
+* Perbaikan kutu - Cek lokasi pasif untuk memastikan waktu mereka lebih besar dibanding waktu lokasi sebelumnya
+* Perbaikan kuru untuk ikon monokrom di tema Nothing OS
+* Tidak mengizinkan karakter tertentu di nama berkas seperti tanda bintang, garis miring
