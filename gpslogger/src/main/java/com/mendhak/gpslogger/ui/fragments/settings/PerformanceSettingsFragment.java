@@ -24,7 +24,6 @@ import android.text.InputType;
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SwitchPreferenceCompat;
 
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
