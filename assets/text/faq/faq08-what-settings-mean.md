@@ -16,7 +16,7 @@
 
 **Duration to match accuracy** - When searching for a point, the app can continue searching for this many seconds until it finds a point that meets the accuracy and distance filter criteria above.
 
-**Choose best accuracy in duration** - After matching a point with the desired accuracy, the app will continue searching for this many seconds to find a point with even better accuracy.  This is useful if you are in a location where GPS accuracy is poor, and don't need the location point immediately.
+**Choose best accuracy in duration** - After matching a point with the desired accuracy, the app will continue searching for the 'duration to match accuracy' and pick the point with the best accuracy. This is useful if you are in a location where GPS accuracy is poor, and don't need the location point immediately.
 
 **Absolute timeout** - When searching for a point and trying over and over, the app will give up when this timeout is reached.  This is useful for when you're inside buildings, GPS tends to keep searching and finding nothing.  
 
