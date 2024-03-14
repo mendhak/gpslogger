@@ -851,7 +851,9 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
-        if(!isPassiveLocation && !isFromValidListener(loc)){
+        // Check that it's a user selected valid listener, even if it's a passive location.
+        // In other words, if user wants satellite only, then don't log passive network locations.
+        if(!isFromSelectedListener(loc)){
             LOG.debug("Received location, but it's not from a selected listener. Ignoring.");
             return;
         }
@@ -900,6 +902,40 @@ public class GpsLoggingService extends Service  {
 
                 //Success, reset timestamp for next time.
                 session.setFirstRetryTimeStamp(0);
+            }
+            //If the user wants the best possible accuracy, store the point, only if it's the best so far.
+            // Then retry until the time limit is reached.
+            // Exception - if it's a passive location, or it's an annotation, or single point mode.
+            // I don't think we need to pick the best point in the case of passive locations (not sure).
+            else if(preferenceHelper.shouldGetBestPossibleAccuracy() && !isPassiveLocation && !session.hasDescription() && !session.isSinglePointMode()) {
+
+                if(session.getFirstRetryTimeStamp() == 0){
+                    //It's the first loop so reset timestamp and temporary location
+                    session.setTemporaryLocationForBestAccuracy(null);
+                    session.setFirstRetryTimeStamp(System.currentTimeMillis());
+                }
+
+                if(session.getTemporaryLocationForBestAccuracy() == null || loc.getAccuracy() < session.getTemporaryLocationForBestAccuracy().getAccuracy()){
+                    LOG.debug("New point with accuracy of " + String.valueOf(loc.getAccuracy()) + " m." );
+                    session.setTemporaryLocationForBestAccuracy(loc);
+                }
+
+                if (currentTimeStamp - session.getFirstRetryTimeStamp() <= preferenceHelper.getLoggingRetryPeriod() * 1000) {
+                    // return and keep trying
+                    return;
+                }
+
+                if (currentTimeStamp - session.getFirstRetryTimeStamp() > preferenceHelper.getLoggingRetryPeriod() * 1000) {
+                    // We've reached the end of the retry period, use the best point we've got so far.
+                    LOG.debug("Retry timeout reached, using best point so far with accuracy of " + String.valueOf(session.getTemporaryLocationForBestAccuracy().getAccuracy()) + " m.");
+                    loc = session.getTemporaryLocationForBestAccuracy();
+
+                    //reset for next time
+                    session.setTemporaryLocationForBestAccuracy(null);
+                    session.setFirstRetryTimeStamp(0);
+
+                }
+
             }
         }
 
@@ -967,14 +1003,15 @@ public class GpsLoggingService extends Service  {
         return logLine.toString();
     }
 
-    private boolean isFromValidListener(Location loc) {
+    private boolean isFromSelectedListener(Location loc) {
 
         if(!preferenceHelper.shouldLogSatelliteLocations() && !preferenceHelper.shouldLogNetworkLocations()){
-            return true;
+            // Special case - if both satellite and network are deselected, but passive is selected, then accept all passive types!
+            return preferenceHelper.shouldLogPassiveLocations();
         }
 
         if(!preferenceHelper.shouldLogNetworkLocations()){
-            return loc.getProvider().equalsIgnoreCase(LocationManager.GPS_PROVIDER);
+            return !loc.getProvider().equalsIgnoreCase(LocationManager.NETWORK_PROVIDER);
         }
 
         if(!preferenceHelper.shouldLogSatelliteLocations()){

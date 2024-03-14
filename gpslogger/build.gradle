@@ -44,8 +44,8 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
 
-        versionCode 129
-        versionName "129"
+        versionCode 130
+        versionName "130-rc2"
 
         manifestPlaceholders = [
                 appAuthRedirectScheme: 'com.mendhak.gpslogger'

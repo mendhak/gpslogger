@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -45,7 +46,7 @@ public class CustomUrlManager extends FileSender {
                 foundFileToSend = true;
                 List<SerializableLocation> locations = getLocationsFromCSV(f);
                 LOG.debug(locations.size() + " points were read from " + f.getName());
-                sendLocations(locations.toArray(new SerializableLocation[locations.size()]));
+                sendLocations(locations.toArray(new SerializableLocation[locations.size()]), f);
             }
         }
 
@@ -144,37 +145,45 @@ public class CustomUrlManager extends FileSender {
         return recordValue.replace(",",".");
     }
 
-    private void sendLocations(SerializableLocation[] locations){
+    private void sendLocations(SerializableLocation[] locations, File csvFile){
         if(locations.length > 0){
 
+            ArrayList<CustomUrlRequest> requests = new ArrayList<>();
             String customLoggingUrl = preferenceHelper.getCustomLoggingUrl();
             String httpBody = preferenceHelper.getCustomLoggingHTTPBody();
             String httpHeaders = preferenceHelper.getCustomLoggingHTTPHeaders();
             String httpMethod = preferenceHelper.getCustomLoggingHTTPMethod();
 
             for(SerializableLocation loc: locations){
-
                 try {
                     String finalUrl = getFormattedTextblock(customLoggingUrl, loc);
                     String finalBody = getFormattedTextblock(httpBody, loc);
                     String finalHeaders = getFormattedTextblock(httpHeaders, loc);
 
-                    sendByHttp(finalUrl, httpMethod, finalBody, finalHeaders,
-                            preferenceHelper.getCustomLoggingBasicAuthUsername(),
-                            preferenceHelper.getCustomLoggingBasicAuthPassword());
-
+                    requests.add(new CustomUrlRequest(finalUrl, httpMethod,
+                            finalBody, finalHeaders, preferenceHelper.getCustomLoggingBasicAuthUsername(),
+                            preferenceHelper.getCustomLoggingBasicAuthPassword()));
                 } catch (Exception e) {
                     LOG.error("Could not build the Custom URL to send", e);
                 }
             }
+
+            JobManager jobManager = AppSettings.getJobManager();
+            jobManager.addJobInBackground(
+                    new CustomUrlJob(
+                            requests,
+                            csvFile,
+                            new UploadEvents.CustomUrl()));
         }
 
     }
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password){
         JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new CustomUrlJob(new CustomUrlRequest(url, method,
-                body, headers, username, password), new UploadEvents.CustomUrl()));
+        CustomUrlRequest request = new CustomUrlRequest(url, method,
+                body, headers, username, password);
+        ArrayList<CustomUrlRequest> requests = new ArrayList<>(Arrays.asList(request));
+        jobManager.addJobInBackground(new CustomUrlJob(requests, null, new UploadEvents.CustomUrl()));
     }
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {

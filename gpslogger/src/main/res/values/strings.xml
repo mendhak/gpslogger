@@ -162,9 +162,11 @@
     <string name="retry_time_title">Duration to match accuracy</string>
     <string name="retry_time_summary">After acquiring an initial fix, keep trying for this long to get an accurate point to match the accuracy filter setting.</string>
 
+    <string name="retry_get_best_possible_accuracy_title">Choose best accuracy in duration</string>
+    <string name="retry_get_best_possible_accuracy_summary">Instead of logging the first accurate point, keep trying for the accuracy duration and select the point with the best accuracy. Takes longer, but increases chances for more accurate points.</string>
+
     <string name="display_imperial_title">Display Imperial units</string>
     <string name="display_imperial_summary">Display feet, miles and pints, none of that newfangled metric stuff. (Preferences must still be in metrics)</string>
-
 
     <string name="enabledisablegps_title">Enable/Disable GPS</string>
     <string name="enabledisablegps_summary">Go to the phone settings to enable or disable the providers.</string>

@@ -1,0 +1,4 @@
+* New accuracy option - run for the duration of retry interval, and chooses the most accurate point.
+* Passive listener will now match other selected listeners (GNSS/Network). If neither are selected, all points are accepted.
+* Faster Custom URL uploads for auto-send.
+* New stoponapplaunch property, only available via .properties file

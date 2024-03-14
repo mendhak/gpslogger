@@ -34,6 +34,8 @@ public class Session {
     private Location previousLocationInfo;
     private Location currentLocationInfo;
 
+    private Location temporaryLocationForBestAccuracy;
+
     private Session() {
 
     }
@@ -375,6 +377,19 @@ public class Session {
     }
 
 
+    /**
+     * When retrying to get best accuracy, this can store a location object representing the best so far.
+     * @param loc
+     */
+    public void setTemporaryLocationForBestAccuracy(Location loc) {
+        temporaryLocationForBestAccuracy = loc;
+    }
 
-
+    /**
+     * Returns the temporary location, stored for best accuracy
+     * @return
+     */
+    public Location getTemporaryLocationForBestAccuracy() {
+        return temporaryLocationForBestAccuracy;
+    }
 }

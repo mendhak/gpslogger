@@ -4,7 +4,7 @@ export SERVERIP=`hostname -I | cut -f1 -d' '`
 echo $SERVERIP
 
 make-ssl-cert generate-default-snakeoil
-docker-compose up -d
+docker compose up -d
 docker ps -a
 
 docker exec gpslogger-ftpd-server bash -c 'echo -e "Passw0rd\nPassw0rd" > /tmp/bobp.txt'
