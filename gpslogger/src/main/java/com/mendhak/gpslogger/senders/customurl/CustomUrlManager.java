@@ -4,6 +4,7 @@ import android.location.Location;
 import android.os.Bundle;
 
 import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
@@ -204,11 +205,11 @@ public class CustomUrlManager extends FileSender {
                 .putStringArray("urlRequests", new String[]{serializedRequest})
                 .putString("csvfile", null)
                 .build();
-        WorkRequest workRequest = new OneTimeWorkRequest
+        OneTimeWorkRequest workRequest = new OneTimeWorkRequest
                 .Builder(CustomUrlWorker.class)
                 .setInputData(data)
                 .build();
-        WorkManager.getInstance(AppSettings.getInstance()).enqueue(workRequest);
+        WorkManager.getInstance(AppSettings.getInstance()).enqueueUniqueWork(serializedRequest, ExistingWorkPolicy.REPLACE, workRequest);
     }
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
