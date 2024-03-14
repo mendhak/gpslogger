@@ -3,6 +3,11 @@ package com.mendhak.gpslogger.senders.customurl;
 import android.location.Location;
 import android.os.Bundle;
 
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
+
 import com.birbit.android.jobqueue.JobManager;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.BundleConstants;
@@ -15,6 +20,7 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.csv.CSVFileLogger;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
+import com.mendhak.gpslogger.loggers.customurl.CustomUrlWorker;
 import com.mendhak.gpslogger.senders.FileSender;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -179,11 +185,30 @@ public class CustomUrlManager extends FileSender {
     }
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password){
-        JobManager jobManager = AppSettings.getJobManager();
+//        JobManager jobManager = AppSettings.getJobManager();
+//        CustomUrlRequest request = new CustomUrlRequest(url, method,
+//                body, headers, username, password);
+//        ArrayList<CustomUrlRequest> requests = new ArrayList<>(Arrays.asList(request));
+//        jobManager.addJobInBackground(new CustomUrlJob(requests, null, new UploadEvents.CustomUrl()));
+
+
         CustomUrlRequest request = new CustomUrlRequest(url, method,
                 body, headers, username, password);
-        ArrayList<CustomUrlRequest> requests = new ArrayList<>(Arrays.asList(request));
-        jobManager.addJobInBackground(new CustomUrlJob(requests, null, new UploadEvents.CustomUrl()));
+//        ArrayList<CustomUrlRequest> requests = new ArrayList<>(Arrays.asList(request));
+
+        String serializedRequest = Strings.serializeTojson(request);
+
+
+
+        Data data = new Data.Builder()
+                .putStringArray("urlRequests", new String[]{serializedRequest})
+                .putString("csvfile", null)
+                .build();
+        WorkRequest workRequest = new OneTimeWorkRequest
+                .Builder(CustomUrlWorker.class)
+                .setInputData(data)
+                .build();
+        WorkManager.getInstance(AppSettings.getInstance()).enqueue(workRequest);
     }
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {

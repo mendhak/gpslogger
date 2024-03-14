@@ -37,7 +37,7 @@ repositories {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "com.mendhak.gpslogger"
@@ -148,6 +148,11 @@ dependencies {
     implementation ('com.birbit:android-priority-jobqueue:2.0.1'){
         exclude group: 'com.google.android', module: 'android'
     }
+
+    //Android's WorkManager
+    implementation 'androidx.work:work-runtime:2.9.0'
+    // It needs Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     //Event bus
     implementation 'de.greenrobot:eventbus:2.4.0'
