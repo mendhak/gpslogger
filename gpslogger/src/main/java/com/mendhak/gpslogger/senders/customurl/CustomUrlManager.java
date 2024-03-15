@@ -9,19 +9,14 @@ import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
-
-import com.birbit.android.jobqueue.JobManager;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
-import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.csv.CSVFileLogger;
-import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlWorker;
 import com.mendhak.gpslogger.senders.FileSender;
@@ -32,11 +27,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class CustomUrlManager extends FileSender {
 
@@ -177,35 +172,45 @@ public class CustomUrlManager extends FileSender {
                 }
             }
 
-            JobManager jobManager = AppSettings.getJobManager();
-            jobManager.addJobInBackground(
-                    new CustomUrlJob(
-                            requests,
-                            csvFile,
-                            new UploadEvents.CustomUrl()));
+            String[] serializedRequests = new String[requests.size()];
+            for (int i = 0; i < requests.size(); i++) {
+                serializedRequests[i] = Strings.serializeTojson(requests.get(i));
+            }
+
+            String tag = String.valueOf(Objects.hashCode(serializedRequests));
+
+            Data data = new Data.Builder()
+                    .putStringArray("urlRequests", serializedRequests)
+                    .putString("csvfile", csvFile.getAbsolutePath())
+                    .putString("callbackType", "customUrl")
+                    .build();
+            Constraints constraints = new Constraints.Builder()
+                    .setRequiredNetworkType(androidx.work.NetworkType.CONNECTED)
+                    .build();
+            OneTimeWorkRequest workRequest = new OneTimeWorkRequest
+                    .Builder(CustomUrlWorker.class)
+                    .setConstraints(constraints)
+                    .setInitialDelay(1, java.util.concurrent.TimeUnit.SECONDS)
+                    .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, java.util.concurrent.TimeUnit.SECONDS)
+                    .setInputData(data)
+                    .build();
+            WorkManager.getInstance(AppSettings.getInstance())
+                    .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
         }
 
     }
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password){
-//        JobManager jobManager = AppSettings.getJobManager();
-//        CustomUrlRequest request = new CustomUrlRequest(url, method,
-//                body, headers, username, password);
-//        ArrayList<CustomUrlRequest> requests = new ArrayList<>(Arrays.asList(request));
-//        jobManager.addJobInBackground(new CustomUrlJob(requests, null, new UploadEvents.CustomUrl()));
-
 
         CustomUrlRequest request = new CustomUrlRequest(url, method,
                 body, headers, username, password);
-//        ArrayList<CustomUrlRequest> requests = new ArrayList<>(Arrays.asList(request));
 
         String serializedRequest = Strings.serializeTojson(request);
-
-
 
         Data data = new Data.Builder()
                 .putStringArray("urlRequests", new String[]{serializedRequest})
                 .putString("csvfile", null)
+                .putString("callbackType", "customUrl")
                 .build();
         Constraints constraints = new Constraints.Builder()
                 .setRequiredNetworkType(androidx.work.NetworkType.CONNECTED)
@@ -214,7 +219,7 @@ public class CustomUrlManager extends FileSender {
                 .Builder(CustomUrlWorker.class)
                 .setConstraints(constraints)
                 .setInitialDelay(1, java.util.concurrent.TimeUnit.SECONDS)
-                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 10, java.util.concurrent.TimeUnit.SECONDS)
+                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, java.util.concurrent.TimeUnit.SECONDS)
                 .setInputData(data)
                 .build();
         WorkManager.getInstance(AppSettings.getInstance())
