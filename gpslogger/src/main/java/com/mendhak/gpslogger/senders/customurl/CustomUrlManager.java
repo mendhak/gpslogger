@@ -3,6 +3,8 @@ package com.mendhak.gpslogger.senders.customurl;
 import android.location.Location;
 import android.os.Bundle;
 
+import androidx.work.BackoffPolicy;
+import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
@@ -205,11 +207,18 @@ public class CustomUrlManager extends FileSender {
                 .putStringArray("urlRequests", new String[]{serializedRequest})
                 .putString("csvfile", null)
                 .build();
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(androidx.work.NetworkType.CONNECTED)
+                .build();
         OneTimeWorkRequest workRequest = new OneTimeWorkRequest
                 .Builder(CustomUrlWorker.class)
+                .setConstraints(constraints)
+                .setInitialDelay(1, java.util.concurrent.TimeUnit.SECONDS)
+                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 10, java.util.concurrent.TimeUnit.SECONDS)
                 .setInputData(data)
                 .build();
-        WorkManager.getInstance(AppSettings.getInstance()).enqueueUniqueWork(serializedRequest, ExistingWorkPolicy.REPLACE, workRequest);
+        WorkManager.getInstance(AppSettings.getInstance())
+                .enqueueUniqueWork(serializedRequest, ExistingWorkPolicy.REPLACE, workRequest);
     }
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
