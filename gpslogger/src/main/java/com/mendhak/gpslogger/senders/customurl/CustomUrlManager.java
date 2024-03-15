@@ -7,6 +7,7 @@ import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;
+import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import com.mendhak.gpslogger.common.AppSettings;
@@ -185,7 +186,7 @@ public class CustomUrlManager extends FileSender {
                     .putString("callbackType", "customUrl")
                     .build();
             Constraints constraints = new Constraints.Builder()
-                    .setRequiredNetworkType(androidx.work.NetworkType.CONNECTED)
+                    .setRequiredNetworkType(preferenceHelper.shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
                     .build();
             OneTimeWorkRequest workRequest = new OneTimeWorkRequest
                     .Builder(CustomUrlWorker.class)

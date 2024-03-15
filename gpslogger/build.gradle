@@ -42,7 +42,9 @@ android {
     defaultConfig {
         applicationId "com.mendhak.gpslogger"
         minSdkVersion 16
+        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 30
+        compileSdk 34
 
         versionCode 130
         versionName "130-workmgr"
