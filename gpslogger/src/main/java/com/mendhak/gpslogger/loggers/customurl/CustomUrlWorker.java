@@ -130,7 +130,7 @@ public class CustomUrlWorker extends Worker {
         }
         else {
             if(getRunAttemptCount() < getRetryLimit()){
-                LOG.warn(String.format("Custom URL: attempt %d failed, maximum %d attempts", getRunAttemptCount()+1, getRetryLimit()));
+                LOG.warn(String.format("Custom URL: attempt %d failed, maximum %d attempts", getRunAttemptCount(), getRetryLimit()));
                 return Result.retry();
             }
 
