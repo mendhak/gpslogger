@@ -11,6 +11,7 @@ import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -55,7 +56,7 @@ public class CustomUrlWorker extends Worker {
 
         String gpxFilePath = getInputData().getString("gpxFilePath");
         if(!Strings.isNullOrEmpty(gpxFilePath)){
-            OpenGTSManager openGTSManager = new OpenGTSManager(PreferenceHelper.getInstance());
+            OpenGTSManager openGTSManager = new OpenGTSManager(PreferenceHelper.getInstance(), Systems.getBatteryInfo(AppSettings.getInstance()).BatteryLevel);
             List<CustomUrlRequest> gpxCustomUrlRequests = openGTSManager.getCustomUrlRequestsFromGPX(new File(gpxFilePath));
             urlRequests = gpxCustomUrlRequests.toArray(new CustomUrlRequest[0]);
         }
