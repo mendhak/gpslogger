@@ -23,12 +23,11 @@ import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
-import com.birbit.android.jobqueue.JobManager;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlWorker;
-import com.mendhak.gpslogger.loggers.opengts.OpenGtsUdpJob;
+import com.mendhak.gpslogger.loggers.opengts.OpenGtsUdpWorker;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.GpxReader;
 import org.slf4j.Logger;
@@ -59,16 +58,28 @@ public class OpenGTSManager extends FileSender {
         // Use only gpx
         for (File f : files) {
             if (f.getName().endsWith(".gpx")) {
-                String tag = String.valueOf(Objects.hashCode(f.getName()));
 
-                HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
-                    put("gpxFilePath", f.getAbsolutePath());
-                    put("callbackType", "opengts");
-                }};
+                String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
 
-                OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, dataMap);
-                WorkManager.getInstance(AppSettings.getInstance())
-                        .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+                if(communication.equalsIgnoreCase("udp")){
+                    String tag = String.valueOf(Objects.hashCode(f.getName()));
+                    HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+                        put("gpxFilePath", f.getAbsolutePath());
+                    }};
+                    OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(OpenGtsUdpWorker.class, dataMap);
+                    WorkManager.getInstance(AppSettings.getInstance())
+                            .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+                }
+                else {
+                    String tag = String.valueOf(Objects.hashCode(f.getName()));
+                    HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+                        put("gpxFilePath", f.getAbsolutePath());
+                        put("callbackType", "opengts");
+                    }};
+                    OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, dataMap);
+                    WorkManager.getInstance(AppSettings.getInstance())
+                            .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+                }
 
             }
         }
@@ -85,8 +96,18 @@ public class OpenGTSManager extends FileSender {
             String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
 
             if(communication.equalsIgnoreCase("udp")){
-                JobManager jobManager = AppSettings.getJobManager();
-                jobManager.addJobInBackground(new OpenGtsUdpJob(server, port, accountName, path, deviceId, communication, locations));
+                String tag = String.valueOf(Objects.hashCode(locations));
+                String[] serializedLocations = new String[locations.length];
+                for (int i = 0; i < locations.length; i++) {
+                    serializedLocations[i] = Strings.serializeTojson(locations[i]);
+                }
+                HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+                    put("locations", serializedLocations);
+                }};
+
+                OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(OpenGtsUdpWorker.class, dataMap);
+                WorkManager.getInstance(AppSettings.getInstance())
+                        .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
             }
             else {
                 sendByHttp(deviceId, accountName, locations, communication, path, server, port);
