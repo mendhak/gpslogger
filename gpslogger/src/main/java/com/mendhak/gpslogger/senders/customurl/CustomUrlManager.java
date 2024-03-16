@@ -55,16 +55,8 @@ public class CustomUrlManager extends FileSender {
                         .putString("csvFilePath", f.getAbsolutePath())
                         .putString("callbackType", "customUrl")
                         .build();
-                Constraints constraints = new Constraints.Builder()
-                        .setRequiredNetworkType(preferenceHelper.shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
-                        .build();
-                OneTimeWorkRequest workRequest = new OneTimeWorkRequest
-                        .Builder(CustomUrlWorker.class)
-                        .setConstraints(constraints)
-                        .setInitialDelay(1, java.util.concurrent.TimeUnit.SECONDS)
-                        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, java.util.concurrent.TimeUnit.SECONDS)
-                        .setInputData(data)
-                        .build();
+
+                OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, data);
                 WorkManager.getInstance(AppSettings.getInstance())
                         .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
 
@@ -174,23 +166,16 @@ public class CustomUrlManager extends FileSender {
                 body, headers, username, password);
 
         String serializedRequest = Strings.serializeTojson(request);
+        String tag = String.valueOf(Objects.hashCode(serializedRequest));
 
         Data data = new Data.Builder()
                 .putStringArray("urlRequests", new String[]{serializedRequest})
                 .putString("callbackType", "customUrl")
                 .build();
-        Constraints constraints = new Constraints.Builder()
-                .setRequiredNetworkType(preferenceHelper.shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
-                .build();
-        OneTimeWorkRequest workRequest = new OneTimeWorkRequest
-                .Builder(CustomUrlWorker.class)
-                .setConstraints(constraints)
-                .setInitialDelay(1, java.util.concurrent.TimeUnit.SECONDS)
-                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, java.util.concurrent.TimeUnit.SECONDS)
-                .setInputData(data)
-                .build();
+
+        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, data);
         WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(serializedRequest, ExistingWorkPolicy.REPLACE, workRequest);
+                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
     }
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {

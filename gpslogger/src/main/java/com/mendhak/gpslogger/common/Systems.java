@@ -39,6 +39,11 @@ import android.provider.Settings;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.work.BackoffPolicy;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
 
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
@@ -234,4 +239,19 @@ public class Systems {
 
     }
 
+
+    public static OneTimeWorkRequest getBasicOneTimeWorkRequest(Class workerClass, Data data) {
+
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(PreferenceHelper.getInstance().shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
+                .build();
+        OneTimeWorkRequest workRequest = new OneTimeWorkRequest
+                .Builder(workerClass)
+                .setConstraints(constraints)
+                .setInitialDelay(1, java.util.concurrent.TimeUnit.SECONDS)
+                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, java.util.concurrent.TimeUnit.SECONDS)
+                .setInputData(data)
+                .build();
+        return workRequest;
+    }
 }
