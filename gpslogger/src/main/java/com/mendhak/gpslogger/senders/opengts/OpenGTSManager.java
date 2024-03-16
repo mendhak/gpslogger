@@ -65,10 +65,23 @@ public class OpenGTSManager extends FileSender {
         // Use only gpx
         for (File f : files) {
             if (f.getName().endsWith(".gpx")) {
-                List<SerializableLocation> locations = getLocationsFromGPX(f);
-                LOG.debug(locations.size() + " points were read from " + f.getName());
-
-                sendLocations(locations.toArray(new SerializableLocation[locations.size()]));
+                String tag = String.valueOf(Objects.hashCode(f.getName()));
+                Data data = new Data.Builder()
+                        .putString("gpxFilePath", f.getAbsolutePath())
+                        .putString("callbackType", "opengts")
+                        .build();
+                Constraints constraints = new Constraints.Builder()
+                        .setRequiredNetworkType(preferenceHelper.shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
+                        .build();
+                OneTimeWorkRequest workRequest = new OneTimeWorkRequest
+                        .Builder(CustomUrlWorker.class)
+                        .setConstraints(constraints)
+                        .setInitialDelay(1, java.util.concurrent.TimeUnit.SECONDS)
+                        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, java.util.concurrent.TimeUnit.SECONDS)
+                        .setInputData(data)
+                        .build();
+                WorkManager.getInstance(AppSettings.getInstance())
+                        .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
 
             }
         }
@@ -265,14 +278,37 @@ public class OpenGTSManager extends FileSender {
         return SenderNames.OPENGTS;
     }
 
-    private List<SerializableLocation> getLocationsFromGPX(File f) {
-        List<SerializableLocation> locations = Collections.emptyList();
+//    public List<SerializableLocation> getLocationsFromGPX(File f) {
+//        List<SerializableLocation> locations = Collections.emptyList();
+//        try {
+//            locations = GpxReader.getPoints(f);
+//        } catch (Exception e) {
+//            LOG.error("OpenGTSManager.getLocationsFromGPX", e);
+//        }
+//        return locations;
+//    }
+
+    public List<CustomUrlRequest> getCustomUrlRequestsFromGPX(File f) {
+        List<CustomUrlRequest> requests = new ArrayList<>();
         try {
-            locations = GpxReader.getPoints(f);
+            List<SerializableLocation> locations = GpxReader.getPoints(f);
+            LOG.debug(locations.size() + " points were read from " + f.getName());
+            for (SerializableLocation location : locations) {
+                String finalUrl = getUrl(preferenceHelper.getOpenGTSDeviceId(),
+                        preferenceHelper.getOpenGTSAccountName(),
+                        location,
+                        preferenceHelper.getOpenGTSServerCommunicationMethod(),
+                        preferenceHelper.getOpenGTSServerPath(),
+                        preferenceHelper.getOpenGTSServer(),
+                        Integer.valueOf(preferenceHelper.getOpenGTSServerPort()),
+                        batteryLevel);
+                CustomUrlRequest request = new CustomUrlRequest(finalUrl);
+                requests.add(request);
+            }
         } catch (Exception e) {
-            LOG.error("OpenGTSManager.getLocationsFromGPX", e);
+            LOG.error("OpenGTSManager.getCustomUrlRequestsFromGPX", e);
         }
-        return locations;
+        return requests;
     }
 
     @Override

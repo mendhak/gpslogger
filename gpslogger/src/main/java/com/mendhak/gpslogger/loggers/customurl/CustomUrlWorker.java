@@ -8,14 +8,21 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.mendhak.gpslogger.common.AppSettings;
+import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.senders.GpxReader;
+import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
 
 import org.slf4j.Logger;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.X509TrustManager;
@@ -44,11 +51,24 @@ public class CustomUrlWorker extends Worker {
             callbackEvent = new UploadEvents.OpenGTS();
         }
 
-        String[] serializedRequests = getInputData().getStringArray("urlRequests");
+        CustomUrlRequest[] urlRequests;
 
-        CustomUrlRequest[] urlRequests = new CustomUrlRequest[serializedRequests.length];
-        for (int i = 0; i < serializedRequests.length; i++) {
-            urlRequests[i] = Strings.deserializeFromJson(serializedRequests[i], CustomUrlRequest.class);
+        String gpxFilePath = getInputData().getString("gpxFilePath");
+        if(!Strings.isNullOrEmpty(gpxFilePath)){
+            OpenGTSManager openGTSManager = new OpenGTSManager(PreferenceHelper.getInstance());
+            List<CustomUrlRequest> gpxCustomUrlRequests = openGTSManager.getCustomUrlRequestsFromGPX(new File(gpxFilePath));
+            urlRequests = gpxCustomUrlRequests.toArray(new CustomUrlRequest[0]);
+        }
+        else {
+            String[] serializedRequests = getInputData().getStringArray("urlRequests");
+            if(serializedRequests == null){
+                EventBus.getDefault().post(callbackEvent.failed("No URL requests found", new Throwable("No URL requests found")));
+                return Result.failure();
+            }
+            urlRequests = new CustomUrlRequest[serializedRequests.length];
+            for (int i = 0; i < serializedRequests.length; i++) {
+                urlRequests[i] = Strings.deserializeFromJson(serializedRequests[i], CustomUrlRequest.class);
+            }
         }
 
         boolean success = true;
