@@ -19,12 +19,21 @@
 
 package com.mendhak.gpslogger.senders.opengts;
 
+import androidx.work.BackoffPolicy;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
 import com.birbit.android.jobqueue.JobManager;
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
+import com.mendhak.gpslogger.loggers.customurl.CustomUrlWorker;
 import com.mendhak.gpslogger.loggers.opengts.OpenGtsUdpJob;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.GpxReader;
@@ -88,15 +97,33 @@ public class OpenGTSManager extends FileSender {
 
     void sendByHttp(String deviceId, String accountName, SerializableLocation[] locations, String communication, String path, String server, int port) {
         ArrayList<CustomUrlRequest> requests = new ArrayList<>();
-        JobManager jobManager = AppSettings.getJobManager();
 
-        for(SerializableLocation loc:locations){
-            String finalUrl = getUrl(deviceId, accountName, loc, communication, path, server, port, batteryLevel );
+        String[] serializedRequests = new String[locations.length];
+        for (int i = 0; i < locations.length; i++) {
+            String finalUrl = getUrl(deviceId, accountName, locations[i], communication, path, server, port, batteryLevel );
             CustomUrlRequest request = new CustomUrlRequest(finalUrl);
-            requests.add(request);
+            serializedRequests[i] = Strings.serializeTojson(request);
         }
 
-        jobManager.addJobInBackground(new CustomUrlJob(requests, null, new UploadEvents.OpenGTS()));
+
+        String tag = String.valueOf(Objects.hashCode(serializedRequests));
+        Data data = new Data.Builder()
+                .putStringArray("urlRequests", serializedRequests)
+                .putString("callbackType", "opengts")
+                .build();
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(preferenceHelper.shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
+                .build();
+        OneTimeWorkRequest workRequest = new OneTimeWorkRequest
+                .Builder(CustomUrlWorker.class)
+                .setConstraints(constraints)
+                .setInitialDelay(1, java.util.concurrent.TimeUnit.SECONDS)
+                .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, java.util.concurrent.TimeUnit.SECONDS)
+                .setInputData(data)
+                .build();
+        WorkManager.getInstance(AppSettings.getInstance())
+                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+
     }
 
 
