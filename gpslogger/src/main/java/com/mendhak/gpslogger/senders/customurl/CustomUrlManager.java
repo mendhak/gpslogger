@@ -180,7 +180,7 @@ public class CustomUrlManager extends FileSender {
                 .putString("callbackType", "customUrl")
                 .build();
         Constraints constraints = new Constraints.Builder()
-                .setRequiredNetworkType(androidx.work.NetworkType.CONNECTED)
+                .setRequiredNetworkType(preferenceHelper.shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
                 .build();
         OneTimeWorkRequest workRequest = new OneTimeWorkRequest
                 .Builder(CustomUrlWorker.class)
