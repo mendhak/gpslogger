@@ -251,13 +251,12 @@ public class Systems {
      */
     public static OneTimeWorkRequest getBasicOneTimeWorkRequest(Class workerClass, HashMap<String, Object> dataMap) {
 
-        androidx.work.Data.Builder dataBuilder = new Data.Builder();
-        dataBuilder.putAll(dataMap);
-        Data data = dataBuilder.build();
+        androidx.work.Data data = new Data.Builder().putAll(dataMap).build();
 
         Constraints constraints = new Constraints.Builder()
                 .setRequiredNetworkType(PreferenceHelper.getInstance().shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
                 .build();
+
         OneTimeWorkRequest workRequest = new OneTimeWorkRequest
                 .Builder(workerClass)
                 .setConstraints(constraints)
