@@ -29,9 +29,7 @@ import androidx.work.WorkManager;
 
 import com.birbit.android.jobqueue.JobManager;
 import com.mendhak.gpslogger.common.*;
-import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlWorker;
 import com.mendhak.gpslogger.loggers.opengts.OpenGtsUdpJob;
@@ -277,16 +275,6 @@ public class OpenGTSManager extends FileSender {
     public String getName() {
         return SenderNames.OPENGTS;
     }
-
-//    public List<SerializableLocation> getLocationsFromGPX(File f) {
-//        List<SerializableLocation> locations = Collections.emptyList();
-//        try {
-//            locations = GpxReader.getPoints(f);
-//        } catch (Exception e) {
-//            LOG.error("OpenGTSManager.getLocationsFromGPX", e);
-//        }
-//        return locations;
-//    }
 
     public List<CustomUrlRequest> getCustomUrlRequestsFromGPX(File f) {
         List<CustomUrlRequest> requests = new ArrayList<>();

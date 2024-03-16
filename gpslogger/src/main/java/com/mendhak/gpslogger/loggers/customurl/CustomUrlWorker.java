@@ -9,20 +9,17 @@ import androidx.work.WorkerParameters;
 
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.senders.GpxReader;
+import com.mendhak.gpslogger.senders.customurl.CustomUrlManager;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
 
 import org.slf4j.Logger;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -55,10 +52,16 @@ public class CustomUrlWorker extends Worker {
         CustomUrlRequest[] urlRequests;
 
         String gpxFilePath = getInputData().getString("gpxFilePath");
+        String csvFilePath = getInputData().getString("csvFilePath");
         if(!Strings.isNullOrEmpty(gpxFilePath)){
             OpenGTSManager openGTSManager = new OpenGTSManager(PreferenceHelper.getInstance(), Systems.getBatteryInfo(AppSettings.getInstance()).BatteryLevel);
             List<CustomUrlRequest> gpxCustomUrlRequests = openGTSManager.getCustomUrlRequestsFromGPX(new File(gpxFilePath));
             urlRequests = gpxCustomUrlRequests.toArray(new CustomUrlRequest[0]);
+        }
+        else if(!Strings.isNullOrEmpty(csvFilePath)){
+            CustomUrlManager customUrlManager = new CustomUrlManager(PreferenceHelper.getInstance());
+            List<CustomUrlRequest> csvCustomUrlRequests = customUrlManager.getCustomUrlRequestsFromCSV(new File(csvFilePath));
+            urlRequests = csvCustomUrlRequests.toArray(new CustomUrlRequest[0]);
         }
         else {
             String[] serializedRequests = getInputData().getStringArray("urlRequests");

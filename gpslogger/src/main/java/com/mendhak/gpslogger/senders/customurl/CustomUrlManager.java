@@ -49,9 +49,25 @@ public class CustomUrlManager extends FileSender {
         for (File f : files) {
             if (f.getName().endsWith(".csv")) {
                 foundFileToSend = true;
-                List<SerializableLocation> locations = getLocationsFromCSV(f);
-                LOG.debug(locations.size() + " points were read from " + f.getName());
-                sendLocations(locations.toArray(new SerializableLocation[locations.size()]), f);
+
+                String tag = String.valueOf(Objects.hashCode(f.getName()));
+                Data data = new Data.Builder()
+                        .putString("csvFilePath", f.getAbsolutePath())
+                        .putString("callbackType", "customUrl")
+                        .build();
+                Constraints constraints = new Constraints.Builder()
+                        .setRequiredNetworkType(preferenceHelper.shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
+                        .build();
+                OneTimeWorkRequest workRequest = new OneTimeWorkRequest
+                        .Builder(CustomUrlWorker.class)
+                        .setConstraints(constraints)
+                        .setInitialDelay(1, java.util.concurrent.TimeUnit.SECONDS)
+                        .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, java.util.concurrent.TimeUnit.SECONDS)
+                        .setInputData(data)
+                        .build();
+                WorkManager.getInstance(AppSettings.getInstance())
+                        .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+
             }
         }
 
@@ -316,5 +332,34 @@ public class CustomUrlManager extends FileSender {
     @Override
     public boolean accept(File dir, String name) {
         return name.toLowerCase().contains(".csv");
+    }
+
+    public List<CustomUrlRequest> getCustomUrlRequestsFromCSV(File f) {
+        List<SerializableLocation> locations = getLocationsFromCSV(f);
+        LOG.debug(locations.size() + " points were read from " + f.getName());
+
+        List<CustomUrlRequest> requests = new ArrayList<>();
+
+        String customLoggingUrl = preferenceHelper.getCustomLoggingUrl();
+        String httpBody = preferenceHelper.getCustomLoggingHTTPBody();
+        String httpHeaders = preferenceHelper.getCustomLoggingHTTPHeaders();
+        String httpMethod = preferenceHelper.getCustomLoggingHTTPMethod();
+
+        for(SerializableLocation loc: locations){
+            try {
+                String finalUrl = getFormattedTextblock(customLoggingUrl, loc);
+                String finalBody = getFormattedTextblock(httpBody, loc);
+                String finalHeaders = getFormattedTextblock(httpHeaders, loc);
+
+                requests.add(new CustomUrlRequest(finalUrl, httpMethod,
+                        finalBody, finalHeaders, preferenceHelper.getCustomLoggingBasicAuthUsername(),
+                        preferenceHelper.getCustomLoggingBasicAuthPassword()));
+            } catch (Exception e) {
+                LOG.error("Could not build the Custom URL to send", e);
+            }
+        }
+
+        return requests;
+
     }
 }
