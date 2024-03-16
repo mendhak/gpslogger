@@ -107,7 +107,6 @@ public class OpenGTSManager extends FileSender {
     }
 
     void sendByHttp(String deviceId, String accountName, SerializableLocation[] locations, String communication, String path, String server, int port) {
-        ArrayList<CustomUrlRequest> requests = new ArrayList<>();
 
         String[] serializedRequests = new String[locations.length];
         for (int i = 0; i < locations.length; i++) {

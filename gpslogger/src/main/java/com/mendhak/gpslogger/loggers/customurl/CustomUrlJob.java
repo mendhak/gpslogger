@@ -52,7 +52,6 @@ public class CustomUrlJob extends Job {
 
     private UploadEvents.BaseUploadEvent callbackEvent;
 
-    private File csvFile;
     private ArrayList<CustomUrlRequest> urlRequests;
 
     public CustomUrlJob(ArrayList<CustomUrlRequest> urlRequests, File csvFile, UploadEvents.BaseUploadEvent callbackEvent) {
@@ -60,7 +59,6 @@ public class CustomUrlJob extends Job {
 
         this.callbackEvent = callbackEvent;
         this.urlRequests = urlRequests;
-        this.csvFile = csvFile;
     }
 
     @Override
