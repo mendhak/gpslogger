@@ -198,7 +198,6 @@ public class CustomUrlManager extends FileSender {
 
             Data data = new Data.Builder()
                     .putStringArray("urlRequests", serializedRequests)
-                    .putString("csvfile", csvFile.getAbsolutePath())
                     .putString("callbackType", "customUrl")
                     .build();
             Constraints constraints = new Constraints.Builder()
@@ -226,7 +225,6 @@ public class CustomUrlManager extends FileSender {
 
         Data data = new Data.Builder()
                 .putStringArray("urlRequests", new String[]{serializedRequest})
-                .putString("csvfile", null)
                 .putString("callbackType", "customUrl")
                 .build();
         Constraints constraints = new Constraints.Builder()
