@@ -3,11 +3,7 @@ package com.mendhak.gpslogger.senders.customurl;
 import android.location.Location;
 import android.os.Bundle;
 
-import androidx.work.BackoffPolicy;
-import androidx.work.Constraints;
-import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;
-import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import com.mendhak.gpslogger.common.AppSettings;
