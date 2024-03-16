@@ -64,12 +64,13 @@ public class OpenGTSManager extends FileSender {
         for (File f : files) {
             if (f.getName().endsWith(".gpx")) {
                 String tag = String.valueOf(Objects.hashCode(f.getName()));
-                Data data = new Data.Builder()
-                        .putString("gpxFilePath", f.getAbsolutePath())
-                        .putString("callbackType", "opengts")
-                        .build();
 
-                OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, data);
+                HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+                    put("gpxFilePath", f.getAbsolutePath());
+                    put("callbackType", "opengts");
+                }};
+
+                OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, dataMap);
                 WorkManager.getInstance(AppSettings.getInstance())
                         .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
 
@@ -107,21 +108,18 @@ public class OpenGTSManager extends FileSender {
             serializedRequests[i] = Strings.serializeTojson(request);
         }
 
-
         String tag = String.valueOf(Objects.hashCode(serializedRequests));
-        Data data = new Data.Builder()
-                .putStringArray("urlRequests", serializedRequests)
-                .putString("callbackType", "opengts")
-                .build();
 
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, data);
+        HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+            put("urlRequests", serializedRequests);
+            put("callbackType", "opengts");
+        }};
+
+        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, dataMap);
         WorkManager.getInstance(AppSettings.getInstance())
                 .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
 
-
     }
-
-
 
 
     /**

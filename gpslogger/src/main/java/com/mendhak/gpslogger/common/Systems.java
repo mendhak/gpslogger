@@ -55,6 +55,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -239,8 +240,20 @@ public class Systems {
 
     }
 
+    /**
+     * Returns a OneTimeWorkRequest with the given worker class and data map. The constraints are set to
+     * UNMETERED network type if the user has set the app to only send on wifi. Otherwise it is set to
+     * CONNECTED. The initial delay is set to 1 second to avoid the work being enqueued immediately.
+     * The backoff criteria is set to exponential with a 30 second initial delay.
+     * @param workerClass
+     * @param dataMap
+     * @return
+     */
+    public static OneTimeWorkRequest getBasicOneTimeWorkRequest(Class workerClass, HashMap<String, Object> dataMap) {
 
-    public static OneTimeWorkRequest getBasicOneTimeWorkRequest(Class workerClass, Data data) {
+        androidx.work.Data.Builder dataBuilder = new Data.Builder();
+        dataBuilder.putAll(dataMap);
+        Data data = dataBuilder.build();
 
         Constraints constraints = new Constraints.Builder()
                 .setRequiredNetworkType(PreferenceHelper.getInstance().shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)

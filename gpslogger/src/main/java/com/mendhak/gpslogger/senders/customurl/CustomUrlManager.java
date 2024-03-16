@@ -29,6 +29,7 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,12 +52,13 @@ public class CustomUrlManager extends FileSender {
                 foundFileToSend = true;
 
                 String tag = String.valueOf(Objects.hashCode(f.getName()));
-                Data data = new Data.Builder()
-                        .putString("csvFilePath", f.getAbsolutePath())
-                        .putString("callbackType", "customUrl")
-                        .build();
 
-                OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, data);
+                HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
+                    put("csvFilePath", f.getAbsolutePath());
+                    put("callbackType", "customUrl");
+                }};
+
+                OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, dataMap);
                 WorkManager.getInstance(AppSettings.getInstance())
                         .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
 
@@ -162,18 +164,16 @@ public class CustomUrlManager extends FileSender {
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password){
 
-        CustomUrlRequest request = new CustomUrlRequest(url, method,
-                body, headers, username, password);
-
+        CustomUrlRequest request = new CustomUrlRequest(url, method, body, headers, username, password);
         String serializedRequest = Strings.serializeTojson(request);
         String tag = String.valueOf(Objects.hashCode(serializedRequest));
 
-        Data data = new Data.Builder()
-                .putStringArray("urlRequests", new String[]{serializedRequest})
-                .putString("callbackType", "customUrl")
-                .build();
+        HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
+            put("urlRequests", new String[]{serializedRequest});
+            put("callbackType", "customUrl");
+        }};
 
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, data);
+        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, dataMap);
         WorkManager.getInstance(AppSettings.getInstance())
                 .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
     }

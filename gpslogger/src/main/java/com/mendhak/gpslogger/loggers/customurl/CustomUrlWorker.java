@@ -42,37 +42,12 @@ public class CustomUrlWorker extends Worker {
     @Override
     public Result doWork() {
 
-        String callbackType = getInputData().getString("callbackType");
-        UploadEvents.BaseUploadEvent callbackEvent = new UploadEvents.CustomUrl();
+        UploadEvents.BaseUploadEvent callbackEvent = getCallbackEvent();
+        CustomUrlRequest[] urlRequests = getCustomUrlRequests(getInputData());
 
-        if(callbackType.equals("opengts")){
-            callbackEvent = new UploadEvents.OpenGTS();
-        }
-
-        CustomUrlRequest[] urlRequests;
-
-        String gpxFilePath = getInputData().getString("gpxFilePath");
-        String csvFilePath = getInputData().getString("csvFilePath");
-        if(!Strings.isNullOrEmpty(gpxFilePath)){
-            OpenGTSManager openGTSManager = new OpenGTSManager(PreferenceHelper.getInstance(), Systems.getBatteryInfo(AppSettings.getInstance()).BatteryLevel);
-            List<CustomUrlRequest> gpxCustomUrlRequests = openGTSManager.getCustomUrlRequestsFromGPX(new File(gpxFilePath));
-            urlRequests = gpxCustomUrlRequests.toArray(new CustomUrlRequest[0]);
-        }
-        else if(!Strings.isNullOrEmpty(csvFilePath)){
-            CustomUrlManager customUrlManager = new CustomUrlManager(PreferenceHelper.getInstance());
-            List<CustomUrlRequest> csvCustomUrlRequests = customUrlManager.getCustomUrlRequestsFromCSV(new File(csvFilePath));
-            urlRequests = csvCustomUrlRequests.toArray(new CustomUrlRequest[0]);
-        }
-        else {
-            String[] serializedRequests = getInputData().getStringArray("urlRequests");
-            if(serializedRequests == null){
-                EventBus.getDefault().post(callbackEvent.failed("No URL requests found", new Throwable("No URL requests found")));
-                return Result.failure();
-            }
-            urlRequests = new CustomUrlRequest[serializedRequests.length];
-            for (int i = 0; i < serializedRequests.length; i++) {
-                urlRequests[i] = Strings.deserializeFromJson(serializedRequests[i], CustomUrlRequest.class);
-            }
+        if(urlRequests == null || urlRequests.length == 0){
+            EventBus.getDefault().post(callbackEvent.failed("Nothing to process", new Throwable("Nothing to process")));
+            return Result.failure();
         }
 
         boolean success = true;
@@ -130,7 +105,7 @@ public class CustomUrlWorker extends Worker {
         }
         else {
             if(getRunAttemptCount() < getRetryLimit()){
-                LOG.warn(String.format("Custom URL: attempt %d failed, maximum %d attempts", getRunAttemptCount(), getRetryLimit()));
+                LOG.warn(String.format("Custom URL - attempt %d of %d failed, will retry", getRunAttemptCount(), getRetryLimit()));
                 return Result.retry();
             }
 
@@ -139,6 +114,43 @@ public class CustomUrlWorker extends Worker {
             return Result.failure();
         }
     }
+
+    private CustomUrlRequest[] getCustomUrlRequests(Data inputData) {
+        CustomUrlRequest[] urlRequests = null;
+        String[] serializedRequests = inputData.getStringArray("urlRequests");
+        String gpxFilePath = inputData.getString("gpxFilePath");
+        String csvFilePath = inputData.getString("csvFilePath");
+
+        if(!Strings.isNullOrEmpty(gpxFilePath)){
+            OpenGTSManager openGTSManager = new OpenGTSManager(PreferenceHelper.getInstance(), Systems.getBatteryInfo(AppSettings.getInstance()).BatteryLevel);
+            List<CustomUrlRequest> gpxCustomUrlRequests = openGTSManager.getCustomUrlRequestsFromGPX(new File(gpxFilePath));
+            urlRequests = gpxCustomUrlRequests.toArray(new CustomUrlRequest[0]);
+        }
+        else if(!Strings.isNullOrEmpty(csvFilePath)){
+            CustomUrlManager customUrlManager = new CustomUrlManager(PreferenceHelper.getInstance());
+            List<CustomUrlRequest> csvCustomUrlRequests = customUrlManager.getCustomUrlRequestsFromCSV(new File(csvFilePath));
+            urlRequests = csvCustomUrlRequests.toArray(new CustomUrlRequest[0]);
+        }
+        else if(serializedRequests != null && serializedRequests.length > 0) {
+            urlRequests = new CustomUrlRequest[serializedRequests.length];
+            for (int i = 0; i < serializedRequests.length; i++) {
+                urlRequests[i] = Strings.deserializeFromJson(serializedRequests[i], CustomUrlRequest.class);
+            }
+        }
+        return urlRequests;
+    }
+
+    @NonNull
+    private UploadEvents.BaseUploadEvent getCallbackEvent() {
+        String callbackType = getInputData().getString("callbackType");
+        UploadEvents.BaseUploadEvent callbackEvent = new UploadEvents.CustomUrl();
+
+        if(!Strings.isNullOrEmpty(callbackType) && callbackType.equals("opengts")){
+            callbackEvent = new UploadEvents.OpenGTS();
+        }
+        return callbackEvent;
+    }
+
     protected int getRetryLimit() {
         return 3;
     }
