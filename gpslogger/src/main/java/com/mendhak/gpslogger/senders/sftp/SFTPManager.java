@@ -3,9 +3,6 @@ package com.mendhak.gpslogger.senders.sftp;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
-import com.birbit.android.jobqueue.CancelResult;
-import com.birbit.android.jobqueue.JobManager;
-import com.birbit.android.jobqueue.TagConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;

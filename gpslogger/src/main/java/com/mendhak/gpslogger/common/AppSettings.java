@@ -21,9 +21,7 @@ package com.mendhak.gpslogger.common;
 
 import android.app.Application;
 
-import com.birbit.android.jobqueue.JobManager;
-import com.birbit.android.jobqueue.config.Configuration;
-import com.birbit.android.jobqueue.log.CustomLogger;
+
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
@@ -31,7 +29,7 @@ import org.slf4j.Logger;
 
 public class AppSettings extends Application {
 
-    private static JobManager jobManager;
+
     private static AppSettings instance;
     private static Logger LOG;
 
@@ -50,24 +48,9 @@ public class AppSettings extends Application {
         EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
         LOG.debug("EventBus configured");
 
-        //Configure the Job Queue
-        Configuration config = new Configuration.Builder(getInstance())
-                .networkUtil(new WifiNetworkUtil(getInstance()))
-                .consumerKeepAlive(60)
-                .minConsumerCount(0)
-                .maxConsumerCount(1)
-//                .customLogger(jobQueueLogger)
-                .build();
-        jobManager = new JobManager(config);
-        LOG.debug("Job Queue configured");
+
     }
 
-    /**
-     * Returns a configured Job Queue Manager
-     */
-    public static JobManager getJobManager() {
-        return jobManager;
-    }
 
     public AppSettings() {
         instance = this;
@@ -79,37 +62,6 @@ public class AppSettings extends Application {
     public static AppSettings getInstance() {
         return instance;
     }
-
-
-    private final CustomLogger jobQueueLogger = new CustomLogger() {
-        @Override
-        public boolean isDebugEnabled() {
-            return BuildConfig.DEBUG;
-        }
-
-        @Override
-        public void d(String text, Object... args) {
-
-            LOG.debug(String.format(text, args));
-        }
-
-        @Override
-        public void e(Throwable t, String text, Object... args) {
-            LOG.error(String.format(text, args), t);
-        }
-
-        @Override
-        public void e(String text, Object... args) {
-
-            LOG.error(String.format(text, args));
-        }
-
-        @Override
-        public void v(String text, Object... args) {
-            LOG.debug(String.format(text,args));
-        }
-    };
-
 
 
 }

@@ -146,14 +146,9 @@ dependencies {
     //Progress button
     implementation 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
 
-    //Android Priority Jobqueue
-    implementation ('com.birbit:android-priority-jobqueue:2.0.1'){
-        exclude group: 'com.google.android', module: 'android'
-    }
-
     //Android's WorkManager
     implementation 'androidx.work:work-runtime:2.9.0'
-    // It needs Gson
+    // We need to use Gson to help with WorkManager limitations
     implementation 'com.google.code.gson:gson:2.10.1'
 
     //Event bus
