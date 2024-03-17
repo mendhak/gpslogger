@@ -84,7 +84,7 @@ public class DropBoxManager extends FileSender {
     public void uploadFile(List<File> files) {
         for (File f : files) {
             LOG.debug(f.getName());
-            uploadFile(f.getName());
+            uploadFile(f);
         }
     }
 
@@ -103,12 +103,12 @@ public class DropBoxManager extends FileSender {
         return SenderNames.DROPBOX;
     }
 
-    public void uploadFile(final String fileName) {
+    public void uploadFile(File fileToUpload) {
 
         HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
-            put("fileName", fileName);
+            put("filePath", fileToUpload.getAbsolutePath());
         }};
-        String tag = String.valueOf(Objects.hashCode(fileName));
+        String tag = String.valueOf(Objects.hashCode(fileToUpload.getName()));
         Systems.startWorkManagerRequest(DropboxWorker.class, dataMap, tag);
 
     }

@@ -34,18 +34,17 @@ public class DropboxWorker extends Worker {
     @Override
     public Result doWork() {
 
-        String fileName = getInputData().getString("fileName");
-        if(Strings.isNullOrEmpty(fileName)) {
+        String filePath = getInputData().getString("filePath");
+        if(Strings.isNullOrEmpty(filePath)) {
             EventBus.getDefault().post(new UploadEvents.Dropbox().failed("Dropbox upload failed", new Throwable("Nothing to upload.")));
             return Result.failure();
         }
 
-        File gpsDir = new File(PreferenceHelper.getInstance().getGpsLoggerFolder());
-        File gpxFile = new File(gpsDir, fileName);
+        File fileToUpload = new File(filePath);
 
         try {
             LOG.debug("Beginning upload to dropbox...");
-            InputStream inputStream = new FileInputStream(gpxFile);
+            InputStream inputStream = new FileInputStream(fileToUpload);
             DbxRequestConfig requestConfig = DbxRequestConfig.newBuilder("GPSLogger").build();
             DbxClientV2 mDbxClient;
 
@@ -58,7 +57,7 @@ public class DropboxWorker extends Worker {
                 mDbxClient = new DbxClientV2(requestConfig, PreferenceHelper.getInstance().getDropboxLongLivedAccessKey());
             }
 
-            mDbxClient.files().uploadBuilder("/" + fileName).withMode(WriteMode.OVERWRITE).uploadAndFinish(inputStream);
+            mDbxClient.files().uploadBuilder("/" + fileToUpload.getName()).withMode(WriteMode.OVERWRITE).uploadAndFinish(inputStream);
 
             EventBus.getDefault().post(new UploadEvents.Dropbox().succeeded());
             LOG.info("Dropbox - file uploaded");
