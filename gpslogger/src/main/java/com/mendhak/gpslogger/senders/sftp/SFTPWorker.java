@@ -134,7 +134,6 @@ public class SFTPWorker extends Worker {
                 sftpException.fingerprint = session.getHostKey().getFingerPrint(jsch);
                 EventBus.getDefault().post(sftpException.failed(jex.getMessage(), jex));
             } else {
-                LOG.error(jex.getMessage(), jex);
                 EventBus.getDefault().post(new UploadEvents.SFTP().failed(jex.getMessage(), jex));
             }
 
