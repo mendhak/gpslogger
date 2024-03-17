@@ -73,7 +73,6 @@ public class OpenStreetMapWorker extends Worker {
                 @Override
                 public void execute(@Nullable String accessToken, @Nullable String idToken, @Nullable AuthorizationException ex) {
                     if (ex != null){
-//                        EventBus.getDefault().post(new UploadEvents.OpenStreetMap().failed(ex.toJsonString(), ex));
                         taskDone.set(true);
                         LOG.error(ex.toJsonString(), ex);
                         return;
@@ -94,8 +93,6 @@ public class OpenStreetMapWorker extends Worker {
                 LOG.error("Failed to fetch Access Token for OpenStreetMap. Stopping this job.");
                 success = false;
                 failureMessage = "Failed to fetch Access Token for OpenStreetMap.";
-//                EventBus.getDefault().post(new UploadEvents.OpenStreetMap().failed("Failed to fetch Access Token for OpenStreetMap."));
-//                return Result.failure();
             }
             else {
 
@@ -138,7 +135,7 @@ public class OpenStreetMapWorker extends Worker {
                     if(body != null){
                         failureMessage = body.string();
                     }
-//                    body.close();
+
                     EventBus.getDefault().post(new UploadEvents.OpenStreetMap().failed());
                     success = false;
 
