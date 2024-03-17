@@ -216,9 +216,7 @@ public class AutoEmailFragment extends PreferenceFragmentCompat implements
 
 
 
-            aem.sendTestEmail(smtpServer, smtpPort,
-                    smtpUsername, smtpPassword,
-                    useSsl, smtpTarget, senderAddress);
+            aem.sendTestEmail();
             return true;
         }
 

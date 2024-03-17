@@ -18,18 +18,22 @@
  */
 
 package com.mendhak.gpslogger.senders.email;
-import com.birbit.android.jobqueue.CancelResult;
-import com.birbit.android.jobqueue.JobManager;
-import com.birbit.android.jobqueue.TagConstraint;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
+
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.senders.FileSender;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AutoEmailManager extends FileSender {
 
@@ -42,28 +46,24 @@ public class AutoEmailManager extends FileSender {
     @Override
     public void uploadFile(List<File> files) {
 
-        final ArrayList<File> filesToSend = new ArrayList<>();
-
-        //If a zip file exists, remove others
-        for (File f : files) {
-            filesToSend.add(f);
+        String[] fileNames = new String[files.size()];
+        for (int i = 0; i < files.size(); i++) {
+            fileNames[i] = files.get(i).getAbsolutePath();
         }
 
         final String subject = "GPS Log file generated at "+ Strings.getReadableDateTime(new Date());
-
         final String body = "GPS Log file generated at "+ Strings.getReadableDateTime(new Date());
 
-        final JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-            @Override
-            public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new AutoEmailJob(preferenceHelper.getSmtpServer(),
-                        preferenceHelper.getSmtpPort(), preferenceHelper.getSmtpUsername(), preferenceHelper.getSmtpPassword(),
-                        preferenceHelper.isSmtpSsl(), preferenceHelper.getAutoEmailTargets(), preferenceHelper.getSmtpSenderAddress(),
-                        subject, body, filesToSend.toArray(new File[filesToSend.size()])));
-            }
-        }, TagConstraint.ANY, AutoEmailJob.getJobTag(filesToSend.toArray(new File[filesToSend.size()])));
+        HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
+            put("subject", subject);
+            put("body", body);
+            put("fileNames", fileNames);
+        }};
 
+        String tag = String.valueOf(Objects.hashCode(fileNames)) ;
+        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(AutoEmailWorker.class, dataMap);
+        WorkManager.getInstance(AppSettings.getInstance())
+                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
 
     }
 
@@ -83,18 +83,21 @@ public class AutoEmailManager extends FileSender {
     }
 
 
-    public void sendTestEmail(String smtpServer, String smtpPort,
-                       String smtpUsername, String smtpPassword, boolean smtpUseSsl,
-                       String emailTarget, String fromAddress) {
+    public void sendTestEmail() {
 
         String subject = "Test Email from GPSLogger at " + Strings.getReadableDateTime(new Date());
         String body ="Test Email from GPSLogger at " + Strings.getReadableDateTime(new Date());
 
-        JobManager jobManager = AppSettings.getJobManager();
-        jobManager.addJobInBackground(new AutoEmailJob(smtpServer,
-                smtpPort, smtpUsername, smtpPassword, smtpUseSsl,
-                emailTarget, fromAddress, subject, body, new File[]{}));
 
+        HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
+            put("subject", subject);
+            put("body", body);
+            put("fileNames", new String[]{});
+        }};
+        String tag = String.valueOf(Objects.hashCode(new String[]{})) ;
+        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(AutoEmailWorker.class, dataMap);
+        WorkManager.getInstance(AppSettings.getInstance())
+                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
     }
 
     @Override
