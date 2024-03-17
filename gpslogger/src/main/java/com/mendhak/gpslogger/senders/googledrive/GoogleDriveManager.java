@@ -3,12 +3,14 @@ package com.mendhak.gpslogger.senders.googledrive;
 import android.content.Context;
 import android.net.Uri;
 
-import com.birbit.android.jobqueue.CancelResult;
-import com.birbit.android.jobqueue.JobManager;
-import com.birbit.android.jobqueue.TagConstraint;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 
@@ -21,7 +23,9 @@ import org.json.JSONException;
 import org.slf4j.Logger;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class GoogleDriveManager extends FileSender {
 
@@ -81,18 +85,20 @@ public class GoogleDriveManager extends FileSender {
     public void uploadFile(List<File> files) {
         for (File f : files) {
             LOG.debug(f.getName());
-            uploadFile(f.getName());
+            uploadFile(f);
         }
     }
 
-    public void uploadFile(String fileName) {
-        final JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-            @Override
-            public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new GoogleDriveJob(fileName));
-            }
-        }, TagConstraint.ANY, GoogleDriveJob.getJobTag(fileName));
+    public void uploadFile(File fileToUpload) {
+
+        String tag = String.valueOf(Objects.hashCode(fileToUpload));
+        HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
+           put("filePath", fileToUpload.getAbsolutePath());
+        }};
+
+        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(GoogleDriveWorker.class, dataMap);
+        WorkManager.getInstance(AppSettings.getInstance())
+                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
     }
 
     @Override
