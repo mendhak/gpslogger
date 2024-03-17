@@ -51,7 +51,7 @@ public class FtpManager extends FileSender {
         this.preferenceHelper = preferenceHelper;
     }
 
-    public void testFtp(final String servername, final String username, final String password, final String directory, final int port, final boolean useFtps, final String protocol, final boolean implicit) {
+    public void testFtp() {
 
 
         try {
@@ -76,6 +76,7 @@ public class FtpManager extends FileSender {
         if (!validSettings(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpUsername(), preferenceHelper.getFtpPassword(),
                 preferenceHelper.getFtpPort(), preferenceHelper.shouldFtpUseFtps(), preferenceHelper.getFtpProtocol(), preferenceHelper.isFtpImplicit())) {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed());
+            return;
         }
 
         for (File f : files) {

@@ -181,7 +181,7 @@ public class FtpFragment
             boolean useFtpsPreference = preferenceHelper.shouldFtpUseFtps();
             String sslTlsPreference = preferenceHelper.getFtpProtocol();
             boolean implicitPreference = preferenceHelper.isFtpImplicit();
-            String directoryPreference = preferenceHelper.getFtpDirectory();
+
 
             if (!helper.validSettings(servernamePreference, usernamePreference, passwordPreference,
                     portPreference,
@@ -194,11 +194,7 @@ public class FtpFragment
             }
 
             Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.autoftp_testing));
-
-
-            helper.testFtp(servernamePreference, usernamePreference, passwordPreference,
-                    directoryPreference, portPreference, useFtpsPreference,
-                    sslTlsPreference, implicitPreference);
+            helper.testFtp();
         }
 
 
