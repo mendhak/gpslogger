@@ -22,22 +22,25 @@ package com.mendhak.gpslogger.senders.ftp;
 
 
 
-import com.birbit.android.jobqueue.CancelResult;
-import com.birbit.android.jobqueue.JobManager;
-import com.birbit.android.jobqueue.TagConstraint;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSender;
+
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class FtpManager extends FileSender {
     private static final Logger LOG = Logs.of(FtpManager.class);
@@ -54,22 +57,18 @@ public class FtpManager extends FileSender {
         try {
             final File testFile = Files.createTestFile();
 
-            final JobManager jobManager = AppSettings.getJobManager();
+            HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
+                put("filePath", testFile.getAbsolutePath());
+            }};
 
-            jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-                @Override
-                public void onCancelled(CancelResult cancelResult) {
-                    jobManager.addJobInBackground(new FtpJob(servername, port, username, password, directory,
-                            useFtps, protocol, implicit, testFile, testFile.getName()));
-                }
-            }, TagConstraint.ANY, FtpJob.getJobTag(testFile));
+            String tag = String.valueOf(Objects.hashCode(testFile)) ;
+            OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(FtpWorker.class, dataMap);
+            WorkManager.getInstance(AppSettings.getInstance())
+                    .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
 
         } catch (Exception ex) {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed(ex.getMessage(), ex));
         }
-
-
-
     }
 
     @Override
@@ -103,16 +102,14 @@ public class FtpManager extends FileSender {
 
     public void uploadFile(final File f) {
 
-        final JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-            @Override
-            public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new FtpJob(preferenceHelper.getFtpServerName(), preferenceHelper.getFtpPort(),
-                        preferenceHelper.getFtpUsername(), preferenceHelper.getFtpPassword(), preferenceHelper.getFtpDirectory(),
-                        preferenceHelper.shouldFtpUseFtps(), preferenceHelper.getFtpProtocol(), preferenceHelper.isFtpImplicit(),
-                        f, f.getName()));
-            }
-        }, TagConstraint.ANY, FtpJob.getJobTag(f));
+        HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
+            put("filePath", f.getAbsolutePath());
+        }};
+
+        String tag = String.valueOf(Objects.hashCode(f)) ;
+        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(FtpWorker.class, dataMap);
+        WorkManager.getInstance(AppSettings.getInstance())
+                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
 
     }
 
