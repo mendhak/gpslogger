@@ -3,11 +3,6 @@ package com.mendhak.gpslogger.senders.googledrive;
 import android.content.Context;
 import android.net.Uri;
 
-import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
@@ -96,9 +91,8 @@ public class GoogleDriveManager extends FileSender {
            put("filePath", fileToUpload.getAbsolutePath());
         }};
 
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(GoogleDriveWorker.class, dataMap);
-        WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+        Systems.startWorkManagerRequest(GoogleDriveWorker.class, dataMap, tag);
+
     }
 
     @Override

@@ -1,9 +1,6 @@
 package com.mendhak.gpslogger.senders.sftp;
 
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
@@ -35,9 +32,8 @@ public class SFTPManager extends FileSender {
         HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
             put("filePath", file.getAbsolutePath());
         }};
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(SFTPWorker.class, dataMap);
-        WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(tag, androidx.work.ExistingWorkPolicy.REPLACE, workRequest);
+        Systems.startWorkManagerRequest(SFTPWorker.class, dataMap, tag);
+
     }
 
     @Override

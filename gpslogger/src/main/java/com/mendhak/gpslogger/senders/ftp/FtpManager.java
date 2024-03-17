@@ -21,12 +21,6 @@
 package com.mendhak.gpslogger.senders.ftp;
 
 
-
-import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
@@ -62,9 +56,7 @@ public class FtpManager extends FileSender {
             }};
 
             String tag = String.valueOf(Objects.hashCode(testFile)) ;
-            OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(FtpWorker.class, dataMap);
-            WorkManager.getInstance(AppSettings.getInstance())
-                    .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+            Systems.startWorkManagerRequest(FtpWorker.class, dataMap, tag);
 
         } catch (Exception ex) {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed(ex.getMessage(), ex));
@@ -108,10 +100,7 @@ public class FtpManager extends FileSender {
         }};
 
         String tag = String.valueOf(Objects.hashCode(f)) ;
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(FtpWorker.class, dataMap);
-        WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
-
+        Systems.startWorkManagerRequest(FtpWorker.class, dataMap, tag);
     }
 
     @Override

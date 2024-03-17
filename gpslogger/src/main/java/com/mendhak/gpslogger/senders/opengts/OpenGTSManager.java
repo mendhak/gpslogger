@@ -19,10 +19,6 @@
 
 package com.mendhak.gpslogger.senders.opengts;
 
-import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-
 import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
@@ -66,9 +62,7 @@ public class OpenGTSManager extends FileSender {
                     HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
                         put("gpxFilePath", f.getAbsolutePath());
                     }};
-                    OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(OpenGtsUdpWorker.class, dataMap);
-                    WorkManager.getInstance(AppSettings.getInstance())
-                            .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+                    Systems.startWorkManagerRequest(OpenGtsUdpWorker.class, dataMap, tag);
                 }
                 else {
                     String tag = String.valueOf(Objects.hashCode(f.getName()));
@@ -76,9 +70,7 @@ public class OpenGTSManager extends FileSender {
                         put("gpxFilePath", f.getAbsolutePath());
                         put("callbackType", "opengts");
                     }};
-                    OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, dataMap);
-                    WorkManager.getInstance(AppSettings.getInstance())
-                            .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+                    Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
                 }
 
             }
@@ -105,9 +97,7 @@ public class OpenGTSManager extends FileSender {
                     put("locations", serializedLocations);
                 }};
 
-                OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(OpenGtsUdpWorker.class, dataMap);
-                WorkManager.getInstance(AppSettings.getInstance())
-                        .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+                Systems.startWorkManagerRequest(OpenGtsUdpWorker.class, dataMap, tag);
             }
             else {
                 sendByHttp(deviceId, accountName, locations, communication, path, server, port);
@@ -132,10 +122,7 @@ public class OpenGTSManager extends FileSender {
             put("callbackType", "opengts");
         }};
 
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, dataMap);
-        WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
-
+        Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
     }
 
 

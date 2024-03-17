@@ -3,10 +3,6 @@ package com.mendhak.gpslogger.senders.customurl;
 import android.location.Location;
 import android.os.Bundle;
 
-import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
@@ -54,9 +50,7 @@ public class CustomUrlManager extends FileSender {
                     put("callbackType", "customUrl");
                 }};
 
-                OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, dataMap);
-                WorkManager.getInstance(AppSettings.getInstance())
-                        .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+                Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
 
             }
         }
@@ -169,9 +163,8 @@ public class CustomUrlManager extends FileSender {
             put("callbackType", "customUrl");
         }};
 
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(CustomUrlWorker.class, dataMap);
-        WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+        Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
+
     }
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {

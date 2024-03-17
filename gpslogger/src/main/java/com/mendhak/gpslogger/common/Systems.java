@@ -42,8 +42,10 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
@@ -241,15 +243,16 @@ public class Systems {
     }
 
     /**
-     * Returns a OneTimeWorkRequest with the given worker class and data map. The constraints are set to
+     * Starts a OneTimeWorkRequest with the given worker class and data map and tag. The constraints are set to
      * UNMETERED network type if the user has set the app to only send on wifi. Otherwise it is set to
      * CONNECTED. The initial delay is set to 1 second to avoid the work being enqueued immediately.
-     * The backoff criteria is set to exponential with a 30 second initial delay.
+     * The backoff criteria is set to exponential with a 30 second initial delay. The tag is used to
+     * uniquely identify the work request, and it replaces any existing work with the same tag.
      * @param workerClass
      * @param dataMap
      * @return
      */
-    public static OneTimeWorkRequest getBasicOneTimeWorkRequest(Class workerClass, HashMap<String, Object> dataMap) {
+    public static void startWorkManagerRequest(Class workerClass, HashMap<String, Object> dataMap, String tag) {
 
         androidx.work.Data data = new Data.Builder().putAll(dataMap).build();
 
@@ -264,6 +267,8 @@ public class Systems {
                 .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, java.util.concurrent.TimeUnit.SECONDS)
                 .setInputData(data)
                 .build();
-        return workRequest;
+
+        WorkManager.getInstance(AppSettings.getInstance())
+                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
     }
 }

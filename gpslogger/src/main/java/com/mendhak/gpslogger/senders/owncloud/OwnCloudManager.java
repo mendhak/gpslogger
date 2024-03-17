@@ -19,10 +19,7 @@
 
 package com.mendhak.gpslogger.senders.owncloud;
 
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
 
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
@@ -57,9 +54,7 @@ public class OwnCloudManager extends FileSender
             HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
                 put("filePath", testFile.getAbsolutePath());
             }};
-            OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(OwnCloudWorker.class, dataMap);
-            WorkManager.getInstance(AppSettings.getInstance())
-                    .enqueueUniqueWork(tag, androidx.work.ExistingWorkPolicy.REPLACE, workRequest);
+            Systems.startWorkManagerRequest(OwnCloudWorker.class, dataMap, tag);
 
         } catch (Exception ex) {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed());
@@ -111,9 +106,8 @@ public class OwnCloudManager extends FileSender
         HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
             put("filePath", f.getAbsolutePath());
         }};
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(OwnCloudWorker.class, dataMap);
-        WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(tag, androidx.work.ExistingWorkPolicy.REPLACE, workRequest);
+        Systems.startWorkManagerRequest(OwnCloudWorker.class, dataMap, tag);
+
     }
 
     @Override

@@ -22,10 +22,6 @@ package com.mendhak.gpslogger.senders.osm;
 import android.content.Context;
 import android.net.Uri;
 
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
@@ -136,9 +132,7 @@ public class OpenStreetMapManager extends FileSender {
             put("filePath", chosenFile.getAbsolutePath());
         }};
 
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(OpenStreetMapWorker.class, dataMap);
-        WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(tag, androidx.work.ExistingWorkPolicy.REPLACE, workRequest);
+        Systems.startWorkManagerRequest(OpenStreetMapWorker.class, dataMap, tag);
 
     }
 

@@ -21,14 +21,10 @@ package com.mendhak.gpslogger.senders.dropbox;
 
 
 import android.content.Context;
-
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-
 import com.dropbox.core.*;
 import com.dropbox.core.android.Auth;
 import com.dropbox.core.oauth.DbxCredential;
-import com.mendhak.gpslogger.common.AppSettings;
+
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
@@ -39,6 +35,7 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 
 public class DropBoxManager extends FileSender {
@@ -111,9 +108,9 @@ public class DropBoxManager extends FileSender {
         HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
             put("fileName", fileName);
         }};
+        String tag = String.valueOf(Objects.hashCode(fileName));
+        Systems.startWorkManagerRequest(DropboxWorker.class, dataMap, tag);
 
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(DropboxWorker.class, dataMap);
-        WorkManager.getInstance(AppSettings.getInstance()).enqueue(workRequest);
     }
 
     @Override

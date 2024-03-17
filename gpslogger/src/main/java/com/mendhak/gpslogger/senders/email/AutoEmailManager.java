@@ -18,12 +18,6 @@
  */
 
 package com.mendhak.gpslogger.senders.email;
-import androidx.work.ExistingWorkPolicy;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-
-
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
@@ -61,10 +55,7 @@ public class AutoEmailManager extends FileSender {
         }};
 
         String tag = String.valueOf(Objects.hashCode(fileNames)) ;
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(AutoEmailWorker.class, dataMap);
-        WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
-
+        Systems.startWorkManagerRequest(AutoEmailWorker.class, dataMap, tag);
     }
 
     @Override
@@ -95,9 +86,7 @@ public class AutoEmailManager extends FileSender {
             put("fileNames", new String[]{});
         }};
         String tag = String.valueOf(Objects.hashCode(new String[]{})) ;
-        OneTimeWorkRequest workRequest = Systems.getBasicOneTimeWorkRequest(AutoEmailWorker.class, dataMap);
-        WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+        Systems.startWorkManagerRequest(AutoEmailWorker.class, dataMap, tag);
     }
 
     @Override
