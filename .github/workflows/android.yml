@@ -22,7 +22,3 @@ jobs:
       
     - name: Run Unit Tests
       run: ./gradlew testDebugUnitTest -Dpre-dex=false -q --no-configuration-cache
-
-    - name: Android Test Report
-      uses: asadmansr/android-test-report-action@v1.2.0
-      if: ${{ always() }}
