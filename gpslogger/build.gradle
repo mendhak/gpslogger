@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.0'
+        classpath 'com.android.tools.build:gradle:8.1.0'
 
         classpath 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
         classpath "com.moowork.gradle:gradle-node-plugin:0.13"
@@ -45,7 +45,6 @@ android {
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 30
         compileSdk 34
-
         versionCode 130
         versionName "130-workmgr"
 
@@ -216,7 +215,7 @@ tasks.withType(Test) {
     }
 }
 
-tasks.whenTaskAdded { task ->
+tasks.configureEach { task ->
     //Don't run lint. Takes too long.
     if (task.name.contains("lint")) {
         task.enabled = false
@@ -247,7 +246,7 @@ task buildTranslationArray {
 }
 preBuild.dependsOn buildTranslationArray
 
-tasks.whenTaskAdded { task ->
+tasks.configureEach { task ->
     if (task.name == 'preDebugBuild' || task.name == 'preReleaseBuild') {
         task.dependsOn buildTranslationArray
     }
