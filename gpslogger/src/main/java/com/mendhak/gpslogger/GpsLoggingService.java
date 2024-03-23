@@ -381,7 +381,7 @@ public class GpsLoggingService extends Service  {
 
     private void resetAutoSendTimersIfNecessary() {
 
-        if (session.getAutoSendDelay() != preferenceHelper.getAutoSendInterval() && preferenceHelper.getAutoSendInterval() > 0) {
+        if (session.getAutoSendDelay() != preferenceHelper.getAutoSendInterval()) {
             session.setAutoSendDelay(preferenceHelper.getAutoSendInterval());
             setupAutoSendTimers();
         }
