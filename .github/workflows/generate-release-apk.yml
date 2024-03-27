@@ -26,12 +26,14 @@ jobs:
           java-version: '17'
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-      - name: build prod
+      - name: Assemble APK
         run: ./gradlew assembleRelease
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+      - name: Sign and copy APK
+        run: ./gradlew copyFinalAPK
       - name: List the files
         run: |
           tree gpslogger/build/outputs/   
