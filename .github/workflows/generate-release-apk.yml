@@ -35,7 +35,9 @@ jobs:
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
       - name: List the files
-        run: tree 
+        run: |
+          tree gpslogger/build/outputs/   
+          ls -lah gpslogger/ 
 
       - name: Upload
         uses: actions/upload-artifact@v4
