@@ -18,6 +18,7 @@ jobs:
         run: |
           mkdir -p keystore
           echo "${{ secrets.KEYSTORE }}" | base64 --decode > keystore/your_signing_keystore.jks
+          ls -lah keystore/your_signing_keystore.jks
         shell: bash
       - name: Set up Java 17
         uses: actions/setup-java@v4
