@@ -110,10 +110,10 @@
     <string name="autoemail_ssl_summary">Skru av denne hvis tilkobling mislykkes</string>
     <string name="autoemail_choosepreset">E-postleverandøren</string>
     <string name="autoemail_choosepreset_summary">Velg en leverandør eller velg manuellt</string>
-    <string name="autoemail_smtp_testemail">Test epost</string>
+    <string name="autoemail_smtp_testemail">Test-e-post</string>
     <string name="autoemail_test">Send en test med innstillingene ovenfor</string>
     <string name="autoemail_sendingtest">Sende en test e-post</string>
-    <string name="autoemail_testresult_success">Epost ble sendt</string>
+    <string name="autoemail_testresult_success">E-post sendt</string>
     <string name="fix_obtained">Posisjon funnet</string>
     <string name="started_waiting">GPS\'en er på og søker etter posisjon</string>
     <string name="gps_stopped">GPS pauset</string>
@@ -231,7 +231,7 @@
     <string name="gpslogger_permissions_rationale_title">Nødvendige tillatelser</string>
     <string name="privacy_policy">Personvern</string>
     <string name="debuglog_attach_to_email">Legg ved feilsøkingslogg til e-post</string>
-    <string name="debuglog_attach_to_email_summary">Legger ved feilsøkingslogg til epost med diagnostiseringsinformasjon</string>
+    <string name="debuglog_attach_to_email_summary">Legger ved feilsøkingslogg til i e-post med diagnostiseringsinfo</string>
     <string name="change_language_summary">Ikke alle språk er fullstendig oversatt! Du må starte programmet på nytt før innstillingene trer i kraft.</string>
     <string name="navigation_drawer_close">Lukk navigasjonsskuff</string>
     <string name="navigation_drawer_open">Åpne navigasjonsskuff</string>
