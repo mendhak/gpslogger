@@ -47,3 +47,13 @@ jobs:
             gpslogger/gpslogger-*.apk
             gpslogger/gpslogger-*.apk.asc
             gpslogger/gpslogger-*.apk.SHA256
+      - name: Create a Release
+        id: create-release
+        uses: softprops/action-gh-release@v2
+        if: contains(github.ref, '-rc') && startsWith(github.ref, 'refs/tags/')
+        with:
+          prerelease: true
+          files: |
+            gpslogger/gpslogger-*.apk
+            gpslogger/gpslogger-*.apk.asc
+            gpslogger/gpslogger-*.apk.SHA256
