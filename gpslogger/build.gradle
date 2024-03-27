@@ -99,7 +99,7 @@ android {
     else if (System.getenv("SIGNING_STORE_PASSWORD") != null) {
         signingConfigs {
             release {
-                storeFile = file("keystore/your_signing_keystore.jks")
+                storeFile = file("${projectDir}/keystore/your_signing_keystore.jks")
                 storePassword System.getenv("SIGNING_STORE_PASSWORD")
                 keyAlias System.getenv("SIGNING_KEY_ALIAS")
                 keyPassword System.getenv("SIGNING_KEY_PASSWORD")
