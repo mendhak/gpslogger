@@ -32,7 +32,7 @@ jobs:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-      - name: Sign and copy APK
+      - name: Sign and Checksum APK
         run: ./gradlew copyFinalAPK -Psigning.gnupg.passphrase=${{ secrets.GPG_SIGNING_PASSWORD }} -Psigning.gnupg.executable=gpg 
       - name: List the files
         run: |
