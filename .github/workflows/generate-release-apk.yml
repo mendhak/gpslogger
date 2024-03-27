@@ -43,4 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Build Artifacts
-          path: app/build/outputs/
+          path: |
+            gpslogger/gpslogger-*.apk
+            gpslogger/gpslogger-*.apk.asc
+            gpslogger/gpslogger-*.apk.SHA256
