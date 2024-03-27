@@ -1,4 +1,4 @@
-name: Build Release App Bundle
+name: Build and Release App Bundle
 
 on: workflow_dispatch
 
