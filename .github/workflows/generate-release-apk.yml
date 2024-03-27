@@ -12,6 +12,13 @@ jobs:
         with:
           fileName: 'keystore/your_signing_keystore.jks'
           encodedString: ${{ secrets.KEYSTORE }}
+      - id: install-gpg-signing-key
+        name: Install GPG signing key
+        run: |
+          # Install gpg signing key
+          cat <(echo -e "${{ secrets.GPG_SIGNING_SECRET_KEY }}") | gpg --batch --import
+          # Verify gpg secret key
+          gpg --list-secret-keys --keyid-format LONG
       - name: Checkout
         uses: actions/checkout@v1
       - name: Set up Java 17
@@ -27,6 +34,9 @@ jobs:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+      - name: List the files
+        run: tree 
+
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
