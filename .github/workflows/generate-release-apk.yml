@@ -17,8 +17,7 @@ jobs:
         run: |
           # Install gpg signing key
           cat <(echo -e "${{ secrets.GPG_SIGNING_SECRET_KEY }}") | gpg --batch --import
-          # Verify gpg secret key
-          gpg --list-secret-keys --keyid-format LONG
+          
       - name: Checkout
         uses: actions/checkout@v1
       - name: Set up Java 17
