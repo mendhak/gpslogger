@@ -45,8 +45,8 @@ android {
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 30
         compileSdk 34
-        versionCode 130
-        versionName "130-workmgr"
+        versionCode 131
+        versionName "131-workmgr"
 
         manifestPlaceholders = [
                 appAuthRedirectScheme: 'com.mendhak.gpslogger'
