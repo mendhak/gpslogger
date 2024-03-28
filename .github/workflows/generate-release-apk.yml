@@ -1,0 +1,68 @@
+name: Build and Release App Bundle
+
+# Run on workflow dispatch or a tag
+on:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    permissions: 
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - id: install-gpg-signing-key
+        name: Install GPG signing key
+        run: |
+          # Install gpg signing key
+          cat <(echo -e "${{ secrets.GPG_SIGNING_SECRET_KEY }}") | gpg --batch --import > /dev/null 2>&1
+          
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Decode Keystore
+        run: |
+          mkdir -p gpslogger/keystore
+          echo "${{ secrets.KEYSTORE }}" | base64 --decode > gpslogger/keystore/your_signing_keystore.jks
+        shell: bash
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Assemble APK
+        run: ./gradlew assembleRelease
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+      - name: Sign and Checksum APK
+        run: ./gradlew copyFinalAPK -Psigning.gnupg.passphrase=${{ secrets.GPG_SIGNING_PASSWORD }} -Psigning.gnupg.executable=gpg 
+      - name: List the files
+        run: |
+          tree gpslogger/build/outputs/   
+          ls -lah gpslogger/ 
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build Artifacts
+          path: |
+            gpslogger/gpslogger-*.apk
+            gpslogger/gpslogger-*.apk.asc
+            gpslogger/gpslogger-*.apk.SHA256
+      - name: Create a Release
+        id: create-release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          prerelease: ${{ contains(github.ref, '-rc') && startsWith(github.ref, 'refs/tags/') }}
+          make_latest: true
+          files: |
+            gpslogger/gpslogger-*.apk
+            gpslogger/gpslogger-*.apk.asc
+            gpslogger/gpslogger-*.apk.SHA256

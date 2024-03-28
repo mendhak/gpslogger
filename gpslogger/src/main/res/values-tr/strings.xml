@@ -35,8 +35,8 @@
     <string name="sharing_mylocation">Konumum</string>
     <string name="sharing_via">Şununla paylaş</string>
     <!-- general -->
-    <string name="foot">fit</string>
-    <string name="feet">fit</string>
+    <string name="foot"> fit</string>
+    <string name="feet"> fit</string>
     <string name="meter"> metre</string>
     <string name="meters"> metre</string>
     <string name="error">Hata</string>
@@ -383,4 +383,6 @@
     <string name="view_annotation">Açıklama Görünümü</string>
     <string name="annotation_edit_button_label">Açıklama düğmesini düzenle</string>
     <string name="annotation_edit_button_color">Düğme rengi</string>
+    <string name="retry_get_best_possible_accuracy_title">Süre içinde en iyi doğruluğu seç</string>
+    <string name="retry_get_best_possible_accuracy_summary">İlk doğru noktayı kaydetmek yerine, doğruluk süresi boyunca denemeye devam edin ve en iyi doğruluğa sahip noktayı seçin. Daha uzun sürer, ancak daha doğru noktalar için şansı artırır.</string>
 </resources>

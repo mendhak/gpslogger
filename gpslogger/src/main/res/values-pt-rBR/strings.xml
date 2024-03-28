@@ -380,4 +380,6 @@
     <string name="install_conscrypt_provider_title">Instale o provedor Conscrypt (SSL/TLS)</string>
     <string name="log_customurl_discard_offline_locations">Descartar locais offline</string>
     <string name="log_customurl_discard_offline_locations_summary">Registrar locais no URL personalizado somente enquanto uma conexão de rede estiver disponível (não afeta o envio automático)</string>
+    <string name="retry_get_best_possible_accuracy_title">Escolha a melhor precisão na duração</string>
+    <string name="retry_get_best_possible_accuracy_summary">Em vez de registrar o primeiro ponto preciso, continue tentando a duração da precisão e selecione o ponto com a melhor precisão. Demora mais, mas aumenta as chances de pontos mais precisos.</string>
 </resources>

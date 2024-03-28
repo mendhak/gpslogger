@@ -380,4 +380,6 @@
     <string name="debuglog_attach_to_email_summary">कुछ नैदानिक जानकारी के साथ ईमेल में डिबग लॉग संलग्न करता है</string>
     <string name="change_language_summary">सभी भाषाएँ पूरी तरह से अनुवादित नहीं हैं! सेटिंग्स को प्रभावी करने के लिए आपको ऐप को पुनरारंभ करना होगा।</string>
     <string name="ssl_certificate_is_valid">प्रमाणपत्र वैध है</string>
+    <string name="retry_get_best_possible_accuracy_title">अवधि में सर्वोत्तम सटीकता चुनें</string>
+    <string name="retry_get_best_possible_accuracy_summary">पहले सटीक बिंदु को लॉग करने के बजाय, सटीकता अवधि के लिए प्रयास करते रहें और सर्वोत्तम सटीकता के साथ बिंदु का चयन करें। अधिक समय लगता है, लेकिन अधिक सटीक बिंदुओं की संभावना बढ़ जाती है।</string>
 </resources>
