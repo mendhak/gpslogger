@@ -243,7 +243,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
 
         try {
             File testFile = Files.createTestFile();
-            manager.uploadFile(testFile.getName());
+            manager.uploadFile(testFile);
 
         } catch (Exception ex) {
             LOG.error("Could not create local test file", ex);

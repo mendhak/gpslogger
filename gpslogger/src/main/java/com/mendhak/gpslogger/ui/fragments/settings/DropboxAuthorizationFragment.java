@@ -128,7 +128,7 @@ public class DropboxAuthorizationFragment extends PreferenceFragmentCompat imple
 
         try {
             File testFile = Files.createTestFile();
-            manager.uploadFile(testFile.getName());
+            manager.uploadFile(testFile);
 
         } catch (Exception ex) {
             LOG.error("Could not create local test file", ex);

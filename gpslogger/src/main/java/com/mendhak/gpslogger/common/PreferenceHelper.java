@@ -992,6 +992,13 @@ public class PreferenceHelper {
     }
 
 
+    /**
+     * Whether to prompt user for OSM details before starting logging
+     */
+    @ProfilePreference(name= PreferenceNames.OPENSTREETMAP_PROMPT_WHEN_LOGGING_STARTS)
+    public boolean shouldPromptForOSMDetailsWhenLoggingStarts() {
+        return prefs.getBoolean(PreferenceNames.OPENSTREETMAP_PROMPT_WHEN_LOGGING_STARTS, false);
+    }
 
 
 

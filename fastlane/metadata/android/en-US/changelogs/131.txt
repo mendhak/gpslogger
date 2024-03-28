@@ -1,0 +1,3 @@
+* OpenStreetMap option to enable or disable being prompted before logging starts
+* Internal change, switching to Android WorkManager for sending and logging tasks.
+* Clarified autosend description, that a dynamic file name change also results in the file being sent.

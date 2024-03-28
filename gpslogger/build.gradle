@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.0'
+        classpath 'com.android.tools.build:gradle:8.1.0'
 
         classpath 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
         classpath "com.moowork.gradle:gradle-node-plugin:0.13"
@@ -37,15 +37,16 @@ repositories {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "com.mendhak.gpslogger"
         minSdkVersion 16
+        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 30
-
-        versionCode 130
-        versionName "130"
+        compileSdk 34
+        versionCode 131
+        versionName "131-workmgr"
 
         manifestPlaceholders = [
                 appAuthRedirectScheme: 'com.mendhak.gpslogger'
@@ -86,8 +87,6 @@ android {
                 keyAlias RELEASE_KEY_ALIAS
                 keyPassword RELEASE_KEY_PASSWORD
             }
-
-            
         }
 
         buildTypes {
@@ -163,10 +162,10 @@ dependencies {
     //Progress button
     implementation 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
 
-    //Android Priority Jobqueue
-    implementation ('com.birbit:android-priority-jobqueue:2.0.1'){
-        exclude group: 'com.google.android', module: 'android'
-    }
+    //Android's WorkManager
+    implementation 'androidx.work:work-runtime:2.9.0'
+    // We need to use Gson to help with WorkManager limitations
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     //Event bus
     implementation 'de.greenrobot:eventbus:2.4.0'
@@ -233,7 +232,7 @@ tasks.withType(Test) {
     }
 }
 
-tasks.whenTaskAdded { task ->
+tasks.configureEach { task ->
     //Don't run lint. Takes too long.
     if (task.name.contains("lint")) {
         task.enabled = false
@@ -264,7 +263,7 @@ task buildTranslationArray {
 }
 preBuild.dependsOn buildTranslationArray
 
-tasks.whenTaskAdded { task ->
+tasks.configureEach { task ->
     if (task.name == 'preDebugBuild' || task.name == 'preReleaseBuild') {
         task.dependsOn buildTranslationArray
     }

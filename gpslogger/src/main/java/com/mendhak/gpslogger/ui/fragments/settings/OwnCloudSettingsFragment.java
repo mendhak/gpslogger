@@ -195,7 +195,7 @@ public class OwnCloudSettingsFragment
 
             Dialogs.progress((FragmentActivity) getActivity(), getString(R.string.owncloud_testing));
             OwnCloudManager helper = new OwnCloudManager(PreferenceHelper.getInstance());
-            helper.testOwnCloud(server, user, pass, directory);
+            helper.testOwnCloud();
         }
 
 

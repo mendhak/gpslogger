@@ -89,6 +89,7 @@ public  class PreferenceNames {
     public static final String OPENSTREETMAP_DESCRIPTION = "osm_description";
     public static final String OPENSTREETMAP_TAGS = "osm_tags";
     public static final String OPENSTREETMAP_VISIBILITY = "osm_visibility";
+    public static final String OPENSTREETMAP_PROMPT_WHEN_LOGGING_STARTS = "osm_promptfordetails_when_logging_starts";
     public static final String AUTOSEND_DROPBOX_ENABLED = "dropbox_enabled";
     public static final String DROPBOX_LONG_LIVED_ACCESS_TOKEN = "DROPBOX_ACCESS_KEY";
     public static final String DROPBOX_REFRESH_TOKEN = "DROPBOX_REFRESH_TOKEN";

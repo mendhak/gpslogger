@@ -105,6 +105,8 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
         tagsPref.setOnPreferenceClickListener(this);
         tagsPref.setSummary(preferenceHelper.getOSMTags());
 
+        Preference promptPref = findPreference(PreferenceNames.OPENSTREETMAP_PROMPT_WHEN_LOGGING_STARTS);
+
         Preference resetPref = findPreference("osm_resetauth");
 
         if (!manager.isOsmAuthorized()) {
@@ -113,13 +115,14 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
             visibilityPref.setEnabled(false);
             descriptionPref.setEnabled(false);
             tagsPref.setEnabled(false);
+            promptPref.setEnabled(false);
         } else {
             resetPref.setTitle(R.string.osm_resetauth);
             resetPref.setSummary("");
             visibilityPref.setEnabled(true);
             descriptionPref.setEnabled(true);
             tagsPref.setEnabled(true);
-
+            promptPref.setEnabled(true);
         }
 
         resetPref.setOnPreferenceClickListener(this);

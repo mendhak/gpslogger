@@ -22,6 +22,8 @@ package com.mendhak.gpslogger.common;
 
 import android.content.Context;
 import android.os.Build;
+
+import com.google.gson.Gson;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 
@@ -672,5 +674,12 @@ public class Strings {
     }
 
 
+    public static String serializeTojson(Object obj){
+        return new Gson().toJson(obj);
+    }
+
+    public static <T> T deserializeFromJson(String json, Class<T> clazz){
+        return new Gson().fromJson(json, clazz);
+    }
 
 }
