@@ -37,7 +37,6 @@ import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.FileSenderFactory;
 import com.mendhak.gpslogger.ui.Dialogs;
 import de.greenrobot.event.EventBus;
-import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.FormElement;
 import eltos.simpledialogfragment.form.Hint;
 import eltos.simpledialogfragment.form.Input;
@@ -130,7 +129,9 @@ public abstract class GenericViewFragment extends Fragment {
         //If the user needs to be prompted about OpenStreetMap settings, build some form elements for it.
         if(preferenceHelper.isAutoSendEnabled()
                 && preferenceHelper.isOsmAutoSendEnabled()
-                && FileSenderFactory.getOsmSender().isAutoSendAvailable()){
+                && FileSenderFactory.getOsmSender().isAutoSendAvailable()
+                && preferenceHelper.shouldPromptForOSMDetailsWhenLoggingStarts()
+        ){
             formElements.add(Hint.plain(R.string.osm_setup_title));
             formElements.addAll(Dialogs.getOpenStreetMapFormElementsForDialog(preferenceHelper));
         }

@@ -36,5 +36,10 @@
         android:title="@string/osm_tags"
         app:iconSpaceReserved="false" />
 
+    <SwitchPreferenceCompat
+        android:key="osm_promptfordetails_when_logging_starts"
+        android:title="@string/prompt_for_details_when_logging_starts"
+        android:defaultValue="true"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>
