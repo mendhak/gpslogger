@@ -9,6 +9,7 @@ import androidx.work.WorkerParameters;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.slf4j.LoggingOutputStream;
@@ -62,7 +63,10 @@ public class FtpWorker extends Worker {
 
         if (upload(server, username, password, directory, port, useFtps, protocol, implicit, file, file.getName())) {
             LOG.info("FTP - file uploaded");
+            // Notify internal listeners
             EventBus.getDefault().post(new UploadEvents.Ftp().succeeded());
+            // Notify external listeners
+            Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{file.getAbsolutePath()}, "ftp");
             return Result.success();
         } else {
             jobResult.ftpMessages = ftpServerResponses;
