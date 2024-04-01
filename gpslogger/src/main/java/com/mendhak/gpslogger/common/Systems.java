@@ -271,4 +271,14 @@ public class Systems {
         WorkManager.getInstance(AppSettings.getInstance())
                 .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
     }
+
+    public static void sendFileUploadedBroadcast(Context context, String filePath, String senderType){
+        LOG.debug("Sending a file uploaded broadcast");
+        Intent sendIntent = new Intent();
+        sendIntent.setAction("com.mendhak.gpslogger.EVENT");
+        sendIntent.putExtra("gpsloggerevent", "fileuploaded");
+        sendIntent.putExtra("filepath", filePath);
+        sendIntent.putExtra("sendertype", senderType);
+        context.sendBroadcast(sendIntent);
+    }
 }

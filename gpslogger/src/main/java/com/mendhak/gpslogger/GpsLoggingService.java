@@ -420,7 +420,7 @@ public class GpsLoggingService extends Service  {
     }
 
     private void notifyByBroadcast(boolean loggingStarted) {
-            LOG.debug("Sending a custom broadcast");
+            LOG.debug("Sending a started/stopped broadcast");
             String event = (loggingStarted) ? "started" : "stopped";
             Intent sendIntent = new Intent();
             sendIntent.setAction("com.mendhak.gpslogger.EVENT");
