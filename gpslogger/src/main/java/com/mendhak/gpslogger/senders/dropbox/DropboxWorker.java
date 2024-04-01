@@ -12,6 +12,7 @@ import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.WriteMode;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
@@ -59,7 +60,11 @@ public class DropboxWorker extends Worker {
 
             mDbxClient.files().uploadBuilder("/" + fileToUpload.getName()).withMode(WriteMode.OVERWRITE).uploadAndFinish(inputStream);
 
+            // Notify internal listeners
             EventBus.getDefault().post(new UploadEvents.Dropbox().succeeded());
+            // Notify external listeners
+            Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{fileToUpload.getAbsolutePath()}, "dropbox");
+
             LOG.info("Dropbox - file uploaded");
         } catch (Exception e) {
             LOG.error("Could not upload to Dropbox" , e);

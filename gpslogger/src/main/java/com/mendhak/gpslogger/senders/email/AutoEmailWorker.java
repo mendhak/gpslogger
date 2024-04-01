@@ -168,7 +168,10 @@ public class AutoEmailWorker extends Worker {
                 }
                 else {
                     LOG.info("Email - file sent");
+                    // Notify internal listeners
                     EventBus.getDefault().post(new UploadEvents.AutoEmail().succeeded());
+                    // Notify external listeners
+                    Systems.sendFileUploadedBroadcast(getApplicationContext(), fileNames, "email");
                 }
             }
             else {
@@ -198,7 +201,7 @@ public class AutoEmailWorker extends Worker {
             }
         }
 
-        Systems.sendFileUploadedBroadcast(getApplicationContext(), fileNames, "email");
+
 
         return Result.success();
     }

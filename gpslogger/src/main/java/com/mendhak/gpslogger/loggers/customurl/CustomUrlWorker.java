@@ -103,11 +103,13 @@ public class CustomUrlWorker extends Worker {
 
             String gpxFilePath = getInputData().getString("gpxFilePath");
             String csvFilePath = getInputData().getString("csvFilePath");
+            // Notify external listeners
             if(!Strings.isNullOrEmpty(gpxFilePath) || !Strings.isNullOrEmpty(csvFilePath)){
                 String[] filePaths = new String[]{ Strings.isNullOrEmpty(gpxFilePath) ? csvFilePath : gpxFilePath };
                 Systems.sendFileUploadedBroadcast(getApplicationContext(), filePaths, "customurl");
             }
 
+            // Notify internal listeners
             EventBus.getDefault().post(callbackEvent.succeeded());
             return Result.success();
         }
