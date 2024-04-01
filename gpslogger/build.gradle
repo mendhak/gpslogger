@@ -7,9 +7,9 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.0'
+        classpath 'com.android.tools.build:gradle:8.1.4'
 
-        classpath 'org.jacoco:org.jacoco.core:0.7.4.201502262128'
+        classpath 'org.jacoco:org.jacoco.core:0.8.7'
         classpath "com.moowork.gradle:gradle-node-plugin:0.13"
     }
 }
@@ -48,6 +48,7 @@ android {
         versionCode 131
         versionName "131-workmgr"
 
+        // Used by AppAuth-Android
         manifestPlaceholders = [
                 appAuthRedirectScheme: 'com.mendhak.gpslogger'
         ]
