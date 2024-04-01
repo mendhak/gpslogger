@@ -106,7 +106,7 @@ public class CustomUrlWorker extends Worker {
             // Notify external listeners
             if(!Strings.isNullOrEmpty(gpxFilePath) || !Strings.isNullOrEmpty(csvFilePath)){
                 String[] filePaths = new String[]{ Strings.isNullOrEmpty(gpxFilePath) ? csvFilePath : gpxFilePath };
-                Systems.sendFileUploadedBroadcast(getApplicationContext(), filePaths, "customurl");
+                Systems.sendFileUploadedBroadcast(getApplicationContext(), filePaths, getInputData().getString("callbackType"));
             }
 
             // Notify internal listeners

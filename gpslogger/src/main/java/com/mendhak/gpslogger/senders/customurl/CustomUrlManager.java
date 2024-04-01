@@ -47,7 +47,7 @@ public class CustomUrlManager extends FileSender {
 
                 HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
                     put("csvFilePath", f.getAbsolutePath());
-                    put("callbackType", "customUrl");
+                    put("callbackType", "customurl");
                 }};
 
                 Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
@@ -160,7 +160,7 @@ public class CustomUrlManager extends FileSender {
 
         HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
             put("urlRequests", new String[]{serializedRequest});
-            put("callbackType", "customUrl");
+            put("callbackType", "customurl");
         }};
 
         Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
