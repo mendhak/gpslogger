@@ -272,12 +272,12 @@ public class Systems {
                 .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
     }
 
-    public static void sendFileUploadedBroadcast(Context context, String filePath, String senderType){
+    public static void sendFileUploadedBroadcast(Context context, String[] filePaths, String senderType){
         LOG.debug("Sending a file uploaded broadcast");
         Intent sendIntent = new Intent();
         sendIntent.setAction("com.mendhak.gpslogger.EVENT");
         sendIntent.putExtra("gpsloggerevent", "fileuploaded");
-        sendIntent.putExtra("filepath", filePath);
+        sendIntent.putExtra("filepaths", filePaths);
         sendIntent.putExtra("sendertype", senderType);
         context.sendBroadcast(sendIntent);
     }

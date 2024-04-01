@@ -58,11 +58,11 @@ GPSLogger sends a broadcast start/stop of logging, or file uploaded, which you c
 
 In Tasker, this would be the `Intent Received` event.  
 Set the action to `com.mendhak.gpslogger.EVENT`.  
-You can then access the extras as `%variablename`.  
+You can then access the extras as `%variablename` or `%arrayname1`.  
 
 In Automate, you can use the Broadcast Receive block.  
 Set the Action to `com.mendhak.gpslogger.EVENT`.  
-Set the dictionary with broadcast extras to a variable, then access the extras as `myvariable["variablename"]`.  
+Set the dictionary with broadcast extras to a variable, then access the extras as `myvar["variablename"]` or `myvar["arrayname"][0]`.  
 
 From there in your task, you can look at the following variables.
 
@@ -78,7 +78,7 @@ From there in your task, you can look at the following variables.
 *File uploaded*
 
 * `gpsloggerevent` - `fileuploaded`
-* `filepath` - the full path to the file that was uploaded
+* `filepaths` - an array of file paths that were uploaded, even if it's just a single file
 * `sendertype` - which sender was used to upload the file, e.g. `customurl`, `ftp`, etc.
 
 

@@ -10,6 +10,7 @@ import androidx.work.WorkerParameters;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.LocalX509TrustManager;
 import com.mendhak.gpslogger.common.network.Networks;
@@ -197,6 +198,7 @@ public class AutoEmailWorker extends Worker {
             }
         }
 
+        Systems.sendFileUploadedBroadcast(getApplicationContext(), fileNames, "email");
 
         return Result.success();
     }
