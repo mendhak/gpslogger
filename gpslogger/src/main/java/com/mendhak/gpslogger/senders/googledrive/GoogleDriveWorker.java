@@ -11,6 +11,7 @@ import androidx.work.WorkerParameters;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
@@ -149,7 +150,10 @@ public class GoogleDriveWorker extends Worker {
         }
 
         if(success){
+            // Notify internal listeners
             EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
+            // Notify external listeners
+            Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{fileToUpload.getAbsolutePath()}, "googledrive");
             return Result.success();
         }
 
