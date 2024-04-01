@@ -10,6 +10,7 @@ import androidx.work.WorkerParameters;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.LocalX509TrustManager;
 import com.mendhak.gpslogger.common.network.Networks;
@@ -127,7 +128,11 @@ public class OwnCloudWorker extends Worker implements OnRemoteOperationListener 
             }
             else {
                 LOG.info("OwnCloud - file uploaded");
+
+                // Notify internal listeners
                 EventBus.getDefault().post(new UploadEvents.OwnCloud().succeeded());
+                // Notify external listeners
+                Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{fileToUpload.getAbsolutePath()}, "owncloud");
                 return Result.success();
             }
         }

@@ -101,6 +101,9 @@ public class CustomUrlWorker extends Worker {
 
         if(success) {
 
+            // Notify internal listeners
+            EventBus.getDefault().post(callbackEvent.succeeded());
+
             String gpxFilePath = getInputData().getString("gpxFilePath");
             String csvFilePath = getInputData().getString("csvFilePath");
             // Notify external listeners
@@ -109,8 +112,6 @@ public class CustomUrlWorker extends Worker {
                 Systems.sendFileUploadedBroadcast(getApplicationContext(), filePaths, getInputData().getString("callbackType"));
             }
 
-            // Notify internal listeners
-            EventBus.getDefault().post(callbackEvent.succeeded());
             return Result.success();
         }
         else {

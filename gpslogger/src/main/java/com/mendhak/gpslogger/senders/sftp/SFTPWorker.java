@@ -15,6 +15,7 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.SftpException;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
@@ -113,7 +114,10 @@ public class SFTPWorker extends Worker {
                 session.disconnect();
 
                 LOG.info("SFTP - file uploaded");
+                // Notify internal listeners
                 EventBus.getDefault().post(new UploadEvents.SFTP().succeeded());
+                // Notify external listeners
+                Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{fileToUpload.getAbsolutePath()}, "sftp");
                 return Result.success();
             } else {
                 EventBus.getDefault().post(new UploadEvents.SFTP().failed("Could not connect, unknown reasons", null));

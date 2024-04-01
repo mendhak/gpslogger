@@ -9,6 +9,7 @@ import androidx.work.WorkerParameters;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.GpxReader;
@@ -55,7 +56,12 @@ public class OpenGtsUdpWorker extends Worker{
                 }
                 sendRAW(deviceId, accountName, server, port, locations);
             }
+            
+            // Notify internal listeners
             EventBus.getDefault().post(new UploadEvents.OpenGTS().succeeded());
+            // Notify external listeners
+            Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{gpxFilePath}, "opengts");
+
         }
         catch(Exception ex){
             LOG.error("Could not send to OpenGTS", ex);
