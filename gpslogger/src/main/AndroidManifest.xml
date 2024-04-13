@@ -35,6 +35,7 @@
         android:theme="@style/AppTheme"
         android:name="com.mendhak.gpslogger.common.AppSettings"
         android:usesCleartextTraffic="true"
+        android:enableOnBackInvokedCallback="true"
         android:requestLegacyExternalStorage="true"
         >
 
