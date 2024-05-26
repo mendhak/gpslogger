@@ -20,9 +20,14 @@
 package com.mendhak.gpslogger.common;
 
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 
 
 import com.mendhak.gpslogger.BuildConfig;
+import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
@@ -36,6 +41,7 @@ public class AppSettings extends Application {
 
     @Override
     public void onCreate() {
+
         Systems.setAppTheme(PreferenceHelper.getInstance().getAppThemeSetting());
         super.onCreate();
 
@@ -48,7 +54,30 @@ public class AppSettings extends Application {
         EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
         LOG.debug("EventBus configured");
 
+        createNotificationChannels();
+    }
 
+    private void createNotificationChannels() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            NotificationChannel channel = new NotificationChannel(NotificationChannelNames.GPSLOGGER_DEFAULT, getString(R.string.app_name), NotificationManager.IMPORTANCE_DEFAULT);
+            channel.enableLights(false);
+            channel.enableVibration(false);
+            channel.setSound(null,null);
+            channel.setLockscreenVisibility(PreferenceHelper.getInstance().shouldHideNotificationFromLockScreen() ? Notification.VISIBILITY_PRIVATE : Notification.VISIBILITY_PUBLIC);
+
+            channel.setShowBadge(true);
+            manager.createNotificationChannel(channel);
+
+            NotificationChannel channelErrors = new NotificationChannel(NotificationChannelNames.GPSLOGGER_ERRORS, getString(R.string.error), NotificationManager.IMPORTANCE_HIGH);
+            channelErrors.enableLights(true);
+            channelErrors.enableVibration(true);
+            channelErrors.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            channelErrors.setShowBadge(true);
+            manager.createNotificationChannel(channelErrors);
+
+        }
     }
 
 

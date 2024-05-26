@@ -22,6 +22,8 @@ package com.mendhak.gpslogger.common;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -30,14 +32,19 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.text.Html;
+
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.work.BackoffPolicy;
 import androidx.work.Constraints;
@@ -47,6 +54,8 @@ import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import com.mendhak.gpslogger.GpsMainActivity;
+import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 
 import org.slf4j.Logger;
@@ -280,5 +289,36 @@ public class Systems {
         sendIntent.putExtra("filepaths", filePaths);
         sendIntent.putExtra("sendertype", senderType);
         context.sendBroadcast(sendIntent);
+    }
+
+    /**
+     * Show an error notification with a warning emoji ⚠️, this is only used for important errors worth notifying the user for.
+     * Such as location permissions missing, unable to write to storage.
+     * @param context The application context, so that the notification service can be accessed.
+     * @param message A single line message to show in the notification.
+     */
+    public static void showErrorNotification(Context context, String message){
+        LOG.debug("Showing fatal notification");
+
+        Intent contentIntent = new Intent(context, GpsMainActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder nfc = new NotificationCompat.Builder(context.getApplicationContext(), NotificationChannelNames.GPSLOGGER_ERRORS)
+                .setSmallIcon(android.R.drawable.stat_notify_error)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), android.R.drawable.stat_notify_error))
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_ERROR)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setContentTitle(context.getString(R.string.error))
+                .setContentText(HtmlCompat.fromHtml(message, HtmlCompat.FROM_HTML_MODE_COMPACT).toString())
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(Html.fromHtml(message).toString()).setBigContentTitle(context.getString(R.string.error)))
+                .setOngoing(false)
+                .setOnlyAlertOnce(true)
+                .setContentIntent(pendingIntent);
+
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+        notificationManager.notify(NotificationChannelNames.GPSLOGGER_ERRORS_NOTIFICATION_ID, nfc.build());
+
     }
 }
