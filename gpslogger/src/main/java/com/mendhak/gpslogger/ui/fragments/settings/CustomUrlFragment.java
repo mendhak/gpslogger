@@ -116,8 +116,8 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                             "{3} <font color=''#{0}'' face=''monospace''>%DESC</font><br />" +
                             "{4} <font color=''#{0}'' face=''monospace''>%SAT</font><br />" +
                             "{5} <font color=''#{0}'' face=''monospace''>%ALT</font><br />" +
-                            "{6} <font color=''#{0}'' face=''monospace''>%SPD_KPH</font><br />" +
-                            "{7} <font color=''#{0}'' face=''monospace''>%SPD</font><br />" +
+                            "{6} <font color=''#{0}'' face=''monospace''>%SPD</font><br />" +
+                            "{7} <font color=''#{0}'' face=''monospace''>%SPD_KPH</font><br />" +
                             "{8} <font color=''#{0}'' face=''monospace''>%ACC</font><br />" +
                             "{9} <font color=''#{0}'' face=''monospace''>%DIR</font><br />" +
                             "{10} <font color=''#{0}'' face=''monospace''>%PROV</font><br />" +
@@ -140,8 +140,8 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
             String legend1 = MessageFormat.format(legendFormat,
                     codeGreen,
                     getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
-                    getString(R.string.txt_satellites), getString(R.string.txt_altitude), getString(R.string.txt_speed_kph),
-                    getString(R.string.txt_speed), getString(R.string.txt_accuracy), getString(R.string.txt_direction),
+                    getString(R.string.txt_satellites), getString(R.string.txt_altitude), getString(R.string.txt_speed),
+                    getString(R.string.txt_speed_kph), getString(R.string.txt_accuracy), getString(R.string.txt_direction),
                     getString(R.string.txt_provider),
                     getString(R.string.txt_timestamp_epoch),
                     getString(R.string.txt_time_isoformat),
