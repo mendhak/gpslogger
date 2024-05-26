@@ -1,0 +1,4 @@
+* Nová voľba pre presnosť – funguje počas intervalu opakovania a vyberie najpresnejší bod.
+* Pasívne počúvacie zariadenie teraz zodpovedá iným vybraným počúvacím zariadeniam (GNSS/sieť). Ak nie sú vybrané, akceptujú sa všetky body.
+* Rýchlejšie odosielanie na používateľskú adresu URL pri automatickom odosielaní.
+* Nová vlastnosť stoponapplaunch, dostupná len cez súbor .properties
