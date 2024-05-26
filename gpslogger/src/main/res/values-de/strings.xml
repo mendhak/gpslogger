@@ -378,7 +378,7 @@
     <string name="google_drive_folder_path">Google Drive Ordner</string>
     <string name="autosend_customurl_summary">(Diese Funktion aktiviert die CSV-Aufnahme) Sendet Anfragen gruppiert zu der eingestellten URL, eine für jede Zeile in der CSV-Datei. Abhängig vom automatischen Sendeintervall.</string>
     <string name="log_customurl_discard_offline_locations">Offline-Standorte verwerfen</string>
-    <string name="log_customurl_discard_offline_locations_summary">Zeichnet Standorte zu der eingestellten URL nur auf, während eine Netzwerkverbindung verfügbar ist (keine Auswirkung auf automatisches Senden)</string>
+    <string name="log_customurl_discard_offline_locations_summary">Sendet Standorte nur zu der eingestellten URL, wenn eine Netzwerkverbindung verfügbar ist (keine Auswirkung auf automatisches Senden)</string>
     <string name="annotation_edit_button_color">Knopffarbe</string>
     <string name="customurl_all_parameters">Alle Parameter:</string>
     <string name="annotation_edit_button_label">Anmerkungsknopf bearbeiten</string>
