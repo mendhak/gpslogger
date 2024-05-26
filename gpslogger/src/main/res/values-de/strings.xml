@@ -377,4 +377,6 @@
     <string name="log_customurl_summary_detailed">Sendet eine Anfrage an die eingestellte URL wenn ein Standort aufgenommen wurde, in Abhängigkeit vom Aufnahmeintervall.</string>
     <string name="google_drive_folder_path">Google Drive Ordner</string>
     <string name="autosend_customurl_summary">(Diese Funktion aktiviert die CSV-Aufnahme) Sendet Anfragen gruppiert zu der eingestellten URL, eine for jede Zeile in der CSV-Datei, hängt vom automatischen Sendeintervall ab.</string>
+    <string name="log_customurl_discard_offline_locations">Offline-Standorte verwerfen</string>
+    <string name="log_customurl_discard_offline_locations_summary">Zeichnet Standorte zu der eingestellten URL nur auf, während eine Netzwerkverbindung verfügbar ist (keine Auswirkung auf automatisches Senden)</string>
 </resources>
