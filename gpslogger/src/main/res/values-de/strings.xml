@@ -376,4 +376,5 @@
     <string name="google_drive_folder_path_summary_2">Wenn Sie einen einzelnen Ordnernamen verwenden, kann dieser nach der Erstellung innerhalb von Google Drive verschoben werden. Ordnerpfade sind langsamer, da jeder Teil des Pfades überprüft und ggf. erstellt werden muss, bevor Dateien hochgeladen werden .</string>
     <string name="log_customurl_summary_detailed">Sendet eine Anfrage an die eingestellte URL wenn ein Standort aufgenommen wurde, in Abhängigkeit vom Aufnahmeintervall.</string>
     <string name="google_drive_folder_path">Google Drive Ordner</string>
+    <string name="autosend_customurl_summary">(Diese Funktion aktiviert die CSV-Aufnahme) Sendet Anfragen gruppiert zu der eingestellten URL, eine for jede Zeile in der CSV-Datei, hängt vom automatischen Sendeintervall ab.</string>
 </resources>
