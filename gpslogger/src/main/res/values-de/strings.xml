@@ -372,4 +372,5 @@
     <string name="install_conscrypt_provider_summary">Wenn sie SSL/TLS Verbindungsprobleme auf älteren Android-Geräten vorfinden, kann das Installieren des \"Conscrypt Provider\" helfen. (Folgen Sie diesem Link, installieren die APK, und starten Sie die App neu)</string>
     <string name="retry_get_best_possible_accuracy_title">Nutze höchste Genauigkeit aus Zeitspanne</string>
     <string name="retry_get_best_possible_accuracy_summary">Anstatt den ersten Standort mit der eingestellten Genauigkeit aufzuzeichnen, wird erst nach Ablauf der Wartezeit der Standort mit der höchsten Genauigkeit genutzt. Erhöht die Genauigkeit auf Kosten des Aufzeichnungsintervalls.</string>
+    <string name="google_drive_folder_path_summary_1">Benutzen Sie einen einzigen Orndernamen (z.B. „GPSLogger”), oder einen Ordnerpfad (z.B. aaa/bbb/ccc). Die Ordner müssen von dieser App erstellt werden.</string>
 </resources>
