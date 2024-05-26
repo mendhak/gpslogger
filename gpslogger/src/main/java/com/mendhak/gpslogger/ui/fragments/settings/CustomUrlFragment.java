@@ -116,31 +116,33 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                             "{3} <font color=''#{0}'' face=''monospace''>%DESC</font><br />" +
                             "{4} <font color=''#{0}'' face=''monospace''>%SAT</font><br />" +
                             "{5} <font color=''#{0}'' face=''monospace''>%ALT</font><br />" +
-                            "{6} <font color=''#{0}'' face=''monospace''>%SPD</font><br />" +
-                            "{7} <font color=''#{0}'' face=''monospace''>%ACC</font><br />" +
-                            "{8} <font color=''#{0}'' face=''monospace''>%DIR</font><br />" +
-                            "{9} <font color=''#{0}'' face=''monospace''>%PROV</font><br />" +
-                            "{10} <font color=''#{0}'' face=''monospace''>%TIMESTAMP</font><br />" +
-                            "{11} <font color=''#{0}'' face=''monospace''>%TIME</font><br />" +
-                            "{12} <font color=''#{0}'' face=''monospace''>%TIMEOFFSET</font><br />" +
-                            "{13} <font color=''#{0}'' face=''monospace''>%DATE</font><br />" +
-                            "{14} <font color=''#{0}'' face=''monospace''>%STARTTIMESTAMP</font><br />" +
-                            "{15} <font color=''#{0}'' face=''monospace''>%BATT</font><br />" +
-                            "{16} <font color=''#{0}'' face=''monospace''>%ISCHARGING</font><br />" +
-                            "{17} <font color=''#{0}'' face=''monospace''>%AID</font><br />" +
-                            "{18} <font color=''#{0}'' face=''monospace''>%SER</font><br />" +
-                            "{19} <font color=''#{0}'' face=''monospace''>%FILENAME</font><br />" +
-                            "{20} <font color=''#{0}'' face=''monospace''>%PROFILE</font><br />" +
-                            "{21} <font color=''#{0}'' face=''monospace''>%HDOP</font><br />" +
-                            "{22} <font color=''#{0}'' face=''monospace''>%VDOP</font><br />" +
-                            "{23} <font color=''#{0}'' face=''monospace''>%PDOP</font><br />" +
-                            "{24} <font color=''#{0}'' face=''monospace''>%DIST</font><br />" +
-                            "{25} <font color=''#{0}'' face=''monospace''>%ALL</font>";
+                            "{6} <font color=''#{0}'' face=''monospace''>%SPD_KPH</font><br />" +
+                            "{7} <font color=''#{0}'' face=''monospace''>%SPD</font><br />" +
+                            "{8} <font color=''#{0}'' face=''monospace''>%ACC</font><br />" +
+                            "{9} <font color=''#{0}'' face=''monospace''>%DIR</font><br />" +
+                            "{10} <font color=''#{0}'' face=''monospace''>%PROV</font><br />" +
+                            "{11} <font color=''#{0}'' face=''monospace''>%TIMESTAMP</font><br />" +
+                            "{12} <font color=''#{0}'' face=''monospace''>%TIME</font><br />" +
+                            "{13} <font color=''#{0}'' face=''monospace''>%TIMEOFFSET</font><br />" +
+                            "{14} <font color=''#{0}'' face=''monospace''>%DATE</font><br />" +
+                            "{15} <font color=''#{0}'' face=''monospace''>%STARTTIMESTAMP</font><br />" +
+                            "{16} <font color=''#{0}'' face=''monospace''>%BATT</font><br />" +
+                            "{17} <font color=''#{0}'' face=''monospace''>%ISCHARGING</font><br />" +
+                            "{18} <font color=''#{0}'' face=''monospace''>%AID</font><br />" +
+                            "{19} <font color=''#{0}'' face=''monospace''>%SER</font><br />" +
+                            "{20} <font color=''#{0}'' face=''monospace''>%FILENAME</font><br />" +
+                            "{21} <font color=''#{0}'' face=''monospace''>%PROFILE</font><br />" +
+                            "{22} <font color=''#{0}'' face=''monospace''>%HDOP</font><br />" +
+                            "{23} <font color=''#{0}'' face=''monospace''>%VDOP</font><br />" +
+                            "{24} <font color=''#{0}'' face=''monospace''>%PDOP</font><br />" +
+                            "{25} <font color=''#{0}'' face=''monospace''>%DIST</font><br />" +
+                            "{26} <font color=''#{0}'' face=''monospace''>%ALL</font>";
             String legend1 = MessageFormat.format(legendFormat,
                     codeGreen,
                     getString(R.string.txt_latitude), getString(R.string.txt_longitude), getString(R.string.txt_annotation),
-                    getString(R.string.txt_satellites), getString(R.string.txt_altitude), getString(R.string.txt_speed),
-                    getString(R.string.txt_accuracy), getString(R.string.txt_direction), getString(R.string.txt_provider),
+                    getString(R.string.txt_satellites), getString(R.string.txt_altitude), getString(R.string.txt_speed_kph),
+                    getString(R.string.txt_speed), getString(R.string.txt_accuracy), getString(R.string.txt_direction),
+                    getString(R.string.txt_provider),
                     getString(R.string.txt_timestamp_epoch),
                     getString(R.string.txt_time_isoformat),
                     getString(R.string.txt_time_with_offset_isoformat),

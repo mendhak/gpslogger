@@ -197,6 +197,7 @@ public class CustomUrlManager extends FileSender {
         replacements.put("acc", String.valueOf(sLoc.getAccuracy()));
         replacements.put("dir", String.valueOf(sLoc.getBearing()));
         replacements.put("prov", String.valueOf(sLoc.getProvider()));
+        replacements.put("spd_kph", String.valueOf(sLoc.getSpeed()*3.6));
         replacements.put("spd", String.valueOf(sLoc.getSpeed()));
         replacements.put("timestamp", String.valueOf(sLoc.getTime()/1000));
 

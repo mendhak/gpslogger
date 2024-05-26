@@ -26,6 +26,7 @@
     <string name="txt_latitude">Latitude:</string>
     <string name="txt_longitude">Longitude:</string>
     <string name="txt_altitude">Altitude:</string>
+    <string name="txt_speed_kph">Speed (in km/h):</string>
     <string name="txt_speed">Speed:</string>
     <string name="txt_direction">Direction:</string>
     <string name="txt_satellites">Satellites:</string>
