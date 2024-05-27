@@ -1074,6 +1074,7 @@ public class GpsLoggingService extends Service  {
         }
         catch(Exception e){
              LOG.error(getString(R.string.could_not_write_to_file), e);
+             Systems.showErrorNotification(this, getString(R.string.could_not_write_to_file));
         }
 
         session.clearDescription();
@@ -1174,6 +1175,14 @@ public class GpsLoggingService extends Service  {
     }
 
 
+    @EventBusHook
+    public void onEvent(CommandEvents.FileWriteFailure writeFailure){
+        Systems.showErrorNotification(this, getString(R.string.could_not_write_to_file));
+        if(writeFailure.stopLoggingDueToNMEA){
+            LOG.error("Could not write to NMEA file, stopping logging due to high frequency of write failures");
+            stopLogging();
+        }
+    }
 
     @EventBusHook
     public void onEvent(ProfileEvents.SwitchToProfile switchToProfileEvent){

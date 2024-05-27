@@ -4,6 +4,7 @@ import android.location.Location;
 import androidx.annotation.NonNull;
 
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 
@@ -12,6 +13,8 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by clemens on 10.05.17.
@@ -66,8 +69,8 @@ public class GeoJSONWriterPoints implements Runnable {
                 raf.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            LOG.error("GeoJSONWriterPoints", e);
+            EventBus.getDefault().post(new CommandEvents.FileWriteFailure());
+            LOG.error("Failed to write to GeoJSON file", e);
         }
 
     }

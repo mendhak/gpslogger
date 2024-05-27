@@ -24,6 +24,7 @@ import android.location.Location;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.Files;
@@ -35,6 +36,8 @@ import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import de.greenrobot.event.EventBus;
 
 public class Kml22FileLogger implements FileLogger {
     protected final static Object lock = new Object();
@@ -117,7 +120,8 @@ class Kml22AnnotateHandler implements Runnable {
 
             }
         } catch (Exception e) {
-            LOG.error("Kml22FileLogger.annotate", e);
+            EventBus.getDefault().post(new CommandEvents.FileWriteFailure());
+            LOG.error("Error writing KML annotation", e);
         }
     }
 
@@ -222,7 +226,8 @@ class Kml22WriteHandler implements Runnable {
             }
 
         } catch (Exception e) {
-            LOG.error("Kml22FileLogger.write", e);
+            EventBus.getDefault().post(new CommandEvents.FileWriteFailure());
+            LOG.error("Error writing KML file", e);
         }
     }
 }

@@ -23,7 +23,11 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.events.CommandEvents;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
+
+import org.slf4j.Logger;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,9 +37,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import de.greenrobot.event.EventBus;
+
 public class NmeaFileLogger {
 
     protected final static Object lock = new Object();
+    private static final Logger LOG = Logs.of(NmeaFileLogger.class);
     String fileName;
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(10), new RejectionHandler());
@@ -60,7 +67,8 @@ public class NmeaFileLogger {
             try {
                 nmeaFile.createNewFile();
             } catch (IOException e) {
-
+                LOG.error("Error creating NMEA file", e);
+                EventBus.getDefault().post(new CommandEvents.FileWriteFailure(true));
             }
         }
 
@@ -71,6 +79,7 @@ public class NmeaFileLogger {
 
 class NmeaWriteHandler implements Runnable {
 
+    private static final Logger LOG = Logs.of(NmeaWriteHandler.class);
     File gpxFile;
     String nmeaSentence;
 
@@ -92,7 +101,8 @@ class NmeaWriteHandler implements Runnable {
                 Files.addToMediaDatabase(gpxFile, "text/plain");
 
             } catch (IOException e) {
-
+                LOG.error("Error writing NMEA sentence", e);
+                EventBus.getDefault().post(new CommandEvents.FileWriteFailure(true));
             }
         }
 
