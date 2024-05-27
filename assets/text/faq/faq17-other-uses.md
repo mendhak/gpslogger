@@ -3,13 +3,13 @@
 
 The GPS files produced by this app are generally used for processing *other* things.  
 
-A common use case is to geotag photos.  Many cameras, especially SLRs, don't have built-in GPS.  After a day (or days) out of photography, you may have hundreds of photos that need to be geotagged so that their locations can appear properly when used elsewhere.  
+A common use case is to geotag photos.  Many cameras, especially SLRs, don't have built-in GPS. After a day (or days) out of photography, you may have hundreds of photos that need to be geotagged so that their locations can appear properly when used elsewhere.  
 
 I have had success with:
 
 * [GeoSetter](http://www.geosetter.de/en/) - GUI, comprehensive options with map display
-* [ExifTool](http://askubuntu.com/questions/599395/how-can-i-batch-tag-several-hundred-photos-with-separately-recorded-gps-data) - command line, lots of options
-* Lightroom's map module - very basic and limited
+* [digiKam](https://www.digikam.org/) - Open Source photo management. Geotagging and geocoding are tools within this software   
+* [ExifTool](http://askubuntu.com/questions/599395/how-can-i-batch-tag-several-hundred-photos-with-separately-recorded-gps-data) - command line, lots of options  
 
 
  There are of course other uses of the produced files, these are a few I've seen over the years; it's usually a combination of a log file produced from GPSLogger with a secondary software to process the files.  
