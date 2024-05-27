@@ -304,8 +304,8 @@ public class Systems {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder nfc = new NotificationCompat.Builder(context.getApplicationContext(), NotificationChannelNames.GPSLOGGER_ERRORS)
-                .setSmallIcon(android.R.drawable.stat_notify_error)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), android.R.drawable.stat_notify_error))
+                .setSmallIcon(android.R.drawable.stat_sys_warning)
+                //.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), android.R.drawable.stat_sys_warning))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_ERROR)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
