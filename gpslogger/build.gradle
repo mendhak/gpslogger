@@ -46,7 +46,7 @@ android {
         targetSdkVersion 30
         compileSdk 34
         versionCode 131
-        versionName "131-workmgr"
+        versionName "131-rc2"
 
         // Used by AppAuth-Android
         manifestPlaceholders = [
