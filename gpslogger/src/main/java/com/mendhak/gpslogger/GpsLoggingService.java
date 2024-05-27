@@ -36,6 +36,7 @@ import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.events.ProfileEvents;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.network.ConscryptProviderInstaller;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.common.slf4j.SessionLogcatAppender;
@@ -1181,6 +1182,16 @@ public class GpsLoggingService extends Service  {
         if(writeFailure.stopLoggingDueToNMEA){
             LOG.error("Could not write to NMEA file, stopping logging due to high frequency of write failures");
             stopLogging();
+        }
+    }
+
+    @EventBusHook
+    public void onEvent(UploadEvents.CustomUrl upload){
+        if(!upload.success){
+            Systems.showErrorNotification(this, getString(R.string.log_customurl_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure));
+
         }
     }
 
