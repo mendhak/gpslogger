@@ -314,6 +314,7 @@ public class Systems {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(Html.fromHtml(message).toString()).setBigContentTitle(context.getString(R.string.error)))
                 .setOngoing(false)
                 .setOnlyAlertOnce(true)
+                .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 
 

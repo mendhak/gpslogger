@@ -135,8 +135,11 @@ public class GpsLoggingService extends Service  {
         }
 
         if(session.isStarted() && gpsLocationListener == null && towerLocationListener == null && passiveLocationListener == null) {
-            LOG.warn("App might be recovering from an unexpected stop.  Starting logging again.");
-            startLogging();
+            if(Systems.hasUserGrantedAllNecessaryPermissions(this)){
+                LOG.warn("App might be recovering from an unexpected stop.  Starting logging again.");
+                startLogging();
+            }
+
         }
 
         handleIntent(intent);
