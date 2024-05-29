@@ -28,6 +28,8 @@
 
     <!-- allow this to run as a foreground service -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- Beginning with Android 14 (API level 34), this is necessary. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
 
 
     <application
