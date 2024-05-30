@@ -34,26 +34,26 @@
     <string name="sharing_mylocation">我的位置</string>
     <string name="sharing_via">分享方式</string>
     <!-- general -->
-    <string name="foot">&#160;英尺</string>
-    <string name="feet">&#160;英尺</string>
-    <string name="meter">&#160;米</string>
-    <string name="meters">&#160;米</string>
+    <string name="foot"> 英尺</string>
+    <string name="feet"> 英尺</string>
+    <string name="meter"> 米</string>
+    <string name="meters"> 米</string>
     <string name="error">錯誤</string>
     <string name="error_connection">連接錯誤。請檢查你的手機設定。</string>
-    <string name="seconds">&#160;秒</string>
-    <string name="minutes">&#160;分</string>
-    <string name="hours">&#160;時</string>
+    <string name="seconds"> 秒</string>
+    <string name="minutes"> 分</string>
+    <string name="hours"> 時</string>
     <string name="gpsprovider_unavailable">沒有可用的 GPS 來源，請檢查您的位置設定並啟用定位功能。
     </string>
     <string name="started">已開始</string>
     <string name="providername_celltower">基站</string>
     <string name="not_applicable">無</string>
-    <string name="meters_per_second">&#160;米/秒</string>
-    <string name="feet_per_second">&#160;英尺/秒</string>
-    <string name="miles_per_hour">&#160;英哩/小時</string>
-    <string name="miles">&#160;英哩</string>
-    <string name="kilometers_per_hour">&#160;公里/小時</string>
-    <string name="kilometers">&#160;公里</string>
+    <string name="meters_per_second"> 米/秒</string>
+    <string name="feet_per_second"> 英尺/秒</string>
+    <string name="miles_per_hour"> 英哩/小時</string>
+    <string name="miles"> 英哩</string>
+    <string name="kilometers_per_hour"> 公里/小時</string>
+    <string name="kilometers"> 公里</string>
     <string name="unknown_direction">未知</string>
     <string name="sorry">抱歉</string>
     <string name="success">成功</string>
@@ -82,12 +82,12 @@
     <string name="time_halfhour">½ 小時</string>
     <string name="time_oneandhalfhours">1½ 小時</string>
     <string name="time_twoandhalfhours">2½ 小時</string>
-    <string name="time_hms_format" formatted="false">%s小時 %s分鐘 %s秒</string>
-    <string name="accuracy_within" formatted="false">%s %s內</string>
+    <string name="time_hms_format" formatted="false">%s 小時 %s 分鐘 %s 秒</string>
+    <string name="accuracy_within" formatted="false">%s %s 內</string>
     <!-- Settings activity -->
     <string name="settings_distance_in_meters">以米算的距離</string>
     <string name="settings_accuracy_in_meters">精準度（公尺）</string>
-    <string name="settings_enter_meters">輸入米數(最大 9999)</string>
+    <string name="settings_enter_meters">輸入米數（最大 9999）</string>
     <!-- Settings -->
     <string name="pref_logging_title">記錄細節</string>
     <string name="log_gpx_title">記錄到 GPX 檔案</string>
@@ -102,10 +102,10 @@
     <string name="log_json_summary">將位置記錄到 GeoJSON 檔案</string>
     <string name="new_file_creation_title">新檔案的建立</string>
     <string name="new_file_creation_summary">選取是一天僅建立一個檔案呢還是每次開始都建立一個檔案。</string>
-    <string name="new_file_creation_onceaday">一天僅一次</string>
+    <string name="new_file_creation_onceaday">每天一次</string>
     <string name="new_file_creation_everystart">每次我點擊開始</string>
     <string name="new_file_creation_custom">自訂檔案</string>
-    <string name="new_file_custom_title">自訂檔名</string>
+    <string name="new_file_custom_title">自訂檔案名稱</string>
     <string name="new_file_custom_summary">您可以使用任何檔案名稱。可以選擇根據需求新增動態參數，例如流水號、年、小時、分鐘等。但是，由於僅能發送最新檔案，因此如果經常更動檔案名稱，則可能無法正確反映。</string>
     <string name="pref_performance_title">性能</string>
     <string name="pref_performance_summary">時間、過濾器和監聽程式</string>
@@ -118,7 +118,7 @@
     <string name="retry_time_summary">取得一筆起始的定位後，持續嘗試得到符合精確度過濾器標準的時間。</string>
     <string name="display_imperial_title">顯示英制單位</string>
     <string name="display_imperial_summary">顯示英尺、英里和品脫，完全沒有什麼新新人類的公制單位。（設定數值仍然需要使用公制）</string>
-    <string name="enabledisablegps_title">啟用/禁用 GPS</string>
+    <string name="enabledisablegps_title">啟用／停用 GPS</string>
     <string name="enabledisablegps_summary">轉到手機的設定來啟用或禁用提供器。</string>
     <string name="startonbootup_title">開機自啟動</string>
     <string name="startonbootup_summary">當手機開機的時候自動啟動本程式</string>
@@ -317,4 +317,13 @@
     <string name="txt_battery">電池</string>
     <string name="customurl_http_basicauthentication">基本認證</string>
     <string name="hide_notification_from_status_bar_disallowed">Android 8 Oreo 之後不允許將狀態列的通知隱藏</string>
+    <string name="hide">隱藏</string>
+    <string name="providername_gps">GPS 衛星</string>
+    <string name="log_plain_text_csv_advanced_title">記錄到 CSV 檔案設定</string>
+    <string name="log_plain_text_csv_field_delimiter">CSV 欄位分隔符</string>
+    <string name="log_plain_text_decimal_comma">使用逗號（,）作為小數點分隔符而不是點（.）</string>
+    <string name="new_file_creation_onceamonth">每月一次</string>
+    <string name="dropbox_setup_title">Dropbox</string>
+    <string name="owncloud_setup_title">ownCloud</string>
+    <string name="osm_setup_title">OpenStreetMap</string>
 </resources>
