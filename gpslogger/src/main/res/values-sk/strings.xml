@@ -401,4 +401,6 @@ polia.
     <string name="view_annotation">Zobrazenie anotácií</string>
     <string name="annotation_edit_button_label">Tlačidlo pre úpravu anotácie</string>
     <string name="annotation_edit_button_color">Farba tlačidla</string>
+    <string name="retry_get_best_possible_accuracy_summary">Namiesto zaznamenania prvého presného bodu sa pokúšať o zachovanie presnosti počas určitej doby a vybrať najpresnejší bod. Trvá to dlhšie, ale zvyšuje sa šanca na výskyt presnejších bodov.</string>
+    <string name="retry_get_best_possible_accuracy_title">Vybrať najlepšiu presnosť počas trvania</string>
 </resources>

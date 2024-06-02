@@ -370,4 +370,17 @@
     <string name="logging_advanced_delete_files_summary">Lange drücken, um mehrere Dateien auszuwählen.</string>
     <string name="install_conscrypt_provider_title">Installieren Sie „Conscrypt Provider” (SSL/TLS)</string>
     <string name="install_conscrypt_provider_summary">Wenn sie SSL/TLS Verbindungsprobleme auf älteren Android-Geräten vorfinden, kann das Installieren des \"Conscrypt Provider\" helfen. (Folgen Sie diesem Link, installieren die APK, und starten Sie die App neu)</string>
+    <string name="retry_get_best_possible_accuracy_title">Nutze höchste Genauigkeit aus Zeitspanne</string>
+    <string name="retry_get_best_possible_accuracy_summary">Anstatt den ersten Standort mit der eingestellten Genauigkeit aufzuzeichnen, wird erst nach Ablauf der Wartezeit der Standort mit der höchsten Genauigkeit genutzt. Erhöht die Genauigkeit auf Kosten des Aufzeichnungsintervalls.</string>
+    <string name="google_drive_folder_path_summary_1">Benutzen Sie einen einzigen Ordnernamen (z.B. GPSLogger), oder einen Ordnerpfad (z.B. aaa/bbb/ccc). Die Ordner müssen von dieser App erstellt werden.</string>
+    <string name="google_drive_folder_path_summary_2">Wenn Sie einen einzelnen Ordnernamen verwenden, kann dieser nach der Erstellung innerhalb von Google Drive verschoben werden. Ordnerpfade sind langsamer, da jeder Teil des Pfades überprüft und ggf. erstellt werden muss, bevor Dateien hochgeladen werden .</string>
+    <string name="log_customurl_summary_detailed">Sendet eine Anfrage an die eingestellte URL wenn ein Standort aufgenommen wurde, in Abhängigkeit vom Aufnahmeintervall.</string>
+    <string name="google_drive_folder_path">Google Drive Ordner</string>
+    <string name="autosend_customurl_summary">(Diese Funktion aktiviert die CSV-Aufnahme) Sendet Anfragen gruppiert zu der eingestellten URL, eine für jede Zeile in der CSV-Datei. Abhängig vom automatischen Sendeintervall.</string>
+    <string name="log_customurl_discard_offline_locations">Offline-Standorte verwerfen</string>
+    <string name="log_customurl_discard_offline_locations_summary">Sendet Standorte nur zu der eingestellten URL, wenn eine Netzwerkverbindung verfügbar ist (keine Auswirkung auf automatisches Senden)</string>
+    <string name="annotation_edit_button_color">Knopffarbe</string>
+    <string name="customurl_all_parameters">Alle Parameter:</string>
+    <string name="annotation_edit_button_label">Anmerkungsknopf bearbeiten</string>
+    <string name="view_annotation">Annmerkungsansicht</string>
 </resources>

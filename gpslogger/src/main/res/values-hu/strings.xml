@@ -382,4 +382,6 @@
     <string name="view_annotation">Helyjező nézet</string>
     <string name="annotation_edit_button_color">Gomb színe</string>
     <string name="annotation_edit_button_label">Helyjelző gomb szerkesztése</string>
+    <string name="retry_get_best_possible_accuracy_title">Válassza ki a legjobb pontosságot egy időtartamban</string>
+    <string name="retry_get_best_possible_accuracy_summary">Első pontos pont naplózása helyett próbálkozzon tovább a pontossági időtartammal, és válassza ki a legjobb pontosságot. Hosszabb időt vesz igénybe, de növeli az esélyt a pontosabb pontok elérésére.</string>
 </resources>

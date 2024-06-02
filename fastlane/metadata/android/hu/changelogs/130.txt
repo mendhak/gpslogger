@@ -1,0 +1,4 @@
+* Új pontossági beállítás - fut az újrapróbálkozási idő időtartama alatt, és kiválasztja a legpontosabb pontot.
+* A passzív figyelő mostantól megfelel a többi kiválasztott figyelőnek (GNSS/hálózat). Ha egyiket sem választja ki, minden pontot elfogadunk.
+* Gyorsabb egyéni URL-feltöltés az automatikus küldéshez.
+* Új leállás az alkalmazásindítási tulajdonságon, csak a .properties fájlon keresztül érhető el
