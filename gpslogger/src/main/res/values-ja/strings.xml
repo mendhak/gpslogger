@@ -32,8 +32,8 @@
     <string name="sharing_mylocation">位置情報</string>
     <string name="sharing_via">共有法</string>
     <!-- general -->
-    <string name="foot">&#160;フィート</string>
-    <string name="feet">&#160;フィート</string>
+    <string name="foot"> フィート</string>
+    <string name="feet"> フィート</string>
     <string name="meter">m</string>
     <string name="meters">m</string>
     <string name="error">エラー</string>
