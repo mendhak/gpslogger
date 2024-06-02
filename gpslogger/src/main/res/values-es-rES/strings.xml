@@ -384,4 +384,5 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="annotation_edit_button_color">Color del boton</string>
     <string name="retry_get_best_possible_accuracy_summary">En lugar de registrar el primer punto preciso, siga intentándolo durante el tiempo que dure la precisión y seleccione el punto con la mejor precisión. Lleva más tiempo, pero aumenta las posibilidades de obtener puntos más precisos.</string>
     <string name="retry_get_best_possible_accuracy_title">Elegir la mejor precisión en duración</string>
+    <string name="txt_speed_kph">Velocidad (en km/h):</string>
 </resources>
