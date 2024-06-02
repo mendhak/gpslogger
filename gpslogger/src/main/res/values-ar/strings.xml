@@ -34,10 +34,10 @@
     <string name="sharing_mylocation">موقعي</string>
     <string name="sharing_via">المشاركة بأستخدام</string>
     <!-- general -->
-    <string name="foot">&#160;قدم</string>
-    <string name="feet">&#160;أقدام</string>
+    <string name="foot"> قدم</string>
+    <string name="feet"> أقدام</string>
     <string name="meter">متر</string>
-    <string name="meters">&#160;أمتار</string>
+    <string name="meters"> أمتار</string>
     <string name="error">خطاء</string>
     <string name="error_connection">خطاء في الأتصال , الرجاء التأكد من أعدادات الجهاز.</string>
     <string name="seconds">ث</string>
@@ -48,12 +48,12 @@
     <string name="providername_gps">أقمار GPS</string>
     <string name="providername_celltower">أبراج الهاتف</string>
     <string name="not_applicable">بلا</string>
-    <string name="meters_per_second">&#160;م/ث</string>
-    <string name="feet_per_second">&#160;ق/ث</string>
+    <string name="meters_per_second"> م/ث</string>
+    <string name="feet_per_second"> ق/ث</string>
     <string name="miles_per_hour">ميل/س</string>
     <string name="miles">ميل</string>
-    <string name="kilometers_per_hour">&#160;كم/س</string>
-    <string name="kilometers">&#160;كم</string>
+    <string name="kilometers_per_hour"> كم/س</string>
+    <string name="kilometers"> كم</string>
     <string name="unknown_direction">مجهول</string>
     <string name="sorry">آسف</string>
     <string name="success">نجاح</string>
