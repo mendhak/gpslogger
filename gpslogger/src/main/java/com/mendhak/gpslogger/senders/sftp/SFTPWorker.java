@@ -1,38 +1,42 @@
 package com.mendhak.gpslogger.senders.sftp;
 
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.content.Context;
 import android.util.Base64;
 
-import com.birbit.android.jobqueue.Job;
-import com.birbit.android.jobqueue.Params;
-import com.birbit.android.jobqueue.RetryConstraint;
-import com.jcraft.jsch.*;
+import androidx.annotation.NonNull;
+import androidx.work.Worker;
+import androidx.work.WorkerParameters;
+
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.HostKey;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.SftpException;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import de.greenrobot.event.EventBus;
+
+
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
-import java.io.*;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.security.Security;
 import java.util.Properties;
 
-public class SFTPJob extends Job {
-    private static final Logger LOG = Logs.of(SFTPJob.class);
-    private final File localFile;
-    private final String host;
-    private final int port;
-    private final String pathToPrivateKey;
-    private final String privateKeyPassphrase;
-    private final String username;
-    private final String password;
-    private final String hostKey;
-    private final String remoteDir;
+import de.greenrobot.event.EventBus;
 
-    public SFTPJob(File localFile, String remoteDir, String host, int port, String pathToPrivateKey, String privateKeyPassphrase, String username, String password, String hostKey) {
-        super(new Params(1).requireNetwork().persist().addTags(getJobTag(localFile)));
+public class SFTPWorker extends Worker {
+
+    private static final Logger LOG = Logs.of(SFTPWorker.class);
+
+    public SFTPWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+
+        super(context, workerParams);
 
         try {
             Security.removeProvider(BouncyCastleProvider.PROVIDER_NAME);
@@ -41,26 +45,30 @@ public class SFTPJob extends Job {
         catch(Exception ex){
             LOG.error("Could not add BouncyCastle provider.", ex);
         }
-
-        this.localFile = localFile;
-        this.remoteDir = remoteDir;
-        this.host = host;
-        this.port = port;
-        this.pathToPrivateKey = pathToPrivateKey;
-        this.privateKeyPassphrase = privateKeyPassphrase;
-        this.username = username;
-        this.password = password;
-        this.hostKey = hostKey;
     }
 
-
+    @NonNull
     @Override
-    public void onAdded() {
-        LOG.debug("SFTP Job added");
-    }
+    public Result doWork() {
 
-    @Override
-    public void onRun() throws Throwable {
+        String filePath = getInputData().getString("filePath");
+        if(Strings.isNullOrEmpty(filePath)) {
+            LOG.error("No file path provided to upload to SFTP");
+            EventBus.getDefault().post(new UploadEvents.SFTP().failed("No file path provided to upload to SFTP", null));
+            return Result.failure();
+        }
+        File fileToUpload = new File(filePath);
+
+        PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+        String hostKey = preferenceHelper.getSFTPKnownHostKey();
+        String host = preferenceHelper.getSFTPHost();
+        String username = preferenceHelper.getSFTPUser();
+        String password = preferenceHelper.getSFTPPassword();
+        int port = preferenceHelper.getSFTPPort();
+        String remoteDir = preferenceHelper.getSFTPRemoteServerPath();
+        String pathToPrivateKey = preferenceHelper.getSFTPPrivateKeyFilePath();
+        String privateKeyPassphrase = preferenceHelper.getSFTPPrivateKeyPassphrase();
+
         LOG.debug("SFTP Job onRun");
         com.jcraft.jsch.Session session = null;
         JSch.setLogger(new SftpLogger());
@@ -68,19 +76,19 @@ public class SFTPJob extends Job {
         FileInputStream fis = null;
 
         try {
-            String keystring = this.hostKey;
+            String keystring = hostKey;
 
             if (!Strings.isNullOrEmpty(keystring)) {
                 byte[] key = Base64.decode(keystring, Base64.DEFAULT);
                 jsch.getHostKeyRepository().add(new HostKey(host, key), null);
             }
 
-            if(!Strings.isNullOrEmpty(this.pathToPrivateKey)){
-                jsch.addIdentity(this.pathToPrivateKey, this.privateKeyPassphrase);
+            if(!Strings.isNullOrEmpty(pathToPrivateKey)){
+                jsch.addIdentity(pathToPrivateKey, privateKeyPassphrase);
             }
 
-            session = jsch.getSession(this.username, this.host, this.port);
-            session.setPassword(this.password);
+            session = jsch.getSession(username, host, port);
+            session.setPassword(password);
 
             Properties prop = new Properties();
             prop.put("StrictHostKeyChecking", "yes");
@@ -95,10 +103,10 @@ public class SFTPJob extends Job {
                 Channel channel = session.openChannel("sftp");
                 channel.connect();
                 ChannelSftp channelSftp = (ChannelSftp) channel;
-                LOG.debug("Changing directory to " + this.remoteDir);
-                channelSftp.cd(this.remoteDir);
-                LOG.debug("Uploading " + this.localFile.getName() + " to remote server");
-                channelSftp.put(new FileInputStream(this.localFile), this.localFile.getName(), ChannelSftp.OVERWRITE);
+                LOG.debug("Changing directory to " + remoteDir);
+                channelSftp.cd(remoteDir);
+                LOG.debug("Uploading " + fileToUpload.getName() + " to remote server");
+                channelSftp.put(new FileInputStream(fileToUpload), fileToUpload.getName(), ChannelSftp.OVERWRITE);
 
                 LOG.debug("Disconnecting");
                 channelSftp.disconnect();
@@ -106,16 +114,23 @@ public class SFTPJob extends Job {
                 session.disconnect();
 
                 LOG.info("SFTP - file uploaded");
+                // Notify internal listeners
                 EventBus.getDefault().post(new UploadEvents.SFTP().succeeded());
+                // Notify external listeners
+                Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{fileToUpload.getAbsolutePath()}, "sftp");
+                return Result.success();
             } else {
                 EventBus.getDefault().post(new UploadEvents.SFTP().failed("Could not connect, unknown reasons", null));
+                return Result.failure();
             }
 
         } catch (SftpException sftpex) {
             LOG.error(sftpex.getMessage(), sftpex);
             EventBus.getDefault().post(new UploadEvents.SFTP().failed(sftpex.getMessage(), sftpex));
+            return Result.failure();
         } catch (final JSchException jex) {
             LOG.error(jex.getMessage(), jex);
+
             if (jex.getMessage().contains("reject HostKey") || jex.getMessage().contains("HostKey has been changed")) {
                 LOG.debug(session.getHostKey().getKey());
                 UploadEvents.SFTP sftpException = new UploadEvents.SFTP();
@@ -123,11 +138,14 @@ public class SFTPJob extends Job {
                 sftpException.fingerprint = session.getHostKey().getFingerPrint(jsch);
                 EventBus.getDefault().post(sftpException.failed(jex.getMessage(), jex));
             } else {
-                throw jex;
+                EventBus.getDefault().post(new UploadEvents.SFTP().failed(jex.getMessage(), jex));
             }
+
+            return Result.failure();
         } catch (Exception ex) {
             LOG.error(ex.getMessage(), ex);
             EventBus.getDefault().post(new UploadEvents.SFTP().failed(ex.getMessage(), ex));
+            return Result.failure();
         } finally {
             try {
                 fis.close();
@@ -135,24 +153,6 @@ public class SFTPJob extends Job {
             }
         }
     }
-
-    @Override
-    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
-        LOG.debug("SFTP Job Cancelled");
-    }
-
-    @Override
-    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
-        LOG.error("Could not upload to SFTP server", throwable);
-        EventBus.getDefault().post(new UploadEvents.SFTP().failed(throwable.getMessage(), throwable));
-        return RetryConstraint.CANCEL;
-    }
-
-
-    public static String getJobTag(File gpxFile) {
-        return "SFTP" + gpxFile.getName();
-    }
-
 
     public static class SftpLogger implements com.jcraft.jsch.Logger {
 
@@ -173,7 +173,4 @@ public class SFTPJob extends Job {
             }
         }
     }
-
 }
-
-

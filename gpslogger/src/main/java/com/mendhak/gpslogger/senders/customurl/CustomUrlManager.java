@@ -3,18 +3,15 @@ package com.mendhak.gpslogger.senders.customurl;
 import android.location.Location;
 import android.os.Bundle;
 
-import com.birbit.android.jobqueue.JobManager;
-import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
-import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.csv.CSVFileLogger;
-import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
+import com.mendhak.gpslogger.loggers.customurl.CustomUrlWorker;
 import com.mendhak.gpslogger.senders.FileSender;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -23,11 +20,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class CustomUrlManager extends FileSender {
 
@@ -44,9 +42,16 @@ public class CustomUrlManager extends FileSender {
         for (File f : files) {
             if (f.getName().endsWith(".csv")) {
                 foundFileToSend = true;
-                List<SerializableLocation> locations = getLocationsFromCSV(f);
-                LOG.debug(locations.size() + " points were read from " + f.getName());
-                sendLocations(locations.toArray(new SerializableLocation[locations.size()]), f);
+
+                String tag = String.valueOf(Objects.hashCode(f.getName()));
+
+                HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
+                    put("csvFilePath", f.getAbsolutePath());
+                    put("callbackType", "customurl");
+                }};
+
+                Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
+
             }
         }
 
@@ -145,45 +150,21 @@ public class CustomUrlManager extends FileSender {
         return recordValue.replace(",",".");
     }
 
-    private void sendLocations(SerializableLocation[] locations, File csvFile){
-        if(locations.length > 0){
 
-            ArrayList<CustomUrlRequest> requests = new ArrayList<>();
-            String customLoggingUrl = preferenceHelper.getCustomLoggingUrl();
-            String httpBody = preferenceHelper.getCustomLoggingHTTPBody();
-            String httpHeaders = preferenceHelper.getCustomLoggingHTTPHeaders();
-            String httpMethod = preferenceHelper.getCustomLoggingHTTPMethod();
-
-            for(SerializableLocation loc: locations){
-                try {
-                    String finalUrl = getFormattedTextblock(customLoggingUrl, loc);
-                    String finalBody = getFormattedTextblock(httpBody, loc);
-                    String finalHeaders = getFormattedTextblock(httpHeaders, loc);
-
-                    requests.add(new CustomUrlRequest(finalUrl, httpMethod,
-                            finalBody, finalHeaders, preferenceHelper.getCustomLoggingBasicAuthUsername(),
-                            preferenceHelper.getCustomLoggingBasicAuthPassword()));
-                } catch (Exception e) {
-                    LOG.error("Could not build the Custom URL to send", e);
-                }
-            }
-
-            JobManager jobManager = AppSettings.getJobManager();
-            jobManager.addJobInBackground(
-                    new CustomUrlJob(
-                            requests,
-                            csvFile,
-                            new UploadEvents.CustomUrl()));
-        }
-
-    }
 
     public void sendByHttp(String url, String method, String body, String headers, String username, String password){
-        JobManager jobManager = AppSettings.getJobManager();
-        CustomUrlRequest request = new CustomUrlRequest(url, method,
-                body, headers, username, password);
-        ArrayList<CustomUrlRequest> requests = new ArrayList<>(Arrays.asList(request));
-        jobManager.addJobInBackground(new CustomUrlJob(requests, null, new UploadEvents.CustomUrl()));
+
+        CustomUrlRequest request = new CustomUrlRequest(url, method, body, headers, username, password);
+        String serializedRequest = Strings.serializeTojson(request);
+        String tag = String.valueOf(Objects.hashCode(serializedRequest));
+
+        HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
+            put("urlRequests", new String[]{serializedRequest});
+            put("callbackType", "customurl");
+        }};
+
+        Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
+
     }
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
@@ -216,6 +197,7 @@ public class CustomUrlManager extends FileSender {
         replacements.put("acc", String.valueOf(sLoc.getAccuracy()));
         replacements.put("dir", String.valueOf(sLoc.getBearing()));
         replacements.put("prov", String.valueOf(sLoc.getProvider()));
+        replacements.put("spd_kph", String.valueOf(sLoc.getSpeed()*3.6));
         replacements.put("spd", String.valueOf(sLoc.getSpeed()));
         replacements.put("timestamp", String.valueOf(sLoc.getTime()/1000));
 
@@ -276,4 +258,34 @@ public class CustomUrlManager extends FileSender {
     public boolean accept(File dir, String name) {
         return name.toLowerCase().contains(".csv");
     }
+
+    public List<CustomUrlRequest> getCustomUrlRequestsFromCSV(File f) {
+        List<SerializableLocation> locations = getLocationsFromCSV(f);
+        LOG.debug(locations.size() + " points were read from " + f.getName());
+
+        List<CustomUrlRequest> requests = new ArrayList<>();
+
+        String customLoggingUrl = preferenceHelper.getCustomLoggingUrl();
+        String httpBody = preferenceHelper.getCustomLoggingHTTPBody();
+        String httpHeaders = preferenceHelper.getCustomLoggingHTTPHeaders();
+        String httpMethod = preferenceHelper.getCustomLoggingHTTPMethod();
+
+        for(SerializableLocation loc: locations){
+            try {
+                String finalUrl = getFormattedTextblock(customLoggingUrl, loc);
+                String finalBody = getFormattedTextblock(httpBody, loc);
+                String finalHeaders = getFormattedTextblock(httpHeaders, loc);
+
+                requests.add(new CustomUrlRequest(finalUrl, httpMethod,
+                        finalBody, finalHeaders, preferenceHelper.getCustomLoggingBasicAuthUsername(),
+                        preferenceHelper.getCustomLoggingBasicAuthPassword()));
+            } catch (Exception e) {
+                LOG.error("Could not build the Custom URL to send", e);
+            }
+        }
+
+        return requests;
+
+    }
+
 }

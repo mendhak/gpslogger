@@ -18,7 +18,7 @@ jobs:
         java-version: '17'
         
     - name: Build with Gradle
-      run: ./gradlew assembleDebugUnitTest -Dpre-dex=false
+      run: ./gradlew assembleDebugUnitTest -Dpre-dex=false --no-configuration-cache
       
     - name: Run Unit Tests
-      run: ./gradlew testDebugUnitTest -Dpre-dex=false -q
+      run: ./gradlew testDebugUnitTest -Dpre-dex=false -q --no-configuration-cache

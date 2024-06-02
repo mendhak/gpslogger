@@ -1,16 +1,16 @@
 package com.mendhak.gpslogger.senders.sftp;
 
-import com.birbit.android.jobqueue.CancelResult;
-import com.birbit.android.jobqueue.JobManager;
-import com.birbit.android.jobqueue.TagConstraint;
-import com.mendhak.gpslogger.common.AppSettings;
+
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.senders.FileSender;
 
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class SFTPManager extends FileSender {
 
@@ -28,14 +28,12 @@ public class SFTPManager extends FileSender {
     }
 
     public void uploadFile(final File file){
-        final JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-            @Override
-            public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new SFTPJob(file, preferenceHelper.getSFTPRemoteServerPath(), preferenceHelper.getSFTPHost(),preferenceHelper.getSFTPPort(),preferenceHelper.getSFTPPrivateKeyFilePath(),
-                        preferenceHelper.getSFTPPrivateKeyPassphrase(),preferenceHelper.getSFTPUser(),preferenceHelper.getSFTPPassword(),preferenceHelper.getSFTPKnownHostKey()));
-            }
-        }, TagConstraint.ANY, SFTPJob.getJobTag(file));
+        String tag = String.valueOf(Objects.hashCode(file));
+        HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+            put("filePath", file.getAbsolutePath());
+        }};
+        Systems.startWorkManagerRequest(SFTPWorker.class, dataMap, tag);
+
     }
 
     @Override

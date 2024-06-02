@@ -19,12 +19,10 @@
 
 package com.mendhak.gpslogger.senders.owncloud;
 
-import com.birbit.android.jobqueue.CancelResult;
-import com.birbit.android.jobqueue.JobManager;
-import com.birbit.android.jobqueue.TagConstraint;
-import com.mendhak.gpslogger.common.AppSettings;
+
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
@@ -34,7 +32,9 @@ import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class OwnCloudManager extends FileSender
 {
@@ -45,27 +45,21 @@ public class OwnCloudManager extends FileSender
         this.preferenceHelper = preferenceHelper;
     }
 
-    public void testOwnCloud(final String servername, final String username, final String password, final String directory) {
-
-
+    public void testOwnCloud() {
 
         try {
             final File testFile = Files.createTestFile();
-            final JobManager jobManager = AppSettings.getJobManager();
-            jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-                @Override
-                public void onCancelled(CancelResult cancelResult) {
-                    jobManager.addJobInBackground(new OwnCloudJob(servername, username, password, directory,
-                            testFile, testFile.getName()));
-                }
-            }, TagConstraint.ANY, OwnCloudJob.getJobTag(testFile));
+
+            String tag = String.valueOf(Objects.hashCode(testFile));
+            HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+                put("filePath", testFile.getAbsolutePath());
+            }};
+            Systems.startWorkManagerRequest(OwnCloudWorker.class, dataMap, tag);
 
         } catch (Exception ex) {
             EventBus.getDefault().post(new UploadEvents.Ftp().failed());
             LOG.error("Error while testing ownCloud upload: " + ex.getMessage());
         }
-
-
 
         LOG.debug("Added background ownCloud upload job");
     }
@@ -107,18 +101,12 @@ public class OwnCloudManager extends FileSender
 
     public void uploadFile(final File f)
     {
-        final JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-            @Override
-            public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new OwnCloudJob(
-                        preferenceHelper.getOwnCloudBaseUrl(),
-                        preferenceHelper.getOwnCloudUsername(),
-                        preferenceHelper.getOwnCloudPassword(),
-                        preferenceHelper.getOwnCloudDirectory(),
-                        f, f.getName()));
-            }
-        }, TagConstraint.ANY, OwnCloudJob.getJobTag(f));
+
+        String tag = String.valueOf(Objects.hashCode(f));
+        HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+            put("filePath", f.getAbsolutePath());
+        }};
+        Systems.startWorkManagerRequest(OwnCloudWorker.class, dataMap, tag);
 
     }
 

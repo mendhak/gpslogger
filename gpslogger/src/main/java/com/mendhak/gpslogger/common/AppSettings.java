@@ -20,24 +20,28 @@
 package com.mendhak.gpslogger.common;
 
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 
-import com.birbit.android.jobqueue.JobManager;
-import com.birbit.android.jobqueue.config.Configuration;
-import com.birbit.android.jobqueue.log.CustomLogger;
+
 import com.mendhak.gpslogger.BuildConfig;
+import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
 import org.slf4j.Logger;
 
 public class AppSettings extends Application {
 
-    private static JobManager jobManager;
+
     private static AppSettings instance;
     private static Logger LOG;
 
 
     @Override
     public void onCreate() {
+
         Systems.setAppTheme(PreferenceHelper.getInstance().getAppThemeSetting());
         super.onCreate();
 
@@ -50,24 +54,32 @@ public class AppSettings extends Application {
         EventBus.builder().logNoSubscriberMessages(false).sendNoSubscriberEvent(false).installDefaultEventBus();
         LOG.debug("EventBus configured");
 
-        //Configure the Job Queue
-        Configuration config = new Configuration.Builder(getInstance())
-                .networkUtil(new WifiNetworkUtil(getInstance()))
-                .consumerKeepAlive(60)
-                .minConsumerCount(0)
-                .maxConsumerCount(1)
-//                .customLogger(jobQueueLogger)
-                .build();
-        jobManager = new JobManager(config);
-        LOG.debug("Job Queue configured");
+        createNotificationChannels();
     }
 
-    /**
-     * Returns a configured Job Queue Manager
-     */
-    public static JobManager getJobManager() {
-        return jobManager;
+    private void createNotificationChannels() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            NotificationChannel channel = new NotificationChannel(NotificationChannelNames.GPSLOGGER_DEFAULT, getString(R.string.app_name), NotificationManager.IMPORTANCE_DEFAULT);
+            channel.enableLights(false);
+            channel.enableVibration(false);
+            channel.setSound(null,null);
+            channel.setLockscreenVisibility(PreferenceHelper.getInstance().shouldHideNotificationFromLockScreen() ? Notification.VISIBILITY_PRIVATE : Notification.VISIBILITY_PUBLIC);
+
+            channel.setShowBadge(true);
+            manager.createNotificationChannel(channel);
+
+            NotificationChannel channelErrors = new NotificationChannel(NotificationChannelNames.GPSLOGGER_ERRORS, getString(R.string.error), NotificationManager.IMPORTANCE_HIGH);
+            channelErrors.enableLights(true);
+            channelErrors.enableVibration(true);
+            channelErrors.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+            channelErrors.setShowBadge(true);
+            manager.createNotificationChannel(channelErrors);
+
+        }
     }
+
 
     public AppSettings() {
         instance = this;
@@ -79,37 +91,6 @@ public class AppSettings extends Application {
     public static AppSettings getInstance() {
         return instance;
     }
-
-
-    private final CustomLogger jobQueueLogger = new CustomLogger() {
-        @Override
-        public boolean isDebugEnabled() {
-            return BuildConfig.DEBUG;
-        }
-
-        @Override
-        public void d(String text, Object... args) {
-
-            LOG.debug(String.format(text, args));
-        }
-
-        @Override
-        public void e(Throwable t, String text, Object... args) {
-            LOG.error(String.format(text, args), t);
-        }
-
-        @Override
-        public void e(String text, Object... args) {
-
-            LOG.error(String.format(text, args));
-        }
-
-        @Override
-        public void v(String text, Object... args) {
-            LOG.debug(String.format(text,args));
-        }
-    };
-
 
 
 }

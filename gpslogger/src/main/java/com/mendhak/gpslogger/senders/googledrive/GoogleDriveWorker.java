@@ -1,16 +1,17 @@
 package com.mendhak.gpslogger.senders.googledrive;
 
+import android.content.Context;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.work.Worker;
+import androidx.work.WorkerParameters;
 
-import com.birbit.android.jobqueue.Job;
-import com.birbit.android.jobqueue.Params;
-import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
@@ -35,69 +36,66 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class GoogleDriveJob extends Job {
+public class GoogleDriveWorker extends Worker {
+    private static final Logger LOG = Logs.of(GoogleDriveWorker.class);
 
-    private static final Logger LOG = Logs.of(GoogleDriveJob.class);
-    private static final PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-    private final AtomicBoolean taskDone = new AtomicBoolean(false);
-    private final String fileName;
     private String googleDriveAccessToken;
 
-    protected GoogleDriveJob(String fileName) {
-        super(new Params(1).requireNetwork().persist().addTags(getJobTag(fileName)).groupBy("GoogleDrive"));
-        this.fileName = fileName;
+
+    public GoogleDriveWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+        super(context, workerParams);
     }
 
-    public static String getJobTag(String fileName) {
-        return "GOOGLEDRIVE" + fileName;
-    }
-
+    @NonNull
     @Override
-    public void onAdded() {
-        LOG.debug("Google Drive job added");
-    }
+    public Result doWork() {
 
-    @Override
-    public void onRun() throws Throwable {
-        File gpsDir = new File(preferenceHelper.getGpsLoggerFolder());
+        String filePath = getInputData().getString("filePath");
+        File fileToUpload = new File(filePath);
+        boolean success = true;
+        String failureMessage = "";
+        Throwable failureThrowable = null;
+
+
         AuthState authState = GoogleDriveManager.getAuthState();
         if (!authState.isAuthorized()) {
             EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not upload to Google Drive. Not Authorized."));
         }
 
-        AuthorizationService authorizationService = GoogleDriveManager.getAuthorizationService(AppSettings.getInstance());
-
-        // The performActionWithFreshTokens seems to happen on a UI thread! (Why??)
-        // So I can't do network calls on this thread.
-        // Instead, updating a class level variable, and waiting for it afterwards.
-        // https://github.com/openid/AppAuth-Android/issues/123
-        authState.performActionWithFreshTokens(authorizationService, new AuthState.AuthStateAction() {
-            @Override
-            public void execute(@Nullable String accessToken, @Nullable String idToken, @Nullable AuthorizationException ex) {
-                if (ex != null) {
-                    EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(ex.toJsonString(), ex));
-                    taskDone.set(true);
-                    LOG.error(ex.toJsonString(), ex);
-                    return;
-                }
-                googleDriveAccessToken = accessToken;
-                taskDone.set(true);
-            }
-        });
-
-        // Wait for the performActionWithFreshTokens.execute callback
-        // (which happens on the UI thread for some reason) to complete.
-        while (!taskDone.get()) {
-            Thread.sleep(500);
-        }
-
-        if (Strings.isNullOrEmpty(googleDriveAccessToken)) {
-            LOG.error("Failed to fetch Access Token for Google Drive. Stopping this job.");
-            return;
-        }
-
+        final AtomicBoolean taskDone = new AtomicBoolean(false);
+        PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
         try {
+            AuthorizationService authorizationService = GoogleDriveManager.getAuthorizationService(AppSettings.getInstance());
+
+            // The performActionWithFreshTokens seems to happen on a UI thread! (Why??)
+            // So I can't do network calls on this thread.
+            // Instead, updating a class level variable, and waiting for it afterwards.
+            // https://github.com/openid/AppAuth-Android/issues/123
+            authState.performActionWithFreshTokens(authorizationService, new AuthState.AuthStateAction() {
+                @Override
+                public void execute(@Nullable String accessToken, @Nullable String idToken, @Nullable AuthorizationException ex) {
+                    if (ex != null) {
+                        EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(ex.toJsonString(), ex));
+                        taskDone.set(true);
+                        LOG.error(ex.toJsonString(), ex);
+                        return;
+                    }
+                    googleDriveAccessToken = accessToken;
+                    taskDone.set(true);
+                }
+            });
+
+            // Wait for the performActionWithFreshTokens.execute callback
+            // (which happens on the UI thread for some reason) to complete.
+            while (!taskDone.get()) {
+                Thread.sleep(500);
+            }
+
+            if (Strings.isNullOrEmpty(googleDriveAccessToken)) {
+                LOG.error("Failed to fetch Access Token for Google Drive. Stopping this job.");
+                return Result.failure();
+            }
 
             // Figure out the Folder ID to upload to, from the path; recursively create if it doesn't exist.
             String folderPath = preferenceHelper.getGoogleDriveFolderPath();
@@ -119,35 +117,58 @@ public class GoogleDriveJob extends Job {
             String gpsLoggerFolderId = latestFolderId;
 
             if (Strings.isNullOrEmpty(gpsLoggerFolderId)) {
-                EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create folder"));
-                return;
+                failureMessage = "Could not create folder";
+                success = false;
             }
-
-            // Now search for the file
-            String gpxFileId = getFileIdFromFileName(googleDriveAccessToken, fileName, gpsLoggerFolderId);
-
-            if (Strings.isNullOrEmpty(gpxFileId)) {
-                LOG.debug("Creating an empty file first.");
-                gpxFileId = createEmptyFile(googleDriveAccessToken, fileName, Files.getMimeTypeFromFileName(fileName), gpsLoggerFolderId);
+            else {
+                // Now search for the file
+                String gpxFileId = getFileIdFromFileName(googleDriveAccessToken, fileToUpload.getName(), gpsLoggerFolderId);
 
                 if (Strings.isNullOrEmpty(gpxFileId)) {
-                    EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not create file"));
-                    return;
+                    LOG.debug("Creating an empty file first.");
+                    gpxFileId = createEmptyFile(googleDriveAccessToken, fileToUpload.getName(), Files.getMimeTypeFromFileName(fileToUpload.getName()), gpsLoggerFolderId);
+
+                    if (Strings.isNullOrEmpty(gpxFileId)) {
+                        failureMessage = "Could not create file";
+                        success = false;
+                    }
                 }
-            }
 
-            // Upload contents to file
-            if (!Strings.isNullOrEmpty(gpxFileId)) {
-                LOG.debug("Uploading file contents");
-                updateFileContents(googleDriveAccessToken, gpxFileId, fileName);
-            }
+                // The above empty file creation needs to happen first - this shouldn't be an 'else' to the above if.
+                if (!Strings.isNullOrEmpty(gpxFileId)) {
+                    LOG.debug("Uploading file contents");
+                    updateFileContents(googleDriveAccessToken, gpxFileId, fileToUpload);
+                }
 
-            EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
+            }
 
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
-            EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed(e.getMessage(), e));
+            success = false;
+            failureMessage = e.getMessage();
+            failureThrowable = e;
         }
+
+        if(success){
+            // Notify internal listeners
+            EventBus.getDefault().post(new UploadEvents.GoogleDrive().succeeded());
+            // Notify external listeners
+            Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{fileToUpload.getAbsolutePath()}, "googledrive");
+            return Result.success();
+        }
+
+        if(getRunAttemptCount() < getRetryLimit()){
+            LOG.warn(String.format("Google Drive - attempt %d of %d failed, will retry", getRunAttemptCount(), getRetryLimit()));
+            return Result.retry();
+        }
+
+        if(failureThrowable == null) {
+            failureThrowable = new Exception(failureMessage);
+        }
+
+        EventBus.getDefault()
+                .post(new UploadEvents.GoogleDrive().failed(failureMessage, failureThrowable));
+        return Result.failure();
 
     }
 
@@ -211,8 +232,8 @@ public class GoogleDriveJob extends Job {
         return fileId;
     }
 
-    private String updateFileContents(String accessToken, String gpxFileId, String fileName) throws Exception {
-        FileInputStream fis = new FileInputStream(new File(preferenceHelper.getGpsLoggerFolder(), fileName));
+    private String updateFileContents(String accessToken, String gpxFileId, File fileToUpload) throws Exception {
+        FileInputStream fis = new FileInputStream(fileToUpload);
         String fileId = null;
 
         String fileUpdateUrl = "https://www.googleapis.com/upload/drive/v3/files/" + gpxFileId + "?uploadType=media";
@@ -221,7 +242,7 @@ public class GoogleDriveJob extends Job {
         Request.Builder requestBuilder = new Request.Builder().url(fileUpdateUrl);
 
         requestBuilder.addHeader("Authorization", "Bearer " + accessToken);
-        RequestBody body = RequestBody.create(MediaType.parse(Files.getMimeTypeFromFileName(fileName)), Streams.getByteArrayFromInputStream(fis));
+        RequestBody body = RequestBody.create(MediaType.parse(Files.getMimeTypeFromFileName(fileToUpload.getName())), Streams.getByteArrayFromInputStream(fis));
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
             requestBuilder.addHeader("X-HTTP-Method-Override", "PATCH");
         }
@@ -239,23 +260,7 @@ public class GoogleDriveJob extends Job {
         return fileId;
     }
 
-    @Override
-    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
-        EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not send to Google Drive", throwable));
-        LOG.error("Google Drive: maximum attempts failed, giving up", throwable);
-    }
-
-    @Override
-    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
-        EventBus.getDefault().post(new UploadEvents.GoogleDrive().failed("Could not upload to Google Drive", throwable));
-        LOG.error("Could not upload to Google Drive", throwable);
-        return RetryConstraint.CANCEL;
-    }
-
-    @Override
     protected int getRetryLimit() {
         return 3;
     }
-
-
 }

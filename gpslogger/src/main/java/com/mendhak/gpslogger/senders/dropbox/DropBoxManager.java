@@ -21,22 +21,21 @@ package com.mendhak.gpslogger.senders.dropbox;
 
 
 import android.content.Context;
-
-import com.birbit.android.jobqueue.CancelResult;
-import com.birbit.android.jobqueue.JobManager;
-import com.birbit.android.jobqueue.TagConstraint;
 import com.dropbox.core.*;
 import com.dropbox.core.android.Auth;
 import com.dropbox.core.oauth.DbxCredential;
-import com.mendhak.gpslogger.common.AppSettings;
+
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
 import org.slf4j.Logger;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 
 public class DropBoxManager extends FileSender {
@@ -85,7 +84,7 @@ public class DropBoxManager extends FileSender {
     public void uploadFile(List<File> files) {
         for (File f : files) {
             LOG.debug(f.getName());
-            uploadFile(f.getName());
+            uploadFile(f);
         }
     }
 
@@ -104,15 +103,14 @@ public class DropBoxManager extends FileSender {
         return SenderNames.DROPBOX;
     }
 
-    public void uploadFile(final String fileName) {
+    public void uploadFile(File fileToUpload) {
 
-        final JobManager jobManager = AppSettings.getJobManager();
-        jobManager.cancelJobsInBackground(new CancelResult.AsyncCancelCallback() {
-            @Override
-            public void onCancelled(CancelResult cancelResult) {
-                jobManager.addJobInBackground(new DropboxJob(fileName));
-            }
-        }, TagConstraint.ANY, DropboxJob.getJobTag(fileName));
+        HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+            put("filePath", fileToUpload.getAbsolutePath());
+        }};
+        String tag = String.valueOf(Objects.hashCode(fileToUpload.getName()));
+        Systems.startWorkManagerRequest(DropboxWorker.class, dataMap, tag);
+
     }
 
     @Override

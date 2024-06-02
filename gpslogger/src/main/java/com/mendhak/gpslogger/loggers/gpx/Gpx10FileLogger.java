@@ -26,6 +26,7 @@ import com.mendhak.gpslogger.common.Maths;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.RejectionHandler;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.events.CommandEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.Files;
@@ -36,6 +37,8 @@ import java.util.Date;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import de.greenrobot.event.EventBus;
 
 
 public class Gpx10FileLogger implements FileLogger {
@@ -160,7 +163,8 @@ class Gpx10AnnotateHandler implements Runnable {
 
                 LOG.debug("Finished annotation to GPX10 File");
             } catch (Exception e) {
-                LOG.error("Gpx10FileLogger.annotate", e);
+                EventBus.getDefault().post(new CommandEvents.FileWriteFailure());
+                LOG.error("Error annotating GPX file", e);
             }
 
         }
@@ -241,7 +245,8 @@ class Gpx10WriteHandler implements Runnable {
                 LOG.debug("Finished writing to GPX10 file");
 
             } catch (Exception e) {
-                LOG.error("Gpx10FileLogger.write", e);
+                EventBus.getDefault().post(new CommandEvents.FileWriteFailure());
+                LOG.error("Error writing to GPX file", e);
             }
 
         }

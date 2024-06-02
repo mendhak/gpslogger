@@ -1,38 +1,20 @@
-/*
- * Copyright (C) 2016 mendhak
- *
- * This file is part of GPSLogger for Android.
- *
- * GPSLogger for Android is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * GPSLogger for Android is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package com.mendhak.gpslogger.senders.ftp;
 
+import android.content.Context;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.work.Worker;
+import androidx.work.WorkerParameters;
 
-import com.birbit.android.jobqueue.Job;
-import com.birbit.android.jobqueue.Params;
-import com.birbit.android.jobqueue.RetryConstraint;
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.network.Networks;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.slf4j.LoggingOutputStream;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import de.greenrobot.event.EventBus;
+
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -40,53 +22,61 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPSClient;
 import org.slf4j.Logger;
 
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
 
-public class FtpJob extends Job {
+import de.greenrobot.event.EventBus;
 
-    private static final Logger LOG = Logs.of(FtpJob.class);
+public class FtpWorker extends Worker {
 
-    String server;
-    int port;
-    String username;
-    String password;
-    boolean useFtps;
-    String protocol;
-    boolean implicit;
-    File gpxFile;
-    String fileName;
-    String directory;
-
+    private static final Logger LOG = Logs.of(FtpWorker.class);
     static UploadEvents.Ftp jobResult;
     static ArrayList<String> ftpServerResponses;
 
-    protected FtpJob(String server, int port, String username,
-                     String password, String directory, boolean useFtps, String protocol, boolean implicit,
-                     File gpxFile, String fileName) {
-        super(new Params(1).requireNetwork().persist().addTags(getJobTag(gpxFile)));
-
-        this.server = server;
-        this.port = port;
-        this.username = username;
-        this.password = password;
-        this.useFtps = useFtps;
-        this.protocol = protocol;
-        this.implicit = implicit;
-        this.gpxFile = gpxFile;
-        this.fileName = fileName;
-        this.directory = directory;
-
-        ftpServerResponses = new ArrayList<>();
-        jobResult = null;
-
+    public FtpWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+        super(context, workerParams);
     }
+
+    @NonNull
+    @Override
+    public Result doWork() {
+        ftpServerResponses = new ArrayList<>();
+        PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+        String server = preferenceHelper.getFtpServerName();
+        int port = preferenceHelper.getFtpPort();
+        String username = preferenceHelper.getFtpUsername();
+        String password = preferenceHelper.getFtpPassword();
+        boolean useFtps = preferenceHelper.shouldFtpUseFtps();
+        String protocol = preferenceHelper.getFtpProtocol();
+        boolean implicit = preferenceHelper.isFtpImplicit();
+
+        String filePath = getInputData().getString("filePath");
+        File file = new File(filePath);
+
+        String directory = preferenceHelper.getFtpDirectory();
+
+        if (upload(server, username, password, directory, port, useFtps, protocol, implicit, file, file.getName())) {
+            LOG.info("FTP - file uploaded");
+            // Notify internal listeners
+            EventBus.getDefault().post(new UploadEvents.Ftp().succeeded());
+            // Notify external listeners
+            Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{file.getAbsolutePath()}, "ftp");
+            return Result.success();
+        } else {
+            jobResult.ftpMessages = ftpServerResponses;
+            EventBus.getDefault().post(jobResult);
+        }
+
+
+        return Result.success();
+    }
+
 
     public synchronized static boolean upload(String server, String username, String password, String directory, int port,
                                               boolean useFtps, String protocol, boolean implicit,
@@ -197,7 +187,6 @@ public class FtpJob extends Job {
         return true;
     }
 
-
     private static void ftpCreateDirectoryTree(FTPClient client, String dirTree) throws IOException {
 
         boolean dirExists = true;
@@ -235,37 +224,5 @@ public class FtpJob extends Job {
                 }
             }
         }
-    }
-
-    @Override
-    public void onAdded() {
-
-    }
-
-    @Override
-    public void onRun() throws Throwable {
-        if (upload(server, username, password, directory, port, useFtps, protocol, implicit, gpxFile, fileName)) {
-            LOG.info("FTP - file uploaded");
-            EventBus.getDefault().post(new UploadEvents.Ftp().succeeded());
-        } else {
-            jobResult.ftpMessages = ftpServerResponses;
-            EventBus.getDefault().post(jobResult);
-        }
-    }
-
-    @Override
-    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
-
-    }
-
-    @Override
-    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
-        EventBus.getDefault().post(new UploadEvents.Ftp().failed("Could not FTP file", throwable));
-        LOG.error("Could not FTP file", throwable);
-        return RetryConstraint.CANCEL;
-    }
-
-    public static String getJobTag(File testFile) {
-        return "FTP"+testFile.getName();
     }
 }

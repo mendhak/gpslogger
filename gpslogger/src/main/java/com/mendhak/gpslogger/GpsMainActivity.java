@@ -65,6 +65,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -158,9 +159,7 @@ public class GpsMainActivity extends AppCompatActivity
         setUpNavigationDrawer(savedInstanceState);
 
         loadDefaultFragmentView();
-        startAndBindService();
-        registerEventBus();
-        registerConscryptProvider();
+
 
         if(!Systems.hasUserGrantedAllNecessaryPermissions(this)){
             LOG.debug("Permission check - missing permissions");
@@ -169,6 +168,10 @@ public class GpsMainActivity extends AppCompatActivity
         }
         else {
             LOG.debug("Permission check - OK");
+
+            startAndBindService();
+            registerEventBus();
+            registerConscryptProvider();
 
             if(preferenceHelper.shouldStartLoggingOnAppLaunch()){
                 LOG.debug("Start logging on app launch");
@@ -269,6 +272,9 @@ public class GpsMainActivity extends AppCompatActivity
                     permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
                     permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
                     permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        permissions.add(Manifest.permission.POST_NOTIFICATIONS);
+                    }
 
                     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
                         // Only on Android 10 (Q), the permission dialog can include an 'Allow all the time'
@@ -1501,6 +1507,16 @@ public class GpsMainActivity extends AppCompatActivity
      * Stops the service if it isn't logging. Also unbinds.
      */
     private void stopAndUnbindServiceIfRequired() {
+        if(!NotificationManagerCompat.from(this).areNotificationsEnabled()) {
+            // Alright. Why is this needed.
+            // If the notification permission has been revoked or not granted for whatever reason.
+            // When the application opens, the service starts, then stops right away.
+            // Android requires a notification to be shown for a foreground service within 5 seconds.
+            // So the application crashes and comes back repeatedly. Very weird.
+            // The answer - if notifications are disabled, don't unbind the service. It will stop on its own.
+            // Might be related: https://stackoverflow.com/questions/73067939/start-foreground-service-after-notification-permission-was-disabled-causes-crash
+            return;
+        }
         if (session.isBoundToService()) {
 
             try {
@@ -1514,6 +1530,10 @@ public class GpsMainActivity extends AppCompatActivity
         if (!session.isStarted()) {
             LOG.debug("Stopping the service");
             try {
+                // Stop service crashes if the intent is null. lol
+                if(serviceIntent == null){
+                    serviceIntent = new Intent(this, GpsLoggingService.class);
+                }
                 stopService(serviceIntent);
             } catch (Exception e) {
                 LOG.error("Could not stop the service", e);

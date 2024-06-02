@@ -54,20 +54,32 @@ The app comes with a Start and a Stop **shortcut** (long press home screen, add 
 
 ### Listening to GPSLogger
 
+GPSLogger sends a broadcast start/stop of logging, or file uploaded, which you can receive as an event.  
 
-(Experimental feature) GPSLogger sends a broadcast start/stop of logging, which you can receive as an event.
-  
-In Tasker, this would look like:  
-  
-> Event: Intent Received  
-  Action: com.mendhak.gpslogger.EVENT 
-  
-From there in your task, you can look at the following variables
- 
- * `%gpsloggerevent` - `started` or `stopped`
- * `%filename` - the base filename that was chosen (no extension)
- * `%startedtimestamp` - timestamp when logging was started (epoch)
- * `%duration` - seconds since the current session started
- * `%distance` - meters travelled since the session started
+In Tasker, this would be the `Intent Received` event.  
+Set the action to `com.mendhak.gpslogger.EVENT`.  
+You can then access the extras as `%variablename` or `%arrayname1`.  
+
+In Automate, you can use the Broadcast Receive block.  
+Set the Action to `com.mendhak.gpslogger.EVENT`.  
+Set the dictionary with broadcast extras to a variable, then access the extras as `myvar["variablename"]` or `myvar["arrayname"][0]`.  
+
+From there in your task, you can look at the following variables.
+
+*Start/Stop logging*
+
+* `gpsloggerevent` - `started` or `stopped`
+* `filename` - the base filename that was chosen (no extension)
+* `startedtimestamp` - timestamp when logging was started (epoch)
+* `duration` - seconds since the current session started
+* `distance` - meters travelled since the session started
+
+
+*File uploaded*
+
+* `gpsloggerevent` - `fileuploaded`
+* `filepaths` - an array of file paths that were uploaded, even if it's just a single file
+* `sendertype` - which sender was used to upload the file, e.g. `customurl`, `ftp`, etc.
+
 
 In a custom application, receive the `com.mendhak.gpslogger.EVENT` broadcast and have a look inside the extras.

@@ -27,15 +27,15 @@ public class CustomUrlManagerTest {
                 .withAltitude(45)
                 .withAccuracy(8)
                 .withBearing(359)
-                .withSpeed(9001)
+                .withSpeed(9005)
                 .withTime(1457205869949l)
                 .build();
 
 
         CustomUrlManager manager = new CustomUrlManager(null);
 
-        String expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.111&sat=9&desc=blah&alt=45.0&acc=8.0&dir=359.0&prov=MOCK&spd=9001.0&time=2016-03-05T19:24:29.949Z&battery=91.0&androidId=22&serial=SRS11&activity=";
-        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%act";
+        String expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.111&sat=9&desc=blah&alt=45.0&acc=8.0&dir=359.0&prov=MOCK&spd_kph=32418.0&spd=9005.0&time=2016-03-05T19:24:29.949Z&battery=91.0&androidId=22&serial=SRS11&activity=";
+        String urlTemplate = "http://192.168.1.65:8000/test?lat=%LAT&lon=%LON&sat=%SAT&desc=%DESC&alt=%ALT&acc=%ACC&dir=%DIR&prov=%PROV&spd_kph=%SPD_KPH&spd=%SPD&time=%TIME&battery=%BATT&androidId=%AID&serial=%SER&activity=%act";
         assertThat("Placeholders are substituted", manager.getFormattedTextblock(urlTemplate,
                 new SerializableLocation(loc), "blah", "22", 91,
                 false, "SRS11", 0, "", "",
@@ -289,7 +289,7 @@ public class CustomUrlManagerTest {
                 .putExtra(BundleConstants.VDOP, "19").withTime(1457205869949l).build();
         CustomUrlManager manager = new CustomUrlManager(null);
         String expected = "http://192.168.1.65:8000/test?lat=12.193&lon=19.456&sat=0&desc=&alt=0.0" +
-                "&acc=0.0&dir=0.0&prov=MOCK&spd=0.0&timestamp=1457205869" +
+                "&acc=0.0&dir=0.0&prov=MOCK&spd_kph=0.0&spd=0.0&timestamp=1457205869" +
                 "&timeoffset=2016-03-05T21:24:29.949%2B02:00&time=2016-03-05T19:24:29.949Z" +
                 "&starttimestamp=1495884681&date=2016-03-05&batt=0.0&ischarging=false&aid=&ser=" +
                 "&act=&filename=20170527abc&profile=Default+Profile&hdop=&vdop=19&pdop=&dist=0&";
@@ -307,7 +307,7 @@ public class CustomUrlManagerTest {
                 .putExtra(BundleConstants.VDOP, "19").withTime(1457205869949l).build();
         CustomUrlManager manager = new CustomUrlManager(null);
         String expected = "lat=12.193&lon=19.456&sat=0&desc=&alt=0.0&acc=0.0&dir=0.0&prov=MOCK" +
-                "&spd=0.0&timestamp=1457205869&timeoffset=2016-03-05T21:24:29.949%2B02:00" +
+                "&spd_kph=0.0&spd=0.0&timestamp=1457205869&timeoffset=2016-03-05T21:24:29.949%2B02:00" +
                 "&time=2016-03-05T19:24:29.949Z&starttimestamp=1495884681&date=2016-03-05" +
                 "&batt=0.0&ischarging=false&aid=&ser=&act=&filename=20170527abc" +
                 "&profile=Default+Profile&hdop=&vdop=19&pdop=&dist=0&";

@@ -55,7 +55,6 @@ import java.util.Date;
 @SuppressLint("MissingPermission")
 public class GpsLoggingService extends Service  {
     private static NotificationManager notificationManager;
-    private static int NOTIFICATION_ID = 8675309;
     private final IBinder binder = new GpsLoggingBinder();
     AlarmManager nextPointAlarmManager;
     private NotificationCompat.Builder nfc;
@@ -89,10 +88,10 @@ public class GpsLoggingService extends Service  {
     public void onCreate() {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                startForeground(NOTIFICATION_ID, getNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+                startForeground(NotificationChannelNames.GPSLOGGER_DEFAULT_NOTIFICATION_ID, getNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
             }
             else {
-                startForeground(NOTIFICATION_ID, getNotification());
+                startForeground(NotificationChannelNames.GPSLOGGER_DEFAULT_NOTIFICATION_ID, getNotification());
             }
         } catch (Exception ex) {
             LOG.error("Could not start GPSLoggingService in foreground. ", ex);
@@ -126,18 +125,21 @@ public class GpsLoggingService extends Service  {
         super.onStartCommand(intent, flags, startId);
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                startForeground(NOTIFICATION_ID, getNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+                startForeground(NotificationChannelNames.GPSLOGGER_DEFAULT_NOTIFICATION_ID, getNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
             }
             else {
-                startForeground(NOTIFICATION_ID, getNotification());
+                startForeground(NotificationChannelNames.GPSLOGGER_DEFAULT_NOTIFICATION_ID, getNotification());
             }
         } catch (Exception ex) {
             LOG.error("Could not start GPSLoggingService in foreground. ", ex);
         }
 
         if(session.isStarted() && gpsLocationListener == null && towerLocationListener == null && passiveLocationListener == null) {
-            LOG.warn("App might be recovering from an unexpected stop.  Starting logging again.");
-            startLogging();
+            if(Systems.hasUserGrantedAllNecessaryPermissions(this)){
+                LOG.warn("App might be recovering from an unexpected stop.  Starting logging again.");
+                startLogging();
+            }
+
         }
 
         handleIntent(intent);
@@ -179,8 +181,7 @@ public class GpsLoggingService extends Service  {
 
                 if(!Systems.locationPermissionsGranted(this)){
                     LOG.error("User has not granted permission to access location services. Will not continue!");
-                    stopLogging();
-                    stopSelf();
+                    Systems.showErrorNotification(this, getString(R.string.gpslogger_permissions_permanently_denied));
                     return;
                 }
 
@@ -398,10 +399,10 @@ public class GpsLoggingService extends Service  {
 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                startForeground(NOTIFICATION_ID, getNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+                startForeground(NotificationChannelNames.GPSLOGGER_DEFAULT_NOTIFICATION_ID, getNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
             }
             else {
-                startForeground(NOTIFICATION_ID, getNotification());
+                startForeground(NotificationChannelNames.GPSLOGGER_DEFAULT_NOTIFICATION_ID, getNotification());
             }
         } catch (Exception ex) {
             LOG.error("Could not start GPSLoggingService in foreground. ", ex);
@@ -420,7 +421,7 @@ public class GpsLoggingService extends Service  {
     }
 
     private void notifyByBroadcast(boolean loggingStarted) {
-            LOG.debug("Sending a custom broadcast");
+            LOG.debug("Sending a started/stopped broadcast");
             String event = (loggingStarted) ? "started" : "stopped";
             Intent sendIntent = new Intent();
             sendIntent.setAction("com.mendhak.gpslogger.EVENT");
@@ -529,21 +530,7 @@ public class GpsLoggingService extends Service  {
 
         if (nfc == null) {
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-                NotificationChannel channel = new NotificationChannel("gpslogger", getString(R.string.app_name), NotificationManager.IMPORTANCE_DEFAULT);
-                channel.enableLights(false);
-                channel.enableVibration(false);
-                channel.setSound(null,null);
-                channel.setLockscreenVisibility(preferenceHelper.shouldHideNotificationFromLockScreen() ? Notification.VISIBILITY_PRIVATE : Notification.VISIBILITY_PUBLIC);
-
-                channel.setShowBadge(true);
-                manager.createNotificationChannel(channel);
-
-            }
-
-            nfc = new NotificationCompat.Builder(getApplicationContext(),"gpslogger")
+            nfc = new NotificationCompat.Builder(getApplicationContext(), NotificationChannelNames.GPSLOGGER_DEFAULT)
                     .setSmallIcon(R.drawable.notification)
                     .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.gpsloggericon3))
                     .setPriority( preferenceHelper.shouldHideNotificationFromStatusBar() ? NotificationCompat.PRIORITY_MIN : NotificationCompat.PRIORITY_LOW)
@@ -566,22 +553,20 @@ public class GpsLoggingService extends Service  {
             }
         }
 
-
-
         nfc.setContentTitle(contentTitle);
         nfc.setContentText(contentText);
         nfc.setStyle(new NotificationCompat.BigTextStyle().bigText(contentText).setBigContentTitle(contentTitle));
         nfc.setWhen(notificationTime);
 
         //notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        //notificationManager.notify(NOTIFICATION_ID, nfc.build());
+        //notificationManager.notify(NotificationChannelNames.GPSLOGGER_DEFAULT_ID, nfc.build());
         return nfc.build();
     }
 
     private void showNotification(){
         Notification notif = getNotification();
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ID, notif);
+        notificationManager.notify(NotificationChannelNames.GPSLOGGER_DEFAULT_NOTIFICATION_ID, notif);
     }
 
     @SuppressWarnings("ResourceType")
@@ -1092,6 +1077,7 @@ public class GpsLoggingService extends Service  {
         }
         catch(Exception e){
              LOG.error(getString(R.string.could_not_write_to_file), e);
+             Systems.showErrorNotification(this, getString(R.string.could_not_write_to_file));
         }
 
         session.clearDescription();
@@ -1192,6 +1178,14 @@ public class GpsLoggingService extends Service  {
     }
 
 
+    @EventBusHook
+    public void onEvent(CommandEvents.FileWriteFailure writeFailure){
+        Systems.showErrorNotification(this, getString(R.string.could_not_write_to_file));
+        if(writeFailure.stopLoggingDueToNMEA){
+            LOG.error("Could not write to NMEA file, stopping logging due to high frequency of write failures");
+            stopLogging();
+        }
+    }
 
     @EventBusHook
     public void onEvent(ProfileEvents.SwitchToProfile switchToProfileEvent){

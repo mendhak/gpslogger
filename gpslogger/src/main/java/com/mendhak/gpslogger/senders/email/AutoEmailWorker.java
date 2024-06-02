@@ -1,96 +1,70 @@
-/*
- * Copyright (C) 2016 mendhak
- *
- * This file is part of GPSLogger for Android.
- *
- * GPSLogger for Android is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * GPSLogger for Android is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with GPSLogger for Android.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package com.mendhak.gpslogger.senders.email;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.content.Context;
 import android.util.Base64;
 
-import com.birbit.android.jobqueue.Job;
-import com.birbit.android.jobqueue.Params;
-import com.birbit.android.jobqueue.RetryConstraint;
+import androidx.annotation.NonNull;
+import androidx.work.Worker;
+import androidx.work.WorkerParameters;
+
 import com.mendhak.gpslogger.common.AppSettings;
-import com.mendhak.gpslogger.common.network.Networks;
+import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.events.UploadEvents;
+import com.mendhak.gpslogger.common.network.LocalX509TrustManager;
+import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.loggers.Streams;
-import com.mendhak.gpslogger.common.network.LocalX509TrustManager;
-import de.greenrobot.event.EventBus;
+
 import org.apache.commons.net.ProtocolCommandEvent;
 import org.apache.commons.net.ProtocolCommandListener;
-import org.apache.commons.net.smtp.*;
+import org.apache.commons.net.smtp.AuthenticatingSMTPClient;
+import org.apache.commons.net.smtp.SMTPClient;
+import org.apache.commons.net.smtp.SMTPReply;
+import org.apache.commons.net.smtp.SimpleSMTPHeader;
 import org.slf4j.Logger;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
+import de.greenrobot.event.EventBus;
 
-public class AutoEmailJob extends Job {
+public class AutoEmailWorker extends Worker {
 
-    private static final Logger LOG = Logs.of(AutoEmailJob.class);
-    String smtpServer;
-    String smtpPort;
-    String smtpUsername;
-    String smtpPassword;
-    boolean smtpUseSsl;
-    String csvEmailTargets;
-    String fromAddress;
-    String subject;
-    String body;
-    File[] files;
-    static ArrayList<String> smtpServerResponses;
-    static UploadEvents.AutoEmail smtpFailureEvent;
-
-
-
-    protected AutoEmailJob(String smtpServer,
-                           String smtpPort, String smtpUsername, String smtpPassword,
-                           boolean smtpUseSsl, String csvEmailTargets, String fromAddress,
-                            String subject, String body, File[] files) {
-        super(new Params(1).requireNetwork().persist().addTags(getJobTag(files)));
-        this.smtpServer = smtpServer;
-        this.smtpPort = smtpPort;
-        this.smtpPassword = smtpPassword;
-        this.smtpUsername = smtpUsername;
-        this.smtpUseSsl = smtpUseSsl;
-        this.csvEmailTargets = csvEmailTargets;
-        this.fromAddress = fromAddress;
-        this.subject = subject;
-        this.body = body;
-        this.files = files;
-
-        smtpServerResponses = new ArrayList<>();
-        smtpFailureEvent = null;
+    private static final Logger LOG = Logs.of(AutoEmailWorker.class);
+    public AutoEmailWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+        super(context, workerParams);
     }
 
+    @NonNull
     @Override
-    public void onAdded() {
+    public Result doWork() {
 
-    }
+        PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+        String smtpServer = preferenceHelper.getSmtpServer();
+        String smtpPort = preferenceHelper.getSmtpPort();
+        String smtpPassword = preferenceHelper.getSmtpPassword();
+        String smtpUsername = preferenceHelper.getSmtpUsername();
+        boolean smtpUseSsl = preferenceHelper.isSmtpSsl();
+        String csvEmailTargets = preferenceHelper.getAutoEmailTargets();
+        String fromAddress = preferenceHelper.getSmtpSenderAddress();
 
-    @Override
-    public void onRun() throws Throwable {
+        String subject = getInputData().getString("subject");
+        String body = getInputData().getString("body");
+        String[] fileNames = getInputData().getStringArray("fileNames");
+
+        File[] files = new File[fileNames.length];
+        for (int i = 0; i < fileNames.length; i++) {
+            files[i] = new File(fileNames[i]);
+        }
 
         int port = Strings.toInt(smtpPort,25);
 
@@ -99,6 +73,9 @@ public class AutoEmailJob extends Job {
         }
 
         AuthenticatingSMTPClient client = new AuthenticatingSMTPClient();
+
+        ArrayList<String> smtpServerResponses = new ArrayList<>();
+        UploadEvents.AutoEmail smtpFailureEvent = null;
 
         try {
 
@@ -191,7 +168,10 @@ public class AutoEmailJob extends Job {
                 }
                 else {
                     LOG.info("Email - file sent");
+                    // Notify internal listeners
                     EventBus.getDefault().post(new UploadEvents.AutoEmail().succeeded());
+                    // Notify external listeners
+                    Systems.sendFileUploadedBroadcast(getApplicationContext(), fileNames, "email");
                 }
             }
             else {
@@ -217,20 +197,13 @@ public class AutoEmailJob extends Job {
                     smtpFailureEvent.smtpMessages = new ArrayList<>(Arrays.asList(client.getReplyStrings()));
                 }
                 EventBus.getDefault().post(smtpFailureEvent);
+                return Result.failure();
             }
         }
 
-    }
 
-    @Override
-    protected void onCancel(int cancelReason, @Nullable Throwable throwable) {
-        LOG.debug("Email job cancelled");
-    }
 
-    @Override
-    protected RetryConstraint shouldReRunOnThrowable(@NonNull Throwable throwable, int runCount, int maxRunCount) {
-        LOG.error("Could not send email", throwable);
-        return RetryConstraint.CANCEL;
+        return Result.success();
     }
 
 
@@ -262,15 +235,5 @@ public class AutoEmailJob extends Job {
         } else if (SMTPReply.isNegativePermanent(sc.getReplyCode())) {
             throw new Exception("Permanent SMTP error " +  sc.getReplyString());
         }
-    }
-
-
-    public static String getJobTag(File[] files) {
-        StringBuilder sb = new StringBuilder();
-        for(File f : files){
-            sb.append(f.getName()).append(".");
-        }
-        return "EMAIL" + sb.toString();
-
     }
 }

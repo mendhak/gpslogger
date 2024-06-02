@@ -19,13 +19,11 @@
 
 package com.mendhak.gpslogger.senders.opengts;
 
-import com.birbit.android.jobqueue.JobManager;
 import com.mendhak.gpslogger.common.*;
-import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.loggers.customurl.CustomUrlJob;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
-import com.mendhak.gpslogger.loggers.opengts.OpenGtsUdpJob;
+import com.mendhak.gpslogger.loggers.customurl.CustomUrlWorker;
+import com.mendhak.gpslogger.loggers.opengts.OpenGtsUdpWorker;
 import com.mendhak.gpslogger.senders.FileSender;
 import com.mendhak.gpslogger.senders.GpxReader;
 import org.slf4j.Logger;
@@ -56,10 +54,24 @@ public class OpenGTSManager extends FileSender {
         // Use only gpx
         for (File f : files) {
             if (f.getName().endsWith(".gpx")) {
-                List<SerializableLocation> locations = getLocationsFromGPX(f);
-                LOG.debug(locations.size() + " points were read from " + f.getName());
 
-                sendLocations(locations.toArray(new SerializableLocation[locations.size()]));
+                String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
+
+                if(communication.equalsIgnoreCase("udp")){
+                    String tag = String.valueOf(Objects.hashCode(f.getName()));
+                    HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+                        put("gpxFilePath", f.getAbsolutePath());
+                    }};
+                    Systems.startWorkManagerRequest(OpenGtsUdpWorker.class, dataMap, tag);
+                }
+                else {
+                    String tag = String.valueOf(Objects.hashCode(f.getName()));
+                    HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+                        put("gpxFilePath", f.getAbsolutePath());
+                        put("callbackType", "opengts");
+                    }};
+                    Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
+                }
 
             }
         }
@@ -76,8 +88,16 @@ public class OpenGTSManager extends FileSender {
             String communication = preferenceHelper.getOpenGTSServerCommunicationMethod();
 
             if(communication.equalsIgnoreCase("udp")){
-                JobManager jobManager = AppSettings.getJobManager();
-                jobManager.addJobInBackground(new OpenGtsUdpJob(server, port, accountName, path, deviceId, communication, locations));
+                String tag = String.valueOf(Objects.hashCode(locations));
+                String[] serializedLocations = new String[locations.length];
+                for (int i = 0; i < locations.length; i++) {
+                    serializedLocations[i] = Strings.serializeTojson(locations[i]);
+                }
+                HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+                    put("locations", serializedLocations);
+                }};
+
+                Systems.startWorkManagerRequest(OpenGtsUdpWorker.class, dataMap, tag);
             }
             else {
                 sendByHttp(deviceId, accountName, locations, communication, path, server, port);
@@ -87,19 +107,23 @@ public class OpenGTSManager extends FileSender {
     }
 
     void sendByHttp(String deviceId, String accountName, SerializableLocation[] locations, String communication, String path, String server, int port) {
-        ArrayList<CustomUrlRequest> requests = new ArrayList<>();
-        JobManager jobManager = AppSettings.getJobManager();
 
-        for(SerializableLocation loc:locations){
-            String finalUrl = getUrl(deviceId, accountName, loc, communication, path, server, port, batteryLevel );
+        String[] serializedRequests = new String[locations.length];
+        for (int i = 0; i < locations.length; i++) {
+            String finalUrl = getUrl(deviceId, accountName, locations[i], communication, path, server, port, batteryLevel );
             CustomUrlRequest request = new CustomUrlRequest(finalUrl);
-            requests.add(request);
+            serializedRequests[i] = Strings.serializeTojson(request);
         }
 
-        jobManager.addJobInBackground(new CustomUrlJob(requests, null, new UploadEvents.OpenGTS()));
+        String tag = String.valueOf(Objects.hashCode(serializedRequests));
+
+        HashMap<String, Object> dataMap = new HashMap<String, Object>(){{
+            put("urlRequests", serializedRequests);
+            put("callbackType", "opengts");
+        }};
+
+        Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
     }
-
-
 
 
     /**
@@ -238,14 +262,27 @@ public class OpenGTSManager extends FileSender {
         return SenderNames.OPENGTS;
     }
 
-    private List<SerializableLocation> getLocationsFromGPX(File f) {
-        List<SerializableLocation> locations = Collections.emptyList();
+    public List<CustomUrlRequest> getCustomUrlRequestsFromGPX(File f) {
+        List<CustomUrlRequest> requests = new ArrayList<>();
         try {
-            locations = GpxReader.getPoints(f);
+            List<SerializableLocation> locations = GpxReader.getPoints(f);
+            LOG.debug(locations.size() + " points were read from " + f.getName());
+            for (SerializableLocation location : locations) {
+                String finalUrl = getUrl(preferenceHelper.getOpenGTSDeviceId(),
+                        preferenceHelper.getOpenGTSAccountName(),
+                        location,
+                        preferenceHelper.getOpenGTSServerCommunicationMethod(),
+                        preferenceHelper.getOpenGTSServerPath(),
+                        preferenceHelper.getOpenGTSServer(),
+                        Integer.valueOf(preferenceHelper.getOpenGTSServerPort()),
+                        batteryLevel);
+                CustomUrlRequest request = new CustomUrlRequest(finalUrl);
+                requests.add(request);
+            }
         } catch (Exception e) {
-            LOG.error("OpenGTSManager.getLocationsFromGPX", e);
+            LOG.error("OpenGTSManager.getCustomUrlRequestsFromGPX", e);
         }
-        return locations;
+        return requests;
     }
 
     @Override
