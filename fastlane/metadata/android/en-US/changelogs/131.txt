@@ -1,6 +1,6 @@
 * OpenStreetMap option to be prompted before logging starts
-* Switching to Android WorkManager for sending and logging tasks. Should be more reliable.
-* Experimental - broadcast is sent when file upload completed, useful for automation to clean up files.
-* Clarified autosend description, that a dynamic file name change also results in the file being sent.
-* Error notifications if permissions have been revoked or file writes fail.
+* Switching to Android WorkManager for sending tasks, should be more reliable.
+* Broadcast is sent when file upload completed, useful for automation to clean up files.
+* Error notifications and less crashing if permissions have been revoked or file writes fail.
 * New Custom URL parameter, %SPD_KPH
+* Clarified autosend description: dynamic file name change also results in the file being sent.
