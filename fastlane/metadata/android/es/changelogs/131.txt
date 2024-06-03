@@ -1,0 +1,6 @@
+* Opción OpenStreetMap que se solicitará antes de iniciar el registro
+* Cambiar a Android WorkManager para enviar tareas, debería ser más confiable.
+* La difusión se envía cuando se completa la carga, útil para la automatización para limpiar archivos.
+* Notificaciones de error y menos bloqueos si los permisos han sido revocados o falla la escritura del archivo.
+* Nuevo parámetro URL personalizado, %SPD_KPH
+* Descripción de envío automático clarificada: cambio dinámico de nombre de archivo también da como resultado el archivo que se envía.
