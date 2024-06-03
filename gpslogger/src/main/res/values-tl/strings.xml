@@ -33,10 +33,10 @@
     <string name="sharing_mylocation">Aking lokasyon</string>
     <string name="sharing_via">Pagbabahagi sa pamamagitan ng</string>
     <!-- general -->
-    <string name="foot">&#160;talampakan</string>
-    <string name="feet">&#160;talampakan</string>
-    <string name="meter">&#160;metro</string>
-    <string name="meters">&#160;metro</string>
+    <string name="foot"> talampakan</string>
+    <string name="feet"> talampakan</string>
+    <string name="meter"> metro</string>
+    <string name="meters"> metro</string>
     <string name="error">Mali</string>
     <string name="error_connection">Hindi makakonekta. Suriin ng mabuti ang mga opsyon sa phone.</string>
     <string name="seconds">s</string>

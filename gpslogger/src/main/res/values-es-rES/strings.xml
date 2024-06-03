@@ -189,7 +189,7 @@
     <string name="google_drive_testupload_success">Subido. Abre Google Docs para ver el archivo.</string>
     <string name="autoemail_sendto_csv">Direcciones de correo separadas por comas</string>
     <string name="autosend_enabled">Permitir envío automático</string>
-    <string name="autosend_enabled_summary">Permite enviar los archivos a varios objetivos</string>
+    <string name="autosend_enabled_summary">Permite enviar los archivos a varios destinos, con una frecuencia definida, o si el nombre cambia debido a un nombre personalizado</string>
     <string name="autosend_frequency_summary">Con qué frecuencia deben enviarse archivos de registro, en minutos. Establecer 0 para desactivarlo.</string>
     <string name="autosend_frequency">¿Con qué frecuencia?</string>
     <string name="autosend_sendzip_title">Enviar archivo ZIP</string>
@@ -384,4 +384,6 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="annotation_edit_button_color">Color del boton</string>
     <string name="retry_get_best_possible_accuracy_summary">En lugar de registrar el primer punto preciso, siga intentándolo durante el tiempo que dure la precisión y seleccione el punto con la mejor precisión. Lleva más tiempo, pero aumenta las posibilidades de obtener puntos más precisos.</string>
     <string name="retry_get_best_possible_accuracy_title">Elegir la mejor precisión en duración</string>
+    <string name="txt_speed_kph">Velocidad (en km/h):</string>
+    <string name="prompt_for_details_when_logging_starts">Solicitar los detalles cuando comience el registro</string>
 </resources>

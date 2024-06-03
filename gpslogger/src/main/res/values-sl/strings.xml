@@ -31,7 +31,7 @@
     <string name="sharing_mylocation">Moja lokacija</string>
     <string name="sharing_via">Deli preko</string>
     <!-- general -->
-    <string name="meters">&#160;metrov</string>
+    <string name="meters"> metrov</string>
     <string name="error">Napaka</string>
     <string name="error_connection">Napake pri povezavi. Prosimo, preverite vaše nastavitve telefona.</string>
     <string name="seconds">s</string>

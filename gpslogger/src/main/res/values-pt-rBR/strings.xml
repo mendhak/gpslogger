@@ -168,7 +168,7 @@
     <string name="google_drive_testupload_success">Enviado. Por favor, verifique o Google Drive para localizar um novo arquivo.</string>
     <string name="autoemail_sendto_csv">Endereços de e-mail separados por vírgula</string>
     <string name="autosend_enabled">Permitir o envio automático</string>
-    <string name="autosend_enabled_summary">Permite enviar arquivos para vários destinos</string>
+    <string name="autosend_enabled_summary">Permite enviar os arquivos para diversos destinos, em uma frequência definida, ou se o nome mudar devido a nomenclatura personalizada</string>
     <string name="autosend_frequency_summary">Com que frequência os arquivos de log devem ser enviados, em minutos. Defina como 0 para desativá-lo.</string>
     <string name="autosend_frequency">Com que frequência?</string>
     <string name="autosend_sendzip_title">Enviar arquivo zipado</string>
@@ -382,4 +382,6 @@
     <string name="log_customurl_discard_offline_locations_summary">Registrar locais no URL personalizado somente enquanto uma conexão de rede estiver disponível (não afeta o envio automático)</string>
     <string name="retry_get_best_possible_accuracy_title">Escolha a melhor precisão na duração</string>
     <string name="retry_get_best_possible_accuracy_summary">Em vez de registrar o primeiro ponto preciso, continue tentando a duração da precisão e selecione o ponto com a melhor precisão. Demora mais, mas aumenta as chances de pontos mais precisos.</string>
+    <string name="txt_speed_kph">Velocidade (em km/h):</string>
+    <string name="prompt_for_details_when_logging_starts">Solicitar detalhes quando o registro for iniciado</string>
 </resources>
