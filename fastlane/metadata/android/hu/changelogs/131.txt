@@ -1,0 +1,6 @@
+* Naplózás megkezdése előtt kéri az OpenStreetMap opciót 
+* Feladatok küldéséhez az Android WorkManagerre váltás megbízhatóbb lett.
+* Közvetítés akkor kerül elküldésre, ha a fájl feltöltése befejeződött, ami hasznos a fájlok tisztításának automatizálásához.
+* Hibaértesítések és kevesebb összeomlás, ha az engedélyeket visszavonták, vagy a fájlírás sikertelen.
+* Új egyéni URL-paraméter, %SPD_KPH
+* Pontosított automatikus küldés leírása: dinamikus fájlnév-módosítás a fájl elküldését is eredményezi.
