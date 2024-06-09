@@ -195,7 +195,7 @@
     <string name="google_drive_testupload_success">Feltöltés kész. Kérjük, ellenőrizze a Google dokumentumokban az új fájlt.</string>
     <string name="autoemail_sendto_csv">Vesszővel elválasztott e-mail címek</string>
     <string name="autosend_enabled">Automatikus küldés engedélyezése</string>
-    <string name="autosend_enabled_summary">Lehetővé teszi a fájlok különböző helyekre küldését</string>
+    <string name="autosend_enabled_summary">Lehetővé teszi a fájlok küldését meghatározott gyakorisággal különböző célpontokra vagy ha a név megváltozik az egyéni elnevezés miatt</string>
     <string name="autosend_frequency_summary">Naplófájlok elküldésének gyakorisága percben. Letiltáshoz állítsa 0-ra.</string>
     <string name="autosend_frequency">Milyen gyakran?</string>
     <string name="autosend_sendzip_title">Küldés zip-fájlként</string>
@@ -384,4 +384,6 @@
     <string name="annotation_edit_button_label">Helyjelző gomb szerkesztése</string>
     <string name="retry_get_best_possible_accuracy_title">Válassza ki a legjobb pontosságot egy időtartamban</string>
     <string name="retry_get_best_possible_accuracy_summary">Első pontos pont naplózása helyett próbálkozzon tovább a pontossági időtartammal, és válassza ki a legjobb pontosságot. Hosszabb időt vesz igénybe, de növeli az esélyt a pontosabb pontok elérésére.</string>
+    <string name="txt_speed_kph">Sebesség (km/h):</string>
+    <string name="prompt_for_details_when_logging_starts">Naplózás megkezdésekor kéri a részleteket</string>
 </resources>

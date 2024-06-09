@@ -192,7 +192,7 @@
     <string name="google_drive_testupload_success">Yüklendi. Lütfen yeni dosya için Google Dökümanları kontrol edin.</string>
     <string name="autoemail_sendto_csv">Virgülle ayrılmış eposta adresleri</string>
     <string name="autosend_enabled">Otomatik göndermeye izin ver</string>
-    <string name="autosend_enabled_summary">Dosyaları çeşitli hedeflere göndermeye izin verir</string>
+    <string name="autosend_enabled_summary">Dosyaların çeşitli hedeflere, tanımlanan bir sıklıkta veya özel adlandırma nedeniyle adın değişmesi durumunda gönderilmesine izin verir</string>
     <string name="autosend_frequency_summary">Günlük dosyaları dakika olarak ne sıklıkta gönderilmelidir. Bunu devre dışı bırakmak için 0 olarak ayarlayın.</string>
     <string name="autosend_frequency">Ne sıklıkla?</string>
     <string name="autosend_sendzip_title">Zip dosyası gönderin</string>
@@ -385,4 +385,6 @@
     <string name="annotation_edit_button_color">Düğme rengi</string>
     <string name="retry_get_best_possible_accuracy_title">Süre içinde en iyi doğruluğu seç</string>
     <string name="retry_get_best_possible_accuracy_summary">İlk doğru noktayı kaydetmek yerine, doğruluk süresi boyunca denemeye devam edin ve en iyi doğruluğa sahip noktayı seçin. Daha uzun sürer, ancak daha doğru noktalar için şansı artırır.</string>
+    <string name="txt_speed_kph">Hız (km/sa):</string>
+    <string name="prompt_for_details_when_logging_starts">Günlük başlatıldığında ayrıntılar sorulur</string>
 </resources>
