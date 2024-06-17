@@ -225,7 +225,7 @@
     <string name="menu_faq">Помощь и ЧаВо</string>
     <string name="log_customurl_title">Запись по пользовательскому URL-адресу</string>
     <string name="log_customurl_summary">Отправить трек на свой сервер по протоколу HTTP</string>
-    <string name="txt_annotation">Аннотация::</string>
+    <string name="txt_annotation">Аннотация:</string>
     <string name="txt_time_isoformat">Время UTC (2011-12-25T15:27:33Z):</string>
     <string name="txt_provider">Поставщик:</string>
     <string name="annotation_requires_logging">Аннотации требуют записи в CSV/GPX/KML/Пользовательский URL/GeoJSON</string>
