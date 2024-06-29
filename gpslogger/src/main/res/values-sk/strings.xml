@@ -210,7 +210,7 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
     <string name="google_drive_testupload_success">Odoslané. Skontrolujte či služba Google Documents obsahuje nový súbor.</string>
     <string name="autoemail_sendto_csv">E-mailové adresy oddelené čiarkou</string>
     <string name="autosend_enabled">Povoliť autom. odosielanie</string>
-    <string name="autosend_enabled_summary">Umožňuje posielať súbory rôznym adresátom</string>
+    <string name="autosend_enabled_summary">Umožňuje posielať súbory rôznym adresátom, v definovanej frekvencii, alebo ak sa zmení názov kvôli vlastnému pomenovaniu</string>
     <string name="autosend_frequency_summary">Ako často (v minútach) by sa mal odosielať záznam. Zadaním hodnoty 0 dôjde k zablokovaniu.</string>
     <string name="autosend_frequency">Ako často?</string>
     <string name="autosend_sendzip_title">Odoslať súbor ZIP</string>
@@ -403,4 +403,6 @@ polia.
     <string name="annotation_edit_button_color">Farba tlačidla</string>
     <string name="retry_get_best_possible_accuracy_summary">Namiesto zaznamenania prvého presného bodu sa pokúšať o zachovanie presnosti počas určitej doby a vybrať najpresnejší bod. Trvá to dlhšie, ale zvyšuje sa šanca na výskyt presnejších bodov.</string>
     <string name="retry_get_best_possible_accuracy_title">Vybrať najlepšiu presnosť počas trvania</string>
+    <string name="txt_speed_kph">Rýchlosť (v km/h):</string>
+    <string name="prompt_for_details_when_logging_starts">Spýtať sa na podrobnosti na začiatku prihlasovania</string>
 </resources>
