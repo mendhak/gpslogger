@@ -1,0 +1,6 @@
+* Pred spustením zaznamenávania sa zobrazí dopyt na OpenStreetMap
+* Prechod na Android WorkManager pre odosielanie úloh, mal by byť stabilnejší.
+* Vysielanie je odoslané po dokončení odosielania súboru, kvôli automatizovaniu čistenia súborov.
+* Notifikácie o chybách a menej pádov v prípade, odvolania oprávnení/zlyhania zapisovania súboru.
+* Nový používateľský parameter URL, %SPD_KPH
+* Ujasnený popis automatického odosielania: dynamická zmena názvu súboru sa prejaví aj v odosielanom súbore.
