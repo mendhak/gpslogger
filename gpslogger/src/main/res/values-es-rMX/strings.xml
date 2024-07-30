@@ -370,4 +370,5 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="txt_battery_charging">Cargando</string>
     <string name="logging_advanced_delete_files">Eliminar archivos seleccionados</string>
     <string name="logging_advanced_delete_files_summary">Pulsación larga para seleccionar varios archivos.</string>
+    <string name="txt_speed_kph">Velocidad (km/h):</string>
 </resources>
