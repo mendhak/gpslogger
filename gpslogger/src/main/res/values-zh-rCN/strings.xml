@@ -188,7 +188,7 @@
     <string name="google_drive_testupload_success">已上传完成，请检查您的Google云端文档。</string>
     <string name="autoemail_sendto_csv">用逗号隔开邮件地址</string>
     <string name="autosend_enabled">允许自动发送</string>
-    <string name="autosend_enabled_summary">允许将文件发送到多处</string>
+    <string name="autosend_enabled_summary">允许以自定义的频率向不同目标发送文件，或在名称因自定义命名而发生变化时发送文件</string>
     <string name="autosend_frequency_summary">自动发送记录文件的频率，以分钟为单位。0分钟则为不自动发送。</string>
     <string name="autosend_frequency">发送频率</string>
     <string name="autosend_sendzip_title">发送 zip 文件</string>
@@ -381,4 +381,8 @@
     <string name="log_customurl_discard_offline_locations_summary">仅在网络连接可用时将位置记录到自定义 URL（不影响自动发送）</string>
     <string name="autosend_customurl_summary">(此功能可以实现CSV记录）向自定义URL批量发送请求，CSV文件的每一行都有一个请求。取决于自动发送的时间间隔。</string>
     <string name="log_customurl_discard_offline_locations">丢弃离线位置</string>
+    <string name="txt_speed_kph">速度（公里/小时）：</string>
+    <string name="prompt_for_details_when_logging_starts">开始记录时提示详细信息</string>
+    <string name="retry_get_best_possible_accuracy_title">选择持续时间内的最佳精度</string>
+    <string name="retry_get_best_possible_accuracy_summary">不要记录第一个准确点，而是继续尝试准确持续时间并选择准确度最高的点。需要更长的时间，但会增加获得更准确点的机会。</string>
 </resources>
