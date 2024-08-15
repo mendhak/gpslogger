@@ -97,11 +97,22 @@
     <string name="log_kml_title">שמור קובץ KML</string>
     <string name="log_kml_summary">שמור מיקומים בקובץ KML v2.2</string>
     <string name="log_plain_text_summary">שמור מיקומים בקובץ CSV</string>
-    <string name="new_file_creation_custom">קובץ מותאמת אישית</string>
+    <string name="new_file_creation_custom">קובץ מותאם אישית</string>
     <string name="time_before_logging_dialog_title">הזמן בשניות</string>
     <string name="autoemail_title">אמייל</string>
     <string name="please_wait">המתן בבקשה</string>
     <string name="autoemail_smtp_category">הגדרות דואר</string>
     <string name="started_waiting">GPS אותחל, ממתין למיקום</string>
     <string name="gps_stopped">GPS הופסק</string>
+    <string name="txt_speed_kph">מהירות (ב km/h):</string>
+    <string name="pref_logging_title">פרטי רישום</string>
+    <string name="new_file_creation_onceamonth">פעם בחודש</string>
+    <string name="new_file_creation_onceaday">פעם ביום</string>
+    <string name="new_file_creation_everystart">בכל פעם שאני מריץ</string>
+    <string name="new_file_custom_title">שם קובץ מותאם אישית</string>
+    <string name="hide">הסתר</string>
+    <string name="new_file_creation_title">צור קובץ חדש</string>
+    <string name="pref_performance_title">ביצועים</string>
+    <string name="new_file_creation_summary">האם ליצור קובץ חדש פעם ביום או בכל פעם שתפעיל.</string>
+    <string name="new_file_custom_summary">אתה יכול להשתמש בשם הקובץ שלך. אפשר להוסיף כמה פרמטרים דינמיים כמו מספר סידורי, שנה, שעה, דקה וכו\'. ייתכן ששמות קבצים דינמיים מאוד לא יעבדו טוב עם תכונות השליחה האוטומטית מכיוון שהיא שולחת רק את הקובץ האחרון.</string>
 </resources>
