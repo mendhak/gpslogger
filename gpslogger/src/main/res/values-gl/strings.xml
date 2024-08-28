@@ -4,4 +4,14 @@
     <!-- general -->
     <!-- Settings activity -->
     <!-- Settings -->
+<string name="title_drawer_uploadsettings">Axustes de envíos</string>
+    <string name="navigation_drawer_open">Abre o caixón de navegación</string>
+    <string name="ok">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="hide">Agochar</string>
+    <string name="add_description">Engadir unha descrición</string>
+    <string name="navigation_drawer_close">Pecha o caixón de navegación</string>
+    <string name="app_name">GPSLogger</string>
+    <string name="settings_screen_name">Axustes de GPSLogger</string>
+    <string name="could_not_write_to_file">Non foi posíbel escribir no ficheiro</string>
 </resources>
