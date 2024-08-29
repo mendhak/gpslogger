@@ -14,4 +14,25 @@
     <string name="app_name">GPSLogger</string>
     <string name="settings_screen_name">Axustes de GPSLogger</string>
     <string name="could_not_write_to_file">Non foi posíbel escribir no ficheiro</string>
+    <string name="txt_speed_kph">Velocidade (en km/h):</string>
+    <string name="txt_accuracy">Precisión:</string>
+    <string name="txt_travel_distance">Recorrido:</string>
+    <string name="btn_stop_logging">Deter o rexistro</string>
+    <string name="btn_start_logging">Comezar a rexistrar</string>
+    <string name="gpslogger_still_running">GPSLogger aínda está en execución.</string>
+    <string name="summary_loggingto">Rexistrando en:</string>
+    <string name="summary_freq_every">Frecuencia:</string>
+    <string name="summary_freq_max">máximo</string>
+    <string name="summary_dist">Distancia:</string>
+    <string name="summary_loggingto_screen">só na pantalla</string>
+    <string name="letters_numbers">Usar só letras e números</string>
+    <string name="menu_annotate">Anotar</string>
+    <string name="txt_direction">Dirección:</string>
+    <string name="menu_share">Compartir</string>
+    <string name="menu_exit">Saír</string>
+    <string name="txt_latitude">Latitude:</string>
+    <string name="txt_longitude">Lonxitude:</string>
+    <string name="txt_altitude">Altitude:</string>
+    <string name="txt_speed">Velocidade:</string>
+    <string name="txt_satellites">Satélites:</string>
 </resources>
