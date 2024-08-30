@@ -35,4 +35,7 @@
     <string name="txt_altitude">Altitude:</string>
     <string name="txt_speed">Velocidade:</string>
     <string name="txt_satellites">Satélites:</string>
+    <string name="summary_current_filename">Ficheiro:</string>
+    <string name="sharing_location_only">Só a localización</string>
+    <string name="sharing_mylocation">A miña localización</string>
 </resources>
