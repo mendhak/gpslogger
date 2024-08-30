@@ -107,7 +107,7 @@
     <string name="accuracy_within" formatted="false">arredor de %s %s</string>
     <string name="pref_performance_title">Rendemento</string>
     <string name="new_file_custom_title">Nome personalizado de ficheiro</string>
-    <string name="pref_performance_summary">Tempos, filtros e observadores</string>
+    <string name="pref_performance_summary">Temporizacións, filtros e receptores</string>
     <string name="new_file_custom_summary">Podes usar o seu propio nome de ficheiro. Opcionalmente pode engadir algúns parámetros dinámicos, como número de serie, ano, hora, minuto, etc. É posíbel que os nomes de ficheiros moi dinámicos non funcionen ben xunto co envío automático xa que só envía o ficheiro máis recente.</string>
     <string name="direction_southsoutheast">Sur-sueste</string>
     <string name="direction_south">Sur</string>
