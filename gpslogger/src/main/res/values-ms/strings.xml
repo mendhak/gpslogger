@@ -177,7 +177,7 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="google_drive_testupload_success">Dimuat naik. Sila semak dokumen anda Google untuk fail baru.</string>
     <string name="autoemail_sendto_csv">Alamat e-mel dipisahkan koma</string>
     <string name="autosend_enabled">Benarkan penghantaran automatik</string>
-    <string name="autosend_enabled_summary">Bolehkan penghantaran fail kepada pelbagai penerima</string>
+    <string name="autosend_enabled_summary">Bolehkan penghantaran fail kepada pelbagai penerima pada frekuensi ditetapkan atau apabila nama berubah disebabkan penamaan kustom</string>
     <string name="autosend_frequency_summary">Berapa kerapkah fail log perlu dihantar, dalam beberapa minit. Tetapkan kepada 0 untuk menyahdayakan ini.</string>
     <string name="autosend_frequency">Berapa kerap?</string>
     <string name="autosend_sendzip_title">Hantar fail zip</string>
@@ -382,4 +382,7 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="customurl_all_parameters">Semua parameter:</string>
     <string name="install_conscrypt_provider_summary">Jika anda menghadapi isu sambungan SSL/TLS pada peranti Android yang lebih lama, memasang Penyedia Conscrypt mungkin membantu. (Ikuti pautan ini, pasang APK, kemudian mulakan semula apl)</string>
     <string name="install_conscrypt_provider_title">Pasang Penyedia Conscrypt (SSL/TLS)</string>
+    <string name="txt_speed_kph">Kelajuan (dalam km/j):</string>
+    <string name="retry_get_best_possible_accuracy_title">Pilih ketepatan masa</string>
+    <string name="retry_get_best_possible_accuracy_summary">Selain daripada menglog titik tepat, cuba untuk log durasi ketepatan dan pilih titik yang lebih tepat. Ini akan mengambil jangka yang lama tetapi akan meningkatkan peluang untuk titik-titik yang lebih tepat.</string>
 </resources>
