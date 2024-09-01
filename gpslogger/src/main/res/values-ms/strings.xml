@@ -177,7 +177,7 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="google_drive_testupload_success">Dimuat naik. Sila semak dokumen anda Google untuk fail baru.</string>
     <string name="autoemail_sendto_csv">Alamat e-mel dipisahkan koma</string>
     <string name="autosend_enabled">Benarkan penghantaran automatik</string>
-    <string name="autosend_enabled_summary">Bolehkan penghantaran fail kepada pelbagai penerima pada frekuensi ditetapkan atau apabila nama berubah disebabkan penamaan kustom</string>
+    <string name="autosend_enabled_summary">Benarkan penghantaran fail kepada pelbagai penerima pada frekuensi ditetapkan atau apabila nama berubah disebabkan penamaan tersuai</string>
     <string name="autosend_frequency_summary">Berapa kerapkah fail log perlu dihantar, dalam beberapa minit. Tetapkan kepada 0 untuk menyahdayakan ini.</string>
     <string name="autosend_frequency">Berapa kerap?</string>
     <string name="autosend_sendzip_title">Hantar fail zip</string>
