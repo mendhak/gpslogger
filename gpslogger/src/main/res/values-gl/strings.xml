@@ -140,4 +140,21 @@
     <string name="listeners_passive_title">Rexistrar localizacións pasivas</string>
     <string name="enabledisablegps_title">Ativar/desativar GPS</string>
     <string name="listeners_summary">Que provedores de localización usar cando estean dispoñíbeis; GPS para satélites, rede para torre de telefonía móbil/wifi, Pasiva é un provedor especial que atende as localizacións solicitadas doutras aplicacións.</string>
+    <string name="enabledisablegps_summary">Vaia á configuración do teléfono para activar ou desactivar os provedores.</string>
+    <string name="startonbootup_title">Iniciar no arrinque</string>
+    <string name="autoemail_smtp_category">Axustes do correo</string>
+    <string name="autoemail_username_summary">Nome de usuario co seu provedor de correo</string>
+    <string name="startonbootup_summary">Iniciar a aplicación e comezar a rexistrar cando se acenda o teléfono</string>
+    <string name="autoemail_target">Enderezos de correo de destino</string>
+    <string name="startonapplaunch_title">Comezar ao iniciar a aplicación</string>
+    <string name="startonapplaunch_summary">Comezar o rexistro cando se inicie a aplicación</string>
+    <string name="autoemail_title">Correo-e</string>
+    <string name="autosend_frequency_display">Após %s minutos</string>
+    <string name="please_wait">Agarde</string>
+    <string name="autoemail_frequency_whenistop">Cando prema en parar</string>
+    <string name="autoemail_ssl_summary">Probe a alternar isto se non pode conectarse</string>
+    <string name="autoemail_choosepreset_summary">Escolla un provedor ou probe o axuste manual</string>
+    <string name="autoemail_password_summary">Contrasinal co seu provedor de correo</string>
+    <string name="autoemail_choosepreset">Provedor de correo</string>
+    <string name="autoemail_ssl">SSL implícito</string>
 </resources>
