@@ -287,4 +287,6 @@
     <string name="profile_add_new">Engadir un perfil</string>
     <string name="profile_default">Perfil predeterminado</string>
     <string name="gpslogger_permissions_rationale_title">Permisos necesarios</string>
+    <string name="autosend_targets_category">Destinos de envío automático</string>
+    <string name="autosend_sendzip_summary">Enviar ficheiro zip se é o caso. Desactiveo para enviar ficheiros individuais ou se a opción zip non funciona para Vde.</string>
 </resources>
