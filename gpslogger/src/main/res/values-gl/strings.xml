@@ -122,7 +122,7 @@
     <string name="listeners_gps_title">Rexistrar localizacións GPS/GNSS</string>
     <string name="listeners_gps_summary">Rexistra as localizacións fornecidas polo satélite baseadas na localización do receptor no seu dispositivo</string>
     <string name="listeners_cell">Rede</string>
-    <string name="listeners_cell_title">Rexistrar localizacións da rede</string>
+    <string name="listeners_cell_title">Rexistrar localizacións baseadas na rede</string>
     <string name="listeners_cell_summary">Rexistra as localizacións fornecidas pola rede móbil baseadas na localización do receptor no seu dispositivo</string>
     <string name="listeners_passive">Pasiva</string>
     <string name="listeners_passive_summary">Rexistra as localizacións obtidas doutras aplicacións, porén a maioría dos filtros son ignorados. Esta configuración tamén é útil para receptores GPS externos.</string>
