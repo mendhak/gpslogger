@@ -299,4 +299,8 @@
     <string name="kilometers"> km</string>
     <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
     <string name="log_plain_text_csv_advanced_title">Mag-log sa mga setting ng CSV</string>
+    <string name="txt_speed_kph">Bilis (sa km/h):</string>
+    <string name="log_plain_text_csv_field_delimiter">CSV field delimiter</string>
+    <string name="log_plain_text_decimal_comma">Gumamit ng comma (,) bilang ang decimal seperator sa halip ng tuldok (.)</string>
+    <string name="new_file_creation_onceamonth">Isang beses kada buwan</string>
 </resources>
