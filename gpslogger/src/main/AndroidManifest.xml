@@ -74,7 +74,8 @@
                 android:resource="@xml/shortcuts" />
         </activity>
 
-        <activity android:name="net.openid.appauth.RedirectUriReceiverActivity">
+        <activity android:name="net.openid.appauth.RedirectUriReceiverActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -114,6 +115,7 @@
         <activity
             android:name="com.dropbox.core.android.AuthActivity"
             android:configChanges="orientation|keyboard"
+            android:exported="true"
             android:launchMode="singleTask"
             android:parentActivityName=".GpsMainActivity" >
             <meta-data
@@ -134,6 +136,7 @@
 
         <activity
             android:name=".shortcuts.ShortcutCreate"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Translucent" >
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
@@ -143,6 +146,7 @@
         </activity>
         <activity
             android:name=".shortcuts.ShortcutStart"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Translucent" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -150,6 +154,7 @@
         </activity>
         <activity
             android:name=".shortcuts.ShortcutStop"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Translucent" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -159,6 +164,7 @@
         <receiver
             android:name=".StartupReceiver"
             android:enabled="true"
+            android:exported="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -168,13 +174,15 @@
         </receiver>
         <receiver android:name=".senders.AlarmReceiver" />
 
-        <receiver android:name=".MyPackageUpgradeReceiver">
+        <receiver android:name=".MyPackageUpgradeReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".TaskerReceiver">
+        <receiver android:name=".TaskerReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.mendhak.gpslogger.TASKER_COMMAND" />
             </intent-filter>
@@ -185,6 +193,7 @@
         <!--android:theme="@style/Theme.AppCompat.Translucent"-->
         <activity
             android:name=".NotificationAnnotationActivity"
+            android:exported="true"
             android:label=""
             android:theme="@style/Theme.AppCompat.Translucent"
             android:excludeFromRecents="true"
@@ -209,7 +218,9 @@
         </provider>
 
 
-        <activity android:name=".ProfileLinkReceiverActivity" android:theme="@style/Theme.AppCompat.Translucent" >
+        <activity android:name=".ProfileLinkReceiverActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Translucent" >
             <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
