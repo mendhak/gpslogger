@@ -37,7 +37,7 @@ repositories {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.mendhak.gpslogger"
