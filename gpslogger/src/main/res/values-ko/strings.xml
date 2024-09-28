@@ -95,7 +95,7 @@
     <string name="log_json_title">GeoJSON으로 기록하기</string>
     <string name="log_json_summary">GeoJSON 파일로 위치 기록</string>
     <string name="new_file_creation_title">새 파일 생성</string>
-    <string name="new_file_creation_summary">새로운 파일을 하루에 한 번씩 또는 매 시작마다 만들지를 선택</string>
+    <string name="new_file_creation_summary">새로운 파일을 하루에 한 번씩 또는 매 시작마다 만들지 여부를 선택.</string>
     <string name="new_file_creation_onceaday">하루에 한 번</string>
     <string name="new_file_creation_everystart">매 시작마다</string>
     <string name="new_file_creation_custom">사용자 지정 파일</string>
@@ -322,4 +322,5 @@
     <string name="miles"> 마일</string>
     <string name="kilometers_per_hour"> km/h</string>
     <string name="kilometers"> 킬로미터</string>
+    <string name="txt_speed_kph">속도 (in km/h):</string>
 </resources>
