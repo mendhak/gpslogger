@@ -301,7 +301,11 @@ public class Systems {
         LOG.debug("Showing fatal notification");
 
         Intent contentIntent = new Intent(context, GpsMainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            flags |= PendingIntent.FLAG_IMMUTABLE;
+        }
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, contentIntent, flags);
 
         NotificationCompat.Builder nfc = new NotificationCompat.Builder(context.getApplicationContext(), NotificationChannelNames.GPSLOGGER_ERRORS)
                 .setSmallIcon(android.R.drawable.stat_sys_warning)

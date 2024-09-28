@@ -43,10 +43,10 @@ android {
         applicationId "com.mendhak.gpslogger"
         minSdkVersion 16
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 30
+        targetSdkVersion 31
         compileSdk 34
-        versionCode 131
-        versionName "131-rc2"
+        versionCode 132
+        versionName "132-rc1"
 
         // Used by AppAuth-Android
         manifestPlaceholders = [
