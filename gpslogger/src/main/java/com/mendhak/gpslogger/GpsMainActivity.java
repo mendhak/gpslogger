@@ -272,9 +272,9 @@ public class GpsMainActivity extends AppCompatActivity
                     permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
                     permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
                     permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        permissions.add(Manifest.permission.POST_NOTIFICATIONS);
-                    }
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                        permissions.add(Manifest.permission.POST_NOTIFICATIONS);
+//                    }
 
                     if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
                         // Only on Android 10 (Q), the permission dialog can include an 'Allow all the time'
