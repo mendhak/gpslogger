@@ -136,12 +136,8 @@ dependencies {
 
 
     //Debug Logging
-    implementation('org.slf4j:slf4j-api:1.7.30')
-    implementation('com.github.tony19:logback-android-classic:1.1.1-2'){
-        exclude group: 'com.google.android', module: 'android'
-    }
-
-    implementation('com.github.tony19:logback-android-core:1.1.1-2')
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    implementation 'com.github.tony19:logback-android:3.0.0'
 
 
     //Android lollipop/material features including the Toolbar
