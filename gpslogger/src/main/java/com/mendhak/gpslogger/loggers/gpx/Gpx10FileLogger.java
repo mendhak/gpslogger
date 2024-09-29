@@ -241,7 +241,6 @@ class Gpx10WriteHandler implements Runnable {
                 raf.seek(startPosition);
                 raf.write(trackPoint.getBytes());
                 raf.close();
-                Files.addToMediaDatabase(gpxFile, "text/plain");
                 LOG.debug("Finished writing to GPX10 file");
 
             } catch (Exception e) {

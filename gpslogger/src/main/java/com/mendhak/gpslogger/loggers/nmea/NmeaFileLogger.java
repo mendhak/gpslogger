@@ -98,7 +98,6 @@ class NmeaWriteHandler implements Runnable {
                 writer.write(nmeaSentence);
                 writer.newLine();
                 writer.close();
-                Files.addToMediaDatabase(gpxFile, "text/plain");
 
             } catch (IOException e) {
                 LOG.error("Error writing NMEA sentence", e);

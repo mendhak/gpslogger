@@ -99,13 +99,6 @@ public class Files {
 
     }
 
-    public static void addToMediaDatabase(File file, String mimeType){
-
-        MediaScannerConnection.scanFile(AppSettings.getInstance(),
-                new String[]{file.getPath()},
-                new String[]{mimeType},
-                null);
-    }
 
     public static File[] fromFolder(File folder) {
         return fromFolder(folder, null);
@@ -193,8 +186,6 @@ public class Files {
             initialOutput.write("<x>This is a test file</x>".getBytes());
             initialOutput.flush();
             initialOutput.close();
-
-            Files.addToMediaDatabase(testFile, "text/xml");
         }
 
         return testFile;

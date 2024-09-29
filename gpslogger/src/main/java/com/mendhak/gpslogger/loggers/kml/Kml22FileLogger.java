@@ -221,7 +221,6 @@ class Kml22WriteHandler implements Runnable {
                 raf.seek(kmlFile.length() - 42);
                 raf.write(coords.toString().getBytes());
                 raf.close();
-                Files.addToMediaDatabase(kmlFile, "text/xml");
                 LOG.debug("Finished writing to KML22 File");
             }
 
