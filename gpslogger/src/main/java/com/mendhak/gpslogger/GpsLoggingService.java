@@ -25,9 +25,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
 import android.graphics.BitmapFactory;
+import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.*;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
@@ -70,6 +73,7 @@ public class GpsLoggingService extends Service  {
     private LocationManager passiveLocationManager;
     private LocationManager towerLocationManager;
     private GeneralLocationListener gpsLocationListener;
+    private GnssStatus.Callback gnssStatusCallback;
     private GeneralLocationListener towerLocationListener;
     private GeneralLocationListener passiveLocationListener;
     private NmeaLocationListener nmeaLocationListener;
@@ -590,6 +594,7 @@ public class GpsLoggingService extends Service  {
         }
     }
 
+
     /**
      * Starts the location manager. There are two location managers - GPS and
      * Cell Tower. This code determines which manager to request updates from
@@ -616,6 +621,32 @@ public class GpsLoggingService extends Service  {
             towerLocationListener = new GeneralLocationListener(this, "CELL");
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            gnssStatusCallback = new GnssStatus.Callback() {
+                @Override
+                public void onStarted() {
+                    super.onStarted();
+                }
+
+                @Override
+                public void onStopped() {
+                    super.onStopped();
+                }
+
+                @Override
+                public void onFirstFix(int ttffMillis) {
+                    super.onFirstFix(ttffMillis);
+                    LOG.info("Time to first fix: {}ms", ttffMillis);
+                }
+
+                @Override
+                public void onSatelliteStatusChanged(@NonNull GnssStatus status) {
+                    super.onSatelliteStatusChanged(status);
+                    setSatelliteInfo(status.getSatelliteCount());
+                    gpsLocationListener.satellitesUsedInFix = status.getSatelliteCount();
+                }
+            };
+        }
 
 
         gpsLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -627,7 +658,13 @@ public class GpsLoggingService extends Service  {
             LOG.info("Requesting GPS location updates");
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
-            gpsLocationManager.addGpsStatusListener(gpsLocationListener);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                gpsLocationManager.registerGnssStatusCallback(gnssStatusCallback);
+            }
+            else {
+                gpsLocationManager.addGpsStatusListener(gpsLocationListener);
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 if (nmeaLocationListener == null){
@@ -724,6 +761,12 @@ public class GpsLoggingService extends Service  {
         if (gpsLocationListener != null) {
             LOG.debug("Removing gpsLocationManager updates");
             gpsLocationManager.removeUpdates(gpsLocationListener);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && gnssStatusCallback != null) {
+            gpsLocationManager.unregisterGnssStatusCallback(gnssStatusCallback);
+        }
+        else {
             gpsLocationManager.removeGpsStatusListener(gpsLocationListener);
         }
 
