@@ -66,6 +66,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -206,20 +207,60 @@ public class Systems {
     }
 
     /**
+     * Returns a list of the necessary permissions for the app.
+     * Permissions are also filtered by the SDK version
+     * @param forInteractivePermissionWorkflow - Whether this is a permission workflow, in which case 'access_background_location' doesn't usually get returned
+     */
+    public static List<String> getListOfNecessaryPermissions(boolean forInteractivePermissionWorkflow){
+        List<String> permissions = new ArrayList<String>();
+        permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
+
+        // In API 33, this storage permission has no effect.
+        // https://developer.android.com/reference/android/Manifest.permission#READ_EXTERNAL_STORAGE
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU){
+            permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+            permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            permissions.add(Manifest.permission.POST_NOTIFICATIONS);
+        }
+
+
+        if(forInteractivePermissionWorkflow){
+            // Only on Android 10 (Q), the permission dialog can include an 'Allow all the time'
+            if(Build.VERSION.SDK_INT == Build.VERSION_CODES.Q){
+                permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+            }
+        }
+        else {
+            // Only return when checking if a permission was granted or not, not for interactive workflow.
+            // Including this along with coarse/fine location permissions will get denied immediately.
+            // Instead you are expected to request coarse/fine location permissions first, then this *separately*.
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+            }
+        }
+
+
+        return permissions;
+    }
+
+    /**
      * Whether the user has allowed the permissions absolutely required to run the app.
      * Currently this is location and file storage.
      */
     public static boolean hasUserGrantedAllNecessaryPermissions(Context context){
-        boolean granted = hasUserGrantedPermission(Manifest.permission.ACCESS_COARSE_LOCATION, context)
-                && hasUserGrantedPermission(Manifest.permission.ACCESS_FINE_LOCATION, context)
-                && hasUserGrantedPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, context)
-                && hasUserGrantedPermission(Manifest.permission.READ_EXTERNAL_STORAGE, context);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-            granted = granted && hasUserGrantedPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION, context);
+        List<String> permissions = getListOfNecessaryPermissions(false);
+        for(String permission : permissions){
+            if(!hasUserGrantedPermission(permission, context)){
+                return false;
+            }
         }
 
-        return granted;
+       return true;
     }
 
     static boolean hasUserGrantedPermission(String permissionName, Context context){

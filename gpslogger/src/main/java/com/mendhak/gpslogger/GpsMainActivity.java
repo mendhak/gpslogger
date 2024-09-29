@@ -65,6 +65,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.ActionMenuView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -267,19 +268,7 @@ public class GpsMainActivity extends AppCompatActivity
                     return true;
                 case BUTTON_POSITIVE:
                     LOG.debug("Beginning request for multiple permissions");
-                    ArrayList<String> permissions = new ArrayList<String>();
-                    permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-                    permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
-                    permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-                    permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//                        permissions.add(Manifest.permission.POST_NOTIFICATIONS);
-//                    }
-
-                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.Q) {
-                        // Only on Android 10 (Q), the permission dialog can include an 'Allow all the time'
-                        permissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
-                    }
+                    ArrayList<String> permissions = new ArrayList<String>(Systems.getListOfNecessaryPermissions(true));
                     basicPermissionsLauncher.launch(permissions.toArray(new String[0]));
                     return true;
             }
