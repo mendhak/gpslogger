@@ -19,13 +19,14 @@ import java.util.concurrent.TimeUnit;
 
 public class GeoJSONLogger implements FileLogger {
     final static Object lock = new Object();
-    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(10), new RejectionHandler());
     private final File file;
-    protected final String name;
+    protected static final String name = "GeoJSON";
+    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60,
+            TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(10), new RejectionHandler(name));
+
 
     public GeoJSONLogger(File file, boolean addNewTrackSegment) {
         this.file = file;
-        name = "GeoJSON";
     }
 
     @Override

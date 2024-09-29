@@ -41,11 +41,11 @@ import de.greenrobot.event.EventBus;
 
 public class Kml22FileLogger implements FileLogger {
     protected final static Object lock = new Object();
-    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<Runnable>(10), new RejectionHandler());
     private final boolean addNewTrackSegment;
     private final File kmlFile;
-    protected final String name = "KML";
+    protected static final String name = "KML";
+    private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
+            new LinkedBlockingQueue<Runnable>(10), new RejectionHandler(name));
 
 
     public Kml22FileLogger(File kmlFile, boolean addNewTrackSegment) {

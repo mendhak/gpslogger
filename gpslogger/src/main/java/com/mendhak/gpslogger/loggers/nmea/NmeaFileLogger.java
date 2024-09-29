@@ -44,8 +44,9 @@ public class NmeaFileLogger {
     protected final static Object lock = new Object();
     private static final Logger LOG = Logs.of(NmeaFileLogger.class);
     String fileName;
+    protected static final String name = "NMEA";
     private final static ThreadPoolExecutor EXECUTOR = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<Runnable>(10), new RejectionHandler());
+            new LinkedBlockingQueue<Runnable>(30), new RejectionHandler(name));
 
     private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     private Session session = Session.getInstance();
