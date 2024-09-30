@@ -32,6 +32,7 @@ import android.os.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.AlarmManagerCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 import android.text.Html;
@@ -1092,21 +1093,21 @@ public class GpsLoggingService extends Service  {
     }
 
     private void setAlarmForNextPoint() {
-        LOG.debug("Set alarm for " + preferenceHelper.getMinimumLoggingInterval() + " seconds");
-
         Intent i = new Intent(this, GpsLoggingService.class);
         i.putExtra(IntentConstants.GET_NEXT_POINT, true);
         PendingIntent pi = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_MUTABLE);
         nextPointAlarmManager.cancel(pi);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            nextPointAlarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+
+        if(AlarmManagerCompat.canScheduleExactAlarms(nextPointAlarmManager)){
+            LOG.debug("Setting exact alarm for {}s", preferenceHelper.getMinimumLoggingInterval());
+            AlarmManagerCompat.setExactAndAllowWhileIdle(nextPointAlarmManager, AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000L, pi);
         }
         else {
-            nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+            LOG.debug("Setting inexact alarm for {}s (exact alarm disallowed/not available)", preferenceHelper.getMinimumLoggingInterval());
+            AlarmManagerCompat.setAndAllowWhileIdle(nextPointAlarmManager, AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000L, pi);
         }
-
     }
 
 
