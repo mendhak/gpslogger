@@ -95,7 +95,9 @@
         <activity
             android:name=".MainPreferenceActivity"
             android:label="@string/settings_screen_name"
-            android:parentActivityName=".GpsMainActivity" >
+            android:parentActivityName=".GpsMainActivity"
+            android:exported="true"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />
@@ -106,7 +108,9 @@
             android:name=".Faqtivity"
             android:label="@string/faq_screen_title"
             android:launchMode="singleTask"
-            android:parentActivityName=".GpsMainActivity" >
+            android:parentActivityName=".GpsMainActivity"
+            android:exported="true"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mendhak.gpslogger.GpsMainActivity" />

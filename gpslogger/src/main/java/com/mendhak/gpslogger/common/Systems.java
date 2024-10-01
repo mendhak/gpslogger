@@ -84,7 +84,16 @@ public class Systems {
     }
 
     public static BatteryInfo getBatteryInfo(Context context){
-        Intent batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        Intent batteryIntent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            batteryIntent = ContextCompat.registerReceiver(context, null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED),
+                    ContextCompat.RECEIVER_EXPORTED);
+        }
+        else {
+            batteryIntent = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        }
+
+
         int level = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) : 0;
         int scale = batteryIntent != null ? batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1) : 0;
 
