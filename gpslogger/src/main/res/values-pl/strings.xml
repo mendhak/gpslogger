@@ -386,4 +386,8 @@
     <string name="annotation_edit_button_label">Przycisk edycji adnotacji</string>
     <string name="annotation_edit_button_color">Kolor przycisku</string>
     <string name="view_annotation">Widok adnotacji</string>
+    <string name="retry_get_best_possible_accuracy_title">Wybierz najwyższą dokładność w czasie działania</string>
+    <string name="retry_get_best_possible_accuracy_summary">Zamiast rejestrować pierwszy dostępny punkt, próbuj przez cały czas i wybierz punkt o najlepszej dokładności. Trwa to dłużej, ale zwiększa szanse na dokładniejsze punkty.</string>
+    <string name="prompt_for_details_when_logging_starts">Monit o szczegóły po rozpoczęciu rejestrowania</string>
+    <string name="txt_speed_kph">Prędkość (w km/h):</string>
 </resources>
