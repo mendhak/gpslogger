@@ -37,13 +37,13 @@ repositories {
 }
 
 android {
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.mendhak.gpslogger"
         minSdkVersion 21
 
-        targetSdkVersion 34
+        targetSdkVersion 35
         compileSdk 34
         versionCode 132
         versionName "132-test1"
