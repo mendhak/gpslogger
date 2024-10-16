@@ -128,21 +128,21 @@ public class GpsLogViewFragment extends GenericViewFragment implements CompoundB
         StringBuilder sb = new StringBuilder();
         for(ILoggingEvent message : SessionLogcatAppender.Statuses){
 
-            if(message.getMarker() == SessionLogcatAppender.MARKER_LOCATION){
-                sb.append(getFormattedMessage(message.getMessage(), R.color.accentColorComplementary, message.getTimeStamp(), true));
+            if(message.getMarkers() != null && message.getMarkers().contains(SessionLogcatAppender.MARKER_LOCATION)){
+                sb.append(getFormattedMessage(message.getFormattedMessage(), R.color.accentColorComplementary, message.getTimeStamp(), true));
             }
 
             else if(!chkLocationsOnly.isChecked()){
                 if(message.getLevel() == Level.ERROR) {
-                    sb.append(getFormattedMessage(message.getMessage(), R.color.errorColor, message.getTimeStamp(), false));
+                    sb.append(getFormattedMessage(message.getFormattedMessage(), R.color.errorColor, message.getTimeStamp(), false));
 
                 }
                 else if(message.getLevel() == Level.WARN){
-                    sb.append(getFormattedMessage(message.getMessage(), R.color.warningColor, message.getTimeStamp(), false));
+                    sb.append(getFormattedMessage(message.getFormattedMessage(), R.color.warningColor, message.getTimeStamp(), false));
 
                 }
                 else {
-                    sb.append(getFormattedMessage(message.getMessage(), R.color.secondaryColorText, message.getTimeStamp(), false));
+                    sb.append(getFormattedMessage(message.getFormattedMessage(), R.color.secondaryColorText, message.getTimeStamp(), false));
                 }
             }
 
