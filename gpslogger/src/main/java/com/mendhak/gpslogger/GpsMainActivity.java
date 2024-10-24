@@ -244,6 +244,7 @@ public class GpsMainActivity extends AppCompatActivity
                     .title(getString(R.string.gpslogger_permissions_rationale_title))
                     .msgHtml(getString(R.string.gpslogger_permissions_rationale_message_basic)
                             + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_location)
+                            + (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU ?  "<br />" + getString(R.string.gpslogger_permissions_rationale_message_notification) : "")
                             + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_storage)
                             + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_location_background)
                             + "<br />" + getString(R.string.gpslogger_permissions_rationale_message_battery_optimization)
