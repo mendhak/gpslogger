@@ -165,8 +165,6 @@ public class CSVFileLogger implements FileLogger {
             );
         }
         out.close();
-
-        Files.addToMediaDatabase(file, "text/csv");
     }
 
     /**

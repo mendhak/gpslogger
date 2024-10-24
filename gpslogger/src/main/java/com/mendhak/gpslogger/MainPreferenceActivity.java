@@ -22,9 +22,13 @@ package com.mendhak.gpslogger;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.preference.PreferenceFragmentCompat;
 
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.slf4j.Logs;
@@ -46,6 +50,25 @@ public class MainPreferenceActivity extends AppCompatActivity {
 
         Systems.setLocale(PreferenceHelper.getInstance().getUserSpecifiedLocale(),getBaseContext(),getResources());
         setContentView(R.layout.activity_preferences);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.toolbar), (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+
+            // Apply the insets as a margin to the view so it doesn't overlap with status bar
+            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+            mlp.leftMargin = insets.left;
+            mlp.bottomMargin = insets.bottom;
+            mlp.rightMargin = insets.right;
+            mlp.topMargin = insets.top;
+            v.setLayoutParams(mlp);
+
+            // Alternatively set the padding on the view itself.
+//            v.setPadding(insets.left, 0, insets.right, insets.bottom);
+
+            // Return CONSUMED if you don't want want the window insets to keep passing
+            // down to descendant views.
+            return WindowInsetsCompat.CONSUMED;
+        });
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

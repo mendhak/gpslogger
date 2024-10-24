@@ -5,6 +5,10 @@ Sometimes your specified time interval will have passed, but no point was logged
 
 * On Android 6+ (Marshmallow), a new feature called *[doze mode](http://lifehacker.com/how-android-doze-works-and-how-to-tweak-it-to-save-you-1785921957)* was introduced, which severely restricts activity on the device after certain periods of inactivity. Be sure to grant the app permission to run in the background by disabling battery optimization.  If you aren't sure, or if you've denied this permission you can [disable battery optimization for GPSLogger manually](https://android.stackexchange.com/a/129075/14996) which does not bypass doze mode but occasionally provides logging windows in which to work. It will not make a great difference though, doze mode is quite aggressive.
 
+* Background permission or battery un-optimization wasn't granted to the app, and this can prevent the periodic alarm scheduling the app needs to get a new point.
+
+* This can also happen if the app isn't used for a long time, the OS starts to remove permissions from the app. 
+
 * Many vendors are also known to introduce their own _additional_ poorly written but aggressive battery optimization mechanisms.  App developers don't have a way of detecting or working around these, and unfortunately the apps receive all the blame.  You can see some partial workarounds on the [Don't Kill My App site](https://dontkillmyapp.com/?app=GPSLogger)
 
 * The GPS system will have attempted to find its location and given up after a while. This in turn means that Android OS will not have given a location to GPSLogger
