@@ -193,7 +193,7 @@
     <string name="google_drive_testupload_success">Hochgeladen. Bitte prüfen Sie Ihre Google-Dokumente auf eine neue Datei.</string>
     <string name="autoemail_sendto_csv">Einzelne E-Mail-Adressen durch Kommata trennen</string>
     <string name="autosend_enabled">Automatisches Senden erlauben</string>
-    <string name="autosend_enabled_summary">Ermöglicht das Senden der Dateien an verschiedene Ziele</string>
+    <string name="autosend_enabled_summary">Ermöglicht das Senden der Dateien an verschiedene Ziele, mit einer bestimmten Frequenz, oder falls sich der Name aufgrund benutzerdefinierter Benennung ändert</string>
     <string name="autosend_frequency_summary">Zeiteinheit (in Minuten) festlegen, wie häufig Protokolldateien gesendet werden sollen. Wert auf „0” (Null) setzen, um diese Funktion zu deaktivieren.</string>
     <string name="autosend_frequency">Wie oft\?</string>
     <string name="autosend_sendzip_title">Als Zip-Datei senden</string>
@@ -383,4 +383,5 @@
     <string name="customurl_all_parameters">Alle Parameter:</string>
     <string name="annotation_edit_button_label">Anmerkungsknopf bearbeiten</string>
     <string name="view_annotation">Annmerkungsansicht</string>
+    <string name="txt_speed_kph">Geschwindigkeit (in km/h):</string>
 </resources>
