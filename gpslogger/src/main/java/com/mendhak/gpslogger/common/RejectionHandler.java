@@ -30,9 +30,14 @@ public class RejectionHandler implements RejectedExecutionHandler {
 
     private static final Logger LOG = Logs.of(RejectionHandler.class);
 
+    private final String tag;
+    public RejectionHandler(String tag){
+        this.tag = tag;
+    }
+
     @Override
     public void rejectedExecution(Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
-        LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "Could not queue task, some points may not be logged.");
+        LOG.warn(SessionLogcatAppender.MARKER_INTERNAL, "Could not queue task for {}, some points may not be logged.", tag);
     }
 }
 

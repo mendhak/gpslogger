@@ -204,7 +204,7 @@ public class OSMAuthorizationFragment extends PreferenceFragmentCompat
                     AuthorizationRequest authRequest = requestBuilder.build();
                     Intent authIntent = authorizationService.getAuthorizationRequestIntent(authRequest);
                     openStreetMapAuthenticationWorkflow.launch(new IntentSenderRequest.Builder(
-                            PendingIntent.getActivity(getActivity(), 53, authIntent, 0))
+                            PendingIntent.getActivity(getActivity(), 53, authIntent, PendingIntent.FLAG_IMMUTABLE))
                             .setFillInIntent(authIntent)
                             .build());
 

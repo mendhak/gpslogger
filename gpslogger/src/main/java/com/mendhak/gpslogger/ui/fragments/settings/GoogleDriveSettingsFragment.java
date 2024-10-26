@@ -178,7 +178,7 @@ public class GoogleDriveSettingsFragment extends PreferenceFragmentCompat implem
                 AuthorizationRequest authRequest = requestBuilder.build();
                 Intent authIntent = authorizationService.getAuthorizationRequestIntent(authRequest);
                 googleDriveAuthenticationWorkflow.launch(new IntentSenderRequest.Builder(
-                        PendingIntent.getActivity(getActivity(), 0, authIntent, 0))
+                        PendingIntent.getActivity(getActivity(), 0, authIntent, PendingIntent.FLAG_IMMUTABLE))
                         .setFillInIntent(authIntent)
                         .build());
 

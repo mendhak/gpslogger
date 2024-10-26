@@ -25,10 +25,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
 import android.graphics.BitmapFactory;
+import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.*;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.AlarmManagerCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 import android.text.Html;
@@ -70,6 +74,7 @@ public class GpsLoggingService extends Service  {
     private LocationManager passiveLocationManager;
     private LocationManager towerLocationManager;
     private GeneralLocationListener gpsLocationListener;
+    private GnssStatus.Callback gnssStatusCallback;
     private GeneralLocationListener towerLocationListener;
     private GeneralLocationListener passiveLocationListener;
     private NmeaLocationListener nmeaLocationListener;
@@ -166,7 +171,7 @@ public class GpsLoggingService extends Service  {
         LOG.error("Android is low on memory!");
         Intent i = new Intent(this, GpsLoggingService.class);
         i.putExtra(IntentConstants.GET_NEXT_POINT, true);
-        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+        PendingIntent pi = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_IMMUTABLE);
         nextPointAlarmManager.cancel(pi);
         nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 300000, pi);
         super.onLowMemory();
@@ -319,7 +324,11 @@ public class GpsLoggingService extends Service  {
             alarmIntent = new Intent(this, AlarmReceiver.class);
             cancelAlarm();
 
-            PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                flags |= PendingIntent.FLAG_MUTABLE;
+            }
+            PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent, flags);
             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 am.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, sender);
@@ -351,7 +360,8 @@ public class GpsLoggingService extends Service  {
     private void cancelAlarm() {
         if (alarmIntent != null) {
             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-            PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
             am.cancel(sender);
         }
     }
@@ -497,11 +507,11 @@ public class GpsLoggingService extends Service  {
         Intent stopLoggingIntent = new Intent(this, GpsLoggingService.class);
         stopLoggingIntent.setAction("NotificationButton_STOP");
         stopLoggingIntent.putExtra(IntentConstants.IMMEDIATE_STOP, true);
-        PendingIntent piStop = PendingIntent.getService(this, 0, stopLoggingIntent, 0);
+        PendingIntent piStop = PendingIntent.getService(this, 0, stopLoggingIntent, PendingIntent.FLAG_IMMUTABLE);
 
         Intent annotateIntent = new Intent(this, NotificationAnnotationActivity.class);
         annotateIntent.setAction("com.mendhak.gpslogger.NOTIFICATION_BUTTON");
-        PendingIntent piAnnotate = PendingIntent.getActivity(this,0, annotateIntent,0);
+        PendingIntent piAnnotate = PendingIntent.getActivity(this,0, annotateIntent, PendingIntent.FLAG_IMMUTABLE);
 
         // What happens when the notification item is clicked
         Intent contentIntent = new Intent(this, GpsMainActivity.class);
@@ -509,7 +519,11 @@ public class GpsLoggingService extends Service  {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addNextIntent(contentIntent);
 
-        PendingIntent pending = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            flags |= PendingIntent.FLAG_IMMUTABLE;
+        }
+        PendingIntent pending = stackBuilder.getPendingIntent(0, flags);
 
         CharSequence contentTitle = getString(R.string.gpslogger_still_running);
         CharSequence contentText = getString(R.string.app_name);
@@ -581,6 +595,7 @@ public class GpsLoggingService extends Service  {
         }
     }
 
+
     /**
      * Starts the location manager. There are two location managers - GPS and
      * Cell Tower. This code determines which manager to request updates from
@@ -607,6 +622,32 @@ public class GpsLoggingService extends Service  {
             towerLocationListener = new GeneralLocationListener(this, "CELL");
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            gnssStatusCallback = new GnssStatus.Callback() {
+                @Override
+                public void onStarted() {
+                    super.onStarted();
+                }
+
+                @Override
+                public void onStopped() {
+                    super.onStopped();
+                }
+
+                @Override
+                public void onFirstFix(int ttffMillis) {
+                    super.onFirstFix(ttffMillis);
+                    LOG.info("Time to first fix: {}ms", ttffMillis);
+                }
+
+                @Override
+                public void onSatelliteStatusChanged(@NonNull GnssStatus status) {
+                    super.onSatelliteStatusChanged(status);
+                    setSatelliteInfo(status.getSatelliteCount());
+                    gpsLocationListener.satellitesUsedInFix = status.getSatelliteCount();
+                }
+            };
+        }
 
 
         gpsLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -618,7 +659,13 @@ public class GpsLoggingService extends Service  {
             LOG.info("Requesting GPS location updates");
             // gps satellite based
             gpsLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, gpsLocationListener);
-            gpsLocationManager.addGpsStatusListener(gpsLocationListener);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                gpsLocationManager.registerGnssStatusCallback(gnssStatusCallback);
+            }
+            else {
+                gpsLocationManager.addGpsStatusListener(gpsLocationListener);
+            }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 if (nmeaLocationListener == null){
@@ -715,6 +762,12 @@ public class GpsLoggingService extends Service  {
         if (gpsLocationListener != null) {
             LOG.debug("Removing gpsLocationManager updates");
             gpsLocationManager.removeUpdates(gpsLocationListener);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && gnssStatusCallback != null) {
+            gpsLocationManager.unregisterGnssStatusCallback(gnssStatusCallback);
+        }
+        else {
             gpsLocationManager.removeGpsStatusListener(gpsLocationListener);
         }
 
@@ -1035,26 +1088,26 @@ public class GpsLoggingService extends Service  {
     private void stopAlarm() {
         Intent i = new Intent(this, GpsLoggingService.class);
         i.putExtra(IntentConstants.GET_NEXT_POINT, true);
-        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+        PendingIntent pi = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_MUTABLE);
         nextPointAlarmManager.cancel(pi);
     }
 
     private void setAlarmForNextPoint() {
-        LOG.debug("Set alarm for " + preferenceHelper.getMinimumLoggingInterval() + " seconds");
-
         Intent i = new Intent(this, GpsLoggingService.class);
         i.putExtra(IntentConstants.GET_NEXT_POINT, true);
-        PendingIntent pi = PendingIntent.getService(this, 0, i, 0);
+        PendingIntent pi = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_MUTABLE);
         nextPointAlarmManager.cancel(pi);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            nextPointAlarmManager.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+
+        if(AlarmManagerCompat.canScheduleExactAlarms(nextPointAlarmManager)){
+            LOG.debug("Setting exact alarm for {}s", preferenceHelper.getMinimumLoggingInterval());
+            AlarmManagerCompat.setExactAndAllowWhileIdle(nextPointAlarmManager, AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000L, pi);
         }
         else {
-            nextPointAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000, pi);
+            LOG.debug("Setting inexact alarm for {}s (exact alarm disallowed/not available)", preferenceHelper.getMinimumLoggingInterval());
+            AlarmManagerCompat.setAndAllowWhileIdle(nextPointAlarmManager, AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000L, pi);
         }
-
     }
 
 

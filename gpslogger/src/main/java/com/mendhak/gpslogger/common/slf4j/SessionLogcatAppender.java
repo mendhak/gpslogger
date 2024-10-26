@@ -52,7 +52,7 @@ public class SessionLogcatAppender extends AppenderBase<ILoggingEvent> {
         if(eventObject.getLevel().toInt() < Level.INFO.toInt()){ return; }
 
         //Prevents certain entries from appearing in device logcat
-        if(eventObject.getMarker() == MARKER_INTERNAL){ return; }
+        if(eventObject.getMarkers() != null && eventObject.getMarkers().contains(MARKER_INTERNAL)){ return; }
 
         Statuses.add(eventObject);
     }
