@@ -41,7 +41,7 @@ jobs:
         continue-on-error: true
 
       - name: Build the static site
-        run: docker-compose run --rm --entrypoint "/bin/bash -c 'npm install;npx eleventy'" eleventy
+        run: docker compose run --rm --entrypoint "/bin/bash -c 'npm install;npx eleventy'" eleventy
 
 #      - name: Test the generated pages
 #        run: |
