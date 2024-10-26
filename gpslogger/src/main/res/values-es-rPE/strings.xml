@@ -276,8 +276,7 @@
     <string name="customurl_http_headers">Encabezados HTTP</string>
     <string name="customurl_http_method">Método HTTP</string>
     <string name="gpslogger_permissions_rationale_message_location_background"><b>Permitir todo el tiempo</b> - Permite a la aplicación usar el GPS estando en segundo plano.</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ignorar optimizaciones de batería</b> -
-\nPermite la ejecución de la aplicación en segundo plano ignorando optimizaciones de batería.</string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ignorar optimizaciones de batería</b> - \nPermite la ejecución de la aplicación en segundo plano ignorando optimizaciones de batería.</string>
     <string name="app_name">Registro GPS</string>
     <string name="hide">Ocultar</string>
     <string name="gpslogger_permissions_background_location">Permite el GPSLogger en segundo plano, concediendo un permiso adicional. En la siguiente pantalla selecciona:</string>
