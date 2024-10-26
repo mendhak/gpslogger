@@ -1,0 +1,4 @@
+* Mainly upgrading the internal SDK and library references, to make it more compatible with latest Android requirements.
+* SDK upgrades means the app is more respecting of background permissions, and may use inexact alarms if background worker permissions not granted.
+* SDK upgrades means should no longer see F-Droid and APK warnings about this being built for older versions.
+* Android 4.x is no longer supported.
