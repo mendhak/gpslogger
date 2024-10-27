@@ -40,8 +40,8 @@
     <string name="meters"> метры</string>
     <string name="error">Ошибка</string>
     <string name="error_connection">Ошибка соединения. Пожайлуйста, проверьте настройки телефона.</string>
-    <string name="seconds">сек.</string>
-    <string name="minutes">мин.</string>
+    <string name="seconds">сек</string>
+    <string name="minutes">мин</string>
     <string name="hours">час</string>
     <string name="gpsprovider_unavailable">Нет доступных источников GPS-данных. Проверьте настройки местоположения и выберите источник.</string>
     <string name="started">Начато</string>
@@ -295,9 +295,9 @@
     <string name="profile_default">Профиль по умолчанию</string>
     <string name="profile_add_new">Добавить профиль</string>
     <string name="gpslogger_permissions_rationale_title">Необходимые разрешения</string>
-    <string name="gpslogger_permissions_rationale_message_location"><b>Местоположение</b> — это разрешение позволяет считывать данные о местоположении по вышкам сети и данным GPS.</string>
-    <string name="gpslogger_permissions_rationale_message_storage"><b>Фото, медиа, файлы</b> — это разрешение позволяет писать логи и тестовые файлы в хранилище, а также читать список файлов для загрузки или обмена. Приложение не будет обращаться к Вашим фотографиям и медиафайлам.</string>
-    <string name="gpslogger_permissions_permanently_denied">Вы не предоставили одно или несколько разрешений, необходимых для работы приложения. Вам нужно перейти на экран настроек приложения и предоставить эти разрешения. <br/> <br/> Если Вы навсегда отклонили разрешения, их можно сбросить в настройках системы.</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Местоположение</b> — это разрешение позволяет считывать данные о местоположении по вышкам сети и данным GPS.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Фото, медиа, файлы</b> — Это разрешение позволяет писать логи и тестовые файлы в хранилище, а также читать список файлов для загрузки или обмена. Приложение не будет обращаться к Вашим фотографиям и медиафайлам.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Вы не предоставили одно или несколько разрешений, необходимых для работы приложения. Вам нужно перейти на экран настроек приложения и предоставить эти разрешения. <br/> <br/> Если Вы навсегда отклонили разрешения, их можно сбросить в настройках системы.]]></string>
     <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="debuglog_attach_to_email">Прикрепить лог отладки к e-mail</string>
     <string name="debuglog_attach_to_email_summary">Прикрепляет к e-mail лог отладки а также некоторые диагностические сведения</string>
@@ -360,14 +360,14 @@
     <string name="app_theme_setting">Определяет, как установить светлую или темную тему приложения</string>
     <string name="logging_advanced_delete_files">Удалить выбранные файлы</string>
     <string name="logging_advanced_delete_files_summary">Нажмите и удерживайте, чтобы выбрать несколько файлов.</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Для функционирования этого приложения требуется несколько разрешений. У Вас будет несколько раз запрошены различные разрешения (извините). Ниже приведено объяснение каждого из них.</string>
-    <string name="gpslogger_permissions_background_location">Чтобы GPSLogger мог работать в фоновом режиме, необходимо предоставить ему дополнительное разрешение. На следующем экране выберите:</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Для функционирования этого приложения требуется несколько разрешений. У Вас будет несколько раз запрошены различные разрешения (извините). Ниже приведено объяснение каждого из них.]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Чтобы GPSLogger мог работать в фоновом режиме, необходимо предоставить ему дополнительное разрешение. Пожалуйста, выберите на следующем экране: ]]></string>
     <string name="autoftp_setup_title">FTP</string>
     <string name="owncloud_setup_title">ownCloud</string>
     <string name="log_customurl_setup_title">Пользовательский URL</string>
     <string name="donate_bitcoin">Биткоин</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b>Разрешить всё время</b> — Разрешить приложению получать обновления местоположения при работе в фоновом режиме.</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Игнорировать оптимизацию батареи</b> — Разрешить приложению работать в фоновом режиме, уменьшив оптимизацию батареи.</string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Разрешить всё время</b> — Разрешить приложению получать обновления местоположения при работе в фоновом режиме. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Игнорировать оптимизацию батареи</b> — Разрешить приложению работать в фоновом режиме, уменьшив оптимизацию батареи.]]></string>
     <string name="file_logging_log_time_with_offset_title">Запись времени в лог со смещением часового пояса</string>
     <string name="file_logging_log_time_with_offset_summary">Где возможно, записывает время ISO8601 со смещением часового пояса вместо UTC.</string>
     <string name="customurl_all_parameters">Все параметры:</string>
@@ -387,4 +387,5 @@
     <string name="google_drive_folder_path_summary_2">Если Вы используете одно имя папки, после создания её можно переместить в другое место в Диске Google. Пути к папкам работают медленнее, так как каждая часть пути должна быть проверена или создана перед загрузкой файлов.</string>
     <string name="view_annotation">Просмотр аннотации</string>
     <string name="google_drive_folder_path_summary_1">Используйте одно имя папки (например, GPSLogger) или путь к папке (например, aaa/bbb/ccc). Папки должны быть созданы этим приложением.</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Уведомления</b> — Разрешить показ уведомления; это поможет сохранить процесс записи активным. ]]></string>
 </resources>
