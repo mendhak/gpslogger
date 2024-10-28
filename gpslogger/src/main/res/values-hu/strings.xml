@@ -265,7 +265,7 @@
     <string name="accuracy_filter_summary">Minimális pontosság mentéshez. Az ennél pontatlanabb pont nem lesznek elmentve.</string>
     <string name="distance_filter_title">Távolság-szűrő</string>
     <string name="distance_filter_summary">Aktuális és az előző pont közötti minimális távolság, amely a mentéshez szükséges, különben a pont eldobásra kerül.</string>
-    <string name="points">pontok</string>
+    <string name="points">pont</string>
     <string name="txt_number_of_points">Pontok száma</string>
     <string name="save">Mentés</string>
     <string name="pref_filedetails_title">Fájl- és Mappa részletek</string>
