@@ -326,12 +326,12 @@
     <string name="profile_default">Alapértelmezett profil</string>
     <string name="profile_add_new">Profil hozzáadása</string>
     <string name="gpslogger_permissions_rationale_title">Szükséges engedélyek</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Az alkalmazás különféle engedélyeket igényel a megfelelő működéshez. Következőkben kérni fogja az engedélyek megadását (sajnálom). Itt olvasható az engedélyek magyarázata.</string>
-    <string name="gpslogger_permissions_rationale_message_location"><b>Készülék pozíciója</b> - Ez engedélyezi a GSM tornyokból és a GPS-ből származó adatok olvasását.</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ennek az alkalmazásnak különféle engedélyekre van szüksége a megfelelő működéshez. Mostantól a rendszer többször kéri a különböző engedélyek megadását (elnézést). Itt található az egyes engedélyek magyarázata. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Eszköz helye</b> - Ez az engedély lehetővé teszi a helyadatok kiolvasását a cellatornyokból és az eszköz GPS-hardveréből.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Képek, média, fájlok</b> - Engedélyezi a naplófájlok és tesztfájlok írását, és a fájllista olvasását feltöltéshez vagy megosztáshoz. A program nem fog hozzányúlni a fényképeihez vagy médiafájljaihoz.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Mindig engedélyezze</b> - Engedélyezze az alkalmazás számára, hogy a háttérben helyadatokat kapjon. ]]></string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Akkumulátor optimalizálás figyelmen kívül hagyása</b> -Hagyja ezt az alkalmazást a háttérben futni, akkumulátor optimalizálás nélkül.</string>
-    <string name="gpslogger_permissions_permanently_denied">Egy vagy több alkalmazásengedélyt elutasított, melyekre az alkalmazásnak szüksége van. Engedélyek megadásához lépjen be az Alkalmazás beállítások képernyőre. <br/> <br/>Ha véglegesen megtagadta az engedélyeket, visszaállíthatja őket a rendszerbeállításokban.</string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Akkumulátoroptimalizálás figyelmen kívül hagyása</b> - Engedélyezze az alkalmazásnak a háttérben való futást az akkumulátoroptimalizálás kihagyásával. ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Ön megtagadot egy vagy több engedélyt, amelyeket az alkalmazás igényel. Az engedélyek megadásához újra kell indítania az alkalmazást, vagy a rendszerbeállítások képernyőre kell lépnie. <br /><br />Ha véglegesen megtagadta az engedélyeket, a rendszerbeállításokban visszaállíthatja azokat. ]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Ahhoz, hogy a GPSLogger futhasson a háttérben, további engedélyt kell megadnia. A következő képernyőn válassza ki: ]]></string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
@@ -386,4 +386,5 @@
     <string name="retry_get_best_possible_accuracy_summary">Első pontos pont naplózása helyett próbálkozzon tovább a pontossági időtartammal, és válassza ki a legjobb pontosságot. Hosszabb időt vesz igénybe, de növeli az esélyt a pontosabb pontok elérésére.</string>
     <string name="txt_speed_kph">Sebesség (km/h):</string>
     <string name="prompt_for_details_when_logging_starts">Naplózás megkezdésekor kéri a részleteket</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Értesítések</b> - Engedélyezze az értesítések megjelenítését, ez segít a naplózási szolgáltatás életben tartásában. ]]></string>
 </resources>
