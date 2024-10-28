@@ -1,0 +1,4 @@
+* Főként a belső SDK és a könyvtári hivatkozások frissítése, nagyobb kompatibilitás legyen a legújabb Android-követelményekkel.
+* SDK-frissítések azt jelentik, hogy az alkalmazás jobban tiszteletben tartja a háttérengedélyeket, pontatlan riasztásokat használhat, ha a háttérben dolgozók engedélyeit nem adják meg.
+* SDK-frissítések azt jelentik, hogy többé nem jelennek meg az F-Droid és az APK figyelmeztetések, melyek a régebbi verziókhoz készültek.
+* Android 4.x már nem támogatott.
