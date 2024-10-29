@@ -8,10 +8,10 @@
     <string name="ok">OK</string>
     <string name="cancel">Mégse</string>
     <string name="hide">Elrejt</string>
-    <string name="could_not_write_to_file">A fájl nem írható</string>
+    <string name="could_not_write_to_file">Nem sikerült írni a fájlba</string>
     <string name="add_description">Leírás hozzáadása</string>
     <string name="letters_numbers">Csak (A-Z) és (0-9)</string>
-    <string name="menu_annotate">Helyjelző</string>
+    <string name="menu_annotate">Hely mentése</string>
     <string name="menu_share">Megosztás</string>
     <string name="menu_exit">Kilépés</string>
     <!-- main form labels -->
@@ -38,14 +38,14 @@
     <!-- general -->
     <string name="foot"> láb</string>
     <string name="feet"> láb</string>
-    <string name="meter"> méter</string>
-    <string name="meters"> méter</string>
+    <string name="meter">m</string>
+    <string name="meters">m</string>
     <string name="error">Hiba</string>
     <string name="error_connection">Csatlakozási hiba! Ellenőrizze a telefon beállításait.</string>
     <string name="seconds"> mp</string>
     <string name="minutes"> perc</string>
     <string name="hours"> óra</string>
-    <string name="gpsprovider_unavailable">Nem található GPS szolgáltató. Kérem ellenőrizze a telefon helymeghatározás beállításait.</string>
+    <string name="gpsprovider_unavailable">Nincs elérhető GPS szolgáltató. Kérem ellenőrizze a telefon helymeghatározási beállításait.</string>
     <string name="started">Elindult</string>
     <string name="providername_gps">GPS műholdak</string>
     <string name="providername_celltower">GSM adótornyok</string>
@@ -57,7 +57,7 @@
     <string name="kilometers_per_hour"> km/h</string>
     <string name="kilometers"> km</string>
     <string name="unknown_direction">ismeretlen</string>
-    <string name="sorry">Sajnáljuk</string>
+    <string name="sorry">Sajnálom</string>
     <string name="success">Siker</string>
     <string name="direction_roughly">Körülbelül: %s</string>
     <string name="direction_north">É</string>
@@ -85,28 +85,28 @@
     <string name="time_oneandhalfhours">90 perc</string>
     <string name="time_twoandhalfhours">150 perc</string>
     <string name="time_hms_format" formatted="false">%só %sp %smp</string>
-    <string name="accuracy_within" formatted="false">%s %s -en belül</string>
+    <string name="accuracy_within" formatted="false">%s %s-en belül</string>
     <!-- Settings activity -->
     <string name="settings_distance_in_meters">Távolság-szűrő (méter)</string>
-    <string name="settings_accuracy_in_meters">Pontosság-szűrő (méter)</string>
+    <string name="settings_accuracy_in_meters">Pontosság méterben</string>
     <string name="settings_enter_meters">Adja meg méterben (max 9999)</string>
     <!-- Settings -->
     <string name="pref_logging_title">Naplózási beállítások</string>
     <string name="log_gpx_title">GPX formátum használata</string>
-    <string name="log_gpx_summary">Pozíciók rögzítése GPX v1.0 fájlformátumban</string>
+    <string name="log_gpx_summary">Pozíció rögzítése GPX v1.0 fájlformátumba</string>
     <string name="log_gpx_11_title">GPX 1.1 használata</string>
     <string name="log_gpx_11_summary">GPX 1.1 formátum használata GPX 1.0 helyett</string>
     <string name="log_kml_title">KML formátum használata</string>
-    <string name="log_kml_summary">Pozíciók rögzítése KML v2.2 fájlformátumban</string>
+    <string name="log_kml_summary">Pozíció rögzítése KML v2.2 fájlformátumba</string>
     <string name="log_plain_text_title">CSV formátum használata</string>
     <string name="log_plain_text_csv_advanced_title">CSV naplózás beállításai</string>
     <string name="log_plain_text_csv_field_delimiter">CSV mezőhatároló</string>
     <string name="log_plain_text_decimal_comma">Tizedes elválasztóként vessző (,) használata pont (.) helyett</string>
-    <string name="log_plain_text_summary">Pozíciók rögzítése CSV fájlformátumban</string>
+    <string name="log_plain_text_summary">Pozíció rögzítése CSV fájlformátumba</string>
     <string name="log_json_title">GeoJSON formátum használata</string>
-    <string name="log_json_summary">Pozíciók rögzítése GeoJSON fájlformátumban</string>
-    <string name="new_file_creation_title">Naplófájlok létrehozása</string>
-    <string name="new_file_creation_summary">Megadhatja, hogy az alkalmazás milyen időközönként készítsen új naplófájlt.</string>
+    <string name="log_json_summary">Pozíció rögzítése GeoJSON fájlformátumba</string>
+    <string name="new_file_creation_title">Naplófájl létrehozása</string>
+    <string name="new_file_creation_summary">Megadhatja, hogy az alkalmazás mikor készítsen új naplófájlt.</string>
     <string name="new_file_creation_onceamonth">Havonta egyszer</string>
     <string name="new_file_creation_onceaday">Naponta egyszer</string>
     <string name="new_file_creation_everystart">GPSLogger indításakor</string>
@@ -116,40 +116,38 @@
     <string name="pref_performance_title">Teljesítmény</string>
     <string name="pref_performance_summary">Időzítés- és szűrő beállítások</string>
     <string name="time_before_logging_title">Rögzítési időköz</string>
-    <string name="time_before_logging_summary">Használjon 0 értéket a legsűrűbb rögzítéshez. Ezen opció használata nagyban megnöveli az alkalmazás erőforrás igényét! Ezt a beállítást a Rendszer akkumulátor beállításai felülírhatják! További információ: Súgó és GY.I.K.</string>
-    <string name="time_before_logging_dialog_title">Mentési időköz (másodperc)</string>
+    <string name="time_before_logging_summary">Használjon 0 értéket a legsűrűbb rögzítéshez. Ritkább rögzítés az akkumulátor élettartama szempontjából jobb! Ezt a beállítást a Rendszer akkumulátor beállításai felülírhatják! További információ: Súgó és GY.I.K.</string>
+    <string name="time_before_logging_dialog_title">Idő másodpercben</string>
     <string name="time_before_logging_hint">Adja meg másodpercben (max 9999)</string>
-    <string name="keep_fix_summary">Legyen óvatos, ez drámaian csökkenteni fogja az akkumulátor élettartamát. Csak
-        nagyobb pontosság érdekében használja, nagy mentési időközzel. 
-    </string>
+    <string name="keep_fix_summary">Legyen óvatos, ez drámaian csökkenteni az akkumulátor élettartamát. Csak nagyobb pontosság érdekében használja, nagy mentési időközzel.</string>
     <string name="keep_fix_title">Tartsa bekapcsolva a GPS-t</string>
     <string name="retry_time_title">Pontosítási időkorlát</string>
-    <string name="retry_time_summary">Az első GPS jel vétele után ennyi ideig próbáljon meg az alkalmazás pontosabb pozíciót keresni, hogy az megfeleljen a \"pontossági-szűrő\" beállításának.</string>
+    <string name="retry_time_summary">Első GPS jel vétele után ennyi ideig próbáljon meg az alkalmazás pontosabb pozíciót keresni, hogy megfeleljen a \"pontosság-szűrő\" beállításának.</string>
     <string name="display_imperial_title">Angolszász mértékegységek használata</string>
     <string name="display_imperial_summary">Mérföld, láb, öl használata a modern metrikus cuccok helyett. (A beállításokat továbbra is metrikusan kell megadni)</string>
     <string name="enabledisablegps_title">GPS engedélyezése/tiltása</string>
     <string name="enabledisablegps_summary">Készülékbeállítások megnyitása a helyhozzáférés engedélyezéséhez vagy tiltásához.</string>
-    <string name="startonbootup_title">Boot-nál induljon</string>
-    <string name="startonbootup_summary">GPSlogger a telefon bekapcsolásakor induljon</string>
-    <string name="startonapplaunch_title">Indítás app indításakor</string>
+    <string name="startonbootup_title">Indítás rendszerindításkor</string>
+    <string name="startonbootup_summary">GPSlogger a telefon bekapcsolásakor elindul</string>
+    <string name="startonapplaunch_title">Rögzítés indítása</string>
     <string name="startonapplaunch_summary">Elindítja a naplózást az app indulásakor</string>
     <string name="autoemail_title">Email</string>
     <string name="please_wait">Kérem várjon</string>
     <string name="autoemail_target">Fogadó e-mail címe</string>
-    <string name="autosend_frequency_display">%s perc után</string>
-    <string name="autoemail_frequency_whenistop">Küldés a loggolás leállításakor</string>
+    <string name="autosend_frequency_display">%s perc elteltével</string>
+    <string name="autoemail_frequency_whenistop">Loggolás leállításakor</string>
     <string name="autoemail_smtp_category">E-mail beállítások</string>
-    <string name="autoemail_username_summary">Felhasználóneve az e-mail szolgáltatónál</string>
-    <string name="autoemail_password_summary">Jelszava az e-mail szolgáltatónál</string>
+    <string name="autoemail_username_summary">Felhasználónév az e-mail szolgáltatónál</string>
+    <string name="autoemail_password_summary">Jelszó az e-mail szolgáltatónál</string>
     <string name="autoemail_ssl">Alapértelmezett SSL</string>
     <string name="autoemail_ssl_summary">Próbálja meg ezt bekapcsolni, ha nem tud csatlakozni</string>
-    <string name="autoemail_choosepreset">Ön Email szolgáltatója</string>
-    <string name="autoemail_choosepreset_summary">Válasszon szolgáltatót vagy írja be kézzel az adatait</string>
+    <string name="autoemail_choosepreset">E-mail szolgáltató</string>
+    <string name="autoemail_choosepreset_summary">Válasszon szolgáltatót vagy adja meg manuálisan</string>
     <string name="autoemail_smtp_testemail">Teszt e-mail</string>
     <string name="autoemail_test">Küldjön tesztüzenetet a fenti beállításokkal</string>
     <string name="autoemail_sendingtest">Teszt e-mail küldése</string>
     <string name="autoemail_testresult_success">E-mail elküldve</string>
-    <string name="fix_obtained">Pontos helyzet</string>
+    <string name="fix_obtained">Megszerzett javítás</string>
     <string name="started_waiting">GPS elindult, várjon a pontos pozícióra</string>
     <string name="gps_stopped">GPS szüneteltetve</string>
     <string name="stopped">Megállt</string>
@@ -175,7 +173,7 @@
     <string name="emailprovider_google">Google Mail</string>
     <string name="emailprovider_yahoo">Yahoo! Mail</string>
     <string name="emailprovider_msn">Windows Live Mail</string>
-    <string name="emailprovider_manual">Kézikönyv</string>
+    <string name="emailprovider_manual">Egyéb</string>
     <string name="dropbox_setup_title">Dropbox</string>
     <string name="dropbox_authorize_description">Dropbox funkciók használatához engedélyt kell adnia, hogy a GPSLogger fájlokat tudjon feltölteni.</string>
     <string name="dropbox_unauthorize_description">A Dropbox hitelesítés megtörtént. Fájlok feltöltésre kerülnek a \"Apps\\GPSLogger for Android\" mappába. Bármikor leállíthatja a további feltöltést. </string>
@@ -241,12 +239,12 @@
     <string name="log_customurl_title">Naplózás egyedi URL-re</string>
     <string name="log_customurl_setup_title">Egyéni URL</string>
     <string name="log_customurl_summary">Helyinformációk küldése saját szerverre HTTP protokollal</string>
-    <string name="txt_annotation">Helyjelző:</string>
+    <string name="txt_annotation">Mentett hely:</string>
     <string name="txt_time_isoformat">UTC idő (2011-12-25T15:27:33Z):</string>
     <string name="txt_time_with_offset_isoformat">Időeltolódás (2011-12-25T11:27:33+04:00):</string>
     <string name="txt_date_isoformat">Dátum (2011-12-25):</string>
     <string name="txt_provider">Szolgáltató:</string>
-    <string name="annotation_requires_logging">Helyjelzők naplózása CSV/GPX/KML/Egyedi URL/GeoJSON-ba</string>
+    <string name="annotation_requires_logging">Helyek naplózása CSV/GPX/KML/Egyedi URL/GeoJSON-ba</string>
     <string name="gpslogger_folder_title">Mentési mappa</string>
     <string name="gpslogger_folder_summary">Hová mentse a naplófájlokat, alapértelmezett az /sdcard/GPSLogger mappa</string>
     <string name="autoftp_directory">Mappa</string>
@@ -381,8 +379,8 @@
     <string name="log_customurl_discard_offline_locations_summary">Csak a legújabb helyadatokat naplózza az egyéni URL-re miután a hálózati kapcsolat helyreállt. (Nincs hatással az automatikus küldésre)</string>
     <string name="view_annotation">Helyjező nézet</string>
     <string name="annotation_edit_button_color">Gomb színe</string>
-    <string name="annotation_edit_button_label">Helyjelző gomb szerkesztése</string>
-    <string name="retry_get_best_possible_accuracy_title">Válassza ki a legjobb pontosságot egy időtartamban</string>
+    <string name="annotation_edit_button_label">Hely gomb szerkesztése</string>
+    <string name="retry_get_best_possible_accuracy_title">Legjobb pontosság egy időtartamon belül</string>
     <string name="retry_get_best_possible_accuracy_summary">Első pontos pont naplózása helyett próbálkozzon tovább a pontossági időtartammal, és válassza ki a legjobb pontosságot. Hosszabb időt vesz igénybe, de növeli az esélyt a pontosabb pontok elérésére.</string>
     <string name="txt_speed_kph">Sebesség (km/h):</string>
     <string name="prompt_for_details_when_logging_starts">Naplózás megkezdésekor kéri a részleteket</string>
