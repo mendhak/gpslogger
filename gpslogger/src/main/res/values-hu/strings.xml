@@ -27,7 +27,7 @@
     <string name="btn_stop_logging">Naplózás leállítása</string>
     <string name="gpslogger_still_running">GPSLogger fut.</string>
     <string name="summary_loggingto">Formátum:</string>
-    <string name="summary_loggingto_screen">Csak kijelző</string>
+    <string name="summary_loggingto_screen">Csak képernyőn</string>
     <string name="summary_freq_every">Időköz:</string>
     <string name="summary_freq_max">maximum</string>
     <string name="summary_dist">Távolság:</string>
@@ -147,8 +147,8 @@
     <string name="autoemail_test">Küldjön tesztüzenetet a fenti beállításokkal</string>
     <string name="autoemail_sendingtest">Teszt e-mail küldése</string>
     <string name="autoemail_testresult_success">E-mail elküldve</string>
-    <string name="fix_obtained">Megszerzett javítás</string>
-    <string name="started_waiting">GPS elindult, várjon a pontos pozícióra</string>
+    <string name="fix_obtained">Kapott pozíció</string>
+    <string name="started_waiting">GPS elindult, várakozás pontos pozícióra</string>
     <string name="gps_stopped">GPS szüneteltetve</string>
     <string name="stopped">Leállt</string>
     <string name="osm_setup_title">OpenStreetMap</string>
