@@ -1,0 +1,4 @@
+* Hlavné modernizáciu interných SDK a knižnice odkazy, aby bolo viac kompatibilné s najnovšími požiadavkami Android.
+* SDK upgrady znamená, že aplikácia je viac rešpektujúce povolenia na pozadí, a môže použiť neporušiteľné alarmy, ak povolenia pracovníkov pozadia nie sú udelené.
+* SDK upgrady znamená, že už vidieť F-Droid a APK varovania o tom, že sú postavené pre staršie verzie.
+* Android 4.x už nie je podporovaný.
