@@ -139,7 +139,7 @@
     <string name="listeners_title">Provedores de localización</string>
     <string name="listeners_passive_title">Rexistrar localizacións pasivas</string>
     <string name="enabledisablegps_title">Ativar/desativar GPS</string>
-    <string name="listeners_summary">Que provedores de localización usar cando estean dispoñíbeis; GPS para satélites, rede para torre de telefonía móbil/wifi, Pasiva é un provedor especial que atende as localizacións solicitadas doutras aplicacións.</string>
+    <string name="listeners_summary">Que provedores de localización usar cando estean dispoñíbeis; GPS para satélites, rede para torre de telefonía móbil/wifi, Pasivo é un provedor especial que atende as localizacións solicitadas doutras aplicacións.</string>
     <string name="enabledisablegps_summary">Vaia á configuración do teléfono para activar ou desactivar os provedores.</string>
     <string name="startonbootup_title">Iniciar no arrinque</string>
     <string name="autoemail_smtp_category">Axustes do correo</string>
@@ -347,7 +347,7 @@
     <string name="hide_notification_buttons">Agochar os botóns de notificación</string>
     <string name="restart_required">É necesario reiniciar GPSLogger para que este axuste teña efecto</string>
     <string name="donate_bitcoin">Bitcoin</string>
-    <string name="altitude_subtractgeoidheight_summary">Usa o nivel medio do mar (MSL) no canto da altura de WGS84 restando a altura xeoide da altitude GPS. Só se aplica aos puntos de satélite GPS, non aos da rede ou de NMEA.</string>
+    <string name="altitude_subtractgeoidheight_summary">Usa o nivel medio do mar (MSL) no canto da altura WGS84 restando a altura xeoide da altitude GPS. Só se aplica aos puntos de satélite GPS, non aos da rede ou de NMEA.</string>
     <string name="ssl_certificate_validate">Validar o certificado SSL</string>
     <string name="parameters">Parámetros</string>
     <string name="ssl_certificate_is_valid">O certificado é válido</string>
