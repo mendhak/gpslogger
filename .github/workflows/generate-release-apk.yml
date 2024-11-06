@@ -56,8 +56,10 @@ jobs:
         id: references
         run: |
           APK_FILE_NAME=$(find gpslogger/ -maxdepth 1 -name "gpslogger-*.apk" -print -quit | xargs basename)
+          logIndex=$(jq -r '.verificationMaterial.tlogEntries[0].logIndex' < ${{ steps.attest.outputs.bundle-path }})
           echo "APK_FILE_NAME=$APK_FILE_NAME" >> "$GITHUB_OUTPUT"
           echo "GITHUB_WORKFLOW_REF=$GITHUB_WORKFLOW_REF" >> "$GITHUB_OUTPUT"
+          echo "REKOR_LOGINDEX=$logindex" >> "$GITHUB_OUTPUT"
       - name: Copy cosign bundle
         run: cp ${{ steps.attest.outputs.bundle-path }} gpslogger/${{ steps.references.outputs.APK_FILE_NAME }}.cosign.bundle
       - name: Upload
@@ -81,6 +83,8 @@ jobs:
             ```
             cosign verify-blob ${{ steps.references.outputs.APK_FILE_NAME }} --bundle ${{ steps.references.outputs.APK_FILE_NAME }}.cosign.bundle --new-bundle-format --cert-oidc-issuer https://token.actions.githubusercontent.com --cert-identity https://github.com/${{ steps.references.outputs.GITHUB_WORKFLOW_REF }}
             ```
+            
+            [Rekor transparency log](https://search.sigstore.dev?logIndex=${{ steps.references.outputs.REKOR_LOGINDEX }})
           files: |
             gpslogger/gpslogger-*.apk
             gpslogger/gpslogger-*.apk.asc
