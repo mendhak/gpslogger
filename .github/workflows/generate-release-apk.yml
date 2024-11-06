@@ -63,11 +63,12 @@ jobs:
             gpslogger/gpslogger-*.apk.asc
             gpslogger/gpslogger-*.apk.SHA256
             gpslogger/cosign.bundle
-      - name: Get APK file name
-        id: apk_file_name
+      - name: Get APK and WORKFLOW REF
+        id: references
         run: |
           APK_FILE_NAME=$(find gpslogger/ -maxdepth 1 -name "gpslogger-*.apk" -print -quit | xargs basename)
           echo "APK_FILE_NAME=$APK_FILE_NAME" >> "$GITHUB_OUTPUT"
+          echo "GITHUB_WORKFLOW_REF=$GITHUB_WORKFLOW_REF" >> "$GITHUB_OUTPUT"
       - name: Create a Release
         id: create-release
         uses: softprops/action-gh-release@v2
@@ -77,10 +78,9 @@ jobs:
           make_latest: true
           body: |
             Verification: 
-            
-            cosign verify-blob ${{ steps.apk_file_name.outputs.APK_FILE_NAME }} --bundle cosign.bundle --new-bundle-format --cert-oidc-issuer https://token.actions.githubusercontent.com --cert-identity https://github.com/${GITHUB_WORKFLOW_REF}
-            
-
+            ```
+            cosign verify-blob ${{ steps.references.outputs.APK_FILE_NAME }} --bundle cosign.bundle --new-bundle-format --cert-oidc-issuer https://token.actions.githubusercontent.com --cert-identity https://github.com/${{ steps.references.outputs.GITHUB_WORKFLOW_REF }}
+            ```
           files: |
             gpslogger/gpslogger-*.apk
             gpslogger/gpslogger-*.apk.asc
