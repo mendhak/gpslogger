@@ -12,6 +12,8 @@ jobs:
   build:
     permissions: 
       contents: write
+      id-token: write
+      attestations: write
     runs-on: ubuntu-latest
     steps:
       - id: install-gpg-signing-key
@@ -46,7 +48,10 @@ jobs:
         run: |
           tree gpslogger/build/outputs/   
           ls -lah gpslogger/ 
-
+      - uses: actions/attest-build-provenance@v1
+        id: attest
+        with:
+          subject-path: gpslogger/gpslogger-*.apk
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
@@ -55,10 +60,6 @@ jobs:
             gpslogger/gpslogger-*.apk
             gpslogger/gpslogger-*.apk.asc
             gpslogger/gpslogger-*.apk.SHA256
-      - uses: actions/attest-build-provenance@v1
-        id: attest
-        with:
-          subject-path: gpslogger/gpslogger-*.apk
       - name: Create a Release
         id: create-release
         uses: softprops/action-gh-release@v2
