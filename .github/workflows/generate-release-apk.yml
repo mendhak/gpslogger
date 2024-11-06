@@ -52,8 +52,14 @@ jobs:
         id: attest
         with:
           subject-path: gpslogger/gpslogger-*.apk
+      - name: Get APK and WORKFLOW REF
+        id: references
+        run: |
+          APK_FILE_NAME=$(find gpslogger/ -maxdepth 1 -name "gpslogger-*.apk" -print -quit | xargs basename)
+          echo "APK_FILE_NAME=$APK_FILE_NAME" >> "$GITHUB_OUTPUT"
+          echo "GITHUB_WORKFLOW_REF=$GITHUB_WORKFLOW_REF" >> "$GITHUB_OUTPUT"
       - name: Copy cosign bundle
-        run: cp ${{ steps.attest.outputs.bundle-path }} gpslogger/cosign.bundle
+        run: cp ${{ steps.attest.outputs.bundle-path }} gpslogger/${{ steps.references.outputs.APK_FILE_NAME }}.cosign.bundle
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
@@ -62,13 +68,7 @@ jobs:
             gpslogger/gpslogger-*.apk
             gpslogger/gpslogger-*.apk.asc
             gpslogger/gpslogger-*.apk.SHA256
-            gpslogger/cosign.bundle
-      - name: Get APK and WORKFLOW REF
-        id: references
-        run: |
-          APK_FILE_NAME=$(find gpslogger/ -maxdepth 1 -name "gpslogger-*.apk" -print -quit | xargs basename)
-          echo "APK_FILE_NAME=$APK_FILE_NAME" >> "$GITHUB_OUTPUT"
-          echo "GITHUB_WORKFLOW_REF=$GITHUB_WORKFLOW_REF" >> "$GITHUB_OUTPUT"
+            gpslogger/gpslogger-*.cosign.bundle
       - name: Create a Release
         id: create-release
         uses: softprops/action-gh-release@v2
@@ -79,10 +79,10 @@ jobs:
           body: |
             Verification: 
             ```
-            cosign verify-blob ${{ steps.references.outputs.APK_FILE_NAME }} --bundle cosign.bundle --new-bundle-format --cert-oidc-issuer https://token.actions.githubusercontent.com --cert-identity https://github.com/${{ steps.references.outputs.GITHUB_WORKFLOW_REF }}
+            cosign verify-blob ${{ steps.references.outputs.APK_FILE_NAME }} --bundle ${{ steps.references.outputs.APK_FILE_NAME }}.cosign.bundle --new-bundle-format --cert-oidc-issuer https://token.actions.githubusercontent.com --cert-identity https://github.com/${{ steps.references.outputs.GITHUB_WORKFLOW_REF }}
             ```
           files: |
             gpslogger/gpslogger-*.apk
             gpslogger/gpslogger-*.apk.asc
             gpslogger/gpslogger-*.apk.SHA256
-            gpslogger/cosign.bundle
+            gpslogger/gpslogger-*.cosign.bundle
