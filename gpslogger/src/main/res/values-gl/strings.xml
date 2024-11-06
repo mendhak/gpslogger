@@ -139,7 +139,7 @@
     <string name="listeners_title">Provedores de localización</string>
     <string name="listeners_passive_title">Rexistrar localizacións pasivas</string>
     <string name="enabledisablegps_title">Ativar/desativar GPS</string>
-    <string name="listeners_summary">Que provedores de localización usar cando estean dispoñíbeis; GPS para satélites, rede para torre de telefonía móbil/wifi, Pasiva é un provedor especial que atende as localizacións solicitadas doutras aplicacións.</string>
+    <string name="listeners_summary">Que provedores de localización usar cando estean dispoñíbeis; GPS para satélites, rede para torre de telefonía móbil/wifi, Pasivo é un provedor especial que atende as localizacións solicitadas doutras aplicacións.</string>
     <string name="enabledisablegps_summary">Vaia á configuración do teléfono para activar ou desactivar os provedores.</string>
     <string name="startonbootup_title">Iniciar no arrinque</string>
     <string name="autoemail_smtp_category">Axustes do correo</string>
@@ -207,8 +207,8 @@
     <string name="autoemail_from_summary">Algúns provedores de correo requiren un enderezo de procedencia. Use isto só se o precisa.</string>
     <string name="autoftp_useftps">Usar FTPS</string>
     <string name="new_file_custom_each_time_summary">Solicitar un nome de ficheiro personalizado cada vez que se inicia o rexistro</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ignorar a optimización da batería</b>: permite que esta aplicación se execute en segundo plano reducindo a optimización da batería.</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Esta aplicación precisa de varios permisos para funcionar correctamente. Agora solicitaráselle varias veces varios permisos (sentímolo). Aquí ten unha explicación de cada permiso.</string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorar a optimización da batería</b>: permite que esta aplicación se execute en segundo plano reducindo a optimización da batería. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta aplicación precisa de varios permisos para funcionar correctamente. Agora solicitaráselle varias veces varios permisos (sentímolo).  Aquí ten unha explicación de cada permiso. ]]></string>
     <string name="google_drive_folder_path_summary_1">Use un nome único de cartafol (p. ex., GPSLogger) ou unha ruta de cartafol (p. ex., aaa/bbb/ccc). Os cartafoles deben ser creados por esta aplicación.</string>
     <string name="google_drive_folder_path_summary_2">Se usa un nome único de cartafol, pódese mover cara a outro lugar de Google Drive após a creación. As rutas dos cartafoles son máis lentos porque cada parte da ruta debe ser verificada ou creada antes de cargar os ficheiros.</string>
     <string name="google_drive_testupload_success">Enviado. Comprobe se ten un novo ficheiro en Google Drive.</string>
@@ -248,7 +248,7 @@
     <string name="autosend_wifionly_title">Enviar só en wifi</string>
     <string name="profile_add_from_url">Dende un URL</string>
     <string name="profile_switch_before_delete">Cambie a outro perfil antes de eliminar este.</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b>Permitir sempre</b>: permite que esta aplicación reciba actualizacións de localización cando se executa en segundo plano.</string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Permitir sempre</b>: permite que esta aplicación reciba actualizacións de localización cando se executa en segundo plano. ]]></string>
     <string name="debuglog_attach_to_email">Anexar o rexistro de depuración ao correo-e</string>
     <string name="debuglog_attach_to_email_summary">Anexa o rexistro de depuración a un correo-e xunto con algunha información de diagnóstico</string>
     <string name="log_customurl_summary_detailed">Envía unha solicitude ao URL personalizado sempre que se captura un punto de localización. Depende do intervalo de rexistro.</string>
@@ -272,7 +272,7 @@
     <string name="new_file_custom_each_time_title">Solicitar un nome de ficheiro en cada inicio</string>
     <string name="properties_file_url">URL do ficheiro de propiedades</string>
     <string name="log_customurl_discard_offline_locations">Desbotar as localizacións sen conexión</string>
-    <string name="gpslogger_permissions_background_location">Para permitir que GPSLogger se execute en segundo plano, terá que concederlle un permiso adicional. Na seguinte pantalla, seleccione:</string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Para permitir que GPSLogger se execute en segundo plano, terá que concederlle un permiso adicional.  Na seguinte pantalla, seleccione: ]]></string>
     <string name="autoemail_sendto_csv">Enderezos de correo separados por comas</string>
     <string name="autosend_sendzip_title">Enviar arquivo ZIP</string>
     <string name="log_opengts_title">Rexistrar nun servidor OpenGTS</string>
@@ -283,14 +283,14 @@
     <string name="gpslogger_custom_path_need_permission">Para utilizar rutas personalizadas en GPSLogger, permita que GPSLogger xestione todos os ficheiros na seguinte pantalla. A continuación, tente realizar a acción de novo. Isto é necesario por mor dunha restrición de Android 11+.</string>
     <string name="storage_chooser_free_space_text">libre</string>
     <string name="donate_app">Doar (aplicación)</string>
-    <string name="gpslogger_permissions_rationale_message_location"><b>Localización do dispositivo</b>: este permiso posibilita ler datos de localización das torres móbiles e do hardware GPS do dispositivo.</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Localización do dispositivo</b>: este permiso posibilita ler datos de localización das torres móbiles e do hardware GPS do dispositivo.]]></string>
     <string name="profile_add_new">Engadir un perfil</string>
     <string name="profile_default">Perfil predeterminado</string>
     <string name="gpslogger_permissions_rationale_title">Permisos necesarios</string>
     <string name="autosend_targets_category">Destinos de envío automático</string>
     <string name="autosend_sendzip_summary">Enviar ficheiro zip se é o caso. Desactiveo para enviar ficheiros individuais ou se a opción zip non funciona para Vde.</string>
-    <string name="gpslogger_permissions_rationale_message_storage"><b>Fotos, multimedia, ficheiros</b>: este permiso posibilita escribir ficheiros de rexistro e ficheiros de proba no almacenamento e ler a partir dunha lista de ficheiros para enviar ou compartir. Esta aplicación non accederá ás súas fotos ou contido multimedia.</string>
-    <string name="gpslogger_permissions_permanently_denied">Vde. denegou un ou máis permisos necesarios para esta aplicación. Terá que reiniciar ou ir á pantalla de axustes do sistema para conceder estes permisos. <br/><br/>Se denegou permanentemente os permisos, pode restabelecelos nos axustes do sistema.</string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos, multimedia, ficheiros</b>: este permiso posibilita escribir ficheiros de rexistro e ficheiros de proba no almacenamento e ler a partir dunha lista de ficheiros para enviar ou compartir. Esta aplicación non accederá ás súas fotos ou contido multimedia.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Vde. denegou un ou máis permisos necesarios para esta aplicación.  Terá que reiniciar ou ir á pantalla de axustes do sistema para conceder estes permisos.  <br/><br/>Se denegou permanentemente os permisos, pode restabelecelos nos axustes do sistema. ]]></string>
     <string name="log_customurl_discard_offline_locations_summary">Rexistrar as localizacións no URL personalizado só mentres haxa unha conexión de rede dispoñíbel (non afecta ao envío automático)</string>
     <string name="autoopengts_server_path_summary">Opcional e só para comunicacións baseadas en HTTP. Por exemplo «/gprmc/Data»</string>
     <string name="autoftp_useftps_summary">Activar FTP sobre SSL. SSL/TLS e implícito ignóranse se isto está desmarcado.</string>
@@ -347,7 +347,7 @@
     <string name="hide_notification_buttons">Agochar os botóns de notificación</string>
     <string name="restart_required">É necesario reiniciar GPSLogger para que este axuste teña efecto</string>
     <string name="donate_bitcoin">Bitcoin</string>
-    <string name="altitude_subtractgeoidheight_summary">Usa o nivel medio do mar (MSL) no canto da altura de WGS84 restando a altura xeoide da altitude GPS. Só se aplica aos puntos de satélite GPS, non aos da rede ou de NMEA.</string>
+    <string name="altitude_subtractgeoidheight_summary">Usa o nivel medio do mar (MSL) no canto da altura WGS84 restando a altura xeoide da altitude GPS. Só se aplica aos puntos de satélite GPS, non aos da rede ou de NMEA.</string>
     <string name="ssl_certificate_validate">Validar o certificado SSL</string>
     <string name="parameters">Parámetros</string>
     <string name="ssl_certificate_is_valid">O certificado é válido</string>
@@ -384,4 +384,5 @@
     <string name="customurl_http_method">Método HTTP</string>
     <string name="app_theme_dark">Tema escuro</string>
     <string name="sftp_validate_test_upload">Validar a chave da máquina/servidor e probar o envío</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificacións</b>: permite amosar unha notificación, isto axuda a manter o servizo de rexistro activo. ]]></string>
 </resources>

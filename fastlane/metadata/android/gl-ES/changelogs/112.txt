@@ -1,0 +1,1 @@
+* Corrección de erros: a orde getstatus de Tasker non estaba enviando unha emisión de estado.

@@ -38,7 +38,7 @@
     <!-- general -->
     <string name="foot">stopa</string>
     <string name="feet">stopy</string>
-    <string name="meter"> m</string>
+    <string name="meter">meter</string>
     <string name="meters"> metre</string>
     <string name="error">Chyba</string>
     <string name="error_connection">Chyba pripojenia. Prosím skontrolujte nastavenia telefónu.</string>
@@ -345,7 +345,7 @@ polia.
     <string name="profile_default">Predvolený profil</string>
     <string name="profile_add_new">Pridať profil</string>
     <string name="gpslogger_permissions_rationale_title">Vyžaduje sa oprávnenie</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Aplikácia vyžaduje pre svoje korektné fungovanie rôzne oprávnenia. Teraz vám bude viackrát položená otázka súvisiaca s oprávneniami (prepáčte). Tu je vysvetlenie každého oprávnenia.</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Aplikácia vyžaduje pre svoje korektné fungovanie rôzne oprávnenia. Teraz vám bude viackrát položená otázka súvisiaca s oprávneniami (prepáčte). Tu je vysvetlenie každého oprávnenia. ]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Umiestnenie zariadenia</b> - Toto oprávnenie umožňuje čítanie údajov o lokalite z vysielačov mobilného signálu a z hardvéru pre GPS.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Povoliť vždy</b> - umožní aplikácii získavať aktualizácie polohy aj vtedy, keď beží na pozadí. ]]></string>
@@ -405,4 +405,5 @@ polia.
     <string name="retry_get_best_possible_accuracy_title">Vybrať najlepšiu presnosť počas trvania</string>
     <string name="txt_speed_kph">Rýchlosť (v km/h):</string>
     <string name="prompt_for_details_when_logging_starts">Spýtať sa na podrobnosti na začiatku prihlasovania</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notifikácie</b> - Povoliť zobrazenie notifikácie, ktorá pomôže udržať proces zaznamenávania aktívny. ]]></string>
 </resources>

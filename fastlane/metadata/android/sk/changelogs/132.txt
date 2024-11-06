@@ -1,0 +1,4 @@
+* Hlavná aktualizácia interného SDK a referencií na knižnice, kvôli zlepšeniu kompatibility s najnovšími požiadavkami systému Android.
+* Aktualizácie SDK znamenajú, že aplikácia lepšie rešpektuje oprávnenia na pozadí, a môže používať nepresné alarmy, ak nie sú udelené oprávnenia pre prvky worker na pozadí.
+* Aktualizácie SDK vedú k tomu, že už by ste nemali vidieť výstrahy F-Droid a APK o zostavení pre staršie verzie.
+* Android 4.x už nie je podporovaný.

@@ -54,7 +54,7 @@
     <string name="meters_per_second"> m/s</string>
     <string name="feet_per_second"> pies/s</string>
     <string name="miles_per_hour"> millas/h</string>
-    <string name="miles">mi</string>
+    <string name="miles">millas</string>
     <string name="kilometers_per_hour">km/h</string>
     <string name="kilometers">km</string>
     <string name="unknown_direction">desconocido</string>

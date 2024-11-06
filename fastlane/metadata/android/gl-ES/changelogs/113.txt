@@ -1,0 +1,1 @@
+* Engade unha barra de desprazamento á vista sinxela para adaptala ao tamaño da pantalla do sistema e ao tamaño da letra.

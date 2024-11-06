@@ -1,0 +1,47 @@
+Un rexistrador GPS lixeiro cun uso eficiente da batería. O obxectivo desta aplicación é rexistrar as súas coordenadas GPS a intervalos especificados nun ficheiro da súa tarxeta SD. Esta aplicación execútase en segundo plano para que poidas facer unha camiñada, correr, voar, facer unha sesión fotográfica ou incluso ir a mercar un pouco de leite e telo en funcionamento o maior tempo posíbel. Unha vez que estea de volta no computador, pode usar os ficheiros para xeoetiquetar fotos, enviar a webs de viaxes, ver en Google Earth, etc.
+
+
+Para obter máis información, consulte <a href="https://gpslogger.app">https://gpslogger.app</a>
+
+<b>Nota</b>: Lembre <b>Permitir sempre</b> para esta aplicación nos axustes do seu S.O., para permitir que rexistre localizacións en segundo plano.
+
+<b>Características</b>
+
+<ul>
+<li>Podeo rexistrar en formatos GPX, KML, CSV, NMEA e CSV. Tamén pode facelo nun URL personalizado ou só na pantalla.</li>
+<li>Rexistra puntos GPX como trazados e segmentos de trazado</li>
+<li>Rexistra tamén velocidade, dirección e altitude se está dispoñíbel</li>
+<li>Engada unha descrición a un punto usando o menú de anotacións, engádese como waypoint</li>
+<li>Configurar intervalos de tempo entre puntos</li>
+<li>Configurar un filtro de distancia mínima entre puntos ou un filtro de precisión</li>
+<li>Icona de notificación con coordenadas e accións rápidas</li>
+<li>Usa torres móbiles para a localización cando o GPS está desactivado</li>
+<li>Pode escoller selectivamente os provedores de rede, gps e localización pasiva</li>
+<li>Envíar automaticamente a intervalos estabelecidos a destinos como correo-e, FTP, Dropbox, OpenStreetMap, Google Drive, URL personalizado.</li>
+<li>Compartir a posición ficheiros de rexistro a través de SMS/correo-e (e outras aplicacións como Facebook ou X, dependendo do que teña instalado)</li>
+<li>Iniciar o rexistro no arrinque do teléfono</li>
+<li>Invocar operacións dende Tasker ou outras aplicacións de automatización.</li>
+<li>Pode indicar un ficheiro predefinido cos seus propios valores para a distribución</li>
+<li>Pode ter varios perfís con diferentes configuracións</li>
+</ul>
+
+Erros, solicitudes de funcións, preguntas. Envíanolos a github.com/mendhak/gpslogger (seguidor de incidencias).
+
+<b>Notas</b>
+
+Esta aplicación só utiliza unha conexión de datos se utiliza funcións de envío automático ou funcións de URL personalizados
+
+Aínda que a aplicación permite frecuencias de 0 segundos, non se recomenda xa que a gravación e o rexistro están a suceder moi rápido; isto pode causar inestabilidade/quebras. Probe con 1-3 segundos.
+
+
+<b>Explicación dos permisos</b>
+
+Almacenamento: lendo e escribindo ficheiros no cartafol GPSLogger da súa tarxeta SD
+
+Comunicación de rede: úsase no envio de ficheiros (Dropbox, Openstreetmap), no envío de correos-e ou para autorización con Dropbox ou Openstreetmap
+
+A localización: úsase para determinar a súa localización baseada no GPS ou na torre
+
+Ferramentas do sistema (iniciar o rexistro ao arrincar): úsase se escolle iniciar GPSLogger no arrinque do teléfono
+
+Permisos de almacenamento compartido: en Android 11, úsanse para permitir escribir ficheiros en rutas de ficheiros personalizadas
