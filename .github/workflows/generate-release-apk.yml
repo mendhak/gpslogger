@@ -55,6 +55,10 @@ jobs:
             gpslogger/gpslogger-*.apk
             gpslogger/gpslogger-*.apk.asc
             gpslogger/gpslogger-*.apk.SHA256
+      - uses: actions/attest-build-provenance@v1
+        id: attest
+        with:
+          subject-path: gpslogger/gpslogger-*.apk
       - name: Create a Release
         id: create-release
         uses: softprops/action-gh-release@v2
