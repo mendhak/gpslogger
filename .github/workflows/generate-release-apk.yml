@@ -59,7 +59,7 @@ jobs:
           logIndex=$(jq -r '.verificationMaterial.tlogEntries[0].logIndex' < ${{ steps.attest.outputs.bundle-path }})
           echo "APK_FILE_NAME=$APK_FILE_NAME" >> "$GITHUB_OUTPUT"
           echo "GITHUB_WORKFLOW_REF=$GITHUB_WORKFLOW_REF" >> "$GITHUB_OUTPUT"
-          echo "REKOR_LOGINDEX=$logindex" >> "$GITHUB_OUTPUT"
+          echo "REKOR_LOGINDEX=$logIndex" >> "$GITHUB_OUTPUT"
       - name: Copy cosign bundle
         run: cp ${{ steps.attest.outputs.bundle-path }} gpslogger/${{ steps.references.outputs.APK_FILE_NAME }}.cosign.bundle
       - name: Upload
