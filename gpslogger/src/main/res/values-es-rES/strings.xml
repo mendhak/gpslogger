@@ -307,7 +307,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="profile_default">Perfil por defecto</string>
     <string name="profile_add_new">Añadir perfil</string>
     <string name="gpslogger_permissions_rationale_title">Se necesitan permisos</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Esta aplicación requiere varios permisos para funcionar correctamente. Ahora se le solicitarán varias veces (lo siento). Aquí hay una explicación de cada permiso.</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta aplicación requiere varios permisos para funcionar correctamente. Ahora se te pedirán varias veces varios permisos (lo siento).  Aquí hay una explicación de cada permiso. ]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[No has concedido permiso para alguno de los requisitos de la aplicación.  usted necesitará ir a la configuración de la aplicación para dar estos permisos.  <br /><br />Si los negó permanentemente debe restaurarlos en  la configuración del sistema. ]]></string>
     <string name="privacy_policy">Política de Privacidad</string>
     <string name="debuglog_attach_to_email">Adjuntar el registro de depuración para correo electrónico</string>
@@ -352,10 +352,10 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="storage_chooser_text_field_hint">Nombre de carpeta</string>
     <string name="profile_add_from_url">Desde la dirección URL</string>
     <string name="properties_file_url">Dirección URL del archivo de propiedades</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b>Permitir todo el tiempo</b> - Permite que esta aplicación reciba actualizaciones de ubicación cuando se ejecuta en segundo plano.</string>
-    <string name="gpslogger_permissions_rationale_message_location"><b>Ubicación del dispositivo</b> - Este permiso permite leer los datos de ubicación desde las torres de telefonía móvil y del hardware GPS del dispositivo.</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ignorar la optimización de la batería</b> - Permite que esta aplicación se ejecute en segundo plano reduciendo la optimización de la batería.</string>
-    <string name="gpslogger_permissions_background_location">Para permitir que GPSLogger se ejecute en segundo plano, deberá otorgarle un permiso adicional. En la siguiente pantalla, seleccione:</string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Permitir todo el tiempo</b>: permite que esta aplicación reciba actualizaciones de ubicación cuando se ejecuta en segundo plano. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Localización del dispositivo</b> - Este permiso permite leer datos de localización de torres de telefonía móvil y del hardware GPS del dispositivo.]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorar optimización de batería</b> - Permite que esta app se ejecute en segundo plano reduciendo la optimización de batería. ]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Para permitir que GPSLogger se ejecute en segundo plano, tendrás que concederle un permiso adicional.  En la siguiente pantalla selecciona: ]]></string>
     <string name="txt_battery_charging">Cargando</string>
     <string name="reset_app_summary">Esto restablecerá la aplicación, eliminará cualquier preferencia, eliminará los archivos de GPSLogger y revocará los permisos otorgados a esta aplicación. ¡Se perderán todos los datos!</string>
     <string name="reset_app_title">Restablecer la aplicación</string>
@@ -367,7 +367,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="logging_advanced_delete_files">Eliminar archivos seleccionados</string>
     <string name="logging_advanced_delete_files_summary">Mantenga pulsado para seleccionar varios archivos.</string>
     <string name="file_logging_log_time_with_offset_summary">Dónde sea posible, escriba la hora ISO8601 con desplazamiento de zona horaria en lugar de UTC.</string>
-    <string name="gpslogger_permissions_rationale_message_storage"><b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba en el almacenamiento y leer una lista de archivos para cargarlos o compartirlos. Esta aplicación no accederá a sus fotos o medios.</string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba en el almacenamiento, y leer de una lista de archivos para subir o compartir. Esta aplicación no accederá a tus fotos o archivos multimedia]]>.</string>
     <string name="app_theme_dark">Tema oscuro</string>
     <string name="customurl_all_parameters">Todos los parámetros:</string>
     <string name="google_drive_folder_path">Ruta al directorio de Google Drive</string>
@@ -386,4 +386,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="retry_get_best_possible_accuracy_title">Elegir la mejor precisión en duración</string>
     <string name="txt_speed_kph">Velocidad (en km/h):</string>
     <string name="prompt_for_details_when_logging_starts">Solicitar los detalles cuando comience el registro</string>
+    <string name="started_at">comenzó en</string>
+    <string name="hide_notification_from_lock_screen">Ocultar notificaciones de la pantalla de bloqueo</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificaciones</b> - Permite mostrar una notificación, esto ayuda a mantener vivo el servicio de registro. ]]></string>
 </resources>
