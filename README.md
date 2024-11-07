@@ -36,7 +36,7 @@ To verify the PGP integrity and signature:
 
 ```bash
 gpg --recv-key 6989CF77490369CFFDCBCD8995E7D75C76CBE9A9
-gpg --verify ~/Downloads/gpslogger-132.apk.asc
+gpg --verify gpslogger-132.apk.asc
 ```
 
 (Experimental) To verify with [Sigstore Cosign](https://docs.sigstore.dev/cosign/system_config/installation), the command should be in the releases notes, it will look like this: 
@@ -52,7 +52,7 @@ cosign verify-blob gpslogger-132.apk \
 To verify the checksum:    
     
 ```bash
-sha256sum -c ~/Downloads/gpslogger-132.apk.SHA256
+sha256sum -c gpslogger-132.apk.SHA256
 ```
 
 
