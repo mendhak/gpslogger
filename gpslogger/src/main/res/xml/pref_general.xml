@@ -33,7 +33,7 @@
 
     <SwitchPreferenceCompat
         android:key="hide_notification_from_lock_screen"
-        android:title="Hide notification from lock screen"
+        android:title="@string/hide_notification_from_lock_screen"
         android:summary="@string/restart_required"
         android:defaultValue="true"
         app:iconSpaceReserved="false"/>`
