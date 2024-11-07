@@ -52,6 +52,7 @@ jobs:
         id: attest
         with:
           subject-path: gpslogger/gpslogger-*.apk
+          subject-name: test
       - name: Get APK and WORKFLOW REF
         id: references
         run: |
