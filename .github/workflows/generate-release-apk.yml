@@ -56,7 +56,7 @@ jobs:
       - name: Checksum the APK
         run: |
           cd gpslogger 
-          sha256sum gpslogger-132-rc2.apk > gpslogger-132-rc2.apk.SHA256
+          sha256sum ${{ steps.references.outputs.APK_FILE_NAME }} > ${{ steps.references.outputs.APK_FILE_NAME }}.SHA256
       - name: Cosign Attestation of the APK
         uses: actions/attest-build-provenance@v1
         id: attest
