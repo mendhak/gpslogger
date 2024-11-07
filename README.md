@@ -30,17 +30,31 @@ I'm not very good at UIs, so any work with the layouts would be appreciated!
 
 ## Verifying
 
-It's good practice to verify downloads.  In recent releases, a PGP signature and an SHA256 checksum will accompany each `.apk`.
+It's good practice to verify downloads. A PGP signature, Cosign bundle, and an SHA256 checksum will accompany each `.apk`.
 
-Import PGP Public Key from [the Ubuntu Keyserver](https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95e7d75c76cbe9a9) or just `gpg --recv-key 6989CF77490369CFFDCBCD8995E7D75C76CBE9A9`
+To verify the PGP integrity and signature:
 
-To verify the integrity and signature:
+```bash
+gpg --recv-key 6989CF77490369CFFDCBCD8995E7D75C76CBE9A9
+gpg --verify ~/Downloads/gpslogger-71.apk.asc
+```
 
-    $ gpg --verify ~/Downloads/gpslogger-71.apk.asc
+(Experimental) To verify with [Sigstore Cosign](https://docs.sigstore.dev/cosign/system_config/installation), the command should be in the releases notes, it will look like this: 
+
+```bash
+cosign verify-blob gpslogger-132.apk \
+--bundle gpslogger-132.apk.cosign.bundle --new-bundle-format \
+--cert-oidc-issuer https://token.actions.githubusercontent.com \
+--cert-identity https://github.com/mendhak/gpslogger/.github/workflows/generate-release-apk.yml@refs/head/master
+```    
+
+
+To verify the checksum:    
     
-To verify checksum:    
-    
-    $ sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
+```bash
+sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
+```
+
 
 
 Setting up the code
