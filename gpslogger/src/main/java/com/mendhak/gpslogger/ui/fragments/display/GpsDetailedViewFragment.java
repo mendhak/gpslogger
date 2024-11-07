@@ -44,6 +44,7 @@ import com.mendhak.gpslogger.senders.FileSenderFactory;
 import org.slf4j.Logger;
 
 import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -395,7 +396,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         }
 
         double distanceValue = session.getTotalTravelled();
-        txtTravelled.setText(Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits(), true) + " (" + session.getNumLegs() + " points)");
+        txtTravelled.setText(MessageFormat.format("{0} ({1} {2})", Strings.getDistanceDisplay(getActivity(), distanceValue, preferenceHelper.shouldDisplayImperialUnits(), true), session.getNumLegs(), getString(R.string.points)));
 
         long startTime = session.getStartTimeStamp();
         Date d = new Date(startTime);
@@ -405,10 +406,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
-        txtTime.setText(duration + " (started at " + dateFormat.format(d) + " " + timeFormat.format(d) + ")");
-
-
-
+        txtTime.setText(MessageFormat.format("{0} ({1} {2} {3})", duration, getString(R.string.started_at), dateFormat.format(d), timeFormat.format(d)));
     }
 
 

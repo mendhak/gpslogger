@@ -378,6 +378,7 @@
     <string name="distance_filter_title">Distance filter</string>
     <string name="distance_filter_summary">The minimum distance required between current and previous for a point to be saved, otherwise the point will be discarded.</string>
     <string name="points">points</string>
+    <string name="started_at">started at</string>
     <string name="txt_number_of_points">Number of points</string>
     <string name="save">Save</string>
 
