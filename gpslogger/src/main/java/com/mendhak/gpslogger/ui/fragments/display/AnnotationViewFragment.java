@@ -211,7 +211,7 @@ public class AnnotationViewFragment extends GenericViewFragment implements Simpl
         int i = 0;
         AnnotationViewFragment fragment = this;
         for (ButtonWrapper buttonWrapper : buttonList) {
-            buttonWrapper.setText("Annotation " + i);
+            buttonWrapper.setText(getString(R.string.txt_annotation) + i);
             buttonWrapper.setColor("#808080");
             final int btnIdx = i;
             buttonWrapper.actionButton.setOnLongClickListener(v -> {
