@@ -17,8 +17,8 @@ buildscript {
 //Android
 apply plugin: 'com.android.application'
 
-//Generating PGP
-apply plugin: 'signing'
+////Generating PGP
+//apply plugin: 'signing'
 //Generating colorful output
 apply from: 'buildtools/ColoredOutput.gradle'
 project.ext.set("GHACTIONS_FOLDING", true)
@@ -307,18 +307,18 @@ task copyFinalAPK(group:'build') {
             fileName.replace("gpslogger-release.apk", finalApkName)
         }
     }
-        //PGP Sign
-        //Verify with gpg --verify ~/Downloads/gpslogger-71.apk.asc
-    if(file(finalApkName).isFile()){
-        signing {
-            useGpgCmd()
-            sign file(finalApkName)
-        }
-
-        //SHA256 Checksum
-        //Verify with sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
-        ant.checksum(file: finalApkName, fileext: '.SHA256', algorithm: "SHA-256", pattern: "{0} {1}")
-    }
+//        //PGP Sign
+//        //Verify with gpg --verify ~/Downloads/gpslogger-71.apk.asc
+//    if(file(finalApkName).isFile()){
+//        signing {
+//            useGpgCmd()
+//            sign file(finalApkName)
+//        }
+//
+//        //SHA256 Checksum
+//        //Verify with sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
+//        ant.checksum(file: finalApkName, fileext: '.SHA256', algorithm: "SHA-256", pattern: "{0} {1}")
+//    }
 
 }
 
