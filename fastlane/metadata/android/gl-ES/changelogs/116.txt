@@ -1,0 +1,3 @@
+* Corrección de permisos de ficheiro para Android 11+. Agora pode estabelecer unha ruta personalizada ao ficheiro e solicitaránselle permisos para o xestor de ficheiros.
+* Engadiuse un novo permiso, MANAGE_EXTERNAL_STORAGE. Isto é para permitir a función de ruta personalizada aos ficheiros en Android 11+.
+* Corrección de erros: permite caracteres UTF-8 no nome do cartafol FTP.
