@@ -388,4 +388,6 @@
     <string name="view_annotation">Просмотр аннотации</string>
     <string name="google_drive_folder_path_summary_1">Используйте одно имя папки (например, GPSLogger) или путь к папке (например, aaa/bbb/ccc). Папки должны быть созданы этим приложением.</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Уведомления</b> — Разрешить показ уведомления; это поможет сохранить процесс записи активным. ]]></string>
+    <string name="started_at">запущено</string>
+    <string name="hide_notification_from_lock_screen">Скрыть уведомление с экрана блокировки</string>
 </resources>
