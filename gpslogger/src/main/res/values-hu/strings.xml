@@ -385,4 +385,6 @@
     <string name="txt_speed_kph">Sebesség (km/h):</string>
     <string name="prompt_for_details_when_logging_starts">Részletek kérése a naplózás indításakor</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Értesítések</b> - Engedélyezze az értesítések megjelenítését, ez segít a naplózási szolgáltatás életben tartásában. ]]></string>
+    <string name="hide_notification_from_lock_screen">Értesítés elrejtése lezárt képernyőről</string>
+    <string name="started_at">Kezdő időpont</string>
 </resources>
