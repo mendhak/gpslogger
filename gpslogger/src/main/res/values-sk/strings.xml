@@ -406,4 +406,6 @@ polia.
     <string name="txt_speed_kph">Rýchlosť (v km/h):</string>
     <string name="prompt_for_details_when_logging_starts">Spýtať sa na podrobnosti na začiatku prihlasovania</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notifikácie</b> - Povoliť zobrazenie notifikácie, ktorá pomôže udržať proces zaznamenávania aktívny. ]]></string>
+    <string name="started_at">spustené</string>
+    <string name="hide_notification_from_lock_screen">Skryť notifikáciu z obrazovky uzamknutia</string>
 </resources>
