@@ -129,7 +129,7 @@
     <string name="enabledisablegps_summary">Készülékbeállítások megnyitása a helyhozzáférés engedélyezéséhez vagy tiltásához.</string>
     <string name="startonbootup_title">Indítás rendszerindításkor</string>
     <string name="startonbootup_summary">GPSlogger a telefon bekapcsolásakor elindul</string>
-    <string name="startonapplaunch_title">Rögzítés indítása</string>
+    <string name="startonapplaunch_title">Automatikus rögzítés indítás</string>
     <string name="startonapplaunch_summary">Elindítja a rögzítést az app indulásakor</string>
     <string name="autoemail_title">Email</string>
     <string name="please_wait">Kérem várjon</string>
