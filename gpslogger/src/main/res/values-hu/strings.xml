@@ -8,7 +8,7 @@
     <string name="ok">OK</string>
     <string name="cancel">Mégse</string>
     <string name="hide">Elrejt</string>
-    <string name="could_not_write_to_file">Nem sikerült írni a fájlba</string>
+    <string name="could_not_write_to_file">Sikertelen fájl írás</string>
     <string name="add_description">Leírás hozzáadása</string>
     <string name="letters_numbers">Csak (A-Z) és (0-9)</string>
     <string name="menu_annotate">Hely mentése</string>
