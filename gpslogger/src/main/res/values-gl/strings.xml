@@ -385,4 +385,6 @@
     <string name="app_theme_dark">Tema escuro</string>
     <string name="sftp_validate_test_upload">Validar a chave da máquina/servidor e probar o envío</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificacións</b>: permite amosar unha notificación, isto axuda a manter o servizo de rexistro activo. ]]></string>
+    <string name="started_at">comezou ás</string>
+    <string name="hide_notification_from_lock_screen">Agochar as notificacións da pantalla de bloqueo</string>
 </resources>

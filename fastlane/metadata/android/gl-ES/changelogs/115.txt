@@ -1,0 +1,3 @@
+* Corrección de erros: permite caracteres UTF-8 no nome do cartafol FTP
+* Engade unha barra de desprazamento á vista sinxela para adaptala ao tamaño da pantalla do sistema e ao tamaño da letra.
+* O teclado debería aparecer automaticamente ao usar a caixa de texto de anotación.

@@ -1,9 +1,9 @@
-* Arranxo da carga para ownCloud/NextCloud non funcionaba
-* Por mor das novas restricións de almacenamento de Android, só pode escribir nos propios cartafoles da aplicación
+* Arranxada a carga para ownCloud/NextCloud
+* Por mor das novas restricións de almacenamento de Android, só pode escribir nos cartafoles propios da aplicación
 
-* En Android 10+, o fluxo de traballo de permisos solicitará o permiso «permitir sempre».
-* O fluxo de traballo de permisos solicitará tamén desactivar a optimización da batería
-* O fluxo de traballo de permisos é molesto, mais é preciso para axudar coas solicitudes de asistencia relacionadas coas limitacións en segundo plano.
+* En Android 10+, o fluxo de permisos solicitará «permitir sempre».
+* O fluxo de permisos solicitará tamén desactivar a optimización da batería
+* O fluxo de permisos é molesto, mais é preciso para axudar coas solicitudes de asistencia relacionadas coas limitacións en segundo plano.
 * Iconas adaptábeis, grazas a @kanru
-* Engadida unha opción para restabelecer a apli. (borra todos os ficheiros e permisos da apli.), en Axustes xerais
+* Engadiuse unha opción para restabelecer a apli. (borra todos os ficheiros e permisos da apli.), en Axustes xerais
 * Traducións actualizadas dende Crowdin

@@ -1,0 +1,5 @@
+* Nova opción de tema escuro, debería seguir automaticamente o modo día/noite do sistema.
+* Tamén pode configurar manualmente o tema claro/escuro na configuración xeral.
+* Modificáronse as pantallas de configuración, para amosar os valores seleccionados polo usuario sempre que sexa posíbel.
+* Engadiuse un selector de ficheiros e cartafoles. A aplicación solicitará permiso adicional en Android 11+ para rutas personalizadas.
+* SFTP agora debería poder conectarse usando algoritmos SSH modernos.

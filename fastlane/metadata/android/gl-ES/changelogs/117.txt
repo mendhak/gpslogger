@@ -1,0 +1,5 @@
+* Engadiuse un selector de ficheiros e cartafoles. Usado para a ruta de gardado de GPSLogger. Tamén para a chave privada SFTP.
+* Nova biblioteca SSH para permitir conexións mediante algoritmos SSH máis modernos cando se usa a función SFTP.
+* Corrección de permisos de ficheiro para Android 11+. Agora pode estabelecer unha ruta personalizada ao ficheiro e solicitaránselle permisos para o xestor de ficheiros.
+* Engadiuse un novo permiso, MANAGE_EXTERNAL_STORAGE. Isto é para permitir a función de ruta personalizada aos ficheiros en Android 11+.
+* Corrección de erros: permite caracteres UTF-8 no nome do cartafol FTP.
