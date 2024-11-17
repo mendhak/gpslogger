@@ -147,9 +147,9 @@
     <string name="hide_notification_buttons">收起通知嗰啲掣</string>
     <string name="restart_required">您要重新開過 GPSLogger，呢個設定至會生效</string>
     <string name="gpslogger_permissions_rationale_title">須要權限</string>
-    <string name="gpslogger_permissions_rationale_message_location"><b>裝置位置</b> - 呢個權限允許讀取電訊基站同部機 GPS 硬件嘅位置資料。</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b>一律允許</b> - 允許呢個 app 幕後執行嘅時候接收位置更新。</string>
-    <string name="gpslogger_permissions_background_location">若要允許 GPSLogger 喺幕後執行，您將需要畀多一個權限。跟住落嚟嘅畫面請揀選：</string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>裝置位置</b> - 呢個權限允許讀取電訊基站同部機 GPS 硬件嘅位置資料。]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>一律允許</b> - 允許呢個 app 幕後執行嘅時候接收位置更新。]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[若要允許 GPSLogger 喺幕後執行，您將需要畀多一個權限。跟住落嚟嘅畫面請揀選：]]></string>
     <string name="change_language_title">轉其他文</string>
     <string name="coordinate_display_format">座標顯示格式</string>
     <string name="ssl_certificate_validate">驗證 SSL 憑證</string>
@@ -194,10 +194,10 @@
     <string name="ssl_certificate_add_to_keystore">係咪要將呢張憑證加落本機金鑰庫入面？</string>
     <string name="sftp_private_key_passphrase">私密金鑰密碼</string>
     <string name="reset_app_summary">噉就會重設個 app、剷走晒任何喜好設定、刪除晒 GPSLogger 啲檔案，同埋撤銷晒授予呢個 app 嘅權限。所有資料就會冇晒個囉噃！</string>
-    <string name="gpslogger_permissions_rationale_message_basic">呢個 app 須要若干權限至能夠正常運作。跟住落嚟會逐個問您攞幾個權限 (真係唔好意思)。以下係各個權限嘅說明。</string>
-    <string name="gpslogger_permissions_rationale_message_storage"><b>相片、媒體、檔案</b> - 呢個權限允許寫入紀錄檔同測試檔去儲存空間入面，同埋讀取以清單表列嘅檔案去上載或分享。呢個 app 唔會存取您啲相或者多媒體檔案。</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>忽略電量優化</b> - 降低電量優化，以便允許呢個 app 喺幕後執行。</string>
-    <string name="gpslogger_permissions_permanently_denied">您拒絕咗呢個 app 須要嘅一或多個權限。您將需要重新開過或者去系統設定畫面入面授予呢啲權限。<br/><br/>若然您永久拒絕咗呢啲權限，您可以喺系統設定入面重設返呢啲權限。</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[呢個 app 須要若干權限至能夠正常運作。跟住落嚟會逐個問您攞幾個權限 (真係唔好意思)。以下係各個權限嘅說明。]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>相片、媒體、檔案</b> - 呢個權限允許寫入紀錄檔同測試檔去儲存空間入面，同埋讀取以清單表列嘅檔案去上載或分享。呢個 app 唔會存取您啲相或者多媒體檔案。]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>忽略電量優化</b> - 降低電量優化，以便允許呢個 app 喺幕後執行。]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[您拒絕咗呢個 app 須要嘅一或多個權限。您將需要重新開過或者去系統設定畫面入面授予呢啲權限。<br /><br />若然您永久拒絕咗呢啲權限，您可以喺系統設定入面重設返呢啲權限。]]></string>
     <string name="donate_app">課金 (app)</string>
     <string name="no_network_message">上唔到網噃</string>
     <string name="log_plain_text_csv_field_delimiter">CSV 欄位分隔符號</string>
