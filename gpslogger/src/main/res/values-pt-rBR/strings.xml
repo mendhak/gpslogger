@@ -108,10 +108,10 @@
     <string name="display_imperial_summary">Exibir em pés, milhas e semi-litros, esqueça dessas unidades da métrica moderna. (Preferências ainda devem estar em unidades métricas)</string>
     <string name="enabledisablegps_title">Ativar/desativar GPS</string>
     <string name="enabledisablegps_summary">Entre em configurações do telefone para ativar ou desativar os provedores.</string>
-    <string name="startonbootup_title">Executar na inicialização</string>
-    <string name="startonbootup_summary">Executar app e gravar logs quando telefone iniciar</string>
+    <string name="startonbootup_title">Executar ao ligar o dispositivo</string>
+    <string name="startonbootup_summary">Executa o aplicativo e comece a registrar quando o telefone for ligado</string>
     <string name="startonapplaunch_title">Executar ao iniciar app</string>
-    <string name="startonapplaunch_summary">Iniciar logging quando o app for aberto</string>
+    <string name="startonapplaunch_summary">Iniciar o registro quando o aplicativo for iniciado</string>
     <string name="please_wait">Por favor, aguarde</string>
     <string name="autoemail_target">Endereços de e-mail de destino</string>
     <string name="autosend_frequency_display">Depois de %s minutos</string>
@@ -334,10 +334,10 @@
     <string name="storage_chooser_select_folder">Selecione</string>
     <string name="storage_chooser_text_field_hint">Nome da pasta</string>
     <string name="donate_bitcoin">Bitcoin</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Este aplicativo requer várias permissões para poder funcionar corretamente. Você será solicitado várias vezes para conceder várias permissões (desculpe). Aqui está uma explicação de cada permissão.</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b>Permitir sempre</b> - Permitir que este app receba atualizações de localização sendo executado em segundo plano.</string>
-    <string name="gpslogger_permissions_background_location">Permite que o GPSLogger funcione em segundo plano, você precisará conceder uma permissão adicional. Na próxima tela, selecione:</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ignorar a otimização da bateria</b> - Permitir que este app seja executado em segundo plano, reduzindo a otimização da bateria.</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Este aplicativo requer várias permissões para poder funcionar corretamente. Você será solicitado várias vezes para conceder várias permissões (desculpe). Aqui está uma explicação de cada permissão.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Permitir sempre</b> - Permitir que este app receba atualizações de localização sendo executado em segundo plano.]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Permite que o GPSLogger funcione em segundo plano, você precisará conceder uma permissão adicional. Na próxima tela, selecione:]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorar a otimização da bateria</b> - Permitir que este app seja executado em segundo plano, reduzindo a otimização da bateria.]]></string>
     <string name="sftp_setup_title">SFTP</string>
     <string name="txt_battery_charging">Carregando</string>
     <string name="reset_app_summary">Isto redefinirá o app, apagará quaisquer preferências, arquivos do GPSLogger e revogará as permissões concedidas a este aplicativo. Todos os dados serão perdidos!</string>
@@ -363,7 +363,7 @@
     <string name="listeners_gps_title">Salvar posições do GPS/GNSS</string>
     <string name="listeners_gps_summary">Registra localizações fornecidos pelo receptor de localização por satélite em seu dispositivo</string>
     <string name="gpslogger_custom_path_need_permission">Para usar caminhos personalizados no GPSLogger, por favor, permita que o GPSLogger gerencie todos os arquivos na próxima tela. Em seguida, tente executar a ação novamente. Isto é necessário devido a uma restrição no Android 11+.</string>
-    <string name="profile_add_from_url">da URL</string>
+    <string name="profile_add_from_url">A partir do URL</string>
     <string name="properties_file_url">URL do arquivo de propriedades</string>
     <string name="reset_app_title">Redefinir o app</string>
     <string name="app_theme_light">Tema claro</string>
@@ -374,7 +374,7 @@
     <string name="log_customurl_summary_detailed">Envie uma requisição para uma URL personalidada sempre que um ponto de localização for capturado. Depende do intervalo de registro.</string>
     <string name="annotation_edit_button_label">Editar botão de anotação</string>
     <string name="annotation_edit_button_color">Cor do botão</string>
-    <string name="view_annotation">Visualização de Anotação</string>
+    <string name="view_annotation">Ver anotações</string>
     <string name="autosend_customurl_summary">(Este recurso permite o registro em CSV) Envia solicitações em massa para o URL personalizado, uma para cada linha no arquivo CSV. Depende do intervalo de envio automático.</string>
     <string name="install_conscrypt_provider_summary">Se você estiver enfrentando problemas de conectividade SSL/TLS em dispositivos Android mais antigos, instalar o Conscrypt Provider pode ajudar. (Siga este link, instale o APK e reinicie o aplicativo)</string>
     <string name="install_conscrypt_provider_title">Instale o provedor Conscrypt (SSL/TLS)</string>
@@ -384,4 +384,7 @@
     <string name="retry_get_best_possible_accuracy_summary">Em vez de registrar o primeiro ponto preciso, continue tentando a duração da precisão e selecione o ponto com a melhor precisão. Demora mais, mas aumenta as chances de pontos mais precisos.</string>
     <string name="txt_speed_kph">Velocidade (em km/h):</string>
     <string name="prompt_for_details_when_logging_starts">Solicitar detalhes quando o registro for iniciado</string>
+    <string name="started_at">começou em</string>
+    <string name="hide_notification_from_lock_screen">Ocultar notificação na tela de bloqueio</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificações</b> - Permitir a exibição de uma notificação, o que ajuda a manter o serviço de registro ativo.]]></string>
 </resources>
