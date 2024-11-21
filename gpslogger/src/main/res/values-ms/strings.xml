@@ -385,4 +385,5 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="txt_speed_kph">Kelajuan (dalam km/j):</string>
     <string name="retry_get_best_possible_accuracy_title">Pilih ketepatan masa</string>
     <string name="retry_get_best_possible_accuracy_summary">Selain daripada menglog titik tepat, cuba untuk log durasi ketepatan dan pilih titik yang lebih tepat. Ini akan mengambil jangka yang lama tetapi akan meningkatkan peluang untuk titik-titik yang lebih tepat.</string>
+    <string name="started_at">bermula pada</string>
 </resources>
