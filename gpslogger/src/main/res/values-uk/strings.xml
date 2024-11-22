@@ -35,7 +35,7 @@
     <string name="sharing_via">Поділитися за допомогою</string>
     <!-- general -->
     <string name="foot"> фут</string>
-    <string name="feet">фути</string>
+    <string name="feet">ноги</string>
     <string name="meter"> метр</string>
     <string name="meters"> метри</string>
     <string name="error">Помилка</string>
@@ -49,9 +49,9 @@
     <string name="providername_celltower">стільникові вежі</string>
     <string name="not_applicable">н/д</string>
     <string name="meters_per_second"> м/с</string>
-    <string name="feet_per_second">фт/с</string>
+    <string name="feet_per_second">футів/с</string>
     <string name="miles_per_hour"> миль/год</string>
-    <string name="miles">миль</string>
+    <string name="miles">Миль</string>
     <string name="kilometers_per_hour"> км/год</string>
     <string name="kilometers"> км</string>
     <string name="unknown_direction">невідомо</string>
@@ -185,7 +185,7 @@
     <string name="google_drive_testupload_success">Надіслано. Будь ласка, перевірте ваші Документи Google на наявність нового файлу.</string>
     <string name="autoemail_sendto_csv">Адреси, відокремлені комами</string>
     <string name="autosend_enabled">Дозволити автонадсилання</string>
-    <string name="autosend_enabled_summary">Дозволяє надсилання файлів до різних отримувачів</string>
+    <string name="autosend_enabled_summary">Дозволяє надсилати файли до різних цілей із визначеною частотою або якщо ім’я змінюється через спеціальне іменування</string>
     <string name="autosend_frequency_summary">Як часто файли журналів мають надсилатися, у хвилинах. Встановіть 0, щоб відключити цю функцію.</string>
     <string name="autosend_frequency">Як часто?</string>
     <string name="autosend_sendzip_title">Надіслати файл zip</string>
@@ -296,8 +296,8 @@
     <string name="profile_add_new">Додати профіль</string>
     <string name="gpslogger_permissions_rationale_title">Потрібні дозволи</string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Місцезнаходження</b> - Цей дозвіл дозволяє читати дані про місцезнаходження з антен мобільного зв\'язку та пристрою GPS.]]></string>
-    <string name="gpslogger_permissions_rationale_message_storage"><b>Світлини, мультимедія, файли</b> - Цей дозвіл дозволяє писати журнали й тестові файли для зберігання і читання зі списку файлів для завантаження або спільного використання. Цей застосунок не буде отримувати доступ до світлин або медіа даних.</string>
-    <string name="gpslogger_permissions_permanently_denied">Ви не дали один або кілька дозволів, які вимагає даний застосунок. Вам потрібно буде перезапустити , або перейти до екрана налаштувань системи, щоб надати ці дозволи.<br/><br/>Якщо у вас увімкнене постійне блокування дозволів ви можете скинути їх у системних налаштуваннях.</string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b> Фотографії, медіафайли, файли – цей дозвіл дозволяє записувати файли журналу та тестові файли в сховище, а також читати зі списку файлів для завантаження чи спільного використання. Ця програма не матиме доступу до ваших фотографій чи медіа.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[You have denied one or more permissions that this app requires.  You will need to relaunch, or go to the system settings screen to grant these permissions.  <br /><br />Якщо ви назавжди заборонили дозволи, ви можете скинути їх у налаштуваннях системи. ]]></string>
     <string name="privacy_policy">Політика конфіденційності</string>
     <string name="debuglog_attach_to_email">Прикріпляти журнал відлагодження до email</string>
     <string name="debuglog_attach_to_email_summary">Прикріпляє до e-mail журнал відлагодження разом з деякою діагностичною інформацією</string>
@@ -330,7 +330,7 @@
     <string name="storage_chooser_free_space_text">вільно</string>
     <string name="storage_chooser_new_folder_label">Нова папка</string>
     <string name="storage_chooser_text_field_error">Порожня назва папки</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Для правильної роботи цього застосунку потрібні різні дозволи. Зараз вам буде запропоновано кілька разів надати різні дозволи (вибачте). Нижче наведено пояснення щодо кожного дозволу.</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Для належної роботи цієї програми потрібні різні дозволи. Тепер вам кілька разів буде запропоновано різні дозволи (вибачте).  Ось пояснення кожного дозволу. ]]></string>
     <string name="logging_advanced_delete_files">Видалити вибрані файли</string>
     <string name="install_conscrypt_provider_title">Встановлення Conscrypt Provider (SSL/TLS)</string>
     <string name="app_name">GPSLogger</string>
@@ -352,8 +352,8 @@
     <string name="txt_date_isoformat">Дата (2011-12-25):</string>
     <string name="gpslogger_custom_path_need_permission">Для того, щоб використовувати власні шляхи в GPSLogger, будь ласка, дозвольте GPSLogger керувати всіма файлами на наступному екрані. Потім спробуйте виконати дію ще раз. Це пов\'язано з обмеженням для Android 11+.</string>
     <string name="donate_bitcoin">Bitcoin</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b>Дозволити постійно</b> - Дозволити цьому застосунку отримувати оновлення місцезнаходження при роботі у фоновому режимі.</string>
-    <string name="gpslogger_permissions_background_location">Щоб дозволити GPSLogger працювати у фоновому режимі, необхідно надати йому додатковий дозвіл. На наступному екрані, будь ласка, виберіть:</string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Завжди дозволяти</b> – дозволити цій програмі отримувати оновлення місцезнаходження під час роботи у фоновому режимі. ]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Щоб дозволити GPSLogger працювати у фоновому режимі, вам потрібно буде надати йому додатковий дозвіл.  На наступному екрані виберіть: ]]></string>
     <string name="sftp_setup_title">SFTP</string>
     <string name="txt_battery_charging">Заряджання</string>
     <string name="customurl_http_basicauthentication">Базова аутентифікація</string>
@@ -374,7 +374,7 @@
     <string name="storage_chooser_text_field_hint">Назва папки</string>
     <string name="profile_add_from_url">З URL</string>
     <string name="properties_file_url">URL - адреса файлу властивостей</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ігнорувати оптимізацію заряду акумулятора</b> - Дозволити цьому застосунку працювати у фоновому режимі, зменшивши оптимізацію заряду акумулятора.</string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ігнорувати оптимізацію батареї</b> – дозволити цій програмі працювати у фоновому режимі, зменшивши оптимізацію батареї. ]]></string>
     <string name="log_customurl_summary_detailed">Надсилає запит на спеціальну URL-адресу щоразу, коли фіксується точка місцеперебування. Залежить від інтервалу реєстрації.</string>
     <string name="autosend_customurl_summary">(Ця функція вмикає ведення журналу CSV) Надсилає запити масово на спеціальну URL-адресу, по одному для кожного рядка у файлі CSV. Залежить від інтервалу автоматичної відправки.</string>
     <string name="log_customurl_discard_offline_locations_summary">Використовуйте користувацьку URL-адресу лише тоді, коли доступне мережеве з \'єднання (це не впливає на автоматичне надсилання)</string>
@@ -382,4 +382,11 @@
     <string name="annotation_edit_button_color">Колір кнопки</string>
     <string name="view_annotation">Перегляд анотації</string>
     <string name="annotation_edit_button_label">Кнопка редагування анотації</string>
+    <string name="txt_speed_kph">Швидкість (в км/год):</string>
+    <string name="retry_get_best_possible_accuracy_title">Виберіть найкращу точність за тривалістю</string>
+    <string name="started_at">розпочато о</string>
+    <string name="hide_notification_from_lock_screen">Приховати сповіщення з екрана блокування</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Сповіщення</b> – Дозволити показ сповіщень, це допомагає підтримувати роботу служби журналювання. ]]></string>
+    <string name="prompt_for_details_when_logging_starts">Запитувати деталі під час реєстрації</string>
+    <string name="retry_get_best_possible_accuracy_summary">Замість того, щоб реєструвати першу точну точку, продовжуйте намагатися визначити тривалість точності та виберіть точку з найкращою точністю. Це займає більше часу, але збільшує шанси отримати точніші бали.</string>
 </resources>
