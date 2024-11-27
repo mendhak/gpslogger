@@ -4,9 +4,9 @@
     <string name="navigation_drawer_open">ナビゲーションを表示</string>
     <string name="navigation_drawer_close">ナビゲーションを閉じる</string>
     <string name="settings_screen_name">GPSLogger の設定</string>
-    <string name="could_not_write_to_file">ファイルの書込みができません。</string>
-    <string name="add_description">メモの追加</string>
-    <string name="letters_numbers">文字と数字のみ使用可能</string>
+    <string name="could_not_write_to_file">ファイルの書込みができません</string>
+    <string name="add_description">説明を追加</string>
+    <string name="letters_numbers">文字と数字のみ使用可</string>
     <string name="menu_annotate">注釈</string>
     <string name="menu_share">共有</string>
     <string name="menu_exit">終了</string>
@@ -19,8 +19,8 @@
     <string name="txt_satellites">受信衛星数:</string>
     <string name="txt_accuracy">精度:</string>
     <string name="txt_travel_distance">移動距離:</string>
-    <string name="btn_start_logging">ログ開始</string>
-    <string name="btn_stop_logging">ログ終了</string>
+    <string name="btn_start_logging">記録開始</string>
+    <string name="btn_stop_logging">記録終了</string>
     <string name="gpslogger_still_running">GPSLoggerを実行中</string>
     <string name="summary_loggingto">保存形式:</string>
     <string name="summary_loggingto_screen">スクリーン表示のみ</string>
@@ -34,28 +34,28 @@
     <!-- general -->
     <string name="foot"> フィート</string>
     <string name="feet"> フィート</string>
-    <string name="meter">m</string>
-    <string name="meters">m</string>
+    <string name="meter">メートル</string>
+    <string name="meters">メートル</string>
     <string name="error">エラー</string>
     <string name="error_connection">接続エラーです。携帯電話の設定を確認してください。</string>
     <string name="seconds">秒</string>
     <string name="minutes">分</string>
     <string name="hours">時間</string>
     <string name="gpsprovider_unavailable">GPSプロバイダーが利用できません。位置情報をチェックして、位置情報プロバイダを有効にしてください。</string>
-    <string name="started">開始しました。</string>
+    <string name="started">開始しました</string>
     <string name="providername_gps">GPS衛星</string>
     <string name="providername_celltower">基地局</string>
     <string name="not_applicable">利用不可</string>
-    <string name="meters_per_second">m/s</string>
-    <string name="feet_per_second">feet/s</string>
-    <string name="miles_per_hour">mile/h</string>
-    <string name="miles">mile</string>
-    <string name="kilometers_per_hour">km/h</string>
+    <string name="meters_per_second">m/秒</string>
+    <string name="feet_per_second">ft/秒</string>
+    <string name="miles_per_hour">mi/時</string>
+    <string name="miles">マイル</string>
+    <string name="kilometers_per_hour">km/時</string>
     <string name="kilometers">km</string>
     <string name="unknown_direction">不明</string>
-    <string name="sorry">申し訳ありません。</string>
+    <string name="sorry">申し訳ありません</string>
     <string name="success">成功</string>
-    <string name="direction_roughly">%s 方向</string>
+    <string name="direction_roughly">おおよそ %s</string>
     <string name="direction_north">北</string>
     <string name="direction_northnortheast">北北東</string>
     <string name="direction_northeast">北東</string>
@@ -83,11 +83,11 @@
     <string name="time_hms_format" formatted="false">%s時間 %s分 %s秒</string>
     <string name="accuracy_within" formatted="false">誤差 %s %s 以内</string>
     <!-- Settings activity -->
-    <string name="settings_distance_in_meters">距離（m）</string>
-    <string name="settings_accuracy_in_meters">精度（m）</string>
-    <string name="settings_enter_meters">入力（m、最大 9999)</string>
+    <string name="settings_distance_in_meters">距離 (m)</string>
+    <string name="settings_accuracy_in_meters">精度 (m)</string>
+    <string name="settings_enter_meters">入力 (m、最大 9999)</string>
     <!-- Settings -->
-    <string name="pref_logging_title">ログ設定詳細</string>
+    <string name="pref_logging_title">ログ詳細設定</string>
     <string name="log_gpx_title">GPXで保存</string>
     <string name="log_gpx_summary">GPX v1.0 形式のファイルへ位置を記録する</string>
     <string name="log_gpx_11_title">GPX 1.1 を使用</string>
@@ -104,13 +104,13 @@
     <string name="new_file_creation_everystart">アプリ起動毎</string>
     <string name="new_file_creation_custom">カスタム ファイル</string>
     <string name="new_file_custom_title">カスタムファイル名</string>
-    <string name="new_file_custom_summary">任意のファイル名を使う事ができます。必要に応じて、シリアル番号、年、時、分等の動的なパラメタを付加することができます。ただし、最新のファイルのみを送信するため、更新頻度が高い場合、うまく反映されないことがあります。</string>
+    <string name="new_file_custom_summary">任意のファイル名を使う事ができます。必要に応じて、シリアル番号、年、時、分等の動的なパラメーターを付加することができます。但し、最新のファイルのみを送信するため、更新頻度が高い場合、うまく反映されない事があります。</string>
     <string name="pref_performance_title">パフォーマンス</string>
-    <string name="pref_performance_summary">プロバイダ、周期、フィルタ</string>
+    <string name="pref_performance_summary">タイミング、フィルター、リスナー</string>
     <string name="time_before_logging_title">記録間隔</string>
-    <string name="time_before_logging_dialog_title">記録間隔（秒）</string>
+    <string name="time_before_logging_dialog_title">記録間隔 (秒)</string>
     <string name="time_before_logging_hint">時間（秒、最大9999）を入力してください</string>
-    <string name="keep_fix_summary">注意。この設定はバッテリを著しく消費します。書込頻度を抑えて高精度を得たい場合のみ使用してください。</string>
+    <string name="keep_fix_summary">ご注意下さい、この設定はバッテリを著しく消費します。書込頻度を抑えて高精度を得たい場合のみお使い下さい。</string>
     <string name="keep_fix_title">GPSを常にON</string>
     <string name="retry_time_title">精度にマッチするまでの待ち時間</string>
     <string name="retry_time_summary">初期の位置情報の取得後は、この値の間、精度フィルタにマッチする値が来るのを待ちます。</string>
@@ -121,7 +121,7 @@
     <string name="startonbootup_title">ブート時に開始</string>
     <string name="startonbootup_summary">携帯電話が起動された時にアプリケーションを起動し、ログを開始します。</string>
     <string name="startonapplaunch_title">アプリ起動時に開始</string>
-    <string name="startonapplaunch_summary">アプリ起動時にログ開始</string>
+    <string name="startonapplaunch_summary">アプリ起動時に記録開始</string>
     <string name="please_wait">お待ちください。</string>
     <string name="autoemail_target">送信先メール アドレス</string>
     <string name="autosend_frequency_display">%s 分後</string>
@@ -371,4 +371,21 @@
     <string name="storage_chooser_create_label">作成</string>
     <string name="storage_chooser_text_field_error">空のフォルダ名</string>
     <string name="storage_chooser_text_field_hint">フォルダ名</string>
+    <string name="install_conscrypt_provider_title">Conscrypt Providerのインストール(SSL/TLS)</string>
+    <string name="reset_app_title">アプリをリセット</string>
+    <string name="app_theme_title">アプリのテーマ</string>
+    <string name="file_logging_log_time_with_offset_title">タイムゾーン・オフセットを伴う記録時間</string>
+    <string name="logging_advanced_delete_files">選択されたファイルを削除</string>
+    <string name="logging_advanced_delete_files_summary">長押しで複数ファイルを選択します。</string>
+    <string name="customurl_all_parameters">全パラメーター:</string>
+    <string name="install_conscrypt_provider_summary">古いAndroid端末でSSL/TLS接続に問題が発生した場合、Conscrypt Providerをインストールすると解決する場合があります。 (このリンクを辿り、APKをインストールして、アプリを再起動してください)</string>
+    <string name="app_theme_follow_system">システムに準拠</string>
+    <string name="app_theme_light">明るいテーマ</string>
+    <string name="app_theme_dark">ダークテーマ</string>
+    <string name="app_theme_setting">アプリのテーマに対し明暗の設定方法を決定します</string>
+    <string name="annotation_edit_button_color">ボタンの色</string>
+    <string name="file_logging_log_time_with_offset_summary">可能なら、UTCの代わりにISO8601の時刻とタイムゾーン・オフセットを記入する。</string>
+    <string name="annotation_edit_button_label">アノテーションボタンの編集</string>
+    <string name="prompt_for_details_when_logging_starts">ロギング開始時に詳細入力</string>
+    <string name="reset_app_summary">この操作で、アプリはリセットされ、あらゆる設定の削除、GPSLoggerファイルの削除、このアプリで付与済みの権限が取り消されます。 関連データは全て失われます！</string>
 </resources>
