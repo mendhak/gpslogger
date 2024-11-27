@@ -38,4 +38,3 @@ GPSLoggerはOpenTracksを置き換えるものではありません。  OpenTrac
 現在地 - GPSあるいは基地局による場所の特定
 
 システムツール (run at startup) - 端末ブート時の自動起動
-
