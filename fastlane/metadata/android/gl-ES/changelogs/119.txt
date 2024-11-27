@@ -1,8 +1,8 @@
-* Pode empregar o URL personalizado como remitente automático para axudar a fiabilidade.
+* Pode empregar o URL personalizado como remitente automático para maior fiabilidade.
 * Opción para escribir horas con compensación de fuso horario, en Detalles de rexistro. (GPX, KML, GeoJSON, CSV)
 * O URL personalizado pode usar o parámetro %TIMEOFFSET
 * Rexistro CSV: engadíronse máis campos.
-* Rexistro CSV: opción para definir o delimitador de campo e o separador de coma decimal.
+* Rexistro CSV: opción para especificar o delimitador de campo e o separador de coma decimal.
 * A vista de rexistro amosará as coordenadas no formato preferido polo usuario.
-* Se está a recuperar unha parada inesperada, inicie de novo o rexistro se a aplicación xa estaba a rexistrar.
+* Se está a recuperar unha parada inesperada, inicie de novo o rexistro se a apli. xa estaba a rexistrar.
 * Corrección de erros para o húngaro
