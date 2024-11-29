@@ -51,7 +51,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
         Systems.setLocale(PreferenceHelper.getInstance().getUserSpecifiedLocale(),getBaseContext(),getResources());
         setContentView(R.layout.activity_preferences);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.toolbar), (v, windowInsets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.preference_activity_layout), (v, windowInsets) -> {
             Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
 
             // Apply the insets as a margin to the view so it doesn't overlap with status bar
@@ -67,7 +67,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
 
             // Return CONSUMED if you don't want want the window insets to keep passing
             // down to descendant views.
-            return WindowInsetsCompat.CONSUMED;
+            return windowInsets;
         });
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
