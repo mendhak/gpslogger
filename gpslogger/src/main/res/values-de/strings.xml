@@ -166,8 +166,8 @@
     <string name="no_files_found">Keine Dateien gefunden, nichts zu teilen oder hochzuladen.</string>
     <string name="osm_pick_file">Wählen Sie eine Datei zum Hochladen aus</string>
     <string name="debuglog_title">Fehlerprotokoll-Datei schreiben</string>
-    <string name="debuglog_summary">Schreibe Fehlerprotokolle in eine Datei auf der SD-Karte. Warnung: Die Datei wird sehr schnell größer.</string>
-    <string name="pref_logging_summary">Dateitypen, Erstellzeitpunkt und Namensgebung</string>
+    <string name="debuglog_summary">Schreibt Fehlerprotokolle in eine Datei auf der SD-Karte. Warnung: Die Datei wird sehr schnell größer.</string>
+    <string name="pref_logging_summary">Dateitypen, Erstellung und Benennung</string>
     <string name="pref_general_title">Allgemeine Einstellungen</string>
     <string name="pref_general_summary">Start- und Anzeigeoptionen</string>
     <string name="emailprovider_google">Google Mail</string>
@@ -275,7 +275,7 @@
     <string name="log_nmea_summary">Erstellt eine unbearbeitete NMEA-Datei, während man versucht, eine Positionsbestimmung zu erhalten. Diese Datei wächst sehr schnell. Dies funktioniert nur während der Verwendung von GPS.</string>
     <string name="autoopengts_accountname">Benutzername</string>
     <string name="listeners_gps">GPS</string>
-    <string name="listeners_gps_title">GPS/GNSS Standorte aufzeichnen</string>
+    <string name="listeners_gps_title">GPS/GNSS-Standorte aufzeichnen</string>
     <string name="listeners_gps_summary">Zeichnet Standorte auf, die durch das GPS-Modul des Handys generiert wurden</string>
     <string name="listeners_cell">Netzwerk</string>
     <string name="listeners_cell_title">Netzwerk-Standorte aufzeichnen</string>
@@ -291,7 +291,7 @@
     <string name="storage_chooser_create_label">Erzeuge</string>
     <string name="storage_chooser_internal_storage_text">interner Speicher</string>
     <string name="storage_chooser_select_folder">Auswahl</string>
-    <string name="storage_chooser_overview_heading">wähle Speicher</string>
+    <string name="storage_chooser_overview_heading">Speicher auswählen</string>
     <string name="storage_chooser_new_folder_label">neuer Ordner</string>
     <string name="storage_chooser_free_space_text">frei</string>
     <string name="storage_chooser_text_field_error">Name des leeren Ordners</string>
@@ -341,7 +341,7 @@
     <string name="parameters">Parameter</string>
     <string name="ssl_certificate_add_to_keystore">Dieses Zertifikat zum lokalen Schlüsselspeicher hinzufügen?</string>
     <string name="ssl_certificate_is_valid">Das Zertifikat ist gültig</string>
-    <string name="hide_notification_from_status_bar">Benachrichtigung von Statusleiste ausblenden</string>
+    <string name="hide_notification_from_status_bar">Benachrichtigung aus der Statusleiste ausblenden</string>
     <string name="sftp_setup_title">SFTP</string>
     <string name="sftp_private_key_path">Privater Schlüssel</string>
     <string name="sftp_private_key_passphrase">Passphrase des privaten Schlüssels</string>
@@ -370,7 +370,7 @@
     <string name="logging_advanced_delete_files_summary">Lange drücken, um mehrere Dateien auszuwählen.</string>
     <string name="install_conscrypt_provider_title">Installieren Sie „Conscrypt Provider“ (SSL/TLS)</string>
     <string name="install_conscrypt_provider_summary">Wenn Sie SSL/TLS-Verbindungsprobleme auf älteren Android-Geräten vorfinden, kann das Installieren des „Conscrypt Provider“ helfen. (Folgen Sie diesem Link, installieren die APK und starten Sie die App neu)</string>
-    <string name="retry_get_best_possible_accuracy_title">Nutze höchste Genauigkeit aus Zeitspanne</string>
+    <string name="retry_get_best_possible_accuracy_title">Beste Genauigkeit in Bezug auf die Dauer wählen</string>
     <string name="retry_get_best_possible_accuracy_summary">Anstatt den ersten Standort mit der eingestellten Genauigkeit aufzuzeichnen, wird erst nach Ablauf der Wartezeit der Standort mit der höchsten Genauigkeit genutzt. Erhöht die Genauigkeit auf Kosten des Aufzeichnungsintervalls.</string>
     <string name="google_drive_folder_path_summary_1">Benutzen Sie einen einzelnen Ordnernamen (z. B. GPSLogger) oder einen Ordnerpfad (z. B. aaa/bbb/ccc). Die Ordner müssen von dieser App erstellt werden.</string>
     <string name="google_drive_folder_path_summary_2">Wenn Sie einen einzelnen Ordnernamen verwenden, kann dieser nach der Erstellung innerhalb von Google Drive verschoben werden. Ordnerpfade sind langsamer, da jeder Teil des Pfades überprüft und ggf. erstellt werden muss, bevor Dateien hochgeladen werden .</string>
@@ -378,7 +378,7 @@
     <string name="google_drive_folder_path">Google Drive-Ordner</string>
     <string name="autosend_customurl_summary">(Diese Funktion aktiviert die CSV-Aufnahme) Sendet Anfragen gruppiert zu der eingestellten URL, eine für jede Zeile in der CSV-Datei. Abhängig vom automatischen Sendeintervall.</string>
     <string name="log_customurl_discard_offline_locations">Offline-Standorte verwerfen</string>
-    <string name="log_customurl_discard_offline_locations_summary">Sendet Standorte nur zu der eingestellten URL, wenn eine Netzwerkverbindung verfügbar ist (keine Auswirkung auf automatisches Senden)</string>
+    <string name="log_customurl_discard_offline_locations_summary">Sendet Standorte auf der benutzerdefinierten URL nur, wenn eine Netzwerkverbindung verfügbar ist (keine Auswirkung auf automatisches Senden)</string>
     <string name="annotation_edit_button_color">Knopffarbe</string>
     <string name="customurl_all_parameters">Alle Parameter:</string>
     <string name="annotation_edit_button_label">Anmerkungsknopf bearbeiten</string>
