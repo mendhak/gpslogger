@@ -1,0 +1,5 @@
+* Mudança significativa no OpenStreetMap - mudança de autenticação para OAuth2, você precisará reautorizar o OpenStreetMap
+* Padrão para envio automático quando o registro é interrompido
+* Bugfix - Verifique locais passivos para garantir que seu tempo seja maior que o tempo do local anterior
+* Bugfix para ícone monocromático no tema Nothing OS
+* Proibir certos caracteres no nome do arquivo, como asterisco, barras

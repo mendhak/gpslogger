@@ -1,0 +1,3 @@
+* Bugfix - torna a caixa de diálogo de permissão inicial indispensável
+* Bugfix - esclareça a diferença entre o recurso de registro de URL personalizado e o recurso de envio automático
+* Bugfix - verifique e carregue corretamente o provedor conscrypt se instalado a partir do F-Droid

@@ -1,0 +1,4 @@
+* Nova opção de precisão - execute durante o intervalo de novas tentativas e escolha o ponto mais preciso.
+* O ouvinte passivo agora corresponderá a outros ouvintes selecionados (GNSS/Rede). Se nenhum deles for selecionado, todos os pontos serão aceitos.
+* Uploads mais rápidos de URLs personalizados para envio automático.
+* Nova propriedade stoponapplaunch, disponível apenas através do arquivo .properties

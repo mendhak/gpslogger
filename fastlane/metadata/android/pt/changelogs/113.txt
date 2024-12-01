@@ -1,0 +1,1 @@
+* Adicione uma barra de rolagem à visualização simples para se adaptar ao grande tamanho de exibição do sistema e ao tamanho da fonte.
