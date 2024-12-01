@@ -196,7 +196,7 @@ Nomes de ficheiro muito dinâmicos
     <string name="google_drive_testupload_success">Enviado. Verifique se tem um novo ficheiro no Google Documents.</string>
     <string name="autoemail_sendto_csv">Endereços de e-mail separados por vírgula</string>
     <string name="autosend_enabled">Permitir o envio automático</string>
-    <string name="autosend_enabled_summary">Permite enviar ficheiros para vários destinos</string>
+    <string name="autosend_enabled_summary">Permite enviar os arquivos para diversos destinos, em uma frequência definida, ou se o nome mudar devido a nomenclatura personalizada</string>
     <string name="autosend_frequency_summary">Com que frequência os ficheiros de registos serão enviados, em minutos. Indique 0 para desativar.</string>
     <string name="autosend_frequency">Com que frequência?</string>
     <string name="autosend_sendzip_title">Enviar ficheiro zip</string>
@@ -388,4 +388,9 @@ Nomes de ficheiro muito dinâmicos
     <string name="log_customurl_discard_offline_locations_summary">Registar locais para a URL personalizada somente enquanto uma conexão de rede estiver disponível (não afeta o envio automático)</string>
     <string name="retry_get_best_possible_accuracy_title">Escolha a melhor precisão na duração</string>
     <string name="retry_get_best_possible_accuracy_summary">Em vez de registrar o primeiro ponto preciso, continue tentando a duração da precisão e selecione o ponto com a melhor precisão. Demora mais, mas aumenta as chances de obter pontos mais precisos.</string>
+    <string name="txt_speed_kph">Velocidade (em km/h):</string>
+    <string name="started_at">começou em</string>
+    <string name="hide_notification_from_lock_screen">Ocultar notificação da tela de bloqueio</string>
+    <string name="prompt_for_details_when_logging_starts">Solicitar detalhes quando o registro for iniciado</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificações</b> - Permite mostrar uma notificação, isso ajuda a manter o serviço de registro ativo. ]]></string>
 </resources>
