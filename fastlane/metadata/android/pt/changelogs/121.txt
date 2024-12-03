@@ -1,0 +1,5 @@
+* Novo parâmetro de URL personalizado: %ALL que substitui todos os parâmetros de URL personalizados disponíveis
+* Correção de bug: escape do + em carimbos de data/hora de URL personalizados
+* Correção de bug: o cronômetro não zera ao trocar de perfil
+* Bugfix: ao fechar a gaveta, feche primeiro a lista de perfis.
+* Bugfix: ao clicar em item na lista de perfis, manter a gaveta aberta

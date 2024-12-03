@@ -3,4 +3,4 @@
 * O fluxo de permisos é molesto, mais é preciso para axudar coas solicitudes de asistencia relacionadas coas limitacións en segundo plano.
 * Iconas adaptábeis, grazas a @kanru
 * Engadiuse unha opción para restabelecer a aplicación (borra todos os ficheiros e permisos da aplicación), nos axustes xerais
-* Traducións actualizadas dende Crowdin
+* Traducións actualizadas desde Crowdin
