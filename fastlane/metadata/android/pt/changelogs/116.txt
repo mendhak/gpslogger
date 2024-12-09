@@ -1,0 +1,3 @@
+* Correção de permissões de arquivo para Android 11+. Agora você pode definir um caminho de arquivo personalizado e será solicitado a conceder permissões ao gerenciador de arquivos.
+* Nova permissão adicionada, MANAGE_EXTERNAL_STORAGE.  Isso permite o recurso de caminho de arquivo personalizado no Android 11+.
+* Bugfix: Permitir caracteres UTF-8 no nome da pasta FTP.

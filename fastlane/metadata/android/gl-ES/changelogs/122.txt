@@ -1,0 +1,6 @@
+* Volve Google Drive! Agora sen bibliotecas propietarias
+* Corrección de erros na notificación presentada ao chou cando non está en uso
+* Ao desactivar os servizos de localización, a aplicación seguirá a agardar (cunha icona de aviso) e retomara cando volva activarse
+*Axustado o tamaño da letra na vista detallada para que se axuste mellor a latitude/lonxitude
+* Alarma máis precisa para axudar coas localizacións suprimidas no modo durmido
+* Nova preferencia de dobre acción nos axustes de envío

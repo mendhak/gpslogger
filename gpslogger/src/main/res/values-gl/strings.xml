@@ -141,7 +141,7 @@
     <string name="enabledisablegps_title">Ativar/desativar GPS</string>
     <string name="listeners_summary">Que provedores de localización usar cando estean dispoñíbeis; GPS para satélites, rede para torre de telefonía móbil/wifi, Pasivo é un provedor especial que atende as localizacións solicitadas doutras aplicacións.</string>
     <string name="enabledisablegps_summary">Vaia á configuración do teléfono para activar ou desactivar os provedores.</string>
-    <string name="startonbootup_title">Iniciar no arrinque</string>
+    <string name="startonbootup_title">Iniciar no arranque</string>
     <string name="autoemail_smtp_category">Axustes do correo</string>
     <string name="autoemail_username_summary">Nome de usuario co seu provedor de correo</string>
     <string name="startonbootup_summary">Iniciar a aplicación e comezar a rexistrar cando se acenda o teléfono</string>
@@ -202,7 +202,7 @@
     <string name="dropbox_couldnotauthorize">Non foi posíbel autorizalo en Dropbox. Ténteo de novo máis tarde</string>
     <string name="owncloud_server_summary">URL base en ownCloud</string>
     <string name="menu_upload">Enviar</string>
-    <string name="autoemail_from">Dende o enderezo</string>
+    <string name="autoemail_from">Desde o enderezo</string>
     <string name="owncloud_testing">Probando o envío a ownCloud</string>
     <string name="autoemail_from_summary">Algúns provedores de correo requiren un enderezo de procedencia. Use isto só se o precisa.</string>
     <string name="autoftp_useftps">Usar FTPS</string>
@@ -246,7 +246,7 @@
     <string name="logview_showlocationsonly">Só localizacións</string>
     <string name="profile_create_new">Crear un novo perfil</string>
     <string name="autosend_wifionly_title">Enviar só en wifi</string>
-    <string name="profile_add_from_url">Dende un URL</string>
+    <string name="profile_add_from_url">Desde un URL</string>
     <string name="profile_switch_before_delete">Cambie a outro perfil antes de eliminar este.</string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Permitir sempre</b>: permite que esta aplicación reciba actualizacións de localización cando se executa en segundo plano. ]]></string>
     <string name="debuglog_attach_to_email">Anexar o rexistro de depuración ao correo-e</string>

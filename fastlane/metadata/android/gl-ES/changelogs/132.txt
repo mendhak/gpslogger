@@ -1,4 +1,4 @@
 * Anovado principalmente o SDK interno e as referencias da biblioteca, para facelo máis compatíbel cos últimos requisitos de Android.
 * A anovación do SDK significa que a aplicación respecta máis os permisos en segundo plano e pode usar alarmas inexactas se non se conceden permisos de traballadores en segundo plano.
-* A anovación do SDK significan que xa non debería ver avisos de F-Droid e advertencias de APK sobre que está construído para versións anteriores.
+* A anovación do SDK significan que xa non debería ver advertencias de F-Droid e da APK indicando que está construído para versións anteriores.
 * Android 4.x xa non é compatíbel.

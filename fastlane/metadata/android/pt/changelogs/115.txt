@@ -1,0 +1,3 @@
+* Bugfix: Permitir caracteres UTF-8 no nome da pasta FTP
+* Adicione uma barra de rolagem à visualização simples para se adaptar ao grande tamanho de exibição do sistema e ao tamanho da fonte.
+* O teclado deve aparecer automaticamente ao usar a caixa de texto de anotação.

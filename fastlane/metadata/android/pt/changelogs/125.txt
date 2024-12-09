@@ -1,0 +1,4 @@
+* URL personalizada - adicionada opção para descartar locais offline; útil para enviar a localização mais recente.
+* URL personalizado - tentará novamente no máximo 3 vezes em vez de 5 vezes.
+* Bugfix: correr por muito tempo resultou em horas negativas exibidas
+* Aprimoramento: torne os alarmes de envio automático mais confiáveis e tente ser mais exato

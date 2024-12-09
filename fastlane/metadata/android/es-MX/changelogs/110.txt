@@ -1,0 +1,8 @@
+FLUJO DE PERMISOS
+* En Android 10+, ahora solicitará el permiso "permitir todo el tiempo".
+* También desactivar la optimización de la batería
+* Es molesto, lo siento, es necesario para ayudar con solicitudes de soporte relacionadas con las limitaciones de segundo plano.
+
+* Iconos adaptables, gracias a @kanru
+* Se ha añadido una opción para restablecer la aplicación (borra todos los archivos y permisos de la aplicación), en la configuración general.
+* Traducciones actualizadas de Crowdin
