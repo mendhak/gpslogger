@@ -195,7 +195,7 @@
     <string name="google_drive_testupload_success">Cargado. Por favor revise sus documentos de Google para un nuevo archivo.</string>
     <string name="autoemail_sendto_csv">Direcciones de correo electrónico separadas por comas</string>
     <string name="autosend_enabled">Permite el envío automático</string>
-    <string name="autosend_enabled_summary">Permite enviar los archivos a varios destinos</string>
+    <string name="autosend_enabled_summary">Permite enviar los archivos a varios destinos, a una frecuencia definida, o si el nombre cambia debido a un nombre personalizado</string>
     <string name="autosend_frequency_summary">Con qué frecuencia deben enviarse archivos de registro, en minutos. Establecer 0 para desactivarlo.</string>
     <string name="autosend_frequency">¿Con qué frecuencia?</string>
     <string name="autosend_sendzip_title">Enviar archivo zip</string>
@@ -380,4 +380,14 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="retry_get_best_possible_accuracy_summary">En lugar de registrar el primer punto preciso, seguir intentando durante el tiempo que dure la precisión y seleccionar el punto con la mejor precisión. Lleva más tiempo, pero aumenta las posibilidades de obtener puntos más precisos.</string>
     <string name="log_customurl_summary_detailed">Envía una solicitud a la URL personalizada cada vez que se captura un punto de localización. Depende del intervalo de registro.</string>
     <string name="autosend_customurl_summary">(Esta función permite el registro de CSV) Envía solicitudes en bloque a la URL personalizada, una por cada línea del archivo CSV. Depende del intervalo de envío automático.</string>
+    <string name="started_at">iniciado a las</string>
+    <string name="hide_notification_from_lock_screen">Ocultar notificación de la pantalla de bloqueo</string>
+    <string name="view_annotation">Vista de anotaciones</string>
+    <string name="install_conscrypt_provider_summary">Si tienes problemas de conectividad SSL/TLS en dispositivos Android antiguos, instalar Conscrypt Provider puede ayudarte. (Siga este enlace, instale el APK y reinicie la aplicación)</string>
+    <string name="install_conscrypt_provider_title">Instalar Conscrypt Provider (SSL/TLS)</string>
+    <string name="annotation_edit_button_label">Editar botón de anotación</string>
+    <string name="annotation_edit_button_color">Color del botón</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificaciones</b> - Permite mostrar una notificación, esto ayuda a mantener vivo el servicio de registro. ]]></string>
+    <string name="prompt_for_details_when_logging_starts">Preguntar detalles al iniciar el registro</string>
+    <string name="customurl_all_parameters">Todos los parámetros:</string>
 </resources>
