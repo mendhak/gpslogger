@@ -1,1 +1,1 @@
-Un ligero GPS logger, batería eficiente, GPX/KML, añadir notas, compartir, subi
+Registrador GPS ligero, bajo consumo de batería, GPX/KML, añadir notas, compartir, subir.

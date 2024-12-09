@@ -1,0 +1,1 @@
+* Añade una barra de desplazamiento a la vista simple para adaptarla a tamaños de pantalla grandes y al tamaño de la fuente.

@@ -36,5 +36,3 @@ Comunicación de la red - cuando carga los archivos Dropbox (Openstreetmap) o en
 Su ubicación - se utiliza para determinar su GPS o torre según ubicación
 
 Herramientas del sistema (iniciar automáticamente durante el arranque) - Si elige iniciar GPSLogger en el arranque
-
-
