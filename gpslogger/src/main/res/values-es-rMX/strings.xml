@@ -77,13 +77,13 @@
     <string name="direction_westnorthwest">Oeste-noroeste</string>
     <string name="direction_northwest">Noroeste</string>
     <string name="direction_northnorthwest">Norte por Noroeste</string>
-    <string name="time_onesecond">1 segon</string>
+    <string name="time_onesecond">1 segundo</string>
     <string name="time_halfminute">½ minuto</string>
-    <string name="time_oneminute">15 minutos</string>
+    <string name="time_oneminute">1 minuto</string>
     <string name="time_onehour">1 hora</string>
     <string name="time_quarterhour">15 minutos</string>
-    <string name="time_halfhour">1½ horas</string>
-    <string name="time_oneandhalfhours">2½ horas</string>
+    <string name="time_halfhour">½ hora</string>
+    <string name="time_oneandhalfhours">1½ horas</string>
     <string name="time_twoandhalfhours">2½ horas</string>
     <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
     <string name="accuracy_within" formatted="false">precisión de %s %s</string>
@@ -93,19 +93,19 @@
     <string name="settings_enter_meters">Introduce el valor en metros (máx. 9999)</string>
     <!-- Settings -->
     <string name="pref_logging_title">Ajustes de registro</string>
-    <string name="log_gpx_title">Registro a GPX</string>
+    <string name="log_gpx_title">Registrar en GPX</string>
     <string name="log_gpx_summary">Escribe las posiciones en un archivo GPX v1.0</string>
     <string name="log_gpx_11_title">Usar GPX 1.1</string>
     <string name="log_gpx_11_summary">Usar formato de archivos GPX 1.1 en vez de GPX 1.0</string>
-    <string name="log_kml_title">Registro a KML</string>
+    <string name="log_kml_title">Registrar en KML</string>
     <string name="log_kml_summary">Escribe las posiciones en un archivo KML v2.2</string>
-    <string name="log_plain_text_title">Registro a CSV</string>
+    <string name="log_plain_text_title">Registrar en CSV</string>
     <string name="log_plain_text_csv_advanced_title">Registrar en las configuraciones CSV </string>
     <string name="log_plain_text_csv_field_delimiter">CSV delimitador de campo</string>
     <string name="log_plain_text_decimal_comma">Usar coma (,) como separador decimal en lugar del punto (.)</string>
     <string name="log_plain_text_summary">Escribe las posiciones en un archivo CSV</string>
-    <string name="log_json_title">Registrarse en GeoJSON</string>
-    <string name="log_json_summary">Escribe las posiciones en un archivo Csv</string>
+    <string name="log_json_title">Registrar en GeoJSON</string>
+    <string name="log_json_summary">Escribe las posiciones en un archivo GeoJSON</string>
     <string name="new_file_creation_title">Creación de archivos nuevos</string>
     <string name="new_file_creation_summary">Si desea crear un nuevo archivo una vez al día o cada vez que inicie.</string>
     <string name="new_file_creation_onceamonth">Una vez al mes</string>
@@ -113,7 +113,7 @@
     <string name="new_file_creation_everystart">En cada inicio</string>
     <string name="new_file_creation_custom">Archivo personalizado</string>
     <string name="new_file_custom_title">Nombre de archivo personalizado</string>
-    <string name="new_file_custom_summary">Puedes utilizar tu propio nombre de archivo. De forma opcional puedes añadir algunos variables dinámicas tales como el número de serie, el año, la hora, los minutos actuales y demás. Puede que los nombres de archivo demasiado dinámicos no funcionen demasiado bien junto con el autoenvío ya que sólo sube el último archivo encontrado.</string>
+    <string name="new_file_custom_summary">Puedes utilizar tu propio nombre de archivo. De forma opcional puedes añadir algunas variables dinámicas tales como el número de serie, el año, la hora, los minutos actuales y demás. Puede que los nombres de archivo demasiado dinámicos no funcionen demasiado bien junto con el autoenvío ya que sólo sube el último archivo encontrado.</string>
     <string name="pref_performance_title">Rendimiento</string>
     <string name="pref_performance_summary">Tiempos, filtros y orígenes</string>
     <string name="time_before_logging_title">Intervalo de registro</string>
@@ -371,4 +371,13 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="logging_advanced_delete_files">Eliminar archivos seleccionados</string>
     <string name="logging_advanced_delete_files_summary">Pulsación larga para seleccionar varios archivos.</string>
     <string name="txt_speed_kph">Velocidad (km/h):</string>
+    <string name="google_drive_folder_path_summary_2">Si utilizas un único nombre de carpeta, se puede mover a otro lugar de Google Drive después de su creación. Las rutas de carpetas son más lentas porque cada parte de la ruta debe comprobarse o crearse antes de subir los archivos.</string>
+    <string name="log_customurl_discard_offline_locations_summary">Registrar ubicaciones en URL personalizadas sólo mientras haya una conexión de red disponible (no afecta al envío automático)</string>
+    <string name="google_drive_folder_path">Ruta de la carpeta de Google Drive</string>
+    <string name="google_drive_folder_path_summary_1">Utilice un único nombre de carpeta (ej. GPSLogger) o una ruta de carpeta (ej. aaa/bbb/ccc). Las carpetas deben ser creadas por esta aplicación.</string>
+    <string name="log_customurl_discard_offline_locations">Descartar ubicaciones sin conexión</string>
+    <string name="retry_get_best_possible_accuracy_title">Elegir la mejor precisión en duración</string>
+    <string name="retry_get_best_possible_accuracy_summary">En lugar de registrar el primer punto preciso, seguir intentando durante el tiempo que dure la precisión y seleccionar el punto con la mejor precisión. Lleva más tiempo, pero aumenta las posibilidades de obtener puntos más precisos.</string>
+    <string name="log_customurl_summary_detailed">Envía una solicitud a la URL personalizada cada vez que se captura un punto de localización. Depende del intervalo de registro.</string>
+    <string name="autosend_customurl_summary">(Esta función permite el registro de CSV) Envía solicitudes en bloque a la URL personalizada, una por cada línea del archivo CSV. Depende del intervalo de envío automático.</string>
 </resources>
