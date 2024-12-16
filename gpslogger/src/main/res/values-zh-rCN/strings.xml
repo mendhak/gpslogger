@@ -162,7 +162,7 @@
     <string name="no_files_found">找不到需要上传或共享的文件</string>
     <string name="osm_pick_file">选择要上传的文件</string>
     <string name="debuglog_title">写入调试文件</string>
-    <string name="debuglog_summary">将调试消息写入到 SD 卡。警告：文件吃了金坷拉，大小长得贼快。    </string>
+    <string name="debuglog_summary">将调试消息写入到 SD 卡。警告： 文件增长速度非常快。</string>
     <string name="pref_logging_summary">文件类型、创建和命名</string>
     <string name="pref_general_title">常规选项</string>
     <string name="pref_general_summary">启动和显示选项</string>
