@@ -343,7 +343,7 @@
     <string name="time_before_logging_summary">用 0 代表最大頻率冇停手，但隔得耐啲就會慳啲電。系統層面嘅電量設置或者會冚過呢個設定，詳見說明與問答。</string>
     <string name="log_customurl_summary_detailed">每次紀錄一個位置點，都傳送一個請求去自訂 URL 度。視乎紀錄相隔幾耐而定。</string>
     <string name="autoemail_ssl">隱含 SSL</string>
-    <string name="autosend_enabled_summary">允許傳送檔案去各個目的地</string>
+    <string name="autosend_enabled_summary">允許傳送檔案去各個目的地：每隔指定嘅時候，又或自訂檔名之下，每當個檔名有變化</string>
     <string name="autosend_frequency_summary">紀錄檔隔幾耐傳送一次，以分鐘計。0 代表停用。</string>
     <string name="autosend_frequency">隔幾耐一次？</string>
     <string name="autosend_sendzip_summary">得嘅話就傳送壓縮檔。若果想啲檔案逐個單獨傳送，又或者個壓縮搞唔掂，就停用呢一欄啦</string>
@@ -376,4 +376,5 @@
     <string name="profile_create_new">整個新嘅設定檔</string>
     <string name="profile_add_from_url">嚟自 URL</string>
     <string name="profile_switch_before_delete">請先轉去另一個設定檔，然後至刪除呢一個。</string>
+    <string name="txt_speed_kph">速度 (時速幾多公里)：</string>
 </resources>

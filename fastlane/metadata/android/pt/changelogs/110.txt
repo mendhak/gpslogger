@@ -1,0 +1,6 @@
+* No Android 10+, o fluxo de trabalho de permissão agora solicitará a permissão "permitir o tempo todo"
+* O fluxo de trabalho de permissão também solicitará a desativação da otimização da bateria
+* O fluxo de trabalho de permissão é irritante, desculpe, é necessário ajudar com inúmeras solicitações de suporte relacionadas a limitações de segundo plano.
+* Ícones adaptáveis, graças a @kanru
+* Adicionada uma opção para redefinir o aplicativo (exclui todos os arquivos e permissões do aplicativo), nas configurações gerais
+* Traduções atualizadas do Crowdin

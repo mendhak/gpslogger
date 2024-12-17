@@ -1,0 +1,7 @@
+* Estado de carga da batería no URL personalizado (%ISCHARGING) e CSV (battery_charging)
+* Se OSM e o envío automático están activados, solicitaránselle os detalles do trazado OSM ao iniciar e enviar
+* Opción de eliminar ficheiros (en rexistro, avanzado)
+* Rexistro GPX 1.1, engadidas extensións gpxtpx:speed e gpxtpx:bearing
+* Dropbox actualizou o método de autenticación
+* Corrección de erros: enviábanse varios ficheiros se o nome estaba contido noutros nomes de ficheiro
+* Traducións actualizadas

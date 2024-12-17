@@ -1,0 +1,2 @@
+GPSLoggerをF-Droid用へリパッケージ。
+Google Drive、Activity Recognition、Play Servicesの依存関係を削除。

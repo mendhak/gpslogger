@@ -1,0 +1,4 @@
+* Experimental: nova visualização do botão de anotação. Pressione e segure para editar sua mensagem e cor.
+* As caixas de entrada URL personalizado e Anotação agora quebram o texto, facilitando a visualização do que você está inserindo. As novas linhas serão removidas.
+* A transmissão de status do GPSLogger agora inclui valores de duração e distância.
+* Quebra: A intenção emailAlarm com nome incorreto foi renomeada para imediatoautosend.  Use-o para iniciar uploads de arquivos.

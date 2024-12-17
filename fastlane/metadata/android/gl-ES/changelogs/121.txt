@@ -1,0 +1,5 @@
+* Novo parámetro de URL personalizado: %ALL que substitúe todos os parámetros de URL personalizados dispoñíbeis
+* Corrección de erros: escape do + nas marcas de tempo de URL personalizados
+* Corrección de erros: o temporizador non se restabelece ao cambiar de perfil
+* Corrección de erros: ao pechar o caixón, pecha primeiro a lista de perfís.
+* Corrección de erros: ao premer no elemento da lista de perfil, mantén o caixón aberto
