@@ -55,7 +55,7 @@
     <string name="miles_per_hour">英里/时</string>
     <string name="miles">英里</string>
     <string name="kilometers_per_hour">千米/时</string>
-    <string name="kilometers">公里</string>
+    <string name="kilometers">千米</string>
     <string name="unknown_direction">未知</string>
     <string name="sorry">抱歉</string>
     <string name="success">成功</string>
@@ -385,4 +385,7 @@
     <string name="prompt_for_details_when_logging_starts">开始记录时提示详细信息</string>
     <string name="retry_get_best_possible_accuracy_title">选择持续时间内的最佳精度</string>
     <string name="retry_get_best_possible_accuracy_summary">不要记录第一个准确点，而是继续尝试准确持续时间并选择准确度最高的点。需要更长的时间，但会增加获得更准确点的机会。</string>
+    <string name="started_at">开始于</string>
+    <string name="hide_notification_from_lock_screen">在锁屏界面隐藏通知</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>通知</b>-允许显示出通知，这有助于保持记录服务存活。 ]]></string>
 </resources>
