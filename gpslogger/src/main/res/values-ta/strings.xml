@@ -218,7 +218,7 @@
     <string name="summary_loggingto">உள்நுழைவு:</string>
     <string name="gpsprovider_unavailable">சி.பி.எச் வழங்குநர் எதுவும் கிடைக்கவில்லை. உங்கள் இருப்பிட அமைப்புகளை சரிபார்த்து இருப்பிட வழங்குநரை இயக்கவும்.</string>
     <string name="not_applicable">இதற்கில்லை</string>
-    <string name="direction_roughly">தோராயமாக %கள்</string>
+    <string name="direction_roughly">தோராயமாக %s</string>
     <string name="direction_northnortheast">வடகிழக்கு வழியாக வடக்கு</string>
     <string name="direction_eastnortheast">கிழக்கு வடகிழக்கு</string>
     <string name="direction_eastsoutheast">தென்கிழக்கு வழியாக கிழக்கு</string>
@@ -277,7 +277,7 @@
     <string name="listeners_cell_title">பிணையம் இருப்பிடங்களை பதிவுசெய்க</string>
     <string name="listeners_passive">செயலற்ற</string>
     <string name="altitude_subtractoffset_title">உயர ஆஃப்செட் கழிக்கவும்</string>
-    <string name="not_enough_distance_traveled">%S m மட்டுமே பயணம் செய்தது. புள்ளி நிராகரிக்கப்பட்டது.</string>
+    <string name="not_enough_distance_traveled">%s m மட்டுமே பயணம் செய்தது. புள்ளி நிராகரிக்கப்பட்டது.</string>
     <string name="logview_autoscroll">ஆட்டோ ச்க்ரோல்</string>
     <string name="gpslogger_permissions_rationale_message_storage">&lt;!] இந்த பயன்பாடு உங்கள் புகைப்படங்கள் அல்லது ஊடகத்தை அணுகாது.]]</string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization">&lt;! [சி.டி.ஏ.டி.ஏ [&lt;b&gt; பேட்டரி உகப்பாக்கத்தை புறக்கணிக்கவும் &lt;/b&gt; - பேட்டரி உகப்பாக்கத்தைக் குறைப்பதன் மூலம் இந்த பயன்பாட்டை பின்னணியில் இயக்க அனுமதிக்கவும். ]]&gt;</string>
