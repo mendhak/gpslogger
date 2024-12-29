@@ -291,7 +291,6 @@
     <string name="donate_bitcoin">பிட்காயின்</string>
     <string name="log_customurl_discard_offline_locations">இணைப்பில்லாத இடங்களை நிராகரிக்கவும்</string>
     <string name="log_customurl_discard_offline_locations_summary">பிணைய இணைப்பு கிடைக்கும்போது மட்டுமே தனிப்பயன் முகவரி க்கு இடங்களை பதிவு செய்யுங்கள் (ஆட்டோ அனுப்பு பாதிப்பை ஏற்படுத்தாது)</string>
-    <string name="new_file_custom_message"></string>
     <string name="new_file_prefix_serial_title">கோப்பு பெயருக்கு தனித்துவமான சரம் முன்னொட்டு</string>
     <string name="pref_logging_file_no_permissions">அந்த கோப்புறை சி.பி.எச்.எல்.சிசரால் எழுதப்படவில்லை. எழுத மற்றொரு கோப்புறையைத் தேர்ந்தெடுக்கவும்.</string>
     <string name="retry_time_title">துல்லியத்துடன் பொருந்தக்கூடிய காலம்</string>
