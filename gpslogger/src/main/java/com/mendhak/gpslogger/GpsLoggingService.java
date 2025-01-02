@@ -330,11 +330,10 @@ public class GpsLoggingService extends Service  {
             }
             PendingIntent sender = PendingIntent.getBroadcast(this, 0, alarmIntent, flags);
             AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                am.setExactAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, sender);
-            }
-            else {
-                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, sender);
+            if(AlarmManagerCompat.canScheduleExactAlarms(am)){
+                AlarmManagerCompat.setExactAndAllowWhileIdle(am, AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, sender);
+            } else {
+                AlarmManagerCompat.setAndAllowWhileIdle(am, AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, sender);
             }
             LOG.debug("Autosend alarm has been set");
 

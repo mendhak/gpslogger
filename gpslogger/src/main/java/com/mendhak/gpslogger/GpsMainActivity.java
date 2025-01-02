@@ -69,6 +69,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -697,10 +700,8 @@ public class GpsMainActivity extends AppCompatActivity
             getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
             getSupportActionBar().setSelectedNavigationItem(getUserSelectedNavigationItem());
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            }
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
         catch(Exception ex){
             //http://stackoverflow.com/questions/26657348/appcompat-v7-v21-0-0-causing-crash-on-samsung-devices-with-android-v4-2-2
@@ -1087,6 +1088,25 @@ public class GpsMainActivity extends AppCompatActivity
 
         // Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarBottom);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.content_layout), (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+
+            // Apply the insets as a margin to the view so it doesn't overlap with status bar
+            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+            mlp.leftMargin = insets.left;
+            mlp.bottomMargin = insets.bottom;
+            mlp.rightMargin = insets.right;
+            // mlp.topMargin = insets.top;
+            v.setLayoutParams(mlp);
+
+            // Alternatively set the padding on the view itself.
+            // v.setPadding(0, 0, 0, 0);
+
+            // Return CONSUMED if you don't want want the window insets to keep passing down to descendant views.
+            // return windowInsets;
+            return WindowInsetsCompat.CONSUMED;
+        });
 
         // Add 10 spacing on either side of the toolbar
         toolbar.setContentInsetsAbsolute(10, 10);
