@@ -1,0 +1,2 @@
+* Bugfix - when background work permission was denied, autosend was causing the app to crash  
+* Bugfix - adjust the layout insets for Android 15
