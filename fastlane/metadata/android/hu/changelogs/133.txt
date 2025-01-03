@@ -1,0 +1,2 @@
+* Hibajavítás - ha háttérben futás nem volt engedélyezve, az automatikus küldés az alkalmazás összeomlását okozta.
+* Hibajavítás - elrendezések beállítása Android 15 esetén
