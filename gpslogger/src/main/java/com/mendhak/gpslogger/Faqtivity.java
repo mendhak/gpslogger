@@ -23,6 +23,11 @@ package com.mendhak.gpslogger;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import android.view.ViewGroup;
 import android.widget.ListView;
 import com.commonsware.cwac.anddown.AndDown;
 import com.mendhak.gpslogger.common.Strings;
@@ -53,6 +58,25 @@ public class Faqtivity extends AppCompatActivity {
             if(getSupportActionBar() != null){
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
+
+            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.lvExp), (v, windowInsets) -> {
+                Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+
+                // Apply the insets as a margin to the view so it doesn't overlap with status bar
+                ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+                mlp.leftMargin = insets.left;
+                mlp.bottomMargin = insets.bottom;
+                mlp.rightMargin = insets.right;
+                // mlp.topMargin = insets.top;
+                v.setLayoutParams(mlp);
+
+                // Alternatively set the padding on the view itself.
+                // v.setPadding(0, 0, 0, 0);
+
+                // Return CONSUMED if you don't want want the window insets to keep passing down to descendant views.
+                // return windowInsets;
+                return WindowInsetsCompat.CONSUMED;
+            });
 
         }
         catch(Exception ex){
