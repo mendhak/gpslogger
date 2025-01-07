@@ -374,8 +374,8 @@
     <string name="txt_speed_kph">Скорость (в км/ч):</string>
     <string name="retry_get_best_possible_accuracy_title">Выбирать наиболее точное значение за период</string>
     <string name="log_customurl_discard_offline_locations">Отклонять оффлайн-местоположения</string>
-    <string name="install_conscrypt_provider_title">Установка Conscrypt Provider (SSL/TLS)</string>
-    <string name="annotation_edit_button_label">Кнопка редактирования аннотации</string>
+    <string name="install_conscrypt_provider_title">Установить Conscrypt Provider (SSL/TLS)</string>
+    <string name="annotation_edit_button_label">Редактирование кнопки аннотации</string>
     <string name="annotation_edit_button_color">Цвет кнопки</string>
     <string name="prompt_for_details_when_logging_starts">Запрашивать сведения при начале записи</string>
     <string name="retry_get_best_possible_accuracy_summary">Вместо записи первого точного значения, продолжать попытки определения местоположения в течение выбранного периода времени, и сохранить наиболее точно определённое местоположение за весь период. Занимает больше времени, но повышает вероятность получения точного результата.</string>
@@ -383,7 +383,7 @@
     <string name="autosend_customurl_summary">(Эта функция включает запись в CSV) Отправляет запросы массово на пользовательский URL, по одному для каждой строки в файле CSV. Зависит от частоты автоматической отправки.</string>
     <string name="log_customurl_discard_offline_locations_summary">Отправлять местоположения на пользовательский URL только при наличии подключения к сети (не влияет на автоматическую отправку)</string>
     <string name="install_conscrypt_provider_summary">Если у Вас возникают проблемы с SSL/TLS-подключениями на старых версиях Android, установка Conscrypt Provider может помочь. (Проследуйте по ссылке, установите APK, и перезапустите приложение.)</string>
-    <string name="google_drive_folder_path">Путь до папки в Диске Google</string>
+    <string name="google_drive_folder_path">Путь к папке Google Диска</string>
     <string name="google_drive_folder_path_summary_2">Если Вы используете одно имя папки, после создания её можно переместить в другое место в Диске Google. Пути к папкам работают медленнее, так как каждая часть пути должна быть проверена или создана перед загрузкой файлов.</string>
     <string name="view_annotation">Просмотр аннотации</string>
     <string name="google_drive_folder_path_summary_1">Используйте одно имя папки (например, GPSLogger) или путь к папке (например, aaa/bbb/ccc). Папки должны быть созданы этим приложением.</string>
