@@ -269,6 +269,18 @@ public class Systems {
             }
         }
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String packageName = context.getPackageName();
+            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            if (!pm.isIgnoringBatteryOptimizations(packageName)){
+                LOG.warn("Permission to ignore battery optimization was denied. Without this permission, the OS will terminate the service.");
+                return false;
+            }
+            else {
+                LOG.debug("Permission ignore battery optimization : true");
+            }
+        }
+
        return true;
     }
 
