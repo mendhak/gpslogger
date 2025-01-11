@@ -1,0 +1,2 @@
+* Ignore battery optimization is now mandatory because the OS starts killing services without it.
+* Fix for FAQ activity on edge to edge layout for Android 15.
