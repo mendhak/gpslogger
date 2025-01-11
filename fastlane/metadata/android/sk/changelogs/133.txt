@@ -1,2 +1,2 @@
-* Bugfix - keď bolo odmietnuté povolenie na pozadí, autosend bol príčinou aplikácie k pádu
-* Bugfix - upraviť rozloženie insets pre Android 15
+* Oprava chyby - ak bolo zamietnutné povolenie na fungovanie na pozadí, automatické odosielanie spôsobovalo pád aplikácie
+* Oprava chyby - prispôsobenie vkladaných prvkov rozloženia pre systém Android 15
