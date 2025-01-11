@@ -1,2 +1,2 @@
-* Ignore optimalizácia batérie je teraz povinné, pretože OS začne zabíjať služby bez neho.
-* Fix pre FAQ činnosť na okraji pre okrajové rozloženie pre Android 15.
+* V súčasnosti je povinné ignorovanie optimalizácie batérie, pretože bez toho OS ukončuje služby.
+* Oprava pre aktivitu FAQ pri rozložení typu "edge to edge" pre systém Android 15.

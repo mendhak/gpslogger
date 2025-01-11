@@ -1,2 +1,2 @@
-* Oprava chyby - ak bolo zamietnutné povolenie na fungovanie na pozadí, automatické odosielanie spôsobovalo pád aplikácie
+* Oprava chyby - ak bolo zamietnuté povolenie na fungovanie na pozadí, automatické odosielanie spôsobovalo pád aplikácie
 * Oprava chyby - prispôsobenie vkladaných prvkov rozloženia pre systém Android 15
