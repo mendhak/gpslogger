@@ -1,0 +1,2 @@
+* Mostantól az akkumulátoroptimalizálást kötelező figyelmen kívül hagyni.
+* Javítás: Android 15-nél teljes szélességű a GYIK elrendezése.
