@@ -1,0 +1,2 @@
+* Corrección de erros: cando se denegou o permiso de traballo en segundo plano, o envío automático estaba a provocar que a aplicación fallase
+* Corrección de erros: axustar as insercións de deseño para Android 15

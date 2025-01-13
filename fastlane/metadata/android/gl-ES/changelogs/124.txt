@@ -1,0 +1,3 @@
+* Corrección de erros: fai que non sexa posíbel desbotar o diálogo de permisos inicial
+* Corrección de erros: aclarar a diferenza entre a función de rexistro de URL personalizado e a función de envío automático
+* Corrección de erros: verificar e cargue correctamente o provedor de conscrypt se está instalado desde F-Droid
