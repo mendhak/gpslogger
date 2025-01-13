@@ -1,0 +1,4 @@
+* URL personalizado: opción engadida para desbotar localizacións sen conexión; útil para enviar a última localización.
+* URL personalizado: tentarase un máximo de 3 veces no canto de 5 veces.
+* Corrección de erros: a execución durante moito tempo provocou que se amosasen horas negativas
+* Mellora: facer que as alarmas de envío automático sexan máis fiábeis e tentar que sexan máis exactas

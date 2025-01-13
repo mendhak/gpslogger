@@ -1,0 +1,2 @@
+* Ignorar a optimización da batería agora é obrigatorio porque o sistema operativo comeza a matar servizos sen ela.
+* Corrixiuse a actividade das preguntas frecuentes no deseño de bordo a bordo para Android 15.

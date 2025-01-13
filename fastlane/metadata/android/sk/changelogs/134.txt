@@ -1,0 +1,2 @@
+* V súčasnosti je povinné ignorovanie optimalizácie batérie, pretože bez toho OS ukončuje služby.
+* Oprava pre aktivitu FAQ pri rozložení typu "edge to edge" pre systém Android 15.
