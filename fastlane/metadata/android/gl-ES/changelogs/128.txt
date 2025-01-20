@@ -1,4 +1,4 @@
-* Cambio de ruptura de OpenStreetMap: cambio de autenticación a OAuth2, terás que volver autorizar OpenStreetMap
+* Cambio significativo OpenStreetMap: cambio de autenticación a OAuth2, terá que volver autorizar OpenStreetMap
 * O envío automático predeterminado cando se detén o rexistro
 * Corrección de erros: comprobe as localizacións pasivas para asegurarse de que o seu tempo sexa maior que o tempo da localización anterior
 * Corrección de erros para a icona monocromática no tema Nothing OS

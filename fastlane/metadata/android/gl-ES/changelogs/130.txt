@@ -1,0 +1,4 @@
+* Nova opción de precisión: executa durante o intervalo de * Nova opción de precisión: executa durante o intervalo de reintento e escolle o punto máis preciso.
+* A escoita pasiva agora coincide con outras escoitas seleccionadas (GNSS/Rede). Se non se selecciona ningunha, aceptaranse todos os puntos.
+* Cargas de URL personalizados máis rápidas para o envío automático.
+* Nova propiedade «stoponapplaunch», dispoñíbel só a través do ficheiro .properties
