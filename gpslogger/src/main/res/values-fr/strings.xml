@@ -195,7 +195,7 @@ une plus grande précision à basses fréquences.    </string>
     <string name="google_drive_testupload_success">Téléversé. Merci de vérifier le nouveau fichier sur Google Documents.</string>
     <string name="autoemail_sendto_csv">Adresses de courriel séparées par une virgule</string>
     <string name="autosend_enabled">Autoriser l\'envoi automatique</string>
-    <string name="autosend_enabled_summary">Autoriser l\'envoi de fichiers à différentes cibles</string>
+    <string name="autosend_enabled_summary">Permet d\'envoyer les fichiers à différentes cibles, à une fréquence définie, ou si le nom change en raison d\'une dénomination personnalisée</string>
     <string name="autosend_frequency_summary">À quelle fréquence les fichiers doivent être envoyés, en minutes. Mettre 0 pour désactiver.</string>
     <string name="autosend_frequency">Combien de fois ?</string>
     <string name="autosend_sendzip_title">Envoyer en fichier ZIP</string>
@@ -332,7 +332,7 @@ une plus grande précision à basses fréquences.    </string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Autoriser tout le temps</b> - Permettre à cette application de recevoir des mises à jour de localisation lors de l’exécution en arrière-plan. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorer l’optimisation de la batterie</b> - Permettre à cette application de s’exécuter en arrière-plan en réduisant l’optimisation de la batterie. ]]></string>
     <string name="gpslogger_permissions_permanently_denied"><![CDATA[Une ou plusieurs autorisations requises par cette application ont été refusées. Il sera nécessaire d’aller à l’écran des paramètres de l\'application pour les lui accorder.<br /><br />Si des autorisations ont été définitivement refusées, il est possible de les réinitialiser dans les paramètres du système. ]]></string>
-    <string name="gpslogger_permissions_background_location"><![CDATA[Pour permettre à GPSLogger de fonctionner en arrière-plan, vous devrez lui accorder une permission supplémentaire. À l’écran suivant, sélectionner : ]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Pour permettre à GPSLogger de fonctionner en arrière-plan, vous devrez lui accorder une permission supplémentaire. À l’écran suivant, sélectionner : ]]></string>
     <string name="privacy_policy">Politique de confidentialité</string>
     <string name="debuglog_attach_to_email">Joindre le journal de débogage à un courriel</string>
     <string name="debuglog_attach_to_email_summary">Joindre le journal de débogage à un courriel avec quelques informations de diagnostic</string>
@@ -375,4 +375,18 @@ une plus grande précision à basses fréquences.    </string>
     <string name="google_drive_folder_path_summary_1">Utilisez un nom de dossier unique (par exemple GPSLogger), ou un chemin d\'accès (par exemple aaa/bbb/ccc). Les dossiers doivent être créés par cette application.</string>
     <string name="google_drive_folder_path_summary_2">Si vous utilisez un simple nom de dossier, il peut être déplacé ailleurs dans Google Drive après sa création. Les chemins d\'accès au dossier sont plus lent car chaque partie du chemin doit être vérifiée ou créée, avant que les fichiers ne soit envoyé.</string>
     <string name="customurl_all_parameters">Tous les paramètres :</string>
+    <string name="txt_speed_kph">Vitesse (en km/h):</string>
+    <string name="autosend_customurl_summary">(Cette fonctionnalité permet la journalisation CSV) Envoie des requêtes en masse à l\'URL personnalisée, une pour chaque ligne du fichier CSV. Dépend de l\'intervalle d\'envoi automatique.</string>
+    <string name="log_customurl_summary_detailed">Envoie une requête à l\'URL personnalisée chaque fois qu\'un point de localisation est capturé. Dépend de l\'intervalle de journalisation.</string>
+    <string name="annotation_edit_button_color">Couleur du bouton</string>
+    <string name="started_at">commencé à</string>
+    <string name="hide_notification_from_lock_screen">Masquer la notification de l\'écran de verrouillage</string>
+    <string name="view_annotation">Vue d\'annotation</string>
+    <string name="log_customurl_discard_offline_locations">Supprimer les emplacements hors ligne</string>
+    <string name="annotation_edit_button_label">Bouton Modifier l\'annotation</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notifications</b> - Autorise l'affichage d'une notification, cela aide à maintenir le service de journalisation en vie. ]]></string>
+    <string name="prompt_for_details_when_logging_starts">Demander des détails au démarrage de la journalisation</string>
+    <string name="log_customurl_discard_offline_locations_summary">Enregistrer les emplacements sur une URL personnalisée uniquement lorsqu\'une connexion réseau est disponible (n\'affecte pas l\'envoi automatique)</string>
+    <string name="retry_get_best_possible_accuracy_summary">Au lieu d\'enregistrer le premier point précis, continuez d\'essayer pendant la durée de précision et sélectionnez le point avec la meilleure précision. Cela prend plus de temps, mais augmente les chances d\'obtenir des points plus précis.</string>
+    <string name="retry_get_best_possible_accuracy_title">Sélectionnez la meilleure précision dans la durée</string>
 </resources>
