@@ -75,7 +75,7 @@
     <string name="time_oneandhalfhours">1½ ore</string>
     <string name="time_twoandhalfhours">2½ ore</string>
     <string name="time_hms_format" formatted="false">%so %sm %ss</string>
-    <string name="accuracy_within" formatted="false">in %s %s</string>
+    <string name="accuracy_within" formatted="false">entro %s %s</string>
     <!-- Settings activity -->
     <string name="settings_distance_in_meters">Distanza in metri</string>
     <string name="settings_accuracy_in_meters">Accuratezza in metri</string>
