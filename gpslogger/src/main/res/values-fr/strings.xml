@@ -384,7 +384,7 @@ une plus grande précision à basses fréquences.    </string>
     <string name="view_annotation">Vue d\'annotation</string>
     <string name="log_customurl_discard_offline_locations">Supprimer les emplacements hors ligne</string>
     <string name="annotation_edit_button_label">Bouton Modifier l\'annotation</string>
-    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notifications</b> - Autorise l'affichage d'une notification, cela aide à maintenir le service de journalisation en vie. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notifications</b> - Autorise l\'affichage d\'une notification, cela aide à maintenir le service de journalisation en vie. ]]></string>
     <string name="prompt_for_details_when_logging_starts">Demander des détails au démarrage de la journalisation</string>
     <string name="log_customurl_discard_offline_locations_summary">Enregistrer les emplacements sur une URL personnalisée uniquement lorsqu\'une connexion réseau est disponible (n\'affecte pas l\'envoi automatique)</string>
     <string name="retry_get_best_possible_accuracy_summary">Au lieu d\'enregistrer le premier point précis, continuez d\'essayer pendant la durée de précision et sélectionnez le point avec la meilleure précision. Cela prend plus de temps, mais augmente les chances d\'obtenir des points plus précis.</string>
