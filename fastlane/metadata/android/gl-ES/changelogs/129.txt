@@ -1,0 +1,5 @@
+* Cambio significativo en OpenStreetMap: cambio de autenticación a OAuth2, terás que volver autorizar OpenStreetMap
+* Envío automático predeterminado cando se detén o rexistro
+* Corrección de erros: comprobación das localizacións pasivas para asegurar que a súa hora sexa superior á hora da localización anterior
+* Corrección de erros para a icona monocromática no tema Nothing OS
+* Non permitir certos caracteres no nome do ficheiro, coma o asterisco, ou as barras inclinadas

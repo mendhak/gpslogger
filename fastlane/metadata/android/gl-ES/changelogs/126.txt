@@ -1,4 +1,4 @@
 * Experimental: nova vista do botón de anotación. Mantéñao premido para editar a súa mensaxe e cor.
 * As caixas de entrada de URL personalizadas e as Anotacións agora envolven o texto, é máis doado ver o que está a introducir. Eliminaranse as novas liñas.
 * A emisión de estado de GPSLogger agora inclúe valores de duración e distancia.
-* Creba: o intento da alarma de correo-e foi renomeado a «enviar inmediatamente».  Emprégueo para iniciar o envío de ficheiros.
+* Significativo: o intento da alarma de correo-e foi renomeado a «enviar inmediatamente».  Emprégueo para iniciar o envío de ficheiros.
