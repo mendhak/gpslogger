@@ -316,4 +316,5 @@
     <string name="autoftp_ssltls">SSL/TLS</string>
     <string name="autoftp_ssltls_summary">Ei mitään, SSL tai TLS. Valitse \'Ei mitään\' tavallisille suojaamattomille yhteyksille.</string>
     <string name="new_file_prefix_serial_summary">Android 8:ssa käytetään yksilöllistä Android-tunnusta. Android 8:a edeltävässä, koontisarjanumeroa, joka löytyy puhelimen tilasta, käytetään.</string>
+    <string name="txt_latitude_short">Lev</string>
 </resources>
