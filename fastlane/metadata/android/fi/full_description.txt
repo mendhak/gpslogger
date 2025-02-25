@@ -36,4 +36,3 @@ Nettiyhteys - käytetään kun lataat tiedostoja (Dropbox, Openstreetmap) tai s�
 Sijaintisi - käytetään selvittääksesi sijaintisi perustuen joko GPS- tai mobiiliverkkosignaaliin
 
 Järjestelmätyökalut (käynnistä automaattisesti puhelimen käynnistyessä) - käytetään jos päätät käynnistää GPSLoggerin puhelimen käynnistyessä
-
