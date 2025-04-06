@@ -1,2 +1,3 @@
 * Ignore battery optimization is now mandatory because the OS starts killing services without it.
 * Fix for FAQ activity on edge to edge layout for Android 15.
+* Bugfix: the autosend alarm was being reset even after logging stopped, causing notification to reappear.
