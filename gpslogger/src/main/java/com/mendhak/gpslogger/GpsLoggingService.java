@@ -315,10 +315,11 @@ public class GpsLoggingService extends Service  {
      * Sets up the auto email timers based on user preferences.
      */
     public void setupAutoSendTimers() {
-        LOG.debug("Setting up autosend timers. Auto Send Enabled - " + String.valueOf(preferenceHelper.isAutoSendEnabled())
-                + ", Auto Send Delay - " + String.valueOf(session.getAutoSendDelay()));
 
-        if (preferenceHelper.isAutoSendEnabled() && session.getAutoSendDelay() > 0) {
+        if (preferenceHelper.isAutoSendEnabled() && session.getAutoSendDelay() > 0 && session.isStarted()) {
+            LOG.debug("Setting up autosend timers. Auto Send Enabled - " + String.valueOf(preferenceHelper.isAutoSendEnabled())
+                    + ", Auto Send Delay - " + String.valueOf(session.getAutoSendDelay()));
+
             long triggerTime = SystemClock.elapsedRealtime() + (long) (session.getAutoSendDelay() * 60 * 1000);
 
             alarmIntent = new Intent(this, AlarmReceiver.class);
@@ -339,7 +340,7 @@ public class GpsLoggingService extends Service  {
 
         } else {
             if (alarmIntent != null) {
-                LOG.debug("alarmIntent was null, canceling alarm");
+                LOG.debug("Canceling auto-send alarm");
                 cancelAlarm();
             }
         }
