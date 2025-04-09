@@ -279,6 +279,13 @@ public class GpsLoggingService extends Service  {
                     needToStartGpsManager = true;
                 }
 
+                if (bundle.get(IntentConstants.PASSIVE_FILTER_INTERVAL) != null) {
+                    int passiveFilterInterval = bundle.getInt(IntentConstants.PASSIVE_FILTER_INTERVAL);
+                    LOG.debug("Intent received - Set passive filter interval: " + String.valueOf(passiveFilterInterval));
+                    preferenceHelper.setPassiveFilterInterval(passiveFilterInterval);
+                    needToStartGpsManager = true;
+                }
+                
                 if(bundle.get(IntentConstants.LOG_ONCE) != null){
                     boolean logOnceIntent = bundle.getBoolean(IntentConstants.LOG_ONCE);
                     LOG.debug("Intent received - Log Once: " + String.valueOf(logOnceIntent));

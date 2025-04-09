@@ -251,6 +251,8 @@
     <string name="accuracy_filter_summary">保存某点时要求其所具有的最低精度。不那么精确的点会被丢弃。</string>
     <string name="distance_filter_title">按距离过滤</string>
     <string name="distance_filter_summary">要保存的点和上一个点之间的最小距离；距离太近的话会被丢弃。</string>
+    <string name="passive_filter_time_title">被动日志采集间隔</string>
+    <string name="passive_filter_time_summary">调整日志数据的采集间隔以减少数据的大量产生 单位：秒</string>
     <string name="points">点</string>
     <string name="txt_number_of_points">点数</string>
     <string name="save">保存</string>
