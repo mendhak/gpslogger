@@ -31,6 +31,7 @@ public class IntentConstants {
     public static final String GPS_ON_BETWEEN_FIX = "setkeepbetweenfix";
     public static final String RETRY_TIME = "setretrytime";
     public static final String ABSOLUTE_TIMEOUT = "setabsolutetimeout";
+    public static final String PASSIVE_FILTER_INTERVAL = "passivefilterinterval";
     public static final String LOG_ONCE = "logonce";
     public static final String SWITCH_PROFILE = "switchprofile";
     public static final String GET_STATUS = "getstatus";

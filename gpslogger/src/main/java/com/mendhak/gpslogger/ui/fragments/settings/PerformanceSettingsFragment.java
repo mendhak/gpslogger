@@ -57,6 +57,9 @@ public class PerformanceSettingsFragment
 
         findPreference(PreferenceNames.ABSOLUTE_TIMEOUT).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.ABSOLUTE_TIMEOUT).setSummary(String.valueOf(preferenceHelper.getAbsoluteTimeoutForAcquiringPosition()) + getString(R.string.seconds));
+        
+        findPreference(PreferenceNames.PASSIVE_FILTER_INTERVAL).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.PASSIVE_FILTER_INTERVAL).setSummary(String.valueOf(preferenceHelper.getPassiveFilterInterval()) + getString(R.string.seconds));
 
         findPreference(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET).setSummary(String.valueOf(preferenceHelper.getSubtractAltitudeOffset()) + getString(R.string.meters));
@@ -150,6 +153,22 @@ public class PerformanceSettingsFragment
                     .show(this, PreferenceNames.ABSOLUTE_TIMEOUT);
             return true;
         }
+        
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.PASSIVE_FILTER_INTERVAL)){
+            SimpleFormDialog.build()
+                    .title(R.string.time_before_logging_dialog_title)
+                    .msg(R.string.passive_filter_time_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.PASSIVE_FILTER_INTERVAL)
+                                    .hint(R.string.time_before_logging_hint)
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getPassiveFilterInterval()))
+                                    .max(4)
+                    )
+                    .show(this, PreferenceNames.PASSIVE_FILTER_INTERVAL);
+            return true;
+        }
 
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET)){
             SimpleFormDialog.build()
@@ -204,6 +223,13 @@ public class PerformanceSettingsFragment
             String time = extras.getString(PreferenceNames.ABSOLUTE_TIMEOUT);
             preferenceHelper.setAbsoluteTimeoutForAcquiringPosition(Integer.valueOf(time));
             findPreference(PreferenceNames.ABSOLUTE_TIMEOUT).setSummary(String.valueOf(preferenceHelper.getAbsoluteTimeoutForAcquiringPosition()) + getString(R.string.seconds));
+            return true;
+        }
+        
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.PASSIVE_FILTER_INTERVAL)){
+            String time = extras.getString(PreferenceNames.PASSIVE_FILTER_INTERVAL);
+            preferenceHelper.setPassiveFilterInterval(Integer.valueOf(time));
+            findPreference(PreferenceNames.PASSIVE_FILTER_INTERVAL).setSummary(String.valueOf(preferenceHelper.getPassiveFilterInterval()) + getString(R.string.seconds));
             return true;
         }
 
