@@ -1,2 +1,3 @@
 * Ignorar a optimización da batería agora é obrigatorio porque o sistema operativo comeza a matar servizos sen ela.
 * Corrixiuse a actividade das preguntas frecuentes no deseño de bordo a bordo para Android 15.
+* Corrección de erros: a alarma de envío automático estaba a ser restabelecida mesmo após que se detivese o rexistro, causando que a notificación volvese aparecer.
