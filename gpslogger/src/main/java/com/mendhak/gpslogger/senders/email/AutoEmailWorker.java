@@ -149,8 +149,9 @@ public class AutoEmailWorker extends Worker {
                 // Attach files in a multipart way
                 else {
                     String boundary = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9);
+                    header.addHeaderField("MIME-Version", "1.0");
                     header.addHeaderField("Content-Type", "multipart/mixed; boundary=" + boundary);
-                    writer.write(header.toString());
+                    writer.write(header.toString();
 
                     writer.write("--" + boundary + "\n");
                     writer.write("Content-Type: text/plain; charset=UTF-8" + "\n\n");
