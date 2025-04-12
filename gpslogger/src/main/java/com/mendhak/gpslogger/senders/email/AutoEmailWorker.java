@@ -220,7 +220,7 @@ public class AutoEmailWorker extends Worker {
             Streams.copyIntoStream(inputStream, outputStream);
 
             writer.write("--" + boundary + "\n");
-            writer.write("Content-Type: application/" + Files.getMimeTypeFromFileName(f.getName()) + "; name=\"" + f.getName() + "\"\n");
+            writer.write("Content-Type: " + Files.getMimeTypeFromFileName(f.getName()) + "; name=\"" + f.getName() + "\"\n");
             writer.write("Content-Disposition: attachment; filename=\"" + f.getName() + "\"\n");
             writer.write("Content-Transfer-Encoding: base64\n\n");
             String encodedFile = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
