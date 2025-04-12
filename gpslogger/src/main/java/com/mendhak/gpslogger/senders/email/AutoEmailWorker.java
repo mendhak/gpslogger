@@ -141,7 +141,7 @@ public class AutoEmailWorker extends Worker {
             if (writer != null) {
 
                 // Add a Message-ID to the email
-      	        String messageid = UUID.randomUUID().toString() + "@gpslogger>";
+                String messageid = "<" + UUID.randomUUID().toString() + "@gpslogger>";
                 header.addHeaderField("Message-ID", messageid);
 
                 // Regular email with just a body
