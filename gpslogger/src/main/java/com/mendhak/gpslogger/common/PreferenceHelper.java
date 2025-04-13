@@ -1222,6 +1222,15 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.ANNOTATIONS_BUTTON_SETTINGS, settings).apply();
     }
 
+    @ProfilePreference(name= PreferenceNames.ONLY_LOG_IF_SIGNIFICANT_MOTION)
+    public boolean shouldLogOnlyIfSignificantMotion() {
+        return prefs.getBoolean(PreferenceNames.ONLY_LOG_IF_SIGNIFICANT_MOTION, false);
+    }
+
+    public void setShouldLogOnlyIfSignificantMotion(boolean value){
+        prefs.edit().putBoolean(PreferenceNames.ONLY_LOG_IF_SIGNIFICANT_MOTION, value).apply();
+    }
+
     @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {
 

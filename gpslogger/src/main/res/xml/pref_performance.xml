@@ -91,6 +91,13 @@
         android:title="@string/absolute_timeout_title"
         app:iconSpaceReserved="false" />
 
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="only_log_if_significant_motion"
+        android:title="Only log if there is significant motion"
+        android:summary="Only log if significant activity is detected such as walking, biking, driving. Significant motion is determined by your OS."
+        app:iconSpaceReserved="false" />
+
     <PreferenceCategory
         android:title="Altitude"
         app:iconSpaceReserved="false">
