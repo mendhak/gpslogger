@@ -94,8 +94,8 @@
     <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="only_log_if_significant_motion"
-        android:title="Only log if there is significant motion"
-        android:summary="Only log if significant activity is detected such as walking, biking, driving. Significant motion is determined by your OS."
+        android:title="@string/only_log_if_significant_motion_title"
+        android:summary="@string/only_log_if_significant_motion_summary"
         app:iconSpaceReserved="false" />
 
     <PreferenceCategory

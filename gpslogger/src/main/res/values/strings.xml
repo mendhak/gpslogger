@@ -497,5 +497,7 @@
     <string name="annotation_edit_button_label">Edit annotation button</string>
     <string name="annotation_edit_button_color">Button color</string>
     <string name="prompt_for_details_when_logging_starts">Prompt for details when logging starts</string>
+    <string name="only_log_if_significant_motion_title">Only log if there is significant motion</string>
+    <string name="only_log_if_significant_motion_summary">Only log if significant activity is detected such as walking, biking, driving. Significant motion is determined by your OS.</string>
 
 </resources>
