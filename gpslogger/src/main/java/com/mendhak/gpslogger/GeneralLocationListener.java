@@ -21,7 +21,6 @@ package com.mendhak.gpslogger;
 
 import android.location.*;
 import android.os.Bundle;
-import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
@@ -33,8 +32,6 @@ import java.util.Iterator;
 
 class GeneralLocationListener implements LocationListener, GpsStatus.Listener, GpsStatus.NmeaListener {
 
-    private long lastUpdateTime = 0;
-    private PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     private String listenerName;
     private static GpsLoggingService loggingService;
     private static final Logger LOG = Logs.of(GeneralLocationListener.class);
@@ -72,17 +69,8 @@ class GeneralLocationListener implements LocationListener, GpsStatus.Listener, G
                 b.putInt(BundleConstants.SATELLITES_FIX, satellitesUsedInFix);
 
                 loc.setExtras(b);
+                loggingService.onLocationChanged(loc);
 
-                if (listenerName.equalsIgnoreCase(BundleConstants.PASSIVE)){
-                    long now = System.currentTimeMillis();
-                    LOG.debug("Passive location listener Interval " + (preferenceHelper.getPassiveFilterInterval() * 1000) + "ms");
-                    if (now - lastUpdateTime >= (preferenceHelper.getPassiveFilterInterval() * 1000)) {
-                        lastUpdateTime = now;
-                        loggingService.onLocationChanged(loc);
-                    }
-                }else{
-                    loggingService.onLocationChanged(loc);
-                }
                 this.latestHdop = "";
                 this.latestPdop = "";
                 this.latestVdop = "";

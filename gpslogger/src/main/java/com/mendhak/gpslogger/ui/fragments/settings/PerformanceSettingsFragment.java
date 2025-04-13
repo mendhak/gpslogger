@@ -153,7 +153,8 @@ public class PerformanceSettingsFragment
                     .show(this, PreferenceNames.ABSOLUTE_TIMEOUT);
             return true;
         }
-        
+
+        // passive filter interval dialog
         if(preference.getKey().equalsIgnoreCase(PreferenceNames.PASSIVE_FILTER_INTERVAL)){
             SimpleFormDialog.build()
                     .title(R.string.time_before_logging_dialog_title)
@@ -225,7 +226,8 @@ public class PerformanceSettingsFragment
             findPreference(PreferenceNames.ABSOLUTE_TIMEOUT).setSummary(String.valueOf(preferenceHelper.getAbsoluteTimeoutForAcquiringPosition()) + getString(R.string.seconds));
             return true;
         }
-        
+
+        // passive filter interval dialog callback
         if(dialogTag.equalsIgnoreCase(PreferenceNames.PASSIVE_FILTER_INTERVAL)){
             String time = extras.getString(PreferenceNames.PASSIVE_FILTER_INTERVAL);
             preferenceHelper.setPassiveFilterInterval(Integer.valueOf(time));
