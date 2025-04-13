@@ -643,8 +643,19 @@ public class GpsLoggingService extends Service  {
                 @Override
                 public void onSatelliteStatusChanged(@NonNull GnssStatus status) {
                     super.onSatelliteStatusChanged(status);
+                    int satellitesUsedInFixCount = 0;
+                    for (int i = 0; i < status.getSatelliteCount(); i++) {
+                        if (status.usedInFix(i)) {
+                            satellitesUsedInFixCount++;
+                        }
+                    }
+                    // This is just for display
                     setSatelliteInfo(status.getSatelliteCount());
-                    gpsLocationListener.satellitesUsedInFix = status.getSatelliteCount();
+                    LOG.debug(String.valueOf(status.getSatelliteCount()) + " satellites visible");
+
+                    // This will be used later as part of the fix in location object.
+                    gpsLocationListener.satellitesUsedInFix = satellitesUsedInFixCount;
+                    LOG.debug(String.valueOf(satellitesUsedInFixCount) + " satellites used in fix");
                 }
             };
         }
