@@ -30,16 +30,20 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
+import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.loggers.Files;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.slf4j.Logger;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Date;
 
 
 public class CSVFileLogger implements FileLogger {
+
+    private static final Logger LOG = Logs.of(CSVFileLogger.class);
 
     public static class FIELDS{
 
@@ -165,6 +169,7 @@ public class CSVFileLogger implements FileLogger {
             );
         }
         out.close();
+        LOG.debug("Finished writing to CSV file");
     }
 
     /**
