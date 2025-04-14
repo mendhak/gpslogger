@@ -25,6 +25,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
 import android.graphics.BitmapFactory;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.hardware.TriggerEvent;
+import android.hardware.TriggerEventListener;
 import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationManager;
@@ -279,6 +283,13 @@ public class GpsLoggingService extends Service  {
                     needToStartGpsManager = true;
                 }
 
+                if (bundle.get(IntentConstants.PASSIVE_FILTER_INTERVAL) != null) {
+                    int passiveFilterInterval = bundle.getInt(IntentConstants.PASSIVE_FILTER_INTERVAL);
+                    LOG.debug("Intent received - Set passive filter interval: " + String.valueOf(passiveFilterInterval));
+                    preferenceHelper.setPassiveFilterInterval(passiveFilterInterval);
+                    needToStartGpsManager = true;
+                }
+                
                 if(bundle.get(IntentConstants.LOG_ONCE) != null){
                     boolean logOnceIntent = bundle.getBoolean(IntentConstants.LOG_ONCE);
                     LOG.debug("Intent received - Log Once: " + String.valueOf(logOnceIntent));
@@ -423,11 +434,45 @@ public class GpsLoggingService extends Service  {
         resetAutoSendTimersIfNecessary();
         showNotification();
         setupAutoSendTimers();
+        setupSignificantMotionSensor();
         resetCurrentFileName(true);
         notifyClientsStarted(true);
         startPassiveManager();
         startGpsManager();
 
+    }
+
+
+    private TriggerEventListener triggerEventListener;
+
+    private void setupSignificantMotionSensor(){
+
+        if(!preferenceHelper.shouldLogOnlyIfSignificantMotion()) {
+            return;
+        }
+
+        SensorManager sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        Sensor significantMotionSensor = sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);
+
+        if(significantMotionSensor != null) {
+            LOG.warn("Setting up significant motion sensor manager");
+
+            if(triggerEventListener == null){
+                triggerEventListener = new TriggerEventListener() {
+                    @Override
+                    public void onTrigger(TriggerEvent event) {
+                        LOG.warn("TRIGGERED!");
+                        session.setUserStillSinceTimeStamp(System.currentTimeMillis());
+                    }
+                };
+            }
+            else {
+                session.setUserStillSinceTimeStamp(System.currentTimeMillis());
+            }
+
+            sensorManager.cancelTriggerSensor(triggerEventListener, significantMotionSensor);
+            sensorManager.requestTriggerSensor(triggerEventListener, significantMotionSensor);
+        }
     }
 
     private void notifyByBroadcast(boolean loggingStarted) {
@@ -643,8 +688,19 @@ public class GpsLoggingService extends Service  {
                 @Override
                 public void onSatelliteStatusChanged(@NonNull GnssStatus status) {
                     super.onSatelliteStatusChanged(status);
+                    int satellitesUsedInFixCount = 0;
+                    for (int i = 0; i < status.getSatelliteCount(); i++) {
+                        if (status.usedInFix(i)) {
+                            satellitesUsedInFixCount++;
+                        }
+                    }
+                    // This is just for display
                     setSatelliteInfo(status.getSatelliteCount());
-                    gpsLocationListener.satellitesUsedInFix = status.getSatelliteCount();
+                    LOG.debug(String.valueOf(status.getSatelliteCount()) + " satellites visible");
+
+                    // This will be used later as part of the fix in location object.
+                    gpsLocationListener.satellitesUsedInFix = satellitesUsedInFixCount;
+                    LOG.debug(String.valueOf(satellitesUsedInFixCount) + " satellites used in fix");
                 }
             };
         }
@@ -881,13 +937,20 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
-
-        //Don't log a point if user has been still
-        // However, if user has set an annotation, just log the point, disregard time and distance filters
-        if(userHasBeenStillForTooLong()) {
-            LOG.info("Received location, but the user hasn't moved. Ignoring.");
-            return;
+        // Even if it's a passive location, the loc.getTime() - session.getLatestPassiveTimeStamp()  should be greater than the previous getPassiveFilterInterval's time.
+        if(isPassiveLocation && session.getPreviousLocationInfo() != null ){
+            if  ((loc.getTime() - session.getLatestPassiveTimeStamp()) < (preferenceHelper.getPassiveFilterInterval() * 1000)) {
+                LOG.debug("Passive location discarded; interval set=>{}ms old=>{}ms now=>{}ms Filter",
+                        (preferenceHelper.getPassiveFilterInterval() * 1000),
+                        session.getLatestPassiveTimeStamp(),
+                        loc.getTime() );
+                return;
+            }
+            //If passed, save LatestPassiveTimeStamp.
+            session.setLatestPassiveTimeStamp(loc.getTime());
         }
+
+
 
         // Check that it's a user selected valid listener, even if it's a passive location.
         // In other words, if user wants satellite only, then don't log passive network locations.
@@ -1011,6 +1074,7 @@ public class GpsLoggingService extends Service  {
         writeToFile(loc);
         resetAutoSendTimersIfNecessary();
         stopManagerAndResetAlarm();
+        setupSignificantMotionSensor();
 
         EventBus.getDefault().post(new ServiceEvents.LocationUpdate(loc));
 

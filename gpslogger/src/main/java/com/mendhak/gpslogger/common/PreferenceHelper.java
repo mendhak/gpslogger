@@ -447,6 +447,21 @@ public class PreferenceHelper {
     public void setAbsoluteTimeoutForAcquiringPosition(int absoluteTimeout) {
         prefs.edit().putString(PreferenceNames.ABSOLUTE_TIMEOUT, String.valueOf(absoluteTimeout)).apply();
     }
+    
+    /**
+     * Reduce redundant passive location updates by adjusting the minimum collection interval (in seconds).
+     */
+    @ProfilePreference(name= PreferenceNames.PASSIVE_FILTER_INTERVAL)
+    public int getPassiveFilterInterval() {
+        return (Strings.toInt(prefs.getString(PreferenceNames.PASSIVE_FILTER_INTERVAL, "1"), 1));
+    }
+
+    /**
+     * Sets Reduce redundant passive location updates by adjusting the minimum collection interval (in seconds).
+     */
+    public void setPassiveFilterInterval(int filterInterval) {
+        prefs.edit().putString(PreferenceNames.PASSIVE_FILTER_INTERVAL, String.valueOf(filterInterval)).apply();
+    }
 
     /**
      * Whether to start logging on application launch
@@ -1220,6 +1235,15 @@ public class PreferenceHelper {
 
     public void setAnnotationButtonSettings(String settings){
         prefs.edit().putString(PreferenceNames.ANNOTATIONS_BUTTON_SETTINGS, settings).apply();
+    }
+
+    @ProfilePreference(name= PreferenceNames.ONLY_LOG_IF_SIGNIFICANT_MOTION)
+    public boolean shouldLogOnlyIfSignificantMotion() {
+        return prefs.getBoolean(PreferenceNames.ONLY_LOG_IF_SIGNIFICANT_MOTION, false);
+    }
+
+    public void setShouldLogOnlyIfSignificantMotion(boolean value){
+        prefs.edit().putBoolean(PreferenceNames.ONLY_LOG_IF_SIGNIFICANT_MOTION, value).apply();
     }
 
     @SuppressWarnings("unchecked")

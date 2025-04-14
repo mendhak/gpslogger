@@ -264,6 +264,23 @@ public class Session {
     }
 
     /**
+     * Store passive timestamp
+     * @return the latestPassiveTimeStamp (for location info)
+     */
+    public long getLatestPassiveTimeStamp() {
+        return Long.parseLong(get("latestPassiveTimeStamp", "0"));
+    }
+
+    /**
+     * Store passive timestamp
+     * @param latestPassiveTimeStamp the latestPassiveTimeStamp (for location info) to set
+     */
+    public void setLatestPassiveTimeStamp(long latestPassiveTimeStamp) {
+        set("latestPassiveTimeStamp", String.valueOf(latestPassiveTimeStamp));
+    }
+
+
+    /**
      * @return whether to create a new track segment
      */
     public boolean shouldAddNewTrackSegment() {
