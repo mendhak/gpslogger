@@ -19,13 +19,17 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.text.InputType;
 import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
 import eltos.simpledialogfragment.SimpleDialog;
@@ -60,6 +64,15 @@ public class PerformanceSettingsFragment
 
         findPreference(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET).setSummary(String.valueOf(preferenceHelper.getSubtractAltitudeOffset()) + getString(R.string.meters));
+
+        SensorManager sensorManager = (SensorManager)AppSettings.getInstance().getSystemService(android.content.Context.SENSOR_SERVICE);
+        Sensor significantMotionSensor = sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);
+        SwitchPreferenceCompat significantMotionSwitch = findPreference(PreferenceNames.ONLY_LOG_IF_SIGNIFICANT_MOTION);
+        if(significantMotionSensor == null && significantMotionSwitch != null){
+            significantMotionSwitch.setChecked(false);
+            significantMotionSwitch.setEnabled(false);
+        }
+
 
     }
 

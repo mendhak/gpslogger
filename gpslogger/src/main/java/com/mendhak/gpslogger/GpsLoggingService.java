@@ -463,6 +463,7 @@ public class GpsLoggingService extends Service  {
                 session.setUserStillSinceTimeStamp(System.currentTimeMillis());
             }
 
+            sensorManager.cancelTriggerSensor(triggerEventListener, significantMotionSensor);
             sensorManager.requestTriggerSensor(triggerEventListener, significantMotionSensor);
         }
     }
