@@ -940,12 +940,14 @@ public class GpsLoggingService extends Service  {
         // Even if it's a passive location, the loc.getTime() - session.getLatestPassiveTimeStamp()  should be greater than the previous getPassiveFilterInterval's time.
         if(isPassiveLocation && session.getPreviousLocationInfo() != null ){
             if  ((loc.getTime() - session.getLatestPassiveTimeStamp()) < (preferenceHelper.getPassiveFilterInterval() * 1000)) {
-                LOG.debug("Passive location listener Interval set=>{}ms old=>{}ms now=>{}ms Filter",(preferenceHelper.getPassiveFilterInterval() * 1000), session.getLatestPassiveTimeStamp(), loc.getTime() );
+                LOG.debug("Passive location discarded; interval set=>{}ms old=>{}ms now=>{}ms Filter",
+                        (preferenceHelper.getPassiveFilterInterval() * 1000),
+                        session.getLatestPassiveTimeStamp(),
+                        loc.getTime() );
                 return;
             }
             //If passed, save LatestPassiveTimeStamp.
             session.setLatestPassiveTimeStamp(loc.getTime());
-            LOG.debug("Passive location listener Interval set=>{}ms old=>{}ms now=>{}ms Pass",(preferenceHelper.getPassiveFilterInterval() * 1000), session.getLatestPassiveTimeStamp(), loc.getTime() );
         }
 
 
