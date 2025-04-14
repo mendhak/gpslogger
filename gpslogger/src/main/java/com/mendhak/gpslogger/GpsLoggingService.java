@@ -283,6 +283,13 @@ public class GpsLoggingService extends Service  {
                     needToStartGpsManager = true;
                 }
 
+                if (bundle.get(IntentConstants.PASSIVE_FILTER_INTERVAL) != null) {
+                    int passiveFilterInterval = bundle.getInt(IntentConstants.PASSIVE_FILTER_INTERVAL);
+                    LOG.debug("Intent received - Set passive filter interval: " + String.valueOf(passiveFilterInterval));
+                    preferenceHelper.setPassiveFilterInterval(passiveFilterInterval);
+                    needToStartGpsManager = true;
+                }
+                
                 if(bundle.get(IntentConstants.LOG_ONCE) != null){
                     boolean logOnceIntent = bundle.getBoolean(IntentConstants.LOG_ONCE);
                     LOG.debug("Intent received - Log Once: " + String.valueOf(logOnceIntent));
@@ -928,6 +935,17 @@ public class GpsLoggingService extends Service  {
             LOG.debug("Passive location time: " + loc.getTime() + ", previous location's time: " + session.getPreviousLocationInfo().getTime());
             LOG.debug("Passive location received, but its time was less than the previous point's time.");
             return;
+        }
+
+        // Even if it's a passive location, the loc.getTime() - session.getLatestPassiveTimeStamp()  should be greater than the previous getPassiveFilterInterval's time.
+        if(isPassiveLocation && session.getPreviousLocationInfo() != null ){
+            if  ((loc.getTime() - session.getLatestPassiveTimeStamp()) < (preferenceHelper.getPassiveFilterInterval() * 1000)) {
+                LOG.debug("Passive location listener Interval set=>{}ms old=>{}ms now=>{}ms Filter",(preferenceHelper.getPassiveFilterInterval() * 1000), session.getLatestPassiveTimeStamp(), loc.getTime() );
+                return;
+            }
+            //If passed, save LatestPassiveTimeStamp.
+            session.setLatestPassiveTimeStamp(loc.getTime());
+            LOG.debug("Passive location listener Interval set=>{}ms old=>{}ms now=>{}ms Pass",(preferenceHelper.getPassiveFilterInterval() * 1000), session.getLatestPassiveTimeStamp(), loc.getTime() );
         }
 
 

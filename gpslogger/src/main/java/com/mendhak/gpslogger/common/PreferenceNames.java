@@ -29,6 +29,7 @@ public  class PreferenceNames {
 
     public static final String LOGGING_RETRY_SHOULD_GET_BEST_POSSIBLE_ACCURACY = "retry_get_best_possible_accuracy";
     public static final String ABSOLUTE_TIMEOUT = "absolute_timeout";
+    public static final String PASSIVE_FILTER_INTERVAL = "passive_filter_interval";
     public static final String START_LOGGING_ON_APP_LAUNCH = "startonapplaunch";
     public static final String STOP_LOGGING_ON_APP_LAUNCH = "stoponapplaunch";
     public static final String START_LOGGING_ON_BOOTUP = "startonbootup";
