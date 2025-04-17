@@ -288,4 +288,5 @@
     <string name="error">Error</string>
     <string name="kilometers_per_hour"> km/h</string>
     <string name="log_plain_text_csv_advanced_title">Registrar configuracion de CSV</string>
+    <string name="txt_speed_kph">Velocidad (en km/h):</string>
 </resources>
