@@ -772,6 +772,9 @@ public class GpsLoggingService extends Service  {
     }
 
     private boolean userHasBeenStillForTooLong() {
+        if(!preferenceHelper.shouldLogOnlyIfSignificantMotion()){
+            return false;
+        }
         return !session.hasDescription() && !session.isSinglePointMode() &&
                 (session.getUserStillSinceTimeStamp() > 0 && (System.currentTimeMillis() - session.getUserStillSinceTimeStamp()) > (preferenceHelper.getMinimumLoggingInterval() * 1000));
     }
