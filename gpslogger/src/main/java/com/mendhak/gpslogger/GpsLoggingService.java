@@ -1093,6 +1093,25 @@ public class GpsLoggingService extends Service  {
         logLine.append(Strings.getFormattedLatitude(loc.getLatitude()));
         logLine.append(" ");
         logLine.append(Strings.getFormattedLongitude(loc.getLongitude()));
+        logLine.append(" ");
+
+        if(!Strings.isNullOrEmpty(loc.getProvider())){
+            String provider = loc.getProvider();
+            logLine.append("(");
+            if (provider.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
+                logLine.append(getString(R.string.listeners_gps));
+            }
+            if (provider.equalsIgnoreCase(LocationManager.NETWORK_PROVIDER)) {
+                logLine.append(getString(R.string.listeners_cell));
+            }
+            if(loc.getExtras() != null && loc.getExtras().containsKey(BundleConstants.PASSIVE) && loc.getExtras().getBoolean(BundleConstants.PASSIVE)) {
+                logLine.append(getString(R.string.listeners_passive));
+            }
+            logLine.append(")");
+        }
+
+
+
         if(loc.hasAltitude()){
             logLine.append("\n");
             logLine.append(getString(R.string.txt_altitude));
