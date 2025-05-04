@@ -925,10 +925,18 @@ public class GpsLoggingService extends Service  {
 
         LOG.debug("Has description? " + session.hasDescription() + ", Single point? " + session.isSinglePointMode() + ", Last timestamp: " + session.getLatestTimeStamp() + ", Current timestamp: " + currentTimeStamp);
 
+        // Sometimes we are given a cached location whose time is in the past and already logged.
+        if (session.getPreviousLocationInfo() != null && loc.getTime() <= session.getPreviousLocationInfo().getTime()){
+            LOG.debug("Received a stale location, its time was less than or equal to a previous point. Ignoring.");
+            return;
+        }
+
         // Don't log a point until the user-defined time has elapsed
         // However, if user has set an annotation, just log the point, disregard time and distance filters
         // However, if it's a passive location, disregard the time filter
-        if (!isPassiveLocation && !session.hasDescription() && !session.isSinglePointMode() && (currentTimeStamp - session.getLatestTimeStamp()) < (preferenceHelper.getMinimumLoggingInterval() * 1000)) {
+        if (!isPassiveLocation && !session.hasDescription()
+                && !session.isSinglePointMode()
+                && (currentTimeStamp - session.getLatestTimeStamp()) < (preferenceHelper.getMinimumLoggingInterval() * 1000)) {
             LOG.debug("Received location, but minimum logging interval has not passed. Ignoring.");
             return;
         }
