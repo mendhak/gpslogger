@@ -34,7 +34,9 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
+import android.net.NetworkRequest;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.PowerManager;
@@ -327,7 +329,19 @@ public class Systems {
 
         androidx.work.Data data = new Data.Builder().putAll(dataMap).build();
 
+        NetworkRequest.Builder builder = new NetworkRequest.Builder();
+        builder.addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            builder.addCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED);
+        }
+        if(PreferenceHelper.getInstance().shouldAutoSendOnWifiOnly()){
+            builder.addTransportType(NetworkCapabilities.TRANSPORT_WIFI);
+        }
+        NetworkRequest networkRequest = builder.build();
+
+
         Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkRequest(networkRequest, PreferenceHelper.getInstance().shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
                 .setRequiredNetworkType(PreferenceHelper.getInstance().shouldAutoSendOnWifiOnly() ? NetworkType.UNMETERED: NetworkType.CONNECTED)
                 .build();
 
