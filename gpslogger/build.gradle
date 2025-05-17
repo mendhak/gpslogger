@@ -160,7 +160,6 @@ dependencies {
     implementation 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
 
     //Android's WorkManager
-    // Bug in 2.10: https://issuetracker.google.com/issues/387656869
     implementation 'androidx.work:work-runtime:2.10.1'
     // We need to use Gson to help with WorkManager limitations
     implementation 'com.google.code.gson:gson:2.10.1'
