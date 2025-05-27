@@ -783,6 +783,11 @@ public class GpsMainActivity extends AppCompatActivity
                             return true;
                         }
 
+                        if (profile.getIdentifier() == 104){
+                            EventBus.getDefault().post(new ProfileEvents.ShareProfile());
+                            return true;
+                        }
+
 
                         //Clicked on profile name
                         String newProfileName = profile.getName().getText();
@@ -959,6 +964,12 @@ public class GpsMainActivity extends AppCompatActivity
                         .withIdentifier(103)
                         .withName(getString(R.string.save))
                         .withTag("PROFILE_SAVE")
+                ,
+                new ProfileSettingDrawerItem()
+                        .withIcon(R.drawable.share)
+                        .withIdentifier(104)
+                        .withName(getString(R.string.menu_share))
+                        .withTag("PROFILE_SHARE")
 
         );
 
@@ -1791,6 +1802,10 @@ public class GpsMainActivity extends AppCompatActivity
     @EventBusHook
     public void onEventMainThread(ProfileEvents.SaveProfile saveProfileEvent){
 
+        saveProfileToFile();
+    }
+
+    private void saveProfileToFile(){
         Dialogs.progress(GpsMainActivity.this, getString(R.string.please_wait));
         File f = new File(Files.storageFolder(GpsMainActivity.this), preferenceHelper.getCurrentProfileName()+".properties");
         try {
@@ -1806,7 +1821,24 @@ public class GpsMainActivity extends AppCompatActivity
                 Dialogs.hideProgress();
             }
         },800);
+    }
 
+    @EventBusHook
+    public void onEventMainThread(ProfileEvents.ShareProfile shareProfileEvent){
+        saveProfileToFile();
+
+        File f = new File(Files.storageFolder(getApplicationContext()), preferenceHelper.getCurrentProfileName()+".properties");
+        LOG.debug("Sharing file " + f.getAbsolutePath());
+        if(f.exists()) {
+            String authority = "com.mendhak.gpslogger.fileprovider";
+            Uri uri = FileProvider.getUriForFile(getApplicationContext(), authority, f);
+
+            final Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_STREAM, uri);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(Intent.createChooser(intent, getString(R.string.sharing_via)));
+        }
     }
 
     @EventBusHook

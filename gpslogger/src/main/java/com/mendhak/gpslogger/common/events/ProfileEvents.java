@@ -71,4 +71,9 @@ public class ProfileEvents {
      * Requests saving the profile file
      */
     public static class SaveProfile { }
+
+    /**
+     * Saves then shares the profile file
+     */
+    public static class ShareProfile { }
 }
