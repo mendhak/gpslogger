@@ -445,6 +445,25 @@ public class GpsLoggingService extends Service  {
 
     private TriggerEventListener triggerEventListener;
 
+    private void cancelAndAgainSetupSignificantMotionSensor() {
+        // Sometimes, after a long period of the significant motion sensor NOT being triggered,
+        // even if some motion occurs, the sensor just fails to trigger.
+        // https://issuetracker.google.com/issues/259298110
+        // Here, let's cancel the existing sensor then set it up again,
+        // without resetting the userStillSinceTimeStamp.
+
+        if(!preferenceHelper.shouldLogOnlyIfSignificantMotion()) {
+            return;
+        }
+
+        SensorManager sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        Sensor significantMotionSensor = sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);
+        if(significantMotionSensor != null) {
+            sensorManager.cancelTriggerSensor(triggerEventListener, significantMotionSensor);
+        }
+        triggerEventListener = null;
+        setupSignificantMotionSensor();
+    }
     private void setupSignificantMotionSensor(){
 
         if(!preferenceHelper.shouldLogOnlyIfSignificantMotion()) {
@@ -455,23 +474,26 @@ public class GpsLoggingService extends Service  {
         Sensor significantMotionSensor = sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);
 
         if(significantMotionSensor != null) {
-            LOG.warn("Setting up significant motion sensor manager");
+            LOG.warn("Setting up significant motion sensor manager"); // TODO: change to debug later
 
             if(triggerEventListener == null){
+                // Brand new listener
                 triggerEventListener = new TriggerEventListener() {
                     @Override
                     public void onTrigger(TriggerEvent event) {
-                        LOG.warn("TRIGGERED!");
+                        LOG.warn("TRIGGERED!"); // TODO: change to debug later
                         session.setUserStillSinceTimeStamp(System.currentTimeMillis());
                     }
                 };
             }
             else {
+                // Called when a location has been found
                 session.setUserStillSinceTimeStamp(System.currentTimeMillis());
             }
 
             sensorManager.cancelTriggerSensor(triggerEventListener, significantMotionSensor);
             sensorManager.requestTriggerSensor(triggerEventListener, significantMotionSensor);
+            session.setSignificantMotionSensorCreationTimeStamp(System.currentTimeMillis());
         }
     }
 
@@ -654,6 +676,15 @@ public class GpsLoggingService extends Service  {
 
         //If the user has been still for more than the minimum seconds
         if(userHasBeenStillForTooLong()) {
+
+            if(preferenceHelper.shouldLogOnlyIfSignificantMotion() && session.getUserStillSinceTimeStamp() > 0){
+                long howLongSinceSignificantMotionSensorCreated = System.currentTimeMillis() - session.getSignificantMotionSensorCreationTimeStamp();
+                if(howLongSinceSignificantMotionSensorCreated > 5 * 60 * 1000){
+                    LOG.warn("Significant motion sensor has been created for more than 5 minutes, resetting sensor!"); //TODO: change to debug later
+                    cancelAndAgainSetupSignificantMotionSensor();
+                }
+            }
+
             LOG.info("No movement detected in the past interval, will not log");
             setAlarmForNextPoint();
             return;

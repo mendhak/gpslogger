@@ -385,6 +385,13 @@ public class Session {
         set("userStillSinceTimeStamp", String.valueOf(lastUserStillTimeStamp));
     }
 
+    public long getSignificantMotionSensorCreationTimeStamp() {
+        return Long.parseLong(get("significantMotionSensorCreationTimeStamp", "0"));
+    }
+    public void setSignificantMotionSensorCreationTimeStamp(long significantMotionSensorCreationTimeStamp) {
+        set("significantMotionSensorCreationTimeStamp", String.valueOf(significantMotionSensorCreationTimeStamp));
+    };
+
     public void setFirstRetryTimeStamp(long firstRetryTimeStamp) {
         set("firstRetryTimeStamp", String.valueOf(firstRetryTimeStamp));
     }
