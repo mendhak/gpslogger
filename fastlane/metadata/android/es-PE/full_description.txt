@@ -8,12 +8,11 @@ Un Capturador de Datos GPS ligero, con poco consumo de batería. El propósito d
 * Archivos GPX y/o KML
 * Muestra una notificación
 * Usar la hora del teléfono o la hora del satélite
-* Imperial display units
+* Unidades de medida imperiales
 * Inicio automático en el arranque
 * Envío de correos electrónicos cada pocas horas
 * OpenStreetMap - upload GPS traces
 * Dropbox - subir archivos GPX/KML/ZIP
-
 
 Para errores, peticiones de funcionalidades, preguntas - por favor envíelas a github.com/mendhak/gpslogger (rastreador de problemas).  
 
