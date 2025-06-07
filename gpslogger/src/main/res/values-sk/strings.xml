@@ -408,4 +408,9 @@ polia.
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notifikácie</b> - Povoliť zobrazenie notifikácie, ktorá pomôže udržať proces zaznamenávania aktívny. ]]></string>
     <string name="started_at">spustené</string>
     <string name="hide_notification_from_lock_screen">Skryť notifikáciu z obrazovky uzamknutia</string>
+    <string name="passive_filter_time_title">Interval aktualizovania pasívnych lokalít</string>
+    <string name="passive_filter_time_summary">Obmedzte zbytočné aktualizovanie pasívnych lokalít úpravu minimálneho intervalu pre zber (v sek.).</string>
+    <string name="autosend_wifionly_summary">Čakať na WiFi pripojenie pred vykonaním sieťových požiadaviek. Týka sa všetkých požiadaviek, aj odosielania a zaznamenávania.</string>
+    <string name="only_log_if_significant_motion_title">Zaznamenávať len pri výraznom pohybe</string>
+    <string name="only_log_if_significant_motion_summary">Zaznamenávať len pri výraznej aktivite, ako je kráčanie, jazda. Významnosť pohybu určuje váš OS.</string>
 </resources>
