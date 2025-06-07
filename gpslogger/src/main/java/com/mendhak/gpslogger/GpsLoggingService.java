@@ -474,14 +474,14 @@ public class GpsLoggingService extends Service  {
         Sensor significantMotionSensor = sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);
 
         if(significantMotionSensor != null) {
-            LOG.warn("Setting up significant motion sensor manager"); // TODO: change to debug later
+            LOG.debug("Setting up significant motion sensor manager");
 
             if(triggerEventListener == null){
                 // Brand new listener
                 triggerEventListener = new TriggerEventListener() {
                     @Override
                     public void onTrigger(TriggerEvent event) {
-                        LOG.warn("TRIGGERED!"); // TODO: change to debug later
+                        LOG.debug("Motion detected.");
                         session.setUserStillSinceTimeStamp(System.currentTimeMillis());
                     }
                 };
@@ -680,7 +680,7 @@ public class GpsLoggingService extends Service  {
             if(preferenceHelper.shouldLogOnlyIfSignificantMotion() && session.getUserStillSinceTimeStamp() > 0){
                 long howLongSinceSignificantMotionSensorCreated = System.currentTimeMillis() - session.getSignificantMotionSensorCreationTimeStamp();
                 if(howLongSinceSignificantMotionSensorCreated > 5 * 60 * 1000){
-                    LOG.warn("Significant motion sensor has been created for more than 5 minutes, resetting sensor!"); //TODO: change to debug later
+                    LOG.debug("Significant motion sensor has been created for more than 5 minutes, resetting sensor.");
                     cancelAndAgainSetupSignificantMotionSensor();
                 }
             }
