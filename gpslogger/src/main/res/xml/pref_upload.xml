@@ -37,6 +37,7 @@
         android:defaultValue="false"
         android:key="autosend_wifionly"
         android:title="@string/autosend_wifionly_title"
+        android:summary="@string/autosend_wifionly_summary"
         app:iconSpaceReserved="false" />
 
     <PreferenceCategory

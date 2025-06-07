@@ -436,6 +436,7 @@
     <string name="inaccurate_point_discarded">Inaccurate point discarded</string>
     <string name="not_enough_distance_traveled">Only %s m traveled. Point discarded.</string>
     <string name="autosend_wifionly_title">Send on Wi-Fi only</string>
+    <string name="autosend_wifionly_summary">Wait for a WiFi connection before performing any network requests. Applies to all requests including sending and logging.</string>
     <string name="logview_showlocationsonly">Locations only</string>
     <string name="logview_autoscroll">Auto Scroll</string>
     <string name="profile_create_new">Create new profile</string>
