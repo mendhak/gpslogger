@@ -1,6 +1,7 @@
 * Ignore battery optimization is now mandatory because the OS starts killing services without it.
 * Fix for FAQ activity on edge to edge layout for Android 15.
-* Bugfix: the autosend alarm was being reset even after logging stopped, causing notification to reappear.
-* Bugfix: Email headers and MIME types correctly sent
-* Bugfix: Ignore stale locations
-* Experimental: Ability to log only if there's been significant motion.
+* The autosend alarm was being reset even after logging stopped, causing notification to reappear
+* Email headers and MIME types correctly sent
+* Ignore stale locations
+* Time filter for passive locations
+* Experimental: Only log if there's been significant motion
