@@ -1,3 +1,7 @@
 * V súčasnosti je povinné ignorovanie optimalizácie batérie, pretože bez toho OS ukončuje služby.
 * Oprava pre aktivitu FAQ pri rozložení typu "edge to edge" pre systém Android 15.
-* Oprava chyby: alarm pre automatické odoslanie sa resetoval aj po zastavení zaznamenávania. To spôsobovalo opätovné zobrazenie notifikácie.
+* Oprava chyby: reset alarmu pre automatické odoslanie aj po zastavení zaznamenávania. To spôsobovalo opätovné zobrazenie notifikácie.
+* Hlavičky e-mailov a MIME typy sú odosielané správne
+* Ignorovanie neaktuálnych lokalít
+* Časový filter pre pasívne lokality
+* Experimentálne: zaznamenávanie len pri významnom pohybe
