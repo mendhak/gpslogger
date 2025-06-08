@@ -388,4 +388,9 @@
     <string name="annotation_edit_button_label">アノテーションボタンの編集</string>
     <string name="prompt_for_details_when_logging_starts">ロギング開始時に詳細入力</string>
     <string name="reset_app_summary">この操作で、アプリはリセットされ、あらゆる設定の削除、GPSLoggerファイルの削除、このアプリで付与済みの権限が取り消されます。 関連データは全て失われます！</string>
+    <string name="passive_filter_time_summary">(秒単位の)最小収集間隔を調整して、冗長なパッシブロケーションの更新を減らします。</string>
+    <string name="passive_filter_time_title">パッシブ・ロケーション更新間隔</string>
+    <string name="autosend_wifionly_summary">ネットワーク・リクエストの実施前にWiFi接続の確立を待ちます。 送信・ログを含む全てのリクエストに適用されます。</string>
+    <string name="only_log_if_significant_motion_title">大きな動きの変化があった場合だけ記録する</string>
+    <string name="only_log_if_significant_motion_summary">歩行、自転車・自動車の運転など、著しい動作が検出された場合だけログを記録します。 有効な動作かはOS側で判断されます。</string>
 </resources>
