@@ -389,4 +389,9 @@
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Сповіщення</b> – Дозволити показ сповіщень, це допомагає підтримувати роботу служби журналювання. ]]></string>
     <string name="prompt_for_details_when_logging_starts">Запитувати деталі під час реєстрації</string>
     <string name="retry_get_best_possible_accuracy_summary">Замість того, щоб реєструвати першу точну точку, продовжуйте намагатися визначити тривалість точності та виберіть точку з найкращою точністю. Це займає більше часу, але збільшує шанси отримати точніші бали.</string>
+    <string name="passive_filter_time_title">Інтервал оновлення пасивних локацій</string>
+    <string name="passive_filter_time_summary">Зменште кількість надлишкових пасивних оновлень місцезнаходження, налаштувавши мінімальний інтервал збору даних (у секундах).</string>
+    <string name="only_log_if_significant_motion_title">Записуйте лише за наявності значного руху</string>
+    <string name="only_log_if_significant_motion_summary">Записувати лише у випадку виявлення значної активності, такої як ходьба, їзда на велосипеді, керування автомобілем. Значний рух визначається вашою ОС.</string>
+    <string name="autosend_wifionly_summary">Зачекайте на встановлення з’єднання Wi-Fi, перш ніж виконувати будь-які мережеві запити. Стосується всіх запитів, включаючи надсилання та реєстрацію.</string>
 </resources>
