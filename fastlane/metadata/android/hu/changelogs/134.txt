@@ -1,3 +1,7 @@
 * Mostantól az akkumulátoroptimalizálást kötelező figyelmen kívül hagyni.
 * Javítás: Android 15-nél teljes szélességű a GYIK elrendezése.
 * Hibajavítás: automatikus küldési riasztás a naplózás leállítása után is visszaállításra került, így az értesítés újra megjelent.
+* Az e-mail fejlécek és a MIME-típusok helyesen kerülnek elküldésre. 
+* Elavult helyeket figyelmen kívül hagyja.
+* Időszűrő passzív helyekhez.
+* Kísérleti: Csak jelentős mozgás esetén naplóz
