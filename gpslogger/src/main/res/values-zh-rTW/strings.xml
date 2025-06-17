@@ -333,4 +333,11 @@
     <string name="google_drive_folder_path">Google 硬碟檔案路徑</string>
     <string name="google_drive_folder_path_summary_1">使用單一資料夾名稱 (例如 GPSLogger)，或是檔案路徑 (例如 aaa/bbb/ccc)。資料夾必須由應用程式創建。</string>
     <string name="retry_get_best_possible_accuracy_summary">與其記錄第一個正確節點，請試著評估精確度時段以及選擇最精確的節點。也許會花得時間比較久，但會記錄更精確的節點的機會。</string>
+    <string name="log_customurl_summary_detailed">無論位置節點截取狀況，寄送請求到客製連結。視記錄區間。</string>
+    <string name="autoftp_ssltls_ssl">SSL</string>
+    <string name="log_customurl_discard_offline_locations">遺棄離線地點</string>
+    <string name="autoftp_ssltls_tls">TLS</string>
+    <string name="autosend_customurl_summary">(這個功能啟用 CSV 記錄) 大量寄送客製連結請求，在 CSV 檔案當中一次記錄一行，視自動傳送區間的設定。</string>
+    <string name="autoftp_setup_title">FPT</string>
+    <string name="log_customurl_setup_title">客製連結</string>
 </resources>
