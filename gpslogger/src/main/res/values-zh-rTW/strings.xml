@@ -330,4 +330,7 @@
     <string name="app_name">GPS記錄器</string>
     <string name="retry_get_best_possible_accuracy_title">在時段內選擇最佳精確度</string>
     <string name="time_before_logging_summary">使用 0 表示最大頻率，但是比較慢會對電池壽命比較好。系統層級的電池管理設定則可能覆寫這項設定，請參照說明與常見問題。</string>
+    <string name="google_drive_folder_path">Google 硬碟檔案路徑</string>
+    <string name="google_drive_folder_path_summary_1">使用單一資料夾名稱 (例如 GPSLogger)，或是檔案路徑 (例如 aaa/bbb/ccc)。資料夾必須由應用程式創建。</string>
+    <string name="retry_get_best_possible_accuracy_summary">與其記錄第一個正確節點，請試著評估精確度時段以及選擇最精確的節點。也許會花得時間比較久，但會記錄更精確的節點的機會。</string>
 </resources>
