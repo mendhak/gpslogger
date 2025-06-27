@@ -355,4 +355,10 @@
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[這款 app 需要各種權限才能正常運作。你需要多次被詢問相關限制 (抱歉)。 這邊解釋各種權限。 ]]></string>
     <string name="listeners_gps">GPS</string>
     <string name="gpslogger_custom_path_need_permission">為了在 GPSLogger 使用客製路徑，請允許 GPSLogger 來管理下個畫面的所有檔案。接著再試一次，這是因為 Android 11+ 的限制。</string>
+    <string name="app_theme_setting">設定淺色或是深色 app 主題</string>
+    <string name="file_logging_log_time_with_offset_title">寫入時區偏差資訊</string>
+    <string name="app_theme_light">淺色主題</string>
+    <string name="app_theme_dark">深色主題</string>
+    <string name="app_theme_title">app 主題</string>
+    <string name="app_theme_follow_system">跟隨系統</string>
 </resources>
