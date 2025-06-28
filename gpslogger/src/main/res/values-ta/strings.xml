@@ -389,5 +389,5 @@
     <string name="hide_notification_from_lock_screen">பூட்டுத் திரையில் இருந்து அறிவிப்பை மறைக்கவும்</string>
     <string name="prompt_for_details_when_logging_starts">உள்நுழைவு தொடங்கும் போது விவரங்களுக்கு வரியில்</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>அறிவிப்புகள் </b> - அறிவிப்பைக் காட்ட அனுமதிக்கவும், இது பதிவு சேவையை உயிரோடு வைத்திருக்க உதவுகிறது. ]]></string>
-    <string name="new_file_custom_message">"%SER சாதன சீரியல்,  %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER பதிப்பிற்காக"</string>
+    <string name="new_file_custom_message">%SER சாதன சீரியல், %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER பதிப்பிற்காக</string>
 </resources>
