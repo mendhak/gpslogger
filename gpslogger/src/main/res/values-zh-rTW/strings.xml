@@ -198,7 +198,7 @@
     <string name="shortcut_stop">停止</string>
     <string name="shortcut_pickaction">選擇一項操作</string>
     <string name="log_opengts_title">記錄至 OpenGTS 伺服器</string>
-    <string name="log_opengts_summary">傳送 GPRMC 資料至線上 OpenGTS 伺服器，</string>
+    <string name="log_opengts_summary">傳送 GPRMC 資料至線上 OpenGTS 伺服器。</string>
     <string name="autoopengts_server_category">OpenGTS 設定</string>
     <string name="autoopengts_server">伺服器</string>
     <string name="autoopengts_server_summary">主機名稱或 IP</string>
