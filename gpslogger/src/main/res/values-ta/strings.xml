@@ -390,5 +390,7 @@
     <string name="prompt_for_details_when_logging_starts">உள்நுழைவு தொடங்கும் போது விவரங்களுக்கு வரியில்</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>அறிவிப்புகள் </b> - அறிவிப்பைக் காட்ட அனுமதிக்கவும், இது பதிவு சேவையை உயிரோடு வைத்திருக்க உதவுகிறது. ]]></string>
     <string name="new_file_custom_message">%SER சாதன சீரியல், %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER பதிப்பிற்காக</string>
-    <string name="passive_filter_time_title">செயலற்ற இடங்கள் இடைவெளி புதுப்பித்தல்</string>
+    <string name="passive_filter_time_title">செயலற்ற இடங்கள் புதுப்பித்தல் இடைவெளி</string>
+    <string name="passive_filter_time_summary">குறைந்தபட்ச சேகரிப்பு இடைவெளியை (நொடிகளில்) சரிசெய்வதன் மூலம் தேவையற்ற செயலற்ற இருப்பிட புதுப்பிப்புகளைக் குறைக்கவும்.</string>
+    <string name="autosend_wifionly_summary">எந்தவொரு பிணைய கோரிக்கைகளையும் செய்வதற்கு முன் வைஃபை இணைப்புக்காக காத்திருங்கள். அனுப்புதல் மற்றும் உள்நுழைவு உள்ளிட்ட அனைத்து கோரிக்கைகளுக்கும் பொருந்தும்.</string>
 </resources>
