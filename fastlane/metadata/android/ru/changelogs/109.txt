@@ -1,0 +1,2 @@
+Перепакуйте GPSLogger для F-Droid. 
+Удалите зависимости Google Drive, Activity Recognition, Play Services.

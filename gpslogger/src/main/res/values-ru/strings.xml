@@ -390,4 +390,9 @@
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Уведомления</b> — Разрешить показ уведомления; это поможет сохранить процесс записи активным. ]]></string>
     <string name="started_at">запущено</string>
     <string name="hide_notification_from_lock_screen">Скрыть уведомление с экрана блокировки</string>
+    <string name="passive_filter_time_title">Интервал обновления пассивных местоположений</string>
+    <string name="passive_filter_time_summary">Сократите кол-во избыточных пассивных обновлений местоположения, настроив минимальный интервал сбора данных (в секундах).</string>
+    <string name="autosend_wifionly_summary">Перед выполнением любых сетевых запросов дождитесь подключения к WIFI. Применяется ко всем запросам, включая отправку и ведение журнала.</string>
+    <string name="only_log_if_significant_motion_title">Ведите журнал только в случае значительного движения</string>
+    <string name="only_log_if_significant_motion_summary">Введите журнал только при обнаружении значительной активности, например при ходьбе, езде на велосипеде, вождении автомобиля. Значительная активность определяется вашей ОС.</string>
 </resources>
