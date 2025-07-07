@@ -390,4 +390,7 @@
     <string name="started_at">开始于</string>
     <string name="hide_notification_from_lock_screen">在锁屏界面隐藏通知</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>通知</b>-允许显示出通知，这有助于保持记录服务存活。 ]]></string>
+    <string name="only_log_if_significant_motion_summary">仅在检测到显著活动（如步行、骑行、驾驶）时记录。是否属于显著运动由系统判定。</string>
+    <string name="autosend_wifionly_summary">在执行任何网络请求（包括数据发送和日志记录）前，需等待 WiFi 连接。</string>
+    <string name="only_log_if_significant_motion_title">仅在检测到显著运动时记录</string>
 </resources>
