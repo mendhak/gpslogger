@@ -105,18 +105,6 @@
         </activity>
 
         <activity
-            android:name=".Faqtivity"
-            android:label="@string/faq_screen_title"
-            android:launchMode="singleTask"
-            android:parentActivityName=".GpsMainActivity"
-            android:exported="true"
-            >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mendhak.gpslogger.GpsMainActivity" />
-        </activity>
-
-        <activity
             android:name="com.dropbox.core.android.AuthActivity"
             android:configChanges="orientation|keyboard"
             android:exported="true"

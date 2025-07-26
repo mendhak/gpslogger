@@ -268,33 +268,6 @@ tasks.configureEach { task ->
 }
 
 
-task buildDocs(group: "docs", type: NodeTask, dependsOn:"installNodeModules") {
-    script = file('../assets/generate-pages/index.js')
-    execOverrides {
-        it.workingDir = '../assets/generate-pages'
-    }
-}
-
-task installNodeModules(group:"docs", type:NpmTask){
-    args = ['install']
-    execOverrides {
-        it.workingDir = '../assets/generate-pages'
-    }
-}
-
-task copyFAQsIntoAssets(group:"docs", type:Copy){
-    from '../assets/text/faq'
-    into 'src/main/assets/faq/'
-    include('*.md')
-}
-
-task deleteFAQsAssets(group:"docs", type:Delete){
-    def dirName = 'src/main/assets/faq'
-    fileTree( dirName ).include('**/*.md').each{
-            f -> delete f
-        }
-}
-
 task copyFinalAPK(group:'build') {
     //Copies final APK to this directory
     def finalApkName = "gpslogger-"+android.defaultConfig.versionName+".apk"
@@ -308,23 +281,9 @@ task copyFinalAPK(group:'build') {
             fileName.replace("gpslogger-release.apk", finalApkName)
         }
     }
-//        //PGP Sign
-//        //Verify with gpg --verify ~/Downloads/gpslogger-71.apk.asc
-//    if(file(finalApkName).isFile()){
-//        signing {
-//            useGpgCmd()
-//            sign file(finalApkName)
-//        }
-//
-//        //SHA256 Checksum
-//        //Verify with sha256sum -c ~/Downloads/gpslogger-71.apk.SHA256
-//        ant.checksum(file: finalApkName, fileext: '.SHA256', algorithm: "SHA-256", pattern: "{0} {1}")
-//    }
 
 }
 
-preBuild.dependsOn copyFAQsIntoAssets
-clean.dependsOn deleteFAQsAssets
 
 task deleteReleaseAPKs(group:"build", type:Delete){
     delete fileTree(dir:'./', include:'*.apk*')
