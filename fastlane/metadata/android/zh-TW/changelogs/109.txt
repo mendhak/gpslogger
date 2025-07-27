@@ -1,0 +1,2 @@
+為F-Droid重新打包GPSLogger
+移除Google碟諜、Activity Recognition、Play服務相依性。
