@@ -14,7 +14,7 @@ Then browse to http://localhost:8080/
 To generate the output once, without web server:
 
 ```
-docker-compose run --rm --entrypoint "/bin/bash -c 'npm install;npx eleventy'" eleventy
+docker compose run --rm --entrypoint "/bin/bash -c 'npm install;npx eleventy'" eleventy
 ```
 
 Always run through docker, not via npm, because all the input and output folders are in parent paths which makes npm running a lot more difficult. 
@@ -22,7 +22,7 @@ Always run through docker, not via npm, because all the input and output folders
 After generating the HTML, to run tests: 
 
 ```
-docker-compose -f docker-compose.tests.yml run --rm smashtest
+docker compose -f docker-compose.tests.yml run --service-ports --rm playwright
 ```
 
 
