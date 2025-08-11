@@ -1,0 +1,7 @@
+*Pengoptimuman bateri kini wajib diabaikan kerana OS akan mula mematikan perkhidmatan tanpa kebenaran ini.
+*Pembetulan untuk aktiviti Soalan Lazim (FAQ) pada susun atur tepi bagi Android 15.
+*Penggera hantar automatik diset semula walaupun peloggan telah berhenti, menyebabkan pemberitahuan muncul semula
+*Tajuk e-mel dan jenis MIME dihantar dengan betul
+*Abaikan lokasi lapuk/lama
+*Penapis masa untuk lokasi pasif
+*Eksperimental: Catat hanya jika terdapat pergerakan yang ketara

@@ -1,0 +1,4 @@
+*Meningkatkan rujukan SDK dan perpustakaan dalaman secara besar-besaran supaya lebih serasi dengan keperluan Android terkini.
+*Peningkatan SDK bermakna aplikasi lebih menghormati kebenaran latar belakang, dan mungkin menggunakan penggera tidak tepat jika kebenaran bekerja di latar belakang tidak diberikan.
+*Peningkatan SDK bermakna amaran F-Droid dan APK tentang aplikasi ini dibina untuk versi lama tidak akan kelihatan lagi.
+*Android 4.x tidak lagi disokong.

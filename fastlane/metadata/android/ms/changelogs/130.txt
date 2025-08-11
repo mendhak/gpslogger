@@ -1,0 +1,4 @@
+*Pilihan ketepatan baharu – berjalan sepanjang tempoh cuba semula, dan pilih titik paling tepat.
+*Pendengar pasif kini akan memadankan pendengar lain yang dipilih (GNSS/Rangkaian). Jika tiada satu pun yang dipilih, semua titik diterima.
+*Muat naik URL Tersuai lebih pantas untuk hantar secara automatik.
+*Ciri baharu stoponapplaunch, hanya tersedia melalui fail .properties

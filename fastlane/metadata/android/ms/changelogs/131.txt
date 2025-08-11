@@ -1,0 +1,6 @@
+*Pilihan OpenStreetMap untuk ditanya dahulu sebelum peloggan bermula
+*Beralih kepada Android WorkManager untuk tugasan penghantaran, sepatutnya lebih handal.
+*Siaran dihantar apabila muat naik fail selesai, berguna untuk automasi membersihkan fail.
+*Pemberitahuan ralat dan kurang ranap sekiranya kebenaran ditarik balik atau penulisan fail gagal.
+*Parameter URL Tersuai baharu, %SPD_KPH.
+*Penerangan hantar secara automatik diperjelaskan: pertukaran nama fail dinamik juga menyebabkan fail dihantar.
