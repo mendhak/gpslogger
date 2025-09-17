@@ -1,0 +1,6 @@
+* Se solicitará la opción de OpenStreetMap antes de iniciar el registro.
+* Se ha cambiado a Android WorkManager para el envío de tareas; esto debería ser más fiable.
+* Se envía una transmisión al finalizar la carga del archivo, lo que resulta útil para la automatización de la limpieza de archivos.
+* Se han añadido notificaciones de error y se reducen los fallos si se revocan los permisos o falla la escritura de archivos.
+* Nuevo parámetro de URL personalizada: %SPD_KPH
+* Se ha aclarado la descripción del envío automático: el cambio dinámico del nombre de archivo también implica el envío del archivo.

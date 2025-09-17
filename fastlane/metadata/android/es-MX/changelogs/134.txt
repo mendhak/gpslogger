@@ -1,0 +1,7 @@
+* Ignorar la optimización de la batería ahora es obligatorio porque el sistema operativo comienza a cerrar servicios sin ella.
+* Corrección de la actividad de preguntas frecuentes en el diseño de borde a borde para Android 15.
+* La alarma de envío automático se restablecía incluso después de detener el registro, lo que provocaba que la notificación reapareciera.
+* Los encabezados de correo electrónico y los tipos MIME se enviaron correctamente.
+* Ignorar ubicaciones obsoletas.
+* Filtro de tiempo para ubicaciones pasivas.
+* Experimental: Registrar solo si ha habido movimiento significativo.

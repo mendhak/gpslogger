@@ -1,0 +1,2 @@
+* Corrección de error: Al denegar el permiso para trabajar en segundo plano, el envío automático provocaba el bloqueo de la aplicación.
+* Corrección de error: Ajuste de las inserciones de diseño para Android 15.

@@ -1,0 +1,4 @@
+* Nueva opción de precisión: se ejecuta durante el intervalo de reintento y selecciona el punto más preciso.
+* El receptor pasivo ahora coincidirá con otros receptores seleccionados (GNSS/Red). Si no se selecciona ninguno, se aceptan todos los puntos.
+* Carga de URL personalizadas más rápida para el envío automático.
+* Nueva propiedad stoponapplaunch, disponible solo mediante el archivo .properties.

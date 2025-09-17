@@ -1,0 +1,4 @@
+* URL personalizada: se añadió la opción de descartar ubicaciones sin conexión; útil para enviar la ubicación más reciente.
+* URL personalizada: se reintentará un máximo de 3 veces en lugar de 5.
+* Corrección de error: al ejecutarse durante un tiempo prolongado, se mostraban horas negativas.
+* Mejora: las alarmas de envío automático son más fiables y precisas.
