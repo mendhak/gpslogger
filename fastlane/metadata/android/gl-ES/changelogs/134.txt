@@ -1,3 +1,7 @@
-* Ignorar a optimización da batería agora é obrigatorio porque o sistema operativo comeza a matar servizos sen ela.
-* Corrixiuse a actividade das preguntas frecuentes no deseño de bordo a bordo para Android 15.
-* Corrección de erros: a alarma de envío automático estaba a ser restabelecida mesmo após que se detivese o rexistro, causando que a notificación volvese aparecer.
+* Agora é obrigatorio ignorar a optimización da batería porque o S.O. comeza a matar os servizos sen ela.
+* Corrección da actividade de FAQ no deseño de bordo a bordo para Android 15.
+* A alarma de envío automático estaba a ser restablecida mesmo após deter o rexistro, causando que a notificación volvese aparecer
+* Cabeceiras de correo-e e tipos MIME enviados correctamente
+* Ignorar as localizacións obsoletas
+* Filtro de tempo para localizacións pasivas
+* Experimental: Rexistrar só se houbo movemento significativo
