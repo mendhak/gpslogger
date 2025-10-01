@@ -1,0 +1,9 @@
+* Solución para el problema de subida a ownCloud/NextCloud
+* Debido a las nuevas restricciones de almacenamiento de Android, solo se puede escribir en las carpetas propias de la app.
+
+* En Android 10 o superior, el flujo de trabajo de permisos ahora solicitará el permiso "permitir siempre".
+* El flujo de trabajo de permisos también solicitará la desactivación de la optimización de la batería.
+* El flujo de trabajo de permisos es molesto; lo sentimos, es necesario para ayudar con las numerosas solicitudes de soporte relacionadas con las limitaciones de fondo.
+* Iconos adaptables, gracias a @kanru.
+* Se añadió una opción para restablecer la app (elimina todos los archivos y permisos de la app) en la configuración general.
+* Traducciones actualizadas de Crowdin.

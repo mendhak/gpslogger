@@ -1,0 +1,5 @@
+* Nuevo parámetro de URL personalizada: %ALL, que reemplaza todos los parámetros de URL personalizada disponibles.
+* Corrección de error: Escapar el signo + en las marcas de tiempo de las URL personalizadas.
+* Corrección de error: El temporizador no se reinicia al cambiar de perfil.
+* Corrección de error: Al cerrar el panel, cerrar primero la lista de perfiles.
+* Corrección de error: Al hacer clic en un elemento de la lista de perfiles, mantener el panel abierto.

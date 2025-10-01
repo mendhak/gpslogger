@@ -388,4 +388,9 @@
     <string name="prompt_for_details_when_logging_starts">Aufforderung zur Eingabe von Details bei Beginn der Protokollierung</string>
     <string name="started_at">Gestartet am</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notifications</b> - Erlaube die Anzeige einer Benachrichtigung, das hilft, den Protokollierungsdienst am Leben zu erhalten. ]]></string>
+    <string name="passive_filter_time_title">Aktualisierungsintervall für passive Standorte</string>
+    <string name="passive_filter_time_summary">Reduziere unnötige passive Standortaktualisierungen, indem du das minimale Erfassungsintervall (in Sekunden) anpasst.</string>
+    <string name="autosend_wifionly_summary">Warte auf eine WLAN-Verbindung, bevor du irgendwelche Netzwerk-Anfragen machst. Das gilt für alle Anfragen, auch für das Senden und Protokollieren.</string>
+    <string name="only_log_if_significant_motion_title">Nur bei deutlicher Bewegung protokollieren</string>
+    <string name="only_log_if_significant_motion_summary">Nur aufzeichnen, wenn du dich richtig bewegst, wie zum Beispiel beim Laufen, Radfahren oder Autofahren. Was als richtige Bewegung zählt, entscheidet dein Betriebssystem.</string>
 </resources>

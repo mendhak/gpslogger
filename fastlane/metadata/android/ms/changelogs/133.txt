@@ -1,0 +1,2 @@
+*Pembetulan pepijat – apabila kebenaran kerja latar belakang ditolak, fungsi hantar automatik telah menyebabkan aplikasi rosak(crash)
+*Pembetulan pepijat – laraskan sisipan reka letak untuk Android 15

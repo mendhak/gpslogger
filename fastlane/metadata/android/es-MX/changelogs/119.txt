@@ -1,0 +1,8 @@
+* La URL personalizada se puede usar como autoenviador para mejorar la fiabilidad.
+* Opción para escribir la hora con diferencia horaria en los detalles de registro (GPX, KML, GeoJSON, CSV).
+* La URL personalizada puede usar el parámetro %TIMEOFFSET.
+* Registro CSV: se han añadido más campos.
+* Registro CSV: opción para especificar el delimitador de campo y el separador decimal (coma).
+* La vista de registro mostrará las coordenadas en el formato preferido del usuario.
+* Si se recupera de una parada inesperada, inicie el registro si la aplicación lo estaba haciendo previamente.
+* Corrección de errores para húngaro.

@@ -1,0 +1,3 @@
+* En Android R y versiones posteriores, se puede hacer clic en la ruta de la carpeta.
+* Icono monocromo.
+* Añadir el elemento <name> a las etiquetas <trk> en archivos GPX.

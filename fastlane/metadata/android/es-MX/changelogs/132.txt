@@ -1,0 +1,4 @@
+* Principalmente, se actualiza el SDK interno y las referencias de bibliotecas para que sea más compatible con los últimos requisitos de Android.
+* Las actualizaciones del SDK implican que la aplicación respeta mejor los permisos en segundo plano y puede usar alarmas inexactas si no se conceden los permisos de los trabajadores en segundo plano.
+* Las actualizaciones del SDK implican que ya no debería aparecer la advertencia de F-Droid ni del APK sobre la compilación para versiones anteriores.
+* Android 4.x ya no es compatible.

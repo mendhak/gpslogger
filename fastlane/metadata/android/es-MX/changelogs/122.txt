@@ -1,0 +1,6 @@
+* ¡Google Drive regresa! Reimplementado sin bibliotecas de código cerrado.
+* Posible corrección de error para la notificación de GPSLogger que aparecía aleatoriamente cuando no se usaba.
+* Si los servicios de ubicación están deshabilitados, la aplicación ahora simplemente esperará (con un icono de advertencia) y se reanudará al volver a habilitarse.
+* Se ajustó el tamaño de fuente en la vista detallada para que la latitud y la longitud se ajusten mejor.
+* Se usa una alarma más precisa para ayudar con las ubicaciones suprimidas en el modo de sueño.
+* Nueva preferencia de doble acción en la configuración de carga.

@@ -390,4 +390,9 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificaciones</b> - Permite mostrar una notificación, esto ayuda a mantener vivo el servicio de registro. ]]></string>
     <string name="prompt_for_details_when_logging_starts">Preguntar detalles al iniciar el registro</string>
     <string name="customurl_all_parameters">Todos los parámetros:</string>
+    <string name="passive_filter_time_title">Intervalo de actualización de ubicaciones pasivas</string>
+    <string name="passive_filter_time_summary">Reducir las actualizaciones de ubicación pasivas redundantes ajustando el intervalo mínimo de recopilación (en segundos).</string>
+    <string name="autosend_wifionly_summary">Espere a que haya una conexión WIFI antes de realizar cualquier solicitud de red. Esto aplica a todas las solicitudes, incluyendo el envío y el registro.</string>
+    <string name="only_log_if_significant_motion_title">Solo registre si hay movimiento significativo</string>
+    <string name="only_log_if_significant_motion_summary">Registrar solo si se detecta actividad significativa, como caminar, andar en bicicleta o conducir. El movimiento significativo lo determina el sistema operativo.</string>
 </resources>
