@@ -202,12 +202,14 @@ class Gpx10WriteHandler implements Runnable {
     Location loc;
     private File gpxFile = null;
     private boolean addNewTrackSegment;
+    protected GpxVersion gpxVersion;
 
     public Gpx10WriteHandler(String dateTimeString, File gpxFile, Location loc, boolean addNewTrackSegment) {
         this.dateTimeString = dateTimeString;
         this.addNewTrackSegment = addNewTrackSegment;
         this.gpxFile = gpxFile;
         this.loc = loc;
+        this.gpxVersion = GpxVersion.GPX_VERSION_1_0;
     }
 
     @Override
@@ -256,7 +258,7 @@ class Gpx10WriteHandler implements Runnable {
     String getBeginningXml(String dateTimeString){
         StringBuilder initialXml = new StringBuilder();
         initialXml.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-        initialXml.append("<gpx version=\"1.0\" creator=\"GPSLogger " + BuildConfig.VERSION_CODE + " - http://gpslogger.mendhak.com/\" ");
+        initialXml.append("<gpx version=\"" + this.gpxVersion.getValue() + "\" creator=\"GPSLogger " + BuildConfig.VERSION_CODE + " - http://gpslogger.mendhak.com/\" ");
         initialXml.append("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
         initialXml.append("xmlns=\"http://www.topografix.com/GPX/1/0\" ");
         initialXml.append("xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 ");
@@ -293,7 +295,11 @@ class Gpx10WriteHandler implements Runnable {
 
         track.append("<time>").append(dateTimeString).append("</time>");
 
-        appendCourseAndSpeed(track, loc);
+	      // Topografix GPX waypoint elements are in order-significant XSD sequences.
+	      // The sequence location of course and speed differ between the GPX 1.0 and 1.1 specifications.
+	      if (this.gpxVersion == GpxVersion.GPX_VERSION_1_0) {
+            appendCourseAndSpeed(track, loc);
+	      }
 
         if (loc.getExtras() != null) {
             String geoidheight = loc.getExtras().getString(BundleConstants.GEOIDHEIGHT);
@@ -341,6 +347,11 @@ class Gpx10WriteHandler implements Runnable {
             }
         }
 
+        // Topografix GPX waypoint elements are in order-significant XSD sequences.
+	      // The sequence location of course and speed differ between the GPX 1.0 and 1.1 specifications.
+	      if (this.gpxVersion == GpxVersion.GPX_VERSION_1_1) {
+            appendCourseAndSpeed(track, loc);
+	      }
 
         track.append("</trkpt>\n");
 

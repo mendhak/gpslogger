@@ -1,0 +1,3 @@
+* Corrección de errores: el cuadro de diálogo de permisos inicial ya no se puede cerrar.
+* Corrección de errores: se aclara la diferencia entre la función de registro de URL personalizada y la función de envío automático.
+* Corrección de errores: se comprueba y carga correctamente el proveedor de cifrado si se instala desde F-Droid.

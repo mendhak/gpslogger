@@ -1,0 +1,5 @@
+*Perubahan kritikal pada OpenStreetMap – pengesahan beralih ke OAuth2, anda perlu membenarkan semula OpenStreetMap
+*Lalai kepada hantar secara automatik apabila pengeloggan berhenti
+*Pembetulan pepijat – Semak lokasi pasif untuk memastikan masa mereka lebih besar daripada masa lokasi sebelumnya
+*Pembetulan pepijat untuk ikon hitamputih(monokrom) pada tema Nothing OS
+*Tidak membenarkan aksara tertentu dalam nama fail seperti asterisk, garis miring
