@@ -24,13 +24,14 @@ class Gpx11WriteHandler extends Gpx10WriteHandler {
 
     public Gpx11WriteHandler(String dateTimeString, File gpxFile, Location loc, boolean addNewTrackSegment) {
         super(dateTimeString, gpxFile, loc, addNewTrackSegment);
+	      this.gpxVersion = GpxVersion.GPX_VERSION_1_1;
     }
 
     String getBeginningXml(String dateTimeString){
         // Use GPX 1.1 namespaces and put <time> inside a <metadata> element
         StringBuilder initialXml = new StringBuilder();
         initialXml.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-        initialXml.append("<gpx version=\"1.1\" creator=\"GPSLogger " + BuildConfig.VERSION_CODE + " - http://gpslogger.mendhak.com/\" ");
+        initialXml.append("<gpx version=\"" + this.gpxVersion.getValue() + "\" creator=\"GPSLogger " + BuildConfig.VERSION_CODE + " - http://gpslogger.mendhak.com/\" ");
         initialXml.append("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ");
         initialXml.append("xmlns=\"http://www.topografix.com/GPX/1/1\" ");
         initialXml.append("xmlns:gpxtpx=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v2\" ");
@@ -44,16 +45,18 @@ class Gpx11WriteHandler extends Gpx10WriteHandler {
     public void appendCourseAndSpeed(StringBuilder track, Location loc)
     {
 
-        track.append("<extensions><gpxtpx:TrackPointExtension>");
+        if (loc.hasBearing() || loc.hasSpeed()) {
+            track.append("<extensions><gpxtpx:TrackPointExtension>");
 
-        if (loc.hasBearing()) {
-            track.append("<gpxtpx:bearing>").append(String.valueOf(loc.getBearing())).append("</gpxtpx:bearing>");
+            if (loc.hasBearing()) {
+                track.append("<gpxtpx:bearing>").append(String.valueOf(loc.getBearing())).append("</gpxtpx:bearing>");
+            }
+
+            if (loc.hasSpeed()) {
+                track.append("<gpxtpx:speed>").append(String.valueOf(loc.getSpeed())).append("</gpxtpx:speed>");
+            }
+
+            track.append("</gpxtpx:TrackPointExtension></extensions>");
         }
-
-        if (loc.hasSpeed()) {
-            track.append("<gpxtpx:speed>").append(String.valueOf(loc.getSpeed())).append("</gpxtpx:speed>");
-        }
-
-        track.append("</gpxtpx:TrackPointExtension></extensions>");
     }
 }
