@@ -182,7 +182,7 @@
     <string name="autoemail_sendto_csv">カンマで区切られた電子メール アドレス</string>
     <string name="autosend_enabled">自動送信を許可</string>
     <string name="autosend_enabled_summary">設定頻度、或いは任意の名前付けにより名称が変更された場合、様々なターゲットへファイルを送信できます</string>
-    <string name="autosend_frequency_summary">1分間に何回ファイルを送信するか。0にすると送信しません。</string>
+    <string name="autosend_frequency_summary">何分おきにファイルを送信するか。0にすると送信しません。</string>
     <string name="autosend_frequency">送信間隔は?</string>
     <string name="autosend_sendzip_title">Zip ファイルの送信</string>
     <string name="autosend_sendzip_summary">可能ならzipファイルを送信します。ファイルを個別で送信する場合、もしくはzipがうまく動かない場合はこの設定を無効にしてください</string>
