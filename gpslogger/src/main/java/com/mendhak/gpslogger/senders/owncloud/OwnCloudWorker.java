@@ -34,7 +34,7 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.security.GeneralSecurityException;
 import java.util.concurrent.atomic.AtomicInteger;
-
+import org.apache.http.conn.ssl.StrictHostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 
@@ -84,7 +84,8 @@ public class OwnCloudWorker extends Worker implements OnRemoteOperationListener 
                         null
                 );
 
-                ProtocolSocketFactory psf = new AdvancedSslSocketFactory(sslContext, new AdvancedX509TrustManager(Networks.getKnownServersStore(AppSettings.getInstance())), null);
+                ProtocolSocketFactory psf = new AdvancedSslSocketFactory(sslContext,
+                        new AdvancedX509TrustManager(Networks.getKnownServersStore(AppSettings.getInstance())), new StrictHostnameVerifier());
 
 
                 Protocol.registerProtocol( "https", new Protocol("https", psf, 443));

@@ -10,5 +10,9 @@
     "@11ty/eleventy": "^2.0.1",
     "markdown-it-anchor": "^8.6.5",
     "node-html-parser": "^6.1.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^24.1.0"
   }
 }

@@ -1,0 +1,9 @@
+﻿FROM mcr.microsoft.com/playwright:v1.54.0-noble
+USER root
+WORKDIR /app
+
+RUN npx playwright install firefox
+
+COPY package*.json ./
+
+RUN npm install

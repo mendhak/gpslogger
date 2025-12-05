@@ -906,14 +906,12 @@ public class GpsMainActivity extends AppCompatActivity
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
                         break;
                     case 9000:
-                        Intent faqtivity = new Intent(getApplicationContext(), Faqtivity.class);
-                        startActivity(faqtivity);
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://gpslogger.app")));
                         break;
                     case 9001:
                         EventBus.getDefault().post(new CommandEvents.RequestStartStop(false));
                         finish();
                         break;
-
                 }
                 return false;
             }
