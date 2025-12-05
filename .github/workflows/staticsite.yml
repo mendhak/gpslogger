@@ -43,7 +43,7 @@ jobs:
         uses: actions/configure-pages@v2
 
       - name: Upload Github Pages artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'assets/generate-pages/_site'
 
