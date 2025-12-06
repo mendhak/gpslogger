@@ -1,0 +1,4 @@
+* Javítás: GPX 1.0 és GPX 1.1 fájlokban útvonal/sebesség elemek
+* Frissítés: Dropbox SDK v7-re, 2026 januárjában bekövetkezett tanúsítványváltozás miatt
+* GYIK képernyők eltávolítása az alkalmazásból, ezzel csökkentve a karbantartási költségeket
+* TLS hostnév ellenőrzése az Owncloud/Nextcloud kliens használatakor
