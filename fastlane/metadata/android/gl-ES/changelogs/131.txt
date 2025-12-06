@@ -3,4 +3,4 @@
 * A difusión envíase cando se completa o envío do ficheiro, útil para automatizar a limpeza de ficheiros
 * Notificacións de erro e menos fallos se os permisos foron revogados ou falla a escritura de ficheiros
 * Novo parámetro de URL personalizado, %SPD_KPH
-* Aclaración da descrición de envío automático: o cambio dinámico do nome do ficheiro tamén provoca o envío do ficheiro
+* Aclaración da descrición de envío automático: o cambio dinámico do nome do ficheiro tamén provoca o envío do ficheiro.
