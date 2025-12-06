@@ -1,0 +1,4 @@
+* Corrección para elementos de rumbo/velocidade nos ficheiros GPX 1.0 e GPX 1.1
+* Actualización ao SDK de Dropbox v7 por mor do cambio de certificado en xaneiro de 2026
+* Retirar as pantallas de preguntas frecuentes da aplicación, reducir a sobrecarga de mantemento
+* Verificar o nome do servidor TLS ao empregar o cliente Owncloud/Nextcloud
