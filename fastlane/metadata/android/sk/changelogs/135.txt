@@ -1,0 +1,4 @@
+* Oprava pre prvky týkajúce sa smeru/rýchlosti v súboroch GPX 1.0 a GPX 1.1
+* Aktualizácia na Dropbox SDK v7 kvôli zmene certifikátu v januári 2026
+* Odstránenie obrazoviek s FAQ z aplikácie, zníženie náročnosti údržby
+* Overenie názvu hostiteľa TLS pri používaní klienta Owncloud/Nextcloud
