@@ -387,7 +387,7 @@
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Értesítések</b> - Engedélyezze az értesítések megjelenítését, ez segít a rögzítés életben tartásában. ]]></string>
     <string name="hide_notification_from_lock_screen">Értesítés elrejtése lezárt képernyőről</string>
     <string name="started_at">Kezdő időpont</string>
-    <string name="passive_filter_time_title">Passzív helyszíne frissítési intervallum</string>
+    <string name="passive_filter_time_title">Passzív helyszín frissítési intervallum</string>
     <string name="passive_filter_time_summary">Csökkentsd a redundáns passzív helyfrissítéseket a minimális gyűjtési intervallum (másodpercben) módosításával.</string>
     <string name="autosend_wifionly_summary">Wi-Fi-kapcsolatra várás, mielőtt bármilyen hálózati kérést végrehajtana. Minden kérésre vonatkozik, beleértve a küldést és a naplózást is.</string>
     <string name="only_log_if_significant_motion_title">Csak jelentős mozgás esetén naplózzon</string>
