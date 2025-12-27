@@ -44,7 +44,7 @@
     <string name="error_connection">Verbindungsfehler. Bitte prüfen Sie Ihre Telefoneinstellungen.</string>
     <string name="seconds">Sekunde(n)</string>
     <string name="minutes"> Minute(n)</string>
-    <string name="hours">Std.</string>
+    <string name="hours">Stunden</string>
     <string name="gpsprovider_unavailable">Kein GPS-Anbieter verfügbar. Bitte überprüfen Sie Ihre Einstellungen für Standortdienste und aktivieren Sie einen Dienst für die Standortbestimmung.    </string>
     <string name="started">Gestartet</string>
     <string name="providername_gps">GPS-Satelliten</string>
@@ -117,7 +117,7 @@
     <string name="time_before_logging_title">Aufzeichnungsintervall</string>
     <string name="time_before_logging_summary">0 für maximale Frequenz verwenden, aber langsamer ist besser für die Akkulaufzeit. Die Systemkonfiguration für den Akku kann diese Einstellung überschreiben, siehe Hilfe und FAQ.</string>
     <string name="time_before_logging_dialog_title">Zeit in Sekunden</string>
-    <string name="time_before_logging_hint">Eingabe in Sekunden (max. 9999)</string>
+    <string name="time_before_logging_hint">Sekunden eingeben (max. 9999)</string>
     <string name="keep_fix_summary">Seien Sie vorsichtig, dies verkürzt die Akkulaufzeit erheblich. Nur für höhere Präzision bei niedrigen Frequenzen verwenden.</string>
     <string name="keep_fix_title">GPS zwischen den Positionsbestimmungen eingeschaltet lassen</string>
     <string name="retry_time_title">Zeit, bis die Genauigkeit erreicht ist</string>
