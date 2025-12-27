@@ -1,1 +1,1 @@
-GPS-Logger
+GPSLogger

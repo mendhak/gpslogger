@@ -1,1 +1,1 @@
-Eine App zur einfachen Aufzeichnung von GPS-Wegpunkten, batteriesparend, GPX
+Ein einfacher GPS-Logger, Akku-sparend, GPX/KML, Hinzufügen von Notizen, Teilen, Hochladen.
