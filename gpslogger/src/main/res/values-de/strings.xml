@@ -42,7 +42,7 @@
     <string name="meters"> Meter</string>
     <string name="error">Fehler</string>
     <string name="error_connection">Verbindungsfehler. Bitte prüfen Sie Ihre Telefoneinstellungen.</string>
-    <string name="seconds"> Sek.</string>
+    <string name="seconds">Sekunde(n)</string>
     <string name="minutes"> Minute(n)</string>
     <string name="hours">Std.</string>
     <string name="gpsprovider_unavailable">Kein GPS-Anbieter verfügbar. Bitte überprüfen Sie Ihre Einstellungen für Standortdienste und aktivieren Sie einen Dienst für die Standortbestimmung.    </string>
@@ -91,7 +91,7 @@
     <string name="settings_accuracy_in_meters">Genauigkeit in Metern</string>
     <string name="settings_enter_meters">Eingabe in Metern (max. 9999)</string>
     <!-- Settings -->
-    <string name="pref_logging_title">Aufzeichnungsinformationen</string>
+    <string name="pref_logging_title">Aufzeichnungsdetails</string>
     <string name="log_gpx_title">In eine GPX-Datei protokollieren</string>
     <string name="log_gpx_summary">Aufzeichnen von Orten in eine GPX v1.0-Datei</string>
     <string name="log_gpx_11_title">GPX 1.1 verwenden</string>
@@ -201,7 +201,7 @@
     <string name="menu_autosend_now">Jetzt automatisch senden</string>
     <string name="autosend_sending">Automatisch senden</string>
     <string name="summary_autosend">Automatisches Senden:</string>
-    <string name="pref_autosend_title">Automatisches Senden, E-Mail und Hochladen</string>
+    <string name="pref_autosend_title">Automat. Senden, E-Mail, Hochladen</string>
     <string name="pref_autosend_summary">E-Mail-, Teilen- und Hochladen-Optionen</string>
     <string name="shortcut_start">Starten</string>
     <string name="shortcut_stop">Beenden</string>
@@ -306,7 +306,7 @@
     <string name="hide_notification_buttons">Benachrichtigungs-Schaltflächen ausblenden</string>
     <string name="restart_required">GPSLogger muss neu gestartet werden, damit diese Einstellung wirksam wird</string>
     <string name="altitude_subtractgeoidheight_summary">Verwendet den „Mittleren Meeresspiegel“ (MSL) anstelle der WGS84-Höhe (World Geodetic System 1984), indem die Geoidhöhe von der GPS-Höhe abgezogen wird. Gilt nur für Punkte, die mittels GPS-Satelliten und nicht über Netzwerk oder NMEA bestimmt wurden.</string>
-    <string name="altitude_subtractgeoidheight_title">„Mittlerer Meeresspiegel“ statt WGS84 verwenden</string>
+    <string name="altitude_subtractgeoidheight_title">„Mittleren Meeresspiegel“ statt WGS84 verwenden</string>
     <string name="altitude_subtractoffset_title">Höhenversatz abziehen</string>
     <string name="altitude_subtractoffset_summary">Ein Wert in Metern, der von den festgestellten GPS-Höhen abgezogen wird. Verwenden Sie eine negative Zahl, um einen Wert zur Höhe hinzuzufügen. Gilt nur für GPS-Satellitenpunkte, nicht für Netzwerk oder NMEA.</string>
     <string name="upload_failure">Datei konnte nicht hochgeladen werden</string>
@@ -373,7 +373,7 @@
     <string name="retry_get_best_possible_accuracy_summary">Anstatt den ersten Standort mit der eingestellten Genauigkeit aufzuzeichnen, wird erst nach Ablauf der Wartezeit der Standort mit der höchsten Genauigkeit genutzt. Erhöht die Genauigkeit auf Kosten des Aufzeichnungsintervalls.</string>
     <string name="google_drive_folder_path_summary_1">Benutzen Sie einen einzelnen Ordnernamen (z. B. GPSLogger) oder einen Ordnerpfad (z. B. aaa/bbb/ccc). Die Ordner müssen von dieser App erstellt werden.</string>
     <string name="google_drive_folder_path_summary_2">Wenn Sie einen einzelnen Ordnernamen verwenden, kann dieser nach der Erstellung innerhalb von Google Drive verschoben werden. Ordnerpfade sind langsamer, da jeder Teil des Pfades überprüft und ggf. erstellt werden muss, bevor Dateien hochgeladen werden .</string>
-    <string name="log_customurl_summary_detailed">Sendet eine Anfrage an die eingestellte URL wenn ein Standort aufgenommen wurde, in Abhängigkeit vom Aufnahmeintervall.</string>
+    <string name="log_customurl_summary_detailed">Sendet eine Anfrage an die benutzerdefinierte URL, sobald ein Standortpunkt erfasst wird. Abhängig vom Aufzeichnungsintervall.</string>
     <string name="google_drive_folder_path">Google Drive-Ordner</string>
     <string name="autosend_customurl_summary">(Diese Funktion aktiviert die CSV-Aufnahme) Sendet Anfragen gruppiert zu der eingestellten URL, eine für jede Zeile in der CSV-Datei. Abhängig vom automatischen Sendeintervall.</string>
     <string name="log_customurl_discard_offline_locations">Offline-Standorte verwerfen</string>
@@ -384,11 +384,11 @@
     <string name="view_annotation">Annmerkungsansicht</string>
     <string name="txt_speed_kph">Geschwindigkeit (in km/h):</string>
     <string name="hide_notification_from_lock_screen">Benachrichtigung auf dem Sperrbildschirm ausblenden</string>
-    <string name="prompt_for_details_when_logging_starts">Aufforderung zur Eingabe von Details bei Beginn der Protokollierung</string>
+    <string name="prompt_for_details_when_logging_starts">Bei Beginn der Aufzeichnung nach Details fragen</string>
     <string name="started_at">Gestartet am</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Benachrichtigungen</b> - Erlaubt die Anzeige einer Benachrichtigung, dies hilft dabei, den Protokollierungsdienst aufrechtzuerhalten. ]]></string>
     <string name="passive_filter_time_title">Aktualisierungsintervall für passive Standorte</string>
-    <string name="passive_filter_time_summary">Reduziere unnötige passive Standortaktualisierungen, indem du das minimale Erfassungsintervall (in Sekunden) anpasst.</string>
+    <string name="passive_filter_time_summary">Reduzieren Sie redundante passive Standortaktualisierungen, indem Sie das minimale Erfassungsintervall (in Sekunden) anpassen.</string>
     <string name="autosend_wifionly_summary">Auf eine WLAN-Verbindung warten, bevor Netzwerk-Anfragen durchgeführt werden. Gilt für alle Anfragen einschließlich Senden und Protokollieren.</string>
     <string name="only_log_if_significant_motion_title">Nur bei deutlicher Bewegung protokollieren</string>
     <string name="only_log_if_significant_motion_summary">Nur protokollieren, wenn bedeutende Aktivitäten wie Gehen, Radfahren oder Autofahren erkannt werden. Bedeutende Bewegungen werden von Ihrem Betriebssystem bestimmt.</string>
