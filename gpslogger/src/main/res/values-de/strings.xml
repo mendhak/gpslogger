@@ -192,7 +192,7 @@
     <string name="google_drive_testupload_success">Hochgeladen. Bitte prüfen Sie Ihre Google-Dokumente auf eine neue Datei.</string>
     <string name="autoemail_sendto_csv">Einzelne E-Mail-Adressen durch Kommata trennen</string>
     <string name="autosend_enabled">Automatisches Senden erlauben</string>
-    <string name="autosend_enabled_summary">Ermöglicht das Senden der Dateien an verschiedene Ziele, mit einer bestimmten Frequenz, oder falls sich der Name aufgrund benutzerdefinierter Benennung ändert</string>
+    <string name="autosend_enabled_summary">Ermöglicht das Senden der Dateien an verschiedene Ziele mit einer bestimmten Frequenz oder wenn sich der Name aufgrund benutzerdefinierter Benennung ändert</string>
     <string name="autosend_frequency_summary">Zeiteinheit (in Minuten) festlegen, wie häufig Protokolldateien gesendet werden sollen. Wert auf „0“ setzen, um diese Funktion zu deaktivieren.</string>
     <string name="autosend_frequency">Wie oft\?</string>
     <string name="autosend_sendzip_title">Als Zip-Datei senden</string>
@@ -216,7 +216,7 @@
     <string name="opengts_server_communication_method_summary">HTTP-basierte oder Raw-Socket-basierte Kommunikation</string>
     <string name="autoopengts_server_path">Serverpfad</string>
     <string name="autoopengts_server_path_summary">Optional und nur für HTTP-basierte Kommunikation. Beispielsweise „/gprmc/Data“</string>
-    <string name="autoopengts_device_id">Geräte-Kennung</string>
+    <string name="autoopengts_device_id">Gerätekennung</string>
     <string name="autoftp_username">Benutzername</string>
     <string name="autoftp_password">Passwort</string>
     <string name="autoftp_advanced_settings">Erweiterte Einstellungen</string>
@@ -267,7 +267,7 @@
     <string name="save">Speichern</string>
     <string name="pref_filedetails_title">Datei- und Ordnerinformationen</string>
     <string name="absolute_timeout_title">Absolute Zeit bis zur GPS-Positionsbestimmung</string>
-    <string name="absolute_timeout_summary">Zeit (in Sekunden), nach denen die App die Positionsbestimmung unterbricht, unabhängig von anderen Einstellungen. Dies ist besonders sinnvoll, wenn Sie sich innerhalb von Gebäuden befinden, um zu verhindern, dass der GPS-Empfänger die Batterie entleert. Auf 0 (Null) setzen, um diese Einstellung zu deaktivieren.</string>
+    <string name="absolute_timeout_summary">Anzahl der Sekunden, nach denen die App die Positionsbestimmung unabhängig von anderen Einstellungen aufgibt. Dies ist besonders nützlich, wenn Sie sich in Gebäuden befinden, um zu verhindern, dass das GPS den Akku entleert. Setzen Sie den Wert auf 0, um keine Zeitüberschreitung festzulegen.</string>
     <string name="txt_latitude_short">Breite</string>
     <string name="txt_longitude_short">Länge</string>
     <string name="log_nmea_title">In eine NMEA-Datei protokollieren</string>
@@ -328,7 +328,7 @@
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos/Medien/Dateien</b> - Diese Berechtigung ermöglicht es, Protokolldateien und Testdateien zu speichern, wie auch das Lesen einer Liste von Dateien, um sie hochladen oder teilen zu können. Diese App greift nicht auf Ihre Fotos oder Medien zu.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Jederzeit zulassen</b> – Erlaubt dieser App, Standortaktualisierungen zu empfangen, wenn sie im Hintergrund ausgeführt wird. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Akkuoptimierung ignorieren</b> – Erlaubt dieser App, im Hintergrund zu laufen, indem die Akkuoptimierung reduziert wird. ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Sie haben eine oder mehrere Berechtigungen abgelehnt, welche die App benötigt. Sie müssen in die Appeinstellungen wechseln und der App die benötigten Berechtigungen erteilen. <br /><br /> Falls Sie die Berechtigungen permanent abgelehnt haben, so können Sie diese in den Systemeinstellungen zurücksetzen.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Sie haben eine oder mehrere Berechtigungen abgelehnt, die diese App benötigt. Sie müssen die App neu starten oder in den Systemeinstellungen diese Berechtigungen erteilen. <br /><br /> Wenn Sie die Berechtigungen permanent abgelehnt haben, können Sie diese in den Systemeinstellungen zurücksetzen.]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Damit GPSLogger im Hintergrund laufen kann, müssen Sie ihm eine zusätzliche Berechtigung erteilen. Auf dem nächsten Bildschirm wählen Sie bitte: ]]></string>
     <string name="privacy_policy">Datenschutzbestimmungen</string>
     <string name="debuglog_attach_to_email">Fehlerprotokolldatei an E-Mail anhängen</string>
@@ -389,7 +389,7 @@
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Benachrichtigungen</b> - Erlaubt die Anzeige einer Benachrichtigung, dies hilft dabei, den Protokollierungsdienst aufrechtzuerhalten. ]]></string>
     <string name="passive_filter_time_title">Aktualisierungsintervall für passive Standorte</string>
     <string name="passive_filter_time_summary">Reduziere unnötige passive Standortaktualisierungen, indem du das minimale Erfassungsintervall (in Sekunden) anpasst.</string>
-    <string name="autosend_wifionly_summary">Warte auf eine WLAN-Verbindung, bevor du irgendwelche Netzwerk-Anfragen machst. Das gilt für alle Anfragen, auch für das Senden und Protokollieren.</string>
+    <string name="autosend_wifionly_summary">Auf eine WLAN-Verbindung warten, bevor Netzwerk-Anfragen durchgeführt werden. Gilt für alle Anfragen einschließlich Senden und Protokollieren.</string>
     <string name="only_log_if_significant_motion_title">Nur bei deutlicher Bewegung protokollieren</string>
-    <string name="only_log_if_significant_motion_summary">Nur aufzeichnen, wenn du dich richtig bewegst, wie zum Beispiel beim Laufen, Radfahren oder Autofahren. Was als richtige Bewegung zählt, entscheidet dein Betriebssystem.</string>
+    <string name="only_log_if_significant_motion_summary">Nur protokollieren, wenn bedeutende Aktivitäten wie Gehen, Radfahren oder Autofahren erkannt werden. Bedeutende Bewegungen werden von Ihrem Betriebssystem bestimmt.</string>
 </resources>
