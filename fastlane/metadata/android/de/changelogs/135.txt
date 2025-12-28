@@ -1,0 +1,4 @@
+* Korrektur für Kurs-/Geschwindigkeitselemente in GPX 1.0- und GPX 1.1-Dateien
+* Aktualisierung auf Dropbox SDK v7 aufgrund einer Zertifikatsänderung im Januar 2026
+* Entfernung der FAQ-Bildschirme aus der App, Reduzierung des Wartungsaufwands
+* Überprüfung des TLS-Hostnamens bei Verwendung des ownCloud- und Nextcloud-Clients
