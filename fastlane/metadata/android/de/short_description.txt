@@ -1,1 +1,1 @@
-Ein einfacher GPS-Logger, Akku-sparend, GPX/KML, Hinzufügen von Notizen, Teilen, Hochladen.
+Einfacher GPS-Logger, akkusparend, GPX/KML, Notizen hinzufügen, Teilen, Hochladen.
