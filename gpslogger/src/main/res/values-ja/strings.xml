@@ -270,7 +270,7 @@
     <string name="new_file_custom_each_time_summary">ログを開始する度にカスタムファイル名の入力プロンプトを表示する</string>
     <string name="new_file_custom_keep_changing_title">ファイル名を自動的に変更</string>
     <string name="new_file_custom_keep_changing_summary">現在のファイル名を自動的に変更できます。たとえば %HOUR を使用すると新しいファイルは 1 時間ごとに作成されます。ファイル名を固定するにはオフにします。</string>
-    <string name="donate_app">GPSLogger(寄付版)</string>
+    <string name="donate_app">寄附(アプリ)</string>
     <string name="donate_bitcoin">ビットコイン</string>
     <string name="tip_coffee">コーヒーを買う</string>
     <string name="no_network_message">利用可能なネットワークがありません</string>
@@ -361,7 +361,7 @@
     <string name="storage_chooser_select_folder">選択</string>
     <string name="retry_get_best_possible_accuracy_title">期間中で最も高精度なものを選択</string>
     <string name="osm_setup_title">OpenStreetMap</string>
-    <string name="google_drive_folder_path">GDriveフォルダのパス</string>
+    <string name="google_drive_folder_path">Google Drive フォルダのパス</string>
     <string name="google_drive_folder_path_summary_1">単一フォルダ名（例: GPSLogger）、またはフォルダパス（例: aaa/bbb/ccc）を使用します。 フォルダーはこのアプリケーションで作成する必要があります。</string>
     <string name="opengts_setup_title">OpenGTS</string>
     <string name="autoftp_ssltls_ssl">SSL</string>
