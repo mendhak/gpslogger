@@ -380,4 +380,5 @@
     <string name="log_customurl_discard_offline_locations">Descartar localizaciones offline</string>
     <string name="log_customurl_discard_offline_locations_summary">Registrar localizaciones a una URL personalizada únicamente cuando haya una conexión de red disponible (no afecta el envío automático)</string>
     <string name="install_conscrypt_provider_title">Instalar Conscrypt Provider (SSL/TLS)</string>
+    <string name="txt_speed_kph">Velocidad (en km/h):</string>
 </resources>
