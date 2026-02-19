@@ -1,0 +1,1 @@
+* Bugfix: Comando da tarefa getstatus não estava enviando um broadcast de status.
