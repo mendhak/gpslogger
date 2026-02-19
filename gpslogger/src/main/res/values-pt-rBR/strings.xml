@@ -387,4 +387,5 @@
     <string name="started_at">começou em</string>
     <string name="hide_notification_from_lock_screen">Ocultar notificação na tela de bloqueio</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificações</b> - Permitir a exibição de uma notificação, o que ajuda a manter o serviço de registro ativo.]]></string>
+    <string name="only_log_if_significant_motion_summary">Registre apenas se for detectada atividade significativa, como caminhar, andar de bicicleta ou dirigir. O que é movimento significativo é determinado pelo seu sistema operacional.</string>
 </resources>
