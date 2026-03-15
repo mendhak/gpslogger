@@ -1,0 +1,1 @@
+* Adicionamos uma barra de rolagem à visualização simples para adaptá-la a telas e fontes de tamanho grande.

@@ -135,7 +135,7 @@
     <string name="google_drive_testupload_success">பதிவேற்றப்பட்டது. தயவுசெய்து புதியக் கோப்புக்காக உங்கள் Google Docs ஐ சரிபாருங்கள்.</string>
     <string name="autosend_enabled">தானாக அனுப்புவதை அனுமதி</string>
     <string name="autosend_frequency">அடிக்கடி எவ்வளவு?</string>
-    <string name="autosend_sendzip_title">ZIP கோப்பை அனுப்பு</string>
+    <string name="autosend_sendzip_title">zip கோப்பை அனுப்பு</string>
     <string name="menu_autosend_now">இப்பொழுது தானாக அனுப்பு</string>
     <string name="autosend_sending">தானாக அனுப்புகிறது</string>
     <string name="summary_autosend">தானாக அனுப்பு:</string>
@@ -279,8 +279,8 @@
     <string name="altitude_subtractoffset_title">உயர ஆஃப்செட் கழிக்கவும்</string>
     <string name="not_enough_distance_traveled">%s m மட்டுமே பயணம் செய்தது. புள்ளி நிராகரிக்கப்பட்டது.</string>
     <string name="logview_autoscroll">ஆட்டோ ச்க்ரோல்</string>
-    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b> புகைப்படங்கள், மீடியா, கோப்புகள் </b> - இந்த இசைவு பதிவு கோப்புகள் மற்றும் சோதனை கோப்புகளை சேமிப்பிற்கு எழுத அனுமதிக்கிறது, மேலும் பதிவேற்றம் அல்லது பகிர்வுக்கான கோப்புகளின் பட்டியலிலிருந்து படிக்க அனுமதிக்கிறது. இந்த பயன்பாடு உங்கள் புகைப்படங்கள் அல்லது ஊடகத்தை அணுகாது.]]></string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b><! [சி.டி.ஏ.டி.ஏ [<b> பேட்டரி உகப்பாக்கத்தை புறக்கணிக்கவும் </b> - பேட்டரி உகப்பாக்கத்தைக் குறைப்பதன் மூலம் இந்த பயன்பாட்டை பின்னணியில் இயக்க அனுமதிக்கவும். ]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b> புகைப்படங்கள், மீடியா, கோப்புகள் </b> - இந்த இசைவு பதிவுக் கோப்புகள் மற்றும் சோதனை கோப்புகளைச் சேமிப்பிற்கு எழுத அனுமதிக்கிறது, மேலும் பதிவேற்றம் அல்லது பகிர்வுக்கான கோப்புகளின் பட்டியலிலிருந்து படிக்க அனுமதிக்கிறது. இந்தப் பயன்பாடு உங்கள் புகைப்படங்கள் அல்லது ஊடகத்தை அணுகாது.]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>பேட்டரி உகப்பாக்கத்தை புறக்கணி</b> - பேட்டரி உகப்பாக்கத்தைக் குறைப்பதன் மூலம் இந்தப் பயன்பாட்டைப் பின்னணியில் இயக்க அனுமதிக்கவும். ]]></string>
     <string name="sftp_setup_title">Sftp</string>
     <string name="sftp_private_key_passphrase">தனியார் விசை கடவுச்சொல்</string>
     <string name="app_theme_follow_system">அமைப்பைப் பின்தொடரவும்</string>
@@ -331,8 +331,8 @@
     <string name="profile_add_from_url">முகவரி இலிருந்து</string>
     <string name="properties_file_url">பண்புகள் கோப்பு முகவரி</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[சி.டி.ஏ.டி.ஏ [இந்த பயன்பாட்டிற்கு சரியாக செயல்பட பல்வேறு அனுமதிகள் தேவை. நீங்கள் இப்போது பல்வேறு அனுமதிகளுக்கு பல முறை தூண்டப்படுவீர்கள் (மன்னிக்கவும்). ஒவ்வொரு அனுமதியின் விளக்கம் இங்கே. ]]></string>
-    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b> சாதன இருப்பிடம் </b> - இந்த இசைவு செல் கோபுரங்கள் மற்றும் சாதன சி.பி.எச் வன்பொருளிலிருந்து இருப்பிட தரவைப் படிக்க அனுமதிக்கிறது.]]></string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b> எல்லா நேரத்தையும் அனுமதிக்கவும் </b> - பின்னணியில் இயங்கும் போது இருப்பிட புதுப்பிப்புகளைப் பெற இந்த பயன்பாட்டை அனுமதிக்கவும். ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>சாதன இருப்பிடம்</b> - இந்த இசைவு செல் கோபுரங்கள் மற்றும் சாதன சி.பி.எச் வன்பொருளிலிருந்து இருப்பிட தரவைப் படிக்க அனுமதிக்கிறது.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>எல்லா நேரத்தையும் அனுமதிக்கவும்</b> - பின்னணியில் இயங்கும்போது இருப்பிட புதுப்பிப்புகளைப் பெற இந்தப் பயன்பாட்டை அனுமதிக்கவும். ]]></string>
     <string name="annotation_edit_button_color">பொத்தான் நிறம்</string>
     <string name="txt_longitude_short">லோன்</string>
     <string name="retry_get_best_possible_accuracy_summary">முதல் துல்லியமான புள்ளியை பதிவு செய்வதற்கு பதிலாக, துல்லிய காலத்திற்கு முயற்சி செய்து, சிறந்த துல்லியத்துடன் புள்ளியைத் தேர்ந்தெடுக்கவும். அதிக நேரம் எடுக்கும், ஆனால் இன்னும் துல்லியமான புள்ளிகளுக்கான வாய்ப்புகளை அதிகரிக்கிறது.</string>
@@ -366,7 +366,7 @@
     <string name="absolute_timeout_title">சி.பி.எச் பிழைத்திருத்தத்திற்கு முழுமையான நேரம்</string>
     <string name="absolute_timeout_summary">மற்ற அமைப்புகளைப் பொருட்படுத்தாமல், ஒரு பிழைத்திருத்தத்தைப் பெற முயற்சிப்பதை பயன்பாடு விட்டுக்கொடுக்கும் வினாடிகளின் எண்ணிக்கை. சி.பி.எச் பேட்டரியை வடிகட்டுவதைத் தடுக்க நீங்கள் கட்டிடங்களுக்குள் இருக்கும்போது இது மிகவும் பயனுள்ளதாக இருக்கும். காலக்கெடு எதுவும் இல்லை.</string>
     <string name="txt_latitude_short">லாட்</string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[சி.டி.ஏ.டி.ஏ [இந்த பயன்பாட்டிற்கு தேவைப்படும் ஒன்று அல்லது அதற்கு மேற்பட்ட அனுமதிகளை நீங்கள் மறுத்துள்ளீர்கள். இந்த அனுமதிகளை வழங்க நீங்கள் மீண்டும் தொடங்க வேண்டும், அல்லது கணினி அமைப்புகள் திரைக்குச் செல்ல வேண்டும். <br /> <br /> நீங்கள் நிரந்தரமாக அனுமதிகளை மறுத்திருந்தால் அவற்றை கணினி அமைப்புகளில் மீட்டமைக்கலாம். ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[இந்தப் பயன்பாட்டிற்கு தேவைப்படும் ஒன்று அல்லது அதற்கு மேற்பட்ட அனுமதிகளை நீங்கள் மறுத்துள்ளீர்கள். இந்த அனுமதிகளை வழங்க நீங்கள் மீண்டும் தொடங்க வேண்டும், அல்லது கணினி அமைப்புகள் திரைக்குச் செல்ல வேண்டும். <br/> <br/> நீங்கள் நிரந்தரமாக அனுமதிகளை மறுத்திருந்தால் அவற்றைக் கணினி அமைப்புகளில் மீட்டமைக்கலாம். ]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[சி.பி.எச்.எல்.சிசரை பின்னணியில் இயக்க அனுமதிக்க, நீங்கள் அதற்கு கூடுதல் அனுமதியை வழங்க வேண்டும். அடுத்த திரையில் தயவுசெய்து தேர்ந்தெடுக்கவும்:]]></string>
     <string name="debuglog_attach_to_email">பிழைத்திருத்த பதிவை மின்னஞ்சலுடன் இணைக்கவும்</string>
     <string name="debuglog_attach_to_email_summary">சில கண்டறியும் தகவல்களுடன் ஒரு மின்னஞ்சலுடன் பிழைத்திருத்த பதிவை இணைக்கிறது</string>
@@ -388,8 +388,8 @@
     <string name="started_at">தொடங்கியது</string>
     <string name="hide_notification_from_lock_screen">பூட்டுத் திரையில் இருந்து அறிவிப்பை மறைக்கவும்</string>
     <string name="prompt_for_details_when_logging_starts">உள்நுழைவு தொடங்கும் போது விவரங்களுக்கு வரியில்</string>
-    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>அறிவிப்புகள் </b> - அறிவிப்பைக் காட்ட அனுமதிக்கவும், இது பதிவு சேவையை உயிரோடு வைத்திருக்க உதவுகிறது. ]]></string>
-    <string name="new_file_custom_message">%SER சாதன சீரியல், %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER பதிப்பிற்காக</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>அறிவிப்புகள்</b> - அறிவிப்பைக் காட்ட அனுமதிக்கவும், இது பதிவுச் சேவையை உயிரோடு வைத்திருக்க உதவுகிறது. ]]></string>
+    <string name="new_file_custom_message">சாதன சீரியல் %SER, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, பதிப்பிற்காகப் %VER பயன்படுத்தலாம்</string>
     <string name="passive_filter_time_title">செயலற்ற இடங்கள் புதுப்பித்தல் இடைவெளி</string>
     <string name="passive_filter_time_summary">குறைந்தபட்ச சேகரிப்பு இடைவெளியை (நொடிகளில்) சரிசெய்வதன் மூலம் தேவையற்ற செயலற்ற இருப்பிட புதுப்பிப்புகளைக் குறைக்கவும்.</string>
     <string name="autosend_wifionly_summary">எந்தவொரு பிணையக் கோரிக்கைகளையும் செய்வதற்கு முன் வைஃபை இணைப்புக்காகக் காத்திருங்கள். அனுப்புதல் மற்றும் உள்நுழைவு உள்ளிட்ட அனைத்து கோரிக்கைகளுக்கும் பொருந்தும்.</string>
