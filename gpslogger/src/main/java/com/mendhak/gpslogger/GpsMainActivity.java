@@ -704,7 +704,7 @@ public class GpsMainActivity extends AppCompatActivity
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
         catch(Exception ex){
-            //http://stackoverflow.com/questions/26657348/appcompat-v7-v21-0-0-causing-crash-on-samsung-devices-with-android-v4-2-2
+            //http://stackoverflow.com/questions/26489079/appcompat-v7-v21-0-0-causing-crash-on-samsung-devices-with-android-v4-2-2
             LOG.error("Thanks for this, Samsung", ex);
         }
 
@@ -846,6 +846,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_autosend_title, R.string.pref_autosend_summary, R.drawable.autosend, 1003));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.log_customurl_setup_title, null, R.drawable.customurlsender, 1020));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.http_upload_setup_title, null, R.drawable.customurlsender, 1021));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.dropbox_setup_title, null, R.drawable.dropbox, 1005));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.google_drive_setup_title, null, R.drawable.googledrive, 1011));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.sftp_setup_title, null, R.drawable.sftp, 1015));
@@ -904,6 +905,9 @@ public class GpsMainActivity extends AppCompatActivity
                         break;
                     case 1020:
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
+                        break;
+                    case 1021:
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPUPLOAD);
                         break;
                     case 9000:
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://gpslogger.app")));
@@ -1231,6 +1235,7 @@ public class GpsMainActivity extends AppCompatActivity
                 return true;
             case R.id.mnuAutoSendNow:
                 forceAutoSendNow();
+                return true;
             case R.id.mnuOwnCloud:
                 uploadToOwnCloud();
                 return true;
@@ -1239,6 +1244,9 @@ public class GpsMainActivity extends AppCompatActivity
                 return true;
             case R.id.mnuCustomUrl:
                 uploadToCustomURL();
+                return true;
+            case R.id.mnuHttpUpload:
+                uploadToHttpUpload();
                 return true;
             default:
                 return true;
@@ -1319,6 +1327,15 @@ public class GpsMainActivity extends AppCompatActivity
         }
 
         showFileListDialog(FileSenderFactory.getCustomUrlSender());
+    }
+
+    private void uploadToHttpUpload(){
+        if(!FileSenderFactory.getHttpUploadSender().isAvailable()){
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPUPLOAD);
+            return;
+        }
+
+        showFileListDialog(FileSenderFactory.getHttpUploadSender());
     }
 
     private void uploadToSFTP(){
@@ -1600,6 +1617,23 @@ public class GpsMainActivity extends AppCompatActivity
 
         if(!upload.success){
             LOG.error(getString(R.string.log_customurl_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure));
+
+            if(userInvokedUpload){
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                userInvokedUpload = false;
+            }
+        }
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.HttpUpload upload){
+        LOG.debug("HTTP Upload Event completed, success: " + upload.success);
+        Dialogs.hideProgress();
+
+        if(!upload.success){
+            LOG.error(getString(R.string.http_upload_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
 
