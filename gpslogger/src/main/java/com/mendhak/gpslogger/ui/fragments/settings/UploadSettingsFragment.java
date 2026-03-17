@@ -175,6 +175,23 @@ public class UploadSettingsFragment
                     }
                 });
 
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_HTTPUPLOAD_ENABLED))
+                .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
+
+                    @Override
+                    public void onCheckedChanged(SwitchCompat buttonView, boolean isChecked) {
+                        // No need to do anything, the value gets propagated.
+                    }
+
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
+                        intent.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPUPLOAD);
+                        startActivity(intent);
+                    }
+                });
+
         ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_DROPBOX_ENABLED))
                 .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
 

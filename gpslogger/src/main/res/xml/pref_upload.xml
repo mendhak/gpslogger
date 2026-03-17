@@ -50,6 +50,11 @@
             app:icon="@drawable/customurlsender"/>
 
         <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="autohttpupload_enabled"
+            android:title="@string/http_upload_setup_title"
+            app:icon="@drawable/customurlsender"/>
+
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
             android:key="dropbox_enabled"
             android:title="@string/dropbox_setup_title"
             app:icon="@drawable/dropbox" />

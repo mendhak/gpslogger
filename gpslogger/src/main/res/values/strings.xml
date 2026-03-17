@@ -503,4 +503,8 @@
     <string name="only_log_if_significant_motion_title">Only log if there is significant motion</string>
     <string name="only_log_if_significant_motion_summary">Only log if significant activity is detected such as walking, biking, driving. Significant motion is determined by your OS.</string>
 
+    <string name="http_upload_setup_title">HTTP Upload</string>
+    <string name="autosend_httpupload_summary">Uploads files to an arbitrary URL using HTTP POST or PUT.</string>
+    <string name="http_upload_body_type">Encoding</string>
+
 </resources>

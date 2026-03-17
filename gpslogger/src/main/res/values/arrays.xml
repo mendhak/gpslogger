@@ -75,5 +75,19 @@
         <item>dark</item>
     </string-array>
 
+    <string-array name="http_methods">
+        <item>POST</item>
+        <item>PUT</item>
+    </string-array>
+
+    <string-array name="http_body_types">
+        <item>Multipart form-data</item>
+        <item>Binary stream</item>
+    </string-array>
+
+    <string-array name="http_body_type_values">
+        <item>form-data</item>
+        <item>binary</item>
+    </string-array>
 
 </resources>
