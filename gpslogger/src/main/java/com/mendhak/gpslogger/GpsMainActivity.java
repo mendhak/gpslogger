@@ -704,7 +704,7 @@ public class GpsMainActivity extends AppCompatActivity
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
         catch(Exception ex){
-            //http://stackoverflow.com/questions/26489079/appcompat-v7-v21-0-0-causing-crash-on-samsung-devices-with-android-v4-2-2
+            //http://stackoverflow.com/questions/26657348/appcompat-v7-v21-0-0-causing-crash-on-samsung-devices-with-android-v4-2-2
             LOG.error("Thanks for this, Samsung", ex);
         }
 
