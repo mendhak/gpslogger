@@ -27,6 +27,7 @@ import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.senders.ftp.FtpManager;
 import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
+import com.mendhak.gpslogger.senders.http.HttpUploadManager;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
@@ -78,6 +79,10 @@ public class FileSenderFactory {
 
     public static FileSender getCustomUrlSender(){
         return new CustomUrlManager(PreferenceHelper.getInstance());
+    }
+
+    public static FileSender getHttpUploadSender() {
+        return new HttpUploadManager(PreferenceHelper.getInstance());
     }
 
     public static void autoSendFiles(final String fileToSend) {
@@ -164,6 +169,8 @@ public class FileSenderFactory {
                 return getSFTPSender();
             case FileSender.SenderNames.CUSTOMURL:
                 return getCustomUrlSender();
+            case FileSender.SenderNames.HTTPUPLOAD:
+                return getHttpUploadSender();
             default:
                 return null;
 
@@ -181,6 +188,7 @@ public class FileSenderFactory {
             senders.add(getOwnCloudSender());
             senders.add(getSFTPSender());
             senders.add(getCustomUrlSender());
+            senders.add(getHttpUploadSender());
         return senders;
     }
 
@@ -222,6 +230,10 @@ public class FileSenderFactory {
 
         if(getCustomUrlSender().isAutoSendAvailable()){
             senders.add(getCustomUrlSender());
+        }
+
+        if(getHttpUploadSender().isAutoSendAvailable()){
+            senders.add(getHttpUploadSender());
         }
 
         return senders;
