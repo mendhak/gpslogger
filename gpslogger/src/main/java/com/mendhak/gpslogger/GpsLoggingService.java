@@ -289,7 +289,7 @@ public class GpsLoggingService extends Service  {
                     preferenceHelper.setPassiveFilterInterval(passiveFilterInterval);
                     needToStartGpsManager = true;
                 }
-                
+
                 if(bundle.get(IntentConstants.LOG_ONCE) != null){
                     boolean logOnceIntent = bundle.getBoolean(IntentConstants.LOG_ONCE);
                     LOG.debug("Intent received - Log Once: " + String.valueOf(logOnceIntent));
@@ -806,8 +806,18 @@ public class GpsLoggingService extends Service  {
         if(!preferenceHelper.shouldLogOnlyIfSignificantMotion()){
             return false;
         }
-        return !session.hasDescription() && !session.isSinglePointMode() &&
+
+        boolean hasBeenStill = !session.hasDescription() && !session.isSinglePointMode() &&
                 (session.getUserStillSinceTimeStamp() > 0 && (System.currentTimeMillis() - session.getUserStillSinceTimeStamp()) > (preferenceHelper.getMinimumLoggingInterval() * 1000));
+
+        if (hasBeenStill && preferenceHelper.getSignificantMotionBypassInterval() >= 1) {
+            long bypassIntervalInMillis = preferenceHelper.getSignificantMotionBypassInterval() * 60 * 1000L;
+            if (System.currentTimeMillis() - session.getLatestTimeStamp() >= bypassIntervalInMillis) {
+                return false;
+            }
+        }
+
+        return hasBeenStill;
     }
 
     private void startAbsoluteTimer() {
