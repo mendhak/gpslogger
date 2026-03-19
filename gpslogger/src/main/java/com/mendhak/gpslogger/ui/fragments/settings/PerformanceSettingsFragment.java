@@ -61,12 +61,15 @@ public class PerformanceSettingsFragment
 
         findPreference(PreferenceNames.ABSOLUTE_TIMEOUT).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.ABSOLUTE_TIMEOUT).setSummary(String.valueOf(preferenceHelper.getAbsoluteTimeoutForAcquiringPosition()) + getString(R.string.seconds));
-        
+
         findPreference(PreferenceNames.PASSIVE_FILTER_INTERVAL).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.PASSIVE_FILTER_INTERVAL).setSummary(String.valueOf(preferenceHelper.getPassiveFilterInterval()) + getString(R.string.seconds));
 
         findPreference(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET).setSummary(String.valueOf(preferenceHelper.getSubtractAltitudeOffset()) + getString(R.string.meters));
+
+        findPreference(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL).setSummary(String.valueOf(preferenceHelper.getSignificantMotionBypassInterval()) + " " + getString(R.string.minutes));
 
         SensorManager sensorManager = (SensorManager)AppSettings.getInstance().getSystemService(android.content.Context.SENSOR_SERVICE);
         Sensor significantMotionSensor = sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);
@@ -198,6 +201,21 @@ public class PerformanceSettingsFragment
             return true;
         }
 
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL)){
+            SimpleFormDialog.build()
+                    .title(R.string.time_in_minutes_dialog_title)
+                    .msg(R.string.significant_motion_bypass_interval_summary)
+                    .fields(
+                            Input.plain(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL)
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                                    .required()
+                                    .text(String.valueOf(preferenceHelper.getSignificantMotionBypassInterval()))
+                                    .max(4)
+                    )
+                    .show(this, PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL);
+            return true;
+        }
+
         return false;
     }
 
@@ -252,6 +270,13 @@ public class PerformanceSettingsFragment
             String offset = extras.getString(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET);
             preferenceHelper.setSubtractAltitudeOffset(offset);
             findPreference(PreferenceNames.ALTITUDE_SUBTRACT_OFFSET).setSummary(String.valueOf(preferenceHelper.getSubtractAltitudeOffset()) + getString(R.string.meters));
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL)){
+            String time = extras.getString(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL);
+            preferenceHelper.setSignificantMotionBypassInterval(Integer.valueOf(time));
+            findPreference(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL).setSummary(String.valueOf(preferenceHelper.getSignificantMotionBypassInterval()) + " " + getString(R.string.minutes));
             return true;
         }
 
