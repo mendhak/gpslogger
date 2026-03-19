@@ -447,7 +447,7 @@ public class PreferenceHelper {
     public void setAbsoluteTimeoutForAcquiringPosition(int absoluteTimeout) {
         prefs.edit().putString(PreferenceNames.ABSOLUTE_TIMEOUT, String.valueOf(absoluteTimeout)).apply();
     }
-    
+
     /**
      * Reduce redundant passive location updates by adjusting the minimum collection interval (in seconds).
      */
@@ -1244,6 +1244,20 @@ public class PreferenceHelper {
 
     public void setShouldLogOnlyIfSignificantMotion(boolean value){
         prefs.edit().putBoolean(PreferenceNames.ONLY_LOG_IF_SIGNIFICANT_MOTION, value).apply();
+    }
+
+    @ProfilePreference(name= PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL)
+    public int getSignificantMotionBypassInterval() {
+        try{
+            return Integer.parseInt(prefs.getString(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL, "0"));
+        }
+        catch(Exception e){
+            return 0;
+        }
+    }
+
+    public void setSignificantMotionBypassInterval(int value){
+        prefs.edit().putString(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL, String.valueOf(value)).apply();
     }
 
     @SuppressWarnings("unchecked")
