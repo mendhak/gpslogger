@@ -10,6 +10,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
 import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -134,6 +137,36 @@ public class Gpx10WriteHandlerTest {
                 "<course>91.88</course><speed>188.44</speed><src>MOCK</src></trkpt>\n</trkseg></trk></gpx>";
 
         assertThat("Trackpoint XML with a new segment", actual, is(expected));
+    }
+
+    @Test
+    public void GetTrackPointXml_NewTrackSegmentPref_AdditionalTrkSegAddedIfTrkSegExists() throws Exception{
+
+        // Here I have to create a temporary file so that I can have a file with an existing TRKPT.
+        // There's no method that takes the full file contents as an input so there is no way to test that.
+        File tempFile = File.createTempFile("test",".gpx");
+        String existingContent = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><gpx version=\"1.0\" creator=\"GPSLogger 135 - http://gpslogger.mendhak.com/\" " +
+                "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://www.topografix.com/GPX/1/0\" " +
+                "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd\">" +
+                "<time>2026-03-31T05:58:37.506Z</time><trk><name>20260331</name>" +
+                "<trkseg>" +
+                "<trkpt lat=\"51.35660812382162\" lon=\"-0.20237763405425874\"><ele>88.7111657481467</ele>" +
+                "<time>2026-03-31T05:58:37.506Z</time><speed>0.0</speed><geoidheight>47.2</geoidheight><src>gps</src><sat>7</sat><hdop>1.5</hdop><vdop>1.3</vdop><pdop>2.0</pdop></trkpt>\n" +
+                "</trkseg>" +
+                "</trk></gpx>";
+        try(FileWriter writer = new FileWriter(tempFile)){
+            writer.write(existingContent);
+        }
+
+        Gpx10WriteHandler writeHandler = new Gpx10WriteHandler(null, tempFile, null, true);
+        writeHandler.run();
+
+        String fileContent = new String(Files.readAllBytes(tempFile.toPath()));
+
+        assertThat("File should contain two track segments", fileContent.split("<trkseg>").length, is(2));
+        assertThat("File should contain two track segments", fileContent.split("</trkseg>").length, is(2));
+
+
     }
 
 

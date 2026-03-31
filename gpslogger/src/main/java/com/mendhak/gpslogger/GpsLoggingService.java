@@ -1242,7 +1242,7 @@ public class GpsLoggingService extends Service  {
      * @param loc Location object
      */
     private void writeToFile(Location loc) {
-        session.setAddNewTrackSegment(false);
+        //session.setAddNewTrackSegment(false);
 
         try {
             LOG.debug("Calling file writers");
@@ -1258,6 +1258,7 @@ public class GpsLoggingService extends Service  {
              Systems.showErrorNotification(this, getString(R.string.could_not_write_to_file));
         }
 
+        session.setAddNewTrackSegment(false);
         session.clearDescription();
         EventBus.getDefault().post(new ServiceEvents.AnnotationStatus(true));
     }
