@@ -111,6 +111,7 @@
         app:iconSpaceReserved="false" />
 
     <Preference
+        android:defaultValue="0"
         android:key="significant_motion_bypass_interval"
         android:title="@string/significant_motion_bypass_interval_title"
         android:summary="@string/significant_motion_bypass_interval_summary"

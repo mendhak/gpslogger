@@ -77,9 +77,8 @@ public class PerformanceSettingsFragment
         if(significantMotionSensor == null && significantMotionSwitch != null){
             significantMotionSwitch.setChecked(false);
             significantMotionSwitch.setEnabled(false);
+            findPreference(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL).setEnabled(false);
         }
-
-
     }
 
     @Override
