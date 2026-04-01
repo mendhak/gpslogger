@@ -813,6 +813,7 @@ public class GpsLoggingService extends Service  {
         if (hasBeenStill && preferenceHelper.getSignificantMotionBypassInterval() >= 1) {
             long bypassIntervalInMillis = preferenceHelper.getSignificantMotionBypassInterval() * 60 * 1000L;
             if (System.currentTimeMillis() - session.getLatestTimeStamp() >= bypassIntervalInMillis) {
+                LOG.debug("Significant motion bypass interval passed, so let's allow a point to be logged.");
                 return false;
             }
         }
