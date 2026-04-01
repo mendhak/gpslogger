@@ -162,9 +162,10 @@ public class HttpFileUploadSettingsFragment extends PreferenceFragmentCompat imp
 
         if (preference.getKey().equals(PreferenceNames.HTTPFILEUPLOAD_HEADERS)) {
             SimpleFormDialog.build()
-                    .title(R.string.customurl_http_headers)
+                    .title(R.string.http_file_upload_http_headers)
                     .neg(R.string.cancel)
                     .pos(R.string.ok)
+                    .msgHtml("<font face='monospace'>Content-Type: application/json</font><br /><font face='monospace'>Authorization: Basic abcdefg</font><br /><font face='monospace'>ApiToken: 12345</font>")
                     .fields(
                             Input.plain(PreferenceNames.HTTPFILEUPLOAD_HEADERS)
                                     .text(preferenceHelper.getHttpFileUploadHeaders())

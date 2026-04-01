@@ -28,7 +28,10 @@
 
     <Preference
         android:key="httpfileupload_headers"
-        android:title="@string/customurl_http_headers"
+        android:hint="Content-Type: application/json\nAuthorization: Basic abcdefg\nApiToken: 12345"
+        android:title="@string/http_file_upload_http_headers"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
         app:iconSpaceReserved="false" />
 
     <Preference

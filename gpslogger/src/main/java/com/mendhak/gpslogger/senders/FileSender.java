@@ -35,7 +35,7 @@ public abstract class FileSender implements FilenameFilter {
         public static final String SFTP = "SFTP_SENDER";
         public static final String OPENSTREETMAP = "OSM_SENDER";
         public static final String CUSTOMURL = "CUSTOM_URL_SENDER";
-        public static final String HTTPFILEUPLOAD = "HTTP_UPLOAD_SENDER";
+        public static final String HTTPFILEUPLOAD = "HTTP_FILE_UPLOAD_SENDER";
     }
 
 
