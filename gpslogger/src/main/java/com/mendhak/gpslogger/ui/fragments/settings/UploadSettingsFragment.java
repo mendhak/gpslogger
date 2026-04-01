@@ -175,7 +175,7 @@ public class UploadSettingsFragment
                     }
                 });
 
-        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_HTTPUPLOAD_ENABLED))
+        ((SwitchPlusClickPreference)findPreference(PreferenceNames.AUTOSEND_HTTPFILEUPLOAD_ENABLED))
                 .setSwitchClickListener(new SwitchPlusClickPreference.SwitchPlusClickListener() {
 
                     @Override
@@ -187,7 +187,7 @@ public class UploadSettingsFragment
                     public void onClick(View view) {
 
                         Intent intent = new Intent(getActivity(), MainPreferenceActivity.class);
-                        intent.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPUPLOAD);
+                        intent.putExtra("preference_fragment", MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPFILEUPLOAD);
                         startActivity(intent);
                     }
                 });

@@ -169,7 +169,7 @@ public class FileSenderFactory {
                 return getSFTPSender();
             case FileSender.SenderNames.CUSTOMURL:
                 return getCustomUrlSender();
-            case FileSender.SenderNames.HTTPUPLOAD:
+            case FileSender.SenderNames.HTTPFILEUPLOAD:
                 return getHttpFileUploadSender();
             default:
                 return null;

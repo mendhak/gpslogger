@@ -59,7 +59,7 @@ public class HttpFileUploadManagerTest {
     @Test
     public void getName_ReturnsHttpFileUploadSenderName() {
         HttpFileUploadManager manager = new HttpFileUploadManager(mock(PreferenceHelper.class));
-        assertThat("Sender name should be HTTP File Upload", manager.getName(), is(FileSender.SenderNames.HTTPUPLOAD));
+        assertThat("Sender name should be HTTP File Upload", manager.getName(), is(FileSender.SenderNames.HTTPFILEUPLOAD));
     }
 
     @Test

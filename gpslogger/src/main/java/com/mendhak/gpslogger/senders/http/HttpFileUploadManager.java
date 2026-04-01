@@ -67,7 +67,7 @@ public class HttpFileUploadManager extends FileSender {
 
     @Override
     public String getName() {
-        return SenderNames.HTTPUPLOAD;
+        return SenderNames.HTTPFILEUPLOAD;
     }
 
     @Override

@@ -105,7 +105,7 @@ public class HttpFileUploadWorker extends Worker {
                 response.close();
 
                 EventBus.getDefault().post(new UploadEvents.HttpFileUpload().succeeded());
-                Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{fileToUpload.getAbsolutePath()}, "httpupload");
+                Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{fileToUpload.getAbsolutePath()}, "httpfileupload");
 
                 return Result.success();
             } else {

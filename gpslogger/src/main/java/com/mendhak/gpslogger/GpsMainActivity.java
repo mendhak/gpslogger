@@ -907,7 +907,7 @@ public class GpsMainActivity extends AppCompatActivity
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.CUSTOMURL);
                         break;
                     case 1021:
-                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPUPLOAD);
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPFILEUPLOAD);
                         break;
                     case 9000:
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://gpslogger.app")));
@@ -1331,7 +1331,7 @@ public class GpsMainActivity extends AppCompatActivity
 
     private void uploadToHttpFileUpload(){
         if(!FileSenderFactory.getHttpFileUploadSender().isAvailable()){
-            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPUPLOAD);
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPFILEUPLOAD);
             return;
         }
 

@@ -39,27 +39,27 @@ public class HttpFileUploadSettingsFragment extends PreferenceFragmentCompat imp
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Preference urlPreference = findPreference(PreferenceNames.HTTPUPLOAD_URL);
+        Preference urlPreference = findPreference(PreferenceNames.HTTPFILEUPLOAD_URL);
         urlPreference.setSummary(preferenceHelper.getHttpFileUploadUrl());
         urlPreference.setOnPreferenceClickListener(this);
 
-        Preference bodyTypePreference = findPreference(PreferenceNames.HTTPUPLOAD_BODY_TYPE);
+        Preference bodyTypePreference = findPreference(PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE);
         bodyTypePreference.setSummary(getBodyTypeDisplay(preferenceHelper.getHttpFileUploadBodyType()));
         bodyTypePreference.setOnPreferenceClickListener(this);
 
-        Preference methodPreference = findPreference(PreferenceNames.HTTPUPLOAD_METHOD);
+        Preference methodPreference = findPreference(PreferenceNames.HTTPFILEUPLOAD_METHOD);
         methodPreference.setSummary(preferenceHelper.getHttpFileUploadMethod());
         methodPreference.setOnPreferenceClickListener(this);
 
-        Preference headersPreference = findPreference(PreferenceNames.HTTPUPLOAD_HEADERS);
+        Preference headersPreference = findPreference(PreferenceNames.HTTPFILEUPLOAD_HEADERS);
         headersPreference.setSummary(preferenceHelper.getHttpFileUploadHeaders());
         headersPreference.setOnPreferenceClickListener(this);
 
-        Preference authPreference = findPreference("httpupload_basicauth");
+        Preference authPreference = findPreference("httpfileupload_basicauth");
         updateAuthSummary(authPreference);
         authPreference.setOnPreferenceClickListener(this);
 
-        findPreference("httpupload_test").setOnPreferenceClickListener(this);
+        findPreference("httpfileupload_test").setOnPreferenceClickListener(this);
 
         updateMethodPreferenceState();
         registerEventBus();
@@ -86,7 +86,7 @@ public class HttpFileUploadSettingsFragment extends PreferenceFragmentCompat imp
     }
 
     private void updateMethodPreferenceState() {
-        Preference methodPreference = findPreference(PreferenceNames.HTTPUPLOAD_METHOD);
+        Preference methodPreference = findPreference(PreferenceNames.HTTPFILEUPLOAD_METHOD);
         if ("form-data".equals(preferenceHelper.getHttpFileUploadBodyType())) {
             preferenceHelper.setHttpFileUploadMethod("POST");
             methodPreference.setSummary("POST");
@@ -99,7 +99,7 @@ public class HttpFileUploadSettingsFragment extends PreferenceFragmentCompat imp
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.httpuploadsettings, rootKey);
+        setPreferencesFromResource(R.xml.httpfileuploadsettings, rootKey);
     }
 
     @Override
@@ -128,72 +128,72 @@ public class HttpFileUploadSettingsFragment extends PreferenceFragmentCompat imp
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference.getKey().equals(PreferenceNames.HTTPUPLOAD_URL)) {
+        if (preference.getKey().equals(PreferenceNames.HTTPFILEUPLOAD_URL)) {
             SimpleFormDialog.build()
                     .title("URL")
                     .neg(R.string.cancel)
                     .pos(R.string.ok)
                     .fields(
-                            Input.plain(PreferenceNames.HTTPUPLOAD_URL)
+                            Input.plain(PreferenceNames.HTTPFILEUPLOAD_URL)
                                     .text(preferenceHelper.getHttpFileUploadUrl())
                                     .required()
                     )
-                    .show(this, PreferenceNames.HTTPUPLOAD_URL);
+                    .show(this, PreferenceNames.HTTPFILEUPLOAD_URL);
             return true;
         }
 
-        if (preference.getKey().equals(PreferenceNames.HTTPUPLOAD_METHOD)) {
+        if (preference.getKey().equals(PreferenceNames.HTTPFILEUPLOAD_METHOD)) {
             SimpleListDialog.build()
                     .title(R.string.customurl_http_method)
                     .items(getActivity(), R.array.http_methods)
                     .choiceMode(SimpleListDialog.SINGLE_CHOICE_DIRECT)
-                    .show(this, PreferenceNames.HTTPUPLOAD_METHOD);
+                    .show(this, PreferenceNames.HTTPFILEUPLOAD_METHOD);
             return true;
         }
 
-        if (preference.getKey().equals(PreferenceNames.HTTPUPLOAD_BODY_TYPE)) {
+        if (preference.getKey().equals(PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE)) {
             SimpleListDialog.build()
                     .title(R.string.http_file_upload_body_type)
                     .items(getActivity(), R.array.http_body_types)
                     .choiceMode(SimpleListDialog.SINGLE_CHOICE_DIRECT)
-                    .show(this, PreferenceNames.HTTPUPLOAD_BODY_TYPE);
+                    .show(this, PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE);
             return true;
         }
 
-        if (preference.getKey().equals(PreferenceNames.HTTPUPLOAD_HEADERS)) {
+        if (preference.getKey().equals(PreferenceNames.HTTPFILEUPLOAD_HEADERS)) {
             SimpleFormDialog.build()
                     .title(R.string.customurl_http_headers)
                     .neg(R.string.cancel)
                     .pos(R.string.ok)
                     .fields(
-                            Input.plain(PreferenceNames.HTTPUPLOAD_HEADERS)
+                            Input.plain(PreferenceNames.HTTPFILEUPLOAD_HEADERS)
                                     .text(preferenceHelper.getHttpFileUploadHeaders())
                                     .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
                     )
-                    .show(this, PreferenceNames.HTTPUPLOAD_HEADERS);
+                    .show(this, PreferenceNames.HTTPFILEUPLOAD_HEADERS);
             return true;
         }
 
-        if (preference.getKey().equals("httpupload_basicauth")) {
+        if (preference.getKey().equals("httpfileupload_basicauth")) {
             SimpleFormDialog.build()
                     .title("Basic Authentication")
                     .neg(R.string.cancel)
                     .pos(R.string.ok)
                     .fields(
-                            Input.plain(PreferenceNames.HTTPUPLOAD_BASICAUTH_USERNAME)
+                            Input.plain(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_USERNAME)
                                     .text(preferenceHelper.getHttpFileUploadUsername())
                                     .hint(R.string.autoftp_username),
-                            Input.plain(PreferenceNames.HTTPUPLOAD_BASICAUTH_PASSWORD)
+                            Input.plain(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD)
                                     .text(preferenceHelper.getHttpFileUploadPassword())
                                     .hint(R.string.autoftp_password)
                                     .showPasswordToggle()
                                     .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     )
-                    .show(this, "httpupload_basicauth");
+                    .show(this, "httpfileupload_basicauth");
             return true;
         }
 
-        if (preference.getKey().equals("httpupload_test")) {
+        if (preference.getKey().equals("httpfileupload_test")) {
             HttpFileUploadManager manager = new HttpFileUploadManager(preferenceHelper);
             if (!manager.isAvailable()) {
                 Dialogs.alert(getString(R.string.autoftp_invalid_settings),
@@ -227,21 +227,21 @@ public class HttpFileUploadSettingsFragment extends PreferenceFragmentCompat imp
             return true;
         }
 
-        if (dialogTag.equals(PreferenceNames.HTTPUPLOAD_URL)) {
-            String url = extras.getString(PreferenceNames.HTTPUPLOAD_URL);
+        if (dialogTag.equals(PreferenceNames.HTTPFILEUPLOAD_URL)) {
+            String url = extras.getString(PreferenceNames.HTTPFILEUPLOAD_URL);
             preferenceHelper.setHttpFileUploadUrl(url);
-            findPreference(PreferenceNames.HTTPUPLOAD_URL).setSummary(url);
+            findPreference(PreferenceNames.HTTPFILEUPLOAD_URL).setSummary(url);
             return true;
         }
 
-        if (dialogTag.equals(PreferenceNames.HTTPUPLOAD_METHOD)) {
+        if (dialogTag.equals(PreferenceNames.HTTPFILEUPLOAD_METHOD)) {
             String method = extras.getString(SimpleListDialog.SELECTED_SINGLE_LABEL);
             preferenceHelper.setHttpFileUploadMethod(method);
-            findPreference(PreferenceNames.HTTPUPLOAD_METHOD).setSummary(method);
+            findPreference(PreferenceNames.HTTPFILEUPLOAD_METHOD).setSummary(method);
             return true;
         }
 
-        if (dialogTag.equals(PreferenceNames.HTTPUPLOAD_BODY_TYPE)) {
+        if (dialogTag.equals(PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE)) {
             String label = extras.getString(SimpleListDialog.SELECTED_SINGLE_LABEL);
             String[] entries = getResources().getStringArray(R.array.http_body_types);
             String[] values = getResources().getStringArray(R.array.http_body_type_values);
@@ -255,24 +255,24 @@ public class HttpFileUploadSettingsFragment extends PreferenceFragmentCompat imp
             }
 
             preferenceHelper.setHttpFileUploadBodyType(value);
-            findPreference(PreferenceNames.HTTPUPLOAD_BODY_TYPE).setSummary(getBodyTypeDisplay(value));
+            findPreference(PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE).setSummary(getBodyTypeDisplay(value));
             updateMethodPreferenceState();
             return true;
         }
 
-        if (dialogTag.equals(PreferenceNames.HTTPUPLOAD_HEADERS)) {
-            String headers = extras.getString(PreferenceNames.HTTPUPLOAD_HEADERS);
+        if (dialogTag.equals(PreferenceNames.HTTPFILEUPLOAD_HEADERS)) {
+            String headers = extras.getString(PreferenceNames.HTTPFILEUPLOAD_HEADERS);
             preferenceHelper.setHttpFileUploadHeaders(headers);
-            findPreference(PreferenceNames.HTTPUPLOAD_HEADERS).setSummary(headers);
+            findPreference(PreferenceNames.HTTPFILEUPLOAD_HEADERS).setSummary(headers);
             return true;
         }
 
-        if (dialogTag.equals("httpupload_basicauth")) {
-            String username = extras.getString(PreferenceNames.HTTPUPLOAD_BASICAUTH_USERNAME);
-            String password = extras.getString(PreferenceNames.HTTPUPLOAD_BASICAUTH_PASSWORD);
+        if (dialogTag.equals("httpfileupload_basicauth")) {
+            String username = extras.getString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_USERNAME);
+            String password = extras.getString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD);
             preferenceHelper.setHttpFileUploadUsername(username);
             preferenceHelper.setHttpFileUploadPassword(password);
-            updateAuthSummary(findPreference("httpupload_basicauth"));
+            updateAuthSummary(findPreference("httpfileupload_basicauth"));
             return true;
         }
 

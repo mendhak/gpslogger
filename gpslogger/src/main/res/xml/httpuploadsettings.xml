@@ -1,54 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <SwitchPreferenceCompat
-        android:key="autohttpupload_enabled"
+        android:key="autohttpfileupload_enabled"
+        android:summary="@string/autosend_httpfileupload_summary"
         android:title="@string/autosend_enabled"
-        android:summary="@string/autosend_httpupload_summary"
-        app:iconSpaceReserved="false"
-    />
+        app:iconSpaceReserved="false" />
 
     <Preference
-        android:key="httpupload_url"
-        android:title="URL"
+        android:key="httpfileupload_url"
         android:summary="URL to upload files to"
-        app:iconSpaceReserved="false"
-    />
+        android:title="URL"
+        app:iconSpaceReserved="false" />
 
     <Preference
-        android:key="httpupload_body_type"
-        android:title="@string/http_file_upload_body_type"
         android:defaultValue="form-data"
-        app:iconSpaceReserved="false"
-    />
+        android:key="httpfileupload_body_type"
+        android:title="@string/http_file_upload_body_type"
+        app:iconSpaceReserved="false" />
 
     <Preference
-        android:key="httpupload_method"
-        android:title="@string/customurl_http_method"
         android:defaultValue="POST"
-        app:iconSpaceReserved="false"
-    />
+        android:key="httpfileupload_method"
+        android:title="@string/customurl_http_method"
+        app:iconSpaceReserved="false" />
 
     <Preference
-        android:key="httpupload_headers"
+        android:key="httpfileupload_headers"
         android:title="@string/customurl_http_headers"
-        app:iconSpaceReserved="false"
-    />
+        app:iconSpaceReserved="false" />
 
     <Preference
-        android:key="httpupload_basicauth"
+        android:key="httpfileupload_basicauth"
         android:title="Basic Authentication"
-        app:iconSpaceReserved="false"
-    />
+        app:iconSpaceReserved="false" />
 
     <Preference
-        android:key="httpupload_test"
-        android:title="Test upload"
+        android:key="httpfileupload_test"
         android:summary="Upload a test file to the URL"
-        app:iconSpaceReserved="false"
-    />
+        android:title="Test upload"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>
