@@ -32,7 +32,6 @@ public class HttpFileUploadManagerTest {
     public void isAvailable_WhenUrlMissing_ReturnsFalse() {
         PreferenceHelper pm = mock(PreferenceHelper.class);
         when(pm.getHttpFileUploadUrl()).thenReturn("");
-        when(pm.getHttpFileUploadMethod()).thenReturn("POST");
 
         HttpFileUploadManager manager = new HttpFileUploadManager(pm);
         assertThat("URL is required", manager.isAvailable(), is(false));
