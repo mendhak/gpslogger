@@ -1,45 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<?xml version="1.0" encoding="utf-8" ?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+>
 
     <SwitchPreferenceCompat
         android:key="autohttpupload_enabled"
         android:title="@string/autosend_enabled"
         android:summary="@string/autosend_httpupload_summary"
-        app:iconSpaceReserved="false" />
+        app:iconSpaceReserved="false"
+    />
 
     <Preference
         android:key="httpupload_url"
         android:title="URL"
         android:summary="URL to upload files to"
-        app:iconSpaceReserved="false" />
+        app:iconSpaceReserved="false"
+    />
 
     <Preference
         android:key="httpupload_body_type"
-        android:title="@string/http_upload_body_type"
+        android:title="@string/http_file_upload_body_type"
         android:defaultValue="form-data"
-        app:iconSpaceReserved="false" />
+        app:iconSpaceReserved="false"
+    />
 
     <Preference
         android:key="httpupload_method"
         android:title="@string/customurl_http_method"
         android:defaultValue="POST"
-        app:iconSpaceReserved="false" />
+        app:iconSpaceReserved="false"
+    />
 
     <Preference
         android:key="httpupload_headers"
         android:title="@string/customurl_http_headers"
-        app:iconSpaceReserved="false" />
+        app:iconSpaceReserved="false"
+    />
 
     <Preference
         android:key="httpupload_basicauth"
         android:title="Basic Authentication"
-        app:iconSpaceReserved="false" />
+        app:iconSpaceReserved="false"
+    />
 
     <Preference
         android:key="httpupload_test"
         android:title="Test upload"
         android:summary="Upload a test file to the URL"
-        app:iconSpaceReserved="false" />
+        app:iconSpaceReserved="false"
+    />
 
 </PreferenceScreen>

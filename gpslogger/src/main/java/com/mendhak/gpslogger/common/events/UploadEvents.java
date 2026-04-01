@@ -106,5 +106,5 @@ public class UploadEvents {
         public String hostKey;
     }
 
-    public static class HttpUpload extends BaseUploadEvent {}
+    public static class HttpFileUpload extends BaseUploadEvent {}
 }

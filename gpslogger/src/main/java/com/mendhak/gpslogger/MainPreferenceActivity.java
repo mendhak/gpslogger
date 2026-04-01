@@ -142,8 +142,8 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 preferenceFragmentCompat = new SFTPSettingsFragment();
                 break;
             case PREFERENCE_FRAGMENTS.HTTPUPLOAD:
-                setTitle(R.string.http_upload_setup_title);
-                preferenceFragmentCompat = new HttpUploadSettingsFragment();
+                setTitle(R.string.http_file_upload_setup_title);
+                preferenceFragmentCompat = new HttpFileUploadSettingsFragment();
                 break;
         }
 
@@ -194,7 +194,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
         public static final String OWNCLOUD = "OwnCloudAuthorizationFragment";
         public static final String OSM = "OSMAuthorizationFragment";
         public static final String SFTP = "SFTPSettingsFragment";
-        public static final String HTTPUPLOAD = "HttpUploadSettingsFragment";
+        public static final String HTTPUPLOAD = "HttpFileUploadSettingsFragment";
     }
 
 }

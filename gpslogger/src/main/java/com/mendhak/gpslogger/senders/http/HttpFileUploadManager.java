@@ -16,16 +16,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-public class HttpUploadManager extends FileSender {
+public class HttpFileUploadManager extends FileSender {
 
-    private static final Logger LOG = Logs.of(HttpUploadManager.class);
+    private static final Logger LOG = Logs.of(HttpFileUploadManager.class);
     private final PreferenceHelper preferenceHelper;
 
-    public HttpUploadManager(PreferenceHelper preferenceHelper) {
+    public HttpFileUploadManager(PreferenceHelper preferenceHelper) {
         this.preferenceHelper = preferenceHelper;
     }
 
-    public void testHttpUpload() {
+    public void testHttpFileUpload() {
         try {
             final File testFile = Files.createTestFile();
 
@@ -33,14 +33,14 @@ public class HttpUploadManager extends FileSender {
             HashMap<String, Object> dataMap = new HashMap<String, Object>() {{
                 put("filePath", testFile.getAbsolutePath());
             }};
-            Systems.startWorkManagerRequest(HttpUploadWorker.class, dataMap, tag);
+            Systems.startWorkManagerRequest(HttpFileUploadWorker.class, dataMap, tag);
 
         } catch (Exception ex) {
-            EventBus.getDefault().post(new UploadEvents.HttpUpload().failed());
-            LOG.error("Error while testing HTTP upload: " + ex.getMessage());
+            EventBus.getDefault().post(new UploadEvents.HttpFileUpload().failed());
+            LOG.error("Error while testing HTTP File Upload: " + ex.getMessage());
         }
 
-        LOG.debug("Added background HTTP upload job");
+        LOG.debug("Added background HTTP File Upload job");
     }
 
     @Override
@@ -50,19 +50,19 @@ public class HttpUploadManager extends FileSender {
             HashMap<String, Object> dataMap = new HashMap<>();
             dataMap.put("filePath", f.getAbsolutePath());
 
-            Systems.startWorkManagerRequest(HttpUploadWorker.class, dataMap, tag);
+            Systems.startWorkManagerRequest(HttpFileUploadWorker.class, dataMap, tag);
         }
     }
 
     @Override
     public boolean isAvailable() {
-        return !Strings.isNullOrEmpty(preferenceHelper.getHttpUploadUrl()) &&
-                !Strings.isNullOrEmpty(preferenceHelper.getHttpUploadMethod());
+        return !Strings.isNullOrEmpty(preferenceHelper.getHttpFileUploadUrl()) &&
+                !Strings.isNullOrEmpty(preferenceHelper.getHttpFileUploadMethod());
     }
 
     @Override
     public boolean hasUserAllowedAutoSending() {
-        return preferenceHelper.isHttpUploadAutoSendEnabled();
+        return preferenceHelper.isHttpFileUploadAutoSendEnabled();
     }
 
     @Override

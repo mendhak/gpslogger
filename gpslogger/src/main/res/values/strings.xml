@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
     <string name="title_drawer_uploadsettings">Upload settings</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
 
 
     <string name="app_name">GPSLogger</string>
@@ -189,7 +188,6 @@
     <string name="autoemail_frequency_whenistop">When I press stop</string>
 
 
-
     <string name="autoemail_smtp_category">Email Settings</string>
     <string name="autoemail_username_summary">Username with your email provider</string>
     <string name="autoemail_password_summary">Password with your email provider</string>
@@ -207,7 +205,6 @@
     <string name="started_waiting">GPS started, waiting for fix</string>
     <string name="gps_stopped">GPS paused</string>
     <string name="stopped">Stopped</string>
-
 
 
     <string name="osm_setup_title">OpenStreetMap</string>
@@ -262,7 +259,7 @@
     <string name="owncloud_server_summary">ownCloud Base URL</string>
     <string name="owncloud_directory_summary">Folder to use on ownCloud server. Ensure that it exists or upload will fail.</string>
     <string name="owncloud_test_summary">Upload a test file to the ownCloud server</string>
-   
+
     <string name="owncloud_testing">Testing ownCloud upload</string>
 
     <string name="menu_upload">Upload</string>
@@ -432,7 +429,7 @@
     <string name="altitude_subtractgeoidheight_title">Use MSL instead of WGS84</string>
     <string name="altitude_subtractoffset_title">Subtract altitude offset</string>
     <string name="altitude_subtractoffset_summary">A value in meters to subtract from GPS altitudes. Use a negative number to add a value to the altitude. Only applies to GPS satellite points, not network or NMEA.</string>
-	<string name="upload_failure">Could not upload the file</string>
+    <string name="upload_failure">Could not upload the file</string>
     <string name="inaccurate_point_discarded">Inaccurate point discarded</string>
     <string name="not_enough_distance_traveled">Only %s m traveled. Point discarded.</string>
     <string name="autosend_wifionly_title">Send on Wi-Fi only</string>
@@ -503,8 +500,8 @@
     <string name="only_log_if_significant_motion_title">Only log if there is significant motion</string>
     <string name="only_log_if_significant_motion_summary">Only log if significant activity is detected such as walking, biking, driving. Significant motion is determined by your OS.</string>
 
-    <string name="http_upload_setup_title">HTTP Upload</string>
+    <string name="http_file_upload_setup_title">HTTP File Upload</string>
     <string name="autosend_httpupload_summary">Uploads files to an arbitrary URL using HTTP POST or PUT.</string>
-    <string name="http_upload_body_type">Encoding</string>
+    <string name="http_file_upload_body_type">Encoding</string>
 
 </resources>

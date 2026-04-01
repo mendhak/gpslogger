@@ -16,56 +16,56 @@ import static org.mockito.Mockito.when;
 
 @SmallTest
 @RunWith(MockitoJUnitRunner.class)
-public class HttpUploadManagerTest {
+public class HttpFileUploadManagerTest {
 
     @Test
     public void isAvailable_WhenUrlAndMethodPresent_ReturnsTrue() {
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.getHttpUploadUrl()).thenReturn("https://example.com/upload");
-        when(pm.getHttpUploadMethod()).thenReturn("POST");
+        when(pm.getHttpFileUploadUrl()).thenReturn("https://example.com/upload");
+        when(pm.getHttpFileUploadMethod()).thenReturn("POST");
 
-        HttpUploadManager manager = new HttpUploadManager(pm);
+        HttpFileUploadManager manager = new HttpFileUploadManager(pm);
         assertThat("URL and method are required", manager.isAvailable(), is(true));
     }
 
     @Test
     public void isAvailable_WhenUrlMissing_ReturnsFalse() {
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.getHttpUploadUrl()).thenReturn("");
-        when(pm.getHttpUploadMethod()).thenReturn("POST");
+        when(pm.getHttpFileUploadUrl()).thenReturn("");
+        when(pm.getHttpFileUploadMethod()).thenReturn("POST");
 
-        HttpUploadManager manager = new HttpUploadManager(pm);
+        HttpFileUploadManager manager = new HttpFileUploadManager(pm);
         assertThat("URL is required", manager.isAvailable(), is(false));
     }
 
     @Test
     public void isAvailable_WhenMethodMissing_ReturnsFalse() {
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.getHttpUploadUrl()).thenReturn("https://example.com/upload");
-        when(pm.getHttpUploadMethod()).thenReturn("");
+        when(pm.getHttpFileUploadUrl()).thenReturn("https://example.com/upload");
+        when(pm.getHttpFileUploadMethod()).thenReturn("");
 
-        HttpUploadManager manager = new HttpUploadManager(pm);
+        HttpFileUploadManager manager = new HttpFileUploadManager(pm);
         assertThat("HTTP method is required", manager.isAvailable(), is(false));
     }
 
     @Test
     public void hasUserAllowedAutoSending_UsesPreferenceFlag() {
         PreferenceHelper pm = mock(PreferenceHelper.class);
-        when(pm.isHttpUploadAutoSendEnabled()).thenReturn(true);
+        when(pm.isHttpFileUploadAutoSendEnabled()).thenReturn(true);
 
-        HttpUploadManager manager = new HttpUploadManager(pm);
+        HttpFileUploadManager manager = new HttpFileUploadManager(pm);
         assertThat("Autosend preference should drive behavior", manager.hasUserAllowedAutoSending(), is(true));
     }
 
     @Test
-    public void getName_ReturnsHttpUploadSenderName() {
-        HttpUploadManager manager = new HttpUploadManager(mock(PreferenceHelper.class));
-        assertThat("Sender name should be HTTP upload", manager.getName(), is(FileSender.SenderNames.HTTPUPLOAD));
+    public void getName_ReturnsHttpFileUploadSenderName() {
+        HttpFileUploadManager manager = new HttpFileUploadManager(mock(PreferenceHelper.class));
+        assertThat("Sender name should be HTTP File Upload", manager.getName(), is(FileSender.SenderNames.HTTPUPLOAD));
     }
 
     @Test
     public void accept_AnyFileName_ReturnsTrue() {
-        HttpUploadManager manager = new HttpUploadManager(mock(PreferenceHelper.class));
-        assertThat("HTTP upload accepts any log file type", manager.accept(null, "anything.txt"), is(true));
+        HttpFileUploadManager manager = new HttpFileUploadManager(mock(PreferenceHelper.class));
+        assertThat("HTTP File Upload accepts any log file type", manager.accept(null, "anything.txt"), is(true));
     }
 }

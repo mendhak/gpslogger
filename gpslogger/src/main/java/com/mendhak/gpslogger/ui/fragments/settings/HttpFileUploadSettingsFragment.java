@@ -16,7 +16,7 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
-import com.mendhak.gpslogger.senders.http.HttpUploadManager;
+import com.mendhak.gpslogger.senders.http.HttpFileUploadManager;
 import com.mendhak.gpslogger.ui.Dialogs;
 
 import de.greenrobot.event.EventBus;
@@ -27,12 +27,12 @@ import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 import eltos.simpledialogfragment.list.SimpleListDialog;
 
-public class HttpUploadSettingsFragment extends PreferenceFragmentCompat implements
+public class HttpFileUploadSettingsFragment extends PreferenceFragmentCompat implements
         SimpleDialog.OnDialogResultListener,
         PreferenceValidator,
         Preference.OnPreferenceClickListener {
 
-    private static final Logger LOG = Logs.of(HttpUploadSettingsFragment.class);
+    private static final Logger LOG = Logs.of(HttpFileUploadSettingsFragment.class);
     private final PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
     @Override
@@ -40,19 +40,19 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
         super.onCreate(savedInstanceState);
 
         Preference urlPreference = findPreference(PreferenceNames.HTTPUPLOAD_URL);
-        urlPreference.setSummary(preferenceHelper.getHttpUploadUrl());
+        urlPreference.setSummary(preferenceHelper.getHttpFileUploadUrl());
         urlPreference.setOnPreferenceClickListener(this);
 
         Preference bodyTypePreference = findPreference(PreferenceNames.HTTPUPLOAD_BODY_TYPE);
-        bodyTypePreference.setSummary(getBodyTypeDisplay(preferenceHelper.getHttpUploadBodyType()));
+        bodyTypePreference.setSummary(getBodyTypeDisplay(preferenceHelper.getHttpFileUploadBodyType()));
         bodyTypePreference.setOnPreferenceClickListener(this);
 
         Preference methodPreference = findPreference(PreferenceNames.HTTPUPLOAD_METHOD);
-        methodPreference.setSummary(preferenceHelper.getHttpUploadMethod());
+        methodPreference.setSummary(preferenceHelper.getHttpFileUploadMethod());
         methodPreference.setOnPreferenceClickListener(this);
 
         Preference headersPreference = findPreference(PreferenceNames.HTTPUPLOAD_HEADERS);
-        headersPreference.setSummary(preferenceHelper.getHttpUploadHeaders());
+        headersPreference.setSummary(preferenceHelper.getHttpFileUploadHeaders());
         headersPreference.setOnPreferenceClickListener(this);
 
         Preference authPreference = findPreference("httpupload_basicauth");
@@ -66,7 +66,7 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
     }
 
     private void updateAuthSummary(Preference authPreference) {
-        String username = preferenceHelper.getHttpUploadUsername();
+        String username = preferenceHelper.getHttpFileUploadUsername();
         if (!Strings.isNullOrEmpty(username)) {
             authPreference.setSummary(username + ":***");
         } else {
@@ -87,13 +87,13 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
 
     private void updateMethodPreferenceState() {
         Preference methodPreference = findPreference(PreferenceNames.HTTPUPLOAD_METHOD);
-        if ("form-data".equals(preferenceHelper.getHttpUploadBodyType())) {
-            preferenceHelper.setHttpUploadMethod("POST");
+        if ("form-data".equals(preferenceHelper.getHttpFileUploadBodyType())) {
+            preferenceHelper.setHttpFileUploadMethod("POST");
             methodPreference.setSummary("POST");
             methodPreference.setEnabled(false);
         } else {
             methodPreference.setEnabled(true);
-            methodPreference.setSummary(preferenceHelper.getHttpUploadMethod());
+            methodPreference.setSummary(preferenceHelper.getHttpFileUploadMethod());
         }
     }
 
@@ -122,7 +122,7 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
 
     @Override
     public boolean isValid() {
-        HttpUploadManager manager = new HttpUploadManager(preferenceHelper);
+        HttpFileUploadManager manager = new HttpFileUploadManager(preferenceHelper);
         return !manager.hasUserAllowedAutoSending() || manager.isAvailable();
     }
 
@@ -135,7 +135,7 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
                     .pos(R.string.ok)
                     .fields(
                             Input.plain(PreferenceNames.HTTPUPLOAD_URL)
-                                    .text(preferenceHelper.getHttpUploadUrl())
+                                    .text(preferenceHelper.getHttpFileUploadUrl())
                                     .required()
                     )
                     .show(this, PreferenceNames.HTTPUPLOAD_URL);
@@ -153,7 +153,7 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
 
         if (preference.getKey().equals(PreferenceNames.HTTPUPLOAD_BODY_TYPE)) {
             SimpleListDialog.build()
-                    .title(R.string.http_upload_body_type)
+                    .title(R.string.http_file_upload_body_type)
                     .items(getActivity(), R.array.http_body_types)
                     .choiceMode(SimpleListDialog.SINGLE_CHOICE_DIRECT)
                     .show(this, PreferenceNames.HTTPUPLOAD_BODY_TYPE);
@@ -167,7 +167,7 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
                     .pos(R.string.ok)
                     .fields(
                             Input.plain(PreferenceNames.HTTPUPLOAD_HEADERS)
-                                    .text(preferenceHelper.getHttpUploadHeaders())
+                                    .text(preferenceHelper.getHttpFileUploadHeaders())
                                     .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
                     )
                     .show(this, PreferenceNames.HTTPUPLOAD_HEADERS);
@@ -181,10 +181,10 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
                     .pos(R.string.ok)
                     .fields(
                             Input.plain(PreferenceNames.HTTPUPLOAD_BASICAUTH_USERNAME)
-                                    .text(preferenceHelper.getHttpUploadUsername())
+                                    .text(preferenceHelper.getHttpFileUploadUsername())
                                     .hint(R.string.autoftp_username),
                             Input.plain(PreferenceNames.HTTPUPLOAD_BASICAUTH_PASSWORD)
-                                    .text(preferenceHelper.getHttpUploadPassword())
+                                    .text(preferenceHelper.getHttpFileUploadPassword())
                                     .hint(R.string.autoftp_password)
                                     .showPasswordToggle()
                                     .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
@@ -194,7 +194,7 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
         }
 
         if (preference.getKey().equals("httpupload_test")) {
-            HttpUploadManager manager = new HttpUploadManager(preferenceHelper);
+            HttpFileUploadManager manager = new HttpFileUploadManager(preferenceHelper);
             if (!manager.isAvailable()) {
                 Dialogs.alert(getString(R.string.autoftp_invalid_settings),
                         getString(R.string.autoftp_invalid_summary),
@@ -202,8 +202,8 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
                 return false;
             }
 
-            Dialogs.progress((FragmentActivity) getActivity(), "Testing HTTP upload");
-            manager.testHttpUpload();
+            Dialogs.progress((FragmentActivity) getActivity(), "Testing HTTP File Upload");
+            manager.testHttpFileUpload();
             return true;
         }
 
@@ -211,13 +211,13 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.HttpUpload o) {
-        LOG.debug("HTTP Upload Event completed, success: " + o.success);
+    public void onEventMainThread(UploadEvents.HttpFileUpload o) {
+        LOG.debug("HTTP File Upload Event completed, success: " + o.success);
         Dialogs.hideProgress();
         if (!o.success) {
-            Dialogs.showError(getString(R.string.sorry), "HTTP Upload Test Failed", o.message, o.throwable, (FragmentActivity) getActivity());
+            Dialogs.showError(getString(R.string.sorry), "HTTP File Upload Test Failed", o.message, o.throwable, (FragmentActivity) getActivity());
         } else {
-            Dialogs.alert(getString(R.string.success), "HTTP Upload Test Succeeded", getActivity());
+            Dialogs.alert(getString(R.string.success), "HTTP File Upload Test Succeeded", getActivity());
         }
     }
 
@@ -229,14 +229,14 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
 
         if (dialogTag.equals(PreferenceNames.HTTPUPLOAD_URL)) {
             String url = extras.getString(PreferenceNames.HTTPUPLOAD_URL);
-            preferenceHelper.setHttpUploadUrl(url);
+            preferenceHelper.setHttpFileUploadUrl(url);
             findPreference(PreferenceNames.HTTPUPLOAD_URL).setSummary(url);
             return true;
         }
 
         if (dialogTag.equals(PreferenceNames.HTTPUPLOAD_METHOD)) {
             String method = extras.getString(SimpleListDialog.SELECTED_SINGLE_LABEL);
-            preferenceHelper.setHttpUploadMethod(method);
+            preferenceHelper.setHttpFileUploadMethod(method);
             findPreference(PreferenceNames.HTTPUPLOAD_METHOD).setSummary(method);
             return true;
         }
@@ -245,7 +245,7 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
             String label = extras.getString(SimpleListDialog.SELECTED_SINGLE_LABEL);
             String[] entries = getResources().getStringArray(R.array.http_body_types);
             String[] values = getResources().getStringArray(R.array.http_body_type_values);
-            
+
             String value = values[0];
             for (int i = 0; i < entries.length; i++) {
                 if (entries[i].equals(label)) {
@@ -254,7 +254,7 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
                 }
             }
 
-            preferenceHelper.setHttpUploadBodyType(value);
+            preferenceHelper.setHttpFileUploadBodyType(value);
             findPreference(PreferenceNames.HTTPUPLOAD_BODY_TYPE).setSummary(getBodyTypeDisplay(value));
             updateMethodPreferenceState();
             return true;
@@ -262,7 +262,7 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
 
         if (dialogTag.equals(PreferenceNames.HTTPUPLOAD_HEADERS)) {
             String headers = extras.getString(PreferenceNames.HTTPUPLOAD_HEADERS);
-            preferenceHelper.setHttpUploadHeaders(headers);
+            preferenceHelper.setHttpFileUploadHeaders(headers);
             findPreference(PreferenceNames.HTTPUPLOAD_HEADERS).setSummary(headers);
             return true;
         }
@@ -270,8 +270,8 @@ public class HttpUploadSettingsFragment extends PreferenceFragmentCompat impleme
         if (dialogTag.equals("httpupload_basicauth")) {
             String username = extras.getString(PreferenceNames.HTTPUPLOAD_BASICAUTH_USERNAME);
             String password = extras.getString(PreferenceNames.HTTPUPLOAD_BASICAUTH_PASSWORD);
-            preferenceHelper.setHttpUploadUsername(username);
-            preferenceHelper.setHttpUploadPassword(password);
+            preferenceHelper.setHttpFileUploadUsername(username);
+            preferenceHelper.setHttpFileUploadPassword(password);
             updateAuthSummary(findPreference("httpupload_basicauth"));
             return true;
         }

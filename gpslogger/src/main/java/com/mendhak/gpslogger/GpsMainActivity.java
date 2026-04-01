@@ -846,7 +846,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_autosend_title, R.string.pref_autosend_summary, R.drawable.autosend, 1003));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.log_customurl_setup_title, null, R.drawable.customurlsender, 1020));
-        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.http_upload_setup_title, null, R.drawable.customurlsender, 1021));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.http_file_upload_setup_title, null, R.drawable.customurlsender, 1021));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.dropbox_setup_title, null, R.drawable.dropbox, 1005));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.google_drive_setup_title, null, R.drawable.googledrive, 1011));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.sftp_setup_title, null, R.drawable.sftp, 1015));
@@ -1245,8 +1245,8 @@ public class GpsMainActivity extends AppCompatActivity
             case R.id.mnuCustomUrl:
                 uploadToCustomURL();
                 return true;
-            case R.id.mnuHttpUpload:
-                uploadToHttpUpload();
+            case R.id.mnuHttpFileUpload:
+                uploadToHttpFileUpload();
                 return true;
             default:
                 return true;
@@ -1329,13 +1329,13 @@ public class GpsMainActivity extends AppCompatActivity
         showFileListDialog(FileSenderFactory.getCustomUrlSender());
     }
 
-    private void uploadToHttpUpload(){
-        if(!FileSenderFactory.getHttpUploadSender().isAvailable()){
+    private void uploadToHttpFileUpload(){
+        if(!FileSenderFactory.getHttpFileUploadSender().isAvailable()){
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPUPLOAD);
             return;
         }
 
-        showFileListDialog(FileSenderFactory.getHttpUploadSender());
+        showFileListDialog(FileSenderFactory.getHttpFileUploadSender());
     }
 
     private void uploadToSFTP(){
@@ -1628,12 +1628,12 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
     @EventBusHook
-    public void onEventMainThread(UploadEvents.HttpUpload upload){
-        LOG.debug("HTTP Upload Event completed, success: " + upload.success);
+    public void onEventMainThread(UploadEvents.HttpFileUpload upload){
+        LOG.debug("HTTP File Upload Event completed, success: " + upload.success);
         Dialogs.hideProgress();
 
         if(!upload.success){
-            LOG.error(getString(R.string.http_upload_setup_title)
+            LOG.error(getString(R.string.http_file_upload_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
 

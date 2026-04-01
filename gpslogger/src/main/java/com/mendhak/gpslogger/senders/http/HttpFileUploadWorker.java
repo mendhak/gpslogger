@@ -31,11 +31,11 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class HttpUploadWorker extends Worker {
+public class HttpFileUploadWorker extends Worker {
 
-    private static final Logger LOG = Logs.of(HttpUploadWorker.class);
+    private static final Logger LOG = Logs.of(HttpFileUploadWorker.class);
 
-    public HttpUploadWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public HttpFileUploadWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
@@ -44,22 +44,22 @@ public class HttpUploadWorker extends Worker {
     public Result doWork() {
         String filePath = getInputData().getString("filePath");
         if (Strings.isNullOrEmpty(filePath)) {
-            LOG.error("No file path provided to HttpUploadWorker");
+            LOG.error("No file path provided to HttpFileUploadWorker");
             return Result.failure();
         }
 
         File fileToUpload = new File(filePath);
         PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
-        String url = preferenceHelper.getHttpUploadUrl();
-        String method = preferenceHelper.getHttpUploadMethod();
-        String headersString = preferenceHelper.getHttpUploadHeaders();
-        String username = preferenceHelper.getHttpUploadUsername();
-        String password = preferenceHelper.getHttpUploadPassword();
-        String bodyType = preferenceHelper.getHttpUploadBodyType();
+        String url = preferenceHelper.getHttpFileUploadUrl();
+        String method = preferenceHelper.getHttpFileUploadMethod();
+        String headersString = preferenceHelper.getHttpFileUploadHeaders();
+        String username = preferenceHelper.getHttpFileUploadUsername();
+        String password = preferenceHelper.getHttpFileUploadPassword();
+        String bodyType = preferenceHelper.getHttpFileUploadBodyType();
 
         try {
-            LOG.info("HTTP Uploading " + fileToUpload.getName() + " to " + url + " using " + method + " (" + bodyType + ")");
+            LOG.info("HTTP File Uploading " + fileToUpload.getName() + " to " + url + " using " + method + " (" + bodyType + ")");
 
             OkHttpClient.Builder okBuilder = new OkHttpClient.Builder();
             okBuilder.sslSocketFactory(Networks.getSocketFactory(AppSettings.getInstance()),
@@ -101,32 +101,32 @@ public class HttpUploadWorker extends Worker {
             Response response = okBuilder.build().newCall(request).execute();
 
             if (response.isSuccessful()) {
-                LOG.debug("HTTP upload complete with successful response code " + response.code());
+                LOG.debug("HTTP File Upload complete with successful response code " + response.code());
                 response.close();
-                
-                EventBus.getDefault().post(new UploadEvents.HttpUpload().succeeded());
+
+                EventBus.getDefault().post(new UploadEvents.HttpFileUpload().succeeded());
                 Systems.sendFileUploadedBroadcast(getApplicationContext(), new String[]{fileToUpload.getAbsolutePath()}, "httpupload");
-                
+
                 return Result.success();
             } else {
                 String errorBody = response.body() != null ? response.body().string() : "Empty response body";
-                LOG.error("HTTP upload failed with code " + response.code() + ": " + errorBody);
+                LOG.error("HTTP File Upload failed with code " + response.code() + ": " + errorBody);
                 response.close();
-                
+
                 if (getRunAttemptCount() < 3) {
                     return Result.retry();
                 }
-                
-                EventBus.getDefault().post(new UploadEvents.HttpUpload().failed("Response code " + response.code(), new Throwable(errorBody)));
+
+                EventBus.getDefault().post(new UploadEvents.HttpFileUpload().failed("Response code " + response.code(), new Throwable(errorBody)));
                 return Result.failure();
             }
 
         } catch (Exception e) {
-            LOG.error("Exception during HTTP upload", e);
+            LOG.error("Exception during HTTP File Upload", e);
             if (getRunAttemptCount() < 3) {
                 return Result.retry();
             }
-            EventBus.getDefault().post(new UploadEvents.HttpUpload().failed(e.getMessage(), e));
+            EventBus.getDefault().post(new UploadEvents.HttpFileUpload().failed(e.getMessage(), e));
             return Result.failure();
         }
     }
