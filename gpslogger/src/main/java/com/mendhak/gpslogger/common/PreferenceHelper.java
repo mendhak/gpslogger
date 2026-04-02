@@ -720,6 +720,64 @@ public class PreferenceHelper {
     }
 
 
+    @ProfilePreference(name=PreferenceNames.AUTOSEND_HTTPFILEUPLOAD_ENABLED)
+    public boolean isHttpFileUploadAutoSendEnabled() {
+        return prefs.getBoolean(PreferenceNames.AUTOSEND_HTTPFILEUPLOAD_ENABLED, false);
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_URL)
+    public String getHttpFileUploadUrl() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_URL, "");
+    }
+
+    public void setHttpFileUploadUrl(String url) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_URL, url).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_METHOD)
+    public String getHttpFileUploadMethod() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_METHOD, "POST");
+    }
+
+    public void setHttpFileUploadMethod(String method) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_METHOD, method).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_HEADERS)
+    public String getHttpFileUploadHeaders() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_HEADERS, "");
+    }
+
+    public void setHttpFileUploadHeaders(String headers) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_HEADERS, headers).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_USERNAME)
+    public String getHttpFileUploadUsername() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_USERNAME, "");
+    }
+
+    public void setHttpFileUploadUsername(String username) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_USERNAME, username).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD)
+    public String getHttpFileUploadPassword() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD, "");
+    }
+
+    public void setHttpFileUploadPassword(String password) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD, password).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE)
+    public String getHttpFileUploadBodyType() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE, "form-data");
+    }
+
+    public void setHttpFileUploadBodyType(String bodyType) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE, bodyType).apply();
+    }
 
 
     @ProfilePreference(name=PreferenceNames.LOG_PASSIVE_LOCATIONS)

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+        android:key="autohttpfileupload_enabled"
+        android:summary="@string/autosend_httpfileupload_summary"
+        android:title="@string/autosend_enabled"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:key="httpfileupload_url"
+        android:summary="URL to upload files to"
+        android:title="URL"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:defaultValue="form-data"
+        android:key="httpfileupload_body_type"
+        android:title="@string/http_file_upload_body_type"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:defaultValue="POST"
+        android:key="httpfileupload_method"
+        android:title="@string/customurl_http_method"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:key="httpfileupload_headers"
+        android:hint="Content-Type: application/json\nAuthorization: Basic abcdefg\nApiToken: 12345"
+        android:title="@string/http_file_upload_http_headers"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:key="httpfileupload_basicauth"
+        android:title="Basic Authentication"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:key="httpfileupload_test"
+        android:summary="Upload a test file to the URL"
+        android:title="Test upload"
+        app:iconSpaceReserved="false" />
+
+</PreferenceScreen>
