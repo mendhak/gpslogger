@@ -499,6 +499,9 @@
     <string name="prompt_for_details_when_logging_starts">Prompt for details when logging starts</string>
     <string name="only_log_if_significant_motion_title">Only log if there is significant motion</string>
     <string name="only_log_if_significant_motion_summary">Only log if significant activity is detected such as walking, biking, driving. Significant motion is determined by your OS.</string>
+    <string name="significant_motion_bypass_interval_title">Extended no motion heartbeat interval</string>
+    <string name="significant_motion_bypass_interval_summary">During extended periods of no significant motion, ocassionally bypass the check and take a heartbeat log anyway as determined by this interval. A value less than 1 minute disables the interval.</string>
+    <string name="time_in_minutes_dialog_title">Time in minutes</string>
 
     <string name="http_file_upload_setup_title">HTTP File Upload</string>
     <string name="autosend_httpfileupload_summary">Uploads files to an arbitrary URL using HTTP POST or PUT.</string>

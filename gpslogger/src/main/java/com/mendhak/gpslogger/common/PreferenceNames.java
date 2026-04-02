@@ -157,5 +157,6 @@ public  class PreferenceNames {
     public static final String ANNOTATIONS_BUTTON_SETTINGS = "annotations_buttons";
 
     public static final String ONLY_LOG_IF_SIGNIFICANT_MOTION = "only_log_if_significant_motion";
+    public static final String SIGNIFICANT_MOTION_BYPASS_INTERVAL = "significant_motion_bypass_interval";
 
 }
