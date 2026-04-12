@@ -125,7 +125,7 @@
     <string name="display_imperial_title">Angloamerikanische Maßeinheiten verwenden</string>
     <string name="display_imperial_summary">Amerikanische Maßeinheiten wie Fuß, Meilen und Pints verwenden (statt metrischer Maße)</string>
     <string name="enabledisablegps_title">GPS aktivieren/deaktivieren</string>
-    <string name="enabledisablegps_summary">In die Telefoneinstellungen wechseln, zum Aktivieren oder Deaktivieren der Anbieter.</string>
+    <string name="enabledisablegps_summary">In die Telefoneinstellungen wechseln, um die Anbieter zu aktivieren oder zu deaktivieren.</string>
     <string name="startonbootup_title">Beim Einschalten des Gerätes starten</string>
     <string name="startonbootup_summary">App beim Einschalten des Telefons starten und mit der Aufzeichnung beginnen</string>
     <string name="startonapplaunch_title">Protokollierung beim Öffnen der App starten</string>
@@ -298,12 +298,12 @@
     <string name="new_file_custom_each_time_title">Bei jedem Start nach einem Dateinamen fragen</string>
     <string name="new_file_custom_each_time_summary">Aufforderung zur Eingabe eines benutzerdefinierten Dateinamens bei jedem Start der Aufzeichnung</string>
     <string name="new_file_custom_keep_changing_title">Benutzerdefinierte Dateinamen dynamisch ändern lassen</string>
-    <string name="new_file_custom_keep_changing_summary">Wenn sich die Werte der benutzerdefinierten Dateinamen ändern, ändert sich auch der aktuelle Dateiname. Beispielsweise wird jede Stunde eine neue Datei erzeugt, wenn der Parameter %HOUR genutzt wird. Häkchen entfernen, um statische Dateinamen zu verwenden.</string>
+    <string name="new_file_custom_keep_changing_summary">Wenn sich die Werte der benutzerdefinierten Dateinamen ändern, soll sich auch der aktuelle Dateiname ändern. Wird beispielsweise %HOUR verwendet, wird stündlich eine neue Datei erstellt. Deaktivieren Sie diese Option, wenn der Dateiname unverändert bleiben soll.</string>
     <string name="donate_app">Spenden (App)</string>
     <string name="donate_bitcoin">Bitcoin</string>
     <string name="tip_coffee">Gib mir einen Kaffee aus</string>
     <string name="no_network_message">Netzwerk nicht verfügbar</string>
-    <string name="hide_notification_buttons">Benachrichtigungs-Schaltflächen ausblenden</string>
+    <string name="hide_notification_buttons">Benachrichtigungsschaltflächen ausblenden</string>
     <string name="restart_required">GPSLogger muss neu gestartet werden, damit diese Einstellung wirksam wird</string>
     <string name="altitude_subtractgeoidheight_summary">Verwendet den „Mittleren Meeresspiegel“ (MSL) anstelle der WGS84-Höhe (World Geodetic System 1984), indem die Geoidhöhe von der GPS-Höhe abgezogen wird. Gilt nur für Punkte, die mittels GPS-Satelliten und nicht über Netzwerk oder NMEA bestimmt wurden.</string>
     <string name="altitude_subtractgeoidheight_title">„Mittleren Meeresspiegel“ statt WGS84 verwenden</string>
@@ -367,8 +367,8 @@
     <string name="logging_advanced_delete_files">Ausgewählte Dateien löschen</string>
     <string name="txt_battery_charging">Wird aufgeladen</string>
     <string name="logging_advanced_delete_files_summary">Lange drücken, um mehrere Dateien auszuwählen.</string>
-    <string name="install_conscrypt_provider_title">Installieren Sie „Conscrypt Provider“ (SSL/TLS)</string>
-    <string name="install_conscrypt_provider_summary">Wenn Sie SSL/TLS-Verbindungsprobleme auf älteren Android-Geräten vorfinden, kann das Installieren des „Conscrypt Provider“ helfen. (Folgen Sie diesem Link, installieren die APK und starten Sie die App neu)</string>
+    <string name="install_conscrypt_provider_title">„Conscrypt Provider“ (SSL/TLS) installieren</string>
+    <string name="install_conscrypt_provider_summary">Sollten bei älteren Android-Geräten Probleme mit der SSL/TLS-Verbindung auftreten, kann die Installation des „Conscrypt Provider“ helfen. (Folgen Sie diesem Link, installieren Sie die APK und starten Sie die App neu.)</string>
     <string name="retry_get_best_possible_accuracy_title">Beste Genauigkeit in Bezug auf die Dauer wählen</string>
     <string name="retry_get_best_possible_accuracy_summary">Anstatt den ersten Standort mit der eingestellten Genauigkeit aufzuzeichnen, wird erst nach Ablauf der Wartezeit der Standort mit der höchsten Genauigkeit genutzt. Erhöht die Genauigkeit auf Kosten des Aufzeichnungsintervalls.</string>
     <string name="google_drive_folder_path_summary_1">Benutzen Sie einen einzelnen Ordnernamen (z. B. GPSLogger) oder einen Ordnerpfad (z. B. aaa/bbb/ccc). Die Ordner müssen von dieser App erstellt werden.</string>
