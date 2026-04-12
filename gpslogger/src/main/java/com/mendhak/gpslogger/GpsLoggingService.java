@@ -435,7 +435,9 @@ public class GpsLoggingService extends Service  {
         showNotification();
         setupAutoSendTimers();
         setupSignificantMotionSensor();
-        resetCurrentFileName(true);
+
+        resetCurrentFileName(Strings.isNullOrEmpty(session.getCurrentFormattedFileName()));
+
         notifyClientsStarted(true);
         startPassiveManager();
         startGpsManager();
