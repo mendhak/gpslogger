@@ -195,7 +195,7 @@
     <string name="autosend_enabled_summary">Ermöglicht das Senden der Dateien an verschiedene Ziele mit einer bestimmten Frequenz oder wenn sich der Name aufgrund benutzerdefinierter Benennung ändert</string>
     <string name="autosend_frequency_summary">Zeiteinheit (in Minuten) festlegen, wie häufig Protokolldateien gesendet werden sollen. Wert auf „0“ setzen, um diese Funktion zu deaktivieren.</string>
     <string name="autosend_frequency">Wie oft\?</string>
-    <string name="autosend_sendzip_title">Als Zip-Datei senden</string>
+    <string name="autosend_sendzip_title">Als ZIP-Datei senden</string>
     <string name="autosend_sendzip_summary">Wenn möglich, eine ZIP-Datei senden. Funktion deaktivieren, um einzelne Dateien zu versenden, oder wenn der ZIP-Versand bei Ihnen nicht funktioniert</string>
     <string name="autosend_targets_category">Ziele für automatisches Senden</string>
     <string name="menu_autosend_now">Jetzt automatisch senden</string>
