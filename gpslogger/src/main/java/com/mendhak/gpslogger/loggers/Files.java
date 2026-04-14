@@ -213,6 +213,14 @@ public class Files {
     }
 
     public static void DownloadFromUrl(String url, File destination) throws IOException {
+        if (url.startsWith("file://")) {
+            InputStream inputStream = new FileInputStream(url.replaceFirst("file://", ""));
+            OutputStream outputStream = new FileOutputStream(destination);
+            Streams.copyIntoStream(inputStream, outputStream);
+            LOG.debug("Copied from local file");
+            return;
+        }
+
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(url).build();
 
