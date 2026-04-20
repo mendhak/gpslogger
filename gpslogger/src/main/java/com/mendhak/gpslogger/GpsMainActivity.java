@@ -1814,10 +1814,15 @@ public class GpsMainActivity extends AppCompatActivity
             EventBus.getDefault().post(new ProfileEvents.PopulateProfiles());
 
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             LOG.error("Could not download properties file", e);
-            Dialogs.hideProgress();
-            Dialogs.showError("Could not download properties file","Could not download properties file",e.getMessage(), e, this);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Dialogs.hideProgress();
+                    Dialogs.showError("Could not download properties file", "Could not download properties file", e.getMessage(), e, GpsMainActivity.this);
+                }
+            });
         }
 
     }
