@@ -951,6 +951,8 @@ public class GpsLoggingService extends Service  {
             return;
         }
 
+        loc = Locations.getLocationAdjustedForGPSWeekRollover(loc);
+
         boolean isPassiveLocation = loc.getExtras().getBoolean(BundleConstants.PASSIVE);
         long currentTimeStamp = System.currentTimeMillis();
 
@@ -1101,7 +1103,6 @@ public class GpsLoggingService extends Service  {
         LOG.debug(String.valueOf(loc.getLatitude()) + "," + String.valueOf(loc.getLongitude()));
         LOG.info(SessionLogcatAppender.MARKER_LOCATION, getLocationDisplayForLogs(loc));
         loc = Locations.getLocationWithAdjustedAltitude(loc, preferenceHelper);
-        loc = Locations.getLocationAdjustedForGPSWeekRollover(loc);
         resetCurrentFileName(false);
         session.setLatestTimeStamp(System.currentTimeMillis());
         session.setFirstRetryTimeStamp(0);
