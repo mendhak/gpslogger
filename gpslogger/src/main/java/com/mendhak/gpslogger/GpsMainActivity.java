@@ -1258,8 +1258,12 @@ public class GpsMainActivity extends AppCompatActivity
         LOG.debug("User forced an auto send");
 
         if (preferenceHelper.isAutoSendEnabled()) {
-            Dialogs.progress(this, getString(R.string.autosend_sending));
-            EventBus.getDefault().post(new CommandEvents.AutoSend(null));
+            if (FileSenderFactory.getAvailableFileAutoSenders().isEmpty()) {
+                launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);
+            } else {
+                Dialogs.progress(this, getString(R.string.autosend_sending));
+                EventBus.getDefault().post(new CommandEvents.AutoSend(null));
+            }
 
         } else {
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);

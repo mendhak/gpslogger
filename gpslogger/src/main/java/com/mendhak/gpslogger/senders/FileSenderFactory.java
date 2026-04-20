@@ -192,7 +192,7 @@ public class FileSenderFactory {
         return senders;
     }
 
-    private static List<FileSender> getAvailableFileAutoSenders() {
+    public static List<FileSender> getAvailableFileAutoSenders() {
 
         List<FileSender> senders = new ArrayList<>();
 
