@@ -51,6 +51,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
@@ -679,6 +680,16 @@ public class GpsMainActivity extends AppCompatActivity
     }
 
 
+    private void disableToolbarSpinner(Toolbar toolbar) {
+        for (int i = 0; i < toolbar.getChildCount(); i++) {
+            View child = toolbar.getChildAt(i);
+            if (child instanceof Spinner) {
+                child.setEnabled(false);
+                child.setClickable(false);
+                child.setFocusable(false);
+            }
+        }
+    }
 
     public Toolbar getToolbar(){
         return (Toolbar)findViewById(R.id.toolbar);
@@ -700,6 +711,7 @@ public class GpsMainActivity extends AppCompatActivity
             getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, this);
             getSupportActionBar().setSelectedNavigationItem(getUserSelectedNavigationItem());
 
+            disableToolbarSpinner(toolbar);
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
@@ -1066,8 +1078,9 @@ public class GpsMainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(int position, long itemId) {
-        preferenceHelper.setUserSelectedNavigationItem(position);
-        loadFragmentView(position);
+// This below line is commented to pause the action in the spinner dropdown. This is working code.
+//        preferenceHelper.setUserSelectedNavigationItem(position);
+//        loadFragmentView(position);
         return true;
     }
 
@@ -1159,6 +1172,7 @@ public class GpsMainActivity extends AppCompatActivity
         setBulbStatus();
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarBottom);
+
         MenuItem mnuAnnotate = toolbar.getMenu().findItem(R.id.mnuAnnotate);
         MenuItem mnuOnePoint = toolbar.getMenu().findItem(R.id.mnuOnePoint);
         MenuItem mnuAutoSendNow = toolbar.getMenu().findItem(R.id.mnuAutoSendNow);

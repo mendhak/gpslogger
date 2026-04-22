@@ -503,4 +503,6 @@
     <string name="only_log_if_significant_motion_title">Only log if there is significant motion</string>
     <string name="only_log_if_significant_motion_summary">Only log if significant activity is detected such as walking, biking, driving. Significant motion is determined by your OS.</string>
 
+    <string name="google_client_id">906480199699-q332hspmvkbk6f70i5mu4dnaigb75h8f.apps.googleusercontent.com</string>
+
 </resources>

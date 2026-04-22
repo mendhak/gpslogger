@@ -26,6 +26,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 import android.content.Intent;
@@ -52,8 +55,12 @@ import org.slf4j.Logger;
 import android.accounts.AccountManager;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import static android.app.Activity.RESULT_OK;
 import android.app.Activity;
+
+import androidx.credentials.*;
+import androidx.credentials.exceptions.GetCredentialException;
+
+import com.google.android.libraries.identity.googleid.*;
 
 
 public class GpsSimpleViewFragment extends GenericViewFragment implements View.OnClickListener {
@@ -64,12 +71,16 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     private Session session = Session.getInstance();
 
     private View rootView;
-    
+
     private ActionProcessButton actionButton;
 
     private static final String KEY_PRIMARY_EMAIL = "primary_email";
 
     private static TextView mPrimaryEmail;
+
+    private CredentialManager credentialManager;
+
+    private static final String KEY_ID_TOKEN = "id_token";
 
     private ActivityResultLauncher<Intent> accountPickerLauncher;
 
@@ -92,6 +103,9 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        credentialManager = CredentialManager.create(requireContext());
+
         accountPickerLauncher =
                 registerForActivityResult(
                         new ActivityResultContracts.StartActivityForResult(),
@@ -586,26 +600,77 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
 
     private void fetchPrimaryEmail() {
 
-        String cachedEmail = PreferenceManager.getDefaultSharedPreferences(context).getString(KEY_PRIMARY_EMAIL, null);
+        GetGoogleIdOption googleIdOption = new GetGoogleIdOption.Builder()
+                .setFilterByAuthorizedAccounts(false)
+                .setAutoSelectEnabled(false)
+                .setServerClientId("906480199699-q332hspmvkbk6f70i5mu4dnaigb75h8f.apps.googleusercontent.com")
+                .build();
 
-        if (cachedEmail != null) {
-            // Email already cached
-            if (mPrimaryEmail != null) {
-                mPrimaryEmail.setText(cachedEmail);
-            }
-        } else {
-            // Launch account picker
-            Intent intent = AccountManager.newChooseAccountIntent(
-                    null,
-                    null,
-                    new String[]{"com.google"},
-                    false,
-                    null,
-                    null,
-                    null,
-                    null
-            );
-            accountPickerLauncher.launch(intent);
-        }
+        GetCredentialRequest request = new GetCredentialRequest.Builder()
+                .addCredentialOption(googleIdOption)
+                .build();
+
+        credentialManager.getCredentialAsync(
+                requireActivity(),
+                request,
+                null,
+                Runnable::run,
+                new CredentialManagerCallback<GetCredentialResponse, GetCredentialException>() {
+                    @Override
+                    public void onResult(GetCredentialResponse result) {
+
+                        Credential credential = result.getCredential();
+
+                        if (credential instanceof CustomCredential) {
+
+                            CustomCredential customCredential = (CustomCredential) credential;
+
+                            if (GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
+                                    .equals(customCredential.getType())) {
+
+                                GoogleIdTokenCredential googleCredential =
+                                        GoogleIdTokenCredential.createFrom(customCredential.getData());
+
+                                String idToken = googleCredential.getIdToken();
+                                String email = googleCredential.getId();
+
+                                PreferenceManager.getDefaultSharedPreferences(context)
+                                        .edit()
+                                        .putString(KEY_PRIMARY_EMAIL, email)
+                                        .apply();
+
+                                if (mPrimaryEmail != null) {
+                                    mPrimaryEmail.setText(email);
+                                }
+
+                                PreferenceManager.getDefaultSharedPreferences(context)
+                                        .edit()
+                                        .putString(KEY_ID_TOKEN, idToken)
+                                        .apply();
+
+                                LOG.debug("ID TOKEN: " + idToken);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull GetCredentialException e) {
+
+                        Log.e("CREDENTIAL", "Error: ", e);
+
+                        if (e instanceof androidx.credentials.exceptions.NoCredentialException) {
+
+                            Toast.makeText(getContext(),
+                                    "No Google account found. Please add account or try again.",
+                                    Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Toast.makeText(getContext(),
+                                    "Login failed: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+        );
     }
 }
