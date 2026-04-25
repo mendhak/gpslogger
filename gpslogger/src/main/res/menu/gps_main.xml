@@ -11,6 +11,7 @@
         <menu>
             <item android:id="@+id/mnuAutoSendNow" android:title="@string/menu_autosend_now" />
             <item android:id="@+id/mnuCustomUrl" android:title="@string/log_customurl_setup_title"/>
+            <item android:id="@+id/mnuHttpFileUpload" android:title="@string/http_file_upload_setup_title"/>
             <item android:id="@+id/mnuDropBox" android:title="@string/dropbox_setup_title" />
             <item android:id="@+id/mnuGoogleDrive" android:title="@string/google_drive_setup_title" />
             <item android:id="@+id/mnuSFTP" android:title="@string/sftp_setup_title"/>

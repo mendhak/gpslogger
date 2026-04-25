@@ -289,7 +289,7 @@ public class GpsLoggingService extends Service  {
                     preferenceHelper.setPassiveFilterInterval(passiveFilterInterval);
                     needToStartGpsManager = true;
                 }
-                
+
                 if(bundle.get(IntentConstants.LOG_ONCE) != null){
                     boolean logOnceIntent = bundle.getBoolean(IntentConstants.LOG_ONCE);
                     LOG.debug("Intent received - Log Once: " + String.valueOf(logOnceIntent));
@@ -435,7 +435,9 @@ public class GpsLoggingService extends Service  {
         showNotification();
         setupAutoSendTimers();
         setupSignificantMotionSensor();
-        resetCurrentFileName(true);
+
+        resetCurrentFileName(Strings.isNullOrEmpty(session.getCurrentFormattedFileName()));
+
         notifyClientsStarted(true);
         startPassiveManager();
         startGpsManager();
@@ -806,8 +808,19 @@ public class GpsLoggingService extends Service  {
         if(!preferenceHelper.shouldLogOnlyIfSignificantMotion()){
             return false;
         }
-        return !session.hasDescription() && !session.isSinglePointMode() &&
+
+        boolean hasBeenStill = !session.hasDescription() && !session.isSinglePointMode() &&
                 (session.getUserStillSinceTimeStamp() > 0 && (System.currentTimeMillis() - session.getUserStillSinceTimeStamp()) > (preferenceHelper.getMinimumLoggingInterval() * 1000));
+
+        if (hasBeenStill && preferenceHelper.getSignificantMotionBypassInterval() >= 1) {
+            long bypassIntervalInMillis = preferenceHelper.getSignificantMotionBypassInterval() * 60 * 1000L;
+            if (System.currentTimeMillis() - session.getLatestTimeStamp() >= bypassIntervalInMillis) {
+                LOG.debug("Significant motion bypass interval passed, so let's allow a point to be logged.");
+                return false;
+            }
+        }
+
+        return hasBeenStill;
     }
 
     private void startAbsoluteTimer() {
@@ -1243,7 +1256,13 @@ public class GpsLoggingService extends Service  {
      * @param loc Location object
      */
     private void writeToFile(Location loc) {
-        session.setAddNewTrackSegment(false);
+        //session.setAddNewTrackSegment(false);
+
+        if(FileLoggerFactory.getFileLoggers(getApplicationContext()).isEmpty()){
+            Systems.showErrorNotification(getApplicationContext(),
+                    String.format("%s %s", getString(R.string.summary_loggingto), getString(R.string.summary_loggingto_screen)));
+            return;
+        }
 
         try {
             LOG.debug("Calling file writers");
@@ -1259,6 +1278,7 @@ public class GpsLoggingService extends Service  {
              Systems.showErrorNotification(this, getString(R.string.could_not_write_to_file));
         }
 
+        session.setAddNewTrackSegment(false);
         session.clearDescription();
         EventBus.getDefault().post(new ServiceEvents.AnnotationStatus(true));
     }
