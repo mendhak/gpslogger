@@ -1258,6 +1258,12 @@ public class GpsLoggingService extends Service  {
     private void writeToFile(Location loc) {
         //session.setAddNewTrackSegment(false);
 
+        if(FileLoggerFactory.getFileLoggers(getApplicationContext()).isEmpty()){
+            Systems.showErrorNotification(getApplicationContext(),
+                    String.format("%s %s", getString(R.string.summary_loggingto), getString(R.string.summary_loggingto_screen)));
+            return;
+        }
+
         try {
             LOG.debug("Calling file writers");
             FileLoggerFactory.write(getApplicationContext(), loc);
