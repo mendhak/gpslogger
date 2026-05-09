@@ -1,0 +1,3 @@
+* HTTP File Upload Target (separate from normal Custom URL logger).
+* Significant motion heartbeat interval setting for long durations.
+* Fixed bug where GPX track segments were not being created correctly.
