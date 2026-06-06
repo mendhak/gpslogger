@@ -54,7 +54,8 @@ public class CustomUrlWorker extends Worker {
         String responseError = null;
         String responseThrowableMessage = null;
 
-        for (CustomUrlRequest urlRequest : urlRequests) {
+        for (int i = 0; i < urlRequests.length; i++) {
+            CustomUrlRequest urlRequest = urlRequests[i];
             try{
                 LOG.info("HTTP Request - " + urlRequest.getLogURL());
 
@@ -89,6 +90,17 @@ public class CustomUrlWorker extends Worker {
                 if (!success) {
                     break;
                 }
+
+                // Throttling: sleep for 1 second every 10 requests to prevent DOS
+                if ((i + 1) % 10 == 0) {
+                    try {
+                        LOG.debug("Throttling: sleeping for 1s to prevent DOS");
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        break;
+                    }
+                }
             }
             catch (Exception e) {
                 LOG.error("Exception during Custom URL processing " + e);
@@ -98,7 +110,7 @@ public class CustomUrlWorker extends Worker {
                 break;
             }
         }
-
+        
         if(success) {
 
             // Notify internal listeners
