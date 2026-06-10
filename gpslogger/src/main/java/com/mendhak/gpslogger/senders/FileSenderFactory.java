@@ -23,6 +23,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.customurl.CustomUrlManager;
+import com.mendhak.gpslogger.senders.dawarich.DawarichManager;
 import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.senders.ftp.FtpManager;
@@ -78,6 +79,10 @@ public class FileSenderFactory {
 
     public static FileSender getCustomUrlSender(){
         return new CustomUrlManager(PreferenceHelper.getInstance());
+    }
+
+    public static FileSender getDawarichSender() {
+        return new DawarichManager(PreferenceHelper.getInstance());
     }
 
     public static void autoSendFiles(final String fileToSend) {
@@ -148,6 +153,8 @@ public class FileSenderFactory {
         switch (senderName){
             case FileSender.SenderNames.AUTOEMAIL:
                 return getEmailSender();
+            case FileSender.SenderNames.DAWARICH:
+                return getDawarichSender();
             case FileSender.SenderNames.DROPBOX:
                 return getDropBoxSender();
             case FileSender.SenderNames.GOOGLEDRIVE:
@@ -181,6 +188,7 @@ public class FileSenderFactory {
             senders.add(getOwnCloudSender());
             senders.add(getSFTPSender());
             senders.add(getCustomUrlSender());
+            senders.add(getDawarichSender());
         return senders;
     }
 
@@ -222,6 +230,10 @@ public class FileSenderFactory {
 
         if(getCustomUrlSender().isAutoSendAvailable()){
             senders.add(getCustomUrlSender());
+        }
+
+        if(getDawarichSender().isAvailable()){
+            senders.add(getDawarichSender());
         }
 
         return senders;

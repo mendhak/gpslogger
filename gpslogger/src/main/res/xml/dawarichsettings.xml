@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+            android:key="dawarich_enable_logging"
+            android:title="@string/log_dawarich_title"
+            android:summary="@string/log_dawarich_summary_detailed"
+            app:iconSpaceReserved="false" />
+
+    <SwitchPreferenceCompat
+            android:key="dawarich_discard_offline_logs"
+            android:title="@string/log_dawarich_discard_offline_locations"
+            android:summary="@string/log_dawarich_discard_offline_locations_summary"
+            app:iconSpaceReserved="false" />
+
+    <Preference
+            android:key="dawarich_server"
+            android:singleLine="true"
+            android:title="@string/log_dawarich_url"
+            app:iconSpaceReserved="false" />
+
+    <EditTextPreference
+            android:key="dawarich_apikey"
+            android:singleLine="true"
+            android:title="Dawarich API key"
+            android:inputType="textPassword"
+            app:iconSpaceReserved="false" />
+
+    <Preference
+            android:key="dawarich_device_id"
+            android:singleLine="true"
+            android:title="@string/log_dawarich_device_id"
+            android:summary="@string/log_dawarich_device_id_summary"
+            app:iconSpaceReserved="false" />
+
+    <Preference
+            android:key="dawarich_persistence_file_path"
+            android:summary="@string/log_dawarich_filepath_summary"
+            android:title="@string/log_dawarich_filepath"
+            app:iconSpaceReserved="false" />
+
+
+</PreferenceScreen>

@@ -116,6 +116,14 @@ public  class PreferenceNames {
     public static final String GPSLOGGER_FOLDER = "gpslogger_folder";
     public static final String PREFIX_SERIAL_TO_FILENAME = "new_file_prefix_serial";
 
+    public static final String AUTOSEND_DAWARICH_ENABLED = "dawarich_enabled";
+    public static final String DAWARICH_BASE_URL = "dawarich_server";
+    public static final String DAWARICH_APIKEY = "dawarich_apikey";
+    public static final String DAWARICH_DEVICE_ID = "dawarich_device_id";
+    public static final String DAWARICH_DISCARD_LOG_WHEN_OFFLINE = "dawarich_discard_offline_logs";
+    public static final String DAWARICH_FILE_PATH = "dawarich_persistence_file_path";
+    public static final String LOG_TO_DAWARICH = "dawarich_enable_logging";
+
     public static final String ALTITUDE_SUBTRACT_OFFSET = "altitude_subtractoffset";
     public static final String ALTITUDE_SHOULD_ADJUST = "altitude_subtractgeoidheight";
     public static final String AUTOSEND_WIFI_ONLY = "autosend_wifionly";
