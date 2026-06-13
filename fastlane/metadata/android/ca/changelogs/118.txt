@@ -1,0 +1,5 @@
+* Nova Opció Tema Fosc per seguir automàticament el mode dia/nit del sistema.
+* També podeu configurar manualment Light/Dark Theme a la configuració general.
+* Pantalles de configuració retreballades, per mostrar els valors escollits per l’usuari quan sigui possible.
+* S'ha afegit un selector de fitxers i carpetes. L'aplicació sol·licitarà permís addicional a Android 11+ per a rutes personalitzades.
+* SFTP ha de ser capaç de connectar amb els algoritmes SSH moderns.

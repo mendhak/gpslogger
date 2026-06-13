@@ -1,0 +1,1 @@
+* Bugfix: L'ordre de tasques getstatus no enviava un broadcast d'estat.
