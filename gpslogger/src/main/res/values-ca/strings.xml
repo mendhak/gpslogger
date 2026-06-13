@@ -273,12 +273,12 @@
     <string name="gpslogger_permissions_rationale_title">Permisos necessaris</string>
     <string name="profile_delete">Esborrar perfil\?</string>
     <string name="profile_add_new">Afegir perfil</string>
-    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b><b>Fotos, mèdia, arxius</b> - Aquest permís permet escriure arxius de gravació i prova al magatzem, i llegir d'una llista d'arxius per pujar-los o compartir-los. Aquesta app no accedeix a les teves fotos o mèdia.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos, mèdia, arxius</b> - Aquest permís permet escriure arxius de gravació i prova al magatzem, i llegir d\'una llista d\'arxius per pujar-los o compartir-los. Aquesta app no accedeix a les teves fotos o mèdia.]]></string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[This app requires various permissions in order to function properly. You will now be prompted multiple times for various permissions (sorry).  Here is an explanation of each permission. ]]>Aquesta app necessita uns quants permisos per funcionar correctament. A continuació se\'t demanaran permisos vàries vegades (ho sento). Aquí hi ha una descripció de cada permís.</string>
-    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b><b>Ubicació del dispositiu</b> - Aques permís permet la localització amb torres de comunicació i el GPS del dispositiu.]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Has denegat un o mes permisos que la app necessita. Has de tornar a reiniciar, o anar a la pantalla de configuració per donar aquests permisos.  <br /><br/><br/>Si has denegat els permisos permanentment pots tornar a canviar-los a les opcions de sistema. ]]></string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b><b>Permetre sempre</b> - Permetre a aquesta app rebre actualitzacions de la posició quan està corrent en segon pla. ]]></string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b><b>Ignora optimització de bateria</b> - Permetre a aquesta app córrer en segon pla reduint la optimització de la bateria. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Ubicació del dispositiu</b> - Aques permís permet la localització amb torres de comunicació i el GPS del dispositiu.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Has denegat un o mes permisos que la app necessita. Has de tornar a reiniciar, o anar a la pantalla de configuració per donar aquests permisos.  <br/><br/>Si has denegat els permisos permanentment pots tornar a canviar-los a les opcions de sistema. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Permetre sempre</b> - Permetre a aquesta app rebre actualitzacions de la posició quan està corrent en segon pla. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignora optimització de bateria</b> - Permetre a aquesta app córrer en segon pla reduint la optimització de la bateria. ]]></string>
     <string name="debuglog_attach_to_email_summary">Adjunta el registre de depuració a un email juntament amb informació de diagnòstic</string>
     <string name="change_language_title">Canvia llengua</string>
     <string name="coordinate_display_format">Format de visualització de coordinades</string>
