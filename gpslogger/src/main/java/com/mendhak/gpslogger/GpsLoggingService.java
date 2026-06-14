@@ -1003,8 +1003,6 @@ public class GpsLoggingService extends Service  {
                         loc.getTime() );
                 return;
             }
-            //If passed, save LatestPassiveTimeStamp.
-            session.setLatestPassiveTimeStamp(loc.getTime());
         }
 
 
@@ -1125,6 +1123,8 @@ public class GpsLoggingService extends Service  {
 
         if(isPassiveLocation){
             LOG.debug("Logging passive location to file");
+            // Also set passive timestamp so that the passive time filter is respected next time
+            session.setLatestPassiveTimeStamp(loc.getTime());
         }
 
         writeToFile(loc);
