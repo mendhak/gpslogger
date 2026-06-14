@@ -386,7 +386,7 @@
     <string name="hide_notification_from_lock_screen">Benachrichtigung auf dem Sperrbildschirm ausblenden</string>
     <string name="prompt_for_details_when_logging_starts">Bei Beginn der Aufzeichnung nach Details fragen</string>
     <string name="started_at">Gestartet am</string>
-    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Benachrichtigungen</b> - Erlaubt die Anzeige einer Benachrichtigung, dies hilft dabei, den Protokollierungsdienst aufrechtzuerhalten. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Benachrichtigungen</b> – Erlaubt die Anzeige einer Benachrichtigung. Dies hilft dabei, den Protokollierungsdienst aufrechtzuerhalten. ]]></string>
     <string name="passive_filter_time_title">Aktualisierungsintervall für passive Standorte</string>
     <string name="passive_filter_time_summary">Reduzieren Sie redundante passive Standortaktualisierungen, indem Sie das minimale Erfassungsintervall (in Sekunden) anpassen.</string>
     <string name="autosend_wifionly_summary">Auf eine WLAN-Verbindung warten, bevor Netzwerk-Anfragen durchgeführt werden. Gilt für alle Anfragen einschließlich Senden und Protokollieren.</string>

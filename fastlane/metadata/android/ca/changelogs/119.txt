@@ -1,0 +1,8 @@
+* URL personalitzada pot ser utilitzada com un autosender, per ajudar amb la fiabilitat.
+* Opció per escriure temps amb offset de fus horari, sota Logging detalls. (GPX, KML, GeoJSON, CSV)
+* URL personalitzada pot utilitzar el paràmetre %TIMEOFFSET
+* CSV Logging: més camps afegits.
+* CSV Logging: opció per especificar camp delimitador i separador decimal de coma.
+* Vista de Registre mostrarà les coordenades en format preferit de l'usuari.
+* Si es recupera des d'una aturada inesperada, fara logging si l'aplicació era anteriorment estava fent-ho.
+* Bugfix per hongarès

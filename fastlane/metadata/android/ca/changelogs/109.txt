@@ -1,0 +1,2 @@
+Repackage GPSLogger per F-Droid.
+Treu Google Drive, Reconeixement d'Activitat, dependències de Serveis del Joc.

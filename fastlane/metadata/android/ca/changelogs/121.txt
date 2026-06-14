@@ -1,0 +1,5 @@
+* Nou paràmetre URL personalitzat: %ALL que substitueix cada paràmetre URL personalitzat disponible
+* Bugfix: escapar les + en les etiquetes de temps
+* Bugfix: el temporitzador no es reinicialització quan es canvia de perfil
+* Bugfix: tancar el calaix, quan es tanca la llista de perfils primer.
+* correcció d'errors: quan feu clic a l'element de la llista de perfils, mantenir calaix obert

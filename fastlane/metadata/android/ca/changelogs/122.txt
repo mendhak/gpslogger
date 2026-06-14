@@ -1,0 +1,6 @@
+* Google Drive torna! Reimplementat sense biblioteques de codi tancat
+* Possible correcció d'errors per a la notificació GPSLogger apareix aleatòriament quan no s'utilitzi
+* Si els serveis d'ubicació estan desactivats, l'aplicació ara només es mantindrà esperant (amb una icona d'avís), i es tornarà a activar quan es reactivi.
+* Mida del tipus de lletra ajustat a la vista detallada de manera que lat/long ajusti millor
+* L'ús d'una alarma més precisa per ajudar a llocs suprimits en el mode de laberint
+* Nova preferència de doble acció en la configuració de càrrega
