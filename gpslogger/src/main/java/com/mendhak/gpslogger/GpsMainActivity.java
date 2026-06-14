@@ -858,8 +858,13 @@ public class GpsMainActivity extends AppCompatActivity
 
         materialDrawer.addItem(new DividerDrawerItem());
 
-        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newPrimary(R.string.menu_faq, null, R.drawable.helpfaq, 9000));
-        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newPrimary(R.string.menu_exit, null, R.drawable.exit, 9001));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.menu_faq, null, R.drawable.helpfaq, 9000));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.menu_exit, null, R.drawable.exit, 9001));
+
+        // Just adding some space
+        materialDrawer.addItem(new DividerDrawerItem());
+        materialDrawer.addItem(new DividerDrawerItem());
+        materialDrawer.addItem(new DividerDrawerItem());
 
 
         materialDrawer.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
