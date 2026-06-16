@@ -705,6 +705,23 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED, false);
     }
 
+
+    public void setCustomUrlBatchSize(int batchSize){
+        prefs.edit().putString(PreferenceNames.CUSTOM_URL_BATCH_SIZE, String.valueOf(batchSize)).apply();
+    }
+
+    public int getCustomUrlBatchSize() {
+        return Strings.toInt(prefs.getString(PreferenceNames.CUSTOM_URL_BATCH_SIZE, "0"), 0);
+    }
+
+    public void setCustomUrlSleepMs(long sleepMs){
+        prefs.edit().putLong(PreferenceNames.CUSTOM_URL_SLEEP_MS, sleepMs).apply();
+    }
+
+    public long getCustomUrlSleepMs() {
+        return prefs.getLong(PreferenceNames.CUSTOM_URL_SLEEP_MS, 0L);
+    }
+
     @ProfilePreference(name= PreferenceNames.LOG_TO_URL_DISCARD_OFFLINE_LOCATIONS_ENABLED)
     public boolean shouldCustomURLLoggingDiscardOfflineLocations() {
         return prefs.getBoolean(PreferenceNames.LOG_TO_URL_DISCARD_OFFLINE_LOCATIONS_ENABLED, false);

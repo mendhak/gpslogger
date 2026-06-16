@@ -50,6 +50,8 @@ public  class PreferenceNames {
     public static final String LOG_TO_URL_BASICAUTH_PASSWORD = "log_customurl_basicauth_password";
     public static final String LOG_TO_URL_DISCARD_OFFLINE_LOCATIONS_ENABLED = "log_customurl_discard_offline_locations_enabled";
     public static final String AUTOSEND_CUSTOMURL_ENABLED = "autocustomurl_enabled";
+    public static final String CUSTOM_URL_BATCH_SIZE = "custom_url_batch_size";
+    public static final String CUSTOM_URL_SLEEP_MS = "custom_url_sleep_ms";
 
     public static final String AUTOSEND_HTTPFILEUPLOAD_ENABLED = "autohttpfileupload_enabled";
     public static final String HTTPFILEUPLOAD_URL = "httpfileupload_url";

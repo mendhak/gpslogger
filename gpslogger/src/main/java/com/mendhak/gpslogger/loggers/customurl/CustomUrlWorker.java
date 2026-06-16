@@ -53,6 +53,7 @@ public class CustomUrlWorker extends Worker {
         boolean success = true;
         String responseError = null;
         String responseThrowableMessage = null;
+        PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
 
         for (int i = 0; i < urlRequests.length; i++) {
             CustomUrlRequest urlRequest = urlRequests[i];
@@ -91,11 +92,13 @@ public class CustomUrlWorker extends Worker {
                     break;
                 }
 
-                // Throttling: sleep for 1 second every 10 requests to prevent DOS
-                if ((i + 1) % 10 == 0) {
+                // Throttling: sleep after a certain number of requests to prevent DoS
+                int batchSize = preferenceHelper.getCustomUrlBatchSize();
+                long sleepMs = preferenceHelper.getCustomUrlSleepMs();
+                if (batchSize > 1 && sleepMs > 0 && (i + 1) % batchSize == 0) {
                     try {
-                        LOG.debug("Throttling: sleeping for 1s to prevent DOS");
-                        Thread.sleep(1000);
+                        LOG.debug("Throttling custom URL auto send: sleeping for " + sleepMs + "ms to prevent DoS");
+                        Thread.sleep(sleepMs);
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                         break;
