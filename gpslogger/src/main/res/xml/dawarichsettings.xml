@@ -20,10 +20,10 @@
             android:title="@string/log_dawarich_url"
             app:iconSpaceReserved="false" />
 
-    <EditTextPreference
+    <Preference
             android:key="dawarich_apikey"
             android:singleLine="true"
-            android:title="Dawarich API key"
+            android:title="@string/log_dawarich_apikey"
             android:inputType="textPassword"
             app:iconSpaceReserved="false" />
 

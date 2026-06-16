@@ -68,13 +68,17 @@ public class DawarichManager extends FileSender {
                 mediaType,
                 json
         );
+        LOG.info("Sending bulk data to Dawarich");
         Request req = new Request.Builder()
                 .url(preferenceHelper.getDawarichBaseUrl() + "/api/v1/overland/batches?api_key=" + preferenceHelper.getDawarichApikey())
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .build();
         Response response = httpClient.newCall(req).execute();
-        if (response.isSuccessful()) return true;
+        if (response.isSuccessful()) {
+            LOG.info("Successfully posted bulk data to Dawarich");
+            return true;
+        }
         else {
             ArrayList<DawarichBatchLocation> locations = batch.getLocations();
             for (DawarichBatchLocation l : locations){
@@ -95,13 +99,17 @@ public class DawarichManager extends FileSender {
                 mediaType,
                 json
         );
+        LOG.info("Sending single location to Dawarich");
         Request req = new Request.Builder()
                 .url(preferenceHelper.getDawarichBaseUrl() + "/api/v1/overland/batches?api_key=" + preferenceHelper.getDawarichApikey())
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .build();
         Response response = httpClient.newCall(req).execute();
-        if (response.isSuccessful()) return true;
+        if (response.isSuccessful()) {
+            LOG.info("Successfully posted single location to Dawarich");
+            return true;
+        }
         else {
             LOG.warn("Location could not be send to the Dawarich server, location will be added to the queue again, server response:{}", response.toString());
             return false;

@@ -19,12 +19,17 @@
 
 package com.mendhak.gpslogger.senders.dawarich;
 
+import com.mendhak.gpslogger.common.BundleConstants;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
+import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.slf4j.Logs;
+import net.openid.appauth.internal.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -207,6 +212,8 @@ public class DawarichBatchLocation {
     public SerializableLocation getSourceData() {return sourceData;};
     //endregion
 
+    private static final org.slf4j.Logger LOG = Logs.of(DawarichBatchLocation.class);
+
     private DawarichBatchLocation (Builder builder) {
         this.locationType = builder.locationType;
         this.geometryType = builder.geometryType;
@@ -232,38 +239,43 @@ public class DawarichBatchLocation {
     public static DawarichBatchLocation fromSerializableLocation (SerializableLocation location) {
         sourceData = location;
         double[] coords = {location.getLongitude(), location.getLatitude()};
-        return new Builder(coords, location.getTimeWithOffset())
+        Builder b = new Builder(coords, Strings.getIsoDateTimeWithOffset(new Date(location.getTime())))
                 .withAltitude(location.getAltitude())
                 .withSpeed(location.getSpeed())
                 // Use accuracy in meters as hor. accuracy
                 .withHorizontalAccuracy(location.getAccuracy())
-                // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
-                .withVerticalAccuracy(location.getAccuracy()*(Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())))
                 .withLocationsInPayload(1)
                 .withBatteryState(location.getBatteryCharging() ? "charging" : "unplugged")
-                .withBatteryLevel((double) location.getBatteryLevel() / 100)
-                .build();
+                .withBatteryLevel((double) location.getBatteryLevel() / 100);
+        if (location.getExtras() != null && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.HDOP))) {
+            // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
+            b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
+        }
+        return b.build();
     }
 
     public static DawarichBatchLocation fromSerializableLocationExtended (
             SerializableLocation location,
             PreferenceHelper helper){
         double[] coords = {location.getLongitude(), location.getLatitude()};
-        return new Builder(coords, location.getTimeWithOffset())
+        Builder b = new Builder(coords, Strings.getIsoDateTimeWithOffset(new Date(location.getTime())))
                 .withAltitude(location.getAltitude())
                 .withSpeed(location.getSpeed())
                 // Use accuracy in meters as hor. accuracy
                 .withHorizontalAccuracy(location.getAccuracy())
-                // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
-                .withVerticalAccuracy(location.getAccuracy()*(Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())))
                 .withLocationsInPayload(1)
                 .withBatteryState(location.getBatteryCharging() ? "charging" : "unplugged")
                 .withBatteryLevel((double) location.getBatteryLevel() / 100)
                 .withDeferred(helper.getMinimumDistanceInterval())
                 .withDesiredAccuracy(helper.getMinimumAccuracy())
                 .withDeviceId(helper.getDawarichDeviceId())
-                .withSignificantChange(helper.shouldLogOnlyIfSignificantMotion() ? "enabled" : "disabled")
-                .build();
+                .withSignificantChange(helper.shouldLogOnlyIfSignificantMotion() ? "enabled" : "disabled");
+        if (location.hasAccuracy()) {
+            // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
+            LOG.debug(location.getVDOP());
+                b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
+        }
+        return b.build();
     }
 
     public JSONObject toJSON() throws JSONException {
@@ -415,6 +427,7 @@ public class DawarichBatchLocation {
             if (match.matches()) {
                 this.timestamp = timestamp;
             } else {
+                LOG.error("Invalid timestamp format: {}", timestamp);
                 throw new IllegalArgumentException("Timestamp does not match ISO 8601 requirements");
             }
         }

@@ -143,7 +143,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 break;
             case PREFERENCE_FRAGMENTS.DAWARICH:
                 setTitle(R.string.log_dawarich_setup_title);
-                preferenceFragmentCompat = new DawarichSettingsFragment();
+                preferenceFragmentCompat = new DawarichFragment();
                 break;
         }
 

@@ -15,7 +15,7 @@ public class DawarichLogger implements FileLogger {
 
     public DawarichLogger (String persistenceFilePath) throws IOException {
         this.filepath = persistenceFilePath;
-        this.buffer = new SerializableFIFOBuffer<SerializableLocation>(this.filepath);
+        this.buffer = new SerializableFIFOBuffer<SerializableLocation>(this.filepath + "/buffer.bin");
     }
 
     @Override

@@ -20,12 +20,19 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.text.InputType;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import com.codekidlabs.storagechooser.StorageChooser;
+import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
@@ -33,6 +40,7 @@ import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.network.Networks;
 import com.mendhak.gpslogger.common.network.ServerType;
 import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.ui.Dialogs;
 import eltos.simpledialogfragment.SimpleDialog;
@@ -40,6 +48,7 @@ import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 import org.slf4j.Logger;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
@@ -58,32 +67,20 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Preference filepath = findPreference(PreferenceNames.DAWARICH_FILE_PATH);
+        filepath.setSummary(PreferenceHelper.getInstance().getDawarichFilePath());
+        filepath.setOnPreferenceClickListener(this);
 
+        findPreference(PreferenceNames.DAWARICH_BASE_URL).setSummary(preferenceHelper.getDawarichBaseUrl());
+        findPreference(PreferenceNames.DAWARICH_BASE_URL).setOnPreferenceChangeListener(this);
 
-        Preference urlPathPreference = findPreference(PreferenceNames.LOG_TO_URL_PATH);
-        urlPathPreference.setSummary(PreferenceHelper.getInstance().getCustomLoggingUrl());
-        urlPathPreference.setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.DAWARICH_APIKEY).setSummary(preferenceHelper.getDawarichApikey());
+        findPreference(PreferenceNames.DAWARICH_APIKEY).setOnPreferenceChangeListener(this);
 
+        findPreference(PreferenceNames.DAWARICH_DEVICE_ID).setSummary(preferenceHelper.getDawarichDeviceId());
+        findPreference(PreferenceNames.DAWARICH_DEVICE_ID).setOnPreferenceChangeListener(this);
 
-        findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setSummary(preferenceHelper.getCustomLoggingHTTPHeaders());
-        findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setOnPreferenceClickListener(this);
-
-        findPreference(PreferenceNames.LOG_TO_URL_METHOD).setSummary(preferenceHelper.getCustomLoggingHTTPMethod());
-        findPreference(PreferenceNames.LOG_TO_URL_METHOD).setOnPreferenceClickListener(this);
-
-        findPreference(PreferenceNames.LOG_TO_URL_BODY).setSummary(preferenceHelper.getCustomLoggingHTTPBody());
-        findPreference(PreferenceNames.LOG_TO_URL_BODY).setOnPreferenceClickListener(this);
-
-        findPreference(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED).setOnPreferenceChangeListener(this);
-
-        findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
-        findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
-
-        findPreference("log_customurl_basicauth").setOnPreferenceClickListener(this);
-        if(!Strings.isNullOrEmpty(preferenceHelper.getCustomLoggingBasicAuthUsername())){
-            findPreference("log_customurl_basicauth").setSummary(preferenceHelper.getCustomLoggingBasicAuthUsername() + ":" + preferenceHelper.getCustomLoggingBasicAuthPassword().replaceAll(".","*"));
-        }
-
+        findPreference(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE).setOnPreferenceChangeListener(this);
 
     }
 
@@ -103,86 +100,87 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        LOG.debug(preference.getKey());
 
-        if(preference.getKey().equals("log_customurl_basicauth")){
-
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.DAWARICH_BASE_URL)){
             SimpleFormDialog.build()
-                    .title(R.string.customurl_http_basicauthentication)
+                    .title(R.string.log_dawarich_url)
                     .neg(R.string.cancel)
                     .pos(R.string.ok)
                     .fields(
-                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME)
-                                    .text(preferenceHelper.getCustomLoggingBasicAuthUsername())
-                                    .hint(R.string.autoftp_username),
-                            Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD)
-                                    .text(preferenceHelper.getCustomLoggingBasicAuthPassword())
-                                    .hint(R.string.autoftp_password)
-                                    .showPasswordToggle()
-                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
-                    )
-                    .show(this,PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
-
-            return true;
-        }
-
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL_HEADERS)){
-            SimpleFormDialog.build()
-                    .title(R.string.customurl_http_headers)
-                    .neg(R.string.cancel)
-                    .pos(R.string.ok)
-                    .msgHtml("<font face='monospace'>Content-Type: application/json</font><br /><font face='monospace'>Authorization: Basic abcdefg</font><br /><font face='monospace'>ApiToken: 12345</font>")
-                    .fields(
-                            Input.plain(PreferenceNames.LOG_TO_URL_HEADERS)
-                                    .text(preferenceHelper.getCustomLoggingHTTPHeaders())
-                                    .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
-                    )
-                    .show(this, PreferenceNames.LOG_TO_URL_HEADERS);
-            return true;
-        }
-
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL_PATH)){
-            SimpleFormDialog.build()
-                    .title("URL")
-                    .neg(R.string.cancel)
-                    .pos(R.string.ok)
-                    .fields(
-                            Input.plain(PreferenceNames.LOG_TO_URL_PATH)
-                                    .text(preferenceHelper.getCustomLoggingUrl())
+                            Input.plain(PreferenceNames.DAWARICH_BASE_URL)
+                                    .text(preferenceHelper.getDawarichBaseUrl())
                                     .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
                                     .validatePattern("[^\\n]+"," ")
                                     .required()
                     )
-                    .show(this, PreferenceNames.LOG_TO_URL_PATH);
+                    .show(this, PreferenceNames.DAWARICH_BASE_URL);
             return true;
         }
 
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL_METHOD)){
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.DAWARICH_APIKEY)){
             SimpleFormDialog.build()
-                    .title(R.string.customurl_http_method)
+                    .title(R.string.log_dawarich_apikey)
                     .neg(R.string.cancel)
                     .pos(R.string.ok)
                     .fields(
-                            Input.plain(PreferenceNames.LOG_TO_URL_METHOD)
-                                    .text(preferenceHelper.getCustomLoggingHTTPMethod())
-                                    .required()
-                    )
-                    .show(this, PreferenceNames.LOG_TO_URL_METHOD);
-            return true;
-        }
-
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_URL_BODY)){
-            SimpleFormDialog.build()
-                    .title(R.string.customurl_http_body)
-                    .neg(R.string.cancel)
-                    .pos(R.string.ok)
-                    .fields(
-                            Input.plain(PreferenceNames.LOG_TO_URL_BODY)
-                                    .text(preferenceHelper.getCustomLoggingHTTPBody())
-                                    .hint("lat=%LAT&lon=%LON")
+                            Input.plain(PreferenceNames.DAWARICH_APIKEY)
+                                    .text(preferenceHelper.getDawarichApikey())
                                     .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
                     )
-                    .show(this, PreferenceNames.LOG_TO_URL_BODY);
+                    .show(this, PreferenceNames.DAWARICH_APIKEY);
             return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.DAWARICH_DEVICE_ID)){
+            SimpleFormDialog.build()
+                    .title(R.string.log_dawarich_device_id)
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.DAWARICH_DEVICE_ID)
+                                    .text(preferenceHelper.getDawarichDeviceId())
+                                    .inputType(InputType.TYPE_CLASS_TEXT)
+                    )
+                    .show(this, PreferenceNames.DAWARICH_DEVICE_ID);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.DAWARICH_FILE_PATH)){
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+                SimpleDialog.build()
+                        .title(R.string.error)
+                        .msg(R.string.gpslogger_custom_path_need_permission)
+                        .show(this, "FILE_PERMISSIONS_REQUIRED");
+
+                return false;
+            }
+
+            StorageChooser chooser = Dialogs.directoryChooser(getActivity());
+            chooser.setOnSelectListener(path -> {
+                LOG.debug(path);
+                if(Strings.isNullOrEmpty(path)) {
+                    path = Files.storageFolder(getActivity()).getAbsolutePath();
+                }
+                File testFile = new File(path, "testfile.txt");
+                try {
+                    testFile.createNewFile();
+                    if(testFile.exists()){
+                        testFile.delete();
+                        LOG.debug("Test file successfully created and deleted.");
+                    }
+                } catch (Exception ex) {
+                    LOG.error("Could not create a test file in the chosen directory.", ex);
+                    path = preferenceHelper.getGpsLoggerFolder();
+                    Dialogs.alert(getString(R.string.error), getString(R.string.pref_logging_file_no_permissions), getActivity());
+                }
+
+                findPreference(PreferenceNames.DAWARICH_FILE_PATH).setSummary(path);
+                preferenceHelper.setDawarichFilepath(path);
+
+            });
+            chooser.show();
         }
 
         return false;
@@ -194,41 +192,31 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
 
         if(which != BUTTON_POSITIVE) { return true; }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME)){
-            String basicAuthUsername = extras.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
-            String basicAuthPass = extras.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD);
-            preferenceHelper.setCustomLoggingBasicAuthUsername(basicAuthUsername);
-            preferenceHelper.setCustomLoggingBasicAuthPassword(basicAuthPass);
-            findPreference("log_customurl_basicauth").setSummary(preferenceHelper.getCustomLoggingBasicAuthUsername() + ":" + preferenceHelper.getCustomLoggingBasicAuthPassword().replaceAll(".","*"));
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.DAWARICH_APIKEY)){
+            String apikey = extras.getString(PreferenceNames.DAWARICH_APIKEY);
+            preferenceHelper.setDawarichApikey(apikey);
+            findPreference(PreferenceNames.DAWARICH_APIKEY).setSummary(apikey);
             return true;
         }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_HEADERS)){
-            String headers = extras.getString(PreferenceNames.LOG_TO_URL_HEADERS);
-            preferenceHelper.setCustomLoggingHTTPHeaders(headers);
-            findPreference(PreferenceNames.LOG_TO_URL_HEADERS).setSummary(headers);
-            return true;
-        }
-
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_PATH)){
-            String url = extras.getString(PreferenceNames.LOG_TO_URL_PATH);
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.DAWARICH_BASE_URL)){
+            String url = extras.getString(PreferenceNames.DAWARICH_BASE_URL);
             url = url.replaceAll("\n","");
-            preferenceHelper.setCustomLoggingUrl(url);
-            findPreference(PreferenceNames.LOG_TO_URL_PATH).setSummary(url);
+            preferenceHelper.setDawarichBaseUrl(url);
+            findPreference(PreferenceNames.DAWARICH_BASE_URL).setSummary(url);
             return true;
         }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_METHOD)){
-            String method = extras.getString(PreferenceNames.LOG_TO_URL_METHOD);
-            preferenceHelper.setCustomLoggingHTTPMethod(method);
-            findPreference(PreferenceNames.LOG_TO_URL_METHOD).setSummary(method);
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.DAWARICH_DEVICE_ID)){
+            String deviceId = extras.getString(PreferenceNames.DAWARICH_DEVICE_ID);
+            preferenceHelper.setDawarichApikey(deviceId);
+            findPreference(PreferenceNames.DAWARICH_DEVICE_ID).setSummary(deviceId);
             return true;
         }
 
-        if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_BODY)){
-            String body = extras.getString(PreferenceNames.LOG_TO_URL_BODY);
-            preferenceHelper.setCustomLoggingHTTPBody(body);
-            findPreference(PreferenceNames.LOG_TO_URL_BODY).setSummary(body);
+        if(dialogTag.equalsIgnoreCase("FILE_PERMISSIONS_REQUIRED")){
+            Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+            getActivity().startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
             return true;
         }
 
@@ -238,14 +226,14 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED)){
-            Boolean isEnabled = (Boolean)newValue;
-            if(isEnabled){
-                // Custom URL SENDER requires CSV logging. Custom URL logging is independent.
-                preferenceHelper.setShouldLogToCSV(true);
-            }
-            return true;
-        }
+//        if(preference.getKey().equalsIgnoreCase(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED)){
+//            Boolean isEnabled = (Boolean)newValue;
+//            if(isEnabled){
+//                // Custom URL SENDER requires CSV logging. Custom URL logging is independent.
+//                preferenceHelper.setShouldLogToCSV(true);
+//            }
+//            return true;
+//        }
         return false;
     }
 }

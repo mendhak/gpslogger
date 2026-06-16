@@ -58,4 +58,5 @@
     </string>
     <string name="log_dawarich_filepath">Buffer file path</string>
     <string name="log_dawarich_filepath_summary">The path where the persistence file of the buffer is saved to</string>
+    <string name="log_dawarich_apikey">Dawarich API-key</string>
 </resources>

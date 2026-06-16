@@ -1125,6 +1125,9 @@ public class PreferenceHelper {
     public String getDawarichFilePath() {
         return prefs.getString(PreferenceNames.DAWARICH_FILE_PATH, "");
     }
+    public void setDawarichFilepath(String path) {
+        prefs.edit().putString(PreferenceNames.DAWARICH_FILE_PATH, path).apply();
+    }
     @ProfilePreference(name= PreferenceNames.LOG_TO_DAWARICH)
     public boolean shouldLogToDawarich() {
         return prefs.getBoolean(PreferenceNames.LOG_TO_DAWARICH, false);
