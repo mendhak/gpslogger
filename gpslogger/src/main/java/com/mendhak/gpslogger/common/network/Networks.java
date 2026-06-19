@@ -154,4 +154,20 @@ public class Networks {
             throws CertificateException, NoSuchAlgorithmException, KeyStoreException, IOException, CertStoreException {
         return new LocalX509TrustManager(getKnownServersStore(context));
     }
+
+    public static boolean isInternalAddress(String url) {
+        if (url == null || url.isEmpty()) return false;
+
+        try {
+            String host = android.net.Uri.parse(url).getHost();
+            if (host == null) return false;
+
+            return host.equalsIgnoreCase("localhost")
+                    || host.equals("127.0.0.1")
+                    || host.equals("::1")
+                    || host.equals("[::1]");
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
