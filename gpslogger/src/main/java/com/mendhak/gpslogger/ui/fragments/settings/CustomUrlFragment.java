@@ -45,6 +45,8 @@ import java.net.URL;
 import java.text.MessageFormat;
 
 import eltos.simpledialogfragment.SimpleDialog;
+import eltos.simpledialogfragment.form.Check;
+import eltos.simpledialogfragment.form.Hint;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 
@@ -85,7 +87,7 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
         findPreference("log_customurl_basicauth").setOnPreferenceClickListener(this);
         if(!Strings.isNullOrEmpty(preferenceHelper.getCustomLoggingBasicAuthUsername())){
-            findPreference("log_customurl_basicauth").setSummary(preferenceHelper.getCustomLoggingBasicAuthUsername() + ":" + preferenceHelper.getCustomLoggingBasicAuthPassword().replaceAll(".","*"));
+            findPreference("log_customurl_basicauth").setSummary(preferenceHelper.getCustomLoggingBasicAuthUsername() + ":" + preferenceHelper.getCustomLoggingBasicAuthPasswordForService().replaceAll(".","*"));
         }
 
 
@@ -168,6 +170,8 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
         if(preference.getKey().equals("log_customurl_basicauth")){
 
+            boolean hidePassword = preferenceHelper.shouldHideCustomLoggingBasicAuthPassword();
+
             SimpleFormDialog.build()
                     .title(R.string.customurl_http_basicauthentication)
                     .neg(R.string.cancel)
@@ -179,8 +183,12 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                             Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD)
                                     .text(preferenceHelper.getCustomLoggingBasicAuthPassword())
                                     .hint(R.string.autoftp_password)
-                                    .showPasswordToggle()
-                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                                    .showPasswordToggle(!hidePassword)
+                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD),
+                            Check.box(PreferenceNames.LOG_TO_URL_BASICAUTH_HIDE_PASSWORD)
+                                    .label(R.string.customurl_basicauth_hide_password)
+                                    .check(hidePassword),
+                            Hint.plain(R.string.customurl_basicauth_hide_password_summary)
                     )
                     .show(this,PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
 
@@ -259,9 +267,11 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
         if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME)){
             String basicAuthUsername = extras.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
             String basicAuthPass = extras.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD);
+            boolean hidePassword = extras.getBoolean(PreferenceNames.LOG_TO_URL_BASICAUTH_HIDE_PASSWORD);
             preferenceHelper.setCustomLoggingBasicAuthUsername(basicAuthUsername);
             preferenceHelper.setCustomLoggingBasicAuthPassword(basicAuthPass);
-            findPreference("log_customurl_basicauth").setSummary(preferenceHelper.getCustomLoggingBasicAuthUsername() + ":" + preferenceHelper.getCustomLoggingBasicAuthPassword().replaceAll(".","*"));
+            preferenceHelper.setShouldHideCustomLoggingBasicAuthPassword(hidePassword);
+            findPreference("log_customurl_basicauth").setSummary(preferenceHelper.getCustomLoggingBasicAuthUsername() + ":" + preferenceHelper.getCustomLoggingBasicAuthPasswordForService().replaceAll(".","*"));
             return true;
         }
 
