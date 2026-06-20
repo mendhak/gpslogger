@@ -297,7 +297,7 @@
     <string name="storage_chooser_text_field_hint">Ordnername</string>
     <string name="new_file_custom_each_time_title">Bei jedem Start nach einem Dateinamen fragen</string>
     <string name="new_file_custom_each_time_summary">Aufforderung zur Eingabe eines benutzerdefinierten Dateinamens bei jedem Start der Aufzeichnung</string>
-    <string name="new_file_custom_keep_changing_title">Benutzerdefinierte Dateinamen dynamisch ändern lassen</string>
+    <string name="new_file_custom_keep_changing_title">Benutzerdefinierte Dateinamen dynamisch ändern</string>
     <string name="new_file_custom_keep_changing_summary">Wenn sich die Werte der benutzerdefinierten Dateinamen ändern, soll sich auch der aktuelle Dateiname ändern. Wird beispielsweise %HOUR verwendet, wird stündlich eine neue Datei erstellt. Deaktivieren Sie diese Option, wenn der Dateiname unverändert bleiben soll.</string>
     <string name="donate_app">Spenden (App)</string>
     <string name="donate_bitcoin">Bitcoin</string>
