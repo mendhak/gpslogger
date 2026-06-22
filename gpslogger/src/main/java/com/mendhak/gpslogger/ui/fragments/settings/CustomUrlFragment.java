@@ -215,7 +215,6 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
                             Input.plain(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD)
                                     .text(preferenceHelper.getCustomLoggingBasicAuthPassword())
                                     .hint(R.string.autoftp_password)
-                                    .showPasswordToggle()
                                     .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     )
                     .show(this,PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
