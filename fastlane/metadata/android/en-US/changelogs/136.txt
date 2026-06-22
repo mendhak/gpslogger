@@ -4,3 +4,4 @@
 * Bugfix - inaccurate passive locations were being recorded
 * Bugfix - don't start new file if already logging to file
 * Auto send batch size, delay options
+* Security - passwords will no longer be saved to exported profile
