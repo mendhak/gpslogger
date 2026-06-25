@@ -518,5 +518,11 @@
     <string name="log_dawarich_filepath_summary">The path where the persistence file of the buffer is saved to</string>
     <string name="log_dawarich_apikey">Dawarich API-key</string>
     <string name="app_name_debug">GPSLogger DEV</string>
+    <string name="dawarich_bulk_min_title">Bulk upload minimum locations</string>
+    <string name="dawarich_bulk_min_summary">Minimum amount of locations to bundle for bulk upload (waits until amount
+        is reached before sending)
+    </string>
+    <string name="dawarich_bulk_max_title">Bulk upload maximum locations</string>
+    <string name="dawarich_bulk_max_summary">Maximum amount of locations to send in one bulk upload request</string>
 
 </resources>

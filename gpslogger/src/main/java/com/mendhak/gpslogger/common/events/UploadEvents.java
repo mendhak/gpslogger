@@ -20,6 +20,10 @@
 package com.mendhak.gpslogger.common.events;
 
 
+import com.mendhak.gpslogger.common.SerializableFIFOBuffer;
+import com.mendhak.gpslogger.common.SerializableLocation;
+
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 public class UploadEvents {
@@ -87,6 +91,9 @@ public class UploadEvents {
 
 
     public static class CustomUrl extends BaseUploadEvent {}
+    public static class Dawarich extends BaseUploadEvent {
+        public ArrayDeque<SerializableLocation> sendBuffer;
+    }
 
     public static class Dropbox extends BaseUploadEvent {}
     public static class GoogleDrive extends BaseUploadEvent {}

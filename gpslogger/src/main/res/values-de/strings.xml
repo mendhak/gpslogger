@@ -408,4 +408,12 @@
     <string name="log_dawarich_filepath_summary">The path where the persistence file of the buffer is saved to</string>
     <string name="log_dawarich_apikey">Dawarich API-key</string>
     <string name="app_name_debug">GPSLogger DEV</string>
+    <string name="dawarich_bulk_min_title">Mindestpositionen für den Sammelupload</string>
+    <string name="dawarich_bulk_min_summary">Mindestanzahl an Positionen die benötigt wird, bevor ein Sammelupload
+        stattfindet (es wird bis zum Erreichen gewartet)
+    </string>
+    <string name="dawarich_bulk_max_title">Maximalpositionen je Sammelanfrage</string>
+    <string name="dawarich_bulk_max_summary">Maximale Anzahl an Positionen, welche mit einer Sammelanfrage gesendet
+        werden
+    </string>
 </resources>

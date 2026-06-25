@@ -19,6 +19,10 @@
 
 package com.mendhak.gpslogger.common;
 
+import com.mendhak.gpslogger.common.slf4j.Logs;
+import com.mendhak.gpslogger.senders.dawarich.DawarichManager;
+import org.slf4j.Logger;
+
 import java.io.*;
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -29,7 +33,8 @@ import java.util.Queue;
  */
 public class SerializableFIFOBuffer<T extends Serializable> {
 
-    private Queue<T> buffer = new ArrayDeque<>();
+    private ArrayDeque<T> buffer = new ArrayDeque<>();
+    private static final Logger LOG = Logs.of(SerializableFIFOBuffer.class);
     private final File persistenceFile;
 
 
@@ -74,7 +79,7 @@ public class SerializableFIFOBuffer<T extends Serializable> {
             out.close();
             file.close();
         } catch (IOException ex) {
-            System.err.println("IOException while persisting Fifo-Buffer object");
+            LOG.error("IOException while persisting Fifo-Buffer object");
         }
     }
 
@@ -83,13 +88,13 @@ public class SerializableFIFOBuffer<T extends Serializable> {
         try {
             FileInputStream file = new FileInputStream(persistenceFile);
             ObjectInputStream in = new ObjectInputStream(file);
-            buffer = (Queue<T>) in.readObject();
+            buffer = (ArrayDeque<T>) in.readObject();
             in.close();
             file.close();
         } catch (IOException ex) {
-            System.err.println("IOException while persisting Fifo-Buffer object");
+            LOG.error("IOException while loading Fifo-Buffer object");
         } catch (ClassNotFoundException ex) {
-            System.err.println("Thw requested class to cast to wasn't found");
+            LOG.error("The requested class to cast to wasn't found");
         }
     }
 }

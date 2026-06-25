@@ -30,28 +30,16 @@ public class DawarichLogger implements FileLogger {
         PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
         SerializableLocation sloc = new SerializableLocation(loc);
 
-        if (!Systems.isNetworkAvailable(AppSettings.getInstance()))
-        {
-            if(preferenceHelper.shouldDawarichLoggingDiscardOfflineLocations())
-            {
-                return;
-            }
+        if(!Systems.isNetworkAvailable((AppSettings.getInstance())) && preferenceHelper.shouldDawarichLoggingDiscardOfflineLocations()) return;
+        this.buffer.push(sloc);
+        if (!Systems.isNetworkAvailable(AppSettings.getInstance())) return;
 
-            this.buffer.push(sloc);
-            return;
+
+        if (this.buffer.getSize() >= preferenceHelper.getDawarichBatchMin()) {
+            DawarichManager manager = new DawarichManager(preferenceHelper);
+            manager.send(buffer);
         }
 
-        DawarichManager manager = new DawarichManager(preferenceHelper);
-
-        if (buffer.getSize() > 1){
-            this.buffer.push(sloc);
-            manager.sendBulkData(buffer);
-        }
-        else {
-            if (!manager.sendLocation(sloc)) {
-                this.buffer.push(sloc);
-            };
-        }
     }
 
     @Override

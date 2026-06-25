@@ -27,6 +27,8 @@ import java.util.Date;
 
 public class SerializableLocation implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private double altitude;
     private double accuracy;
     private float bearing;
@@ -54,7 +56,12 @@ public class SerializableLocation implements Serializable {
 
     private final String timeISO;
 
-    private Bundle extras = null;
+    private transient Bundle extras = null;
+
+    public SerializableLocation(){
+        timeWithOffset = null;
+        timeISO = null;
+    }
 
     public SerializableLocation(Location loc) {
 

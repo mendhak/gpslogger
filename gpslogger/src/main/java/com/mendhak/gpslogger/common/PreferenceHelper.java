@@ -1133,6 +1133,30 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.LOG_TO_DAWARICH, false);
     }
 
+    /**
+     * Dawarich min batch locations
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_BATCH_MIN)
+    public Integer getDawarichBatchMin() {
+        return prefs.getInt(PreferenceNames.DAWARICH_BATCH_MIN, 3);
+    }
+
+    public void setDawarichBatchMin(Integer amount){
+        prefs.edit().putInt(PreferenceNames.DAWARICH_BATCH_MIN, amount).apply();
+    }
+
+    /**
+     * Dawarich max batch locations
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_BATCH_MAX)
+    public Integer getDawarichBatchMax() {
+        return prefs.getInt(PreferenceNames.DAWARICH_BATCH_MAX, 10);
+    }
+
+    public void setDawarichBatchMax(Integer amount){
+        prefs.edit().putInt(PreferenceNames.DAWARICH_BATCH_MAX, amount).apply();
+    }
+
 
     /**
      * Whether to prefix the phone's serial number to the logging file

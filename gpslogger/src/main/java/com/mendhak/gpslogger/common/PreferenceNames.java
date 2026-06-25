@@ -123,6 +123,8 @@ public  class PreferenceNames {
     public static final String DAWARICH_DISCARD_LOG_WHEN_OFFLINE = "dawarich_discard_offline_logs";
     public static final String DAWARICH_FILE_PATH = "dawarich_persistence_file_path";
     public static final String LOG_TO_DAWARICH = "dawarich_enable_logging";
+    public static final String DAWARICH_BATCH_MIN = "dawarich_bulk_min";
+    public static final String DAWARICH_BATCH_MAX = "dawarich_bulk_max";
 
     public static final String ALTITUDE_SUBTRACT_OFFSET = "altitude_subtractoffset";
     public static final String ALTITUDE_SHOULD_ADJUST = "altitude_subtractgeoidheight";

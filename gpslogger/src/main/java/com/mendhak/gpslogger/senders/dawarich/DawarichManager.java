@@ -19,13 +19,15 @@
 
 package com.mendhak.gpslogger.senders.dawarich;
 
-import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.SerializableFIFOBuffer;
-import com.mendhak.gpslogger.common.SerializableLocation;
-import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.R;
+import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
+import com.mendhak.gpslogger.ui.Dialogs;
+import de.greenrobot.event.EventBus;
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.slf4j.Logger;
 
@@ -37,83 +39,51 @@ public class DawarichManager extends FileSender {
 
     private final PreferenceHelper preferenceHelper;
     private static final Logger LOG = Logs.of(DawarichManager.class);
-    private OkHttpClient httpClient = new OkHttpClient().newBuilder().build();;
+    private SerializableFIFOBuffer<SerializableLocation> buffer;
 
     public DawarichManager(PreferenceHelper preferenceHelper) {
         this.preferenceHelper = preferenceHelper;
+        registerEventBus();
     }
 
-    /**
-     * Sends up to 10 points from the buffer as one request to the Dawarich server
-     * @param buffer The buffer holding the points
-     * @return True if the server returned a success message (201), false if not (in this case requeues the points
-     * @throws JSONException
-     * @throws IOException
-     */
-    public boolean sendBulkData(SerializableFIFOBuffer<SerializableLocation> buffer) throws JSONException, IOException {
-        DawarichBatch batch = new DawarichBatch();
-        int i = 0;
-        while (i < 10 && !buffer.isEmpty()) {
-            i++;
-            DawarichBatchLocation loc = DawarichBatchLocation.fromSerializableLocationExtended(Objects.requireNonNull(buffer.pop()), preferenceHelper);
-            batch.appendLocation(loc);
-        }
-        String json = batch.toJSON().toString();
-
-        MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(
-                mediaType,
-                json
-        );
-        LOG.info("Sending bulk data to Dawarich");
-        Request req = new Request.Builder()
-                .url(preferenceHelper.getDawarichBaseUrl() + "/api/v1/overland/batches?api_key=" + preferenceHelper.getDawarichApikey())
-                .method("POST", body)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response = httpClient.newCall(req).execute();
-        if (response.isSuccessful()) {
-            LOG.info("Successfully posted bulk data to Dawarich");
-            return true;
-        }
-        else {
-            ArrayList<DawarichBatchLocation> locations = batch.getLocations();
-            for (DawarichBatchLocation l : locations){
-                buffer.push(l.getSourceData());
-            }
-            LOG.warn("Location batch could not be send to the Dawarich server, locations have been added to the queue again, server response:{}", response.toString());
-            return false;
-        }
+    private void registerEventBus() {
+        EventBus.getDefault().register(this);
     }
 
-    public boolean sendLocation(SerializableLocation location) throws JSONException, IOException {
-        DawarichBatch batch = new DawarichBatch();
-        batch.appendLocation(DawarichBatchLocation.fromSerializableLocationExtended(location, preferenceHelper));
-        String json = batch.toJSON().toString();
-
-        MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(
-                mediaType,
-                json
-        );
-        LOG.info("Sending single location to Dawarich");
+    private void unregisterEventBus(){
         try {
-            Request req = new Request.Builder()
-                    .url(preferenceHelper.getDawarichBaseUrl() + "/api/v1/overland/batches?api_key=" + preferenceHelper.getDawarichApikey())
-                    .method("POST", body)
-                    .addHeader("Content-Type", "application/json")
-                    .build();
-            Response response = httpClient.newCall(req).execute();
-            if (response.isSuccessful()) {
-                LOG.info("Successfully posted single location to Dawarich");
-                return true;
-            } else {
-                LOG.warn("Location could not be send to the Dawarich server, location will be added to the queue again, server response:{}", response.toString());
-                return false;
+            EventBus.getDefault().unregister(this);
+        } catch (Throwable t){
+            //this may crash if registration did not go through. just be safe
+        }
+    }
+
+    public void send(SerializableFIFOBuffer<SerializableLocation> buffer) throws JSONException, IOException {
+        this.buffer = buffer;
+        ArrayDeque<SerializableLocation> sendBuffer = new ArrayDeque<>();
+        for (int i = 0; i < preferenceHelper.getDawarichBatchMax() && !buffer.isEmpty(); i++) {
+            sendBuffer.add(buffer.pop());
+        }
+
+        HashMap<String, Object> dataMap = new HashMap<String, Object>() {
+            {
+                put("sendBuffer", Strings.serializeTojson(sendBuffer));
             }
-        } catch (Exception e) {
-            LOG.error("{}", e.getCause());
-            return false;
+        };
+        String tag = "DaWarIch_" + Systems.DateTimeUtil.currentDateTime();
+        Systems.startWorkManagerRequest(DawarichWorker.class, dataMap, tag);
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.Dawarich upload){
+        if(!upload.success){
+            for (int i=0; !upload.sendBuffer.isEmpty(); i++){
+                try {
+                    this.buffer.push(upload.sendBuffer.poll());
+                } catch (Exception e) {
+                    LOG.error(String.valueOf(e.getCause()));
+                }
+            }
         }
     }
 

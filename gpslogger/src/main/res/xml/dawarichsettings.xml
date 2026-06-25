@@ -24,7 +24,6 @@
             android:key="dawarich_apikey"
             android:singleLine="true"
             android:title="@string/log_dawarich_apikey"
-            android:inputType="textPassword"
             app:iconSpaceReserved="false" />
 
     <Preference
@@ -38,6 +37,18 @@
             android:key="dawarich_persistence_file_path"
             android:summary="@string/log_dawarich_filepath_summary"
             android:title="@string/log_dawarich_filepath"
+            app:iconSpaceReserved="false" />
+
+    <Preference
+            android:key="dawarich_bulk_min"
+            android:title="@string/dawarich_bulk_min_title"
+            android:summary="@string/dawarich_bulk_min_summary"
+            app:iconSpaceReserved="false" />
+
+    <Preference
+            android:key="dawarich_bulk_max"
+            android:title="@string/dawarich_bulk_max_title"
+            android:summary="@string/dawarich_bulk_max_summary"
             app:iconSpaceReserved="false" />
 
 

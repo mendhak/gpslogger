@@ -52,6 +52,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.util.Objects;
 
 
 public class DawarichFragment extends PreferenceFragmentCompat implements
@@ -74,11 +75,17 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
         findPreference(PreferenceNames.DAWARICH_BASE_URL).setSummary(preferenceHelper.getDawarichBaseUrl());
         findPreference(PreferenceNames.DAWARICH_BASE_URL).setOnPreferenceClickListener(this);
 
-        findPreference(PreferenceNames.DAWARICH_APIKEY).setSummary(preferenceHelper.getDawarichApikey());
+        //findPreference(PreferenceNames.DAWARICH_APIKEY).setSummary(preferenceHelper.getDawarichApikey());
         findPreference(PreferenceNames.DAWARICH_APIKEY).setOnPreferenceClickListener(this);
 
         findPreference(PreferenceNames.DAWARICH_DEVICE_ID).setSummary(preferenceHelper.getDawarichDeviceId());
         findPreference(PreferenceNames.DAWARICH_DEVICE_ID).setOnPreferenceClickListener(this);
+
+        findPreference(PreferenceNames.DAWARICH_BATCH_MIN).setSummary(preferenceHelper.getDawarichBatchMin().toString());
+        findPreference(PreferenceNames.DAWARICH_BATCH_MIN).setOnPreferenceClickListener(this);
+
+        findPreference(PreferenceNames.DAWARICH_BATCH_MAX).setSummary(preferenceHelper.getDawarichBatchMax().toString());
+        findPreference(PreferenceNames.DAWARICH_BATCH_MAX).setOnPreferenceClickListener(this);
 
         findPreference(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE).setOnPreferenceChangeListener(this);
 
@@ -126,7 +133,7 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
                     .fields(
                             Input.plain(PreferenceNames.DAWARICH_APIKEY)
                                     .text(preferenceHelper.getDawarichApikey())
-                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+                                    .inputType(InputType.TYPE_CLASS_TEXT)
                     )
                     .show(this, PreferenceNames.DAWARICH_APIKEY);
             return true;
@@ -143,6 +150,34 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
                                     .inputType(InputType.TYPE_CLASS_TEXT)
                     )
                     .show(this, PreferenceNames.DAWARICH_DEVICE_ID);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.DAWARICH_BATCH_MIN)){
+            SimpleFormDialog.build()
+                    .title(R.string.dawarich_bulk_min_title)
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.DAWARICH_BATCH_MIN)
+                                    .text(preferenceHelper.getDawarichBatchMin().toString())
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                    )
+                    .show(this, PreferenceNames.DAWARICH_BATCH_MIN);
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.DAWARICH_BATCH_MAX)){
+            SimpleFormDialog.build()
+                    .title(R.string.dawarich_bulk_max_title)
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.DAWARICH_BATCH_MAX)
+                                    .text(preferenceHelper.getDawarichBatchMin().toString())
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                    )
+                    .show(this, PreferenceNames.DAWARICH_BATCH_MAX);
             return true;
         }
 
@@ -195,7 +230,7 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
         if(dialogTag.equalsIgnoreCase(PreferenceNames.DAWARICH_APIKEY)){
             String apikey = extras.getString(PreferenceNames.DAWARICH_APIKEY);
             preferenceHelper.setDawarichApikey(apikey);
-            findPreference(PreferenceNames.DAWARICH_APIKEY).setSummary(apikey);
+            //findPreference(PreferenceNames.DAWARICH_APIKEY).setSummary(apikey);
             return true;
         }
 
@@ -209,8 +244,22 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
 
         if(dialogTag.equalsIgnoreCase(PreferenceNames.DAWARICH_DEVICE_ID)){
             String deviceId = extras.getString(PreferenceNames.DAWARICH_DEVICE_ID);
-            preferenceHelper.setDawarichApikey(deviceId);
+            preferenceHelper.setDawarichDeviceId(deviceId);
             findPreference(PreferenceNames.DAWARICH_DEVICE_ID).setSummary(deviceId);
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.DAWARICH_BATCH_MIN)){
+            Integer amount = Integer.parseInt(Objects.requireNonNull(extras.getString(PreferenceNames.DAWARICH_BATCH_MIN)));
+            preferenceHelper.setDawarichBatchMin(amount);
+            findPreference(PreferenceNames.DAWARICH_BATCH_MIN).setSummary(amount.toString());
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.DAWARICH_BATCH_MAX)){
+            Integer amount = Integer.parseInt(Objects.requireNonNull(extras.getString(PreferenceNames.DAWARICH_BATCH_MAX)));
+            preferenceHelper.setDawarichBatchMax(amount);
+            findPreference(PreferenceNames.DAWARICH_BATCH_MAX).setSummary(amount.toString());
             return true;
         }
 
