@@ -19,7 +19,7 @@
     <string name="txt_satellites">Mga satellite:</string>
     <string name="txt_accuracy">Katukma:</string>
     <string name="txt_travel_distance">Mibiyahe:</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Mga Setting sa GPSLogger</string>
     <string name="navigation_drawer_open">Ablihi ang navigation drawer</string>
     <string name="cancel">Pagkanselar</string>

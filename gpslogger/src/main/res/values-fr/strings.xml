@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">Paramètres d\'envoi</string>
     <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
     <string name="navigation_drawer_close">Fermer le menu de navigation</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Paramètres de GPSLogger</string>
     <string name="ok">OK</string>
     <string name="cancel">Annuler</string>

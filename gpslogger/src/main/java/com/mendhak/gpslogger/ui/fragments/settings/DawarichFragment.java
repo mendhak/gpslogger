@@ -72,13 +72,13 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
         filepath.setOnPreferenceClickListener(this);
 
         findPreference(PreferenceNames.DAWARICH_BASE_URL).setSummary(preferenceHelper.getDawarichBaseUrl());
-        findPreference(PreferenceNames.DAWARICH_BASE_URL).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.DAWARICH_BASE_URL).setOnPreferenceClickListener(this);
 
         findPreference(PreferenceNames.DAWARICH_APIKEY).setSummary(preferenceHelper.getDawarichApikey());
-        findPreference(PreferenceNames.DAWARICH_APIKEY).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.DAWARICH_APIKEY).setOnPreferenceClickListener(this);
 
         findPreference(PreferenceNames.DAWARICH_DEVICE_ID).setSummary(preferenceHelper.getDawarichDeviceId());
-        findPreference(PreferenceNames.DAWARICH_DEVICE_ID).setOnPreferenceChangeListener(this);
+        findPreference(PreferenceNames.DAWARICH_DEVICE_ID).setOnPreferenceClickListener(this);
 
         findPreference(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE).setOnPreferenceChangeListener(this);
 
@@ -126,7 +126,7 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
                     .fields(
                             Input.plain(PreferenceNames.DAWARICH_APIKEY)
                                     .text(preferenceHelper.getDawarichApikey())
-                                    .inputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE)
+                                    .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     )
                     .show(this, PreferenceNames.DAWARICH_APIKEY);
             return true;

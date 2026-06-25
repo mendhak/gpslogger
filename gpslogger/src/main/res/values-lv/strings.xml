@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">Ielādes iestatījumi</string>
     <string name="navigation_drawer_open">Atvērt navigācijas rādītāju</string>
     <string name="navigation_drawer_close">Aizvērt navigācijas rādītāju</string>
-    <string name="app_name">GPS Piefiksētājs</string>
+    <string name="app_name_release">GPS Piefiksētājs</string>
     <string name="settings_screen_name">GPS Piefiksētāja Iestatījumi</string>
     <string name="cancel">Atcelt</string>
     <string name="could_not_write_to_file">Nevar iestatīt failu</string>

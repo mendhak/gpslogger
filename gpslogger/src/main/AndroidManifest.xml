@@ -196,14 +196,15 @@
             </intent-filter>
         </activity>
 
-        <provider android:name=".common.ContentApi" android:authorities="com.mendhak.gpslogger" android:exported="true"
-                  tools:ignore="ExportedContentProvider"/>
+        <provider android:name=".common.ContentApi" android:authorities="${applicationId}" android:exported="true"
+                  tools:ignore="ExportedContentProvider" tools:replace="android:authorities"/>
 
         <provider
             android:name="com.mendhak.gpslogger.common.GpsLoggerFileProvider"
-            android:authorities="com.mendhak.gpslogger.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/fileprovider"/>
@@ -213,7 +214,7 @@
         <activity android:name=".ProfileLinkReceiverActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Translucent" >
-            <intent-filter android:label="@string/app_name">
+            <intent-filter android:label="@string/app_name_release">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -225,7 +226,7 @@
                 <data android:mimeType="application/x-gpslogger-properties" />
                 <data android:mimeType="text/x-java-properties" />
             </intent-filter>
-            <intent-filter android:label="@string/app_name">
+            <intent-filter android:label="@string/app_name_release">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -236,7 +237,7 @@
                 <data android:mimeType="*/*" />
                 <data android:pathPattern=".*\\.properties" />
             </intent-filter>
-            <intent-filter android:label="@string/app_name">
+            <intent-filter android:label="@string/app_name_release">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />

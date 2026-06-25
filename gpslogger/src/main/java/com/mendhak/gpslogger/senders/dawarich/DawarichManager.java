@@ -31,10 +31,7 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Queue;
+import java.util.*;
 
 public class DawarichManager extends FileSender {
 
@@ -100,18 +97,22 @@ public class DawarichManager extends FileSender {
                 json
         );
         LOG.info("Sending single location to Dawarich");
-        Request req = new Request.Builder()
-                .url(preferenceHelper.getDawarichBaseUrl() + "/api/v1/overland/batches?api_key=" + preferenceHelper.getDawarichApikey())
-                .method("POST", body)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        Response response = httpClient.newCall(req).execute();
-        if (response.isSuccessful()) {
-            LOG.info("Successfully posted single location to Dawarich");
-            return true;
-        }
-        else {
-            LOG.warn("Location could not be send to the Dawarich server, location will be added to the queue again, server response:{}", response.toString());
+        try {
+            Request req = new Request.Builder()
+                    .url(preferenceHelper.getDawarichBaseUrl() + "/api/v1/overland/batches?api_key=" + preferenceHelper.getDawarichApikey())
+                    .method("POST", body)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            Response response = httpClient.newCall(req).execute();
+            if (response.isSuccessful()) {
+                LOG.info("Successfully posted single location to Dawarich");
+                return true;
+            } else {
+                LOG.warn("Location could not be send to the Dawarich server, location will be added to the queue again, server response:{}", response.toString());
+                return false;
+            }
+        } catch (Exception e) {
+            LOG.error("{}", e.getCause());
             return false;
         }
     }

@@ -333,7 +333,7 @@
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Для належної роботи цієї програми потрібні різні дозволи. Тепер вам кілька разів буде запропоновано різні дозволи (вибачте).  Ось пояснення кожного дозволу. ]]></string>
     <string name="logging_advanced_delete_files">Видалити вибрані файли</string>
     <string name="install_conscrypt_provider_title">Встановлення Conscrypt Provider (SSL/TLS)</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="hide">Приховати</string>
     <string name="log_plain_text_csv_advanced_title">Налаштування запису в CSV</string>
     <string name="log_plain_text_csv_field_delimiter">Розділювач полів CSV</string>

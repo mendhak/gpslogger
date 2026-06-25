@@ -60,12 +60,16 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             debuggable true
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-DEBUG"
+            resValue "string", "app_name", "@string/app_name_debug"
         }
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             debuggable false
+            resValue "string", "app_name", "@string/app_name_release"
         }
     }
 
@@ -207,6 +211,10 @@ dependencies {
 
     //CSV library
     implementation('org.apache.commons:commons-csv:1.9.0')
+
+    //JSON
+    //implementation("com.github.fasterxml:jackson-core:jackson-core-2.18.2")
+    //implementation("com.fasterxml.jackson.core:jackson-databind:2.22.0")
 
      //Libraries required for unit testing
     testImplementation 'junit:junit:4.13.2'

@@ -12,7 +12,7 @@
     <!-- Settings activity -->
     <!-- Settings -->
     <string name="navigation_drawer_open">Agor drôr llywio</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Gosodiadau GPSLogger</string>
     <string name="cancel">Diddymu</string>
     <string name="hide">Cuddio</string>

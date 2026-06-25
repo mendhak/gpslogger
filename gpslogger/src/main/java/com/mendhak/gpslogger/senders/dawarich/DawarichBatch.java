@@ -19,6 +19,7 @@
 
 package com.mendhak.gpslogger.senders.dawarich;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,7 +52,7 @@ public class DawarichBatch {
         JSONObject root = new JSONObject();
         JSONArray locations = new JSONArray();
         for (DawarichBatchLocation loc : this.locations){
-            locations.put(loc);
+            locations.put(loc.toJSON());
         }
         root.put("locations", locations);
         return root;

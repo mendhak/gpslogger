@@ -10,7 +10,7 @@
     <string name="title_drawer_uploadsettings">Paramètres de téléchargement</string>
     <string name="navigation_drawer_open">Ouvrir le menu latéral</string>
     <string name="navigation_drawer_close">Fermer le menu latéral</string>
-    <string name="app_name">Enregistreur GPS</string>
+    <string name="app_name_release">Enregistreur GPS</string>
     <string name="settings_screen_name">Réglages de l\'enregistreur GPS</string>
     <string name="ok">okay</string>
     <string name="cancel">Annuler</string>

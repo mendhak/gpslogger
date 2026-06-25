@@ -315,7 +315,7 @@
     <string name="customurl_http_basicauthentication">일반 인증</string>
     <string name="hide_notification_from_status_bar_disallowed">Android Oreo버전부터 알림 숨기기 기능은 적용되지 않습니다</string>
     <string name="hide">숨김</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="meters_per_second"> m/s</string>
     <string name="feet_per_second"> ft/s</string>
     <string name="miles_per_hour"> mi/h</string>

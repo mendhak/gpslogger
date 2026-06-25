@@ -300,7 +300,7 @@
     <string name="customurl_http_method">Método HTTP</string>
     <string name="customurl_http_basicauthentication">Autenticação básica</string>
     <string name="hide_notification_from_status_bar_disallowed">Opção de esconder notificações está desabilitada no Android Oreo e mais recentes</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="ok">OK</string>
     <string name="log_plain_text_csv_field_delimiter">Delimitador de campo CSV</string>
     <string name="log_plain_text_decimal_comma">Use vírgula (,) como separador decimal em vez de ponto (.)</string>

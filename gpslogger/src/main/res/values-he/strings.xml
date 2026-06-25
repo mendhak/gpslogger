@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">הגדרות העלאה</string>
     <string name="navigation_drawer_open">פתח את מגירת הניווט</string>
     <string name="navigation_drawer_close">סגור את מגירת הניווט</string>
-    <string name="app_name">לוגר GPS</string>
+    <string name="app_name_release">לוגר GPS</string>
     <string name="settings_screen_name">הגדרות GPSLogger</string>
     <string name="ok">אישור</string>
     <string name="cancel">ביטול</string>

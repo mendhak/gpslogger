@@ -7,7 +7,7 @@
 
 
 
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger Settings</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -517,5 +517,6 @@
     <string name="log_dawarich_filepath">Buffer file path</string>
     <string name="log_dawarich_filepath_summary">The path where the persistence file of the buffer is saved to</string>
     <string name="log_dawarich_apikey">Dawarich API-key</string>
+    <string name="app_name_debug">GPSLogger DEV</string>
 
 </resources>

@@ -187,7 +187,7 @@
     <string name="autoopengts_accountname">ชื่อบัญชี</string>
     <string name="listeners_title">ตัวให้ตำแหน่ง</string>
     <string name="autosend_frequency_hint">จำนวนนาที</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="log_plain_text_decimal_comma">ใช้คอมมา (,) เป็นตัวคั่นแทนจุด (.)</string>
     <string name="log_gpx_11_summary">ใช้ไฟล์รูปแบบ GPX 1.1 แทน GPX 1.0</string>
     <string name="log_json_title">บันทึกเป็น GeoJSON</string>

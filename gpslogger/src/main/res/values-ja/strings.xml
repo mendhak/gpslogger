@@ -316,7 +316,7 @@
     <string name="txt_battery">バッテリー</string>
     <string name="customurl_http_basicauthentication">Basic認証</string>
     <string name="hide_notification_from_status_bar_disallowed">通知を非表示にすることはAndroid Oreo以降では許可されていません</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="ok">了解</string>
     <string name="cancel">キャンセル</string>
     <string name="retry_get_best_possible_accuracy_summary">正確な最初のポイントを記録する代わりに、精度の持続時間を試行し、最も精度の高いポイントを選択します。 時間はかかりますが、より正確にポイントを記録できる可能性が高まります。</string>

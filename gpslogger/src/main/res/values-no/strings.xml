@@ -235,7 +235,7 @@
     <string name="change_language_summary">Ikke alle språk er fullstendig oversatt! Du må starte programmet på nytt før innstillingene trer i kraft.</string>
     <string name="navigation_drawer_close">Lukk navigasjonsskuff</string>
     <string name="navigation_drawer_open">Åpne navigasjonsskuff</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="ok">OK</string>
     <string name="hide">Skjul</string>
     <string name="meter"> meter</string>

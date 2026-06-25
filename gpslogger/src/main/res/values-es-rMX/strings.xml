@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">Configuración de subidas</string>
     <string name="navigation_drawer_open">Abrir menú de navegación</string>
     <string name="navigation_drawer_close">Cerrar menú de navegación</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Configuracion de GPSLogger</string>
     <string name="ok">Aceptar</string>
     <string name="cancel">Cancelar</string>

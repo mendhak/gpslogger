@@ -212,7 +212,7 @@
     <string name="txt_travel_duration">காலம்:</string>
     <string name="listeners_gps_title">லாக் சி.பி.எச்/சி.என்.எச்.எச் இருப்பிடங்கள்</string>
     <string name="listeners_gps_summary">உங்கள் சாதனத்தில் செயற்கைக்கோள் அடிப்படையிலான இருப்பிட ரிசீவர் வழங்கிய இடங்களை பதிவு செய்கிறது</string>
-    <string name="app_name">Gpslogger</string>
+    <string name="app_name_release">Gpslogger</string>
     <string name="hide">மறை</string>
     <string name="menu_annotate">சிறுகுறிப்பு</string>
     <string name="summary_loggingto">உள்நுழைவு:</string>

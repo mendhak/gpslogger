@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">Upload instellingen</string>
     <string name="navigation_drawer_open">Open navigatie-drawer</string>
     <string name="navigation_drawer_close">Sluit navigatie-drawer</string>
-    <string name="app_name">﻿GPSLogger</string>
+    <string name="app_name_release">﻿GPSLogger</string>
     <string name="settings_screen_name">﻿GPSLogger instellingen</string>
     <string name="cancel">Annuleren</string>
     <string name="could_not_write_to_file">Kan niet schrijven naar bestand</string>

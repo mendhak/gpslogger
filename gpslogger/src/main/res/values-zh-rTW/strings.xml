@@ -327,7 +327,7 @@
     <string name="owncloud_setup_title">ownCloud</string>
     <string name="osm_setup_title">OpenStreetMap</string>
     <string name="txt_speed_kph">速度 (公里/小時)：</string>
-    <string name="app_name">GPS記錄器</string>
+    <string name="app_name_release">GPS記錄器</string>
     <string name="retry_get_best_possible_accuracy_title">在時段內選擇最佳精確度</string>
     <string name="time_before_logging_summary">使用 0 表示最大頻率，但是比較慢會對電池壽命比較好。系統層級的電池管理設定則可能覆寫這項設定，請參照說明與常見問題。</string>
     <string name="google_drive_folder_path">Google 硬碟檔案路徑</string>

@@ -132,7 +132,7 @@
     <string name="autoftp_directory">Aplankas</string>
     <string name="save">Išsaugoti</string>
     <string name="hide">Slėpti</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="not_applicable">netaikoma</string>
     <string name="meters_per_second"> m/s</string>
     <string name="feet_per_second"> ft/s</string>

@@ -283,7 +283,7 @@
     <string name="customurl_http_body">HTTP Katawan</string>
     <string name="customurl_http_headers">Mga header ng HTTP</string>
     <string name="customurl_http_method">HTTP na Paraan</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="ok">OK</string>
     <string name="hide">Itago</string>
     <string name="summary_current_filename">File:</string>

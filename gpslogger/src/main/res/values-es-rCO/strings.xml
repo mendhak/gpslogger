@@ -7,7 +7,7 @@
     <string name="title_drawer_uploadsettings">Configuración de carga</string>
     <string name="navigation_drawer_open">Cajón de navegación abierto</string>
     <string name="navigation_drawer_close">Cajón de navegación cerrado</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Configuración de GPSLogger</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>

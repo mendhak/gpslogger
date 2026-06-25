@@ -312,7 +312,7 @@
     <string name="customurl_http_method">Phương thức HTTP</string>
     <string name="customurl_http_basicauthentication">Xác thực cơ bản</string>
     <string name="hide_notification_from_status_bar_disallowed">Ẩn thông báo không được phép từ Android Oreo trở đi</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="hide">Ẩn</string>
     <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
     <string name="log_plain_text_csv_advanced_title">Nhập vào cài đặt CSV</string>

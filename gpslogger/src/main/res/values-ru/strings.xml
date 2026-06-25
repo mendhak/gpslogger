@@ -320,7 +320,7 @@
     <string name="customurl_http_method">HTTP-метод</string>
     <string name="customurl_http_basicauthentication">Базовая аутентификация</string>
     <string name="hide_notification_from_status_bar_disallowed">Скрытие уведомления запрещено в Android Oreo и новее</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="hide">Скрыть</string>
     <string name="log_plain_text_csv_advanced_title">Настройки записи в CSV</string>
     <string name="log_plain_text_csv_field_delimiter">Разделитель полей CSV</string>

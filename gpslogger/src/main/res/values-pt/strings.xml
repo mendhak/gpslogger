@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">Carregar configurações</string>
     <string name="navigation_drawer_open">Abrir menu de navegação</string>
     <string name="navigation_drawer_close">Fechar menu de navegação</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Configurações do GPSLogger</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancelar</string>

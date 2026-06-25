@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">上传设置</string>
     <string name="navigation_drawer_open">打开导航栏</string>
     <string name="navigation_drawer_close">关闭导航栏</string>
-    <string name="app_name">GPS记录器</string>
+    <string name="app_name_release">GPS记录器</string>
     <string name="settings_screen_name">GPSLogger 设置</string>
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
