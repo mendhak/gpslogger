@@ -384,19 +384,10 @@
     <string name="retry_get_best_possible_accuracy_summary">पहले सटीक बिंदु को लॉग करने के बजाय, सटीकता अवधि के लिए प्रयास करते रहें और सर्वोत्तम सटीकता के साथ बिंदु का चयन करें। अधिक समय लगता है, लेकिन अधिक सटीक बिंदुओं की संभावना बढ़ जाती है।</string>
     <string name="txt_speed_kph">गति (किमी/घंटा में):</string>
     <string name="prompt_for_details_when_logging_starts">लॉगिंग शुरू होने पर विवरण के लिए संकेत दें</string>
-    <string name="log_dawarich_setup_title">Dawarich</string>
-    <string name="log_dawarich_title">Log into a Dawarich instance</string>
-    <string name="log_dawarich_summary_detailed">Sends the recorded position to a defined Dawarich instance</string>
-    <string name="log_dawarich_discard_offline_locations">Discard locations when offline</string>
-    <string name="log_dawarich_discard_offline_locations_summary">If this option is enabled all locations will be
-        discarded while offline instead of beeing queued for upload
-    </string>
-    <string name="log_dawarich_url">Dawarich base URL</string>
-    <string name="log_dawarich_device_id">Device ID</string>
-    <string name="log_dawarich_device_id_summary">The device id to declare in the position data to to differentiate
-        between device in the future
-    </string>
-    <string name="log_dawarich_filepath">Buffer file path</string>
-    <string name="log_dawarich_filepath_summary">The path where the persistence file of the buffer is saved to</string>
-    <string name="log_dawarich_apikey">Dawarich API-key</string>
+
+
+
+
+
+
 </resources>

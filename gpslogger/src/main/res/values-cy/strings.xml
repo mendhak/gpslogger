@@ -382,19 +382,10 @@
     <string name="retry_get_best_possible_accuracy_title">Dewis y cywirdeb gorau o fewn cyfnod amser</string>
     <string name="retry_get_best_possible_accuracy_summary">Yn lle logio\'r pwynt cywirdeb da cyntaf, parhau am y cyfnod o amser cywirdeb a dewis y pwynt sydd â\'r cywirdeb gorau. Mae hyn yn cymryd mwy o amser, ond yn cynyddu\'r tebygolrwydd o gael pwyntiau sydd â chywirdeb gwell.</string>
     <string name="reset_app_summary">Bydd hwn yn ailosod yr ap, yn dileu unrhyw osodiadau, yn dileu ffeiliau GPSLogger, a diddymu\'r caniatadau sydd wedi cael eu rhoi i\'r ap yma. Bydd yr holl ddata yn cael ei golli!</string>
-    <string name="log_dawarich_setup_title">Dawarich</string>
-    <string name="log_dawarich_title">Log into a Dawarich instance</string>
-    <string name="log_dawarich_summary_detailed">Sends the recorded position to a defined Dawarich instance</string>
-    <string name="log_dawarich_discard_offline_locations">Discard locations when offline</string>
-    <string name="log_dawarich_discard_offline_locations_summary">If this option is enabled all locations will be
-        discarded while offline instead of beeing queued for upload
-    </string>
-    <string name="log_dawarich_url">Dawarich base URL</string>
-    <string name="log_dawarich_device_id">Device ID</string>
-    <string name="log_dawarich_device_id_summary">The device id to declare in the position data to to differentiate
-        between device in the future
-    </string>
-    <string name="log_dawarich_filepath">Buffer file path</string>
-    <string name="log_dawarich_filepath_summary">The path where the persistence file of the buffer is saved to</string>
-    <string name="log_dawarich_apikey">Dawarich API-key</string>
+
+
+
+
+
+
 </resources>

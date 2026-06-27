@@ -382,19 +382,10 @@
     <string name="autosend_customurl_summary">(Tato funkce zapne protokolování v CSV) Hromadně odešle požadavky na vlastní adresu URL, jeden pro každý řádek v souboru CSV. Závisí na intervalu automatického odesílání.</string>
     <string name="time_before_logging_summary">Pro maximální frekvenci použijte hodnotu 0. Menší frekvence (vyšší hodnota) je ovšem lepší pro životnost baterie. Konfigurace baterie na úrovni systému může toto nastavení potlačit, viz nápověda a často kladené otázky.</string>
     <string name="retry_time_summary">Jak dlouho, po prvotní opravě, se snažit získat přesný bod, který bude odpovídat filtru přesnosti.</string>
-    <string name="log_dawarich_setup_title">Dawarich</string>
-    <string name="log_dawarich_title">Log into a Dawarich instance</string>
-    <string name="log_dawarich_summary_detailed">Sends the recorded position to a defined Dawarich instance</string>
-    <string name="log_dawarich_discard_offline_locations">Discard locations when offline</string>
-    <string name="log_dawarich_discard_offline_locations_summary">If this option is enabled all locations will be
-        discarded while offline instead of beeing queued for upload
-    </string>
-    <string name="log_dawarich_url">Dawarich base URL</string>
-    <string name="log_dawarich_device_id">Device ID</string>
-    <string name="log_dawarich_device_id_summary">The device id to declare in the position data to to differentiate
-        between device in the future
-    </string>
-    <string name="log_dawarich_filepath">Buffer file path</string>
-    <string name="log_dawarich_filepath_summary">The path where the persistence file of the buffer is saved to</string>
-    <string name="log_dawarich_apikey">Dawarich API-key</string>
+
+
+
+
+
+
 </resources>

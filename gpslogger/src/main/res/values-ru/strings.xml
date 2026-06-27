@@ -395,19 +395,10 @@
     <string name="autosend_wifionly_summary">Перед выполнением любых сетевых запросов дождитесь подключения к WIFI. Применяется ко всем запросам, включая отправку и ведение журнала.</string>
     <string name="only_log_if_significant_motion_title">Ведите журнал только в случае значительного движения</string>
     <string name="only_log_if_significant_motion_summary">Введите журнал только при обнаружении значительной активности, например при ходьбе, езде на велосипеде, вождении автомобиля. Значительная активность определяется вашей ОС.</string>
-    <string name="log_dawarich_setup_title">Dawarich</string>
-    <string name="log_dawarich_title">Log into a Dawarich instance</string>
-    <string name="log_dawarich_summary_detailed">Sends the recorded position to a defined Dawarich instance</string>
-    <string name="log_dawarich_discard_offline_locations">Discard locations when offline</string>
-    <string name="log_dawarich_discard_offline_locations_summary">If this option is enabled all locations will be
-        discarded while offline instead of beeing queued for upload
-    </string>
-    <string name="log_dawarich_url">Dawarich base URL</string>
-    <string name="log_dawarich_device_id">Device ID</string>
-    <string name="log_dawarich_device_id_summary">The device id to declare in the position data to to differentiate
-        between device in the future
-    </string>
-    <string name="log_dawarich_filepath">Buffer file path</string>
-    <string name="log_dawarich_filepath_summary">The path where the persistence file of the buffer is saved to</string>
-    <string name="log_dawarich_apikey">Dawarich API-key</string>
+
+
+
+
+
+
 </resources>
