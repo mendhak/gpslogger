@@ -597,8 +597,7 @@ public class GpsLoggingService extends Service  {
         long notificationTime = System.currentTimeMillis();
 
         if (session.hasValidLocation()) {
-            contentTitle = Strings.getFormattedLatitude(session.getCurrentLatitude()) + ", "
-                    + Strings.getFormattedLongitude(session.getCurrentLongitude());
+            contentTitle = Strings.getCoordinate(session.getCurrentLatitude(), session.getCurrentLongitude(), ", ");
 
             contentText = Html.fromHtml("<b>" + getString(R.string.txt_altitude) + "</b> " + Strings.getDistanceDisplay(this,session.getCurrentLocationInfo().getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), false)
                     + "  "
@@ -1130,10 +1129,7 @@ public class GpsLoggingService extends Service  {
     private String getLocationDisplayForLogs(Location loc) {
 
         StringBuilder logLine = new StringBuilder();
-        logLine.append(Strings.getFormattedLatitude(loc.getLatitude()));
-        logLine.append(" ");
-        logLine.append(Strings.getFormattedLongitude(loc.getLongitude()));
-        logLine.append(" ");
+        logLine.append(Strings.getCoordinate(loc.getLatitude(), loc.getLongitude(), " "));
 
         if(!Strings.isNullOrEmpty(loc.getProvider())){
             String provider = loc.getProvider();
