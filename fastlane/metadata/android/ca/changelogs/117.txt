@@ -1,0 +1,5 @@
+* S'ha afegit un selector de fitxers i carpetes. S'utilitza per al camí GPSLogger. També per a la clau privada SFTP.
+* Nova biblioteca SSH per permetre connectar utilitzant algoritmes SSH més moderns, quan s'utilitza la funció SFTP.
+* Permisos d'arxiu fixar per Android 11+. Ara podeu establir una ruta de fitxers personalitzada, i se us demanarà que doneu permisos de gestor de fitxers.
+* Nou permís afegit, MANAGE_EXTERNAL_STORAGE. Això és permetre la característica de la ruta d'arxius personalitzada en Android 11+.
+* Bugfix: Permet caràcters UTF-8 en el nom de la carpeta FTP.

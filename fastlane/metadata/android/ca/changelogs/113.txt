@@ -1,0 +1,1 @@
+* Afegir scrollbar a vista simple per adaptar-se a la mida de la pantalla gran i la mida de la font.

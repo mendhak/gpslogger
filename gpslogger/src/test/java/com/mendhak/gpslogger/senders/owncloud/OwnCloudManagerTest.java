@@ -26,7 +26,10 @@ public class OwnCloudManagerTest {
         assertThat("Server name should not be empty", ocm.isAvailable(), is(false));
 
         when(pm.getOwnCloudBaseUrl()).thenReturn("sadfasdf");
-        assertThat("Server name should not be empty", ocm.isAvailable(), is(true));
+        when(pm.getOwnCloudDirectory()).thenReturn("/");
+        when(pm.getOwnCloudUsername()).thenReturn("example");
+        when(pm.getOwnCloudPassword()).thenReturn("example");
+        assertThat("Server name, directory, username and password should not be empty", ocm.isAvailable(), is(true));
     }
 
     @Test
@@ -36,6 +39,9 @@ public class OwnCloudManagerTest {
         OwnCloudManager ocm = new OwnCloudManager(pm);
 
         when(pm.getOwnCloudBaseUrl()).thenReturn("sadfasdf");
+        when(pm.getOwnCloudDirectory()).thenReturn("/");
+        when(pm.getOwnCloudUsername()).thenReturn("example");
+        when(pm.getOwnCloudPassword()).thenReturn("example");
         assertThat("Valid but unchecked - not available", ocm.isAutoSendAvailable(), is(false));
 
         when(pm.isOwnCloudAutoSendEnabled()).thenReturn(true);
