@@ -393,4 +393,6 @@
     <string name="only_log_if_significant_motion_summary">仅在检测到显著活动（如步行、骑行、驾驶）时记录。是否属于显著运动由系统判定。</string>
     <string name="autosend_wifionly_summary">在执行任何网络请求（包括数据发送和日志记录）前，需等待 WiFi 连接。</string>
     <string name="only_log_if_significant_motion_title">仅在检测到显著运动时记录</string>
+    <string name="filter_passiv_location_title">Filter passive locations</string>
+    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
 </resources>

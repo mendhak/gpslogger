@@ -289,4 +289,6 @@
     <string name="kilometers_per_hour"> km/h</string>
     <string name="log_plain_text_csv_advanced_title">Registrar configuracion de CSV</string>
     <string name="txt_speed_kph">Velocidad (en km/h):</string>
+    <string name="filter_passiv_location_title">Filter passive locations</string>
+    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
 </resources>

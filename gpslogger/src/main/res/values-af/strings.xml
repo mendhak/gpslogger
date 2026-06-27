@@ -42,4 +42,6 @@
     <string name="autoemail_smtp_category">Epos Instellings</string>
     <string name="autoemail_test">Stuur \'n toets epos met die instellings hierbo</string>
     <string name="autoopengts_server_category">OpenGTS Instellings</string>
+    <string name="filter_passiv_location_title">Filter passive locations</string>
+    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
 </resources>

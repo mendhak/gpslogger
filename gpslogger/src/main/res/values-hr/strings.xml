@@ -273,4 +273,6 @@
     <string name="minutes"> min</string>
     <string name="ssl_certificate_is_valid">Certifikat je ispravan</string>
     <string name="change_language_title">Odaberi jezik</string>
+    <string name="filter_passiv_location_title">Filter passive locations</string>
+    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
 </resources>

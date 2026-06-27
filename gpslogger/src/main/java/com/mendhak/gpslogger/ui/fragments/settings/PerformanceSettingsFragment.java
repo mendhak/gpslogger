@@ -76,7 +76,6 @@ public class PerformanceSettingsFragment
             significantMotionSwitch.setEnabled(false);
         }
 
-
     }
 
     @Override

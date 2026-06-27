@@ -377,4 +377,6 @@
     <string name="profile_add_from_url">嚟自 URL</string>
     <string name="profile_switch_before_delete">請先轉去另一個設定檔，然後至刪除呢一個。</string>
     <string name="txt_speed_kph">速度 (時速幾多公里)：</string>
+    <string name="filter_passiv_location_title">Filter passive locations</string>
+    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
 </resources>

@@ -290,4 +290,6 @@
     <string name="ok">Ok</string>
     <string name="hide">Verberg</string>
     <string name="summary_freq_max">maximum</string>
+    <string name="filter_passiv_location_title">Filter passive locations</string>
+    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
 </resources>

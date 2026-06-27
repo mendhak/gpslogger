@@ -52,6 +52,7 @@ public  class PreferenceNames {
     public static final String AUTOSEND_CUSTOMURL_ENABLED = "autocustomurl_enabled";
     public static final String LOG_TO_OPENGTS = "log_opengts";
     public static final String LOG_PASSIVE_LOCATIONS="log_passive_locations";
+    public static final String LOG_FILTER_PASSIVE_LOCATIONS = "log_filter_passive_locations";
     public static final String LOG_SATELLITE_LOCATIONS = "log_satellite_locations";
     public static final String LOG_NETWORK_LOCATIONS="log_network_locations";
     public static final String NEW_FILE_CREATION_MODE = "new_file_creation";

@@ -389,4 +389,6 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="started_at">comenzó en</string>
     <string name="hide_notification_from_lock_screen">Ocultar notificaciones de la pantalla de bloqueo</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificaciones</b> - Permite mostrar una notificación, esto ayuda a mantener vivo el servicio de registro. ]]></string>
+    <string name="filter_passiv_location_title">Filter passive locations</string>
+    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
 </resources>

@@ -127,4 +127,6 @@
     <string name="autoftp_ssltls_summary">Κανένα, SSL ή TLS. Χρησιμοποιήστε την επιλογή κανένα για κανονικές μη ασφαλείς συνδέσεις.</string>
     <string name="autoftp_ssltls_none">Κανένα</string>
     <string name="autoftp_directory">Φάκελος</string>
+    <string name="filter_passiv_location_title">Filter passive locations</string>
+    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
 </resources>

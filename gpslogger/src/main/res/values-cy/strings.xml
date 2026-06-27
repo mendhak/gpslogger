@@ -382,4 +382,6 @@
     <string name="retry_get_best_possible_accuracy_title">Dewis y cywirdeb gorau o fewn cyfnod amser</string>
     <string name="retry_get_best_possible_accuracy_summary">Yn lle logio\'r pwynt cywirdeb da cyntaf, parhau am y cyfnod o amser cywirdeb a dewis y pwynt sydd â\'r cywirdeb gorau. Mae hyn yn cymryd mwy o amser, ond yn cynyddu\'r tebygolrwydd o gael pwyntiau sydd â chywirdeb gwell.</string>
     <string name="reset_app_summary">Bydd hwn yn ailosod yr ap, yn dileu unrhyw osodiadau, yn dileu ffeiliau GPSLogger, a diddymu\'r caniatadau sydd wedi cael eu rhoi i\'r ap yma. Bydd yr holl ddata yn cael ei golli!</string>
+    <string name="filter_passiv_location_title">Filter passive locations</string>
+    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
 </resources>
