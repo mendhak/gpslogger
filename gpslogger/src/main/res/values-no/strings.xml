@@ -272,6 +272,5 @@
     <string name="kilometers"> km</string>
     <string name="autoftp_setup_title">FTP</string>
     <string name="sftp_private_key_path">Privat nøkkel</string>
-    <string name="filter_passiv_location_title">Filter passive locations</string>
-    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
+
 </resources>

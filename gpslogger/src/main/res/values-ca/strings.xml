@@ -314,6 +314,5 @@
     <string name="app_theme_setting">Determina com establir el tema clar o fosc de l\'app</string>
     <string name="file_logging_log_time_with_offset_title">Grava el temps amb el desplaçament de la zona horària</string>
     <string name="file_logging_log_time_with_offset_summary">On sigui possible, grava el temps ISO8601 amb desplaçament de la zona horària en comptes de UTC.</string>
-    <string name="filter_passiv_location_title">Filter passive locations</string>
-    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
+
 </resources>

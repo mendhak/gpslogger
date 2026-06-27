@@ -4,6 +4,5 @@
     <!-- general -->
     <!-- Settings activity -->
     <!-- Settings -->
-    <string name="filter_passiv_location_title">Filter passive locations</string>
-    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
+
 </resources>

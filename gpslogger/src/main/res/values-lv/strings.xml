@@ -93,6 +93,5 @@
     <string name="view_log">Žurnāla skats</string>
     <string name="ok">Labi</string>
     <string name="hide">Paslēpt</string>
-    <string name="filter_passiv_location_title">Filter passive locations</string>
-    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
+
 </resources>

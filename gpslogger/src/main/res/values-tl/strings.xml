@@ -265,6 +265,5 @@
     <string name="sftp_validate_accept_host_key">Tanggapin ang host key?</string>
     <string name="txt_starttimestamp_epoch">Simulan ang timestamp (epoch)</string>
     <string name="txt_battery">Batterya</string>
-    <string name="filter_passiv_location_title">Filter passive locations</string>
-    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
+
 </resources>

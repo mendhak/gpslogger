@@ -389,6 +389,5 @@ une plus grande précision à basses fréquences.    </string>
     <string name="log_customurl_discard_offline_locations_summary">Enregistrer les emplacements sur une URL personnalisée uniquement lorsqu\'une connexion réseau est disponible (n\'affecte pas l\'envoi automatique)</string>
     <string name="retry_get_best_possible_accuracy_summary">Au lieu d\'enregistrer le premier point précis, continuez d\'essayer pendant la durée de précision et sélectionnez le point avec la meilleure précision. Cela prend plus de temps, mais augmente les chances d\'obtenir des points plus précis.</string>
     <string name="retry_get_best_possible_accuracy_title">Sélectionnez la meilleure précision dans la durée</string>
-    <string name="filter_passiv_location_title">Filter passive locations</string>
-    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
+
 </resources>

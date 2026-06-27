@@ -384,6 +384,5 @@
     <string name="retry_get_best_possible_accuracy_summary">पहले सटीक बिंदु को लॉग करने के बजाय, सटीकता अवधि के लिए प्रयास करते रहें और सर्वोत्तम सटीकता के साथ बिंदु का चयन करें। अधिक समय लगता है, लेकिन अधिक सटीक बिंदुओं की संभावना बढ़ जाती है।</string>
     <string name="txt_speed_kph">गति (किमी/घंटा में):</string>
     <string name="prompt_for_details_when_logging_starts">लॉगिंग शुरू होने पर विवरण के लिए संकेत दें</string>
-    <string name="filter_passiv_location_title">Filter passive locations</string>
-    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
+
 </resources>

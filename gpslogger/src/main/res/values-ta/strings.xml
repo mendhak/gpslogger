@@ -395,6 +395,5 @@
     <string name="autosend_wifionly_summary">எந்தவொரு பிணையக் கோரிக்கைகளையும் செய்வதற்கு முன் வைஃபை இணைப்புக்காகக் காத்திருங்கள். அனுப்புதல் மற்றும் உள்நுழைவு உள்ளிட்ட அனைத்து கோரிக்கைகளுக்கும் பொருந்தும்.</string>
     <string name="only_log_if_significant_motion_title">குறிப்பிடத் தக்க இயக்கம் இருந்தால் மட்டுமே பதிவு</string>
     <string name="only_log_if_significant_motion_summary">நடைபயிற்சி, பைக்கிங், வாகனம் ஓட்டுதல் போன்ற குறிப்பிடத்தக்க செயல்பாடு கண்டறியப்பட்டால் மட்டுமே பதிவு. குறிப்பிடத்தக்க இயக்கம் உங்கள் OS ஆல் தீர்மானிக்கப்படுகிறது.</string>
-    <string name="filter_passiv_location_title">Filter passive locations</string>
-    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
+
 </resources>

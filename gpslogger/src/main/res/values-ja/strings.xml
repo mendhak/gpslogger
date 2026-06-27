@@ -393,6 +393,5 @@
     <string name="autosend_wifionly_summary">ネットワーク・リクエストの実施前にWiFi接続の確立を待ちます。 送信・ログを含む全てのリクエストに適用されます。</string>
     <string name="only_log_if_significant_motion_title">大きな動きの変化があった場合だけ記録する</string>
     <string name="only_log_if_significant_motion_summary">歩行、自転車・自動車の運転など、著しい動作が検出された場合だけログを記録します。 有効な動作かはOS側で判断されます。</string>
-    <string name="filter_passiv_location_title">Filter passive locations</string>
-    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
+
 </resources>
