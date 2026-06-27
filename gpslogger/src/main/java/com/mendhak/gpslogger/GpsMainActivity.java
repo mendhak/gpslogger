@@ -846,6 +846,7 @@ public class GpsMainActivity extends AppCompatActivity
 
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.pref_autosend_title, R.string.pref_autosend_summary, R.drawable.autosend, 1003));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.log_customurl_setup_title, null, R.drawable.customurlsender, 1020));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.http_file_upload_setup_title, null, R.drawable.customurlsender, 1021));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.log_dawarich_setup_title, null, R.drawable.dawarichsender, 1021));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.dropbox_setup_title, null, R.drawable.dropbox, 1005));
         materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.google_drive_setup_title, null, R.drawable.googledrive, 1011));
@@ -858,8 +859,13 @@ public class GpsMainActivity extends AppCompatActivity
 
         materialDrawer.addItem(new DividerDrawerItem());
 
-        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newPrimary(R.string.menu_faq, null, R.drawable.helpfaq, 9000));
-        materialDrawer.addStickyFooterItem(GpsLoggerDrawerItem.newPrimary(R.string.menu_exit, null, R.drawable.exit, 9001));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.menu_faq, null, R.drawable.helpfaq, 9000));
+        materialDrawer.addItem(GpsLoggerDrawerItem.newPrimary(R.string.menu_exit, null, R.drawable.exit, 9001));
+
+        // Just adding some space
+        materialDrawer.addItem(new DividerDrawerItem());
+        materialDrawer.addItem(new DividerDrawerItem());
+        materialDrawer.addItem(new DividerDrawerItem());
 
 
         materialDrawer.setOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -908,6 +914,9 @@ public class GpsMainActivity extends AppCompatActivity
                         break;
                     case 1021:
                         launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.DAWARICH);
+                        break;
+                    case 1021:
+                        launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPFILEUPLOAD);
                         break;
                     case 9000:
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://gpslogger.app")));
@@ -1235,6 +1244,7 @@ public class GpsMainActivity extends AppCompatActivity
                 return true;
             case R.id.mnuAutoSendNow:
                 forceAutoSendNow();
+                return true;
             case R.id.mnuOwnCloud:
                 uploadToOwnCloud();
                 return true;
@@ -1243,6 +1253,9 @@ public class GpsMainActivity extends AppCompatActivity
                 return true;
             case R.id.mnuCustomUrl:
                 uploadToCustomURL();
+                return true;
+            case R.id.mnuHttpFileUpload:
+                uploadToHttpFileUpload();
                 return true;
             default:
                 return true;
@@ -1254,8 +1267,12 @@ public class GpsMainActivity extends AppCompatActivity
         LOG.debug("User forced an auto send");
 
         if (preferenceHelper.isAutoSendEnabled()) {
-            Dialogs.progress(this, getString(R.string.autosend_sending));
-            EventBus.getDefault().post(new CommandEvents.AutoSend(null));
+            if (FileSenderFactory.getAvailableFileAutoSenders().isEmpty()) {
+                launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);
+            } else {
+                Dialogs.progress(this, getString(R.string.autosend_sending));
+                EventBus.getDefault().post(new CommandEvents.AutoSend(null));
+            }
 
         } else {
             launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.UPLOAD);
@@ -1323,6 +1340,15 @@ public class GpsMainActivity extends AppCompatActivity
         }
 
         showFileListDialog(FileSenderFactory.getCustomUrlSender());
+    }
+
+    private void uploadToHttpFileUpload(){
+        if(!FileSenderFactory.getHttpFileUploadSender().isAvailable()){
+            launchPreferenceScreen(MainPreferenceActivity.PREFERENCE_FRAGMENTS.HTTPFILEUPLOAD);
+            return;
+        }
+
+        showFileListDialog(FileSenderFactory.getHttpFileUploadSender());
     }
 
     private void uploadToSFTP(){
@@ -1604,6 +1630,23 @@ public class GpsMainActivity extends AppCompatActivity
 
         if(!upload.success){
             LOG.error(getString(R.string.log_customurl_setup_title)
+                    + "-"
+                    + getString(R.string.upload_failure));
+
+            if(userInvokedUpload){
+                Dialogs.showError(getString(R.string.sorry), getString(R.string.upload_failure), upload.message, upload.throwable, this);
+                userInvokedUpload = false;
+            }
+        }
+    }
+
+    @EventBusHook
+    public void onEventMainThread(UploadEvents.HttpFileUpload upload){
+        LOG.debug("HTTP File Upload Event completed, success: " + upload.success);
+        Dialogs.hideProgress();
+
+        if(!upload.success){
+            LOG.error(getString(R.string.http_file_upload_setup_title)
                     + "-"
                     + getString(R.string.upload_failure));
 

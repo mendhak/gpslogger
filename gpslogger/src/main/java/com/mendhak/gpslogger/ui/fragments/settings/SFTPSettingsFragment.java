@@ -180,7 +180,6 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
                     .fields(
                             Input.plain(PreferenceNames.SFTP_PASSWORD)
                                     .text(preferenceHelper.getSFTPPassword())
-                                    .showPasswordToggle()
                                     .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     ).show(this, PreferenceNames.SFTP_PASSWORD);
         }
@@ -189,7 +188,6 @@ public class SFTPSettingsFragment extends PreferenceFragmentCompat
                     .fields(
                             Input.plain(PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE)
                                     .text(preferenceHelper.getSFTPPrivateKeyPassphrase())
-                                    .showPasswordToggle()
                                     .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     ).show(this, PreferenceNames.SFTP_PRIVATE_KEY_PASSPHRASE);
         }

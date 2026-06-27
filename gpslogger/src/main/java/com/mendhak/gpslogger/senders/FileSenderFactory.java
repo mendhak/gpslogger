@@ -28,6 +28,7 @@ import com.mendhak.gpslogger.senders.dropbox.DropBoxManager;
 import com.mendhak.gpslogger.senders.email.AutoEmailManager;
 import com.mendhak.gpslogger.senders.ftp.FtpManager;
 import com.mendhak.gpslogger.senders.googledrive.GoogleDriveManager;
+import com.mendhak.gpslogger.senders.http.HttpFileUploadManager;
 import com.mendhak.gpslogger.senders.opengts.OpenGTSManager;
 import com.mendhak.gpslogger.senders.osm.OpenStreetMapManager;
 import com.mendhak.gpslogger.senders.owncloud.OwnCloudManager;
@@ -79,6 +80,10 @@ public class FileSenderFactory {
 
     public static FileSender getCustomUrlSender(){
         return new CustomUrlManager(PreferenceHelper.getInstance());
+    }
+
+    public static FileSender getHttpFileUploadSender() {
+        return new HttpFileUploadManager(PreferenceHelper.getInstance());
     }
 
     public static FileSender getDawarichSender() {
@@ -171,6 +176,8 @@ public class FileSenderFactory {
                 return getSFTPSender();
             case FileSender.SenderNames.CUSTOMURL:
                 return getCustomUrlSender();
+            case FileSender.SenderNames.HTTPFILEUPLOAD:
+                return getHttpFileUploadSender();
             default:
                 return null;
 
@@ -188,11 +195,12 @@ public class FileSenderFactory {
             senders.add(getOwnCloudSender());
             senders.add(getSFTPSender());
             senders.add(getCustomUrlSender());
+            senders.add(getHttpFileUploadSender());
             senders.add(getDawarichSender());
         return senders;
     }
 
-    private static List<FileSender> getAvailableFileAutoSenders() {
+    public static List<FileSender> getAvailableFileAutoSenders() {
 
         List<FileSender> senders = new ArrayList<>();
 
@@ -230,6 +238,10 @@ public class FileSenderFactory {
 
         if(getCustomUrlSender().isAutoSendAvailable()){
             senders.add(getCustomUrlSender());
+        }
+
+        if(getHttpFileUploadSender().isAutoSendAvailable()){
+            senders.add(getHttpFileUploadSender());
         }
 
         if(getDawarichSender().isAvailable()){

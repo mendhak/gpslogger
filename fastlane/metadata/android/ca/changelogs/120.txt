@@ -1,0 +1,7 @@
+* Estat de càrrega de la bateria en URL personalitzada (%ISCHARGING) i CSV (battery_charging)
+* Si l'enviament d'OSM automàtic està activat, ara se li demanarà als detalls de la traça OSM a l'inici, i carrega
+* Capacitat per eliminar fitxers (en el registre, avançat).
+* Registre GPX 1.1, afegit gpxtpx: velocitat i gpxtpx: extensions de suport
+* Dropbox ha actualitzat el seu mètode d'autenticació
+* Bugfix: s'han carregat diversos fitxers si el nom s'ha contingut en altres codis de barres
+* Traduccions actualitzades

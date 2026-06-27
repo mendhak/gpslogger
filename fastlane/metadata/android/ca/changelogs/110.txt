@@ -1,0 +1,6 @@
+* En Android 10+, el flux de treball de permisos ara demanarà el permis "permetre tot el temps" 
+* El flux de treball de permisos també sol·licitarà la desactivació de l'optimització de la bateria
+* El flux de treball de permisos és molest, ho sento, és necessari ajudar amb nombroses sol·licituds de suport relacionades amb les limitacions de fons.
+* Icones adaptades, gràcies a @kanru
+* S'ha afegit una opció per restablir l'aplicació (esborra tots els fitxers i permisos per a l'aplicació), a la configuració general
+* Traduccions actualitzades de Crowdin

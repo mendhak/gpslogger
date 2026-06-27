@@ -335,7 +335,7 @@
     <string name="autosend_wifionly_summary">성과하기 전에 WiFi 컨퍼런스를 기다리십시오.</string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignore 배터리 최적화</b> - 배터리 최적화를 줄이기 위해 배경에서 실행할 수 있도록이 응용 프로그램을 허용한다. ]]></string>
     <string name="log_customurl_discard_offline_locations_summary">네트워크 연결 네트워크에서 사용할 수있는 동안 사용자 정의 urly로 로그 위치 (보류에 영향을주지 않음) 서명)</string>
-    <string name="gpslogger_permissions_rationale_message_notification">&lt;![CDATA[&lt;b&gt;Notifications&lt;/b&gt; - 알림을 표시할 수 있도록, 이것은 로깅 서비스를 살아있게 유지하는 데 도움이됩니다. ]&gt;</string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notifications</b> - 알림을 표시할 수 있도록, 이것은 로깅 서비스를 살아있게 유지하는 데 도움이됩니다. ]]></string>
     <string name="passive_filter_time_summary">최소 수집 간격을 조정하여 중복 수동 위치 업데이트 감소 (초).</string>
     <string name="file_logging_log_time_with_offset_summary">Wheers는 UTC 대신 팀존 오프셋으로 ISO8601 시간을 게시했습니다.</string>
     <string name="log_plain_text_decimal_comma">점 (대상) 대신 십진수 분리기로 쉼표 ()를 사용하십시오.</string>

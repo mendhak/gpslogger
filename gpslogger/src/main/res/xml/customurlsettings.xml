@@ -68,5 +68,14 @@
         android:title="@string/ssl_certificate_validate"
         app:iconSpaceReserved="false" />
 
+    <Preference
+        android:key="custom_url_batch_size"
+        android:title="@string/customurl_autosend_batch_size"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:key="custom_url_sleep_ms"
+        android:title="@string/customurl_autosend_sleep"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>

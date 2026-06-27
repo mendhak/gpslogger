@@ -124,7 +124,6 @@ public class OwnCloudSettingsFragment
                     .fields(
                             Input.plain(PreferenceNames.OWNCLOUD_PASSWORD)
                                     .text(preferenceHelper.getOwnCloudPassword())
-                                    .showPasswordToggle()
                                     .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                         )
                     .show(this, PreferenceNames.OWNCLOUD_PASSWORD);
