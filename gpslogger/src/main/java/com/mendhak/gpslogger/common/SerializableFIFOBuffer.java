@@ -19,13 +19,14 @@
 
 package com.mendhak.gpslogger.common;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import com.mendhak.gpslogger.senders.dawarich.DawarichManager;
 import org.slf4j.Logger;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.util.ArrayDeque;
-import java.util.Queue;
 
 /**
  * Generic FIFO Buffer with file persistence
@@ -40,22 +41,25 @@ public class SerializableFIFOBuffer<T extends Serializable> {
 
     public SerializableFIFOBuffer(String filePath) throws IOException{
         persistenceFile = new File(filePath);
-        if (persistenceFile.exists()) {
+        if (persistenceFile.exists() && persistenceFile.isFile() && persistenceFile.length() > 0) {
             loadFromFile();
         }
         else {
-            if (!persistenceFile.createNewFile()) {
-                throw new IOException("Persistence file for buffer could not be created");
+            if(!(persistenceFile.exists() && persistenceFile.isFile())) {
+                if (!persistenceFile.createNewFile()) {
+                    throw new IOException("Persistence file for buffer could not be created");
+                }
+                LOG.info("Persistence file for FIFO-buffer is empty");
             }
         }
     }
 
-    public synchronized void push(T data) throws IOException {
+    public synchronized void push(T data) {
         buffer.offer(data);
         persistBuffer();
     }
 
-    public synchronized T pop() throws IOException {
+    public synchronized T pop() {
         T data = buffer.poll();
         if (data != null) {
             persistBuffer();
@@ -71,30 +75,27 @@ public class SerializableFIFOBuffer<T extends Serializable> {
         return buffer.size();
     }
 
-    private void persistBuffer() throws IOException {
-        try {
-            FileOutputStream file = new FileOutputStream(persistenceFile);
-            ObjectOutputStream out = new ObjectOutputStream(file);
-            out.writeObject(buffer);
-            out.close();
-            file.close();
+    private void persistBuffer() {
+        try (FileWriter fw = new FileWriter(persistenceFile)) {
+
+            Gson gson = new Gson();
+            String jsonBuffer = gson.toJson(buffer);
+            fw.write(jsonBuffer);
+
         } catch (IOException ex) {
-            LOG.error("IOException while persisting Fifo-Buffer object");
+            LOG.error("IOException while persisting Fifo-Buffer object: {}", ex.getMessage());
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private void loadFromFile() throws IOException {
-        try {
-            FileInputStream file = new FileInputStream(persistenceFile);
-            ObjectInputStream in = new ObjectInputStream(file);
-            buffer = (ArrayDeque<T>) in.readObject();
-            in.close();
-            file.close();
+    private void loadFromFile() {
+        try (FileReader reader = new FileReader(persistenceFile)) {
+
+            Gson gson = new Gson();
+            Type dequeTyp = new TypeToken<ArrayDeque<SerializableLocation>>() {}.getType();
+            buffer = gson.fromJson(reader, dequeTyp);
+
         } catch (IOException ex) {
-            LOG.error("IOException while loading Fifo-Buffer object");
-        } catch (ClassNotFoundException ex) {
-            LOG.error("The requested class to cast to wasn't found");
+            LOG.error("IOException while loading Fifo-Buffer object: {}", ex.getMessage());
         }
     }
 }

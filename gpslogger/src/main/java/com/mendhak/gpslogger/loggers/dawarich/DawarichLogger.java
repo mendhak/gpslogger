@@ -9,13 +9,10 @@ import java.io.IOException;
 
 public class DawarichLogger implements FileLogger {
 
-    private final String name = "DAWARICH";
-    private final String filepath;
     private final SerializableFIFOBuffer<SerializableLocation> buffer;
 
     public DawarichLogger (String persistenceFilePath) throws IOException {
-        this.filepath = persistenceFilePath;
-        this.buffer = new SerializableFIFOBuffer<SerializableLocation>(this.filepath + "/buffer.bin");
+        this.buffer = new SerializableFIFOBuffer<>(persistenceFilePath + "/buffer.json");
     }
 
     @Override
@@ -44,6 +41,6 @@ public class DawarichLogger implements FileLogger {
 
     @Override
     public String getName() {
-        return name;
+        return "DAWARICH";
     }
 }
