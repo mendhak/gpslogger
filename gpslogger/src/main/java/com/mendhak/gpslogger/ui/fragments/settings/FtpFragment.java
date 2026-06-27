@@ -141,7 +141,6 @@ public class FtpFragment
                     .fields(
                             Input.plain(PreferenceNames.FTP_PASSWORD)
                                     .text(preferenceHelper.getFtpPassword())
-                                    .showPasswordToggle()
                                     .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     ).show(this, PreferenceNames.FTP_PASSWORD);
             return true;

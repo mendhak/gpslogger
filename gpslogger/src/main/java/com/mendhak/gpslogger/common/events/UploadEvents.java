@@ -105,4 +105,6 @@ public class UploadEvents {
         public String fingerprint;
         public String hostKey;
     }
+
+    public static class HttpFileUpload extends BaseUploadEvent {}
 }

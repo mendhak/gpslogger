@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:title="@string/pref_performance_title">
@@ -102,12 +102,19 @@
         android:title="@string/absolute_timeout_title"
         app:iconSpaceReserved="false" />
 
-        
+
     <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="only_log_if_significant_motion"
         android:title="@string/only_log_if_significant_motion_title"
         android:summary="@string/only_log_if_significant_motion_summary"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:defaultValue="0"
+        android:key="significant_motion_bypass_interval"
+        android:title="@string/significant_motion_bypass_interval_title"
+        android:summary="@string/significant_motion_bypass_interval_summary"
         app:iconSpaceReserved="false" />
 
     <PreferenceCategory
