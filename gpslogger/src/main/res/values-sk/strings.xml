@@ -141,7 +141,7 @@ vyššiu presnosť s nízkymi frekvenciami.
     <string name="please_wait">Prosím čakajte</string>
     <string name="autoemail_target">Cieľové e-mailové adresy</string>
     <string name="autosend_frequency_display">Po %s minútach</string>
-    <string name="autoemail_frequency_whenistop">Pri stlačení tlačidla STOP</string>
+    <string name="autoemail_frequency_whenistop">Pri stlačení tlačidla Stop</string>
     <string name="autoemail_smtp_category">Nastavenia e-mailu</string>
     <string name="autoemail_username_summary">Meno používateľa pre e-mailovú schránku</string>
     <string name="autoemail_password_summary">Heslo pre e-mailovú schránku</string>
@@ -349,8 +349,8 @@ polia.
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Umiestnenie zariadenia</b> - Toto oprávnenie umožňuje čítanie údajov o lokalite z vysielačov mobilného signálu a z hardvéru pre GPS.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Povoliť vždy</b> - umožní aplikácii získavať aktualizácie polohy aj vtedy, keď beží na pozadí. ]]></string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorovať optimalizácie batérie</b> - umožní aplikácii fungovanie na pozadí, znížením optimalizácií batérie.]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Odmietli ste udeliť jedno alebo niekoľko oprávnení, ktoré vyžaduje táto aplikácia. Na udelenie týchto oprávnení budete musieť prejsť na obrazovku s nastaveniami aplikácie. <br /><br />Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. ]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorovať optimalizácie batérie</b> - umožní aplikácii fungovanie na pozadí, znížením optimalizácií batérie. ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["Odmietli ste udeliť jedno alebo niekoľko oprávnení, ktoré vyžaduje táto aplikácia. Na udelenie týchto oprávnení budete musieť prejsť na obrazovku s nastaveniami aplikácie, alebo spustiť aplikáciu znovu.  <br><br>Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Pre fungovanie aplikácie GPSLogger na pozadí, je potrebné udeliť jej dodatočné oprávnenie. Na nasledujúcej obrazovke prosím vyberte:]]></string>
     <string name="privacy_policy">Politika ochrany osobných údajov</string>
     <string name="debuglog_attach_to_email">Pripojiť k e-mailu aj záznam pre ladenie</string>
@@ -413,4 +413,15 @@ polia.
     <string name="autosend_wifionly_summary">Čakať na WiFi pripojenie pred vykonaním sieťových požiadaviek. Týka sa všetkých požiadaviek, aj odosielania a zaznamenávania.</string>
     <string name="only_log_if_significant_motion_title">Zaznamenávať len pri výraznom pohybe</string>
     <string name="only_log_if_significant_motion_summary">Zaznamenávať len pri výraznej aktivite, ako je kráčanie, jazda. Významnosť pohybu určuje váš OS.</string>
+    <string name="customurl_autosend_batch_size_summary">Počet požiadaviek pred prestávkou.</string>
+    <string name="significant_motion_bypass_interval_title">Rozšírený interval pre srdcový tep pri nulovom pohybe</string>
+    <string name="significant_motion_bypass_interval_summary">Počas rozšírených období bez výrazného pohybu sa náhodne ignoruje výsledok kontroly a zaznamená sa srdcový tep bez ohľadu na interval. Hodnota menšia ako 1 deaktivuje interval.</string>
+    <string name="time_in_minutes_dialog_title">Čas v minútach</string>
+    <string name="http_file_upload_setup_title">Odoslanie súboru cez HTTP</string>
+    <string name="autosend_httpfileupload_summary">Odosielať súbory na ľubovoľnú adresu URL, s použitím HTTP POST alebo PUT.</string>
+    <string name="http_file_upload_body_type">Kódovanie</string>
+    <string name="http_file_upload_http_headers">Hlavičky HTTP</string>
+    <string name="customurl_autosend_batch_size">Veľkosť dávky pre automatické odoslanie</string>
+    <string name="customurl_autosend_sleep">Oneskorenie uspania automatického odoslania</string>
+    <string name="customurl_autosend_sleep_summary">Oneskorenie v milisekundách medzi dávkami.</string>
 </resources>
