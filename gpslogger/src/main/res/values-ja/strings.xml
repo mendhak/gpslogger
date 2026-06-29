@@ -295,7 +295,7 @@
     <string name="gpslogger_permissions_rationale_title">必須の権限</string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>位置情報</b> - この権限は基地局やGPSから位置情報を取得するのに必要です。]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>画像/メディア/ファイル</b> - この権限は、ログやテストファイルの書き込みや、アップロードや共有をする際、ファイルのリストを読み込むために必要とされます。このアプリはあなたの写真やメディアファイルにアクセスすることはありません。]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[このアプリの必要とする1つ以上の権限が拒否されています。アプリの設定画面からそれらの権限を許可する必要があるでしょう。<br /><br />もしもそれらの権限を永続的に拒否してしまったとしても、システム設定からリセットできます。]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["このアプリの必要とする1つ以上の権限が拒否されています。アプリの設定画面からそれらの権限を許可する必要があるでしょう。<br><br>もしもそれらの権限を永続的に拒否してしまったとしても、システム設定からリセットできます。 "]]></string>
     <string name="privacy_policy">プライバシーポリシー</string>
     <string name="debuglog_attach_to_email">デバッグ用ログをメールに添付する</string>
     <string name="debuglog_attach_to_email_summary">デバッグログの他に診断結果を添付する</string>
@@ -326,7 +326,7 @@
     <string name="gpslogger_custom_path_need_permission">GPSLoggerで任意のパスを使用するには、次の画面でGPSLoggerが全てのファイルを管理できるようにして下さい。 その後で再度アクションを実行してみて下さい。 これはAndroid 11以降の制限のため必要です。</string>
     <string name="storage_chooser_internal_storage_text">内部ストレージ</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[このアプリが正しく機能するためには、様々なパーミッションが必要です。 これから何度も様々な許可を求めるプロンプトが表示されます（申し訳ない）。  それぞれのパーミッションについて説明します。 ]]></string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>バッテリー最適化を無効化</b> - バッテリーの最適化を無効化して、このアプリのバックグラウンド実行を許可します。]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>バッテリー最適化を無効化</b> - バッテリーの最適化を無効化して、このアプリのバックグラウンド実行を許可します。 ]]></string>
     <string name="txt_speed_kph">速度(km/h):</string>
     <string name="log_plain_text_csv_advanced_title">CSV 出力設定</string>
     <string name="log_plain_text_csv_field_delimiter">CSV 項目のデリミタ</string>
@@ -354,9 +354,9 @@
     <string name="listeners_gps">GPS</string>
     <string name="properties_file_url">PropertiesファイルのURL</string>
     <string name="profile_add_from_url">元のURL</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>常に許可</b> - このアプリがバックグラウンドで動作しているとき位置情報の更新受け取りを許可します。]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>常に許可</b> - このアプリがバックグラウンドで動作しているとき位置情報の更新受け取りを許可します。 ]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[GPSLoggerがバックグラウンドで実行できるように、追加の許可を与える必要があります。  次の画面で選択してください: ]]></string>
-    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>通知</b> - 通知の表示を許可、ロギングサービスの維持に役立ちます。]]></string>
+    <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>通知</b> - 通知の表示を許可、ロギングサービスの維持に役立ちます。 ]]></string>
     <string name="autoftp_ssltls">SSL/TLS</string>
     <string name="storage_chooser_select_folder">選択</string>
     <string name="retry_get_best_possible_accuracy_title">期間中で最も高精度なものを選択</string>
@@ -393,4 +393,15 @@
     <string name="autosend_wifionly_summary">ネットワーク・リクエストの実施前にWiFi接続の確立を待ちます。 送信・ログを含む全てのリクエストに適用されます。</string>
     <string name="only_log_if_significant_motion_title">大きな動きの変化があった場合だけ記録する</string>
     <string name="only_log_if_significant_motion_summary">歩行、自転車・自動車の運転など、著しい動作が検出された場合だけログを記録します。 有効な動作かはOS側で判断されます。</string>
+    <string name="customurl_autosend_batch_size">自動送信バッチサイズ</string>
+    <string name="customurl_autosend_batch_size_summary">一時停止の上限リクエスト数。</string>
+    <string name="customurl_autosend_sleep">自動送信スリープ遅延</string>
+    <string name="customurl_autosend_sleep_summary">バッチ遅延のミリ秒間隔。</string>
+    <string name="significant_motion_bypass_interval_title">心拍なし間隔の延長</string>
+    <string name="significant_motion_bypass_interval_summary">大きな変動が長時間にわたり無い場合には、チェックを時々この間隔に基づきスキップしつつ心拍数を記録する場合があります。１分未満の値を設定するとこの間隔機能が無効になります。</string>
+    <string name="time_in_minutes_dialog_title">分</string>
+    <string name="http_file_upload_setup_title">HTTPファイルアップロード</string>
+    <string name="autosend_httpfileupload_summary">HTTPのPOSTやPUTを使用し任意のURLへファイルをアップロードします。</string>
+    <string name="http_file_upload_body_type">エンコーディング</string>
+    <string name="http_file_upload_http_headers">HTTPヘッダ</string>
 </resources>
