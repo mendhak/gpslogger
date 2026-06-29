@@ -351,9 +351,9 @@
     <string name="storage_chooser_text_field_error">Pusta nazwa folderu</string>
     <string name="profile_add_from_url">Z adresu URL</string>
     <string name="properties_file_url">Adres URL pliku właściwości</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b>Zezwalaj cały czas</b> – Zezwól tej aplikacji na otrzymywanie aktualizacji lokalizacji, gdy działa w tle.</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ignoruj optymalizację baterii</b> - Pozwól tej aplikacji działać w tle, ograniczając optymalizację baterii.</string>
-    <string name="gpslogger_permissions_background_location">Aby GPSLogger mógł działać w tle, należy nadać mu dodatkowe uprawnienie. Na następnym ekranie proszę wybrać:</string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Zezwalaj cały czas</b> – Zezwól tej aplikacji na otrzymywanie aktualizacji lokalizacji, gdy działa w tle.]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignoruj optymalizację baterii</b> - Pozwól tej aplikacji działać w tle, ograniczając optymalizację baterii.]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Aby GPSLogger mógł działać w tle, należy nadać mu dodatkowe uprawnienie. Na następnym ekranie proszę wybrać:]]></string>
     <string name="sftp_setup_title">Serwer SFTP</string>
     <string name="reset_app_title">Resetowanie aplikacji</string>
     <string name="logging_advanced_delete_files">Usuń wybrane pliki</string>
@@ -368,7 +368,7 @@
     <string name="log_customurl_summary_detailed">Wysyła żądanie do niestandardowego adresu URL za każdym razem, gdy zostanie przechwycony punkt lokalizacji. Zależy od interwału logowania.</string>
     <string name="autosend_customurl_summary">(Ta funkcja umożliwia rejestrowanie CSV) Wysyła masowo żądania do niestandardowego adresu URL, po jednym dla każdej linii w pliku CSV. Zależy od interwału automatycznego wysyłania.</string>
     <string name="gpslogger_custom_path_need_permission">Aby użyć niestandardowych ścieżek w GPSLogger, proszę zezwolić GPSLogger na zarządzanie wszystkimi plikami na następnym ekranie. Następnie spróbuj wykonać czynność ponownie. Jest to wymagane ze względu na ograniczenie systemu Android 11+.</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Ta aplikacja wymaga różnych uprawnień, aby działać poprawnie. Zostaniesz teraz wielokrotnie poproszony o różne pozwolenia (przepraszam). Poniżej znajduje się wyjaśnienie każdego pozwolenia.</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ta aplikacja wymaga różnych uprawnień, aby działać poprawnie. Zostaniesz teraz wielokrotnie poproszony o różne pozwolenia (przepraszam). Poniżej znajduje się wyjaśnienie każdego pozwolenia.]]></string>
     <string name="reset_app_summary">Spowoduje to zresetowanie aplikacji, usunięcie wszelkich ustawień, usunięcie plików GPSLogger i cofnięcie uprawnień przyznanych tej aplikacji. Wszystkie dane zostaną utracone!</string>
     <string name="file_logging_log_time_with_offset_summary">Tam, gdzie to możliwe, zapisz czas ISO8601 z przesunięciem strefy czasowej zamiast UTC.</string>
     <string name="install_conscrypt_provider_summary">Jeśli napotykasz problemy z łącznością SSL/TLS na starszych urządzeniach z Androidem, zainstalowanie Conscrypt Provider może pomóc. (Podążaj za tym linkiem, zainstaluj APK, a następnie zrestartuj aplikację)</string>
@@ -390,5 +390,4 @@
     <string name="retry_get_best_possible_accuracy_summary">Zamiast rejestrować pierwszy dostępny punkt, próbuj przez cały czas i wybierz punkt o najlepszej dokładności. Trwa to dłużej, ale zwiększa szanse na dokładniejsze punkty.</string>
     <string name="prompt_for_details_when_logging_starts">Monit o szczegóły po rozpoczęciu rejestrowania</string>
     <string name="txt_speed_kph">Prędkość (w km/h):</string>
-
 </resources>

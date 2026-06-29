@@ -360,10 +360,10 @@
     <string name="storage_chooser_text_field_error">Tên thự mục trống</string>
     <string name="storage_chooser_text_field_hint">Tên thư mục</string>
     <string name="properties_file_url">URL tệp thuộc tính</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Ứng dụng này yêu cầu nhiều quyền khác nhau để có thể hoạt động bình thường. Bây giờ bạn sẽ được nhắc nhiều lần cho nhiều quyền khác nhau (xin lỗi). Dưới đây là giải thích cho mỗi quyền.</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b>Luôn cho phép</b> - Cho phép ứng dụng này nhận cập nhật vị trí khi chạy trong nền.</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Bỏ qua tối hư hoá pin</b> - Cho phép ứng dụng này chạy trong nền bằng cách giảm tối ưu hoá pin.</string>
-    <string name="gpslogger_permissions_background_location">Để cho phép GPSLogger chạy trong nền, bạn sẽ cần phải cấp cho nó một quyền bổ sung. Trong màn hình tiếp theo, hãy chọn:</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Ứng dụng này yêu cầu nhiều quyền khác nhau để có thể hoạt động bình thường. Bây giờ bạn sẽ được nhắc nhiều lần cho nhiều quyền khác nhau (xin lỗi). Dưới đây là giải thích cho mỗi quyền.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Luôn cho phép</b> - Cho phép ứng dụng này nhận cập nhật vị trí khi chạy trong nền.]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Bỏ qua tối hư hoá pin</b> - Cho phép ứng dụng này chạy trong nền bằng cách giảm tối ưu hoá pin.]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Để cho phép GPSLogger chạy trong nền, bạn sẽ cần phải cấp cho nó một quyền bổ sung. Trong màn hình tiếp theo, hãy chọn:]]></string>
     <string name="txt_battery_charging">Đang sạc</string>
     <string name="app_theme_title">Chủ đề ứng dụng</string>
     <string name="app_theme_follow_system">Theo hệ thống</string>
@@ -380,5 +380,4 @@
     <string name="retry_get_best_possible_accuracy_summary">Thay vì ghi ngay vào nhật ký điểm chính xác đầu tiên có được thì cố thử tìm điểm chính xác nhất. Việc này sẽ mất thời gian hơn, nhưng gia tăng xác xuất có các điểm chính xác hơn.</string>
     <string name="retry_get_best_possible_accuracy_title">Chọn điểm chính xác nhất trong khoảng thời gian</string>
     <string name="log_customurl_discard_offline_locations">Bỏ qua các vị trí ngoại tuyến</string>
-
 </resources>
