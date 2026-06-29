@@ -212,10 +212,6 @@ dependencies {
     //CSV library
     implementation('org.apache.commons:commons-csv:1.9.0')
 
-    //JSON
-    //implementation("com.github.fasterxml:jackson-core:jackson-core-2.18.2")
-    //implementation("com.fasterxml.jackson.core:jackson-databind:2.22.0")
-
      //Libraries required for unit testing
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:3.10.0'

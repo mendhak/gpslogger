@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 mendhak
+ * Copyright (C) 2026 Jan-NiklasB
  *
  * This file is part of GPSLogger for Android.
  *
