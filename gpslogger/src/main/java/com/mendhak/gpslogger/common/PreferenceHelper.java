@@ -1211,11 +1211,11 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.DAWARICH_BATCH_MIN)
     public Integer getDawarichBatchMin() {
-        return prefs.getInt(PreferenceNames.DAWARICH_BATCH_MIN, 3);
+        return Integer.parseInt(prefs.getString(PreferenceNames.DAWARICH_BATCH_MIN, "3"));
     }
 
     public void setDawarichBatchMin(Integer amount){
-        prefs.edit().putInt(PreferenceNames.DAWARICH_BATCH_MIN, amount).apply();
+        prefs.edit().putString(PreferenceNames.DAWARICH_BATCH_MIN, String.valueOf(amount)).apply();
     }
 
     /**
@@ -1223,11 +1223,11 @@ public class PreferenceHelper {
      */
     @ProfilePreference(name= PreferenceNames.DAWARICH_BATCH_MAX)
     public Integer getDawarichBatchMax() {
-        return prefs.getInt(PreferenceNames.DAWARICH_BATCH_MAX, 10);
+        return Integer.parseInt(prefs.getString(PreferenceNames.DAWARICH_BATCH_MAX, "10"));
     }
 
-    public void setDawarichBatchMax(Integer amount){
-        prefs.edit().putInt(PreferenceNames.DAWARICH_BATCH_MAX, amount).apply();
+    public void setDawarichBatchMax(Integer amount) {
+        prefs.edit().putString(PreferenceNames.DAWARICH_BATCH_MAX, String.valueOf(amount)).apply();
     }
 
 
