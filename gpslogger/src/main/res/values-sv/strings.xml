@@ -251,8 +251,8 @@
     <string name="owncloud_directory_summary">Mapp att använda på ownCloud-servern. Säkerställ att mappen existerar, annars kommer uppladdningen att misslyckas.</string>
     <string name="owncloud_test_summary">Ladda upp en testfil till ownCloud-servern</string>
     <string name="gpslogger_permissions_rationale_title">Behörigheter krävs</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Den här appen kräver olika behörigheter för att fungera korrekt. Du kommer nu att uppmanas flera gånger att tillåta olika behörigheter (förlåt). Här följer en förklaring för varje behörighet.</string>
-    <string name="gpslogger_permissions_rationale_message_location"><b>Plats</b> - Denna behörighet tillåter applikationen att läsa platsdata från mobilmaster och enhetens GPS-hårdvara.</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Den här appen kräver olika behörigheter för att fungera korrekt. Du kommer nu att uppmanas flera gånger att tillåta olika behörigheter (förlåt). Här följer en förklaring för varje behörighet.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Plats</b> - Denna behörighet tillåter applikationen att läsa platsdata från mobilmaster och enhetens GPS-hårdvara.]]></string>
     <string name="no_network_message">Det finns inga tillgängliga nätverk</string>
     <string name="logview_autoscroll">Automatisk rullning</string>
     <string name="profile_create_new">Skapa en ny profil</string>
@@ -267,10 +267,4 @@
     <string name="profile_default">Standardprofil</string>
     <string name="profile_add_new">Lägg till profil</string>
     <string name="donate_app">Donera (app)</string>
-
-
-
-
-
-
 </resources>

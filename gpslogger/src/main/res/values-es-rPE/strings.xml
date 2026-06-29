@@ -275,11 +275,11 @@
     <string name="customurl_http_body">Cuerpo HTTP</string>
     <string name="customurl_http_headers">Encabezados HTTP</string>
     <string name="customurl_http_method">Método HTTP</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b>Permitir todo el tiempo</b> - Permite a la aplicación usar el GPS estando en segundo plano.</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Ignorar optimizaciones de batería</b> - \nPermite la ejecución de la aplicación en segundo plano ignorando optimizaciones de batería.</string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Permitir todo el tiempo</b> - Permite a la aplicación usar el GPS estando en segundo plano.]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorar optimizaciones de batería</b> - \nPermite la ejecución de la aplicación en segundo plano ignorando optimizaciones de batería.]]></string>
     <string name="app_name_release">Registro GPS</string>
     <string name="hide">Ocultar</string>
-    <string name="gpslogger_permissions_background_location">Permite el GPSLogger en segundo plano, concediendo un permiso adicional. En la siguiente pantalla selecciona:</string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Permite el GPSLogger en segundo plano, concediendo un permiso adicional. En la siguiente pantalla selecciona:]]></string>
     <string name="not_applicable">n/a</string>
     <string name="miles_per_hour"> mph</string>
     <string name="miles"> mi</string>
@@ -289,10 +289,4 @@
     <string name="kilometers_per_hour"> km/h</string>
     <string name="log_plain_text_csv_advanced_title">Registrar configuracion de CSV</string>
     <string name="txt_speed_kph">Velocidad (en km/h):</string>
-
-
-
-
-
-
 </resources>

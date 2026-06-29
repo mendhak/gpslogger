@@ -259,13 +259,13 @@
     <string name="profile_default">Proffil Arferol</string>
     <string name="profile_add_new">Ychwanegu proffil</string>
     <string name="gpslogger_permissions_rationale_title">Mae Angen Caniatâd</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Mae angen nifer o fathau gwahanol o ganiatâd ar yr ap hwn er mwyn gweithion yn iawn. Byddech chi nawr yn cael eich gofyn sawl gwaith am wahanol ganiatadau (sori). Dyma esboniad o bob caniatâd.</string>
-    <string name="gpslogger_permissions_rationale_message_location"><b>Lleoliad dyfais</b> - Mae\'r caniatâd hwn yn caniatáu darllen data lleoliad o dyrrau ffôn symudol ac o galedwedd GPS y ddyfais.</string>
-    <string name="gpslogger_permissions_rationale_message_storage"><b>Lluniau, cyfryngau, ffeiliau</b> - Mae\'r caniatâd hwn yn caniatáu ysgrifennu ffeiliau log a ffeiliau prawf i storfa\'r ddyfais, a darllen o restr o ffeiliau i\'w huwchlwytho neu eu rhannu. Ni fydd yr ap hwn yn cyrchu\'ch lluniau na\'ch cyfryngau.</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b>Caniatáu drwy\'r amser</b> - Caniatáu i\'r ap hwn dderbyn diweddariadau lleoliad wrth iddo redeg yn y cefndir.</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Anwybyddu optimeiddio batri</b> - Caniatáu i\'r ap hwn redeg yn y cefndir trwy leihau optimeiddiad y batri.</string>
-    <string name="gpslogger_permissions_permanently_denied">Rydych chi wedi gwadu un neu fwy o\'r caniatadau sydd eu hangen ar yr ap hwn. Bydd angen i chi ail-lansio\'r ap, neu fynd i sgrin gosodiadau\'r system i roi\'r caniatâd hwn. <br/><br/>Os ydych chi wedi gwrthod caniatâd yn barhaol gallwch eu hailosod yng ngosodiadau\'r system.</string>
-    <string name="gpslogger_permissions_background_location">Er mwyn caniatáu i GPSLogger redeg yn y cefndir, bydd angen i chi roi un caniatâd ychwanegol iddo. Ar y sgrin nesaf dewiswch:</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Mae angen nifer o fathau gwahanol o ganiatâd ar yr ap hwn er mwyn gweithion yn iawn. Byddech chi nawr yn cael eich gofyn sawl gwaith am wahanol ganiatadau (sori). Dyma esboniad o bob caniatâd.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Lleoliad dyfais</b> - Mae\'r caniatâd hwn yn caniatáu darllen data lleoliad o dyrrau ffôn symudol ac o galedwedd GPS y ddyfais.]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Lluniau, cyfryngau, ffeiliau</b> - Mae\'r caniatâd hwn yn caniatáu ysgrifennu ffeiliau log a ffeiliau prawf i storfa\'r ddyfais, a darllen o restr o ffeiliau i\'w huwchlwytho neu eu rhannu. Ni fydd yr ap hwn yn cyrchu\'ch lluniau na\'ch cyfryngau.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Caniatáu drwy\'r amser</b> - Caniatáu i\'r ap hwn dderbyn diweddariadau lleoliad wrth iddo redeg yn y cefndir.]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Anwybyddu optimeiddio batri</b> - Caniatáu i\'r ap hwn redeg yn y cefndir trwy leihau optimeiddiad y batri.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Rydych chi wedi gwadu un neu fwy o\'r caniatadau sydd eu hangen ar yr ap hwn. Bydd angen i chi ail-lansio\'r ap, neu fynd i sgrin gosodiadau\'r system i roi\'r caniatâd hwn. <br/><br/>Os ydych chi wedi gwrthod caniatâd yn barhaol gallwch eu hailosod yng ngosodiadau\'r system.]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Er mwyn caniatáu i GPSLogger redeg yn y cefndir, bydd angen i chi roi un caniatâd ychwanegol iddo. Ar y sgrin nesaf dewiswch:]]></string>
     <string name="privacy_policy">Polisi Preifatrwydd</string>
     <string name="debuglog_attach_to_email">Atodi log dadfygio i ebost</string>
     <string name="debuglog_attach_to_email_summary">Yn atodi log dadfygio i ebost ynghyd â rhywfaint o wybodaeth ddiagnostig</string>
@@ -382,10 +382,4 @@
     <string name="retry_get_best_possible_accuracy_title">Dewis y cywirdeb gorau o fewn cyfnod amser</string>
     <string name="retry_get_best_possible_accuracy_summary">Yn lle logio\'r pwynt cywirdeb da cyntaf, parhau am y cyfnod o amser cywirdeb a dewis y pwynt sydd â\'r cywirdeb gorau. Mae hyn yn cymryd mwy o amser, ond yn cynyddu\'r tebygolrwydd o gael pwyntiau sydd â chywirdeb gwell.</string>
     <string name="reset_app_summary">Bydd hwn yn ailosod yr ap, yn dileu unrhyw osodiadau, yn dileu ffeiliau GPSLogger, a diddymu\'r caniatadau sydd wedi cael eu rhoi i\'r ap yma. Bydd yr holl ddata yn cael ei golli!</string>
-
-
-
-
-
-
 </resources>
