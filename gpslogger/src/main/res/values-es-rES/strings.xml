@@ -192,8 +192,8 @@
     <string name="autosend_enabled_summary">Permite enviar los archivos a varios destinos, con una frecuencia definida, o si el nombre cambia debido a un nombre personalizado</string>
     <string name="autosend_frequency_summary">Con qué frecuencia deben enviarse archivos de registro, en minutos. Establecer 0 para desactivarlo.</string>
     <string name="autosend_frequency">¿Con qué frecuencia?</string>
-    <string name="autosend_sendzip_title">Enviar archivo ZIP</string>
-    <string name="autosend_sendzip_summary">Enviar archivo comprimido en formato ZIP. No lo actives para archivos individuales, o si falla por algún motivo</string>
+    <string name="autosend_sendzip_title">Enviar archivo zip</string>
+    <string name="autosend_sendzip_summary">Enviar archivo comprimido en formato zip. No lo actives para archivos individuales, o si falla por algún motivo</string>
     <string name="autosend_targets_category">Destinos de envío automático</string>
     <string name="menu_autosend_now">Probar envío automático ahora</string>
     <string name="autosend_sending">Envío automático</string>
@@ -308,7 +308,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="profile_add_new">Añadir perfil</string>
     <string name="gpslogger_permissions_rationale_title">Se necesitan permisos</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Esta aplicación requiere varios permisos para funcionar correctamente. Ahora se te pedirán varias veces varios permisos (lo siento).  Aquí hay una explicación de cada permiso. ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[No has concedido permiso para alguno de los requisitos de la aplicación.  usted necesitará ir a la configuración de la aplicación para dar estos permisos.  <br /><br />Si los negó permanentemente debe restaurarlos en  la configuración del sistema. ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["No has concedido permiso para alguno de los requisitos de la aplicación.  usted necesitará ir a la configuración de la aplicación para dar estos permisos.  <br><br>Si los negó permanentemente debe restaurarlos en la configuración del sistema. "]]></string>
     <string name="privacy_policy">Política de Privacidad</string>
     <string name="debuglog_attach_to_email">Adjuntar el registro de depuración para correo electrónico</string>
     <string name="debuglog_attach_to_email_summary">Registro de depuración se conecta a un correo electrónico junto con algunos datos diagnóstico</string>
@@ -367,7 +367,7 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="logging_advanced_delete_files">Eliminar archivos seleccionados</string>
     <string name="logging_advanced_delete_files_summary">Mantenga pulsado para seleccionar varios archivos.</string>
     <string name="file_logging_log_time_with_offset_summary">Dónde sea posible, escriba la hora ISO8601 con desplazamiento de zona horaria en lugar de UTC.</string>
-    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba en el almacenamiento, y leer de una lista de archivos para subir o compartir. Esta aplicación no accederá a tus fotos o archivos multimedia]]>.</string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotos, medios, archivos</b> - Este permiso permite escribir archivos de registro y archivos de prueba en el almacenamiento, y leer de una lista de archivos para subir o compartir. Esta aplicación no accederá a tus fotos o archivos multimedia.]]></string>
     <string name="app_theme_dark">Tema oscuro</string>
     <string name="customurl_all_parameters">Todos los parámetros:</string>
     <string name="google_drive_folder_path">Ruta al directorio de Google Drive</string>
@@ -389,4 +389,20 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="started_at">comenzó en</string>
     <string name="hide_notification_from_lock_screen">Ocultar notificaciones de la pantalla de bloqueo</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificaciones</b> - Permite mostrar una notificación, esto ayuda a mantener vivo el servicio de registro. ]]></string>
+    <string name="passive_filter_time_title">Lugares pasivos actualizan intervalo</string>
+    <string name="passive_filter_time_summary">Reduzca las actualizaciones de ubicación pasivas redundantes ajustando el intervalo mínimo de recopilación (en segundos).</string>
+    <string name="customurl_autosend_batch_size_summary">Número de solicitudes antes de una pausa.</string>
+    <string name="customurl_autosend_sleep">Retraso en el envío automático de sueño</string>
+    <string name="customurl_autosend_sleep_summary">Retraso en milisegundos entre lotes.</string>
+    <string name="only_log_if_significant_motion_title">Registrar solo si hay movimiento significativo</string>
+    <string name="time_in_minutes_dialog_title">Tiempo en minutos</string>
+    <string name="http_file_upload_setup_title">Subir archivo HTTP</string>
+    <string name="autosend_httpfileupload_summary">Sube archivos a un URL arbitraria utilizando HTTP POST o PUT.</string>
+    <string name="http_file_upload_body_type">Codificación</string>
+    <string name="http_file_upload_http_headers">Cabeceras de HTTP</string>
+    <string name="autosend_wifionly_summary">Espere una conexión WiFi antes de realizar cualquier solicitud de red. Se aplica a todas las solicitudes incluyendo envío y bitácora.</string>
+    <string name="customurl_autosend_batch_size">Auto‐enviar tamaño de lote</string>
+    <string name="only_log_if_significant_motion_summary">Solo bitácora si es detectadas actividad significante tal como caminar, bicicleta. La moción significante está determinada por su SO.</string>
+    <string name="significant_motion_bypass_interval_title">Intervalo prolongado sin movimiento</string>
+    <string name="significant_motion_bypass_interval_summary">Durante periodos prolongados sin movimiento significativo, ocasionalmente se omite la verificación y se registra el ritmo cardíaco según lo determine este intervalo. Un valor inferior a 1 minuto desactiva el intervalo.</string>
 </resources>

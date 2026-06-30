@@ -1,0 +1,7 @@
+* Cieľ odosielania súboru cez HTTP (separátne od používateľskej adresy URL normálneho zaznamenávača)
+* Nastavenie intervalu pre srdcový tep pri výraznom pohybe; zaznamenať po uplynutí času
+* Oprava- segmenty GPX trasy v jednom súbore neboli správne vytvárané
+* Oprava - zaznamenávali sa nepresné pasívne polohy
+* Oprava - nespustenie nového súboru, ak sa už zaznamenáva do súboru
+* Veľkosť dávky autom. odoslania, nastavenia oneskorenia
+* Bezpečnosť - heslá sa už neukladajú do exportovaného profilu
