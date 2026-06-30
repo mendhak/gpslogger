@@ -377,4 +377,5 @@
     <string name="profile_add_from_url">嚟自 URL</string>
     <string name="profile_switch_before_delete">請先轉去另一個設定檔，然後至刪除呢一個。</string>
     <string name="txt_speed_kph">速度 (時速幾多公里)：</string>
+
 </resources>

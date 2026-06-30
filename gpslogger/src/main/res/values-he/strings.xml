@@ -115,4 +115,5 @@
     <string name="pref_performance_title">ביצועים</string>
     <string name="new_file_creation_summary">האם ליצור קובץ חדש פעם ביום או בכל פעם שתפעיל.</string>
     <string name="new_file_custom_summary">אתה יכול להשתמש בשם הקובץ שלך. אפשר להוסיף כמה פרמטרים דינמיים כמו מספר סידורי, שנה, שעה, דקה וכו\'. ייתכן ששמות קבצים דינמיים מאוד לא יעבדו טוב עם תכונות השליחה האוטומטית מכיוון שהיא שולחת רק את הקובץ האחרון.</string>
+
 </resources>

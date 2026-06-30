@@ -44,4 +44,5 @@
     <string name="meters"> .मिटरहरु</string>
     <string name="error">त्रुटि</string>
     <string name="error_connection">जडान त्रुटि। कृपया आफ्नो फोन सेटिङ जाँच गर्नुहोस्।</string>
+
 </resources>

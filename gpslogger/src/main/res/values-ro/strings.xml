@@ -252,4 +252,5 @@
     <string name="listeners_cell_title">Înregistrează localizarea din rețea</string>
     <string name="log_plain_text_csv_field_delimiter">Separatorul de câmpuri CSV</string>
     <string name="file_logging_log_time_with_offset_summary">Dacă e posibil, scrieți timpul în format ISO8601 cu decalaj de fus orar în loc de UTC.</string>
+
 </resources>

@@ -393,4 +393,5 @@
     <string name="prompt_for_details_when_logging_starts">開始記錄時的提示詳細資訊</string>
     <string name="only_log_if_significant_motion_title">當只有相當程度移動時才記錄</string>
     <string name="only_log_if_significant_motion_summary">當只有偵測到相當程度的活動，如走路、騎單車、開始才會記錄。相當程度的移動會視作業系統而定。</string>
+
 </resources>

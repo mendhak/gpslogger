@@ -31,4 +31,5 @@
     <string name="txt_latitude">緯度:</string>
     <string name="txt_satellites">衛星：</string>
     <string name="btn_start_logging">開始紀錄</string>
+
 </resources>

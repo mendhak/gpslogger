@@ -393,4 +393,5 @@ Nomes de ficheiro muito dinâmicos
     <string name="hide_notification_from_lock_screen">Ocultar notificação da tela de bloqueio</string>
     <string name="prompt_for_details_when_logging_starts">Solicitar detalhes quando o registro for iniciado</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificações</b> - Permite mostrar uma notificação, isso ajuda a manter o serviço de registro ativo. ]]></string>
+
 </resources>
