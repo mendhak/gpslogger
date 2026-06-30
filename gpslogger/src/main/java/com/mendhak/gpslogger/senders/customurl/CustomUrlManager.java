@@ -8,6 +8,7 @@ import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.Systems;
+import com.mendhak.gpslogger.common.network.InternalAddresses;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.csv.CSVFileLogger;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlRequest;
@@ -163,8 +164,8 @@ public class CustomUrlManager extends FileSender {
             put("callbackType", "customurl");
         }};
 
-        Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag);
-
+        boolean requiresNetwork = !InternalAddresses.isInternalUrl(url);
+        Systems.startWorkManagerRequest(CustomUrlWorker.class, dataMap, tag, requiresNetwork);
     }
 
     private String getFormattedTextblock(String textToFormat, SerializableLocation loc) throws Exception {
