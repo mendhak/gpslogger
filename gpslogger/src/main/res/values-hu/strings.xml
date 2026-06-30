@@ -329,7 +329,7 @@
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotók, média, fájlok</b> - Ez a jogosultság lehetővé teszi naplófájlok és tesztfájlok írását a tárolóba, valamint a fájlok listájából való olvasást feltöltés vagy megosztás céljából. Ez az alkalmazás nem fér hozzá a fényképekhez vagy egyéb média fájlokhoz.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Mindig engedélyezve</b> - Engedélyezi az alkalmazásnak, hogy megkapja a helyfrissítéseket, amikor a háttérben fut. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Akkumulátoroptimalizálás figyelmen kívül hagyása</b> - Engedélyezze az alkalmazásnak a háttérben való futását az akkumulátoroptimalizálás csökkentésével. ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Ön megtagadott egy vagy több engedélyt, amelyet az alkalmazás igényel. Engedélyek megadásához újra kell indítani az alkalmazást vagy a rendszerbeállítások képernyőre kell lépnie. <br /><br />Ha véglegesen megtagadta az engedélyeket, visszaállíthatja azokat a rendszerbeállításokban. ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["Ön megtagadott egy vagy több engedélyt, amelyet az alkalmazás igényel.  Engedélyek megadásához újra kell indítani az alkalmazást vagy a rendszerbeállítások képernyőre kell lépnie.  <br><br>Ha véglegesen megtagadta az engedélyeket, visszaállíthatja azokat a rendszerbeállításokban. "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Ahhoz, hogy a GPSLogger a háttérben futhasson, további engedélyeket kell megadnia. Következő képernyőn válassza ki: ]]></string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
@@ -392,4 +392,15 @@
     <string name="autosend_wifionly_summary">Wi-Fi-kapcsolatra várás, mielőtt bármilyen hálózati kérést végrehajtana. Minden kérésre vonatkozik, beleértve a küldést és a naplózást is.</string>
     <string name="only_log_if_significant_motion_title">Csak jelentős mozgás esetén naplózzon</string>
     <string name="only_log_if_significant_motion_summary">Csak akkor naplóz a rendszer, ha jelentős aktivitást észlel, például gyaloglást, kerékpározást, vezetést. A jelentős mozgást az operációs rendszere határozza meg.</string>
+    <string name="customurl_autosend_batch_size">Kötegméret automatikus küldése</string>
+    <string name="customurl_autosend_batch_size_summary">Szünet előtti kérések száma.</string>
+    <string name="customurl_autosend_sleep">Automatikus küldés alvás késleltetés</string>
+    <string name="customurl_autosend_sleep_summary">Kötegek közötti késleltetés milliszekundumban.</string>
+    <string name="significant_motion_bypass_interval_title">Meghosszabbított mozgás nélküli intervallum</string>
+    <string name="significant_motion_bypass_interval_summary">Hosszabb, jelentős mozgás nélküli időszakokban időnként hagyja ki az ellenőrzést, és ennek ellenére készítsen naplót az intervallum által meghatározottak szerint. 1 percnél kisebb érték letiltja az intervallumot.</string>
+    <string name="time_in_minutes_dialog_title">Idő percben</string>
+    <string name="http_file_upload_setup_title">HTTP fájl feltöltés</string>
+    <string name="autosend_httpfileupload_summary">Fájlokat tölt fel egy tetszőleges URL-címre HTTP POST vagy PUT használatával.</string>
+    <string name="http_file_upload_body_type">Kódolás</string>
+    <string name="http_file_upload_http_headers">HTTP fejlécek</string>
 </resources>
