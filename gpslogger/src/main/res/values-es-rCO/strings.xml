@@ -7,7 +7,7 @@
     <string name="title_drawer_uploadsettings">Configuración de carga</string>
     <string name="navigation_drawer_open">Cajón de navegación abierto</string>
     <string name="navigation_drawer_close">Cajón de navegación cerrado</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Configuración de GPSLogger</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>
@@ -381,4 +381,10 @@
     <string name="log_customurl_discard_offline_locations_summary">Registrar localizaciones a una URL personalizada únicamente cuando haya una conexión de red disponible (no afecta el envío automático)</string>
     <string name="install_conscrypt_provider_title">Instalar Conscrypt Provider (SSL/TLS)</string>
     <string name="txt_speed_kph">Velocidad (en km/h):</string>
+
+
+
+
+
+
 </resources>

@@ -20,9 +20,14 @@
 package com.mendhak.gpslogger.common;
 
 import android.location.Location;
+import android.os.Bundle;
+
 import java.io.Serializable;
+import java.util.Date;
 
 public class SerializableLocation implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private double altitude;
     private double accuracy;
@@ -48,6 +53,10 @@ public class SerializableLocation implements Serializable {
     private double distance;
     private String profileName;
     private final String timeWithOffset;
+
+    public SerializableLocation(){
+        timeWithOffset = null;
+    }
 
     public SerializableLocation(Location loc) {
 
@@ -78,7 +87,7 @@ public class SerializableLocation implements Serializable {
 
         fileName = extractExtra(loc, BundleConstants.FILE_NAME);
         profileName = extractExtra(loc, BundleConstants.PROFILE_NAME);
-        timeWithOffset = extractExtra(loc, BundleConstants.TIME_WITH_OFFSET);
+        timeWithOffset = Strings.getIsoDateTimeWithOffset(new Date(loc.getTime()));
     }
 
 

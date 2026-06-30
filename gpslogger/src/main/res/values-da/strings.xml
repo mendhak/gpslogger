@@ -391,7 +391,7 @@ præcision ved lavere frekvenser.    </string>
     <string name="annotation_edit_button_color">Knapfarve</string>
     <string name="prompt_for_details_when_logging_starts">Bed om detaljer, når logningen starter</string>
     <string name="file_logging_log_time_with_offset_summary">Hvor det er muligt, skriv ISO8601-tiden med tidszoneforskydning i stedet for UTC.</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="logging_advanced_delete_files">Slet valgte filer</string>
     <string name="customurl_all_parameters">Alle parametre:</string>
     <string name="install_conscrypt_provider_title">Installér Conscrypt Provider (SSL/TLS)</string>
@@ -399,4 +399,10 @@ præcision ved lavere frekvenser.    </string>
     <string name="install_conscrypt_provider_summary">Hvis du støder på problemer med SSL/TLS-forbindelse på ældre Android-enheder, kan det måske hjælpe at installere Conscrypt Provider. (Følg dette link, installer APK, og genstart derefter appen)</string>
     <string name="annotation_edit_button_label">Rediger annotation knap</string>
     <string name="app_theme_setting">Bestemmer, hvordan det lyse eller mørke app-tema indstilles</string>
+
+
+
+
+
+
 </resources>
