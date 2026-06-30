@@ -403,13 +403,14 @@ public class Systems {
 
     public static class DateTimeUtil {
         /**
-         * API 21 compatible methode to get the current datetime as string with "yyyy-MM-dd_HH:mm:ss" format
+         * API 21 compatible methode to get the current datetime as formatted string
+         * @param pattern String holding the pattern used for formatting
          * @return Current datetime as string
          */
-        public static String currentDateTime() {
+        public static String currentDateTime(String pattern) {
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat(
-                    "yyyy-MM-dd_HH:mm:ss", Locale.getDefault());
+                    pattern, Locale.getDefault());
             return sdf.format(calendar.getTime());
         }
     }

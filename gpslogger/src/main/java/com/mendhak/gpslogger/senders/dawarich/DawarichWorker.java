@@ -37,89 +37,46 @@ public class DawarichWorker extends Worker {
         ArrayDeque<SerializableLocation> buffer = Strings.deserializeFromJson(getInputData().getString("sendBuffer"), dequeTyp);
         PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
         UploadEvents.Dawarich callbackEvent = new UploadEvents.Dawarich();
+        assert buffer != null;
         callbackEvent.sendBuffer = buffer.clone();
 
-        if(buffer.size() == 1){
-            //Send single location
-
-            DawarichBatch batch = new DawarichBatch();
-            SerializableLocation loc = buffer.pop();
-            batch.appendLocation(DawarichBatchLocation.fromSerializableLocationExtended(loc, preferenceHelper));
-
-            try {
-                String json = batch.toJSON().toString();
-
-                MediaType mediaType = MediaType.parse("application/json");
-                RequestBody body = RequestBody.create(
-                        mediaType,
-                        json
-                );
-                LOG.info("Sending single location to Dawarich");
-                Request req = new Request.Builder()
-                        .url(preferenceHelper.getDawarichBaseUrl() + "/api/v1/overland/batches?api_key=" + preferenceHelper.getDawarichApikey())
-                        .method("POST", body)
-                        .addHeader("Content-Type", "application/json")
-                        .build();
-                Response response = httpClient.newCall(req).execute();
-                if (response.isSuccessful()) {
-                    LOG.info("Successfully posted single location to Dawarich");
-                    EventBus.getDefault().post(callbackEvent.succeeded());
-                    return Result.success();
-                } else {
-                    LOG.warn("Location could not be send to the Dawarich server, location will be added to the queue again, server response:{}", response.toString());
-                    EventBus.getDefault().post(callbackEvent.failed());
-                    return Result.failure();
-                }
-            } catch (Exception e) {
-                LOG.error("{}", e.getCause());
-                EventBus.getDefault().post(callbackEvent.failed());
-                return Result.failure();
-            }
-
-        } else if (buffer.size() > 1) {
-            //Send bulk
-
-            DawarichBatch batch = new DawarichBatch();
-            int i = 0;
-            while (!buffer.isEmpty()) {
-                DawarichBatchLocation loc = DawarichBatchLocation.fromSerializableLocationExtended(Objects.requireNonNull(buffer.pop()), preferenceHelper);
-                batch.appendLocation(loc);
-            }
-            try {
-                String json = batch.toJSON().toString();
-
-                MediaType mediaType = MediaType.parse("application/json");
-                RequestBody body = RequestBody.create(
-                        mediaType,
-                        json
-                );
-                LOG.info("Sending bulk data to Dawarich");
-                Request req = new Request.Builder()
-                        .url(preferenceHelper.getDawarichBaseUrl() + "/api/v1/overland/batches?api_key=" + preferenceHelper.getDawarichApikey())
-                        .method("POST", body)
-                        .addHeader("Content-Type", "application/json")
-                        .build();
-                Response response = httpClient.newCall(req).execute();
-                if (response.isSuccessful()) {
-                    LOG.info("Successfully posted bulk data to Dawarich");
-                    EventBus.getDefault().post(callbackEvent.succeeded());
-                    return Result.success();
-                } else {
-                    ArrayList<DawarichBatchLocation> locations = batch.getLocations();
-                    for (DawarichBatchLocation l : locations) {
-                        buffer.push(l.getSourceData());
-                    }
-                    LOG.warn("Location batch could not be send to the Dawarich server, locations have been added to the queue again, server response:{}", response.toString());
-                    EventBus.getDefault().post(callbackEvent.failed());
-                    return Result.failure();
-                }
-            } catch (Exception e) {
-                LOG.error("{}", e.getCause());
-                EventBus.getDefault().post(callbackEvent.failed());
-                return Result.failure();
-            }
+        DawarichBatch batch = new DawarichBatch();
+        while (!buffer.isEmpty()) {
+            DawarichBatchLocation loc = DawarichBatchLocation.fromSerializableLocationExtended(Objects.requireNonNull(buffer.pop()), preferenceHelper);
+            batch.appendLocation(loc);
         }
-        EventBus.getDefault().post(callbackEvent.failed());
-        return Result.failure();
+        try {
+            String json = batch.toJSON().toString();
+
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(
+                    mediaType,
+                    json
+            );
+            LOG.info("Sending bulk data to Dawarich");
+            Request req = new Request.Builder()
+                    .url(preferenceHelper.getDawarichBaseUrl() + "/api/v1/overland/batches?api_key=" + preferenceHelper.getDawarichApikey())
+                    .method("POST", body)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            Response response = httpClient.newCall(req).execute();
+            if (response.isSuccessful()) {
+                LOG.info("Successfully posted bulk data to Dawarich");
+                EventBus.getDefault().post(callbackEvent.succeeded());
+                return Result.success();
+            } else {
+                ArrayList<DawarichBatchLocation> locations = batch.getLocations();
+                for (DawarichBatchLocation l : locations) {
+                    buffer.push(l.getSourceData());
+                }
+                LOG.warn("Location batch could not be send to the Dawarich server, locations have been added to the queue again, server response:{}", response.toString());
+                EventBus.getDefault().post(callbackEvent.failed());
+                return Result.failure();
+            }
+        } catch (Exception e) {
+            LOG.error("Exception on location upload to Dawarich: {}", e.getMessage(), e);
+            EventBus.getDefault().post(callbackEvent.failed());
+            return Result.failure();
+        }
     }
 }

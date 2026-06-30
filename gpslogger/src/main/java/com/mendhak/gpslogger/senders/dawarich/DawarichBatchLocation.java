@@ -239,7 +239,7 @@ public class DawarichBatchLocation {
     public static DawarichBatchLocation fromSerializableLocation (SerializableLocation location) {
         sourceData = location;
         double[] coords = {location.getLongitude(), location.getLatitude()};
-        Builder b = new Builder(coords, location.getTimeWithOffset())
+        Builder b = new Builder(coords, Strings.getIsoDateTimeWithOffset(new Date(location.getTime())))
                 .withAltitude(location.getAltitude())
                 .withSpeed(location.getSpeed())
                 // Use accuracy in meters as hor. accuracy
@@ -247,7 +247,7 @@ public class DawarichBatchLocation {
                 .withLocationsInPayload(1)
                 .withBatteryState(location.getBatteryCharging() ? "charging" : "unplugged")
                 .withBatteryLevel((double) location.getBatteryLevel() / 100);
-        if (location.getExtras() != null && !Strings.isNullOrEmpty(location.getExtras().getString(BundleConstants.HDOP)) && !Strings.isNullOrEmpty(location.getExtras().getString(BundleConstants.VDOP)) ) {
+        if (!Strings.isNullOrEmpty(location.getHDOP()) &&  !Strings.isNullOrEmpty(location.getVDOP())) {
             // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
             b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
         }
@@ -270,7 +270,7 @@ public class DawarichBatchLocation {
                 .withDesiredAccuracy(helper.getMinimumAccuracy())
                 .withDeviceId(helper.getDawarichDeviceId())
                 .withSignificantChange(helper.shouldLogOnlyIfSignificantMotion() ? "enabled" : "disabled");
-        if (location.getExtras() != null && !Strings.isNullOrEmpty(location.getExtras().getString(BundleConstants.HDOP)) && !Strings.isNullOrEmpty(location.getExtras().getString(BundleConstants.VDOP)) ) {
+        if (!Strings.isNullOrEmpty(location.getHDOP()) &&  !Strings.isNullOrEmpty(location.getVDOP())) {
             // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
             b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
         }

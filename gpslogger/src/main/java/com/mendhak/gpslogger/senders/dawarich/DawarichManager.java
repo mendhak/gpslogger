@@ -70,7 +70,7 @@ public class DawarichManager extends FileSender {
                 put("sendBuffer", Strings.serializeTojson(sendBuffer));
             }
         };
-        String tag = "DaWarIch_" + Systems.DateTimeUtil.currentDateTime();
+        String tag = "DaWarIch_" + Systems.DateTimeUtil.currentDateTime("yyyy-MM-dd_HH:mm:ss");
         Systems.startWorkManagerRequest(DawarichWorker.class, dataMap, tag);
     }
 

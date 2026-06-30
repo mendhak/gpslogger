@@ -39,18 +39,21 @@ public class SerializableFIFOBuffer<T extends Serializable> {
     private final File persistenceFile;
 
 
-    public SerializableFIFOBuffer(String filePath) throws IOException{
+    public SerializableFIFOBuffer(String filePath) {
         persistenceFile = new File(filePath);
-        if (persistenceFile.exists() && persistenceFile.isFile() && persistenceFile.length() > 0) {
-            loadFromFile();
-        }
-        else {
-            if(!(persistenceFile.exists() && persistenceFile.isFile())) {
-                if (!persistenceFile.createNewFile()) {
-                    throw new IOException("Persistence file for buffer could not be created");
+        try {
+            if (persistenceFile.exists() && persistenceFile.isFile() && persistenceFile.length() > 0) {
+                loadFromFile();
+            } else {
+                if (!(persistenceFile.exists() && persistenceFile.isFile())) {
+                    if (!persistenceFile.createNewFile()) {
+                        throw new RuntimeException("Could not create file " + persistenceFile.getAbsolutePath());
+                    }
+                    LOG.info("Persistence file for FIFO-buffer is empty");
                 }
-                LOG.info("Persistence file for FIFO-buffer is empty");
             }
+        } catch (IOException e) {
+            LOG.error("Error on creation of FIFO buffer for Dawarich logging, logging will not function", e);
         }
     }
 

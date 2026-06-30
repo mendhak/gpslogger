@@ -44,7 +44,7 @@ public class FileLoggerFactory {
     private static PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
     private static Session session = Session.getInstance();
 
-    public static List<FileLogger> getFileLoggers(Context context) throws IOException {
+    public static List<FileLogger> getFileLoggers(Context context) {
 
         List<FileLogger> loggers = new ArrayList<>();
 

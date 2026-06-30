@@ -54,13 +54,8 @@ public class SerializableLocation implements Serializable {
     private String profileName;
     private final String timeWithOffset;
 
-    private final String timeISO;
-
-    private transient Bundle extras = null;
-
     public SerializableLocation(){
         timeWithOffset = null;
-        timeISO = null;
     }
 
     public SerializableLocation(Location loc) {
@@ -88,13 +83,11 @@ public class SerializableLocation implements Serializable {
             batteryCharging = loc.getExtras().getBoolean(BundleConstants.BATTERY_CHARGING, false);
             startTimeStamp = loc.getExtras().getLong(BundleConstants.STARTTIMESTAMP, 0);
             distance = loc.getExtras().getDouble(BundleConstants.DISTANCE, 0);
-            extras = loc.getExtras();
         }
 
         fileName = extractExtra(loc, BundleConstants.FILE_NAME);
         profileName = extractExtra(loc, BundleConstants.PROFILE_NAME);
         timeWithOffset = Strings.getIsoDateTimeWithOffset(new Date(loc.getTime()));
-        timeISO = Strings.getIsoDateTime(new Date(loc.getTime()));
     }
 
 
@@ -105,10 +98,6 @@ public class SerializableLocation implements Serializable {
         }
 
         return "";
-    }
-
-    public Bundle getExtras() {
-        return extras;
     }
 
     public boolean hasAltitude(){
@@ -216,6 +205,4 @@ public class SerializableLocation implements Serializable {
     public String getProfileName() { return profileName; }
 
     public String getTimeWithOffset() { return timeWithOffset; }
-
-    public String getTimeISO() { return timeISO; }
 }
