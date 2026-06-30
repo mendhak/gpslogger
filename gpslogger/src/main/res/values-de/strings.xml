@@ -57,25 +57,25 @@
     <string name="kilometers_per_hour"> km/h</string>
     <string name="kilometers"> km</string>
     <string name="unknown_direction">unbekannt</string>
-    <string name="sorry">Tut uns leid</string>
+    <string name="sorry">Entschuldigen Sie</string>
     <string name="success">Erfolgreich</string>
     <string name="direction_roughly">Ungefähr %s</string>
     <string name="direction_north">Norden</string>
-    <string name="direction_northnortheast">Nordnordost</string>
+    <string name="direction_northnortheast">Nord-Nordost</string>
     <string name="direction_northeast">Nordost</string>
-    <string name="direction_eastnortheast">Ostnordost</string>
+    <string name="direction_eastnortheast">Ost-Nordost</string>
     <string name="direction_east">Ost</string>
-    <string name="direction_eastsoutheast">Ostsüdost</string>
+    <string name="direction_eastsoutheast">Ost-Südost</string>
     <string name="direction_southeast">Südost</string>
-    <string name="direction_southsoutheast">Südsüdost</string>
+    <string name="direction_southsoutheast">Süd-Südost</string>
     <string name="direction_south">Süd</string>
-    <string name="direction_southsouthwest">Südsüdwest</string>
+    <string name="direction_southsouthwest">Süd-Südwest</string>
     <string name="direction_southwest">Südwest</string>
-    <string name="direction_westsouthwest">Westsüdwest</string>
+    <string name="direction_westsouthwest">West-Südwest</string>
     <string name="direction_west">Westen</string>
-    <string name="direction_westnorthwest">Westnordwest</string>
+    <string name="direction_westnorthwest">West-Nordwest</string>
     <string name="direction_northwest">Nordwest</string>
-    <string name="direction_northnorthwest">Nordnordwest</string>
+    <string name="direction_northnorthwest">Nord-Nordwest</string>
     <string name="time_onesecond">1 Sekunde</string>
     <string name="time_halfminute">½ Minute</string>
     <string name="time_oneminute">1 Minute</string>
@@ -161,7 +161,9 @@
     <string name="osm_description">Beschreibung</string>
     <string name="osm_description_summary">Beschreibung, die beim Hochladen einer Streckenaufzeichnung verwendet werden soll</string>
     <string name="osm_tags">Schlagwörter</string>
-    <string name="osm_tags_summary">Die Schlagwörter, die beim Hochladen einer Streckenaufzeichnung verwendet werden sollen</string>
+    <string name="osm_tags_summary">Die Schlagwörter, welche beim Hochladen einer Streckenaufzeichnung verwendet werden
+        sollen
+    </string>
     <string name="no_files_found">Keine Dateien gefunden, nichts zu teilen oder hochzuladen.</string>
     <string name="osm_pick_file">Wählen Sie eine Datei zum Hochladen aus</string>
     <string name="debuglog_title">Fehlerprotokolldatei schreiben</string>
@@ -239,9 +241,9 @@
     <string name="log_customurl_setup_title">Benutzerdefinierte URL</string>
     <string name="log_customurl_summary">Aufzeichnungsinformationen über HTTP an den eigenen Server senden</string>
     <string name="txt_annotation">Anmerkung:</string>
-    <string name="txt_time_isoformat">Koordinierte Weltzeit UTC (2011-12-25T15:27:33Z):</string>
-    <string name="txt_time_with_offset_isoformat">Zeitversatz (2011-12-25T11:27:33+04:00):</string>
-    <string name="txt_date_isoformat">Datum (2011-12-25):</string>
+    <string name="txt_time_isoformat">Koordinierte Weltzeit UTC (2011–12–25T15:27:33Z):</string>
+    <string name="txt_time_with_offset_isoformat">Zeitversatz (2011–12–25T11:27:33+04:00):</string>
+    <string name="txt_date_isoformat">Datum (2011–12–25):</string>
     <string name="txt_provider">Anbieter:</string>
     <string name="annotation_requires_logging">Anmerkungen müssen in CSV/GPX/KML/Benutzerdefinierte URL/GeoJSON protokolliert werden</string>
     <string name="gpslogger_folder_title">Speicherort</string>
@@ -362,7 +364,9 @@
     <string name="app_theme_dark">Dunkles Thema</string>
     <string name="app_theme_setting">Legt fest, wie das helle oder dunkle App-Thema eingestellt werden soll</string>
     <string name="file_logging_log_time_with_offset_title">Uhrzeit mit Zeitzonenverschiebung protokollieren</string>
-    <string name="file_logging_log_time_with_offset_summary">Wenn möglich, geben Sie die Zeit nach ISO 8601 mit Zeitverschiebung anstelle von UTC an.</string>
+    <string name="file_logging_log_time_with_offset_summary">Gibt Zeiten nach ISO 8601 mit Zeitverschiebung anstelle von
+        UTC an, wenn möglich.
+    </string>
     <string name="log_plain_text_csv_advanced_title">Einstellungen für die CSV-Protokollierung</string>
     <string name="logging_advanced_delete_files">Ausgewählte Dateien löschen</string>
     <string name="txt_battery_charging">Wird aufgeladen</string>
@@ -398,9 +402,9 @@
     <string name="autosend_httpfileupload_summary">Lädt Dateien über HTTP-POST oder -PUT an eine beliebige URL hoch.</string>
     <string name="http_file_upload_body_type">Codierung</string>
     <string name="significant_motion_bypass_interval_title">Verlängertes Herzschlagintervall ohne Bewegung</string>
-    <string name="customurl_autosend_sleep_summary">Verzögerung in Millisekunden zwischen den Batches.</string>
-    <string name="customurl_autosend_batch_size">Batchgröße für den automatischen Versand</string>
-    <string name="customurl_autosend_sleep">Verzögerung beim Deaktivieren des automatischen Versands</string>
+    <string name="customurl_autosend_sleep_summary">Verzögerung in Millisekunden zwischen den Stapel-Uploads.</string>
+    <string name="customurl_autosend_sleep">Verzögerung zwischen Stapeln</string>
     <string name="significant_motion_bypass_interval_summary">Bei längeren Zeiträumen ohne nennenswerte Bewegung wird die Überprüfung gelegentlich übersprungen und dennoch ein Herzschlagprotokoll gemäß diesem Intervall erstellt. Bei einem Wert von weniger als 1 Minute wird das Intervall deaktiviert.</string>
     <string name="http_file_upload_http_headers">HTTP-Header</string>
+    <string name="customurl_autosend_batch_size">Anfragenanzahl für den stapelweisen Upload</string>
 </resources>
