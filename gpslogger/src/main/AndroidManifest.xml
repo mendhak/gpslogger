@@ -214,7 +214,7 @@
         <activity android:name=".ProfileLinkReceiverActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Translucent" >
-            <intent-filter android:label="@string/app_name_release">
+            <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -226,7 +226,7 @@
                 <data android:mimeType="application/x-gpslogger-properties" />
                 <data android:mimeType="text/x-java-properties" />
             </intent-filter>
-            <intent-filter android:label="@string/app_name_release">
+            <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -237,7 +237,7 @@
                 <data android:mimeType="*/*" />
                 <data android:pathPattern=".*\\.properties" />
             </intent-filter>
-            <intent-filter android:label="@string/app_name_release">
+            <intent-filter android:label="@string/app_name">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
