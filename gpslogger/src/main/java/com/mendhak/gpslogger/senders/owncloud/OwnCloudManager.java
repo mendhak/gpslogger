@@ -69,8 +69,10 @@ public class OwnCloudManager extends FileSender
             String username,
             String password,
             String directory) {
-        return !Strings.isNullOrEmpty(servername);
-
+        return !Strings.isNullOrEmpty(servername)
+                && !Strings.isNullOrEmpty(username)
+                && !Strings.isNullOrEmpty(password)
+                && !Strings.isNullOrEmpty(directory);
     }
 
     @Override
