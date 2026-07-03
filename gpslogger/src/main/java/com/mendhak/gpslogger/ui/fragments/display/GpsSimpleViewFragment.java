@@ -31,17 +31,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.core.content.ContextCompat;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
@@ -111,7 +105,27 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
             displayLocationInfo(session.getCurrentLocationInfo());
         }
 
+        updateCoordinateFormat();
+
         return rootView;
+    }
+
+    private void updateCoordinateFormat() {
+        PreferenceHelper ph = PreferenceHelper.getInstance();
+
+        TableRow trLat = rootView.findViewById(R.id.simple_lat_row);
+        TableRow trLon = rootView.findViewById(R.id.simple_lon_row);
+        TableRow trMGRS = rootView.findViewById(R.id.simple_mgrs_row);
+
+        if (ph.getDisplayLatLongFormat() == PreferenceNames.DegreesDisplayFormat.MGRS) {
+            trLat.setVisibility(View.GONE);
+            trLon.setVisibility(View.GONE);
+            trMGRS.setVisibility(View.VISIBLE);
+        } else {
+            trLat.setVisibility(View.VISIBLE);
+            trLon.setVisibility(View.VISIBLE);
+            trMGRS.setVisibility(View.GONE);
+        }
     }
 
     private void setActionButtonStart(){
@@ -326,14 +340,16 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
     public void displayLocationInfo(Location locationInfo){
         showPreferencesSummary();
 
-        EditText txtLatitude = (EditText) rootView.findViewById(R.id.simple_lat_text);
-        txtLatitude.setText(Strings.getFormattedLatitude(locationInfo.getLatitude()));
-
-        EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
-        txtLongitude.setText(Strings.getFormattedLongitude(locationInfo.getLongitude()));
+        EditText txtLatitude = rootView.findViewById(R.id.simple_lat_text);
+        EditText txtLongitude = rootView.findViewById(R.id.simple_lon_text);
+        EditText txtMGRS = rootView.findViewById(R.id.simple_mgrs_text);
 
         ImageView imgAccuracy = (ImageView) rootView.findViewById(R.id.simpleview_imgAccuracy);
         clearColor(imgAccuracy);
+
+        txtLatitude.setText(Strings.getCoordinate(locationInfo.getLatitude(), true));
+        txtLongitude.setText(Strings.getCoordinate(locationInfo.getLongitude(), false));
+        txtMGRS.setText(Strings.getCoordinate(locationInfo.getLatitude(), locationInfo.getLongitude(), ""));
 
         if (locationInfo.hasAccuracy()) {
 
@@ -412,6 +428,9 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         txtLatitude.setText("");
 
         EditText txtLongitude = (EditText) rootView.findViewById(R.id.simple_lon_text);
+        txtLongitude.setText("");
+
+        EditText txtMGRS = (EditText) rootView.findViewById(R.id.simple_mgrs_text);
         txtLongitude.setText("");
 
         ImageView imgAccuracy = (ImageView)rootView.findViewById(R.id.simpleview_imgAccuracy);

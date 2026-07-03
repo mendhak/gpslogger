@@ -554,6 +554,24 @@ public class Strings {
         }
     }
 
+    public static String getCoordinate (double val, boolean isLat) {
+        PreferenceHelper ph = PreferenceHelper.getInstance();
+        switch(ph.getDisplayLatLongFormat()){
+            case MGRS:
+                return "";
+
+            case DEGREES_MINUTES_SECONDS:
+                return getDegreesMinutesSeconds(val, isLat);
+
+            case DEGREES_DECIMAL_MINUTES:
+                return getDegreesDecimalMinutes(val, isLat);
+
+            case DECIMAL_DEGREES:
+            default:
+                return getDecimalDegrees(val);
+        }
+    }
+
     static String getFormattedDegrees(double decimaldegrees, boolean isLatitude, PreferenceHelper ph){
         switch(ph.getDisplayLatLongFormat()){
 

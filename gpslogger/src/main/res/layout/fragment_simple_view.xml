@@ -122,7 +122,7 @@
                                 android:selectAllOnFocus="true"
                                 android:textAlignment="center"
                                 android:textIsSelectable="true"
-                                android:textSize="@dimen/simpleview_latlong_textsize"
+                                android:textSize="@dimen/simpleview_mgrs_textsize"
                                 android:textStyle="italic" />
                     </LinearLayout>
                 </HorizontalScrollView>
