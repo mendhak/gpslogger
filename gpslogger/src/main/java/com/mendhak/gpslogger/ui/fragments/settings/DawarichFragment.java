@@ -28,7 +28,6 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.text.InputType;
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
