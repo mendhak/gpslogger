@@ -412,4 +412,17 @@
     <string name="dawarich_bulk_max_summary">Maximalanzahl an Positionen, welche mit einer Sammelanfrage gesendet
         werden
     </string>
+    <string name="log_dawarich_setup_title">DaWarIch</string>
+    <string name="log_dawarich_title">In eine DaWarIch-Instanz protokollieren</string>
+    <string name="log_dawarich_summary_detailed">Sendet die aufgezeichneten Positionen an eine definierte DaWarIch-Instanz</string>
+    <string name="log_dawarich_discard_offline_locations">Positionen verwerfen, wenn offline</string>
+    <string name="log_dawarich_discard_offline_locations_summary">Wenn diese Option eingeschaltet ist, werden alle Positionsdaten verworfen, solange Sie offline sind</string>
+    <string name="log_dawarich_url">DaWarIch-Basis-URL</string>
+    <string name="log_dawarich_device_id">Geräte-ID</string>
+    <string name="log_dawarich_device_id_summary">Die Geräte-ID, welche den Positionsdaten hinzugefügt werden soll, um diese später differenzieren zu können</string>
+    <string name="log_dawarich_apikey">DaWarIch-API-Schlüssel</string>
+    <string name="dawarich_baseUrl_not_set_title">Basis-URL nicht gesetzt</string>
+    <string name="dawarich_baseUrl_not_set_msg">Bitte geben Sie die DaWarIch-Basis-URL ein und versuchen Sie es erneut</string>
+    <string name="dawarich_apiKey_not_set_title">API-Schlüssel nicht gesetzt</string>
+    <string name="dawarich_apiKey_not_set_msg">Bitte geben Sie den API-Schlüssel ein und versuche Sie es erneut</string>
 </resources>

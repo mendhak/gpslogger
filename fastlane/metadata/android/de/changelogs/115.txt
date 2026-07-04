@@ -1,0 +1,3 @@
+* Bugfix: Erlaube UTF-8 Zeichen in FTP-Ordnernamen
+* Scrollleiste zur "Einfachen Ansicht", zur Anpassung an Geräte mit großem Display und großer Schriftgröße, hinzugefügt.
+* Tastatur sollte automatisch erscheinen, wenn die Anmerkungstextbox genutzt wird.
