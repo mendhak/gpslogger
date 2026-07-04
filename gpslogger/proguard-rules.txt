@@ -78,6 +78,10 @@
 -dontwarn com.sun.jna.win32.W32APIOptions
 -dontwarn org.newsclub.net.unix.AFUNIXSocketAddress
 -dontwarn org.newsclub.net.unix.AFUNIXSocketChannel
+-dontwarn com.sun.jna.platform.win32.BaseTSD$ULONG_PTR
+-dontwarn com.sun.jna.platform.win32.WinDef$LPARAM
+-dontwarn com.sun.jna.platform.win32.WinDef$LRESULT
+-dontwarn com.sun.jna.platform.win32.WinUser$COPYDATASTRUCT
 #
 # SpongyCastle/BouncyCastle
 #
