@@ -196,14 +196,15 @@
             </intent-filter>
         </activity>
 
-        <provider android:name=".common.ContentApi" android:authorities="com.mendhak.gpslogger" android:exported="true"
-                  tools:ignore="ExportedContentProvider"/>
+        <provider android:name=".common.ContentApi" android:authorities="${applicationId}" android:exported="true"
+                  tools:ignore="ExportedContentProvider" tools:replace="android:authorities"/>
 
         <provider
             android:name="com.mendhak.gpslogger.common.GpsLoggerFileProvider"
-            android:authorities="com.mendhak.gpslogger.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/fileprovider"/>

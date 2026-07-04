@@ -145,6 +145,10 @@ public class MainPreferenceActivity extends AppCompatActivity {
                 setTitle(R.string.http_file_upload_setup_title);
                 preferenceFragmentCompat = new HttpFileUploadSettingsFragment();
                 break;
+            case PREFERENCE_FRAGMENTS.DAWARICH:
+                setTitle(R.string.log_dawarich_setup_title);
+                preferenceFragmentCompat = new DawarichFragment();
+                break;
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragmentCompat).commit();
@@ -195,6 +199,7 @@ public class MainPreferenceActivity extends AppCompatActivity {
         public static final String OSM = "OSMAuthorizationFragment";
         public static final String SFTP = "SFTPSettingsFragment";
         public static final String HTTPFILEUPLOAD = "HttpFileUploadSettingsFragment";
+        public static final String DAWARICH = "DawarichFragment";
     }
 
 }
