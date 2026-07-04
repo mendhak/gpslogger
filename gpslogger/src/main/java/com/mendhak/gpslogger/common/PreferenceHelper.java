@@ -1193,6 +1193,9 @@ public class PreferenceHelper {
     public boolean shouldDawarichLoggingDiscardOfflineLocations() {
         return prefs.getBoolean(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE, false);
     }
+    public void setShouldDawarichLoggingDiscardOfflineLocations(boolean val) {
+        prefs.edit().putBoolean(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE, val).apply();
+    }
 
     @ProfilePreference(name= PreferenceNames.DAWARICH_FILE_PATH)
     public String getDawarichFilePath() {
@@ -1204,6 +1207,9 @@ public class PreferenceHelper {
     @ProfilePreference(name= PreferenceNames.LOG_TO_DAWARICH)
     public boolean shouldLogToDawarich() {
         return prefs.getBoolean(PreferenceNames.LOG_TO_DAWARICH, false);
+    }
+    public void setShouldLogToDawarich(boolean val) {
+        prefs.edit().putBoolean(PreferenceNames.LOG_TO_DAWARICH, val).apply();
     }
 
     /**

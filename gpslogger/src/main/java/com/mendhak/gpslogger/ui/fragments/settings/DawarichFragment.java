@@ -43,6 +43,7 @@ import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.Files;
 import com.mendhak.gpslogger.senders.PreferenceValidator;
 import com.mendhak.gpslogger.ui.Dialogs;
+import com.mendhak.gpslogger.ui.components.SimpleErrorDialog;
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
@@ -68,10 +69,6 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Preference filepath = findPreference(PreferenceNames.DAWARICH_FILE_PATH);
-        filepath.setSummary(PreferenceHelper.getInstance().getDawarichFilePath());
-        filepath.setOnPreferenceClickListener(this);
-
         findPreference(PreferenceNames.DAWARICH_BASE_URL).setSummary(preferenceHelper.getDawarichBaseUrl());
         findPreference(PreferenceNames.DAWARICH_BASE_URL).setOnPreferenceClickListener(this);
 
@@ -87,6 +84,9 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
         findPreference(PreferenceNames.DAWARICH_BATCH_MAX).setOnPreferenceClickListener(this);
 
         findPreference(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE).setOnPreferenceChangeListener(this);
+
+        findPreference(PreferenceNames.LOG_TO_DAWARICH).setOnPreferenceChangeListener(this);
+
 
     }
 
@@ -180,42 +180,7 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
             return true;
         }
 
-        if(preference.getKey().equalsIgnoreCase(PreferenceNames.DAWARICH_FILE_PATH)){
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
-                SimpleDialog.build()
-                        .title(R.string.error)
-                        .msg(R.string.gpslogger_custom_path_need_permission)
-                        .show(this, "FILE_PERMISSIONS_REQUIRED");
-
-                return false;
-            }
-
-            StorageChooser chooser = Dialogs.directoryChooser(getActivity());
-            chooser.setOnSelectListener(path -> {
-                LOG.debug(path);
-                if(Strings.isNullOrEmpty(path)) {
-                    path = Files.storageFolder(getActivity()).getAbsolutePath();
-                }
-                File testFile = new File(path, "testfile.txt");
-                try {
-                    testFile.createNewFile();
-                    if(testFile.exists()){
-                        testFile.delete();
-                        LOG.debug("Test file successfully created and deleted.");
-                    }
-                } catch (Exception ex) {
-                    LOG.error("Could not create a test file in the chosen directory.", ex);
-                    path = preferenceHelper.getGpsLoggerFolder();
-                    Dialogs.alert(getString(R.string.error), getString(R.string.pref_logging_file_no_permissions), getActivity());
-                }
-
-                findPreference(PreferenceNames.DAWARICH_FILE_PATH).setSummary(path);
-                preferenceHelper.setDawarichFilepath(path);
-
-            });
-            chooser.show();
-        }
 
         return false;
     }
@@ -261,18 +226,50 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
             return true;
         }
 
-        if(dialogTag.equalsIgnoreCase("FILE_PERMISSIONS_REQUIRED")){
-            Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
-            getActivity().startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
-            return true;
-        }
-
-
         return false;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.LOG_TO_DAWARICH)){
+            if ((boolean) newValue) {
+                if (Strings.isNullOrEmpty(preferenceHelper.getDawarichBaseUrl())) {
+                    SimpleErrorDialog.build()
+                            .title(R.string.dawarich_baseUrl_not_set_title)
+                            .msg(R.string.dawarich_baseUrl_not_set_msg)
+                            .pos(R.string.ok)
+                            .show(this);
+                    preferenceHelper.setShouldLogToDawarich(false);
+                    return false;
+                }
+                if (Strings.isNullOrEmpty(preferenceHelper.getDawarichApikey())) {
+                    SimpleErrorDialog.build()
+                            .title(R.string.dawarich_apiKey_not_set_title)
+                            .msg(R.string.dawarich_apiKey_not_set_msg)
+                            .pos(R.string.ok)
+                            .show(this);
+                    preferenceHelper.setShouldLogToDawarich(false);
+                    return false;
+                }
+                preferenceHelper.setShouldLogToDawarich(true);
+                return true;
+            } else {
+                preferenceHelper.setShouldLogToDawarich(false);
+                return true;
+            }
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE)){
+            if((boolean) newValue) {
+                preferenceHelper.setShouldDawarichLoggingDiscardOfflineLocations(true);
+                return true;
+            } else {
+                preferenceHelper.setShouldDawarichLoggingDiscardOfflineLocations(false);
+                return true;
+            }
+        }
+
         return false;
     }
 }

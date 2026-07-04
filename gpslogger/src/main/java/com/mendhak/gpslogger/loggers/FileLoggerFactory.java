@@ -81,7 +81,7 @@ public class FileLoggerFactory {
         }
 
         if (preferenceHelper.shouldLogToDawarich()) {
-            loggers.add(new DawarichLogger(preferenceHelper.getDawarichFilePath()));
+            loggers.add(new DawarichLogger(preferenceHelper.getGpsLoggerFolder()));
         }
 
         if (preferenceHelper.shouldLogToCustomUrl()) {

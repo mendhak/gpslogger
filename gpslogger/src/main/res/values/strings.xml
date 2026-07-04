@@ -533,4 +533,8 @@
     <string name="autosend_httpfileupload_summary">Uploads files to an arbitrary URL using HTTP POST or PUT.</string>
     <string name="http_file_upload_body_type">Encoding</string>
     <string name="http_file_upload_http_headers">HTTP Headers</string>
+    <string name="dawarich_baseUrl_not_set_title">Base-URL not set</string>
+    <string name="dawarich_baseUrl_not_set_msg">Please set the Dawarich base-URL and try again</string>
+    <string name="dawarich_apiKey_not_set_title">API-key not set</string>
+    <string name="dawarich_apiKey_not_set_msg">Please set the Dawarich API-key and try again</string>
 </resources>
