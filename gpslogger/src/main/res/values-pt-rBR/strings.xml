@@ -300,7 +300,7 @@
     <string name="customurl_http_method">Método HTTP</string>
     <string name="customurl_http_basicauthentication">Autenticação básica</string>
     <string name="hide_notification_from_status_bar_disallowed">Opção de esconder notificações está desabilitada no Android Oreo e mais recentes</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="ok">OK</string>
     <string name="log_plain_text_csv_field_delimiter">Delimitador de campo CSV</string>
     <string name="log_plain_text_decimal_comma">Use vírgula (,) como separador decimal em vez de ponto (.)</string>
@@ -388,4 +388,10 @@
     <string name="hide_notification_from_lock_screen">Ocultar notificação na tela de bloqueio</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificações</b> - Permitir a exibição de uma notificação, o que ajuda a manter o serviço de registro ativo.]]></string>
     <string name="only_log_if_significant_motion_summary">Registre apenas se for detectada atividade significativa, como caminhar, andar de bicicleta ou dirigir. O que é movimento significativo é determinado pelo seu sistema operacional.</string>
+
+
+
+
+
+
 </resources>

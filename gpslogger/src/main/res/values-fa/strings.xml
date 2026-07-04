@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">تنظیمات بارگزاری</string>
     <string name="navigation_drawer_open">باز کردن منو</string>
     <string name="navigation_drawer_close">بستن منو</string>
-    <string name="app_name">گزارش‌گر جی‌پی‌اس</string>
+    <string name="app_name_release">گزارش‌گر جی‌پی‌اس</string>
     <string name="settings_screen_name">تنظیمات گزارش‌گر جی‌پی‌اس</string>
     <string name="ok">باشه</string>
     <string name="cancel">لغو</string>
@@ -133,4 +133,10 @@
     <string name="time_before_logging_summary">برای حداکثر فرکانس، از 0 استفاده کنید. اما آهسته تر برای عمر باتری بهتر است. تنظیمات باتری سیستم ممکن است اینها را لغو کند، برای اطلاعات بیشتر به راهنما یا سوالات متدوال مراجعه کنید.</string>
     <string name="txt_speed_kph">سرعت (کیلومتر بر ساعت):</string>
     <string name="accuracy_within" formatted="false">"در  %s %s"</string>
+
+
+
+
+
+
 </resources>

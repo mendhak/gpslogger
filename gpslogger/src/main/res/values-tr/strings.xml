@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">Yükleme ayarları</string>
     <string name="navigation_drawer_open">Navigasyon çizimini aç</string>
     <string name="navigation_drawer_close">Navigasyon çizimini kapat</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger Ayarları</string>
     <string name="ok">Tamam</string>
     <string name="cancel">İptal</string>
@@ -387,4 +387,10 @@
     <string name="retry_get_best_possible_accuracy_summary">İlk doğru noktayı kaydetmek yerine, doğruluk süresi boyunca denemeye devam edin ve en iyi doğruluğa sahip noktayı seçin. Daha uzun sürer, ancak daha doğru noktalar için şansı artırır.</string>
     <string name="txt_speed_kph">Hız (km/sa):</string>
     <string name="prompt_for_details_when_logging_starts">Günlük başlatıldığında ayrıntılar sorulur</string>
+
+
+
+
+
+
 </resources>

@@ -42,4 +42,10 @@
     <string name="autoemail_smtp_category">Epos Instellings</string>
     <string name="autoemail_test">Stuur \'n toets epos met die instellings hierbo</string>
     <string name="autoopengts_server_category">OpenGTS Instellings</string>
+
+
+
+
+
+
 </resources>

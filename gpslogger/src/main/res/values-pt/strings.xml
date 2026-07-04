@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">Carregar configurações</string>
     <string name="navigation_drawer_open">Abrir menu de navegação</string>
     <string name="navigation_drawer_close">Fechar menu de navegação</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Configurações do GPSLogger</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancelar</string>
@@ -393,4 +393,10 @@ Nomes de ficheiro muito dinâmicos
     <string name="hide_notification_from_lock_screen">Ocultar notificação da tela de bloqueio</string>
     <string name="prompt_for_details_when_logging_starts">Solicitar detalhes quando o registro for iniciado</string>
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificações</b> - Permite mostrar uma notificação, isso ajuda a manter o serviço de registro ativo. ]]></string>
+
+
+
+
+
+
 </resources>

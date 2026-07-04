@@ -68,10 +68,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class Systems {
 
@@ -401,5 +399,19 @@ public class Systems {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         notificationManager.notify(NotificationChannelNames.GPSLOGGER_ERRORS_NOTIFICATION_ID, nfc.build());
 
+    }
+
+    public static class DateTimeUtil {
+        /**
+         * API 21 compatible methode to get the current datetime as formatted string
+         * @param pattern String holding the pattern used for formatting
+         * @return Current datetime as string
+         */
+        public static String currentDateTime(String pattern) {
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat(
+                    pattern, Locale.getDefault());
+            return sdf.format(calendar.getTime());
+        }
     }
 }

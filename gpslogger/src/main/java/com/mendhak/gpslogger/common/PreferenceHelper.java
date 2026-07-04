@@ -1148,6 +1148,93 @@ public class PreferenceHelper {
     }
 
 
+    /**
+     * Whether to auto send to Dawarich
+     */
+    public boolean isDawarichAutoSendEnabled() {
+        return prefs.getBoolean(PreferenceNames.AUTOSEND_DAWARICH_ENABLED, false);
+    }
+
+    /**
+     * Dawarich server for auto send
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_BASE_URL)
+    public String getDawarichBaseUrl() {
+        return prefs.getString(PreferenceNames.DAWARICH_BASE_URL, "");
+    }
+
+    public void setDawarichBaseUrl(String baseUrl){
+        prefs.edit().putString(PreferenceNames.DAWARICH_BASE_URL, baseUrl).apply();
+    }
+    /**
+     * Dawarich apikey for auto send
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_APIKEY)
+    public String getDawarichApikey() {
+        return prefs.getString(PreferenceNames.DAWARICH_APIKEY, "");
+    }
+
+    public void setDawarichApikey(String apikey){
+        prefs.edit().putString(PreferenceNames.DAWARICH_APIKEY, apikey).apply();
+    }
+    /**
+     * Dawarich device id
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_DEVICE_ID)
+    public String getDawarichDeviceId() {
+        return prefs.getString(PreferenceNames.DAWARICH_DEVICE_ID, "");
+    }
+
+    public void setDawarichDeviceId(String deviceId){
+        prefs.edit().putString(PreferenceNames.DAWARICH_DEVICE_ID, deviceId).apply();
+    }
+
+    @ProfilePreference(name= PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE)
+    public boolean shouldDawarichLoggingDiscardOfflineLocations() {
+        return prefs.getBoolean(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE, false);
+    }
+    public void setShouldDawarichLoggingDiscardOfflineLocations(boolean val) {
+        prefs.edit().putBoolean(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE, val).apply();
+    }
+
+    @ProfilePreference(name= PreferenceNames.DAWARICH_FILE_PATH)
+    public String getDawarichFilePath() {
+        return prefs.getString(PreferenceNames.DAWARICH_FILE_PATH, "");
+    }
+    public void setDawarichFilepath(String path) {
+        prefs.edit().putString(PreferenceNames.DAWARICH_FILE_PATH, path).apply();
+    }
+    @ProfilePreference(name= PreferenceNames.LOG_TO_DAWARICH)
+    public boolean shouldLogToDawarich() {
+        return prefs.getBoolean(PreferenceNames.LOG_TO_DAWARICH, false);
+    }
+    public void setShouldLogToDawarich(boolean val) {
+        prefs.edit().putBoolean(PreferenceNames.LOG_TO_DAWARICH, val).apply();
+    }
+
+    /**
+     * Dawarich min batch locations
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_BATCH_MIN)
+    public Integer getDawarichBatchMin() {
+        return Integer.parseInt(prefs.getString(PreferenceNames.DAWARICH_BATCH_MIN, "3"));
+    }
+
+    public void setDawarichBatchMin(Integer amount){
+        prefs.edit().putString(PreferenceNames.DAWARICH_BATCH_MIN, String.valueOf(amount)).apply();
+    }
+
+    /**
+     * Dawarich max batch locations
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_BATCH_MAX)
+    public Integer getDawarichBatchMax() {
+        return Integer.parseInt(prefs.getString(PreferenceNames.DAWARICH_BATCH_MAX, "10"));
+    }
+
+    public void setDawarichBatchMax(Integer amount) {
+        prefs.edit().putString(PreferenceNames.DAWARICH_BATCH_MAX, String.valueOf(amount)).apply();
+    }
 
 
     /**
@@ -1390,6 +1477,4 @@ public class PreferenceHelper {
         }
 
     }
-
-
 }

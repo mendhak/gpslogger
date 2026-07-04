@@ -84,7 +84,7 @@
     <string name="enabledisablegps_summary">Anar a opcions del telèfon per activar o desactivar proveïdors.</string>
     <string name="title_drawer_uploadsettings">Pujar configuració</string>
     <string name="hide">Ocultar</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="error">Error</string>
     <string name="gpsprovider_unavailable">Proveïdor de GPS no disponible. Si us plau comprova les opcions d\'ubicació i activa un proveïdor.</string>
     <string name="seconds"> s</string>
