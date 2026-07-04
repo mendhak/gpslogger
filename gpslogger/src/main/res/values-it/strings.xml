@@ -311,7 +311,7 @@
     <string name="reset_app_summary">L\'operazione resetterà l\'app, cancellerà tutte le preferenze e annullerà tutti i permessi concessi a questa app. Tutti i dati saranno persi!</string>
     <string name="miles_per_hour"> mi/h</string>
     <string name="kilometers_per_hour"> km/h</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="ok">OK</string>
     <string name="hide">Nascondere</string>
     <string name="summary_current_filename">File:</string>
@@ -389,4 +389,10 @@
     <string name="app_theme_dark">Tema scuro</string>
     <string name="app_theme_light">Tema chiaro</string>
     <string name="logging_advanced_delete_files_summary">Premere a lungo per selezionare più file.</string>
+
+
+
+
+
+
 </resources>

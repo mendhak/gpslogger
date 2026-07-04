@@ -12,7 +12,7 @@
     <string name="tip_coffee">मेरे लिए एक कॉफी खरीदें</string>
     <string name="no_network_message">कोई नेटवर्क उपलब्ध नहीं है</string>
     <string name="navigation_drawer_open">नेविगेशन ड्रॉअर खोलें</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger सेटिंग्स</string>
     <string name="ok">ठीक है</string>
     <string name="cancel">रद्द करें</string>

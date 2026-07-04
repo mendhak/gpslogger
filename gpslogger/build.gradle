@@ -60,12 +60,16 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             debuggable true
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-DEBUG"
+            resValue "string", "app_name", "@string/app_name_debug"
         }
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
             debuggable false
+            resValue "string", "app_name", "@string/app_name_release"
         }
     }
 

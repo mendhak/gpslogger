@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GPSЛогър</string>
+    <string name="app_name_release">GPSЛогър</string>
     <string name="settings_screen_name">GPSЛогър Настройки</string>
     <string name="txt_latitude">Географска ширина:</string>
     <string name="menu_exit">Изход</string>
@@ -139,4 +139,10 @@
     <string name="dropbox_setup_title">Dropbox</string>
     <string name="dropbox_authorize_description">За да използвате услуги от Dropbox, трябва да упълномощите GPSLogger да качва файлове в акаунта Ви.</string>
     <string name="dropbox_unauthorize_description">Вие сте упълномощили Dropbox. Файловете ще се качват в \'Приложения\\GPSLogger за Android\'. Можете да прекратите връзката между GPSLogger и Dropbox ако желаете.</string>
+
+
+
+
+
+
 </resources>

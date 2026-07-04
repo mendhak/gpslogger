@@ -288,7 +288,7 @@
     <string name="txt_timestamp_epoch">Stempel waktu (epoch)</string>
     <string name="txt_starttimestamp_epoch">Stempel waktu mulai (epoch)</string>
     <string name="txt_battery">Baterai</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="hide">Sembunyikan</string>
     <string name="summary_current_filename">File:</string>
     <string name="error">Kesalahan</string>

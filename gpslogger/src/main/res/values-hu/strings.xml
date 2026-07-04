@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">Feltöltési beállítások</string>
     <string name="navigation_drawer_open">Navigációs menü</string>
     <string name="navigation_drawer_close">Navigációs menü bezárása</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger Beállítások</string>
     <string name="ok">OK</string>
     <string name="cancel">Mégse</string>

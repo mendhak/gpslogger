@@ -26,7 +26,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 
 
-import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
@@ -61,7 +60,7 @@ public class AppSettings extends Application {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-            NotificationChannel channel = new NotificationChannel(NotificationChannelNames.GPSLOGGER_DEFAULT, getString(R.string.app_name), NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel(NotificationChannelNames.GPSLOGGER_DEFAULT, getString(R.string.app_name_release), NotificationManager.IMPORTANCE_DEFAULT);
             channel.enableLights(false);
             channel.enableVibration(false);
             channel.setSound(null,null);

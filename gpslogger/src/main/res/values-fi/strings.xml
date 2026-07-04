@@ -294,7 +294,7 @@
     <string name="new_file_custom_message">Voit käyttää %SER:ää laitesarjalle, %YEAR, %MONTH, %MONTHNAME, %DAY, %DAYNAME, %HOUR, %MIN, %PROFILE, %VER versiolle</string>
     <string name="log_customurl_summary_detailed">Lähettää pyynnön mukautettuun URL-osoitteeseen aina, kun sijaintipiste kaapataan. Riippuu kirjausvälistä.</string>
     <string name="started_at">alkoi</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="emailprovider_google">Google Mail</string>
     <string name="annotation_requires_logging">Huomautukset edellyttävät kirjautumista näihin: CSV/GPX/KML/Custom URL/GeoJSON</string>
     <string name="google_drive_setup_title">Google Drive</string>
@@ -397,4 +397,10 @@
     <string name="autosend_wifionly_summary">Odota Wi-Fi-yhteyden muodostumista ennen verkkopyyntöjen suorittamista. Koskee kaikkia pyyntöjä, mukaan lukien lähettämistä ja lokiin kirjaamista.</string>
     <string name="only_log_if_significant_motion_title">Kirjaa vain, jos liikettä on merkittävää</string>
     <string name="only_log_if_significant_motion_summary">Kirjaa lokiin vain, jos havaitaan merkittävää toimintaa, kuten kävelyä, pyöräilyä tai ajamista. Merkittävä liike määräytyy käyttöjärjestelmäsi mukaan.</string>
+
+
+
+
+
+
 </resources>

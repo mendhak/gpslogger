@@ -24,10 +24,12 @@ import android.content.Context;
 import android.os.Build;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -680,6 +682,13 @@ public class Strings {
 
     public static <T> T deserializeFromJson(String json, Class<T> clazz){
         return new Gson().fromJson(json, clazz);
+    }
+
+    public static <T> T deserializeFromJson(String json, Type type) throws JsonSyntaxException {
+        if (json == null || json.trim().isEmpty()) {
+            return null;
+        }
+        return new Gson().fromJson(json, type); // Gson akzeptiert Type nativ
     }
 
 }
