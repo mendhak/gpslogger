@@ -28,6 +28,7 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.text.InputType;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -75,7 +76,6 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
         findPreference(PreferenceNames.DAWARICH_BASE_URL).setSummary(preferenceHelper.getDawarichBaseUrl());
         findPreference(PreferenceNames.DAWARICH_BASE_URL).setOnPreferenceClickListener(this);
 
-        //findPreference(PreferenceNames.DAWARICH_APIKEY).setSummary(preferenceHelper.getDawarichApikey());
         findPreference(PreferenceNames.DAWARICH_APIKEY).setOnPreferenceClickListener(this);
 
         findPreference(PreferenceNames.DAWARICH_DEVICE_ID).setSummary(preferenceHelper.getDawarichDeviceId());
@@ -230,7 +230,6 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
         if(dialogTag.equalsIgnoreCase(PreferenceNames.DAWARICH_APIKEY)){
             String apikey = extras.getString(PreferenceNames.DAWARICH_APIKEY);
             preferenceHelper.setDawarichApikey(apikey);
-            //findPreference(PreferenceNames.DAWARICH_APIKEY).setSummary(apikey);
             return true;
         }
 
@@ -275,14 +274,6 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-//        if(preference.getKey().equalsIgnoreCase(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED)){
-//            Boolean isEnabled = (Boolean)newValue;
-//            if(isEnabled){
-//                // Custom URL SENDER requires CSV logging. Custom URL logging is independent.
-//                preferenceHelper.setShouldLogToCSV(true);
-//            }
-//            return true;
-//        }
         return false;
     }
 }

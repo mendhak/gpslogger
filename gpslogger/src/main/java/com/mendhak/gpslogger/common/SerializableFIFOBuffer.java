@@ -49,7 +49,7 @@ public class SerializableFIFOBuffer<T extends Serializable> {
                     if (!persistenceFile.createNewFile()) {
                         throw new RuntimeException("Could not create file " + persistenceFile.getAbsolutePath());
                     }
-                    LOG.info("Persistence file for FIFO-buffer is empty");
+                    LOG.debug("Persistence file for FIFO-buffer is empty");
                 }
             }
         } catch (IOException e) {

@@ -257,6 +257,7 @@ public class DawarichBatchLocation {
     public static DawarichBatchLocation fromSerializableLocationExtended (
             SerializableLocation location,
             PreferenceHelper helper){
+        sourceData = location;
         double[] coords = {location.getLongitude(), location.getLatitude()};
         Builder b = new Builder(coords, Strings.getIsoDateTimeWithOffset(new Date(location.getTime())))
                 .withAltitude(location.getAltitude())
