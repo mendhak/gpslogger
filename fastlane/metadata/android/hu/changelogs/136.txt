@@ -1,0 +1,7 @@
+* HTTP-fájlfeltöltési cél (egyéni URL-naplózótól függetlenül)
+* Jelentős mozgás intervallum beállítás; kényszeríti a naplózást, ha egy bizonyos idő eltelt 
+* Hibajav – ugyanazon fájlban lévő GPX útvonal szegmensek nem jöttek létre megfelelően
+* Hibajav – pontatlan passzív helyszínek kerültek rögzítésre
+* Hibajav – ne indítson új fájlt, ha már a naplózás folyamatban
+* Automatikus küldés kötegméret, késleltetési beállítások
+* Biztonság – jelszavak nem kerülnek mentésre az exportált profilba

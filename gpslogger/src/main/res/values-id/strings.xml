@@ -392,10 +392,15 @@
     <string name="prompt_for_details_when_logging_starts">Minta detail saat pencatatan dimulai</string>
     <string name="only_log_if_significant_motion_title">Hanya catat jika ada gerakan signifikan</string>
     <string name="only_log_if_significant_motion_summary">Hanya catat jika aktivitas signifikan terdeteksi seperti berjalan, bersepeda, berkendara. Gerakan signifikan ditentukan oleh sistem operasi Anda.</string>
-
-
-
-
-
-
+    <string name="customurl_autosend_batch_size">Ukuran batch kirim otomatis</string>
+    <string name="customurl_autosend_batch_size_summary">Jumlah permintaan sebelum jeda.</string>
+    <string name="customurl_autosend_sleep">Jeda tidur Kirim Otomatis</string>
+    <string name="customurl_autosend_sleep_summary">Jeda dalam milidetik antarbatch.</string>
+    <string name="significant_motion_bypass_interval_title">Interval heartbeat tanpa gerakan yang diperpanjang</string>
+    <string name="significant_motion_bypass_interval_summary">Selama periode panjang tanpa gerakan signifikan, sesekali pemeriksaan akan dilewati dan log heartbeat tetap diambil sesuai interval ini. Nilai kurang dari 1 menit akan menonaktifkan interval.</string>
+    <string name="time_in_minutes_dialog_title">Waktu dalam menit</string>
+    <string name="http_file_upload_setup_title">Unggah File HTTP</string>
+    <string name="autosend_httpfileupload_summary">Mengunggah file ke URL arbitrer menggunakan HTTP POST atau PUT.</string>
+    <string name="http_file_upload_body_type">Pengodean</string>
+    <string name="http_file_upload_http_headers">Header HTTP</string>
 </resources>
