@@ -537,4 +537,7 @@
     <string name="dawarich_baseUrl_not_set_msg">Please set the Dawarich base-URL and try again</string>
     <string name="dawarich_apiKey_not_set_title">API-key not set</string>
     <string name="dawarich_apiKey_not_set_msg">Please set the Dawarich API-key and try again</string>
+    <string name="dawarich_qr_not_valid">Not a valid Dawarich QR-Code</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="dawarich_qr_prompt">Scan the QR-Code provided by Dawarich</string>
 </resources>

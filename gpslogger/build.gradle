@@ -212,7 +212,11 @@ dependencies {
     //CSV library
     implementation('org.apache.commons:commons-csv:1.9.0')
 
-     //Libraries required for unit testing
+    //QR-Code scanner
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation("com.google.zxing:core:3.5.4")
+
+    //Libraries required for unit testing
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:3.10.0'
     testImplementation 'org.json:json:20180813'
