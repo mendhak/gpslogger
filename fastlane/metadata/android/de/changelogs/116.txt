@@ -1,0 +1,3 @@
+* Fehlerbehebung der Dateiberechtigungen unter Android 11+. Sie können jetzt einen eigenen Dateipfad wählen und werden aufgefordert die entsprechenden Berechtigungen zu gewähren.
+* Neue Berechtigung hinzugefügt, MANAGE_EXTERNAL_STORAGE.  Dies ist notwendig, um den wählbaren Dateipfad in Android 11+ zu ermöglichen.
+* Bugfix: Erlaube UTF-8 Zeichen in FTP-Ordnernamen.
