@@ -20,10 +20,14 @@
 package com.mendhak.gpslogger.common;
 
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 
 public class SerializableLocation implements Serializable {
 
@@ -87,7 +91,41 @@ public class SerializableLocation implements Serializable {
 
         fileName = extractExtra(loc, BundleConstants.FILE_NAME);
         profileName = extractExtra(loc, BundleConstants.PROFILE_NAME);
-        timeWithOffset = Strings.getIsoDateTimeWithOffset(new Date(loc.getTime()));
+        timeWithOffset = getPreferredIsoDateTime(loc);
+    }
+
+    /**
+     * Methode checks if a bundled time with offset is available and in ISO-8601 format, is yes, return it, else return
+     * formated fix time provided by the location object (which can vary depending on location source)
+     * @param loc location object tot get the time from
+     * @return ISO-8601 formated date-time string
+     */
+    private String getPreferredIsoDateTime(Location loc) {
+        if (loc.getExtras() != null
+                && !Strings.isNullOrEmpty(loc.getExtras().getString(BundleConstants.TIME_WITH_OFFSET))) {
+            String dt = loc.getExtras().getString(BundleConstants.TIME_WITH_OFFSET);
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    DateTimeFormatter.ISO_DATE_TIME.parse(dt);
+                    return dt;
+                } else {
+                    String[] patterns = {"yyyy-MM-dd'T'HH:mm:ss.SSSXXX", "yyyy-MM-dd'T'HH:mm:ssXXX"};
+                    for (String pattern : patterns) {
+                        try {
+                            SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.US);
+                            sdf.setLenient(false);
+                            sdf.parse(dt);
+                            return dt;
+                        } catch (Exception e) {
+                            // Ignore exception and try next
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                return Strings.getIsoDateTimeWithOffset(new Date(this.time));
+            }
+        }
+        return Strings.getIsoDateTimeWithOffset(new Date(this.time));
     }
 
 
