@@ -595,7 +595,7 @@ public class GpsLoggingService extends Service  {
         PendingIntent pending = stackBuilder.getPendingIntent(0, flags);
 
         CharSequence contentTitle = getString(R.string.gpslogger_still_running);
-        CharSequence contentText = getString(R.string.app_name);
+        CharSequence contentText = getString(R.string.app_name_release);
         long notificationTime = System.currentTimeMillis();
 
         if (session.hasValidLocation()) {

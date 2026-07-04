@@ -318,7 +318,7 @@
     <string name="customurl_http_basicauthentication">Podstawowe uwierzytelnianie</string>
     <string name="hide_notification_from_status_bar_disallowed">Ukrywanie powiadomienia jest zabronione w Androidzie Oreo</string>
     <string name="navigation_drawer_open">Otwórz szufladę nawigacyjną</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="minutes"> min</string>
     <string name="seconds"> sek</string>
     <string name="hours"> godz</string>

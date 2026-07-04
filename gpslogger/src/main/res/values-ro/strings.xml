@@ -238,7 +238,7 @@
     <string name="autosend_frequency_hint">Număr de minute</string>
     <string name="ok">ok</string>
     <string name="hide">Ascunde</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="not_applicable">nu este aplicabil</string>
     <string name="meters_per_second"> m/s</string>
     <string name="kilometers"> km</string>
@@ -252,4 +252,10 @@
     <string name="listeners_cell_title">Înregistrează localizarea din rețea</string>
     <string name="log_plain_text_csv_field_delimiter">Separatorul de câmpuri CSV</string>
     <string name="file_logging_log_time_with_offset_summary">Dacă e posibil, scrieți timpul în format ISO8601 cu decalaj de fus orar în loc de UTC.</string>
+
+
+
+
+
+
 </resources>

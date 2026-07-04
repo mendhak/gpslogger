@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="title_drawer_uploadsettings">Hochladen - Einstellungen</string>
     <string name="navigation_drawer_open">Navigationsmenü öffnen</string>
     <string name="navigation_drawer_close">Navigationsmenü schließen</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger - Einstellungen</string>
     <string name="ok">OK</string>
     <string name="cancel">Abbrechen</string>
@@ -403,4 +403,13 @@
     <string name="customurl_autosend_sleep">Verzögerung beim Deaktivieren des automatischen Versands</string>
     <string name="significant_motion_bypass_interval_summary">Bei längeren Zeiträumen ohne nennenswerte Bewegung wird die Überprüfung gelegentlich übersprungen und dennoch ein Herzschlagprotokoll gemäß diesem Intervall erstellt. Bei einem Wert von weniger als 1 Minute wird das Intervall deaktiviert.</string>
     <string name="http_file_upload_http_headers">HTTP-Header</string>
+    <string name="app_name_debug">GPSLogger DEV</string>
+    <string name="dawarich_bulk_min_title">Mindestpositionen je Sammelupload</string>
+    <string name="dawarich_bulk_min_summary">Mindestanzahl an Positionen die benötigt wird, bevor ein Sammelupload
+        stattfindet (es wird bis zum Erreichen gewartet)
+    </string>
+    <string name="dawarich_bulk_max_title">Maximalpositionen je Sammelupload</string>
+    <string name="dawarich_bulk_max_summary">Maximalanzahl an Positionen, welche mit einer Sammelanfrage gesendet
+        werden
+    </string>
 </resources>

@@ -50,7 +50,7 @@
     <string name="ok">確定</string>
     <string name="navigation_drawer_open">拉開功能選單</string>
     <string name="navigation_drawer_close">閂埋功能選單</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger 設定</string>
     <string name="cancel">取消</string>
     <string name="hide">隱藏</string>
@@ -377,4 +377,10 @@
     <string name="profile_add_from_url">嚟自 URL</string>
     <string name="profile_switch_before_delete">請先轉去另一個設定檔，然後至刪除呢一個。</string>
     <string name="txt_speed_kph">速度 (時速幾多公里)：</string>
+
+
+
+
+
+
 </resources>

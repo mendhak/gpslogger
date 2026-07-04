@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">Nastavenia odosielania</string>
     <string name="navigation_drawer_open">Otvoriť vykresľovač navigácie</string>
     <string name="navigation_drawer_close">Zatvoriť vykresľovač navigácie</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Nastavenia GPSLogger</string>
     <string name="ok">OK</string>
     <string name="cancel">Zrušiť</string>

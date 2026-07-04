@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">上傳設定</string>
     <string name="navigation_drawer_open">打開巡覽列</string>
     <string name="navigation_drawer_close">關閉巡覽列</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger設定</string>
     <string name="ok">確定</string>
     <string name="cancel">取消</string>
@@ -31,4 +31,10 @@
     <string name="txt_latitude">緯度:</string>
     <string name="txt_satellites">衛星：</string>
     <string name="btn_start_logging">開始紀錄</string>
+
+
+
+
+
+
 </resources>

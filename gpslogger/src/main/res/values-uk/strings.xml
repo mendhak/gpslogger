@@ -333,7 +333,7 @@
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Для належної роботи цієї програми потрібні різні дозволи. Тепер вам кілька разів буде запропоновано різні дозволи (вибачте).  Ось пояснення кожного дозволу. ]]></string>
     <string name="logging_advanced_delete_files">Видалити вибрані файли</string>
     <string name="install_conscrypt_provider_title">Встановлення Conscrypt Provider (SSL/TLS)</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="hide">Приховати</string>
     <string name="log_plain_text_csv_advanced_title">Налаштування запису в CSV</string>
     <string name="log_plain_text_csv_field_delimiter">Розділювач полів CSV</string>
@@ -394,4 +394,10 @@
     <string name="only_log_if_significant_motion_title">Записуйте лише за наявності значного руху</string>
     <string name="only_log_if_significant_motion_summary">Записувати лише у випадку виявлення значної активності, такої як ходьба, їзда на велосипеді, керування автомобілем. Значний рух визначається вашою ОС.</string>
     <string name="autosend_wifionly_summary">Зачекайте на встановлення з’єднання Wi-Fi, перш ніж виконувати будь-які мережеві запити. Стосується всіх запитів, включаючи надсилання та реєстрацію.</string>
+
+
+
+
+
+
 </resources>
