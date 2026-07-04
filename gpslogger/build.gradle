@@ -9,7 +9,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.7.1'
+        classpath 'com.android.tools.build:gradle:8.13.2'
 
         classpath 'org.jacoco:org.jacoco.core:0.8.15'
         classpath "com.moowork.gradle:gradle-node-plugin:0.13"
