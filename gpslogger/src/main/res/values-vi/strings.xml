@@ -312,7 +312,7 @@
     <string name="customurl_http_method">Phương thức HTTP</string>
     <string name="customurl_http_basicauthentication">Xác thực cơ bản</string>
     <string name="hide_notification_from_status_bar_disallowed">Ẩn thông báo không được phép từ Android Oreo trở đi</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="hide">Ẩn</string>
     <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
     <string name="log_plain_text_csv_advanced_title">Nhập vào cài đặt CSV</string>
@@ -380,4 +380,10 @@
     <string name="retry_get_best_possible_accuracy_summary">Thay vì ghi ngay vào nhật ký điểm chính xác đầu tiên có được thì cố thử tìm điểm chính xác nhất. Việc này sẽ mất thời gian hơn, nhưng gia tăng xác xuất có các điểm chính xác hơn.</string>
     <string name="retry_get_best_possible_accuracy_title">Chọn điểm chính xác nhất trong khoảng thời gian</string>
     <string name="log_customurl_discard_offline_locations">Bỏ qua các vị trí ngoại tuyến</string>
+
+
+
+
+
+
 </resources>
