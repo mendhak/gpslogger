@@ -395,5 +395,4 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="autosend_wifionly_summary">Espere a que haya una conexión WIFI antes de realizar cualquier solicitud de red. Esto aplica a todas las solicitudes, incluyendo el envío y el registro.</string>
     <string name="only_log_if_significant_motion_title">Solo registre si hay movimiento significativo</string>
     <string name="only_log_if_significant_motion_summary">Registrar solo si se detecta actividad significativa, como caminar, andar en bicicleta o conducir. El movimiento significativo lo determina el sistema operativo.</string>
-
 </resources>

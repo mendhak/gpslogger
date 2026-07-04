@@ -139,5 +139,4 @@
     <string name="dropbox_setup_title">Dropbox</string>
     <string name="dropbox_authorize_description">За да използвате услуги от Dropbox, трябва да упълномощите GPSLogger да качва файлове в акаунта Ви.</string>
     <string name="dropbox_unauthorize_description">Вие сте упълномощили Dropbox. Файловете ще се качват в \'Приложения\\GPSLogger за Android\'. Можете да прекратите връзката между GPSLogger и Dropbox ако желаете.</string>
-
 </resources>

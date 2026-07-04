@@ -397,5 +397,4 @@
     <string name="autosend_wifionly_summary">Odota Wi-Fi-yhteyden muodostumista ennen verkkopyyntöjen suorittamista. Koskee kaikkia pyyntöjä, mukaan lukien lähettämistä ja lokiin kirjaamista.</string>
     <string name="only_log_if_significant_motion_title">Kirjaa vain, jos liikettä on merkittävää</string>
     <string name="only_log_if_significant_motion_summary">Kirjaa lokiin vain, jos havaitaan merkittävää toimintaa, kuten kävelyä, pyöräilyä tai ajamista. Merkittävä liike määräytyy käyttöjärjestelmäsi mukaan.</string>
-
 </resources>
