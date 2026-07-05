@@ -1,5 +1,5 @@
-* OpenStreet Mapa lámanie zmena - overenie prepínanie na OAuth2, budete musieť znovuautomatizovať OpenStreetMap
-* Predvolené na automatické odoslanie pri zastávaní pri prihlásení
-* Bugfix - Skontrolujte pasívne miesta na zabezpečenie ich času je väčší ako predchádzajúci čas umiestnenia
-* Bugfix pre monochromatickú ikonu na nič OS tému
-* Rozpustite určité znaky v názvy súborov, ako je napríklad hviezdičkové, riasy
+* OpenStreetMapa veľká zmena - overenie prepnuté na OAuth2, OpenStreetMap musíte znovu autorizovať
+* Predvolené na automatické odoslanie pri zastavení zaznamenávania
+* Oprava chyby - kontrola pasívnych polôh na zabezpečenie toho, že ich čas je väčší ako predchádzajúci čas
+* Opava chyby pre monochromatickú ikonu na motíve Nothing OS
+* Zakázanie určitých znakov v názve súboru, ako sú napríklad hviezdičky, lomky
