@@ -675,6 +675,7 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME, username).apply();
     }
 
+    @ProfilePreference(name=PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD)
     public String getCustomLoggingBasicAuthPassword() {
         return prefs.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD, "");
     }
@@ -778,6 +779,7 @@ public class PreferenceHelper {
     /**
      * HTTP File upload password
      */
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD)
     public String getHttpFileUploadPassword() {
         return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD, "");
     }
@@ -1434,8 +1436,10 @@ public class PreferenceHelper {
                     Object val = m.invoke(this);
 
                     if(val != null){
-                        props.setProperty(((ProfilePreference)a).name(),String.valueOf(val));
-                        LOG.debug(((ProfilePreference) a).name() + " : " + String.valueOf(val));
+                        String preferenceName = ((ProfilePreference) a).name();
+                        props.setProperty(preferenceName, String.valueOf(val));
+                        boolean isSensitive = preferenceName.toLowerCase().contains("password");
+                        LOG.debug(preferenceName + " : " + (isSensitive ? "********" : String.valueOf(val)));
                     }
                     else {
                         LOG.debug("Null value: " + ((ProfilePreference) a).name() + " is null.");
