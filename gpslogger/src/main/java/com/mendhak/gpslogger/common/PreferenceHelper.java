@@ -157,6 +157,7 @@ public class PreferenceHelper {
     /**
      * SMTP Password to use when sending emails
      */
+    @ProfilePreference(name= PreferenceNames.EMAIL_SMTP_PASSWORD)
     public String getSmtpPassword() {
         return prefs.getString(PreferenceNames.EMAIL_SMTP_PASSWORD, "");
     }
@@ -258,6 +259,7 @@ public class PreferenceHelper {
     /**
      * FTP Password for auto send
      */
+    @ProfilePreference(name= PreferenceNames.FTP_PASSWORD)
     public String getFtpPassword() {
         return prefs.getString(PreferenceNames.FTP_PASSWORD, "");
     }
@@ -775,9 +777,7 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_USERNAME, username).apply();
     }
 
-    /**
-     * HTTP File upload password
-     */
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD)
     public String getHttpFileUploadPassword() {
         return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD, "");
     }
@@ -1118,6 +1118,7 @@ public class PreferenceHelper {
     /**
      * OwnCloud password for auto send
      */
+    @ProfilePreference(name= PreferenceNames.OWNCLOUD_PASSWORD)
     public String getOwnCloudPassword() {
         return prefs.getString(PreferenceNames.OWNCLOUD_PASSWORD, "");
     }

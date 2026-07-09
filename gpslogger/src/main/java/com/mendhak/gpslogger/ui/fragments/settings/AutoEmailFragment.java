@@ -158,6 +158,7 @@ public class AutoEmailFragment extends PreferenceFragmentCompat implements
                     .fields(
                             Input.plain(PreferenceNames.EMAIL_SMTP_PASSWORD)
                                     .text(preferenceHelper.getSmtpPassword())
+                                    .showPasswordToggle()
                                     .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     ).show(this,PreferenceNames.EMAIL_SMTP_PASSWORD);
             return true;

@@ -187,6 +187,7 @@ public class HttpFileUploadSettingsFragment extends PreferenceFragmentCompat imp
                             Input.plain(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD)
                                     .text(preferenceHelper.getHttpFileUploadPassword())
                                     .hint(R.string.autoftp_password)
+                                    .showPasswordToggle()
                                     .inputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
                     )
                     .show(this, "httpfileupload_basicauth");
