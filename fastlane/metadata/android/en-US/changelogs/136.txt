@@ -1,0 +1,8 @@
+* HTTP File Upload Target (separate from normal Custom URL logger)
+* Significant motion heartbeat interval setting; forces log if some time elapses
+* Log to Dawarich
+* Bugfix - GPX track segments in same file were not being created correctly
+* Bugfix - inaccurate passive locations were being recorded
+* Bugfix - don't start new file if already logging to file
+* Auto send batch size, delay options
+* Security - passwords will no longer be saved to exported profile

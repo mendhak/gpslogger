@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <SwitchPreferenceCompat
+            android:key="dawarich_enable_logging"
+            android:title="@string/log_dawarich_title"
+            android:summary="@string/log_dawarich_summary_detailed"
+            app:iconSpaceReserved="false" />
+
+    <SwitchPreferenceCompat
+            android:key="dawarich_discard_offline_logs"
+            android:title="@string/log_dawarich_discard_offline_locations"
+            android:summary="@string/log_dawarich_discard_offline_locations_summary"
+            app:iconSpaceReserved="false" />
+
+    <Preference
+            android:key="dawarich_server"
+            android:singleLine="true"
+            android:title="@string/log_dawarich_url"
+            app:iconSpaceReserved="false" />
+
+    <Preference
+            android:key="dawarich_apikey"
+            android:singleLine="true"
+            android:title="@string/log_dawarich_apikey"
+            app:iconSpaceReserved="false" />
+
+    <Preference
+            android:key="dawarich_device_id"
+            android:singleLine="true"
+            android:title="@string/log_dawarich_device_id"
+            android:summary="@string/log_dawarich_device_id_summary"
+            app:iconSpaceReserved="false" />
+
+    <Preference
+            android:key="dawarich_bulk_min"
+            android:title="@string/dawarich_bulk_min_title"
+            android:summary="@string/dawarich_bulk_min_summary"
+            app:iconSpaceReserved="false" />
+
+    <Preference
+            android:key="dawarich_bulk_max"
+            android:title="@string/dawarich_bulk_max_title"
+            android:summary="@string/dawarich_bulk_max_summary"
+            app:iconSpaceReserved="false" />
+
+
+</PreferenceScreen>

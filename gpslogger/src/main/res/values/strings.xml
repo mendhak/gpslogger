@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
     <string name="title_drawer_uploadsettings">Upload settings</string>
@@ -6,8 +6,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
 
-
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">GPSLogger Settings</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -189,7 +188,6 @@
     <string name="autoemail_frequency_whenistop">When I press stop</string>
 
 
-
     <string name="autoemail_smtp_category">Email Settings</string>
     <string name="autoemail_username_summary">Username with your email provider</string>
     <string name="autoemail_password_summary">Password with your email provider</string>
@@ -207,7 +205,6 @@
     <string name="started_waiting">GPS started, waiting for fix</string>
     <string name="gps_stopped">GPS paused</string>
     <string name="stopped">Stopped</string>
-
 
 
     <string name="osm_setup_title">OpenStreetMap</string>
@@ -262,7 +259,7 @@
     <string name="owncloud_server_summary">ownCloud Base URL</string>
     <string name="owncloud_directory_summary">Folder to use on ownCloud server. Ensure that it exists or upload will fail.</string>
     <string name="owncloud_test_summary">Upload a test file to the ownCloud server</string>
-   
+
     <string name="owncloud_testing">Testing ownCloud upload</string>
 
     <string name="menu_upload">Upload</string>
@@ -432,7 +429,7 @@
     <string name="altitude_subtractgeoidheight_title">Use MSL instead of WGS84</string>
     <string name="altitude_subtractoffset_title">Subtract altitude offset</string>
     <string name="altitude_subtractoffset_summary">A value in meters to subtract from GPS altitudes. Use a negative number to add a value to the altitude. Only applies to GPS satellite points, not network or NMEA.</string>
-	<string name="upload_failure">Could not upload the file</string>
+    <string name="upload_failure">Could not upload the file</string>
     <string name="inaccurate_point_discarded">Inaccurate point discarded</string>
     <string name="not_enough_distance_traveled">Only %s m traveled. Point discarded.</string>
     <string name="autosend_wifionly_title">Send on Wi-Fi only</string>
@@ -482,6 +479,10 @@
     <string name="customurl_http_basicauthentication">Basic Authentication</string>
     <string name="customurl_basicauth_hide_password">Hide password</string>
     <string name="customurl_basicauth_hide_password_summary">Password cannot be displayed in plaintext and will not be exported to the profile file</string>
+    <string name="customurl_autosend_batch_size">Auto send batch size</string>
+    <string name="customurl_autosend_batch_size_summary">Number of requests before a pause.</string>
+    <string name="customurl_autosend_sleep">Auto Send sleep delay</string>
+    <string name="customurl_autosend_sleep_summary">Delay in milliseconds between batches.</string>
     <string name="hide_notification_from_status_bar_disallowed">Hiding notification is disallowed in Android Oreo onwards</string>
     <string name="reset_app_summary">This will reset the app, delete any preferences, delete GPSLogger files, and revoke permissions granted to this app. All data will be lost!</string>
     <string name="reset_app_title">Reset app</string>
@@ -504,5 +505,38 @@
     <string name="prompt_for_details_when_logging_starts">Prompt for details when logging starts</string>
     <string name="only_log_if_significant_motion_title">Only log if there is significant motion</string>
     <string name="only_log_if_significant_motion_summary">Only log if significant activity is detected such as walking, biking, driving. Significant motion is determined by your OS.</string>
+    <string name="significant_motion_bypass_interval_title">Extended no motion heartbeat interval</string>
+    <string name="significant_motion_bypass_interval_summary">During extended periods of no significant motion, occasionally bypass the check and take a heartbeat log anyway as determined by this interval. A value less than 1 minute disables the interval.</string>
+    <string name="time_in_minutes_dialog_title">Time in minutes</string>
+    <string name="log_dawarich_setup_title">Dawarich</string>
+    <string name="log_dawarich_title">Log to a Dawarich instance</string>
+    <string name="log_dawarich_summary_detailed">Sends the recorded position to a defined Dawarich instance</string>
+    <string name="log_dawarich_discard_offline_locations">Discard locations when offline</string>
+    <string name="log_dawarich_discard_offline_locations_summary">If this option is enabled all locations will be
+        discarded while offline instead of being queued for upload
+    </string>
+    <string name="log_dawarich_url">Dawarich base URL</string>
+    <string name="log_dawarich_device_id">Device ID</string>
+    <string name="log_dawarich_device_id_summary">The device id to declare in the position data to to differentiate
+        between device in the future
+    </string>
+    <string name="log_dawarich_filepath">Buffer file path</string>
+    <string name="log_dawarich_filepath_summary">The path where the persistence file of the buffer is saved to</string>
+    <string name="log_dawarich_apikey">Dawarich API-key</string>
+    <string name="app_name_debug">GPSLogger DEV</string>
+    <string name="dawarich_bulk_min_title">Bulk upload minimum locations</string>
+    <string name="dawarich_bulk_min_summary">Minimum amount of locations to bundle for bulk upload (waits until amount
+        is reached before sending)
+    </string>
+    <string name="dawarich_bulk_max_title">Bulk upload maximum locations</string>
+    <string name="dawarich_bulk_max_summary">Maximum amount of locations to send in one bulk upload request</string>
 
+    <string name="http_file_upload_setup_title">HTTP File Upload</string>
+    <string name="autosend_httpfileupload_summary">Uploads files to an arbitrary URL using HTTP POST or PUT.</string>
+    <string name="http_file_upload_body_type">Encoding</string>
+    <string name="http_file_upload_http_headers">HTTP Headers</string>
+    <string name="dawarich_baseUrl_not_set_title">Base-URL not set</string>
+    <string name="dawarich_baseUrl_not_set_msg">Please set the Dawarich base-URL and try again</string>
+    <string name="dawarich_apiKey_not_set_title">API-key not set</string>
+    <string name="dawarich_apiKey_not_set_msg">Please set the Dawarich API-key and try again</string>
 </resources>

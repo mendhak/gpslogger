@@ -157,7 +157,6 @@ public class PreferenceHelper {
     /**
      * SMTP Password to use when sending emails
      */
-    @ProfilePreference(name= PreferenceNames.EMAIL_SMTP_PASSWORD)
     public String getSmtpPassword() {
         return prefs.getString(PreferenceNames.EMAIL_SMTP_PASSWORD, "");
     }
@@ -259,7 +258,6 @@ public class PreferenceHelper {
     /**
      * FTP Password for auto send
      */
-    @ProfilePreference(name= PreferenceNames.FTP_PASSWORD)
     public String getFtpPassword() {
         return prefs.getString(PreferenceNames.FTP_PASSWORD, "");
     }
@@ -447,7 +445,7 @@ public class PreferenceHelper {
     public void setAbsoluteTimeoutForAcquiringPosition(int absoluteTimeout) {
         prefs.edit().putString(PreferenceNames.ABSOLUTE_TIMEOUT, String.valueOf(absoluteTimeout)).apply();
     }
-    
+
     /**
      * Reduce redundant passive location updates by adjusting the minimum collection interval (in seconds).
      */
@@ -677,7 +675,6 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME, username).apply();
     }
 
-    @ProfilePreference(name=PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD)
     public String getCustomLoggingBasicAuthPassword() {
         if (this.shouldHideCustomLoggingBasicAuthPassword()) {
             return "";
@@ -722,6 +719,23 @@ public class PreferenceHelper {
         return prefs.getBoolean(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED, false);
     }
 
+
+    public void setCustomUrlBatchSize(int batchSize){
+        prefs.edit().putString(PreferenceNames.CUSTOM_URL_BATCH_SIZE, String.valueOf(batchSize)).apply();
+    }
+
+    public int getCustomUrlBatchSize() {
+        return Strings.toInt(prefs.getString(PreferenceNames.CUSTOM_URL_BATCH_SIZE, "0"), 0);
+    }
+
+    public void setCustomUrlSleepMs(long sleepMs){
+        prefs.edit().putLong(PreferenceNames.CUSTOM_URL_SLEEP_MS, sleepMs).apply();
+    }
+
+    public long getCustomUrlSleepMs() {
+        return prefs.getLong(PreferenceNames.CUSTOM_URL_SLEEP_MS, 0L);
+    }
+
     @ProfilePreference(name= PreferenceNames.LOG_TO_URL_DISCARD_OFFLINE_LOCATIONS_ENABLED)
     public boolean shouldCustomURLLoggingDiscardOfflineLocations() {
         return prefs.getBoolean(PreferenceNames.LOG_TO_URL_DISCARD_OFFLINE_LOCATIONS_ENABLED, false);
@@ -737,6 +751,66 @@ public class PreferenceHelper {
     }
 
 
+    @ProfilePreference(name=PreferenceNames.AUTOSEND_HTTPFILEUPLOAD_ENABLED)
+    public boolean isHttpFileUploadAutoSendEnabled() {
+        return prefs.getBoolean(PreferenceNames.AUTOSEND_HTTPFILEUPLOAD_ENABLED, false);
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_URL)
+    public String getHttpFileUploadUrl() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_URL, "");
+    }
+
+    public void setHttpFileUploadUrl(String url) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_URL, url).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_METHOD)
+    public String getHttpFileUploadMethod() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_METHOD, "POST");
+    }
+
+    public void setHttpFileUploadMethod(String method) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_METHOD, method).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_HEADERS)
+    public String getHttpFileUploadHeaders() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_HEADERS, "");
+    }
+
+    public void setHttpFileUploadHeaders(String headers) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_HEADERS, headers).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_USERNAME)
+    public String getHttpFileUploadUsername() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_USERNAME, "");
+    }
+
+    public void setHttpFileUploadUsername(String username) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_USERNAME, username).apply();
+    }
+
+    /**
+     * HTTP File upload password
+     */
+    public String getHttpFileUploadPassword() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD, "");
+    }
+
+    public void setHttpFileUploadPassword(String password) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_BASICAUTH_PASSWORD, password).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE)
+    public String getHttpFileUploadBodyType() {
+        return prefs.getString(PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE, "form-data");
+    }
+
+    public void setHttpFileUploadBodyType(String bodyType) {
+        prefs.edit().putString(PreferenceNames.HTTPFILEUPLOAD_BODY_TYPE, bodyType).apply();
+    }
 
 
     @ProfilePreference(name=PreferenceNames.LOG_PASSIVE_LOCATIONS)
@@ -1061,7 +1135,6 @@ public class PreferenceHelper {
     /**
      * OwnCloud password for auto send
      */
-    @ProfilePreference(name= PreferenceNames.OWNCLOUD_PASSWORD)
     public String getOwnCloudPassword() {
         return prefs.getString(PreferenceNames.OWNCLOUD_PASSWORD, "");
     }
@@ -1092,6 +1165,93 @@ public class PreferenceHelper {
     }
 
 
+    /**
+     * Whether to auto send to Dawarich
+     */
+    public boolean isDawarichAutoSendEnabled() {
+        return prefs.getBoolean(PreferenceNames.AUTOSEND_DAWARICH_ENABLED, false);
+    }
+
+    /**
+     * Dawarich server for auto send
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_BASE_URL)
+    public String getDawarichBaseUrl() {
+        return prefs.getString(PreferenceNames.DAWARICH_BASE_URL, "");
+    }
+
+    public void setDawarichBaseUrl(String baseUrl){
+        prefs.edit().putString(PreferenceNames.DAWARICH_BASE_URL, baseUrl).apply();
+    }
+    /**
+     * Dawarich apikey for auto send
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_APIKEY)
+    public String getDawarichApikey() {
+        return prefs.getString(PreferenceNames.DAWARICH_APIKEY, "");
+    }
+
+    public void setDawarichApikey(String apikey){
+        prefs.edit().putString(PreferenceNames.DAWARICH_APIKEY, apikey).apply();
+    }
+    /**
+     * Dawarich device id
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_DEVICE_ID)
+    public String getDawarichDeviceId() {
+        return prefs.getString(PreferenceNames.DAWARICH_DEVICE_ID, "");
+    }
+
+    public void setDawarichDeviceId(String deviceId){
+        prefs.edit().putString(PreferenceNames.DAWARICH_DEVICE_ID, deviceId).apply();
+    }
+
+    @ProfilePreference(name= PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE)
+    public boolean shouldDawarichLoggingDiscardOfflineLocations() {
+        return prefs.getBoolean(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE, false);
+    }
+    public void setShouldDawarichLoggingDiscardOfflineLocations(boolean val) {
+        prefs.edit().putBoolean(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE, val).apply();
+    }
+
+    @ProfilePreference(name= PreferenceNames.DAWARICH_FILE_PATH)
+    public String getDawarichFilePath() {
+        return prefs.getString(PreferenceNames.DAWARICH_FILE_PATH, "");
+    }
+    public void setDawarichFilepath(String path) {
+        prefs.edit().putString(PreferenceNames.DAWARICH_FILE_PATH, path).apply();
+    }
+    @ProfilePreference(name= PreferenceNames.LOG_TO_DAWARICH)
+    public boolean shouldLogToDawarich() {
+        return prefs.getBoolean(PreferenceNames.LOG_TO_DAWARICH, false);
+    }
+    public void setShouldLogToDawarich(boolean val) {
+        prefs.edit().putBoolean(PreferenceNames.LOG_TO_DAWARICH, val).apply();
+    }
+
+    /**
+     * Dawarich min batch locations
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_BATCH_MIN)
+    public Integer getDawarichBatchMin() {
+        return Integer.parseInt(prefs.getString(PreferenceNames.DAWARICH_BATCH_MIN, "3"));
+    }
+
+    public void setDawarichBatchMin(Integer amount){
+        prefs.edit().putString(PreferenceNames.DAWARICH_BATCH_MIN, String.valueOf(amount)).apply();
+    }
+
+    /**
+     * Dawarich max batch locations
+     */
+    @ProfilePreference(name= PreferenceNames.DAWARICH_BATCH_MAX)
+    public Integer getDawarichBatchMax() {
+        return Integer.parseInt(prefs.getString(PreferenceNames.DAWARICH_BATCH_MAX, "10"));
+    }
+
+    public void setDawarichBatchMax(Integer amount) {
+        prefs.edit().putString(PreferenceNames.DAWARICH_BATCH_MAX, String.valueOf(amount)).apply();
+    }
 
 
     /**
@@ -1263,6 +1423,20 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.ONLY_LOG_IF_SIGNIFICANT_MOTION, value).apply();
     }
 
+    @ProfilePreference(name= PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL)
+    public int getSignificantMotionBypassInterval() {
+        try{
+            return Integer.parseInt(prefs.getString(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL, "0"));
+        }
+        catch(Exception e){
+            return 0;
+        }
+    }
+
+    public void setSignificantMotionBypassInterval(int value){
+        prefs.edit().putString(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL, String.valueOf(value)).apply();
+    }
+
     @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {
 
@@ -1320,6 +1494,4 @@ public class PreferenceHelper {
         }
 
     }
-
-
 }

@@ -80,6 +80,12 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
         findPreference(PreferenceNames.LOG_TO_URL_BODY).setSummary(preferenceHelper.getCustomLoggingHTTPBody());
         findPreference(PreferenceNames.LOG_TO_URL_BODY).setOnPreferenceClickListener(this);
 
+        findPreference(PreferenceNames.CUSTOM_URL_BATCH_SIZE).setSummary(String.valueOf(preferenceHelper.getCustomUrlBatchSize()));
+        findPreference(PreferenceNames.CUSTOM_URL_BATCH_SIZE).setOnPreferenceClickListener(this);
+
+        findPreference(PreferenceNames.CUSTOM_URL_SLEEP_MS).setSummary(String.valueOf(preferenceHelper.getCustomUrlSleepMs()));
+        findPreference(PreferenceNames.CUSTOM_URL_SLEEP_MS).setOnPreferenceClickListener(this);
+
         findPreference(PreferenceNames.AUTOSEND_CUSTOMURL_ENABLED).setOnPreferenceChangeListener(this);
 
         findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
@@ -109,6 +115,36 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
+        if(preference.getKey().equals(PreferenceNames.CUSTOM_URL_BATCH_SIZE)){
+            SimpleFormDialog.build()
+                    .title(R.string.customurl_autosend_batch_size)
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.CUSTOM_URL_BATCH_SIZE)
+                                    .text(String.valueOf(preferenceHelper.getCustomUrlBatchSize()))
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                                    .hint(R.string.customurl_autosend_batch_size_summary)
+                    )
+                    .show(this, PreferenceNames.CUSTOM_URL_BATCH_SIZE);
+            return true;
+        }
+
+        if(preference.getKey().equals(PreferenceNames.CUSTOM_URL_SLEEP_MS)){
+            SimpleFormDialog.build()
+                    .title(R.string.customurl_autosend_sleep)
+                    .neg(R.string.cancel)
+                    .pos(R.string.ok)
+                    .fields(
+                            Input.plain(PreferenceNames.CUSTOM_URL_SLEEP_MS)
+                                    .text(String.valueOf(preferenceHelper.getCustomUrlSleepMs()))
+                                    .inputType(InputType.TYPE_CLASS_NUMBER)
+                                    .hint(R.string.customurl_autosend_sleep_summary)
+                    )
+                    .show(this, PreferenceNames.CUSTOM_URL_SLEEP_MS);
+            return true;
+        }
+
         if(preference.getKey().equals("customurl_legend_1")){
 
             String codeGreen = Integer.toHexString(ContextCompat.getColor(getActivity(), R.color.accentColorComplementary)).substring(2);
@@ -264,6 +300,20 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
         if(which != BUTTON_POSITIVE) { return true; }
 
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.CUSTOM_URL_BATCH_SIZE)){
+            int batchSize = Integer.parseInt(extras.getString(PreferenceNames.CUSTOM_URL_BATCH_SIZE));
+            preferenceHelper.setCustomUrlBatchSize(batchSize);
+            findPreference(PreferenceNames.CUSTOM_URL_BATCH_SIZE).setSummary(String.valueOf(batchSize));
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.CUSTOM_URL_SLEEP_MS)){
+            long sleepMs = Long.parseLong(extras.getString(PreferenceNames.CUSTOM_URL_SLEEP_MS));
+            preferenceHelper.setCustomUrlSleepMs(sleepMs);
+            findPreference(PreferenceNames.CUSTOM_URL_SLEEP_MS).setSummary(String.valueOf(sleepMs));
+            return true;
+        }
+
         if(dialogTag.equalsIgnoreCase(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME)){
             String basicAuthUsername = extras.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_USERNAME);
             String basicAuthPass = extras.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD);
@@ -303,7 +353,6 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
             findPreference(PreferenceNames.LOG_TO_URL_BODY).setSummary(body);
             return true;
         }
-
 
         return false;
     }

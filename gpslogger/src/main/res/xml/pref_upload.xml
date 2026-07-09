@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:summary="@string/pref_autosend_summary"
@@ -36,8 +36,8 @@
     <SwitchPreferenceCompat
         android:defaultValue="false"
         android:key="autosend_wifionly"
-        android:title="@string/autosend_wifionly_title"
         android:summary="@string/autosend_wifionly_summary"
+        android:title="@string/autosend_wifionly_title"
         app:iconSpaceReserved="false" />
 
     <PreferenceCategory
@@ -47,7 +47,12 @@
         <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
             android:key="autocustomurl_enabled"
             android:title="@string/log_customurl_setup_title"
-            app:icon="@drawable/customurlsender"/>
+            app:icon="@drawable/customurlsender" />
+
+        <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:key="autohttpfileupload_enabled"
+            android:title="@string/http_file_upload_setup_title"
+            app:icon="@drawable/customurlsender" />
 
         <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
             android:key="dropbox_enabled"
@@ -55,9 +60,9 @@
             app:icon="@drawable/dropbox" />
 
         <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
+            android:icon="@drawable/googledrive"
             android:key="google_drive_enabled"
-            android:title="@string/google_drive_setup_title"
-            android:icon="@drawable/googledrive"/>
+            android:title="@string/google_drive_setup_title" />
 
         <com.mendhak.gpslogger.ui.components.SwitchPlusClickPreference
             android:key="sftp_enabled"

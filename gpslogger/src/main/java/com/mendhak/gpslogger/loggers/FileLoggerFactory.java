@@ -26,6 +26,7 @@ import com.mendhak.gpslogger.common.Session;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.loggers.csv.CSVFileLogger;
 import com.mendhak.gpslogger.loggers.customurl.CustomUrlLogger;
+import com.mendhak.gpslogger.loggers.dawarich.DawarichLogger;
 import com.mendhak.gpslogger.loggers.geojson.GeoJSONLogger;
 import com.mendhak.gpslogger.loggers.gpx.Gpx10FileLogger;
 import com.mendhak.gpslogger.loggers.gpx.Gpx11FileLogger;
@@ -34,6 +35,7 @@ import com.mendhak.gpslogger.loggers.opengts.OpenGTSLogger;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +78,10 @@ public class FileLoggerFactory {
 
         if (preferenceHelper.shouldLogToOpenGTS()) {
             loggers.add(new OpenGTSLogger(context));
+        }
+
+        if (preferenceHelper.shouldLogToDawarich()) {
+            loggers.add(new DawarichLogger(preferenceHelper.getGpsLoggerFolder()));
         }
 
         if (preferenceHelper.shouldLogToCustomUrl()) {

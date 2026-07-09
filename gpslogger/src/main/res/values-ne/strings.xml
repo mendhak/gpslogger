@@ -7,7 +7,7 @@
     <string name="title_drawer_uploadsettings">अपलोड सेटिङहरू</string>
     <string name="navigation_drawer_open">नेभिगेसन ड्रयर खोल्नुहोस्</string>
     <string name="navigation_drawer_close">नेभिगेसन ड्रयर बन्द गर्नुहोस्</string>
-    <string name="app_name">जिपिएस लगर</string>
+    <string name="app_name_release">जिपिएस लगर</string>
     <string name="settings_screen_name">जिपिएस लगर सेटिंगस्</string>
     <string name="hide">लुकाउनुहोस्</string>
     <string name="could_not_write_to_file">फाइलमा लेख्न सकिएन</string>
@@ -44,4 +44,10 @@
     <string name="meters"> .मिटरहरु</string>
     <string name="error">त्रुटि</string>
     <string name="error_connection">जडान त्रुटि। कृपया आफ्नो फोन सेटिङ जाँच गर्नुहोस्।</string>
+
+
+
+
+
+
 </resources>

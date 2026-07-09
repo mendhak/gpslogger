@@ -51,6 +51,17 @@ public  class PreferenceNames {
     public static final String LOG_TO_URL_BASICAUTH_HIDE_PASSWORD = "log_customurl_basicauth_hide_password";
     public static final String LOG_TO_URL_DISCARD_OFFLINE_LOCATIONS_ENABLED = "log_customurl_discard_offline_locations_enabled";
     public static final String AUTOSEND_CUSTOMURL_ENABLED = "autocustomurl_enabled";
+    public static final String CUSTOM_URL_BATCH_SIZE = "custom_url_batch_size";
+    public static final String CUSTOM_URL_SLEEP_MS = "custom_url_sleep_ms";
+
+    public static final String AUTOSEND_HTTPFILEUPLOAD_ENABLED = "autohttpfileupload_enabled";
+    public static final String HTTPFILEUPLOAD_URL = "httpfileupload_url";
+    public static final String HTTPFILEUPLOAD_METHOD = "httpfileupload_method";
+    public static final String HTTPFILEUPLOAD_HEADERS = "httpfileupload_headers";
+    public static final String HTTPFILEUPLOAD_BASICAUTH_USERNAME = "httpfileupload_basicauth_username";
+    public static final String HTTPFILEUPLOAD_BASICAUTH_PASSWORD = "httpfileupload_basicauth_password";
+    public static final String HTTPFILEUPLOAD_BODY_TYPE = "httpfileupload_body_type";
+
     public static final String LOG_TO_OPENGTS = "log_opengts";
     public static final String LOG_PASSIVE_LOCATIONS="log_passive_locations";
     public static final String LOG_SATELLITE_LOCATIONS = "log_satellite_locations";
@@ -117,6 +128,16 @@ public  class PreferenceNames {
     public static final String GPSLOGGER_FOLDER = "gpslogger_folder";
     public static final String PREFIX_SERIAL_TO_FILENAME = "new_file_prefix_serial";
 
+    public static final String AUTOSEND_DAWARICH_ENABLED = "dawarich_enabled";
+    public static final String DAWARICH_BASE_URL = "dawarich_server";
+    public static final String DAWARICH_APIKEY = "dawarich_apikey";
+    public static final String DAWARICH_DEVICE_ID = "dawarich_device_id";
+    public static final String DAWARICH_DISCARD_LOG_WHEN_OFFLINE = "dawarich_discard_offline_logs";
+    public static final String DAWARICH_FILE_PATH = "dawarich_persistence_file_path";
+    public static final String LOG_TO_DAWARICH = "dawarich_enable_logging";
+    public static final String DAWARICH_BATCH_MIN = "dawarich_bulk_min";
+    public static final String DAWARICH_BATCH_MAX = "dawarich_bulk_max";
+
     public static final String ALTITUDE_SUBTRACT_OFFSET = "altitude_subtractoffset";
     public static final String ALTITUDE_SHOULD_ADJUST = "altitude_subtractgeoidheight";
     public static final String AUTOSEND_WIFI_ONLY = "autosend_wifionly";
@@ -149,5 +170,6 @@ public  class PreferenceNames {
     public static final String ANNOTATIONS_BUTTON_SETTINGS = "annotations_buttons";
 
     public static final String ONLY_LOG_IF_SIGNIFICANT_MOTION = "only_log_if_significant_motion";
+    public static final String SIGNIFICANT_MOTION_BYPASS_INTERVAL = "significant_motion_bypass_interval";
 
 }

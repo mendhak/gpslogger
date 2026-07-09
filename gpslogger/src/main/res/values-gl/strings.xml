@@ -11,7 +11,7 @@
     <string name="hide">Agochar</string>
     <string name="add_description">Engadir unha descrición</string>
     <string name="navigation_drawer_close">Pecha o caixón de navegación</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Axustes de GPSLogger</string>
     <string name="could_not_write_to_file">Non foi posíbel escribir no ficheiro</string>
     <string name="txt_speed_kph">Velocidade (en km/h):</string>
@@ -387,4 +387,10 @@
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notificacións</b>: permite amosar unha notificación, isto axuda a manter o servizo de rexistro activo. ]]></string>
     <string name="started_at">comezou ás</string>
     <string name="hide_notification_from_lock_screen">Agochar as notificacións da pantalla de bloqueo</string>
+
+
+
+
+
+
 </resources>

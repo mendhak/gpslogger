@@ -19,7 +19,7 @@
     <string name="change_language_title">Промени јазик</string>
     <string name="change_language_summary">Не се сите јазици целосно преведени! Мора да ја рестатирате апликацијата за да има ефект промената на јазикот.</string>
     <string name="hide_notification_from_status_bar">Сокриј ги известувањата од статусната лента</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="ok">ОК</string>
     <string name="cancel">Откажи</string>
     <string name="hide">Скриј</string>
@@ -184,4 +184,10 @@
     <string name="autoftp_directory">Директориум</string>
     <string name="osm_pick_file">Изберете фајл</string>
     <string name="pref_general_title">Генерални Опции</string>
+
+
+
+
+
+
 </resources>

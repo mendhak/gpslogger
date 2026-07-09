@@ -3,7 +3,7 @@
     <string name="title_drawer_uploadsettings">Paramètres d\'envoi</string>
     <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
     <string name="navigation_drawer_close">Fermer le menu de navigation</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="settings_screen_name">Paramètres de GPSLogger</string>
     <string name="ok">OK</string>
     <string name="cancel">Annuler</string>
@@ -389,4 +389,10 @@ une plus grande précision à basses fréquences.    </string>
     <string name="log_customurl_discard_offline_locations_summary">Enregistrer les emplacements sur une URL personnalisée uniquement lorsqu\'une connexion réseau est disponible (n\'affecte pas l\'envoi automatique)</string>
     <string name="retry_get_best_possible_accuracy_summary">Au lieu d\'enregistrer le premier point précis, continuez d\'essayer pendant la durée de précision et sélectionnez le point avec la meilleure précision. Cela prend plus de temps, mais augmente les chances d\'obtenir des points plus précis.</string>
     <string name="retry_get_best_possible_accuracy_title">Sélectionnez la meilleure précision dans la durée</string>
+
+
+
+
+
+
 </resources>

@@ -295,7 +295,7 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="txt_starttimestamp_epoch">Mula cap waktu (zaman)</string>
     <string name="txt_battery">Bateri</string>
     <string name="time_before_logging_summary">Gunakan 0 untuk kekerapan maksimum, tetapi lebih perlahan adalah lebih baik untuk hayat bateri. Konfigurasi bateri tahap sistem boleh mengatasi tetapan ini, lihat Bantuan dan Soalan Lazim.</string>
-    <string name="app_name">GPSLogger</string>
+    <string name="app_name_release">GPSLogger</string>
     <string name="ok">okey</string>
     <string name="hide">Sembunyi</string>
     <string name="not_applicable">n/a</string>
@@ -314,8 +314,8 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="log_customurl_summary_detailed">Menghantar permintaan kepada URL Tersuai apabila titik lokasi dirakam. Bergantung kepada selang log.</string>
     <string name="autosend_customurl_summary">(Ciri ini membolehkan pengelogan CSV) Menghantar permintaan secara pukal ke URL Tersuai, satu untuk setiap baris dalam fail CSV. Bergantung pada selang penghantaran automatik.</string>
     <string name="txt_time_isoformat">Masa UTC (2011-12-25T15:27:33Z):</string>
-    <string name="gpslogger_permissions_rationale_message_basic">Aplikasi ini memerlukan pelbagai kebenaran untuk berfungsi dengan baik. Anda kini akan digesa beberapa kali untuk pelbagai kebenaran (maaf). Berikut adalah penjelasan bagi setiap kebenaran.</string>
-    <string name="gpslogger_permissions_permanently_denied">Anda telah menafikan satu atau lebih kebenaran yang diperlukan oleh aplikasi ini. Anda perlu melancarkan semula, atau ke skrin tetapan sistem untuk memberikan kebenaran ini. <br/><br/>Jika anda telah menolak kebenaran secara kekal, anda boleh menetapkan semula kebenaran itu dalam tetapan sistem.</string>
+    <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Aplikasi ini memerlukan pelbagai kebenaran untuk berfungsi dengan baik. Anda kini akan digesa beberapa kali untuk pelbagai kebenaran (maaf). Berikut adalah penjelasan bagi setiap kebenaran.]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA[Anda telah menafikan satu atau lebih kebenaran yang diperlukan oleh aplikasi ini. Anda perlu melancarkan semula, atau ke skrin tetapan sistem untuk memberikan kebenaran ini. <br/><br/>Jika anda telah menolak kebenaran secara kekal, anda boleh menetapkan semula kebenaran itu dalam tetapan sistem.]]></string>
     <string name="profile_add_from_url">Daripada URL</string>
     <string name="meter"> meter</string>
     <string name="log_plain_text_csv_field_delimiter">Pembatas medan CSV</string>
@@ -332,7 +332,7 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="listeners_passive_title">Log lokasi pasif</string>
     <string name="storage_chooser_overview_heading">Pilih Storan</string>
     <string name="donate_bitcoin">Bitcoin</string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><b>Abaikan pengoptimuman bateri</b> - Benarkan aplikasi ini berjalan di latar belakang dengan mengurangkan pengoptimuman bateri.</string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Abaikan pengoptimuman bateri</b> - Benarkan aplikasi ini berjalan di latar belakang dengan mengurangkan pengoptimuman bateri.]]></string>
     <string name="customurl_http_body">Badan HTTP</string>
     <string name="customurl_http_headers">Kepala HTTP</string>
     <string name="reset_app_summary">Ini akan menetapkan semula apl, memadam sebarang pilihan, memadamkan fail GPSLogger dan membatalkan kebenaran yang diberikan kepada aplikasi ini. Semua data akan hilang!</string>
@@ -347,8 +347,8 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="storage_chooser_create_label">Cipta</string>
     <string name="storage_chooser_internal_storage_text">Storan Dalaman</string>
     <string name="storage_chooser_new_folder_label">Folder Baru</string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><b> Benarkan sepanjang masa</b> - Benarkan aplikasi ini menerima kemas kini lokasi apabila berjalan di latar belakang.</string>
-    <string name="gpslogger_permissions_background_location">Untuk membenarkan GPSLogger berjalan di latar belakang, anda perlu memberikannya kebenaran tambahan. Pada skrin seterusnya sila pilih:</string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b> Benarkan sepanjang masa</b> - Benarkan aplikasi ini menerima kemas kini lokasi apabila berjalan di latar belakang.]]></string>
+    <string name="gpslogger_permissions_background_location"><![CDATA[Untuk membenarkan GPSLogger berjalan di latar belakang, anda perlu memberikannya kebenaran tambahan. Pada skrin seterusnya sila pilih:]]></string>
     <string name="sftp_setup_title">SFTP</string>
     <string name="txt_timestamp_epoch">Cap masa (epoch)</string>
     <string name="reset_app_title">Tetapkan semula aplikasi</string>
@@ -386,4 +386,10 @@ mungkin tidak berfungsi dengan baik dengan ciri auto hantar kerana ia hanya meng
     <string name="retry_get_best_possible_accuracy_title">Pilih ketepatan masa</string>
     <string name="retry_get_best_possible_accuracy_summary">Selain daripada menglog titik tepat, cuba untuk log durasi ketepatan dan pilih titik yang lebih tepat. Ini akan mengambil jangka yang lama tetapi akan meningkatkan peluang untuk titik-titik yang lebih tepat.</string>
     <string name="started_at">bermula pada</string>
+
+
+
+
+
+
 </resources>

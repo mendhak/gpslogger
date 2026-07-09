@@ -27,6 +27,7 @@ public abstract class FileSender implements FilenameFilter {
 
     public static class SenderNames {
         public static final String AUTOEMAIL = "AUTO_EMAIL_SENDER";
+        public static final String DAWARICH = "DAWARICH_SENDER";
         public static final String DROPBOX = "DROPBOX_SENDER";
         public static final String GOOGLEDRIVE = "GOOGLE_DRIVE";
         public static final String OPENGTS = "OPENGTS_SENDER";
@@ -35,6 +36,7 @@ public abstract class FileSender implements FilenameFilter {
         public static final String SFTP = "SFTP_SENDER";
         public static final String OPENSTREETMAP = "OSM_SENDER";
         public static final String CUSTOMURL = "CUSTOM_URL_SENDER";
+        public static final String HTTPFILEUPLOAD = "HTTP_FILE_UPLOAD_SENDER";
     }
 
 
