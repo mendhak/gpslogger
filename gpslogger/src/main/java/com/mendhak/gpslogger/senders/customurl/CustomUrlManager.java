@@ -278,7 +278,7 @@ public class CustomUrlManager extends FileSender {
 
                 requests.add(new CustomUrlRequest(finalUrl, httpMethod,
                         finalBody, finalHeaders, preferenceHelper.getCustomLoggingBasicAuthUsername(),
-                        preferenceHelper.getCustomLoggingBasicAuthPassword()));
+                        preferenceHelper.getCustomLoggingBasicAuthPasswordForService()));
             } catch (Exception e) {
                 LOG.error("Could not build the Custom URL to send", e);
             }

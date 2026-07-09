@@ -679,11 +679,28 @@ public class PreferenceHelper {
 
     @ProfilePreference(name=PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD)
     public String getCustomLoggingBasicAuthPassword() {
+        if (this.shouldHideCustomLoggingBasicAuthPassword()) {
+            return "";
+        }
+
+        return prefs.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD, "");
+    }
+
+    public String getCustomLoggingBasicAuthPasswordForService() {
         return prefs.getString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD, "");
     }
 
     public void setCustomLoggingBasicAuthPassword(String password) {
         prefs.edit().putString(PreferenceNames.LOG_TO_URL_BASICAUTH_PASSWORD, password).apply();
+    }
+
+    @ProfilePreference(name=PreferenceNames.LOG_TO_URL_BASICAUTH_HIDE_PASSWORD)
+    public boolean shouldHideCustomLoggingBasicAuthPassword() {
+        return prefs.getBoolean(PreferenceNames.LOG_TO_URL_BASICAUTH_HIDE_PASSWORD, false);
+    }
+
+    public void setShouldHideCustomLoggingBasicAuthPassword(boolean hide) {
+        prefs.edit().putBoolean(PreferenceNames.LOG_TO_URL_BASICAUTH_HIDE_PASSWORD, hide).apply();
     }
 
     /**

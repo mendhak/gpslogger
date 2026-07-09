@@ -477,6 +477,8 @@
     <string name="customurl_http_headers">HTTP Headers</string>
     <string name="customurl_http_method">HTTP Method</string>
     <string name="customurl_http_basicauthentication">Basic Authentication</string>
+    <string name="customurl_basicauth_hide_password">Hide password</string>
+    <string name="customurl_basicauth_hide_password_summary">Password cannot be displayed in plaintext and will not be exported to the profile file</string>
     <string name="customurl_autosend_batch_size">Auto send batch size</string>
     <string name="customurl_autosend_batch_size_summary">Number of requests before a pause.</string>
     <string name="customurl_autosend_sleep">Auto Send sleep delay</string>
