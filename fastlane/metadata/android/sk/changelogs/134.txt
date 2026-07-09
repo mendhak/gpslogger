@@ -2,6 +2,6 @@
 * Oprava pre aktivitu FAQ pri rozložení typu "edge to edge" pre systém Android 15.
 * Oprava chyby: reset alarmu pre automatické odoslanie aj po zastavení zaznamenávania. To spôsobovalo opätovné zobrazenie notifikácie.
 * Hlavičky e-mailov a MIME typy sú odosielané správne
-* Ignorovanie neaktuálnych lokalít
-* Časový filter pre pasívne lokality
+* Ignorovanie neaktuálnych polôh
+* Časový filter pre pasívne polohy
 * Experimentálne: zaznamenávanie len pri významnom pohybe

@@ -204,7 +204,7 @@
     <string name="pref_autosend_title">Automat. Senden, E-Mail, Hochladen</string>
     <string name="pref_autosend_summary">E-Mail-, Teilen- und Hochladen-Optionen</string>
     <string name="shortcut_start">Starten</string>
-    <string name="shortcut_stop">Beenden</string>
+    <string name="shortcut_stop">Anhalten</string>
     <string name="shortcut_pickaction">Aktion auswählen</string>
     <string name="log_opengts_title">Protokoll an einem OpenGTS-Server senden</string>
     <string name="log_opengts_summary">Sendet GPRMC-Daten an einen Online-OpenGTS-Server.</string>
@@ -412,17 +412,19 @@
     <string name="dawarich_bulk_max_summary">Maximalanzahl an Positionen, welche mit einer Sammelanfrage gesendet
         werden
     </string>
-    <string name="log_dawarich_setup_title">DaWarIch</string>
-    <string name="log_dawarich_title">In eine DaWarIch-Instanz protokollieren</string>
-    <string name="log_dawarich_summary_detailed">Sendet die aufgezeichneten Positionen an eine definierte DaWarIch-Instanz</string>
+    <string name="log_dawarich_setup_title">Dawarich</string>
+    <string name="log_dawarich_title">In eine Dawarich-Instanz protokollieren</string>
+    <string name="log_dawarich_summary_detailed">Sendet die aufgezeichnete Position an eine definierte Dawarich-Instanz</string>
     <string name="log_dawarich_discard_offline_locations">Positionen verwerfen, wenn offline</string>
-    <string name="log_dawarich_discard_offline_locations_summary">Wenn diese Option eingeschaltet ist, werden alle Positionsdaten verworfen, solange Sie offline sind</string>
-    <string name="log_dawarich_url">DaWarIch-Basis-URL</string>
+    <string name="log_dawarich_discard_offline_locations_summary">Wenn diese Option aktiviert ist, werden alle Standorte im Offline-Modus verworfen, anstatt in die Warteschlange für den Upload gestellt zu werden</string>
+    <string name="log_dawarich_url">Dawarich-Basis-URL</string>
     <string name="log_dawarich_device_id">Geräte-ID</string>
-    <string name="log_dawarich_device_id_summary">Die Geräte-ID, welche den Positionsdaten hinzugefügt werden soll, um diese später differenzieren zu können</string>
-    <string name="log_dawarich_apikey">DaWarIch-API-Schlüssel</string>
-    <string name="dawarich_baseUrl_not_set_title">Basis-URL nicht gesetzt</string>
-    <string name="dawarich_baseUrl_not_set_msg">Bitte geben Sie die DaWarIch-Basis-URL ein und versuchen Sie es erneut</string>
-    <string name="dawarich_apiKey_not_set_title">API-Schlüssel nicht gesetzt</string>
-    <string name="dawarich_apiKey_not_set_msg">Bitte geben Sie den API-Schlüssel ein und versuche Sie es erneut</string>
+    <string name="log_dawarich_device_id_summary">Die Geräte-ID, die in den Positionsdaten angegeben werden muss, um Geräte zukünftig zu unterscheiden</string>
+    <string name="log_dawarich_apikey">Dawarich-API-Schlüssel</string>
+    <string name="dawarich_baseUrl_not_set_title">Basis-URL nicht festgelegt</string>
+    <string name="dawarich_baseUrl_not_set_msg">Bitte geben Sie die Dawarich-Basis-URL ein und versuchen Sie es erneut</string>
+    <string name="dawarich_apiKey_not_set_title">API-Schlüssel nicht festgelegt</string>
+    <string name="dawarich_apiKey_not_set_msg">Bitte geben Sie den Dawarich-API-Schlüssel ein und versuchen Sie es erneut</string>
+    <string name="log_dawarich_filepath">Pfad zur Pufferdatei</string>
+    <string name="log_dawarich_filepath_summary">Der Pfad, unter dem die Persistenzdatei des Puffers gespeichert wird</string>
 </resources>
