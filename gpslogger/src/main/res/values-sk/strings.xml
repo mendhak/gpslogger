@@ -350,7 +350,7 @@ polia.
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Povoliť vždy</b> - umožní aplikácii získavať aktualizácie polohy aj vtedy, keď beží na pozadí. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorovať optimalizácie batérie</b> - umožní aplikácii fungovanie na pozadí, znížením optimalizácií batérie. ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["\"Odmietli ste udeliť jedno alebo niekoľko oprávnení, ktoré vyžaduje táto aplikácia. Na udelenie týchto oprávnení budete musieť prejsť na obrazovku s nastaveniami aplikácie, alebo spustiť aplikáciu znovu.  <br><br>Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["Odmietli ste udeliť jedno alebo niekoľko oprávnení, ktoré vyžaduje táto aplikácia. Na udelenie týchto oprávnení budete musieť prejsť na obrazovku s nastaveniami aplikácie, alebo spustiť aplikáciu znovu.  <br><br>Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Pre fungovanie aplikácie GPSLogger na pozadí, je potrebné udeliť jej dodatočné oprávnenie. Na nasledujúcej obrazovke prosím vyberte:]]></string>
     <string name="privacy_policy">Politika ochrany osobných údajov</string>
     <string name="debuglog_attach_to_email">Pripojiť k e-mailu aj záznam pre ladenie</string>
@@ -444,4 +444,6 @@ polia.
     <string name="dawarich_baseUrl_not_set_msg">Prosím nastavte základnú URL pre Dawarich a skúste to ešte raz</string>
     <string name="dawarich_apiKey_not_set_title">Nie je nastavený kľúč API</string>
     <string name="dawarich_apiKey_not_set_msg">Prosím nastavte kľúč API pre Dawarich a skúste to ešte raz</string>
+    <string name="customurl_basicauth_hide_password_summary">Heslo nemožno zobraziť vo formáte čistého textu a neexportuje sa do súboru s profilom</string>
+    <string name="customurl_basicauth_hide_password">Skryť heslo</string>
 </resources>
