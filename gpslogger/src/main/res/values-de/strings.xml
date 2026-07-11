@@ -427,4 +427,6 @@
     <string name="dawarich_apiKey_not_set_msg">Bitte geben Sie den Dawarich-API-Schlüssel ein und versuchen Sie es erneut</string>
     <string name="log_dawarich_filepath">Pfad zur Pufferdatei</string>
     <string name="log_dawarich_filepath_summary">Der Pfad, unter dem die Persistenzdatei des Puffers gespeichert wird</string>
+    <string name="customurl_basicauth_hide_password">Passwort ausblenden</string>
+    <string name="customurl_basicauth_hide_password_summary">Das Passwort kann nicht im Klartext angezeigt werden und wird nicht in die Profildatei exportiert</string>
 </resources>

@@ -329,7 +329,7 @@
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotók, média, fájlok</b> - Ez a jogosultság lehetővé teszi naplófájlok és tesztfájlok írását a tárolóba, valamint a fájlok listájából való olvasást feltöltés vagy megosztás céljából. Ez az alkalmazás nem fér hozzá a fényképekhez vagy egyéb média fájlokhoz.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Mindig engedélyezve</b> - Engedélyezi az alkalmazásnak, hogy megkapja a helyfrissítéseket, amikor a háttérben fut. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Akkumulátoroptimalizálás figyelmen kívül hagyása</b> - Engedélyezze az alkalmazásnak a háttérben való futását az akkumulátoroptimalizálás csökkentésével. ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["\"Ön megtagadott egy vagy több engedélyt, amelyet az alkalmazás igényel.  Engedélyek megadásához újra kell indítani az alkalmazást vagy a rendszerbeállítások képernyőre kell lépnie.  <br><br>Ha véglegesen megtagadta az engedélyeket, visszaállíthatja azokat a rendszerbeállításokban. "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["Ön megtagadott egy vagy több engedélyt, amelyet az alkalmazás igényel.  Engedélyek megadásához újra kell indítani az alkalmazást vagy a rendszerbeállítások képernyőre kell lépnie.  <br><br>Ha véglegesen megtagadta az engedélyeket, visszaállíthatja azokat a rendszerbeállításokban. "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Ahhoz, hogy a GPSLogger a háttérben futhasson, további engedélyeket kell megadnia. Következő képernyőn válassza ki: ]]></string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
@@ -423,4 +423,6 @@
     <string name="dawarich_baseUrl_not_set_msg">Kérjük, állítsa be a Dawarich alap-URL-jét, majd próbálja meg újra</string>
     <string name="dawarich_apiKey_not_set_title">API-kulcs nincs beállítva</string>
     <string name="dawarich_apiKey_not_set_msg">Kérjük, adja meg a Dawarich API-kulcsot, majd próbálja meg újra</string>
+    <string name="customurl_basicauth_hide_password">Jelszó elrejtése</string>
+    <string name="customurl_basicauth_hide_password_summary">Jelszó nem jeleníthető meg egyszerű szövegként, és nem kerül exportálásra a profilfájlba</string>
 </resources>

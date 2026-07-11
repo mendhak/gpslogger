@@ -5,4 +5,3 @@
 * Oprava - zaznamenávali sa nepresné pasívne polohy
 * Oprava - nespustenie nového súboru, ak sa už zaznamenáva do súboru
 * Veľkosť dávky autom. odoslania, nastavenia oneskorenia
-* Bezpečnosť - heslá sa už neukladajú do exportovaného profilu

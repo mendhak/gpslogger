@@ -5,4 +5,3 @@
 * Hibajav – pontatlan passzív helyszínek kerültek rögzítésre
 * Hibajav – ne indítson új fájlt, ha már a naplózás folyamatban
 * Automatikus küldés kötegméret, késleltetési beállítások
-* Biztonság – jelszavak nem kerülnek mentésre az exportált profilba
