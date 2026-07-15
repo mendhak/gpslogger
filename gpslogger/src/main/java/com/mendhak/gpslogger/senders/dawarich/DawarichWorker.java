@@ -42,7 +42,7 @@ public class DawarichWorker extends Worker {
 
         DawarichBatch batch = new DawarichBatch();
         while (!buffer.isEmpty()) {
-            DawarichBatchLocation loc = DawarichBatchLocation.fromSerializableLocationExtended(Objects.requireNonNull(buffer.pop()), preferenceHelper);
+            DawarichBatchLocation loc = DawarichBatchLocation.fromSerializableLocationExtended(this.getApplicationContext(), Objects.requireNonNull(buffer.pop()), preferenceHelper);
             batch.appendLocation(loc);
         }
         try {
