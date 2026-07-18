@@ -19,12 +19,10 @@
 
 package com.mendhak.gpslogger.senders.dawarich;
 
-import com.mendhak.gpslogger.common.BundleConstants;
-import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.SerializableLocation;
-import com.mendhak.gpslogger.common.Strings;
+import android.content.Context;
+import com.mendhak.gpslogger.common.*;
+import com.mendhak.gpslogger.common.BatteryInfo;
 import com.mendhak.gpslogger.common.slf4j.Logs;
-import net.openid.appauth.internal.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -236,17 +234,25 @@ public class DawarichBatchLocation {
         this.battery_level = builder.battery_level;
     }
 
-    public static DawarichBatchLocation fromSerializableLocation (SerializableLocation location) {
+    public static DawarichBatchLocation fromSerializableLocation (Context context, SerializableLocation location) {
         sourceData = location;
         double[] coords = {location.getLongitude(), location.getLatitude()};
+        double batLvl = -1.0;
+        boolean batChg = false;
+        BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
+        batLvl = batteryInfo.BatteryLevel;
+        batChg = batteryInfo.IsCharging;
         Builder b = new Builder(coords, Strings.getIsoDateTimeWithOffset(new Date(location.getTime())))
                 .withAltitude(location.getAltitude())
                 .withSpeed(location.getSpeed())
                 // Use accuracy in meters as hor. accuracy
                 .withHorizontalAccuracy(location.getAccuracy())
                 .withLocationsInPayload(1)
-                .withBatteryState(location.getBatteryCharging() ? "charging" : "unplugged")
-                .withBatteryLevel((double) location.getBatteryLevel() / 100);
+                // not clear why data provided by Location is wrong, using implementation from CustomURL
+                //.withBatteryState(location.getBatteryCharging() ? "charging" : "unplugged")
+                //.withBatteryLevel((double) location.getBatteryLevel() / 100)
+                .withBatteryLevel(batLvl)
+                .withBatteryState(batChg ? "charging" : "unplugged");
         if (!Strings.isNullOrEmpty(location.getHDOP()) &&  !Strings.isNullOrEmpty(location.getVDOP())) {
             // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
             b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
@@ -255,18 +261,27 @@ public class DawarichBatchLocation {
     }
 
     public static DawarichBatchLocation fromSerializableLocationExtended (
+            Context context,
             SerializableLocation location,
             PreferenceHelper helper){
         sourceData = location;
         double[] coords = {location.getLongitude(), location.getLatitude()};
+        double batLvl = -1.0;
+        boolean batChg = false;
+        BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
+        batLvl = batteryInfo.BatteryLevel;
+        batChg = batteryInfo.IsCharging;
         Builder b = new Builder(coords, Strings.getIsoDateTimeWithOffset(new Date(location.getTime())))
                 .withAltitude(location.getAltitude())
                 .withSpeed(location.getSpeed())
                 // Use accuracy in meters as hor. accuracy
                 .withHorizontalAccuracy(location.getAccuracy())
                 .withLocationsInPayload(1)
-                .withBatteryState(location.getBatteryCharging() ? "charging" : "unplugged")
-                .withBatteryLevel((double) location.getBatteryLevel() / 100)
+                // not clear why data provided by Location is wrong, using implementation from CustomURL
+                //.withBatteryState(location.getBatteryCharging() ? "charging" : "unplugged")
+                //.withBatteryLevel((double) location.getBatteryLevel() / 100)
+                .withBatteryLevel(batLvl)
+                .withBatteryState(batChg ? "charging" : "unplugged")
                 .withDeferred(helper.getMinimumDistanceInterval())
                 .withDesiredAccuracy(helper.getMinimumAccuracy())
                 .withDeviceId(helper.getDawarichDeviceId())

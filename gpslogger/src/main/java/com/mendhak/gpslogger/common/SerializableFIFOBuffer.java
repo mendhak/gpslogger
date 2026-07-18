@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.ArrayDeque;
+import java.util.*;
 
 /**
  * Generic FIFO Buffer with file persistence
@@ -37,23 +37,39 @@ public class SerializableFIFOBuffer<T extends Serializable> {
     private ArrayDeque<T> buffer = new ArrayDeque<>();
     private static final Logger LOG = Logs.of(SerializableFIFOBuffer.class);
     private final File persistenceFile;
+    private static final Map<String, SerializableFIFOBuffer<? extends Serializable>> instance = new HashMap<>();
 
 
-    public SerializableFIFOBuffer(String filePath) {
+    private SerializableFIFOBuffer(String filePath) {
         persistenceFile = new File(filePath);
         try {
             if (persistenceFile.exists() && persistenceFile.isFile() && persistenceFile.length() > 0) {
+                LOG.debug("Load FIFO buffer from file: {}", persistenceFile.getAbsolutePath());
                 loadFromFile();
             } else {
                 if (!(persistenceFile.exists() && persistenceFile.isFile())) {
+                    LOG.debug("FIFO buffer file does not exist, creating new file in path: {}", persistenceFile.getAbsolutePath());
                     if (!persistenceFile.createNewFile()) {
-                        throw new RuntimeException("Could not create file " + persistenceFile.getAbsolutePath());
+                        // Only warn, if no exception is thrown the file exists but was falsely not detected by the if-clause
+                        LOG.warn("Could not create file for FIFO buffer in path (already exists): {}", persistenceFile.getAbsolutePath());
                     }
+                } else {
                     LOG.debug("Persistence file for FIFO-buffer is empty");
                 }
             }
         } catch (IOException e) {
-            LOG.error("Error on creation of FIFO buffer for Dawarich logging, logging will not function", e);
+            LOG.error("Error on creation of FIFO buffer for Dawarich logging, logging will not be functional", e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Serializable> SerializableFIFOBuffer<T> getInstance(String filePath) {
+        if (instance.containsKey(filePath)) {
+            return (SerializableFIFOBuffer<T>) instance.get(filePath);
+        } else {
+            SerializableFIFOBuffer<T> newInst = new SerializableFIFOBuffer<>(filePath);
+            instance.put(filePath, newInst);
+            return newInst;
         }
     }
 

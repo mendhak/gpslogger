@@ -5,14 +5,12 @@ import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.loggers.FileLogger;
 import com.mendhak.gpslogger.senders.dawarich.DawarichManager;
 
-import java.io.IOException;
-
 public class DawarichLogger implements FileLogger {
 
     private final SerializableFIFOBuffer<SerializableLocation> buffer;
 
     public DawarichLogger (String persistenceFilePath) {
-        this.buffer = new SerializableFIFOBuffer<>(persistenceFilePath + "/buffer.json");
+        this.buffer = SerializableFIFOBuffer.getInstance(persistenceFilePath + "/buffer.json");
     }
 
     @Override
