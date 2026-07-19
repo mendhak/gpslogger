@@ -1,0 +1,3 @@
+* 新增选项，允许在锁屏界面上显示 GPSLogger 通知。
+* 针对 Android 10 之前的设备，如果你需要 GPSLogger 连接到 TLS 1.3 服务或遇到 SSL 连接问题，可以选择安装 Conscrypt Provider。
+* 来自 Weblate 社区的众多翻译更新，一如既往地感谢各位。
