@@ -152,14 +152,14 @@
     <string name="osm_resetauth">撤销访问权限</string>
     <string name="osm_lbl_authorize_description">您将需要授予此应用程序将 GPS 轨迹上传到 OpenStreetMap 所需的权限。授权这个应用程序后，您可以在这里设置标签、说明、可见性。    </string>
     <string name="osm_resetauth_summary">删除连接到 OSM 帐户的本地授权。</string>
-    <string name="osm_auth_error">未能与OSM服务器创建连接。请确认手机具有网络连接，或稍后再试。    </string>
+    <string name="osm_auth_error">未能与OpenStreetMap服务器创建连接。请确认手机具有网络连接，或稍后再试。</string>
     <string name="osm_visibility">可见性</string>
     <string name="osm_visibility_summary">设置您上传 GPS 路径的可见性</string>
     <string name="osm_description">说明</string>
     <string name="osm_description_summary">上传时使用的路径说明</string>
     <string name="osm_tags">标签</string>
     <string name="osm_tags_summary">上传路径时使用的标签</string>
-    <string name="no_files_found">找不到需要上传或共享的文件</string>
+    <string name="no_files_found">找不到需要上传或共享的文件。</string>
     <string name="osm_pick_file">选择要上传的文件</string>
     <string name="debuglog_title">写入调试文件</string>
     <string name="debuglog_summary">将调试消息写入到 SD 卡。警告： 文件增长速度非常快。</string>
@@ -203,7 +203,7 @@
     <string name="shortcut_stop">停止</string>
     <string name="shortcut_pickaction">选择一项操作</string>
     <string name="log_opengts_title">记录至OpenGTS服务器</string>
-    <string name="log_opengts_summary">发送 GPRMC 数据至在线 OpenGTS 服务器</string>
+    <string name="log_opengts_summary">发送 GPRMC 数据至在线 OpenGTS 服务器。</string>
     <string name="autoopengts_server_category">OpenGTS 设置</string>
     <string name="autoopengts_server">服务器</string>
     <string name="autoopengts_server_summary">主机名称或 IP</string>
@@ -238,7 +238,7 @@
     <string name="autoftp_directory">文件夹</string>
     <string name="new_file_custom_message">您可使用 %SER 表示设备序号，%YEAR、%MONTH、%MONTHNAME、%DAY、%HOUR、%MIN 表示年月日时分，%DAYNAME 表示星期，%PROFILE 表示配置，%VER 表示版本</string>
     <string name="new_file_prefix_serial_title">文件名使用设备序号作为前缀</string>
-    <string name="new_file_prefix_serial_summary">这是在您的手机状态中找到的序列号</string>
+    <string name="new_file_prefix_serial_summary">在 Android 8 及以上版本中，会使用唯一的 Android ID。在 Android 8 之前的版本中，则会使用手机状态中的设备序列号。</string>
     <string name="txt_travel_duration">持续时间︰</string>
     <string name="menu_onepoint">记录一个点</string>
     <string name="view_simple">简单查看</string>
@@ -306,10 +306,10 @@
     <string name="gpslogger_permissions_rationale_title">需要授权</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[本应用需要一系列的权限以正常运行。您将会就这些权限而被多次提示询问(抱歉)。此处对每个权限用途进行解释。]]></string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>设备位置</b>用于获取您的 GPS 或基站位置。]]></string>
-    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>文件媒介</b>用于读写 SD 卡上的 GPSLogger 文件夹，以供访问、上载、分享记录文件。本应用不会读取您的照片及其他媒介。]]></string>
-    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>总是允许</b>-允许本应用在后台运行时获取位置更新信息。]]></string>
-    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>忽略电池优化</b>-不对本应用进行电池优化，使之可以在后台运行。]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA[您拒绝授予一个或多个此应用程序所需的权限。您需要前往应用程序设置页以授予这些权限。<br /><br />若您永久拒绝了这些权限，您可在系统设置中重置。 ]]></string>
+    <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>照片、多媒体、文件</b>用于读写 SD 卡上的 GPSLogger 文件夹，以供访问、上载、分享记录文件。本应用不会读取您的照片及其他媒介。]]></string>
+    <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>总是允许</b>-允许本应用在后台运行时获取位置更新信息。 ]]></string>
+    <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>忽略电池优化</b>-不对本应用进行电池优化，使之可以在后台运行。 ]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["您拒绝授予一个或多个此应用程序所需的权限。 您需要前往应用程序设置页以授予这些权限。 <br><br>若您永久拒绝了这些权限，您可在系统设置中重置。 "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[为了允许GPS记录器在后台运行，您需要授予它一个额外的权限。在下一个屏幕，请选择: ]]></string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="debuglog_attach_to_email">将调试日志文件附加到电子邮件</string>
@@ -393,10 +393,37 @@
     <string name="only_log_if_significant_motion_summary">仅在检测到显著活动（如步行、骑行、驾驶）时记录。是否属于显著运动由系统判定。</string>
     <string name="autosend_wifionly_summary">在执行任何网络请求（包括数据发送和日志记录）前，需等待 WiFi 连接。</string>
     <string name="only_log_if_significant_motion_title">仅在检测到显著运动时记录</string>
-
-
-
-
-
-
+    <string name="customurl_basicauth_hide_password">隐藏密码</string>
+    <string name="customurl_basicauth_hide_password_summary">密码不会以明文形式显示也不会被导出到配置文件中</string>
+    <string name="customurl_autosend_batch_size">自动批量发送大小</string>
+    <string name="customurl_autosend_batch_size_summary">满足多少次请求后暂停发送。</string>
+    <string name="customurl_autosend_sleep">自动发送间隔时长</string>
+    <string name="customurl_autosend_sleep_summary">批次之间的延迟（毫秒）。</string>
+    <string name="significant_motion_bypass_interval_title">没有移动时强制发送的间隔</string>
+    <string name="significant_motion_bypass_interval_summary">若长时间无显著移动动作，按此间隔设定的频率，强制记录一次心跳日志。若该值小于 1 分钟，则禁用。</string>
+    <string name="time_in_minutes_dialog_title">时间（分钟）</string>
+    <string name="log_dawarich_discard_offline_locations">丢弃离线位置</string>
+    <string name="log_dawarich_discard_offline_locations_summary">如果启用此项，离线期间所有定位数据将被丢弃，不会排队等待上传</string>
+    <string name="log_dawarich_url">Dawarich URL</string>
+    <string name="log_dawarich_device_id">设备ID</string>
+    <string name="log_dawarich_device_id_summary">用于在定位数据中声明设备ID，来区分不同设备</string>
+    <string name="log_dawarich_filepath">缓冲区文件路径</string>
+    <string name="log_dawarich_filepath_summary">缓冲区持久化文件的保存路径</string>
+    <string name="log_dawarich_apikey">Dawarich API-key</string>
+    <string name="app_name_debug">GPSLogger DEV</string>
+    <string name="dawarich_bulk_min_title">触发批量上传最少定位记录数量</string>
+    <string name="dawarich_bulk_min_summary">批量上传的最少定位数（达到该数量后才会发送）</string>
+    <string name="dawarich_bulk_max_title">触发批量上传最大定位记录数量</string>
+    <string name="dawarich_bulk_max_summary">单次批量上传请求中可发送的最大定位记录数</string>
+    <string name="http_file_upload_setup_title">HTTP文件上传</string>
+    <string name="autosend_httpfileupload_summary">使用 HTTP POST 或 PUT 方法将文件上传到任意 URL。</string>
+    <string name="http_file_upload_body_type">编码</string>
+    <string name="http_file_upload_http_headers">HTTP头部信息</string>
+    <string name="dawarich_baseUrl_not_set_title">Base-URL未设置</string>
+    <string name="dawarich_baseUrl_not_set_msg">请设置 Dawarich URL后重新尝试</string>
+    <string name="dawarich_apiKey_not_set_title">API-key未设置</string>
+    <string name="dawarich_apiKey_not_set_msg">请设置Dawarich API-key后重新尝试</string>
+    <string name="log_dawarich_setup_title">Dawarich</string>
+    <string name="log_dawarich_title">记录到Dawarich</string>
+    <string name="log_dawarich_summary_detailed">将定位数据发送到指定的Dawarich服务</string>
 </resources>

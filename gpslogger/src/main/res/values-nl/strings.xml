@@ -290,10 +290,33 @@
     <string name="ok">Ok</string>
     <string name="hide">Verberg</string>
     <string name="summary_freq_max">maximum</string>
-
-
-
-
-
-
+    <string name="txt_speed_kph">Snelheid (in km/u):</string>
+    <string name="meter">meter</string>
+    <string name="meters_per_second">m/s</string>
+    <string name="kilometers_per_hour">km/u</string>
+    <string name="kilometers">km</string>
+    <string name="sorry">Sorry</string>
+    <string name="direction_west">West</string>
+    <string name="time_hms_format" formatted="false">%sh %sm %ss</string>
+    <string name="pref_logging_title">Logdetails</string>
+    <string name="log_plain_text_csv_advanced_title">Log naar CSV instellingen</string>
+    <string name="log_plain_text_csv_field_delimiter">CSV scheidingsteken</string>
+    <string name="log_plain_text_decimal_comma">Gebruik een komma (,) als scheidingsteken voor decimalen in plaats van een punt (.)</string>
+    <string name="new_file_creation_onceamonth">Een keer per maand</string>
+    <string name="time_before_logging_title">Loginterval</string>
+    <string name="time_before_logging_summary">Gebruik 0 voor maximale frequentie, al is langzamer beter voor de levensduur van de batterij. De batterijconfiguratie van je systeem kan deze instelling overschrijven, zie Help en FAQ.</string>
+    <string name="retry_get_best_possible_accuracy_title">Kies de beste nauwkeurigheid binnen de tijd</string>
+    <string name="retry_get_best_possible_accuracy_summary">In plaats van de eerste de beste punt te loggen, blijf opnieuw proberen binnen de tijd en selecteer het punt met de beste nauwkeurigheid. Duurt langer, maar verhoogt de kans op nauwkeurigere punten.</string>
+    <string name="autoemail_ssl">Impliciete SSL</string>
+    <string name="osm_setup_title">OpenStreetMap</string>
+    <string name="emailprovider_google">Google Mail</string>
+    <string name="emailprovider_yahoo">Yahoo! Mail</string>
+    <string name="emailprovider_msn">Windows Live Mail</string>
+    <string name="dropbox_setup_title">Dropbox</string>
+    <string name="owncloud_setup_title">ownCloud</string>
+    <string name="google_drive_setup_title">Google Drive</string>
+    <string name="google_drive_test_title">Test upload</string>
+    <string name="google_drive_folder_path">Google Drive maplocatie</string>
+    <string name="google_drive_folder_path_summary_1">Gebruik een enkele mapnaam (bijv. GPSLogger), of een maplocatie (bijv. aaa/bbb/ccc). De mappen moeten worden aangemaakt door deze applicatie.</string>
+    <string name="google_drive_folder_path_summary_2">Als je een enkele mapnaam gebruikt, dan kan je hem ergens anders naartoe verplaatsen nadat hij aangemaakt is. Maplocaties zijn langzamer, omdat elk onderdeel van de locatie gecontroleerd of aangemaakt moet worden vóórdat bestanden geüploadt worden.</string>
 </resources>

@@ -123,7 +123,7 @@
     <string name="retry_time_title">Zeit, bis die Genauigkeit erreicht ist</string>
     <string name="retry_time_summary">Nach dem Erhalt der ersten Positionsbestimmung so lange warten, bis die eingestellte Genauigkeit erreicht ist.</string>
     <string name="display_imperial_title">Angloamerikanische Maßeinheiten verwenden</string>
-    <string name="display_imperial_summary">Amerikanische Maßeinheiten wie Fuß, Meilen und Pints verwenden (statt metrischer Maße)</string>
+    <string name="display_imperial_summary">Fuß, Meilen und Pints anzeigen, nichts von diesem neumodischen metrischen Zeug. (Die Einstellungen müssen weiterhin auf das metrische System eingestellt sein.)</string>
     <string name="enabledisablegps_title">GPS aktivieren/deaktivieren</string>
     <string name="enabledisablegps_summary">In die Telefoneinstellungen wechseln, um die Anbieter zu aktivieren oder zu deaktivieren.</string>
     <string name="startonbootup_title">Beim Einschalten des Gerätes starten</string>
