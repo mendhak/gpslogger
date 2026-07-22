@@ -824,6 +824,15 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.LOG_PASSIVE_LOCATIONS, value).apply();
     }
 
+    @ProfilePreference(name=PreferenceNames.LOG_FILTER_PASSIVE_LOCATIONS)
+    public boolean isFilterPassivEnabled() {
+        return prefs.getBoolean(PreferenceNames.LOG_FILTER_PASSIVE_LOCATIONS, false);
+    }
+
+    public void setFilterPassivEnabled(boolean value){
+        prefs.edit().putBoolean(PreferenceNames.LOG_FILTER_PASSIVE_LOCATIONS, value).apply();
+    }
+
 
     @ProfilePreference(name = PreferenceNames.LOG_SATELLITE_LOCATIONS)
     public boolean shouldLogSatelliteLocations(){

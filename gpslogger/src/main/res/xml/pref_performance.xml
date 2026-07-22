@@ -46,6 +46,14 @@
         app:iconSpaceReserved="false" />
 
     <SwitchPreferenceCompat
+        android:key="log_filter_passive_locations"
+        android:defaultValue="true"
+        android:title="@string/filter_passiv_location_title"
+        android:summary="@string/filter_passive_location_summary"
+        app:iconSpaceReserved="false"
+        />
+
+    <SwitchPreferenceCompat
         android:key="keep_fix"
         android:summary="@string/keep_fix_summary"
         android:title="@string/keep_fix_title"

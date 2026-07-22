@@ -530,6 +530,8 @@
     </string>
     <string name="dawarich_bulk_max_title">Bulk upload maximum locations</string>
     <string name="dawarich_bulk_max_summary">Maximum amount of locations to send in one bulk upload request</string>
+    <string name="filter_passiv_location_title">Filter passive locations</string>
+    <string name="filter_passive_location_summary">Apply distance filter on passive locations</string>
 
     <string name="http_file_upload_setup_title">HTTP File Upload</string>
     <string name="autosend_httpfileupload_summary">Uploads files to an arbitrary URL using HTTP POST or PUT.</string>
