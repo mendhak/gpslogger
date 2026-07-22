@@ -154,7 +154,7 @@ public  class PreferenceNames {
 
 
     public static enum DegreesDisplayFormat {
-        DEGREES_MINUTES_SECONDS, DEGREES_DECIMAL_MINUTES, DECIMAL_DEGREES
+        DEGREES_MINUTES_SECONDS, DEGREES_DECIMAL_MINUTES, DECIMAL_DEGREES, MGRS
     }
 
     public static final String SFTP_ENABLED ="sftp_enabled";
