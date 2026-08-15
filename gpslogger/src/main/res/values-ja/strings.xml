@@ -426,4 +426,5 @@
     <string name="dawarich_baseUrl_not_set_msg">ダワリッチの基準URLを設定して再試行願います</string>
     <string name="dawarich_apiKey_not_set_title">APIキーが未設定</string>
     <string name="dawarich_apiKey_not_set_msg">ダワリッチのAPIキーを設定して再試行願います</string>
+    <string name="osm_visibility_migration_message">OpenStreetMapは公共・私有のGPSトレース表示の設定オプションが廃止されます。設定はエラー抑止の為に追跡可能へ更新されました。</string>
 </resources>
