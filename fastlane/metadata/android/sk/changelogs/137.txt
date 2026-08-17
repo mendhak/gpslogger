@@ -1,0 +1,1 @@
+* Voľby pre viditeľnosť v OpenSteetMap "verejné" a "súkromné" sú už zastaralé, prechod na predvolenú možnosť "sledovateľné"
