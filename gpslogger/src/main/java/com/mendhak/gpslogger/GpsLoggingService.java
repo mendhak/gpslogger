@@ -1097,8 +1097,8 @@ public class GpsLoggingService extends Service  {
 
         //Don't do anything until the user-defined distance has been traversed
         // However, if user has set an annotation, just log the point, disregard time and distance filters
-        // However, if it's a passive location, ignore distance filter.
-        if (!isPassiveLocation && !session.hasDescription() && !session.isSinglePointMode() && preferenceHelper.getMinimumDistanceInterval() > 0 && session.hasValidLocation()) {
+        // However, if it's a passive location, ignore distance filter if not explicitly enabled
+        if (preferenceHelper.isFilterPassivEnabled() && !session.hasDescription() && !session.isSinglePointMode() && preferenceHelper.getMinimumDistanceInterval() > 0 && session.hasValidLocation()) {
 
             double distanceTraveled = Maths.calculateDistance(loc.getLatitude(), loc.getLongitude(),
                     session.getCurrentLatitude(), session.getCurrentLongitude());
