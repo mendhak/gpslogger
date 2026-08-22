@@ -23,6 +23,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import androidx.core.content.ContextCompat;
 
 import android.view.LayoutInflater;
@@ -31,10 +32,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.PreferenceHelper;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.loggers.FileLogger;
@@ -92,9 +90,29 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             displayLocationInfo(session.getCurrentLocationInfo());
         }
 
+        updateCoordinateFormat();
+
         showPreferencesAndMessages();
 
         return rootView;
+    }
+
+    private void updateCoordinateFormat() {
+        PreferenceHelper ph = PreferenceHelper.getInstance();
+
+        LinearLayout llLat = rootView.findViewById(R.id.detailedview_lat_layout);
+        LinearLayout llLon = rootView.findViewById(R.id.detailedview_lon_layout);
+        LinearLayout llMGRS = rootView.findViewById(R.id.detailedview_mgrs_layout);
+
+        if (ph.getDisplayLatLongFormat() == PreferenceNames.DegreesDisplayFormat.MGRS) {
+            llLat.setVisibility(View.GONE);
+            llLon.setVisibility(View.GONE);
+            llMGRS.setVisibility(View.VISIBLE);
+        } else {
+            llLat.setVisibility(View.VISIBLE);
+            llLon.setVisibility(View.VISIBLE);
+            llMGRS.setVisibility(View.GONE);
+        }
     }
 
 
@@ -270,6 +288,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
     private void clearDisplay() {
         TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
         TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);
+        TextView tvMGRS = (TextView) rootView.findViewById(R.id.detailedview_mgrs_text);
         TextView tvDateTime = (TextView) rootView.findViewById(R.id.detailedview_datetime_text);
 
         TextView tvAltitude = (TextView) rootView.findViewById(R.id.detailedview_altitude_text);
@@ -284,6 +303,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
         tvLatitude.setText("");
         tvLongitude.setText("");
+        tvMGRS.setText("");
         tvDateTime.setText("");
         tvAltitude.setText("");
         txtSpeed.setText("");
@@ -331,6 +351,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
 
         TextView tvLatitude = (TextView) rootView.findViewById(R.id.detailedview_lat_text);
         TextView tvLongitude = (TextView) rootView.findViewById(R.id.detailedview_lon_text);
+        TextView tvMGRS = (TextView) rootView.findViewById(R.id.detailedview_mgrs_text);
         TextView tvDateTime = (TextView) rootView.findViewById(R.id.detailedview_datetime_text);
 
         TextView tvAltitude = (TextView) rootView.findViewById(R.id.detailedview_altitude_text);
@@ -343,6 +364,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         TextView txtTravelled = (TextView) rootView.findViewById(R.id.detailedview_travelled_text);
         TextView txtTime = (TextView) rootView.findViewById(R.id.detailedview_duration_text);
         String providerName = locationInfo.getProvider();
+
         if (providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
             providerName = getString(R.string.providername_gps);
         } else {
@@ -353,8 +375,11 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
                 + " " + new SimpleDateFormat("HH:mm:ss").format(new Date(session.getLatestTimeStamp()))
                 + " - " + providerName);
 
-        tvLatitude.setText(String.valueOf(Strings.getFormattedLatitude(locationInfo.getLatitude())));
-        tvLongitude.setText(String.valueOf(Strings.getFormattedLongitude(locationInfo.getLongitude())));
+        tvLatitude.setText(Strings.getCoordinate(locationInfo.getLatitude(), true));
+        tvLongitude.setText(Strings.getCoordinate(locationInfo.getLongitude(), false));
+        tvMGRS.setText(Strings.getCoordinate(locationInfo.getLatitude(), locationInfo.getLongitude(), ""));
+
+        updateCoordinateFormat();
 
         if (locationInfo.hasAltitude()) {
             tvAltitude.setText(Strings.getDistanceDisplay(getActivity(), locationInfo.getAltitude(), preferenceHelper.shouldDisplayImperialUnits(), false));
