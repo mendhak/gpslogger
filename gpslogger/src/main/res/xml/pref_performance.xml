@@ -5,6 +5,13 @@
 
     <SwitchPreferenceCompat
         android:defaultValue="true"
+        android:key="log_fused_locations"
+        android:summary="Combines inputs from other location providers for location fix."
+        android:title="Log fused locations"
+        app:iconSpaceReserved="false"/>
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
         android:key="log_satellite_locations"
         android:summary="@string/listeners_gps_summary"
         android:title="@string/listeners_gps_title"

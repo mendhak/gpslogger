@@ -77,6 +77,8 @@ public class GpsLoggingService extends Service  {
     protected LocationManager gpsLocationManager;
     private LocationManager passiveLocationManager;
     private LocationManager towerLocationManager;
+    private LocationManager fusedLocationManager;
+    private GeneralLocationListener fusedLocationlistener;
     private GeneralLocationListener gpsLocationListener;
     private GnssStatus.Callback gnssStatusCallback;
     private GeneralLocationListener towerLocationListener;
@@ -700,6 +702,10 @@ public class GpsLoggingService extends Service  {
             towerLocationListener = new GeneralLocationListener(this, "CELL");
         }
 
+        if (fusedLocationlistener == null) {
+            fusedLocationlistener = new GeneralLocationListener(this, "FUSED");
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             gnssStatusCallback = new GnssStatus.Callback() {
                 @Override
@@ -741,8 +747,26 @@ public class GpsLoggingService extends Service  {
 
         gpsLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         towerLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        fusedLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         checkTowerAndGpsStatus();
+
+        if (session.isFusedEnabled() && preferenceHelper.shouldLogFusedLocations() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            LOG.info("Requesting Fused location updates");
+            fusedLocationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, 1000, 0, fusedLocationlistener);
+
+            gpsLocationManager.registerGnssStatusCallback(gnssStatusCallback);
+
+            if (nmeaLocationListener == null){
+                //This Nmea listener just wraps the gps listener.
+                nmeaLocationListener = new NmeaLocationListener(gpsLocationListener);
+            }
+            gpsLocationManager.addNmeaListener(nmeaLocationListener, null);
+
+            //TODO - figure out what this is used for.
+            session.setUsingGps(true); // Well yes, but actually no. But also yes.
+            startAbsoluteTimer();
+        }
 
         if (session.isGpsEnabled() && preferenceHelper.shouldLogSatelliteLocations()) {
             LOG.info("Requesting GPS location updates");
@@ -781,7 +805,7 @@ public class GpsLoggingService extends Service  {
             startAbsoluteTimer();
         }
 
-        if(!session.isTowerEnabled() && !session.isGpsEnabled()) {
+        if(!session.isTowerEnabled() && !session.isGpsEnabled() && !session.isFusedEnabled()) {
             LOG.error("No provider available!");
             session.setUsingGps(false);
             LOG.error(getString(R.string.gpsprovider_unavailable));
@@ -793,7 +817,8 @@ public class GpsLoggingService extends Service  {
             setLocationServiceUnavailable(false);
         }
 
-        if(!preferenceHelper.shouldLogNetworkLocations() && !preferenceHelper.shouldLogSatelliteLocations() && !preferenceHelper.shouldLogPassiveLocations()){
+        if(!preferenceHelper.shouldLogNetworkLocations() && !preferenceHelper.shouldLogSatelliteLocations()
+                && !preferenceHelper.shouldLogPassiveLocations() && !preferenceHelper.shouldLogFusedLocations()){
             LOG.error("No location provider selected!");
             session.setUsingGps(false);
             stopLogging();
@@ -849,6 +874,7 @@ public class GpsLoggingService extends Service  {
     private void checkTowerAndGpsStatus() {
         session.setTowerEnabled(towerLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
         session.setGpsEnabled(gpsLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
+        session.setFusedEnabled(gpsLocationManager.isProviderEnabled(LocationManager.FUSED_PROVIDER));
     }
 
     /**
@@ -856,6 +882,12 @@ public class GpsLoggingService extends Service  {
      */
     @SuppressWarnings("ResourceType")
     private void stopGpsManager() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && fusedLocationManager != null){
+            LOG.debug("Removing fusedLocationManager updates");
+            fusedLocationManager.removeUpdates(fusedLocationlistener);
+            fusedLocationManager.unregisterGnssStatusCallback(gnssStatusCallback);
+        }
 
         if (towerLocationListener != null) {
             LOG.debug("Removing towerLocationManager updates");
@@ -1151,6 +1183,9 @@ public class GpsLoggingService extends Service  {
         if(!Strings.isNullOrEmpty(loc.getProvider())){
             String provider = loc.getProvider();
             logLine.append("(");
+            if (provider.equalsIgnoreCase(LocationManager.FUSED_PROVIDER)){
+               logLine.append(getString(R.string.listener_fused));
+            }
             if (provider.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
                 logLine.append(getString(R.string.listeners_gps));
             }
@@ -1182,20 +1217,26 @@ public class GpsLoggingService extends Service  {
 
     private boolean isFromSelectedListener(Location loc) {
 
-        if(!preferenceHelper.shouldLogSatelliteLocations() && !preferenceHelper.shouldLogNetworkLocations()){
-            // Special case - if both satellite and network are deselected, but passive is selected, then accept all passive types!
+        if(!preferenceHelper.shouldLogSatelliteLocations() && !preferenceHelper.shouldLogNetworkLocations() && !preferenceHelper.shouldLogFusedLocations()){
+            // Special case - if satellite, fused, and network are deselected, but passive is selected, then accept all passive types!
             return preferenceHelper.shouldLogPassiveLocations();
         }
 
-        if(!preferenceHelper.shouldLogNetworkLocations()){
-            return !loc.getProvider().equalsIgnoreCase(LocationManager.NETWORK_PROVIDER);
+        String providerName = loc.getProvider();
+
+        if (providerName.equalsIgnoreCase(LocationManager.FUSED_PROVIDER) && preferenceHelper.shouldLogFusedLocations()){
+            return true;
         }
 
-        if(!preferenceHelper.shouldLogSatelliteLocations()){
-            return !loc.getProvider().equalsIgnoreCase(LocationManager.GPS_PROVIDER);
+        if (providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER) && preferenceHelper.shouldLogSatelliteLocations()){
+            return true;
         }
 
-        return true;
+        if (providerName.equalsIgnoreCase(LocationManager.NETWORK_PROVIDER) && preferenceHelper.shouldLogNetworkLocations()){
+            return true;
+        }
+
+        return false;
     }
 
     private void setDistanceTraveled(Location loc) {

@@ -400,7 +400,8 @@ public class GpsSimpleViewFragment extends GenericViewFragment implements View.O
         txtPoints.setText(session.getNumLegs() + " " + getString(R.string.points));
 
         String providerName = locationInfo.getProvider();
-        if (!providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
+        if (!providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER)
+                && !providerName.equalsIgnoreCase(LocationManager.FUSED_PROVIDER)) {
             setSatelliteCount(-1);
         }
     }
