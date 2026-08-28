@@ -754,17 +754,6 @@ public class GpsLoggingService extends Service  {
         if (session.isFusedEnabled() && preferenceHelper.shouldLogFusedLocations() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             LOG.info("Requesting Fused location updates");
             fusedLocationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, 1000, 0, fusedLocationlistener);
-
-            gpsLocationManager.registerGnssStatusCallback(gnssStatusCallback);
-
-            if (nmeaLocationListener == null){
-                //This Nmea listener just wraps the gps listener.
-                nmeaLocationListener = new NmeaLocationListener(gpsLocationListener);
-            }
-            gpsLocationManager.addNmeaListener(nmeaLocationListener, null);
-
-            //TODO - figure out what this is used for.
-            session.setUsingGps(true); // Well yes, but actually no. But also yes.
             startAbsoluteTimer();
         }
 
@@ -874,7 +863,14 @@ public class GpsLoggingService extends Service  {
     private void checkTowerAndGpsStatus() {
         session.setTowerEnabled(towerLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
         session.setGpsEnabled(gpsLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
-        session.setFusedEnabled(gpsLocationManager.isProviderEnabled(LocationManager.FUSED_PROVIDER));
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            session.setFusedEnabled(gpsLocationManager.isProviderEnabled(LocationManager.FUSED_PROVIDER));
+        }
+        else {
+            session.setFusedEnabled(false);
+        }
+
     }
 
     /**
@@ -1224,7 +1220,9 @@ public class GpsLoggingService extends Service  {
 
         String providerName = loc.getProvider();
 
-        if (providerName.equalsIgnoreCase(LocationManager.FUSED_PROVIDER) && preferenceHelper.shouldLogFusedLocations()){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+                && providerName.equalsIgnoreCase(LocationManager.FUSED_PROVIDER)
+                && preferenceHelper.shouldLogFusedLocations()){
             return true;
         }
 

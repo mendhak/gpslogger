@@ -21,6 +21,7 @@ package com.mendhak.gpslogger.ui.fragments.settings;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
+import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -70,6 +72,12 @@ public class PerformanceSettingsFragment
 
         findPreference(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL).setSummary(String.valueOf(preferenceHelper.getSignificantMotionBypassInterval()) + " " + getString(R.string.minutes));
+
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.S){
+            findPreference(PreferenceNames.LOG_FUSED_LOCATIONS).setEnabled(false);
+            ((SwitchPreferenceCompat)(findPreference(PreferenceNames.LOG_FUSED_LOCATIONS))).setChecked(false);
+        }
+
 
         SensorManager sensorManager = (SensorManager)AppSettings.getInstance().getSystemService(android.content.Context.SENSOR_SERVICE);
         Sensor significantMotionSensor = sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);

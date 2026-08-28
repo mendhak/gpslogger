@@ -349,7 +349,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         if (providerName.equalsIgnoreCase(LocationManager.NETWORK_PROVIDER)) {
             providerName = getString(R.string.providername_celltower);
         }
-        if(providerName.equalsIgnoreCase(LocationManager.FUSED_PROVIDER)){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && providerName.equalsIgnoreCase(LocationManager.FUSED_PROVIDER)){
             providerName = getString(R.string.listener_fused);
         }
 
