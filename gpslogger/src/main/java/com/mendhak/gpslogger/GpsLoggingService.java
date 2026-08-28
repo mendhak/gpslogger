@@ -235,6 +235,23 @@ public class GpsLoggingService extends Service  {
                     needToStartGpsManager = session.isStarted();
                 }
 
+                if (bundle.get(IntentConstants.LOG_GPS) != null) {
+                    boolean logGps = bundle.getBoolean(IntentConstants.LOG_GPS);
+                    LOG.debug("Intent received - log to GPS: " + String.valueOf(logGps));
+                    preferenceHelper.setShouldLogSatelliteLocations(logGps);
+                }
+
+                if (bundle.get(IntentConstants.LOG_NETWORK) != null){
+                    boolean logNetwork = bundle.getBoolean(IntentConstants.LOG_NETWORK);
+                    preferenceHelper.setShouldLogNetworkLocations(logNetwork);
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && bundle.get(IntentConstants.LOG_FUSED) != null){
+                    boolean logFused = bundle.getBoolean(IntentConstants.LOG_FUSED);
+                    preferenceHelper.setShouldLogFusedLocations(logFused);
+                }
+
+
                 if (bundle.get(IntentConstants.PREFER_CELLTOWER) != null) {
                     boolean preferCellTower = bundle.getBoolean(IntentConstants.PREFER_CELLTOWER);
                     LOG.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
