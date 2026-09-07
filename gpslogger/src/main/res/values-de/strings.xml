@@ -429,4 +429,5 @@
     <string name="log_dawarich_filepath_summary">Der Pfad, unter dem die Persistenzdatei des Puffers gespeichert wird</string>
     <string name="customurl_basicauth_hide_password">Passwort ausblenden</string>
     <string name="customurl_basicauth_hide_password_summary">Das Passwort kann nicht im Klartext angezeigt werden und wird nicht in die Profildatei exportiert</string>
+    <string name="osm_visibility_migration_message">OpenStreetMap entfernt die Optionen zur Sichtbarkeit öffentlicher und privater GPS-Tracks. Ihre Einstellung wurde auf „verfolgbar“ aktualisiert, um Fehler zu vermeiden.</string>
 </resources>

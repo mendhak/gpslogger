@@ -446,4 +446,5 @@ polia.
     <string name="dawarich_apiKey_not_set_msg">Prosím nastavte kľúč API pre Dawarich a skúste to ešte raz</string>
     <string name="customurl_basicauth_hide_password_summary">Heslo nemožno zobraziť vo formáte čistého textu a neexportuje sa do súboru s profilom</string>
     <string name="customurl_basicauth_hide_password">Skryť heslo</string>
+    <string name="osm_visibility_migration_message">OpenStreetMap odstraňuje voľby pre viditeľnosť verejného a súkromného GPS sledovania. Vaše nastavenie bolo aktualizované na sledovateľné, aby sa zabránilo chybám.</string>
 </resources>

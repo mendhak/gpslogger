@@ -1,0 +1,1 @@
+* OpenStreetMap láthatósági beállításai „nyilvános” és „privát” elavultak, alapértelmezés szerint „követhető”-re tettek állítva.

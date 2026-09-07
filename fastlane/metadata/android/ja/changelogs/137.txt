@@ -1,0 +1,1 @@
+* OpenStreetMap の公開設定 “public“ ・“private“ が非推奨となり、デフォルトが “trackable” になります
