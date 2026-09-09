@@ -32,10 +32,12 @@ import android.hardware.TriggerEventListener;
 import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationManager;
+import android.location.LocationRequest;
 import android.os.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.app.AlarmManagerCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
@@ -770,7 +772,11 @@ public class GpsLoggingService extends Service  {
 
         if (session.isFusedEnabled() && preferenceHelper.shouldLogFusedLocations() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             LOG.info("Requesting Fused location updates");
-            fusedLocationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, 1000, 0, fusedLocationlistener);
+            LocationRequest request = new LocationRequest.Builder(1000)
+                    .setMinUpdateDistanceMeters(0)
+                    .setQuality(LocationRequest.QUALITY_BALANCED_POWER_ACCURACY)
+                    .build();
+            fusedLocationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, request, ContextCompat.getMainExecutor(this), fusedLocationlistener);
             startAbsoluteTimer();
         }
 
@@ -899,7 +905,6 @@ public class GpsLoggingService extends Service  {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && fusedLocationManager != null){
             LOG.debug("Removing fusedLocationManager updates");
             fusedLocationManager.removeUpdates(fusedLocationlistener);
-            fusedLocationManager.unregisterGnssStatusCallback(gnssStatusCallback);
         }
 
         if (towerLocationListener != null) {
