@@ -245,11 +245,13 @@ public class GpsLoggingService extends Service  {
 
                 if (bundle.get(IntentConstants.LOG_NETWORK) != null){
                     boolean logNetwork = bundle.getBoolean(IntentConstants.LOG_NETWORK);
+                    LOG.debug("Intent received - log to Network: " + String.valueOf(logNetwork));
                     preferenceHelper.setShouldLogNetworkLocations(logNetwork);
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && bundle.get(IntentConstants.LOG_FUSED) != null){
                     boolean logFused = bundle.getBoolean(IntentConstants.LOG_FUSED);
+                    LOG.debug("Intent received - log Fused locations: " + String.valueOf(logFused));
                     preferenceHelper.setShouldLogFusedLocations(logFused);
                 }
 
