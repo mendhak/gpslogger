@@ -6,8 +6,8 @@
     <SwitchPreferenceCompat
         android:defaultValue="true"
         android:key="log_fused_locations"
-        android:summary="Combines inputs from other location providers for location fix."
-        android:title="Log fused locations"
+        android:summary="@string/listeners_fused_summary"
+        android:title="@string/listeners_fused_title"
         app:iconSpaceReserved="false"/>
 
     <SwitchPreferenceCompat

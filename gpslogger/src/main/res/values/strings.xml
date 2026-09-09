@@ -401,7 +401,11 @@
     <string name="listeners_passive_title">Log passive locations</string>
     <string name="listeners_passive_summary">Logs locations obtained from other apps, but note that most filters are ignored. This setting is also useful for external GPS receivers.</string>
 
-    <string name="listener_fused">Fused</string>
+    <string name="listeners_fused">Fused</string>
+    <string name="listeners_fused_summary">Combines inputs from other location providers for location fix.</string>
+    <string name="listeners_fused_title">Log fused locations</string>
+
+
 
     <string name="listeners_summary">Which location providers to use when they are available; GPS for satellites, Network for cell tower/wifi, Passive is a special provider that listens for locations requested from other apps.</string>
     <string name="listeners_title">Location providers</string>

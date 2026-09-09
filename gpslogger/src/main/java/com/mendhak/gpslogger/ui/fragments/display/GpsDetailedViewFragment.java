@@ -350,7 +350,7 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
             providerName = getString(R.string.providername_celltower);
         }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && providerName.equalsIgnoreCase(LocationManager.FUSED_PROVIDER)){
-            providerName = getString(R.string.listener_fused);
+            providerName = getString(R.string.listeners_fused);
         }
 
         tvDateTime.setText(android.text.format.DateFormat.getDateFormat(getActivity()).format(new Date(session.getLatestTimeStamp()))

@@ -1204,7 +1204,7 @@ public class GpsLoggingService extends Service  {
             String provider = loc.getProvider();
             logLine.append("(");
             if (provider.equalsIgnoreCase(LocationManager.FUSED_PROVIDER)){
-               logLine.append(getString(R.string.listener_fused));
+               logLine.append(getString(R.string.listeners_fused));
             }
             if (provider.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
                 logLine.append(getString(R.string.listeners_gps));
