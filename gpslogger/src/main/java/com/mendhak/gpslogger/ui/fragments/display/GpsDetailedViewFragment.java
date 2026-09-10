@@ -345,8 +345,12 @@ public class GpsDetailedViewFragment extends GenericViewFragment {
         String providerName = locationInfo.getProvider();
         if (providerName.equalsIgnoreCase(LocationManager.GPS_PROVIDER)) {
             providerName = getString(R.string.providername_gps);
-        } else {
+        }
+        if (providerName.equalsIgnoreCase(LocationManager.NETWORK_PROVIDER)) {
             providerName = getString(R.string.providername_celltower);
+        }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && providerName.equalsIgnoreCase(LocationManager.FUSED_PROVIDER)){
+            providerName = getString(R.string.listeners_fused);
         }
 
         tvDateTime.setText(android.text.format.DateFormat.getDateFormat(getActivity()).format(new Date(session.getLatestTimeStamp()))

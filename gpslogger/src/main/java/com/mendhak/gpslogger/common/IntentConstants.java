@@ -26,6 +26,9 @@ public class IntentConstants {
     public static final String GET_NEXT_POINT = "getnextpoint";
     public static final String SET_DESCRIPTION = "setnextpointdescription";
     public static final String PREFER_CELLTOWER = "setprefercelltower";
+    public static final String LOG_GPS = "setloggpsprovider";
+    public static final String LOG_NETWORK = "setlognetworkprovider";
+    public static final String LOG_FUSED = "setlogfusedprovider";
     public static final String TIME_BEFORE_LOGGING = "settimebeforelogging";
     public static final String DISTANCE_BEFORE_LOGGING = "setdistancebeforelogging";
     public static final String GPS_ON_BETWEEN_FIX = "setkeepbetweenfix";

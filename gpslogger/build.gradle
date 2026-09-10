@@ -45,12 +45,13 @@ android {
 
         targetSdkVersion 35
         compileSdk 35
-        versionCode 137
-        versionName "137"
+        versionCode 138
+        versionName "138-rc1"
 
         // Used by AppAuth-Android
         manifestPlaceholders = [
-                appAuthRedirectScheme: 'com.mendhak.gpslogger'
+                appAuthRedirectScheme: 'com.mendhak.gpslogger',
+                appIcon: "@mipmap/gpsloggericon"
         ]
     }
 
@@ -63,6 +64,9 @@ android {
             applicationIdSuffix ".debug"
             versionNameSuffix "-DEBUG"
             resValue "string", "app_name", "@string/app_name_debug"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/gpsloggericon_debug"
+            ]
         }
         release {
             minifyEnabled true
@@ -70,6 +74,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
             debuggable false
             resValue "string", "app_name", "@string/app_name_release"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/gpsloggericon"
+            ]
         }
     }
 
