@@ -776,7 +776,7 @@ public class GpsLoggingService extends Service  {
             LOG.info("Requesting Fused location updates");
             LocationRequest request = new LocationRequest.Builder(1000)
                     .setMinUpdateDistanceMeters(0)
-                    .setQuality(LocationRequest.QUALITY_BALANCED_POWER_ACCURACY)
+                    .setQuality(preferenceHelper.getFusedQuality())
                     .build();
             fusedLocationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, request, ContextCompat.getMainExecutor(this), fusedLocationlistener);
             startAbsoluteTimer();

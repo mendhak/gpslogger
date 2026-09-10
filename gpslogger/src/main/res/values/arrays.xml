@@ -88,4 +88,16 @@
         <item>binary</item>
     </string-array>
 
+    <string-array name="fused_quality_entries">
+        <item>@string/fused_quality_low_power</item>
+        <item>@string/fused_quality_balanced</item>
+        <item>@string/fused_quality_high_accuracy</item>
+    </string-array>
+
+    <string-array name="fused_quality_values">
+        <item>QUALITY_LOW_POWER</item>
+        <item>QUALITY_BALANCED_POWER_ACCURACY</item>
+        <item>QUALITY_HIGH_ACCURACY</item>
+    </string-array>
+
 </resources>

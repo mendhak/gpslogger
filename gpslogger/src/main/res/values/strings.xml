@@ -404,6 +404,11 @@
     <string name="listeners_fused">Fused</string>
     <string name="listeners_fused_summary">Combines inputs from other location providers for location fix.</string>
     <string name="listeners_fused_title">Log fused locations</string>
+    <string name="fused_quality_title">Fused location quality</string>
+    <string name="fused_quality_summary">Hint to the fused provider, how much should be spent on power vs accuracy</string>
+    <string name="fused_quality_low_power">Low power (less accurate)</string>
+    <string name="fused_quality_balanced">Balanced (default)</string>
+    <string name="fused_quality_high_accuracy">High accuracy (more power)</string>
 
 
 

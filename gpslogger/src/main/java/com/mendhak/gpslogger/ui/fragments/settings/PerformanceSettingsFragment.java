@@ -76,6 +76,7 @@ public class PerformanceSettingsFragment
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.S){
             findPreference(PreferenceNames.LOG_FUSED_LOCATIONS).setEnabled(false);
             ((SwitchPreferenceCompat)(findPreference(PreferenceNames.LOG_FUSED_LOCATIONS))).setChecked(false);
+            findPreference(PreferenceNames.FUSED_QUALITY).setEnabled(false);
         }
 
 
