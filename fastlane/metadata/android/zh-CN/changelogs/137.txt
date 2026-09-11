@@ -1,0 +1,1 @@
+* OpenStreetMap 的可见性选项“public”（公开）和“private”（私有）已弃用，默认值改为“trackable”（可追踪）
