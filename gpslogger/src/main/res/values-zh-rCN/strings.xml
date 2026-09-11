@@ -174,7 +174,7 @@
     <string name="dropbox_unauthorize_description">您已在 Dropbox 授权。文件将上载至「Apps\\GPSLogger for Android」。若有需要，您可取消绑定。</string>
     <string name="dropbox_couldnotauthorize">未能在 Dropbox 授权，请稍后再试</string>
     <string name="owncloud_setup_title">私有云存储</string>
-    <string name="owncloud_server_summary">ownCloud 基于 URL</string>
+    <string name="owncloud_server_summary">ownCloud 基础 URL</string>
     <string name="owncloud_directory_summary">ownCloud 服务器上使用的文件夹。请保证其存在，不然上传会失败。</string>
     <string name="owncloud_test_summary">上传一个测试文件到 ownCloud 服务器</string>
     <string name="owncloud_testing">正在测试 ownCloud 上传功能</string>
@@ -426,4 +426,5 @@
     <string name="log_dawarich_setup_title">Dawarich</string>
     <string name="log_dawarich_title">记录到Dawarich</string>
     <string name="log_dawarich_summary_detailed">将定位数据发送到指定的Dawarich服务</string>
+    <string name="osm_visibility_migration_message">OpenStreetMap 正在移除 GPS 轨迹的“公开”和“私有”可见性选项。为避免出错，您的设置已更新为“可追踪”。</string>
 </resources>
