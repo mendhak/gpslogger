@@ -27,11 +27,17 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 import android.text.InputType;
+import android.widget.Toast;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import com.codekidlabs.storagechooser.StorageChooser;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+import com.google.zxing.BarcodeFormat;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.PreferenceHelper;
@@ -49,11 +55,17 @@ import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
 import org.slf4j.Logger;
 
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanIntentResult;
+import com.journeyapps.barcodescanner.ScanOptions;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.Objects;
+
+import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
 
 
 public class DawarichFragment extends PreferenceFragmentCompat implements
@@ -86,6 +98,8 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
         findPreference(PreferenceNames.DAWARICH_DISCARD_LOG_WHEN_OFFLINE).setOnPreferenceChangeListener(this);
 
         findPreference(PreferenceNames.LOG_TO_DAWARICH).setOnPreferenceChangeListener(this);
+
+        findPreference(PreferenceNames.DAWARICH_QR_BUTTON).setOnPreferenceClickListener(this);
 
 
     }
@@ -180,7 +194,14 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
             return true;
         }
 
-
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.DAWARICH_QR_BUTTON)){
+            ScanOptions options = new ScanOptions();
+            options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+            options.setPrompt(getContext().getString(R.string.dawarich_qr_prompt));
+            options.setBarcodeImageEnabled(false);
+            options.setOrientationLocked(false);
+            readDawarichQR.launch(options);
+        }
 
         return false;
     }
@@ -272,4 +293,26 @@ public class DawarichFragment extends PreferenceFragmentCompat implements
 
         return false;
     }
+
+    private final ActivityResultLauncher<ScanOptions> readDawarichQR = registerForActivityResult(new ScanContract(),
+            result -> {
+        if (result.getContents() == null) {
+            Toast.makeText(getContext(), R.string.cancelled, Toast.LENGTH_LONG).show();
+        } else {
+            Gson gson = new Gson();
+            try {
+                JsonObject data = gson.fromJson(result.getContents(), JsonObject.class);
+                String url = data.get("server_url").getAsString().replaceAll("/+$", "");
+                String apikey = data.get("api_key").getAsString();
+                assert !Strings.isNullOrEmpty(url);
+                assert !Strings.isNullOrEmpty(apikey);
+                preferenceHelper.setDawarichApikey(apikey);
+                preferenceHelper.setDawarichBaseUrl(url);
+                findPreference(PreferenceNames.DAWARICH_BASE_URL).setSummary(url);
+
+            } catch (Exception e) {
+                Toast.makeText(getContext(), R.string.dawarich_qr_not_valid, Toast.LENGTH_LONG).show();
+            }
+        }
+    });
 }
