@@ -123,7 +123,7 @@
     <string name="display_imperial_title">显示英制单位</string>
     <string name="display_imperial_summary">显示英尺、英里和品脱，没有其他新奇的度量标准。（设置仍然需要使用公制单位）</string>
     <string name="enabledisablegps_title">启用/禁用 GPS</string>
-    <string name="enabledisablegps_summary">转到手机的设置来启用或禁用提供器。</string>
+    <string name="enabledisablegps_summary">转到手机的设置来启用或禁用位置信息。</string>
     <string name="startonbootup_title">开机自启动</string>
     <string name="startonbootup_summary">当手机开机的时候自动启动本程序</string>
     <string name="startonapplaunch_title">在应用程序启动时启动</string>
@@ -162,7 +162,7 @@
     <string name="no_files_found">找不到需要上传或共享的文件。</string>
     <string name="osm_pick_file">选择要上传的文件</string>
     <string name="debuglog_title">写入调试文件</string>
-    <string name="debuglog_summary">将调试消息写入到 SD 卡。警告： 文件增长速度非常快。</string>
+    <string name="debuglog_summary">将调试消息写入 SD 卡上的文件。警告：该文件体积会迅速增大。</string>
     <string name="pref_logging_summary">文件类型、创建和命名</string>
     <string name="pref_general_title">常规选项</string>
     <string name="pref_general_summary">启动和显示选项</string>
@@ -241,8 +241,8 @@
     <string name="new_file_prefix_serial_summary">在 Android 8 及以上版本中，会使用唯一的 Android ID。在 Android 8 之前的版本中，则会使用手机状态中的设备序列号。</string>
     <string name="txt_travel_duration">持续时间︰</string>
     <string name="menu_onepoint">记录一个点</string>
-    <string name="view_simple">简单查看</string>
-    <string name="view_detailed">详细查看</string>
+    <string name="view_simple">简单视图</string>
+    <string name="view_detailed">详细视图</string>
     <string name="view_big">大视图</string>
     <string name="view_log">日志视图</string>
     <string name="bigview_taptotoggle">点击开始/停止记录</string>
@@ -309,13 +309,13 @@
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>照片、多媒体、文件</b>用于读写 SD 卡上的 GPSLogger 文件夹，以供访问、上载、分享记录文件。本应用不会读取您的照片及其他媒介。]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>总是允许</b>-允许本应用在后台运行时获取位置更新信息。 ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>忽略电池优化</b>-不对本应用进行电池优化，使之可以在后台运行。 ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["您拒绝授予一个或多个此应用程序所需的权限。 您需要前往应用程序设置页以授予这些权限。 <br><br>若您永久拒绝了这些权限，您可在系统设置中重置。 "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["\"您拒绝授予一个或多个此应用程序所需的权限。 您需要前往应用程序设置页以授予这些权限。 <br><br>若您永久拒绝了这些权限，您可在系统设置中重置。 \" "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[为了允许GPS记录器在后台运行，您需要授予它一个额外的权限。在下一个屏幕，请选择: ]]></string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="debuglog_attach_to_email">将调试日志文件附加到电子邮件</string>
     <string name="debuglog_attach_to_email_summary">将调试日志文件以及一些诊断信息附加到电子邮件</string>
     <string name="change_language_title">更改语言</string>
-    <string name="change_language_summary">并非所有语言都已完全翻译！您必须重新启动应用程序来使这些设置生效。</string>
+    <string name="change_language_summary">并非所有语言都已完全翻译！重新启动应用程序后才能生效。</string>
     <string name="coordinate_display_format">坐标显示格式</string>
     <string name="ssl_certificate_validate">验证 SSL 证书</string>
     <string name="parameters">参数</string>
@@ -404,7 +404,7 @@
     <string name="time_in_minutes_dialog_title">时间（分钟）</string>
     <string name="log_dawarich_discard_offline_locations">丢弃离线位置</string>
     <string name="log_dawarich_discard_offline_locations_summary">如果启用此项，离线期间所有定位数据将被丢弃，不会排队等待上传</string>
-    <string name="log_dawarich_url">Dawarich URL</string>
+    <string name="log_dawarich_url">Dawarich 基础 URL</string>
     <string name="log_dawarich_device_id">设备ID</string>
     <string name="log_dawarich_device_id_summary">用于在定位数据中声明设备ID，来区分不同设备</string>
     <string name="log_dawarich_filepath">缓冲区文件路径</string>
