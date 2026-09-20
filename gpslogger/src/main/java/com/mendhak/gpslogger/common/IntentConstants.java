@@ -38,5 +38,7 @@ public class IntentConstants {
     public static final String LOG_ONCE = "logonce";
     public static final String SWITCH_PROFILE = "switchprofile";
     public static final String GET_STATUS = "getstatus";
+    public static final String SET_DAWARICH_MOTION = "setdawarichmotion";
+    public static final String SET_DAWARICH_ACTIVITY = "setdawarichactivity";
 
 }

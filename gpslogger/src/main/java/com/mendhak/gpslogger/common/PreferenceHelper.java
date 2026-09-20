@@ -1290,6 +1290,28 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.DAWARICH_BATCH_MAX, String.valueOf(amount)).apply();
     }
 
+    /**
+     * Dawarich motion, comma separated list, e.g. "walking,running"
+     */
+    public String getDawarichMotion() {
+        return prefs.getString(PreferenceNames.DAWARICH_MOTION, "");
+    }
+
+    public void setDawarichMotion(String motion){
+        prefs.edit().putString(PreferenceNames.DAWARICH_MOTION, motion).apply();
+    }
+
+    /**
+     * Dawarich activity, e.g. "automotive_navigation"
+     */
+    public String getDawarichActivity() {
+        return prefs.getString(PreferenceNames.DAWARICH_ACTIVITY, "");
+    }
+
+    public void setDawarichActivity(String activity){
+        prefs.edit().putString(PreferenceNames.DAWARICH_ACTIVITY, activity).apply();
+    }
+
 
     /**
      * Whether to prefix the phone's serial number to the logging file

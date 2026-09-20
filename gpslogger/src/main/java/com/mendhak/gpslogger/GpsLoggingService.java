@@ -237,6 +237,18 @@ public class GpsLoggingService extends Service  {
                     needToStartGpsManager = session.isStarted();
                 }
 
+                if (bundle.getString(IntentConstants.SET_DAWARICH_MOTION) != null) {
+                    String motion = bundle.getString(IntentConstants.SET_DAWARICH_MOTION);
+                    LOG.info("Intent received - Set Dawarich motion: " + motion);
+                    preferenceHelper.setDawarichMotion(motion);
+                }
+
+                if (bundle.getString(IntentConstants.SET_DAWARICH_ACTIVITY) != null) {
+                    String activity = bundle.getString(IntentConstants.SET_DAWARICH_ACTIVITY);
+                    LOG.info("Intent received - Set Dawarich activity: " + activity);
+                    preferenceHelper.setDawarichActivity(activity);
+                }
+
                 if (bundle.get(IntentConstants.LOG_GPS) != null) {
                     boolean logGps = bundle.getBoolean(IntentConstants.LOG_GPS);
                     LOG.debug("Intent received - log to GPS: " + String.valueOf(logGps));

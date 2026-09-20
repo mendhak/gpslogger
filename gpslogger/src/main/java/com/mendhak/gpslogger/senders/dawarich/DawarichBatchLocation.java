@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -293,6 +294,23 @@ public class DawarichBatchLocation {
         if (!Strings.isNullOrEmpty(location.getHDOP()) &&  !Strings.isNullOrEmpty(location.getVDOP())) {
             // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
             b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
+        }
+        String motion = helper.getDawarichMotion();
+        if (!Strings.isNullOrEmpty(motion)) {
+            ArrayList<String> motionList = new ArrayList<>();
+            for (String part : motion.split(",")) {
+                String trimmed = part.trim();
+                if (!trimmed.isEmpty()) {
+                    motionList.add(trimmed);
+                }
+            }
+            if (!motionList.isEmpty()) {
+                b.withMotion(motionList.toArray(new String[0]));
+            }
+        }
+        String activity = helper.getDawarichActivity();
+        if (!Strings.isNullOrEmpty(activity)) {
+            b.withActivity(activity);
         }
         return b.build();
     }
