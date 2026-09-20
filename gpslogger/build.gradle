@@ -51,7 +51,7 @@ android {
         // Used by AppAuth-Android
         manifestPlaceholders = [
                 appAuthRedirectScheme: 'com.mendhak.gpslogger',
-                appIcon: "@mipmap/gpsloggericon"
+                appIcon: "@mipmap/gpsloggericon3"
         ]
     }
 
@@ -75,7 +75,7 @@ android {
             debuggable false
             resValue "string", "app_name", "@string/app_name_release"
             manifestPlaceholders = [
-                    appIcon: "@mipmap/gpsloggericon"
+                    appIcon: "@mipmap/gpsloggericon3"
             ]
         }
     }
