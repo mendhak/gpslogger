@@ -244,7 +244,6 @@ public class DawarichBatchLocation {
         batChg = batteryInfo.IsCharging;
         Builder b = new Builder(coords, Strings.getIsoDateTimeWithOffset(new Date(location.getTime())))
                 .withAltitude(location.getAltitude())
-                .withSpeed(location.getSpeed())
                 // Use accuracy in meters as hor. accuracy
                 .withHorizontalAccuracy(location.getAccuracy())
                 .withLocationsInPayload(1)
@@ -253,6 +252,9 @@ public class DawarichBatchLocation {
                 //.withBatteryLevel((double) location.getBatteryLevel() / 100)
                 .withBatteryLevel(batLvl)
                 .withBatteryState(batChg ? "charging" : "unplugged");
+        if (location.hasSpeed()) {
+            b.withSpeed(location.getSpeed());
+        }
         if (!Strings.isNullOrEmpty(location.getHDOP()) &&  !Strings.isNullOrEmpty(location.getVDOP())) {
             // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
             b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
@@ -273,7 +275,6 @@ public class DawarichBatchLocation {
         batChg = batteryInfo.IsCharging;
         Builder b = new Builder(coords, Strings.getIsoDateTimeWithOffset(new Date(location.getTime())))
                 .withAltitude(location.getAltitude())
-                .withSpeed(location.getSpeed())
                 // Use accuracy in meters as hor. accuracy
                 .withHorizontalAccuracy(location.getAccuracy())
                 .withLocationsInPayload(1)
@@ -286,6 +287,9 @@ public class DawarichBatchLocation {
                 .withDesiredAccuracy(helper.getMinimumAccuracy())
                 .withDeviceId(helper.getDawarichDeviceId())
                 .withSignificantChange(helper.shouldLogOnlyIfSignificantMotion() ? "enabled" : "disabled");
+        if (location.hasSpeed()) {
+            b.withSpeed(location.getSpeed());
+        }
         if (!Strings.isNullOrEmpty(location.getHDOP()) &&  !Strings.isNullOrEmpty(location.getVDOP())) {
             // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
             b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
@@ -368,7 +372,7 @@ public class DawarichBatchLocation {
         /**
          * Speed in <b>meters per second</b>
          */
-        double speed;
+        Double speed;
         /**
          * Horizontal accuracy in meters
          */
