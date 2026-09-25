@@ -28,10 +28,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.EventBusHook;
-import com.mendhak.gpslogger.common.Session;
-import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.*;
 import com.mendhak.gpslogger.common.events.ServiceEvents;
+import mil.nga.mgrs.MGRS;
 
 
 public class GpsBigViewFragment extends GenericViewFragment implements View.OnTouchListener {
@@ -60,12 +59,16 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
         txtLong.setOnTouchListener(this);
 
+        TextView txtMGRS = (TextView) rootView.findViewById(R.id.bigview_text_mgrs);
+        txtMGRS.setOnTouchListener(this);
+
         displayLocationInfo(session.getCurrentLocationInfo());
 
         if (session.isStarted()) {
             Toast.makeText(getActivity().getApplicationContext(), R.string.bigview_taptotoggle, Toast.LENGTH_SHORT).show();
         }
 
+        updateCoordinateFormat();
 
         return rootView;
     }
@@ -80,8 +83,29 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
         if(loggingStatus.loggingStarted){
             TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
             TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
+            TextView txtMGRS = (TextView) rootView.findViewById(R.id.bigview_text_mgrs);
             txtLat.setText("");
             txtLong.setText("");
+            txtMGRS.setText("");
+        }
+    }
+
+    public void updateCoordinateFormat() {
+
+        TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
+        TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
+        TextView txtMGRS = (TextView) rootView.findViewById(R.id.bigview_text_mgrs);
+
+        PreferenceHelper ph = PreferenceHelper.getInstance();
+
+        if (ph.getDisplayLatLongFormat() == PreferenceNames.DegreesDisplayFormat.MGRS) {
+            txtLat.setVisibility(View.GONE);
+            txtLong.setVisibility(View.GONE);
+            txtMGRS.setVisibility(View.VISIBLE);
+        } else {
+            txtLat.setVisibility(View.VISIBLE);
+            txtLong.setVisibility(View.VISIBLE);
+            txtMGRS.setVisibility(View.GONE);
         }
     }
 
@@ -89,15 +113,23 @@ public class GpsBigViewFragment extends GenericViewFragment implements View.OnTo
 
         TextView txtLat = (TextView) rootView.findViewById(R.id.bigview_text_lat);
         TextView txtLong = (TextView) rootView.findViewById(R.id.bigview_text_long);
+        TextView txtMGRS = (TextView) rootView.findViewById(R.id.bigview_text_mgrs);
+
+        PreferenceHelper ph = PreferenceHelper.getInstance();
 
         if (locationInfo != null) {
-            txtLat.setText(String.valueOf(Strings.getFormattedLatitude(locationInfo.getLatitude())));
+            txtLat.setText(Strings.getCoordinate(locationInfo.getLatitude(), true));
+            txtLong.setText(Strings.getCoordinate(locationInfo.getLongitude(), false));
+            txtMGRS.setText(Strings.getCoordinate(locationInfo.getLatitude(), locationInfo.getLongitude(), ""));
 
-            txtLong.setText(String.valueOf(Strings.getFormattedLongitude(locationInfo.getLongitude())));
+            updateCoordinateFormat();
+
         } else if (session.isStarted()) {
             txtLat.setText("...");
+            txtMGRS.setText("...");
         } else {
             txtLat.setText(R.string.bigview_taptotoggle);
+            txtMGRS.setText(R.string.bigview_taptotoggle);
         }
     }
 

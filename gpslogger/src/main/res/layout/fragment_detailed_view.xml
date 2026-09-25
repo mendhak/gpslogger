@@ -27,10 +27,13 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:id="@+id/detailedview_lat_layout"
                     android:layout_margin="5dp"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                >
 
                     <TextView
                         android:layout_width="0dp"
@@ -51,16 +54,19 @@
                         android:maxLines="1"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"
+                        android:inputType="none"
                         android:background="@null"
                         />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/detailedview_lon_layout"
                     android:layout_margin="5dp"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                >
 
                     <TextView
                         android:layout_width="0dp"
@@ -81,9 +87,42 @@
                         android:id="@+id/detailedview_lon_text"
                         android:selectAllOnFocus="true"
                         android:textIsSelectable="true"
-                        android:editable="false"
+                        android:inputType="none"
                         android:background="@null"
                         />
+                </LinearLayout>
+
+                <LinearLayout
+                        android:id="@+id/detailedview_mgrs_layout"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                >
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="20"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/txt_mgrs"
+                            android:id="@+id/detailedview_mgrs_label"/>
+
+                    <EditText
+                            android:layout_width="0dp"
+                            android:layout_weight="80"
+                            android:layout_height="wrap_content"
+                            android:minWidth="200dp"
+                            android:textSize="@dimen/detailedview_mgrs_textsize"
+                            android:text=""
+                            android:maxLines="1"
+                            android:id="@+id/detailedview_mgrs_text"
+                            android:selectAllOnFocus="true"
+                            android:textIsSelectable="true"
+                            android:inputType="none"
+                            android:background="@null"
+                    />
                 </LinearLayout>
             </LinearLayout>
 
