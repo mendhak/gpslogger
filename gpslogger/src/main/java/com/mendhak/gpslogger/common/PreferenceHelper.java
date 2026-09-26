@@ -843,6 +843,38 @@ public class PreferenceHelper {
         prefs.edit().putBoolean(PreferenceNames.LOG_NETWORK_LOCATIONS, value).apply();
     }
 
+    @ProfilePreference(name=PreferenceNames.LOG_FUSED_LOCATIONS)
+    public boolean shouldLogFusedLocations(){
+        return prefs.getBoolean(PreferenceNames.LOG_FUSED_LOCATIONS, true);
+    }
+
+    public void setShouldLogFusedLocations(boolean value){
+        prefs.edit().putBoolean(PreferenceNames.LOG_FUSED_LOCATIONS, value).apply();
+    }
+
+    /**
+     * Stored as the name of one of the android.location.LocationRequest.QUALITY_* constants,
+     * which is converted to its int value here.
+     */
+    @ProfilePreference(name = PreferenceNames.FUSED_QUALITY)
+    public int getFusedQuality(){
+        String quality = prefs.getString(PreferenceNames.FUSED_QUALITY,
+                "QUALITY_BALANCED_POWER_ACCURACY");
+        switch (quality) {
+            case "QUALITY_LOW_POWER":
+                return android.location.LocationRequest.QUALITY_LOW_POWER;
+            case "QUALITY_HIGH_ACCURACY":
+                return android.location.LocationRequest.QUALITY_HIGH_ACCURACY;
+            default:
+                // BALANCED_POWER_ACCURACY, or anything unexpected (e.g. leftover numeric values)
+                return android.location.LocationRequest.QUALITY_BALANCED_POWER_ACCURACY;
+        }
+    }
+
+    public void setFusedQuality(String quality){
+        prefs.edit().putString(PreferenceNames.FUSED_QUALITY, quality).apply();
+    }
+
 
 
 
@@ -1256,6 +1288,28 @@ public class PreferenceHelper {
 
     public void setDawarichBatchMax(Integer amount) {
         prefs.edit().putString(PreferenceNames.DAWARICH_BATCH_MAX, String.valueOf(amount)).apply();
+    }
+
+    /**
+     * Dawarich motion, comma separated list, e.g. "walking,running"
+     */
+    public String getDawarichMotion() {
+        return prefs.getString(PreferenceNames.DAWARICH_MOTION, "");
+    }
+
+    public void setDawarichMotion(String motion){
+        prefs.edit().putString(PreferenceNames.DAWARICH_MOTION, motion).apply();
+    }
+
+    /**
+     * Dawarich activity, e.g. "automotive_navigation"
+     */
+    public String getDawarichActivity() {
+        return prefs.getString(PreferenceNames.DAWARICH_ACTIVITY, "");
+    }
+
+    public void setDawarichActivity(String activity){
+        prefs.edit().putString(PreferenceNames.DAWARICH_ACTIVITY, activity).apply();
     }
 
 

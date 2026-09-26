@@ -94,6 +94,15 @@ public class Session {
         set("gpsEnabled", String.valueOf(gpsEnabled));
     }
 
+
+    public boolean isFusedEnabled(){
+        return Boolean.valueOf(get("fusedEnabled", "false"));
+    }
+
+    public void setFusedEnabled(boolean fusedEnabled){
+        set("fusedEnabled", String.valueOf(fusedEnabled));
+    }
+
     /**
      * @return whether logging has started
      */
