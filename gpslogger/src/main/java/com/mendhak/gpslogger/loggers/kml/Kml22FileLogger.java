@@ -198,9 +198,27 @@ class Kml22WriteHandler implements Runnable {
                 if (addNewTrackSegment) {
                     raf = new RandomAccessFile(kmlFile, "rw");
                     raf.seek(kmlFile.length() - "</Document></kml>\n".length());
-                    String placemarkHead = "\n<Placemark>\n<name>" + dateTimeString + "</name>\n<LineString>\n<tessellate>1</tessellate>\n<altitudeMode>absolute</altitudeMode>\n<coordinates>\n";
-                    String placemarkTail = "</coordinates>\n</LineString>\n</Placemark>\n<Placemark>\n<name>" + dateTimeString + "</name>\n<gx:Track>\n</gx:Track>\n</Placemark>\n</Document></kml>\n";
-                    raf.write((placemarkHead + placemarkTail).getBytes());
+                    String newTrackSegmentBlock =
+                            "\n<Placemark>\n<name>"
+                            + dateTimeString
+                            + "</name>" +
+                            "\n<LineString>" +
+                            "\n<tessellate>1</tessellate>" +
+                            "\n<altitudeMode>absolute</altitudeMode>" +
+                            "\n<coordinates>" +
+                            "\n</coordinates>" +
+                            "\n</LineString>" +
+                            "\n</Placemark>" +
+                            "\n<Placemark>" +
+                            "\n<name>"
+                            + dateTimeString
+                            + "</name>" +
+                            "\n<gx:Track>" +
+                            "\n</gx:Track>" +
+                            "\n</Placemark>" +
+                            "\n</Document>" +
+                            "</kml>\n";
+                    raf.write((newTrackSegmentBlock).getBytes());
                     raf.close();
                 }
 
