@@ -198,8 +198,8 @@ class Kml22WriteHandler implements Runnable {
                 if (addNewTrackSegment) {
                     raf = new RandomAccessFile(kmlFile, "rw");
                     raf.seek(kmlFile.length() - "</Document></kml>\n".length());
-                    String placemarkHead = "\n<Placemark>" + "\n<name>" + dateTimeString + "</name>\n" + "<gx:Track>\n";
-                    String placemarkTail = "</gx:Track>\n</Placemark>\n</Document></kml>\n";
+                    String placemarkHead = "\n<Placemark>\n<name>" + dateTimeString + "</name>\n<LineString>\n<tessellate>1</tessellate>\n<altitudeMode>absolute</altitudeMode>\n<coordinates>\n";
+                    String placemarkTail = "</coordinates>\n</LineString>\n</Placemark>\n<Placemark>\n<name>" + dateTimeString + "</name>\n<gx:Track>\n</gx:Track>\n</Placemark>\n</Document></kml>\n";
                     raf.write((placemarkHead + placemarkTail).getBytes());
                     raf.close();
                 }
@@ -207,10 +207,14 @@ class Kml22WriteHandler implements Runnable {
                 int targetTrackLineIndex = -1;
                 int lastWhenLineIndex = -1;
                 int lastTrackCloseLineIndex = -1;
+                int lastCoordinatesCloseLineIndex = -1;
                 int currentLine = 0;
 
-                // I need to find the closing when, to add the next when; closing gx:Track to add next gx:Coord.
-                // There can be multiple gx:Tracks in a file so just find the last one in the file.
+                // I need to find the:
+                // closing when, to add the next when;
+                // closing gx:Track to add next gx:Coord;
+                // closing coordinates to add the next LineString coordinate.
+                // There can be multiple gx:Tracks/coordinates in a file so just find the last one in the file.
                 try (BufferedReader reader = new BufferedReader(new FileReader(kmlFile))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
@@ -227,12 +231,23 @@ class Kml22WriteHandler implements Runnable {
                         if (line.contains("</gx:Track>")) {
                             lastTrackCloseLineIndex = currentLine;
                         }
+                        if (line.contains("</coordinates>")) {
+                            lastCoordinatesCloseLineIndex = currentLine;
+                        }
                         currentLine++;
                     }
                 }
 
                 // Act on targetTrackLineIndex. If lastWhen is -1, then just write both.
-                // If lastWhen have values, write at those positions
+                // If lastWhen have values, write at those positions.
+                // The LineString coordinate is always appended just before </coordinates>.
+                String gxCoord = String.valueOf(loc.getLongitude())
+                        + " " + String.valueOf(loc.getLatitude())
+                        + " " + String.valueOf(loc.getAltitude());
+                String coordTuple = String.valueOf(loc.getLongitude())
+                        + "," + String.valueOf(loc.getLatitude())
+                        + "," + String.valueOf(loc.getAltitude());
+
                 File tempFile = new File(kmlFile.getAbsolutePath() + ".tmp");
                 currentLine = 0;
 
@@ -251,33 +266,29 @@ class Kml22WriteHandler implements Runnable {
                                 writer.newLine();
                                 writer.write("  <when>" + dateTimeString + "</when>");
                                 writer.newLine();
-                                writer.write("  <gx:coord>"
-                                        + String.valueOf(loc.getLongitude())
-                                        + " "
-                                        + String.valueOf(loc.getLatitude())
-                                        + " "
-                                        + String.valueOf(loc.getAltitude())
-                                        + "</gx:coord>");
+                                writer.write("  <gx:coord>" + gxCoord + "</gx:coord>");
                                 writer.newLine();
                             }
                         }
                         else {
+                            // when can go after the latest when
                             if(currentLine == lastWhenLineIndex){
                                 writer.write("  <when>" + dateTimeString + "</when>");
                                 writer.newLine();
                             }
+                            // gx:coord can go right before the closing gx:Track
                             if(currentLine+1 == lastTrackCloseLineIndex){
-                                writer.write("  <gx:coord>"
-                                        + String.valueOf(loc.getLongitude())
-                                        + " "
-                                        + String.valueOf(loc.getLatitude())
-                                        + " "
-                                        + String.valueOf(loc.getAltitude())
-                                        + "</gx:coord>");
+                                writer.write("  <gx:coord>" + gxCoord + "</gx:coord>");
                                 writer.newLine();
                             }
-
                         }
+
+                        // LineString: append the new coordinate after the last one, just before </coordinates>
+                        if(currentLine+1 == lastCoordinatesCloseLineIndex){
+                            writer.write("  " + coordTuple);
+                            writer.newLine();
+                        }
+
                         currentLine++;
                     }
                 }
