@@ -392,4 +392,25 @@
     <string name="prompt_for_details_when_logging_starts">Pregunta els detalls quan arrenqui el log</string>
     <string name="only_log_if_significant_motion_title">Només registreu si hi ha moviment significatiu</string>
     <string name="only_log_if_significant_motion_summary">Només registreu si es detecten activitats significatives com ara senderisme, ciclisme o conducció. El moviment signoficatiu depén del SO.</string>
+    <string name="osm_visibility_migration_message">OpenStreetMap elimina les opcions de visibilitat GPS públiques i privades. La configuració de les galetes s\'ha canvuat a \"permet galetes\" per evitar errors.</string>
+    <string name="customurl_basicauth_hide_password">Amaga contrasenya</string>
+    <string name="customurl_basicauth_hide_password_summary">La contrasenya no es pot visualitzar en text pla i no s\'exportarà al fitxer de perfil</string>
+    <string name="customurl_autosend_batch_size">Auto enviar la mida del lot</string>
+    <string name="customurl_autosend_batch_size_summary">Nombre de sol·licituds abans d\'una pausa.</string>
+    <string name="customurl_autosend_sleep">Auto envia el retard de sleep</string>
+    <string name="customurl_autosend_sleep_summary">Retarda en mil·lisegons entre lots.</string>
+    <string name="significant_motion_bypass_interval_summary">Durant els períodes prolongats de cap moviment significatiu, de tant en tant prescindir de la comprovació i prendre un registre de batecs de totes maneres tal com determina aquest interval. Un valor inferior a 1 minut desactiva l\'interval.</string>
+    <string name="time_in_minutes_dialog_title">Temps en minuts</string>
+    <string name="log_dawarich_setup_title">Dawarich</string>
+    <string name="log_dawarich_title">Inicia sessió en una instància Dawarich</string>
+    <string name="log_dawarich_summary_detailed">Envia la posició gravada a una instància de Dawarich definida</string>
+    <string name="log_dawarich_discard_offline_locations">Llença ubicacions quan fora de línia</string>
+    <string name="log_dawarich_url">URL base Dawarich</string>
+    <string name="log_dawarich_device_id">Id. de dispositiu</string>
+    <string name="log_dawarich_filepath">Buffer file path</string>
+    <string name="log_dawarich_filepath_summary">El camí on es guarda el fitxer de persistència del buffer</string>
+    <string name="log_dawarich_apikey">Dawarich API-key</string>
+    <string name="app_name_debug">GPSLogger DEV</string>
+    <string name="dawarich_bulk_min_summary">Quantitat mínima d\'ubicacions per a la càrrega a l\'engròs (espera fins a l\'import s\'arriba abans de l\'enviament)</string>
+    <string name="dawarich_bulk_max_title">Localitzacions màximes per càrrega a l\'engros</string>
 </resources>
