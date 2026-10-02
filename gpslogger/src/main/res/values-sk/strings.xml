@@ -214,8 +214,7 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
     <string name="autosend_frequency_summary">Ako často (v minútach) by sa mal odosielať záznam. Zadaním hodnoty 0 dôjde k zablokovaniu.</string>
     <string name="autosend_frequency">Ako často?</string>
     <string name="autosend_sendzip_title">Odoslať súbor ZIP</string>
-    <string name="autosend_sendzip_summary">Odoslať súbor ZIP ak je to možné. Vypnite pre odoslanie jednotlivých súborov, alebo ak táto funkcia nefunguje
-    </string>
+    <string name="autosend_sendzip_summary">Odoslať súbor ZIP ak je to možné. Vypnite pre odoslanie jednotlivých súborov, alebo ak funkcia ZIP nefunguje</string>
     <string name="autosend_targets_category">Automatické odoslanie na</string>
     <string name="menu_autosend_now">Automatické odoslanie teraz</string>
     <string name="autosend_sending">Automatické odosielanie</string>
@@ -350,7 +349,7 @@ polia.
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Povoliť vždy</b> - umožní aplikácii získavať aktualizácie polohy aj vtedy, keď beží na pozadí. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorovať optimalizácie batérie</b> - umožní aplikácii fungovanie na pozadí, znížením optimalizácií batérie. ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["Odmietli ste udeliť jedno alebo niekoľko oprávnení, ktoré vyžaduje táto aplikácia. Na udelenie týchto oprávnení budete musieť prejsť na obrazovku s nastaveniami aplikácie, alebo spustiť aplikáciu znovu.  <br><br>Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["Odmietli ste udeliť jedno alebo viaceré oprávnenia, vyžadované touto aplikáciou. Na ich udelenie musíte spustiť aplikáciu znovu, alebo prejsť na obrazovku s nastaveniami aplikácie. <br><br>Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Pre fungovanie aplikácie GPSLogger na pozadí, je potrebné udeliť jej dodatočné oprávnenie. Na nasledujúcej obrazovke prosím vyberte:]]></string>
     <string name="privacy_policy">Politika ochrany osobných údajov</string>
     <string name="debuglog_attach_to_email">Pripojiť k e-mailu aj záznam pre ladenie</string>
