@@ -399,4 +399,8 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="customurl_autosend_batch_size_summary">Número de solicitudes antes de una pausa.</string>
     <string name="customurl_autosend_sleep">Retraso de sueño Auto Enviar</string>
     <string name="customurl_autosend_sleep_summary">Retraso en milisegundos entre lotes.</string>
+    <string name="osm_visibility_migration_message">OpenStreetMap está removiendo las opciones de visibilidad de trazos de GPS públicos y privados. Tu ajuste ha sido actualizado a rastreable para evitar errores.</string>
+    <string name="customurl_basicauth_hide_password">Ocultar contraseña</string>
+    <string name="time_in_minutes_dialog_title">Tiempo en minutos</string>
+    <string name="log_dawarich_device_id">ID de dispositivo</string>
 </resources>
