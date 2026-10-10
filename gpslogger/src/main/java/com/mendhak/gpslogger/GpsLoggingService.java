@@ -78,12 +78,12 @@ public class GpsLoggingService extends Service  {
     private Session session = Session.getInstance();
     protected LocationManager gpsLocationManager;
     private LocationManager passiveLocationManager;
-    private LocationManager towerLocationManager;
+    private LocationManager networkLocationManager;
     private LocationManager fusedLocationManager;
     private GeneralLocationListener fusedLocationlistener;
     private GeneralLocationListener gpsLocationListener;
     private GnssStatus.Callback gnssStatusCallback;
-    private GeneralLocationListener towerLocationListener;
+    private GeneralLocationListener networkLocationListener;
     private GeneralLocationListener passiveLocationListener;
     private NmeaLocationListener nmeaLocationListener;
     private Intent alarmIntent;
@@ -147,7 +147,7 @@ public class GpsLoggingService extends Service  {
             LOG.error("Could not start GPSLoggingService in foreground. ", ex);
         }
 
-        if(session.isStarted() && gpsLocationListener == null && towerLocationListener == null && passiveLocationListener == null) {
+        if(session.isStarted() && gpsLocationListener == null && networkLocationListener == null && passiveLocationListener == null && fusedLocationlistener == null) {
             if(Systems.hasUserGrantedAllNecessaryPermissions(this)){
                 LOG.warn("App might be recovering from an unexpected stop.  Starting logging again.");
                 startLogging();
@@ -732,8 +732,8 @@ public class GpsLoggingService extends Service  {
             gpsLocationListener = new GeneralLocationListener(this, "GPS");
         }
 
-        if (towerLocationListener == null) {
-            towerLocationListener = new GeneralLocationListener(this, "CELL");
+        if (networkLocationListener == null) {
+            networkLocationListener = new GeneralLocationListener(this, "CELL");
         }
 
         if (fusedLocationlistener == null) {
@@ -780,10 +780,10 @@ public class GpsLoggingService extends Service  {
 
 
         gpsLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        towerLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        networkLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         fusedLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        checkTowerAndGpsStatus();
+        checkProviderStatus();
 
         if (session.isFusedEnabled() && preferenceHelper.shouldLogFusedLocations() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             LOG.info("Requesting Fused location updates");
@@ -824,16 +824,16 @@ public class GpsLoggingService extends Service  {
             startAbsoluteTimer();
         }
 
-        if (session.isTowerEnabled() &&  ( preferenceHelper.shouldLogNetworkLocations() || !session.isGpsEnabled() ) ) {
+        if (session.isNetworkEnabled() &&  ( preferenceHelper.shouldLogNetworkLocations() || !session.isGpsEnabled() ) ) {
             LOG.info("Requesting cell and wifi location updates");
             session.setUsingGps(false);
             // Cell tower and wifi based
-            towerLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, towerLocationListener);
+            networkLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, networkLocationListener);
 
             startAbsoluteTimer();
         }
 
-        if(!session.isTowerEnabled() && !session.isGpsEnabled() && !session.isFusedEnabled()) {
+        if(!session.isNetworkEnabled() && !session.isGpsEnabled() && !session.isFusedEnabled()) {
             LOG.error("No provider available!");
             session.setUsingGps(false);
             LOG.error(getString(R.string.gpsprovider_unavailable));
@@ -895,12 +895,12 @@ public class GpsLoggingService extends Service  {
     }
 
     /**
-     * This method is called periodically to determine whether the cell tower /
-     * gps providers have been enabled, and sets class level variables to those
-     * values.
+     * Checks which of the location providers (network, satellite, fused) are
+     * enabled, stores in the session.
+     * Called each time the location managers are (re)started.
      */
-    private void checkTowerAndGpsStatus() {
-        session.setTowerEnabled(towerLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
+    private void checkProviderStatus() {
+        session.setNetworkEnabled(networkLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER));
         session.setGpsEnabled(gpsLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
@@ -923,9 +923,9 @@ public class GpsLoggingService extends Service  {
             fusedLocationManager.removeUpdates(fusedLocationlistener);
         }
 
-        if (towerLocationListener != null) {
-            LOG.debug("Removing towerLocationManager updates");
-            towerLocationManager.removeUpdates(towerLocationListener);
+        if (networkLocationListener != null) {
+            LOG.debug("Removing networkLocationManager updates");
+            networkLocationManager.removeUpdates(networkLocationListener);
         }
 
         if (gpsLocationListener != null) {

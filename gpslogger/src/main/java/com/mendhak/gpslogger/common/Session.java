@@ -67,16 +67,16 @@ public class Session {
     }
 
     /**
-     * @return whether GPS (tower) is enabled
+     * @return whether Network (celltower) is enabled
      */
-    public boolean isTowerEnabled() {
+    public boolean isNetworkEnabled() {
         return Boolean.valueOf(get("towerEnabled", "false"));
     }
 
     /**
      * @param towerEnabled set whether GPS (tower) is enabled
      */
-    public void setTowerEnabled(boolean towerEnabled) {
+    public void setNetworkEnabled(boolean towerEnabled) {
         set("towerEnabled", String.valueOf(towerEnabled));
     }
 
