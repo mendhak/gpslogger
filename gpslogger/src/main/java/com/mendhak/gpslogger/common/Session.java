@@ -139,7 +139,8 @@ public class Session {
 
 
     /**
-     * @return the isUsingGps
+     * @return whether satellite (GPS) fixes are currently being requested.
+     *         Used to decide whether satellite info should be displayed
      */
     public boolean isUsingGps() {
         return Boolean.valueOf(get("isUsingGps", "false"));

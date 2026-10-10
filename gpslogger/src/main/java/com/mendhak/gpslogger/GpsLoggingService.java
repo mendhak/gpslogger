@@ -268,6 +268,8 @@ public class GpsLoggingService extends Service  {
                 }
 
 
+                // This is the old intent, only switches between network and satellites.
+                // Newer way: the LOG_GPS, LOG_NETWORK, LOG_FUSED above.
                 if (bundle.get(IntentConstants.PREFER_CELLTOWER) != null) {
                     boolean preferCellTower = bundle.getBoolean(IntentConstants.PREFER_CELLTOWER);
                     LOG.debug("Intent received - Set Prefer Cell Tower: " + String.valueOf(preferCellTower));
@@ -701,12 +703,11 @@ public class GpsLoggingService extends Service  {
 
 
     /**
-     * Starts the location manager. There are two location managers - GPS and
-     * Cell Tower. This code determines which manager to request updates from
-     * based on user preference and whichever is enabled. If GPS is enabled on
-     * the phone, that is used. But if the user has also specified that they
-     * prefer cell towers, then cell towers are used. If neither is enabled,
-     * then nothing is requested.
+     * Starts the location managers. The three main providers are satellite (GPS),
+     * network (cell tower/wifi) and fused (internally uses both).
+     * Passive provider separately listens for locations requested by other applications.
+     * here we request updates from whichever providers are both
+     * enabled on the device and selected by the user.
      */
     @SuppressWarnings("ResourceType")
     private void startGpsManager() {
@@ -1071,8 +1072,9 @@ public class GpsLoggingService extends Service  {
 
 
 
-        // Check that it's a user selected valid listener, even if it's a passive location.
-        // In other words, if user wants satellite only, then don't log passive network locations.
+        // Check that the location is from a provider the user selected, even for passive
+        // locations. Passive fixes carry their source provider, so e.g. if the user has
+        // only satellite selected, passive fixes sourced from network are not logged.
         if(!isFromSelectedListener(loc)){
             LOG.debug("Received location, but it's not from a selected listener. Ignoring.");
             return;

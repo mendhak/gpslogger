@@ -184,7 +184,7 @@ and other parts of the application listen for those events.  The most important 
 
 ### GPS Logging Service
 
-GPSLoggingService is where all the work happens.  This service talks to the location providers (network and satellite).
+GPSLoggingService is where all the work happens.  This service talks to the location providers (network, satellite, fused).
 It sets up timers and alarms for the next GPS point to be requested.  It passes location info to the various loggers
 so that they can write files.  It also invokes the auto-uploaders so that they may send their files to DropBox, OSM, etc.
 
