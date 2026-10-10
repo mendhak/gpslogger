@@ -113,9 +113,9 @@
     <string name="display_imperial_title">야드파운드법(Imperial units)으로 표시</string>
     <string name="display_imperial_summary">개정된 미터법이 아닌 피트, 마일, 핀트 단위를 사용합니다. (대게는 미터법 사용에 익숙할 것임)</string>
     <string name="enabledisablegps_title">GPS 켜기/끄기</string>
-    <string name="enabledisablegps_summary">위치 설정을 켜거나 끄기 위해 디바이스 설정화면으로 가기</string>
+    <string name="enabledisablegps_summary">위치 설정을 켜거나 끄기 위해 디바이스 설정화면으로 가기.</string>
     <string name="startonbootup_title">부팅시 시작하기</string>
-    <string name="startonbootup_summary">디바이스가 부팅된 후 애플리케이션을 실행하여 기록을 시작합니다.</string>
+    <string name="startonbootup_summary">디바이스가 부팅될 때 자동으로 앱을 실행하고 기록을 시작합니다.</string>
     <string name="startonapplaunch_title">애플리케이션 실행시 기록하기</string>
     <string name="startonapplaunch_summary">애플리케이션이 실행될 때, 기록을 시작합니다.</string>
     <string name="autoemail_title">이메일</string>
@@ -338,7 +338,7 @@
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notifications</b> - 알림을 표시할 수 있도록, 이것은 로깅 서비스를 살아있게 유지하는 데 도움이됩니다. ]]></string>
     <string name="passive_filter_time_summary">최소 수집 간격을 조정하여 중복 수동 위치 업데이트 감소 (초).</string>
     <string name="file_logging_log_time_with_offset_summary">Wheers는 UTC 대신 팀존 오프셋으로 ISO8601 시간을 게시했습니다.</string>
-    <string name="log_plain_text_decimal_comma">점 (대상) 대신 십진수 분리기로 쉼표 ()를 사용하십시오.</string>
+    <string name="log_plain_text_decimal_comma">소수점 구분 기호로 점(.) 대신 쉼표(,)를 사용하세요.(유럽에서 주로 사용)</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[This app requires various permissions in order to function properly. You will now be prompted multiple times for various permissions (sorry).  Here is an explanation of each permission. ]]></string>
     <string name="autosend_customurl_summary">(기능을 사용하면 CSV 로깅을 사용) CUST 파일의 대기열에 요청을 요청합니다. CSV 파일의 얼당선을위한 것입니다. 자동 전송 간격에 따라 다릅니다.</string>
     <string name="install_conscrypt_provider_summary">Oneinter Android 기기에서 Scls TCS 연결 문제를 해결하는 경우 Conscrypt Provider를 설치하는 데 도움이 될 수 있습니다. (생각하기 링크, APK 설치, 센터 다시 시작 앱)</string>
@@ -371,10 +371,4 @@
     <string name="profile_add_from_url">URL에서</string>
     <string name="reset_app_title">앱 재설정</string>
     <string name="app_theme_title">앱 테마</string>
-
-
-
-
-
-
 </resources>
