@@ -792,6 +792,7 @@ public class GpsLoggingService extends Service  {
                     .setQuality(preferenceHelper.getFusedQuality())
                     .build();
             fusedLocationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, request, ContextCompat.getMainExecutor(this), fusedLocationlistener);
+            session.setUsingGps(false);
             startAbsoluteTimer();
         }
 
