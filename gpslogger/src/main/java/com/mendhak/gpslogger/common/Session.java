@@ -67,16 +67,16 @@ public class Session {
     }
 
     /**
-     * @return whether GPS (tower) is enabled
+     * @return whether Network (celltower) is enabled
      */
-    public boolean isTowerEnabled() {
+    public boolean isNetworkEnabled() {
         return Boolean.valueOf(get("towerEnabled", "false"));
     }
 
     /**
      * @param towerEnabled set whether GPS (tower) is enabled
      */
-    public void setTowerEnabled(boolean towerEnabled) {
+    public void setNetworkEnabled(boolean towerEnabled) {
         set("towerEnabled", String.valueOf(towerEnabled));
     }
 
@@ -92,6 +92,15 @@ public class Session {
      */
     public void setGpsEnabled(boolean gpsEnabled) {
         set("gpsEnabled", String.valueOf(gpsEnabled));
+    }
+
+
+    public boolean isFusedEnabled(){
+        return Boolean.valueOf(get("fusedEnabled", "false"));
+    }
+
+    public void setFusedEnabled(boolean fusedEnabled){
+        set("fusedEnabled", String.valueOf(fusedEnabled));
     }
 
     /**
@@ -130,7 +139,8 @@ public class Session {
 
 
     /**
-     * @return the isUsingGps
+     * @return whether satellite (GPS) fixes are currently being requested.
+     *         Used to decide whether satellite info should be displayed
      */
     public boolean isUsingGps() {
         return Boolean.valueOf(get("isUsingGps", "false"));

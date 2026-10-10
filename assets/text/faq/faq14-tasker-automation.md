@@ -41,6 +41,7 @@ To invoke it from your own Android code:
 > `setretrytime` - (number) Sets preference for duration to match accuracy  
 > `setabsolutetimeout` - (number) Sets preference for absolute timeout  
 > `setprefercelltower` - (true/false) Enables or disables the GPS or celltower listeners  
+> `setlogfusedprovider` - (true/false) Enables or disables the Fused location provider listener (Android 12+)  
 > `logonce` - (true) Log a single point, then stop  
 > `switchprofile` - (text) The name of the profile to switch to  
 > `getstatus` - (true) Asks GPSLogger to send its current events broadcast  
