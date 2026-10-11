@@ -15,6 +15,12 @@
             app:iconSpaceReserved="false" />
 
     <Preference
+            android:key="dawarich_qr_button"
+            android:title="Read Dawarich QR-Code"
+            android:summary="Uses the QR-Code from Dawarich to fill base URL and API-key"
+            android:icon="@drawable/dawarich_qr" />
+
+    <Preference
             android:key="dawarich_server"
             android:singleLine="true"
             android:title="@string/log_dawarich_url"
