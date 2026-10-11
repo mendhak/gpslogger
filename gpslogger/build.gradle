@@ -195,11 +195,7 @@ dependencies {
     //Expandable textview in the FAQ
     implementation 'com.ms-square:expandableTextView:0.1.4'
 
-    //The single letter text icons
-    implementation 'com.github.amulyakhare:TextDrawable:558677ea31'
-
-
-    //OKHTTP client
+        //OKHTTP client
     // VULNERABLE DEPENDENCY
     // CVE-2023-0833  4.7  Generation of Error Message Containing Sensitive Information
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
