@@ -1,0 +1,5 @@
+* New Fused Location provider option
+* Dawarich: send null when location has no speed
+* Dawarich: allow setting motion and activity via Tasker command
+* Bugfix: KML when, coords sequence was incorrect
+* KML: added LineString to output
