@@ -4,3 +4,4 @@
 * Bugfix: KML when, coords sequence was incorrect
 * KML: added LineString to output
 * Maintenance: Removed the profile name icons, unmaintained library
+* Automation: you can now enable/disable logging from gps, network, fused, passive
