@@ -3,3 +3,4 @@
 * Dawarich: allow setting motion and activity via Tasker command
 * Bugfix: KML when, coords sequence was incorrect
 * KML: added LineString to output
+* Maintenance: Removed the profile name icons, unmaintained library
