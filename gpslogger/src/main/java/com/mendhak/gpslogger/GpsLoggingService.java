@@ -267,6 +267,13 @@ public class GpsLoggingService extends Service  {
                     preferenceHelper.setShouldLogFusedLocations(logFused);
                 }
 
+                if (bundle.get(IntentConstants.LOG_PASSIVE) != null){
+                    boolean logPassive = bundle.getBoolean(IntentConstants.LOG_PASSIVE);
+                    LOG.debug("Intent received - log Passive locations: " + String.valueOf(logPassive));
+                    preferenceHelper.setShouldLogPassiveLocations(logPassive);
+                    needToStartGpsManager = true;
+                }
+
 
                 // This is the old intent, only switches between network and satellites.
                 // Newer way: the LOG_GPS, LOG_NETWORK, LOG_FUSED above.

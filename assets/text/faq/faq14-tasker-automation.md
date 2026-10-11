@@ -45,12 +45,13 @@ To invoke it from your own Android code:
 > `setloggpsprovider` - (true/false) Enable or disable GPS/satellite location logging  
 > `setlognetworkprovider` - (true/false) Enable or disable Network (cell tower/Wi-Fi) location logging  
 > `setlogfusedprovider` - (true/false) Enable or disable Fused location provider logging (Android 12+)  
+> `setlogpassivelocation` - (true/false) Enable or disable Passive location logging  
 > `setdawarichmotion` - (text) Set the Dawarich motion mode (e.g. "vehicle", "pedestrian", "biking")  
 > `setdawarichactivity` - (text) Set the Dawarich activity type (e.g. "driving", "walking", "cycling")  
 > `logonce` - (true) Log a single point, then stop  
 > `switchprofile` - (text) The name of the profile to switch to  
 > `getstatus` - (true) Asks GPSLogger to send its current events broadcast  
-> `passivefilterinterval` - (number) Set the passive filter interval in milliseconds  
+> `passivefilterinterval` - (number) Set the passive filter interval in seconds
 
 ### Shortcuts
 
