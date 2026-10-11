@@ -45,12 +45,13 @@ android {
 
         targetSdkVersion 35
         compileSdk 35
-        versionCode 137
-        versionName "137"
+        versionCode 138
+        versionName "138"
 
         // Used by AppAuth-Android
         manifestPlaceholders = [
-                appAuthRedirectScheme: 'com.mendhak.gpslogger'
+                appAuthRedirectScheme: 'com.mendhak.gpslogger',
+                appIcon: "@mipmap/gpsloggericon3"
         ]
     }
 
@@ -63,6 +64,9 @@ android {
             applicationIdSuffix ".debug"
             versionNameSuffix "-DEBUG"
             resValue "string", "app_name", "@string/app_name_debug"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/gpsloggericon_debug"
+            ]
         }
         release {
             minifyEnabled true
@@ -70,6 +74,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
             debuggable false
             resValue "string", "app_name", "@string/app_name_release"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/gpsloggericon3"
+            ]
         }
     }
 
@@ -188,11 +195,7 @@ dependencies {
     //Expandable textview in the FAQ
     implementation 'com.ms-square:expandableTextView:0.1.4'
 
-    //The single letter text icons
-    implementation 'com.github.amulyakhare:TextDrawable:558677ea31'
-
-
-    //OKHTTP client
+        //OKHTTP client
     // VULNERABLE DEPENDENCY
     // CVE-2023-0833  4.7  Generation of Error Message Containing Sensitive Information
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'

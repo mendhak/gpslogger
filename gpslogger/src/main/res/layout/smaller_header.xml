@@ -64,14 +64,6 @@
                 android:clickable="true"
                 android:elevation="2dp" />
 
-            <ImageView
-                android:id="@+id/profiletextletter"
-                android:contentDescription="Profile"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="19dp"
-                android:layout_marginEnd="19dp"
-                />
             <TextView
                 android:id="@+id/material_drawer_account_header_name"
                 android:layout_width="wrap_content"

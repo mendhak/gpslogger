@@ -76,7 +76,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.amulyakhare.textdrawable.TextDrawable;
 import com.mendhak.gpslogger.common.EventBusHook;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
@@ -808,7 +807,6 @@ public class GpsMainActivity extends AppCompatActivity
                         //Clicked on profile name
                         String newProfileName = profile.getName().getText();
                         EventBus.getDefault().post(new ProfileEvents.SwitchToProfile(newProfileName));
-                        refreshProfileIcon(profile.getName().getText());
                         return true;
                     }
                 })
@@ -948,20 +946,6 @@ public class GpsMainActivity extends AppCompatActivity
 
     }
 
-    private void refreshProfileIcon(String profileName){
-
-        ImageView imgLetter = (ImageView)drawerHeader.getView().findViewById(R.id.profiletextletter);
-        TextDrawable drawLetter = TextDrawable.builder()
-                .beginConfig()
-                .bold()
-                .textColor(ContextCompat.getColor(getApplicationContext(),R.color.golden))
-                .useFont(Typeface.SANS_SERIF)
-                .endConfig()
-                .buildRound(profileName.substring(0, 1).toUpperCase(), ContextCompat.getColor(getApplicationContext(), R.color.primaryColorLight));
-
-        imgLetter.setImageDrawable(drawLetter);
-    }
-
     private void populateProfilesList() {
 
         LOG.debug("Current profile:" + preferenceHelper.getCurrentProfileName());
@@ -1036,7 +1020,6 @@ public class GpsMainActivity extends AppCompatActivity
 
         }
 
-        refreshProfileIcon(preferenceHelper.getCurrentProfileName());
 
 
     }

@@ -78,7 +78,7 @@ class Kml22AnnotateHandler implements Runnable {
     File kmlFile;
     String description;
     Location loc;
-    int kmlAnnotationOffset = 258;
+    int kmlAnnotationOffset = 261;
 
     public Kml22AnnotateHandler(File kmlFile, String description, Location loc) {
         this.kmlFile = kmlFile;
@@ -167,8 +167,6 @@ class Kml22WriteHandler implements Runnable {
             if(PreferenceHelper.getInstance().shouldWriteTimeWithOffset()){
                 dateTimeString = Strings.getIsoDateTimeWithOffset(new Date(loc.getTime()));
             }
-            String placemarkHead = "<Placemark>\n<gx:Track>\n";
-            String placemarkTail = "</gx:Track>\n</Placemark></Document></kml>\n";
 
             synchronized (Kml22FileLogger.lock) {
 
@@ -180,12 +178,12 @@ class Kml22WriteHandler implements Runnable {
 
                     StringBuilder initialXml = new StringBuilder();
                     initialXml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-                    initialXml.append("<kml xmlns=\"http://www.opengis.net/kml/2.2\" ");
+                    initialXml.append("\n<kml xmlns=\"http://www.opengis.net/kml/2.2\" ");
                     initialXml.append("xmlns:gx=\"http://www.google.com/kml/ext/2.2\" ");
                     initialXml.append("xmlns:kml=\"http://www.opengis.net/kml/2.2\" ");
                     initialXml.append("xmlns:atom=\"http://www.w3.org/2005/Atom\">");
-                    initialXml.append("<Document>");
-                    initialXml.append("<name>").append(dateTimeString).append("</name>\n");
+                    initialXml.append("\n<Document>");
+                    initialXml.append("\n<name>").append(dateTimeString).append("</name>\n");
 
                     initialXml.append("</Document></kml>\n");
                     initialOutput.write(initialXml.toString().getBytes());
@@ -199,28 +197,181 @@ class Kml22WriteHandler implements Runnable {
 
                 if (addNewTrackSegment) {
                     raf = new RandomAccessFile(kmlFile, "rw");
-                    raf.seek(kmlFile.length() - 18);
-                    raf.write((placemarkHead + placemarkTail).getBytes());
+                    raf.seek(kmlFile.length() - "</Document></kml>\n".length());
+                    String newTrackSegmentBlock =
+                            "\n<Placemark>\n<name>"
+                            + dateTimeString
+                            + "</name>" +
+                            "\n<LineString>" +
+                            "\n<tessellate>1</tessellate>" +
+                            "\n<altitudeMode>absolute</altitudeMode>" +
+                            "\n<coordinates>" +
+                            "\n</coordinates>" +
+                            "\n</LineString>" +
+                            "\n</Placemark>" +
+                            "\n<Placemark>" +
+                            "\n<name>"
+                            + dateTimeString
+                            + "</name>" +
+                            "\n<gx:Track>" +
+                            "\n</gx:Track>" +
+                            "\n</Placemark>" +
+                            "\n</Document>" +
+                            "</kml>\n";
+                    raf.write((newTrackSegmentBlock).getBytes());
                     raf.close();
-
                 }
 
-                StringBuilder coords = new StringBuilder();
-                coords.append("\n<when>");
-                coords.append(dateTimeString);
-                coords.append("</when>\n<gx:coord>");
-                coords.append(String.valueOf(loc.getLongitude()));
-                coords.append(" ");
-                coords.append(String.valueOf(loc.getLatitude()));
-                coords.append(" ");
-                coords.append(String.valueOf(loc.getAltitude()));
-                coords.append("</gx:coord>\n");
-                coords.append(placemarkTail);
+                int targetTrackLineIndex = -1;
+                int lastWhenLineIndex = -1;
+                int lastTrackCloseLineIndex = -1;
+                int lastCoordinatesCloseLineIndex = -1;
+                int currentLine = 0;
 
-                raf = new RandomAccessFile(kmlFile, "rw");
-                raf.seek(kmlFile.length() - 42);
-                raf.write(coords.toString().getBytes());
-                raf.close();
+                // I need to find the:
+                // closing when, to add the next when;
+                // closing gx:Track to add next gx:Coord;
+                // closing coordinates to add the next LineString coordinate.
+                // There can be multiple gx:Tracks/coordinates in a file so just find the last one in the file.
+                try (BufferedReader reader = new BufferedReader(new FileReader(kmlFile))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        if (line.contains("<gx:Track>")) {
+                            // A new gx:Track, reset other indexes.
+                            targetTrackLineIndex = currentLine;
+                            lastWhenLineIndex = -1;
+                            lastTrackCloseLineIndex = -1;
+                        }
+
+                        if (line.contains("</when>")) {
+                            lastWhenLineIndex = currentLine;
+                        }
+                        if (line.contains("</gx:Track>")) {
+                            lastTrackCloseLineIndex = currentLine;
+                        }
+                        if (line.contains("</coordinates>")) {
+                            lastCoordinatesCloseLineIndex = currentLine;
+                        }
+                        currentLine++;
+                    }
+                }
+
+                // Act on targetTrackLineIndex. If lastWhen is -1, then just write both.
+                // If lastWhen have values, write at those positions.
+                // The LineString coordinate is always appended just before </coordinates>.
+                String gxCoord = String.valueOf(loc.getLongitude())
+                        + " " + String.valueOf(loc.getLatitude())
+                        + " " + String.valueOf(loc.getAltitude());
+                String coordTuple = String.valueOf(loc.getLongitude())
+                        + "," + String.valueOf(loc.getLatitude())
+                        + "," + String.valueOf(loc.getAltitude());
+
+                File tempFile = new File(kmlFile.getAbsolutePath() + ".tmp");
+                currentLine = 0;
+
+                try (BufferedReader reader = new BufferedReader(new FileReader(kmlFile));
+                     BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+                    String line;
+                    while((line = reader.readLine()) != null){
+
+                        writer.write(line);
+                        writer.newLine();
+
+                        if(lastWhenLineIndex == -1){
+                            if(currentLine ==  targetTrackLineIndex){
+                                // If lastWhen is -1, that's an empty gx Track, so write both just before the closing gx:Track
+                                writer.write("  <gx:altitudeMode>absolute</gx:altitudeMode>");
+                                writer.newLine();
+                                writer.write("  <when>" + dateTimeString + "</when>");
+                                writer.newLine();
+                                writer.write("  <gx:coord>" + gxCoord + "</gx:coord>");
+                                writer.newLine();
+                            }
+                        }
+                        else {
+                            // when can go after the latest when
+                            if(currentLine == lastWhenLineIndex){
+                                writer.write("  <when>" + dateTimeString + "</when>");
+                                writer.newLine();
+                            }
+                            // gx:coord can go right before the closing gx:Track
+                            if(currentLine+1 == lastTrackCloseLineIndex){
+                                writer.write("  <gx:coord>" + gxCoord + "</gx:coord>");
+                                writer.newLine();
+                            }
+                        }
+
+                        // LineString: append the new coordinate after the last one, just before </coordinates>
+                        if(currentLine+1 == lastCoordinatesCloseLineIndex){
+                            writer.write("  " + coordTuple);
+                            writer.newLine();
+                        }
+
+                        currentLine++;
+                    }
+                }
+
+                if (kmlFile.delete()){
+                    tempFile.renameTo(kmlFile);
+                }
+
+
+
+//                // Can't use ReversedLinesFileReader because that needs Android 8+/API26.
+//                try (BufferedReader reader = new BufferedReader(new FileReader(kmlFile))){
+//                    String line;
+//                    int length = 0;
+//                    int latestGxTrackClosePosition = -1;
+//                    int latestWhenClosePosition = -1;
+//
+//                    while((line = reader.readLine()) != null) {
+//
+//                        if(line.contains("</gx:Track>")){
+//                            // We put the latest <gx:coord> just before this
+//                            latestGxTrackClosePosition = length + line.indexOf("</gx:Track>");
+//                            LOG.info("Found gx track close at file position: " + latestGxTrackClosePosition);
+//                        }
+//                        if(line.contains("</when>")){
+//                            // If other when are present, we'd put the latest <when> just after this
+//                            latestWhenClosePosition = length + line.indexOf("</when>") + "</when>".length();
+//                            LOG.info("Found when close at file position: " + latestWhenClosePosition);
+//                        }
+//
+//                        length += line.length();
+//                    }
+//                }
+
+//                try (ReversedLinesFileReader reader = new ReversedLinesFileReader(kmlFile, StandardCharsets.UTF_8)){
+//                    String line;
+//                    int length = 0;
+//                    while((line = reader.readLine()) != null) {
+//                        length += line.length();
+//                        if(line.contains("</gx:Track>")){
+//                            LOG.info("Found at file position from end: " + length);
+//                            addNewTrackSegment = false;
+//                            break;
+//                        }
+//
+//                    }
+//
+//                }
+
+//                StringBuilder coords = new StringBuilder();
+//                coords.append("\n<when>");
+//                coords.append(dateTimeString);
+//                coords.append("</when>\n<gx:coord>");
+//                coords.append(String.valueOf(loc.getLongitude()));
+//                coords.append(" ");
+//                coords.append(String.valueOf(loc.getLatitude()));
+//                coords.append(" ");
+//                coords.append(String.valueOf(loc.getAltitude()));
+//                coords.append("</gx:coord>\n");
+//                coords.append(placemarkTail);
+//
+//                raf = new RandomAccessFile(kmlFile, "rw");
+//                raf.seek(kmlFile.length() - 42);
+//                raf.write(coords.toString().getBytes());
+//                raf.close();
                 LOG.debug("Finished writing to KML22 File");
             }
 
