@@ -35,16 +35,22 @@ To invoke it from your own Android code:
 > `immediatestop` - (true) Stop logging  
 > `immediateautosend` - (true) Initiate auto-send file uploads (only works if logging has started)   
 > `setnextpointdescription` - (text) Sets the annotation text to use for the next point logged  
+> `getnextpoint` - (true) Start GPS manager to capture the next point (for use with setnextpointdescription)
 > `settimebeforelogging` - (number) Sets preference for logging interval option    
 > `setdistancebeforelogging` - (number) Sets preference for distance before logging option  
 > `setkeepbetweenfix` - (true/false) Sets preference whether to keep GPS on between fixes  
 > `setretrytime` - (number) Sets preference for duration to match accuracy  
 > `setabsolutetimeout` - (number) Sets preference for absolute timeout  
-> `setprefercelltower` - (true/false) Enables or disables the GPS or celltower listeners  
-> `setlogfusedprovider` - (true/false) Enables or disables the Fused location provider listener (Android 12+)  
+> `setprefercelltower` - (true/false) Enables GPS or Network (cell tower) listeners (legacy, use the below ones)  
+> `setloggpsprovider` - (true/false) Enable or disable GPS/satellite location logging  
+> `setlognetworkprovider` - (true/false) Enable or disable Network (cell tower/Wi-Fi) location logging  
+> `setlogfusedprovider` - (true/false) Enable or disable Fused location provider logging (Android 12+)  
+> `setdawarichmotion` - (text) Set the Dawarich motion mode (e.g. "vehicle", "pedestrian", "biking")  
+> `setdawarichactivity` - (text) Set the Dawarich activity type (e.g. "driving", "walking", "cycling")  
 > `logonce` - (true) Log a single point, then stop  
 > `switchprofile` - (text) The name of the profile to switch to  
 > `getstatus` - (true) Asks GPSLogger to send its current events broadcast  
+> `passivefilterinterval` - (number) Set the passive filter interval in milliseconds  
 
 ### Shortcuts
 
