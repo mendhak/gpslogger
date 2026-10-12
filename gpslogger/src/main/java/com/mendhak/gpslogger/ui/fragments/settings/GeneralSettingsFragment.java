@@ -119,9 +119,9 @@ public class GeneralSettingsFragment extends PreferenceFragmentCompat implements
 
     private void setCoordinatesFormatPreferenceItem() {
         ListPreference coordFormats = findPreference("coordinatedisplayformat");
-        String[] coordinateDisplaySamples = new String[]{"12° 34' 56.7890\" S","12° 34.5678' S","-12.345678"};
+        String[] coordinateDisplaySamples = new String[]{"12° 34' 56.7890\" S","12° 34.5678' S","-12.345678", "32U ND 12345"};
         coordFormats.setEntries(coordinateDisplaySamples);
-        coordFormats.setEntryValues(new String[]{PreferenceNames.DegreesDisplayFormat.DEGREES_MINUTES_SECONDS.toString(),PreferenceNames.DegreesDisplayFormat.DEGREES_DECIMAL_MINUTES.toString(),PreferenceNames.DegreesDisplayFormat.DECIMAL_DEGREES.toString()});
+        coordFormats.setEntryValues(new String[]{PreferenceNames.DegreesDisplayFormat.DEGREES_MINUTES_SECONDS.toString(),PreferenceNames.DegreesDisplayFormat.DEGREES_DECIMAL_MINUTES.toString(),PreferenceNames.DegreesDisplayFormat.DECIMAL_DEGREES.toString(), PreferenceNames.DegreesDisplayFormat.MGRS.toString()});
         coordFormats.setDefaultValue("0");
         coordFormats.setOnPreferenceChangeListener(this);
         coordFormats.setSummary(coordinateDisplaySamples[PreferenceHelper.getInstance().getDisplayLatLongFormat().ordinal()]);
