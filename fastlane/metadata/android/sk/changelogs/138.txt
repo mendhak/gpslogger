@@ -1,0 +1,7 @@
+* Nová voľba pre poskytovateľov zlúčenej polohy
+* Dawarich: odoslanie nuly, ak nie je pri danej polohe žiadna rýchlosť
+* Dawarich. povolenie nastavenia pohybu a aktivity príkazom Tasker
+* Oprava chyby: KML, ak je sekvencia súradníc nesprávna
+* KML: pridanie LineString do výstupu
+* Údržba: odstránené ikony pre názov profilu, neudržiavaná knižnica
+* Automatizácia: teraz môžete zapnúť/vypnúť zaznamenávanie z GPS, siete, zlúčené, pasívne

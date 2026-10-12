@@ -45,8 +45,7 @@
     <string name="seconds"> s</string>
     <string name="minutes"> min</string>
     <string name="hours"> hod</string>
-    <string name="gpsprovider_unavailable">Nie je dostupný žiadny poskytovateľ GPS. Prosím skontrolujte nastavenia svojej pozície a zapnite poskytovateľa pozície.
-    </string>
+    <string name="gpsprovider_unavailable">Nie je dostupný žiadny poskytovateľ GPS. Prosím skontrolujte nastavenia svojej polohy a zapnite poskytovateľa informácií o polohe.</string>
     <string name="started">Spustené</string>
     <string name="providername_gps">Satelity GPS</string>
     <string name="providername_celltower">vykrývače mobilným signálom</string>
@@ -295,16 +294,16 @@ polia.
     <string name="log_nmea_summary">Počas pokusu o získanie korekcie sa vytvorí súbor NMEA. Tento súbor sa veľmi rýchlo zväčšuje. Nastavenie funguje iba pri používaním GPS.</string>
     <string name="autoopengts_accountname">Názov účtu</string>
     <string name="listeners_gps">GPS</string>
-    <string name="listeners_gps_title">Zaznamenať lokality GPS/GNSS</string>
-    <string name="listeners_gps_summary">Zaznamená lokality poskytované prijímačom satelitných údajov vo vašom zariadení</string>
+    <string name="listeners_gps_title">Zaznamenať polohy podľa GPS/GNSS</string>
+    <string name="listeners_gps_summary">Zaznamená polohy poskytované prijímačom satelitných údajov vo vašom zariadení</string>
     <string name="listeners_cell">Sieť</string>
     <string name="listeners_cell_title">Zaznamenať sieťové lokality</string>
-    <string name="listeners_cell_summary">Zaznamená lokality na základe prijímača informácií o sieti vo vašom zariadení</string>
+    <string name="listeners_cell_summary">Zaznamená polohy na základe prijímača informácií o sieti vo vašom zariadení</string>
     <string name="listeners_passive">Pasívni</string>
-    <string name="listeners_passive_title">Zaznamenať pasívne lokality</string>
-    <string name="listeners_passive_summary">Zaznamená lokality prebraté z iných aplikácií, avšak je pritom ignorovaná väčšina filtrov. Toto nastavenie je užitočné aj pre externé GPS prijímače.</string>
-    <string name="listeners_summary">Určuje, ktorí poskytovatelia lokalizačných údajov sa majú použiť, ak sú dostupní; GPS pre satelity, Sieť pre wifi/celulárne vysielače, Pasívni (špeciálni poskytovatelia ktorí prijímajú lokalizačné údaje požadované inými aplikáciami).</string>
-    <string name="listeners_title">Poskytovatelia lokalizácie</string>
+    <string name="listeners_passive_title">Zaznamenať pasívne polohy</string>
+    <string name="listeners_passive_summary">Zaznamená polohy prebraté z iných aplikácií, ale pritom je ignorovaná väčšina filtrov. Toto nastavenie je užitočné aj pre externé GPS prijímače.</string>
+    <string name="listeners_summary">Určuje, ktorí poskytovatelia údajov o polohe sa majú použiť, ak sú dostupní; GPS pre satelity, sieť pre mobilné vysielače/wifi, zlúčenie (použijú sa obidvaja), pasívny (špeciálny poskytovateľ prijímajúci informácie o polohe vyžiadané inými aplikáciami).</string>
+    <string name="listeners_title">Poskytovatelia polohy</string>
     <string name="autosend_frequency_hint">Počet minút</string>
     <string name="pref_logging_file_no_permissions">GPSLogger nemôže zapisovať do tohto priečinka. Prosím vyberte iný zapisovací priečinok.</string>
     <string name="gpslogger_custom_path_need_permission">Aby ste v aplikácii GPSLogger mohli využívať používateľom určené cesty, prosím povoľte apl. GPSLogger na nasledujúcej obrazovke spravovanie všetkých súborov. Potom skúste vykonať akciu ešte raz. Je to vyžadované kvôli obmedzeniu v systémoch Android 11+.</string>
@@ -345,11 +344,11 @@ polia.
     <string name="profile_add_new">Pridať profil</string>
     <string name="gpslogger_permissions_rationale_title">Vyžaduje sa oprávnenie</string>
     <string name="gpslogger_permissions_rationale_message_basic"><![CDATA[Aplikácia vyžaduje pre svoje korektné fungovanie rôzne oprávnenia. Teraz vám bude viackrát položená otázka súvisiaca s oprávneniami (prepáčte). Tu je vysvetlenie každého oprávnenia. ]]></string>
-    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Umiestnenie zariadenia</b> - Toto oprávnenie umožňuje čítanie údajov o lokalite z vysielačov mobilného signálu a z hardvéru pre GPS.]]></string>
+    <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>Poloha zariadenia</b> - Toto oprávnenie umožňuje čítanie údajov o polohe z vysielačov mobilného signálu a z hardvéru pre GPS.]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Povoliť vždy</b> - umožní aplikácii získavať aktualizácie polohy aj vtedy, keď beží na pozadí. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorovať optimalizácie batérie</b> - umožní aplikácii fungovanie na pozadí, znížením optimalizácií batérie. ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["Odmietli ste udeliť jedno alebo viaceré oprávnenia, vyžadované touto aplikáciou. Na ich udelenie musíte spustiť aplikáciu znovu, alebo prejsť na obrazovku s nastaveniami aplikácie. <br><br>Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["\"Odmietli ste udeliť jedno alebo viaceré oprávnenia, vyžadované touto aplikáciou. Na ich udelenie musíte spustiť aplikáciu znovu, alebo prejsť na obrazovku s nastaveniami aplikácie. <br><br>Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Pre fungovanie aplikácie GPSLogger na pozadí, je potrebné udeliť jej dodatočné oprávnenie. Na nasledujúcej obrazovke prosím vyberte:]]></string>
     <string name="privacy_policy">Politika ochrany osobných údajov</string>
     <string name="debuglog_attach_to_email">Pripojiť k e-mailu aj záznam pre ladenie</string>
@@ -407,8 +406,8 @@ polia.
     <string name="gpslogger_permissions_rationale_message_notification"><![CDATA[<b>Notifikácie</b> - Povoliť zobrazenie notifikácie, ktorá pomôže udržať proces zaznamenávania aktívny. ]]></string>
     <string name="started_at">spustené</string>
     <string name="hide_notification_from_lock_screen">Skryť notifikáciu z obrazovky uzamknutia</string>
-    <string name="passive_filter_time_title">Interval aktualizovania pasívnych lokalít</string>
-    <string name="passive_filter_time_summary">Obmedzte zbytočné aktualizovanie pasívnych lokalít úpravu minimálneho intervalu pre zber (v sek.).</string>
+    <string name="passive_filter_time_title">Interval aktualizovania pasívnych polôh</string>
+    <string name="passive_filter_time_summary">Obmedzte zbytočné pasívne aktualizácie polohy, úpravou minimálneho intervalu pre zber (v sek.).</string>
     <string name="autosend_wifionly_summary">Čakať na WiFi pripojenie pred vykonaním sieťových požiadaviek. Týka sa všetkých požiadaviek, aj odosielania a zaznamenávania.</string>
     <string name="only_log_if_significant_motion_title">Zaznamenávať len pri výraznom pohybe</string>
     <string name="only_log_if_significant_motion_summary">Zaznamenávať len pri výraznej aktivite, ako je kráčanie, jazda. Významnosť pohybu určuje váš OS.</string>
@@ -426,8 +425,8 @@ polia.
     <string name="log_dawarich_setup_title">Dawarich</string>
     <string name="log_dawarich_title">Zaznamenávať do inštancie Dawarich</string>
     <string name="log_dawarich_summary_detailed">Odošle zaznamenanú pozíciu do definovanej inštancie Dawarich</string>
-    <string name="log_dawarich_discard_offline_locations">Zahodiť pozície v prípade režimu offline</string>
-    <string name="log_dawarich_discard_offline_locations_summary">Ak je táto voľba aktívna, všetky lokality sa zahodia počas režimu offline a nezaradia sa do fronty na odoslanie</string>
+    <string name="log_dawarich_discard_offline_locations">Zahodiť polohy v prípade režimu offline</string>
+    <string name="log_dawarich_discard_offline_locations_summary">Ak je táto voľba aktívna, všetky polohy sa zahodia počas režimu offline a nezaradia sa do fronty na odoslanie</string>
     <string name="log_dawarich_url">Základná URL pre Dawarich</string>
     <string name="log_dawarich_device_id">ID zariadenia</string>
     <string name="log_dawarich_device_id_summary">ID zariadenia uvádzané v údajoch o pozícii, aby bolo možné neskôr rozlíšiť jednotlivé zariadenia</string>
@@ -435,10 +434,10 @@ polia.
     <string name="log_dawarich_filepath_summary">Cesta, na ktorej je uložený trvalý súbor pre vyrovnávaciu pamäť</string>
     <string name="log_dawarich_apikey">Kľúč API pre Dawarich</string>
     <string name="app_name_debug">GPSLogger DEV</string>
-    <string name="dawarich_bulk_min_title">Minimálny počet pozícií na hromadné odoslanie</string>
-    <string name="dawarich_bulk_min_summary">Minimálny počet pozícií na spojenie do jedného hromadného odoslania (pred odoslaním sa čaká na dosiahnutie tohto počtu)</string>
-    <string name="dawarich_bulk_max_title">Maximálny počet pozícií na hromadné odoslanie</string>
-    <string name="dawarich_bulk_max_summary">Maximálny počet pozícií na odoslanie pri jednej požiadavke na hromadné odoslanie</string>
+    <string name="dawarich_bulk_min_title">Minimálny počet polôh na hromadné odoslanie</string>
+    <string name="dawarich_bulk_min_summary">Minimálny počet polôh na spojenie do jedného hromadného odoslania (pred odoslaním sa čaká na dosiahnutie tohto počtu)</string>
+    <string name="dawarich_bulk_max_title">Maximálny počet polôh na hromadné odoslanie</string>
+    <string name="dawarich_bulk_max_summary">Maximálny počet polôh na odoslanie pri jednej požiadavke na hromadné odoslanie</string>
     <string name="dawarich_baseUrl_not_set_title">Nie je nastavená základná adresa URL</string>
     <string name="dawarich_baseUrl_not_set_msg">Prosím nastavte základnú URL pre Dawarich a skúste to ešte raz</string>
     <string name="dawarich_apiKey_not_set_title">Nie je nastavený kľúč API</string>
@@ -446,4 +445,12 @@ polia.
     <string name="customurl_basicauth_hide_password_summary">Heslo nemožno zobraziť vo formáte čistého textu a neexportuje sa do súboru s profilom</string>
     <string name="customurl_basicauth_hide_password">Skryť heslo</string>
     <string name="osm_visibility_migration_message">OpenStreetMap odstraňuje voľby pre viditeľnosť verejného a súkromného GPS sledovania. Vaše nastavenie bolo aktualizované na sledovateľné, aby sa zabránilo chybám.</string>
+    <string name="listeners_fused_summary">Skombinuje vstupy od iných poskytovateľov údajov pre korekciu polohy.</string>
+    <string name="listeners_fused">Zlúčené</string>
+    <string name="listeners_fused_title">Zaznamenávať zlúčené polohy</string>
+    <string name="fused_quality_title">Kvalita zlúčenej polohy</string>
+    <string name="fused_quality_summary">Informácia pre poskytovateľov zlúčenej polohy o pomere spotrebovanej energie voči presnosti</string>
+    <string name="fused_quality_low_power">Málo energie (menej presné)</string>
+    <string name="fused_quality_balanced">Vyvážené (predvolená možnosť)</string>
+    <string name="fused_quality_high_accuracy">Veľmi presné (viac energie)</string>
 </resources>

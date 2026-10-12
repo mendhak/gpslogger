@@ -1,0 +1,7 @@
+* Új, Egyesített helymeghatározási opció
+* Dawarich: null küldése, ha a helymeghatározáshoz nincs sebesség
+* Dawarich: mozgás és tevékenység beállításának engedélyezése Tasker paranccsal
+* Hibajavítás: KML-kibocsátáskor a koordináták sorrendje helytelen volt
+* KML: LineString hozzáadva a kimenethez
+* Karbantartás: eltávolítva a profilnév-ikonok, karbantartatlan könyvtár
+* Automatizálás: mostantól engedélyezhető/letiltható a naplózás a GPS, Hálózat, Egyesített, Passzív adatokból
