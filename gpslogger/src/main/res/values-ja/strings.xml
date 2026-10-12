@@ -262,7 +262,7 @@
     <string name="listeners_passive">パッシブ</string>
     <string name="listeners_passive_title">パッシブ位置情報を記録</string>
     <string name="listeners_passive_summary">他のアプリにより取得された位置情報を記録します。ほとんどのフィルターは無視されることに注意してください。この設定は外部GPS受信機を使用する際にも役立ちます。</string>
-    <string name="listeners_summary">どの位置情報プロバイダを利用するか; GPSは衛星、ネットワークは携帯基地局かWiFi、パッシブは他のアプリから取得された位置情報です。</string>
+    <string name="listeners_summary">利用可能なときにどの位置情報プロバイダーを使用するか; GPSは衛星、ネットワークは携帯基地局/Wi-Fi、統合は両方を併用し、受動は他のアプリから要求された位置情報を受信する特別なプロバイダーです。</string>
     <string name="listeners_title">位置情報プロバイダ</string>
     <string name="autosend_frequency_hint">分数</string>
     <string name="pref_logging_file_no_permissions">指定されたでディレクトリに書き込みできません。別のディレクトリを指定してください。</string>
@@ -295,7 +295,7 @@
     <string name="gpslogger_permissions_rationale_title">必須の権限</string>
     <string name="gpslogger_permissions_rationale_message_location"><![CDATA[<b>位置情報</b> - この権限は基地局やGPSから位置情報を取得するのに必要です。]]></string>
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>画像/メディア/ファイル</b> - この権限は、ログやテストファイルの書き込みや、アップロードや共有をする際、ファイルのリストを読み込むために必要とされます。このアプリはあなたの写真やメディアファイルにアクセスすることはありません。]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["このアプリに必要な権限のうち1つ以上を否認しました。  アプリを再起動するか、システム設定画面からこれらの権限の承認が必要がです。  <br><br>権限を永久に否認した場合にはシステム設定からリセット可能です。 "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["このアプリに必要な権限のうち１つ以上を拒否しました。アプリを再起動するか、システムの設定画面からこれらの権限の承認が必要です。  <br><br>権限を永久に否認した場合はシステム設定からリセットできます。 "]]></string>
     <string name="privacy_policy">プライバシーポリシー</string>
     <string name="debuglog_attach_to_email">デバッグ用ログをメールに添付する</string>
     <string name="debuglog_attach_to_email_summary">デバッグログの他に診断結果を添付する</string>
@@ -427,4 +427,12 @@
     <string name="dawarich_apiKey_not_set_title">APIキーが未設定</string>
     <string name="dawarich_apiKey_not_set_msg">ダワリッチのAPIキーを設定して再試行願います</string>
     <string name="osm_visibility_migration_message">OpenStreetMapは公共・私有のGPSトレース表示の設定オプションが廃止されます。設定はエラー抑止の為に追跡可能へ更新されました。</string>
+    <string name="listeners_fused">統合</string>
+    <string name="listeners_fused_summary">位置情報を特定する為にほかの位置情報プロバイダーからの情報を統合。</string>
+    <string name="listeners_fused_title">統合ロケーションを記録</string>
+    <string name="fused_quality_title">統合ロケーションの精度</string>
+    <string name="fused_quality_summary">統合プロバイダーのヒント、電池持ちと精度でどちらにどれだけのリソースを割くか</string>
+    <string name="fused_quality_low_power">省電力(低精度)</string>
+    <string name="fused_quality_balanced">バランス(標準)</string>
+    <string name="fused_quality_high_accuracy">高精度(より電力が必要)</string>
 </resources>
