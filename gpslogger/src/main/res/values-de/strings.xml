@@ -282,7 +282,7 @@
     <string name="listeners_passive">Passiv</string>
     <string name="listeners_passive_title">Passive Standorte aufzeichnen</string>
     <string name="listeners_passive_summary">Zeichnet Standorte auf, die von anderen Anwendungen erhalten wurden. Beachten Sie, dass die meisten Filter ignoriert werden. Diese Einstellung ist auch für externe GPS-Empfänger nützlich.</string>
-    <string name="listeners_summary">Festlegen, welche Standortbestimmungsmethode je nach Verfügbarkeit genutzt werden soll; GPS-Satelliten, Netzwerke (WLAN/Mobilfunknetz), Passiv (nutzt Standortbestimmungsanfragen, die von anderen Apps angefordert werden).</string>
+    <string name="listeners_summary">Festlegen, welche Standortanbieter bei Verfügbarkeit genutzt werden: GPS für Satelliten, Netzwerk für Mobilfunkmasten/WLAN, Zusammengeführt kombiniert beide, Passiv ist ein spezieller Anbieter, der auf Standortanfragen anderer Apps reagiert.</string>
     <string name="listeners_title">Standortbestimmungsmethoden</string>
     <string name="autosend_frequency_hint">Minuten</string>
     <string name="pref_logging_file_no_permissions">GPSLogger besitzt für diesen Ordner keine Schreibrechte. Bitte einen anderen Speicherort festlegen.</string>
@@ -430,4 +430,12 @@
     <string name="customurl_basicauth_hide_password">Passwort ausblenden</string>
     <string name="customurl_basicauth_hide_password_summary">Das Passwort kann nicht im Klartext angezeigt werden und wird nicht in die Profildatei exportiert</string>
     <string name="osm_visibility_migration_message">OpenStreetMap entfernt die Optionen zur Sichtbarkeit öffentlicher und privater GPS-Tracks. Ihre Einstellung wurde auf „verfolgbar“ aktualisiert, um Fehler zu vermeiden.</string>
+    <string name="listeners_fused_title">Zusammengeführte Standorte aufzeichnen</string>
+    <string name="fused_quality_title">Zusammengeführte Standortqualität</string>
+    <string name="fused_quality_summary">Hinweis an den Anbieter: Wie viel sollte für Leistung im Vergleich zur Genauigkeit ausgegeben werden</string>
+    <string name="fused_quality_low_power">Geringer Stromverbrauch (geringere Genauigkeit)</string>
+    <string name="fused_quality_balanced">Ausgewogen (Standard)</string>
+    <string name="fused_quality_high_accuracy">Hohe Genauigkeit (höherer Stromverbrauch)</string>
+    <string name="listeners_fused">Zusammengeführt</string>
+    <string name="listeners_fused_summary">Kombiniert Daten von anderen Standortanbietern zur Standortbestimmung.</string>
 </resources>
