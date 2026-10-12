@@ -1,5 +1,5 @@
 * OpenStreetMapa veľká zmena - overenie prepnuté na OAuth2, OpenStreetMap musíte znovu autorizovať
 * Predvolené na automatické odoslanie pri zastavení zaznamenávania
-* Oprava chyby - kontrola pasívnych polôh na zabezpečenie toho, že ich čas je väčší ako predchádzajúci čas
+* Oprava chyby - kontrola pasívnych polôh na zabezpečenie toho, že ich čas je väčší ako pri predchádzajúcej polohe
 * Oprava chyby pre monochromatickú ikonu na motíve Nothing OS
 * Zakázanie určitých znakov v názve súboru, ako sú napríklad hviezdičky, lomky
