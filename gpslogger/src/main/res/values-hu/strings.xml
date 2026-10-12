@@ -48,7 +48,7 @@
     <string name="gpsprovider_unavailable">Nincs elérhető GPS szolgáltató. Kérem ellenőrizze a telefon helymeghatározási beállításait.</string>
     <string name="started">Elindult</string>
     <string name="providername_gps">GPS műholdak</string>
-    <string name="providername_celltower">GSM adótornyok</string>
+    <string name="providername_celltower">mobil átjátszótornyok</string>
     <string name="not_applicable">nincs adat</string>
     <string name="meters_per_second"> m/s</string>
     <string name="feet_per_second"> láb/s</string>
@@ -283,7 +283,7 @@
     <string name="listeners_passive">Passzív</string>
     <string name="listeners_passive_title">Passzív helymeghatározás rögzítése</string>
     <string name="listeners_passive_summary">Naplózza a más alkalmazásokból származó hely adatokat, de vegye figyelembe, hogy a legtöbb szűrő figyelmen kívül hagyja. Ez a beállítás külső GPS-vevőkészülék esetén is hasznos.</string>
-    <string name="listeners_summary">Használható helyszolgáltatók; GPS műhold, GSM/Wifi, Passzív - más alkalmazásokban lekérdezett pozíciókat figyeli.</string>
+    <string name="listeners_summary">Melyik helymeghatározó szolgáltatót használja: GPS műhold, Mobil átjátszótorony/Wi-Fi, Egyesített mindkettő, Passzív egy speciális szolgáltató, amely figyeli a többi alkalmazás által kért helyadatokat.</string>
     <string name="listeners_title">Helymeghatározó szolgáltatók</string>
     <string name="autosend_frequency_hint">Percek száma</string>
     <string name="pref_logging_file_no_permissions">GPSLogger nem tudja írni a kiválasztott mappát. Kérem válasszon másikat.</string>
@@ -329,7 +329,7 @@
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotók, média, fájlok</b> - Ez a jogosultság lehetővé teszi naplófájlok és tesztfájlok írását a tárolóba, valamint a fájlok listájából való olvasást feltöltés vagy megosztás céljából. Ez az alkalmazás nem fér hozzá a fényképekhez vagy egyéb média fájlokhoz.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Mindig engedélyezve</b> - Engedélyezi az alkalmazásnak, hogy megkapja a helyfrissítéseket, amikor a háttérben fut. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Akkumulátoroptimalizálás figyelmen kívül hagyása</b> - Engedélyezze az alkalmazásnak a háttérben való futását az akkumulátoroptimalizálás csökkentésével. ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["\"Ön megtagadott egy vagy több engedélyt, amelyet az alkalmazás igényel.  Engedélyek megadásához újra kell indítani az alkalmazást vagy a rendszerbeállítások képernyőre kell lépnie.  <br><br>Ha véglegesen megtagadta az engedélyeket, visszaállíthatja azokat a rendszerbeállításokban. \" "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["\"\"Ön megtagadott egy vagy több engedélyt, amelyet az alkalmazás igényel.  Engedélyek megadásához újra kell indítani az alkalmazást vagy a rendszerbeállítások képernyőre kell lépnie.  <br><br>Ha véglegesen megtagadta az engedélyeket, visszaállíthatja azokat a rendszerbeállításokban. "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Ahhoz, hogy a GPSLogger a háttérben futhasson, további engedélyeket kell megadnia. Következő képernyőn válassza ki: ]]></string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
@@ -426,4 +426,12 @@
     <string name="customurl_basicauth_hide_password">Jelszó elrejtése</string>
     <string name="customurl_basicauth_hide_password_summary">Jelszó nem jeleníthető meg egyszerű szövegként, és nem kerül exportálásra a profilfájlba</string>
     <string name="osm_visibility_migration_message">OpenStreetMap eltávolítja a nyilvános és privát GPS-nyomvonalak láthatósági beállításait. Beállításokat „nyomon követhetőre” frissítettük a hibák elkerülése érdekében.</string>
+    <string name="listeners_fused_summary">Helymeghatározáshoz más helyalapú szolgáltatóktól származó adatokat is felhasznál.</string>
+    <string name="listeners_fused_title">Naplózza az egyesített helyeket</string>
+    <string name="listeners_fused">Egyesítés</string>
+    <string name="fused_quality_title">Egyesített helymeghatározás minősége</string>
+    <string name="fused_quality_summary">Tanács az integrált szolgáltatónak: mennyit érdemes az erőre, és mennyit a pontosságra fordítani</string>
+    <string name="fused_quality_low_power">Alacsony energiafogyasztás (kevésbé pontos)</string>
+    <string name="fused_quality_balanced">Kiegyensúlyozott (alapértelmezett)</string>
+    <string name="fused_quality_high_accuracy">Nagy pontosság (nagyobb teljesítmény)</string>
 </resources>
