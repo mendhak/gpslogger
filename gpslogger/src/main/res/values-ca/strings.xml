@@ -413,4 +413,8 @@
     <string name="app_name_debug">GPSLogger DEV</string>
     <string name="dawarich_bulk_min_summary">Quantitat mínima d\'ubicacions per a la càrrega a l\'engròs (espera fins a l\'import s\'arriba abans de l\'enviament)</string>
     <string name="dawarich_bulk_max_title">Localitzacions màximes per càrrega a l\'engros</string>
+    <string name="listeners_fused">Fusionat</string>
+    <string name="listeners_fused_summary">Combina les entrades d\'altres proveïdors d\'ubicació per a la solució d\'ubicació.</string>
+    <string name="listeners_fused_title">Registra localitzacions fusionades</string>
+    <string name="fused_quality_title">Qualitat de les localitzacions fusionades</string>
 </resources>
