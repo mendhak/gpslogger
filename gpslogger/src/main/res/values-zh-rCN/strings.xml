@@ -271,7 +271,7 @@
     <string name="listeners_passive">被动</string>
     <string name="listeners_passive_title">记录被动位置</string>
     <string name="listeners_passive_summary">记录从其他应用获取的位置数据。请注意，此时大多数过滤规则将失效。此选项也适用于外接 GPS 设备。</string>
-    <string name="listeners_summary">可用时从哪些来源获取位置数据：GPS 对应卫星，网络对应基站/Wi-Fi，被动模式则监听其他应用获取的位置数据。</string>
+    <string name="listeners_summary">可用时从哪些来源获取位置数据：GPS 对应卫星，网络对应基站/Wi-Fi，Fused（融合）同时使用两者，Passive（被动）是一种特殊的提供者，仅监听其他应用请求的定位信息。</string>
     <string name="listeners_title">位置提供者</string>
     <string name="autosend_frequency_hint">分钟数</string>
     <string name="pref_logging_file_no_permissions">GPSLogger 无法写入该文件夹。请选择其他文件夹。</string>
@@ -308,7 +308,7 @@
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>照片、媒体和文件</b> - 此权限允许应用向存储空间写入记录和测试文件，并读取文件列表以便上传或分享。本应用不会访问您的个人照片或媒体文件。]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>始终允许</b> - 允许本应用在后台运行时接收位置更新。 ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>忽略电池优化</b>-不对本应用进行电池优化，使之可以在后台运行。 ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["您已拒绝本应用所需的一项或多项权限。您需要重启应用，或前往系统设置页面授予这些权限。 <br><br>如果您选择了‘永久拒绝’，请在系统设置中重置权限。 "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["您已拒绝本应用所需的一项或多项权限。您需要重启应用，或前往系统设置页面授予这些权限。  <br><br>如果您选择了“永久拒绝”，请在系统设置中重置权限。 "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[为了允许GPS记录器在后台运行，您需要授予它一个额外的权限。在下一屏幕，请选择:]]></string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="debuglog_attach_to_email">将调试日志附加到邮件</string>
@@ -426,4 +426,12 @@
     <string name="log_dawarich_title">记录到 Dawarich 实例</string>
     <string name="log_dawarich_summary_detailed">将定位数据发送到指定的 Dawarich 实例</string>
     <string name="osm_visibility_migration_message">OpenStreetMap 正在移除 GPS 轨迹的“公开”和“私有”可见性选项。为避免出错，您的设置已更新为“可追踪”。</string>
+    <string name="listeners_fused">融合</string>
+    <string name="listeners_fused_summary">综合其他位置提供者的输入以获取定位结果。</string>
+    <string name="listeners_fused_title">记录融合定位数据</string>
+    <string name="fused_quality_title">融合定位质量模式</string>
+    <string name="fused_quality_low_power">低功耗（精度较低）</string>
+    <string name="fused_quality_balanced">平衡（默认）</string>
+    <string name="fused_quality_high_accuracy">高精度（功耗较高）</string>
+    <string name="fused_quality_summary">调整功耗与精度的平衡倾向</string>
 </resources>
