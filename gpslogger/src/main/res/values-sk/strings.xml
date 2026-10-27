@@ -218,8 +218,8 @@ zrušiť prepojenie aplikácie GPSLogger so službou Dropbox.
     <string name="menu_autosend_now">Automatické odoslanie teraz</string>
     <string name="autosend_sending">Automatické odosielanie</string>
     <string name="summary_autosend">Automaticky odoslať:</string>
-    <string name="pref_autosend_title">Odosielanie, email a upload</string>
-    <string name="pref_autosend_summary">Možnosti pre e-mail, zdieľanie a odosielanie</string>
+    <string name="pref_autosend_title">Autom. upload a odoslanie</string>
+    <string name="pref_autosend_summary">Konfigurácia cieľov odosielania a pravidiel</string>
     <string name="shortcut_start">Štart</string>
     <string name="shortcut_stop">Stop</string>
     <string name="shortcut_pickaction">Výber akcie</string>
@@ -348,7 +348,7 @@ polia.
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotografie, médiá, súbory</b> – Toto oprávnenie umožňuje zápis do súborov so záznamami a vykonávanie testu ukladania súborov, čítania zoznamu súborov pre odosielanie alebo zdieľanie. Táto aplikácia nepristupuje k vaším fotografiám alebo médiu.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Povoliť vždy</b> - umožní aplikácii získavať aktualizácie polohy aj vtedy, keď beží na pozadí. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Ignorovať optimalizácie batérie</b> - umožní aplikácii fungovanie na pozadí, znížením optimalizácií batérie. ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["\"Odmietli ste udeliť jedno alebo viaceré oprávnenia, vyžadované touto aplikáciou. Na ich udelenie musíte spustiť aplikáciu znovu, alebo prejsť na obrazovku s nastaveniami aplikácie. <br><br>Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["Odmietli ste udeliť jedno alebo viaceré oprávnenia, vyžadované touto aplikáciou. Na ich udelenie musíte spustiť aplikáciu znovu, alebo prejsť na obrazovku s nastaveniami aplikácie. <br><br>Ak ste odmietli udeliť oprávnenia natrvalo, môžete vykonať reset v nastaveniach systému. "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Pre fungovanie aplikácie GPSLogger na pozadí, je potrebné udeliť jej dodatočné oprávnenie. Na nasledujúcej obrazovke prosím vyberte:]]></string>
     <string name="privacy_policy">Politika ochrany osobných údajov</string>
     <string name="debuglog_attach_to_email">Pripojiť k e-mailu aj záznam pre ladenie</string>
