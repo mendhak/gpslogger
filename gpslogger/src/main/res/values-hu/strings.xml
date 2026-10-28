@@ -38,7 +38,7 @@
     <!-- general -->
     <string name="foot"> láb</string>
     <string name="feet"> láb</string>
-    <string name="meter">m</string>
+    <string name="meter">méter</string>
     <string name="meters">m</string>
     <string name="error">Hiba</string>
     <string name="error_connection">Csatlakozási hiba! Ellenőrizze a telefon beállításait.</string>
@@ -202,8 +202,8 @@
     <string name="menu_autosend_now">Automatikus küldés most</string>
     <string name="autosend_sending">Automatikus küldés</string>
     <string name="summary_autosend">Automatikus küldés:</string>
-    <string name="pref_autosend_title">Automatikus küldés, email, feltöltés</string>
-    <string name="pref_autosend_summary">E-mail, megosztás, feltöltés beállítások</string>
+    <string name="pref_autosend_title">Automatikus feltöltés és küldés</string>
+    <string name="pref_autosend_summary">Küldési célok és szabályok beállítása</string>
     <string name="shortcut_start">Indítás</string>
     <string name="shortcut_stop">Leállítás</string>
     <string name="shortcut_pickaction">Válasszon műveletet</string>
@@ -329,7 +329,7 @@
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>Fotók, média, fájlok</b> - Ez a jogosultság lehetővé teszi naplófájlok és tesztfájlok írását a tárolóba, valamint a fájlok listájából való olvasást feltöltés vagy megosztás céljából. Ez az alkalmazás nem fér hozzá a fényképekhez vagy egyéb média fájlokhoz.]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>Mindig engedélyezve</b> - Engedélyezi az alkalmazásnak, hogy megkapja a helyfrissítéseket, amikor a háttérben fut. ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>Akkumulátoroptimalizálás figyelmen kívül hagyása</b> - Engedélyezze az alkalmazásnak a háttérben való futását az akkumulátoroptimalizálás csökkentésével. ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["\"\"Ön megtagadott egy vagy több engedélyt, amelyet az alkalmazás igényel.  Engedélyek megadásához újra kell indítani az alkalmazást vagy a rendszerbeállítások képernyőre kell lépnie.  <br><br>Ha véglegesen megtagadta az engedélyeket, visszaállíthatja azokat a rendszerbeállításokban. "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["\"\"\"Ön megtagadott egy vagy több engedélyt, amelyet az alkalmazás igényel.  Engedélyek megadásához újra kell indítani az alkalmazást vagy a rendszerbeállítások képernyőre kell lépnie.  <br><br>Ha véglegesen megtagadta az engedélyeket, visszaállíthatja azokat a rendszerbeállításokban. "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[Ahhoz, hogy a GPSLogger a háttérben futhasson, további engedélyeket kell megadnia. Következő képernyőn válassza ki: ]]></string>
     <string name="privacy_policy">Adatvédelmi irányelvek</string>
     <string name="debuglog_attach_to_email">Hibakeresési napló csatolása az e-mailhez</string>
