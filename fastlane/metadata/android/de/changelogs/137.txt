@@ -1,0 +1,1 @@
+* Die OpenStreetMap-Sichtbarkeitsoptionen „öffentlich“ und „privat“ sind veraltet; die Standardeinstellung ist nun „verfolgbar“
