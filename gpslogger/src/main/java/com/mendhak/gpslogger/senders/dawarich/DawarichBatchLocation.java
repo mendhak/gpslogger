@@ -19,9 +19,7 @@
 
 package com.mendhak.gpslogger.senders.dawarich;
 
-import android.content.Context;
 import com.mendhak.gpslogger.common.*;
-import com.mendhak.gpslogger.common.BatteryInfo;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -129,8 +127,6 @@ public class DawarichBatchLocation {
 
     //endregion
 
-    private static SerializableLocation sourceData;
-
     //region getters
     public String getLocationType() {
         return locationType;
@@ -204,11 +200,10 @@ public class DawarichBatchLocation {
         return battery_state;
     }
 
-    public double getBattery_level() {
+    public Double getBattery_level() {
         return battery_level;
     }
 
-    public SerializableLocation getSourceData() {return sourceData;};
     //endregion
 
     private static final org.slf4j.Logger LOG = Logs.of(DawarichBatchLocation.class);
@@ -235,59 +230,22 @@ public class DawarichBatchLocation {
         this.battery_level = builder.battery_level;
     }
 
-    public static DawarichBatchLocation fromSerializableLocation (Context context, SerializableLocation location) {
-        sourceData = location;
+    public static DawarichBatchLocation fromSerializableLocationExtended(SerializableLocation location, PreferenceHelper helper) {
         double[] coords = {location.getLongitude(), location.getLatitude()};
-        double batLvl = -1.0;
-        boolean batChg = false;
-        BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
-        batLvl = batteryInfo.BatteryLevel;
-        batChg = batteryInfo.IsCharging;
         Builder b = new Builder(coords, Strings.getIsoDateTimeWithOffset(new Date(location.getTime())))
                 .withAltitude(location.getAltitude())
                 // Use accuracy in meters as hor. accuracy
                 .withHorizontalAccuracy(location.getAccuracy())
                 .withLocationsInPayload(1)
-                // not clear why data provided by Location is wrong, using implementation from CustomURL
-                //.withBatteryState(location.getBatteryCharging() ? "charging" : "unplugged")
-                //.withBatteryLevel((double) location.getBatteryLevel() / 100)
-                .withBatteryLevel(batLvl)
-                .withBatteryState(batChg ? "charging" : "unplugged");
-        if (location.hasSpeed()) {
-            b.withSpeed(location.getSpeed());
-        }
-        if (!Strings.isNullOrEmpty(location.getHDOP()) &&  !Strings.isNullOrEmpty(location.getVDOP())) {
-            // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
-            b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
-        }
-        return b.build();
-    }
-
-    public static DawarichBatchLocation fromSerializableLocationExtended (
-            Context context,
-            SerializableLocation location,
-            PreferenceHelper helper){
-        sourceData = location;
-        double[] coords = {location.getLongitude(), location.getLatitude()};
-        double batLvl = -1.0;
-        boolean batChg = false;
-        BatteryInfo batteryInfo = Systems.getBatteryInfo(context);
-        batLvl = batteryInfo.BatteryLevel;
-        batChg = batteryInfo.IsCharging;
-        Builder b = new Builder(coords, Strings.getIsoDateTimeWithOffset(new Date(location.getTime())))
-                .withAltitude(location.getAltitude())
-                // Use accuracy in meters as hor. accuracy
-                .withHorizontalAccuracy(location.getAccuracy())
-                .withLocationsInPayload(1)
-                // not clear why data provided by Location is wrong, using implementation from CustomURL
-                //.withBatteryState(location.getBatteryCharging() ? "charging" : "unplugged")
-                //.withBatteryLevel((double) location.getBatteryLevel() / 100)
-                .withBatteryLevel(batLvl)
-                .withBatteryState(batChg ? "charging" : "unplugged")
                 .withDeferred(helper.getMinimumDistanceInterval())
                 .withDesiredAccuracy(helper.getMinimumAccuracy())
                 .withDeviceId(helper.getDawarichDeviceId())
                 .withSignificantChange(helper.shouldLogOnlyIfSignificantMotion() ? "enabled" : "disabled");
+        if (location.getBatteryLevel() > 0) {
+            // Overland expects a fraction from 0 to 1, GPSLogger stores a percentage
+            b.withBatteryLevel(location.getBatteryLevel() / 100.0)
+                    .withBatteryState(location.getBatteryCharging() ? "charging" : "unplugged");
+        }
         if (location.hasSpeed()) {
             b.withSpeed(location.getSpeed());
         }
@@ -295,24 +253,27 @@ public class DawarichBatchLocation {
             // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
             b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
         }
-        String motion = helper.getDawarichMotion();
+        String[] motion = parseMotion(location.getMotion());
+        if (motion.length > 0) {
+            b.withMotion(motion);
+        }
+        if (!Strings.isNullOrEmpty(location.getActivity())) {
+            b.withActivity(location.getActivity());
+        }
+        return b.build();
+    }
+
+    static String[] parseMotion(String motion) {
+        ArrayList<String> motionList = new ArrayList<>();
         if (!Strings.isNullOrEmpty(motion)) {
-            ArrayList<String> motionList = new ArrayList<>();
             for (String part : motion.split(",")) {
                 String trimmed = part.trim();
                 if (!trimmed.isEmpty()) {
                     motionList.add(trimmed);
                 }
             }
-            if (!motionList.isEmpty()) {
-                b.withMotion(motionList.toArray(new String[0]));
-            }
         }
-        String activity = helper.getDawarichActivity();
-        if (!Strings.isNullOrEmpty(activity)) {
-            b.withActivity(activity);
-        }
-        return b.build();
+        return motionList.toArray(new String[0]);
     }
 
     public JSONObject toJSON() throws JSONException {
@@ -343,7 +304,7 @@ public class DawarichBatchLocation {
         }
         if (activity != null) properties.put("activity", activity);
         if (desired_accuracy != null) properties.put("desired_accuracy", desired_accuracy);
-        if (deferred != null) properties.put("deffered", deferred);
+        if (deferred != null) properties.put("deferred", deferred);
         if (significant_change != null) properties.put("significant_change", significant_change);
         if (locations_in_payload != null) properties.put("locations_in_payload", locations_in_payload);
         if (device_id != null) properties.put("device_id", device_id);
@@ -444,7 +405,7 @@ public class DawarichBatchLocation {
         /**
          * The battery level percentage, from 0.00 to 1.00
          */
-        double battery_level;
+        Double battery_level;
         //endregion
 
         private final String iso8601_regex = "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d{1,9})?(?:Z|[+-][01]\\d:[0-5]\\d|[+-][01]\\d[0-5]\\d|[+-][01]\\d)$";

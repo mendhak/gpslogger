@@ -52,6 +52,8 @@ public class SerializableLocation implements Serializable {
     private String description;
     private int batteryLevel;
     private boolean batteryCharging;
+    private String motion;
+    private String activity;
     private String fileName;
     private long startTimeStamp;
     private double distance;
@@ -233,6 +235,18 @@ public class SerializableLocation implements Serializable {
     public int getBatteryLevel() { return batteryLevel; }
 
     public boolean getBatteryCharging() { return batteryCharging; }
+
+    public void setBatteryLevel(int batteryLevel) { this.batteryLevel = batteryLevel; }
+
+    public void setBatteryCharging(boolean batteryCharging) { this.batteryCharging = batteryCharging; }
+
+    public String getMotion() { return motion; }
+
+    public void setMotion(String motion) { this.motion = motion; }
+
+    public String getActivity() { return activity; }
+
+    public void setActivity(String activity) { this.activity = activity; }
 
     public String getFileName() { return fileName; }
 

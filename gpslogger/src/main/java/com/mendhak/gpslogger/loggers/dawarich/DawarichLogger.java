@@ -26,6 +26,13 @@ public class DawarichLogger implements FileLogger {
         SerializableLocation sloc = new SerializableLocation(loc);
 
         if(!Systems.isNetworkAvailable((AppSettings.getInstance())) && preferenceHelper.shouldDawarichLoggingDiscardOfflineLocations()) return;
+
+        BatteryInfo batteryInfo = Systems.getBatteryInfo(AppSettings.getInstance());
+        sloc.setBatteryLevel(batteryInfo.BatteryLevel);
+        sloc.setBatteryCharging(batteryInfo.IsCharging);
+        sloc.setMotion(preferenceHelper.getDawarichMotion());
+        sloc.setActivity(preferenceHelper.getDawarichActivity());
+
         this.buffer.push(sloc);
         if (!Systems.isNetworkAvailable(AppSettings.getInstance())) return;
 
