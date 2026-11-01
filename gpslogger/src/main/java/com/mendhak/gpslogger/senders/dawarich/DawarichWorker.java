@@ -5,62 +5,129 @@ import androidx.annotation.NonNull;
 import androidx.work.ListenableWorker;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
-import com.google.gson.reflect.TypeToken;
 import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.SerializableFIFOBuffer;
 import com.mendhak.gpslogger.common.SerializableLocation;
 import com.mendhak.gpslogger.common.Strings;
 import com.mendhak.gpslogger.common.events.UploadEvents;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import de.greenrobot.event.EventBus;
 import okhttp3.*;
+import org.json.JSONException;
 import org.slf4j.Logger;
 
-import java.lang.reflect.Type;
-import java.util.ArrayDeque;
-import java.util.Objects;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
+/**
+ * Sends the queue in batches until it's empty. Locations are only removed once the server has accepted them.
+ */
 public class DawarichWorker extends Worker {
     private static final Logger LOG = Logs.of(DawarichWorker.class);
 
+    static final String BUFFER_PATH = "bufferPath";
+
+    enum Outcome { SENT, DROP, RETRY, STOP }
+
     public DawarichWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
-
     }
 
     @NonNull
     @Override
     public ListenableWorker.Result doWork() {
-        Type dequeTyp = new TypeToken<ArrayDeque<SerializableLocation>>() {}.getType();
-        ArrayDeque<SerializableLocation> buffer = Strings.deserializeFromJson(getInputData().getString("sendBuffer"), dequeTyp);
-        PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
-        UploadEvents.Dawarich callbackEvent = new UploadEvents.Dawarich();
-        assert buffer != null;
-        callbackEvent.sendBuffer = buffer.clone();
-
-        DawarichBatch batch = new DawarichBatch();
-        while (!buffer.isEmpty()) {
-            DawarichBatchLocation loc = DawarichBatchLocation.fromSerializableLocationExtended(Objects.requireNonNull(buffer.pop()), preferenceHelper);
-            batch.appendLocation(loc);
-        }
-        try {
-            LOG.info("Sending bulk data to Dawarich");
-            Request req = buildRequest(preferenceHelper, batch.toJSON().toString());
-            try (Response response = createHttpClient().newCall(req).execute()) {
-                if (response.isSuccessful()) {
-                    LOG.info("Successfully posted bulk data to Dawarich");
-                    EventBus.getDefault().post(callbackEvent.succeeded());
-                    return Result.success();
-                } else {
-                    LOG.warn("Location batch could not be send to the Dawarich server, locations have been added to the queue again, server response:{}", response.toString());
-                    EventBus.getDefault().post(callbackEvent.failed());
-                    return Result.failure();
-                }
-            }
-        } catch (Exception e) {
-            LOG.error("Exception on location upload to Dawarich: {}", e.getMessage(), e);
-            EventBus.getDefault().post(callbackEvent.failed());
+        String bufferPath = getInputData().getString(BUFFER_PATH);
+        if (Strings.isNullOrEmpty(bufferPath)) {
+            LOG.error("No Dawarich queue file given, nothing to upload");
             return Result.failure();
         }
+        if (!new File(bufferPath).exists()) {
+            // Don't create a queue file if Dawarich logging was never used
+            return Result.success();
+        }
+
+        PreferenceHelper preferenceHelper = PreferenceHelper.getInstance();
+        SerializableFIFOBuffer<SerializableLocation> buffer = SerializableFIFOBuffer.getInstance(bufferPath);
+        int batchSize = Math.max(1, preferenceHelper.getDawarichBatchMax());
+        OkHttpClient httpClient = createHttpClient();
+
+        while (!buffer.isEmpty()) {
+            if (isStopped()) {
+                return Result.retry();
+            }
+
+            List<SerializableLocation> locations = buffer.peek(batchSize);
+            Outcome outcome;
+            try {
+                outcome = send(httpClient, preferenceHelper, locations);
+            } catch (IOException | JSONException e) {
+                LOG.warn("Could not send locations to Dawarich, will retry: {}", e.getMessage());
+                EventBus.getDefault().post(new UploadEvents.Dawarich().failed(e.getMessage(), e));
+                return Result.retry();
+            }
+
+            switch (outcome) {
+                case SENT:
+                    buffer.remove(locations.size());
+                    break;
+                case DROP:
+                    LOG.error("Dawarich rejected {} locations as invalid, removing them from the queue", locations.size());
+                    buffer.remove(locations.size());
+                    EventBus.getDefault().post(new UploadEvents.Dawarich().failed());
+                    break;
+                case RETRY:
+                    EventBus.getDefault().post(new UploadEvents.Dawarich().failed());
+                    return Result.retry();
+                case STOP:
+                    EventBus.getDefault().post(new UploadEvents.Dawarich().failed());
+                    return Result.failure();
+            }
+        }
+
+        LOG.info("All queued locations sent to Dawarich");
+        EventBus.getDefault().post(new UploadEvents.Dawarich().succeeded());
+        return Result.success();
+    }
+
+    private Outcome send(OkHttpClient httpClient, PreferenceHelper preferenceHelper, List<SerializableLocation> locations)
+            throws IOException, JSONException {
+        DawarichBatch batch = new DawarichBatch();
+        for (SerializableLocation location : locations) {
+            try {
+                batch.appendLocation(DawarichBatchLocation.fromSerializableLocationExtended(location, preferenceHelper));
+            } catch (RuntimeException e) {
+                LOG.error("Skipping a location that can't be converted for Dawarich", e);
+            }
+        }
+        if (batch.getItemCount() == 0) {
+            return Outcome.SENT;
+        }
+
+        LOG.info("Sending {} locations to Dawarich", batch.getItemCount());
+        try (Response response = httpClient.newCall(buildRequest(preferenceHelper, batch.toJSON().toString())).execute()) {
+            Outcome outcome = outcomeFor(response.code());
+            if (outcome != Outcome.SENT) {
+                LOG.warn("Dawarich server replied {} {}, {}", response.code(), response.message(), outcome);
+            }
+            return outcome;
+        }
+    }
+
+    // Dawarich returns 422 when a timestamp is invalid (the whole batch is rejected)
+    // and 401/402/403 for API key, account or plan problems
+    static Outcome outcomeFor(int httpStatus) {
+        if (httpStatus >= 200 && httpStatus < 300) {
+            return Outcome.SENT;
+        }
+        if (httpStatus == 400 || httpStatus == 422) {
+            return Outcome.DROP;
+        }
+        if (httpStatus == 408 || httpStatus == 429 || httpStatus >= 500) {
+            return Outcome.RETRY;
+        }
+        // Configuration problem (API key, wrong URL...), keep the locations until it's fixed
+        return Outcome.STOP;
     }
 
     static OkHttpClient createHttpClient() {

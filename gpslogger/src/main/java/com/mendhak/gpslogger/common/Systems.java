@@ -324,6 +324,10 @@ public class Systems {
      * @return
      */
     public static void startWorkManagerRequest(Class workerClass, HashMap<String, Object> dataMap, String tag) {
+        startWorkManagerRequest(workerClass, dataMap, tag, ExistingWorkPolicy.REPLACE);
+    }
+
+    public static void startWorkManagerRequest(Class workerClass, HashMap<String, Object> dataMap, String tag, ExistingWorkPolicy existingWorkPolicy) {
 
         androidx.work.Data data = new Data.Builder().putAll(dataMap).build();
 
@@ -352,7 +356,7 @@ public class Systems {
                 .build();
 
         WorkManager.getInstance(AppSettings.getInstance())
-                .enqueueUniqueWork(tag, ExistingWorkPolicy.REPLACE, workRequest);
+                .enqueueUniqueWork(tag, existingWorkPolicy, workRequest);
     }
 
     public static void sendFileUploadedBroadcast(Context context, String[] filePaths, String senderType){
