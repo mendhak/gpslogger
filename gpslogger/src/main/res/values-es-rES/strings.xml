@@ -199,7 +199,7 @@
     <string name="autosend_sending">Envío automático</string>
     <string name="summary_autosend">Enviar automáticamente:</string>
     <string name="pref_autosend_title">Subir y enviar archivos automáticamente</string>
-    <string name="pref_autosend_summary">Ajustes de correo, envío y subida</string>
+    <string name="pref_autosend_summary">Ajustes de correo y reglas</string>
     <string name="shortcut_start">Iniciar</string>
     <string name="shortcut_stop">Detener</string>
     <string name="shortcut_pickaction">Elige una acción</string>
@@ -276,7 +276,7 @@
     <string name="listeners_passive">Pasivo</string>
     <string name="listeners_passive_title">Registrar ubicaciones pasivas</string>
     <string name="listeners_passive_summary">Registrar ubicaciones obtenidas desde otras aplicaciones, tener presente que los filtros son ignorados. esta configuración es también útil para receptores GPS externos.</string>
-    <string name="listeners_summary">Qué proveedores de contenido usar cuando se encuentran disponibles; GPS para satélites, Red para torres de celdas/WiFi, Pasivo es un proveedor especial que escucha ubicaciones solicitadas por otras aplicaciones.</string>
+    <string name="listeners_summary">Qué proveedores de contenido usar cuando se encuentran disponibles; GPS para satélites, Red para torres de celdas/WiFi, Fusionado utiliza ambos, Pasivo es un proveedor especial que escucha ubicaciones solicitadas por otras aplicaciones.</string>
     <string name="listeners_title">Proveedores de ubicación</string>
     <string name="autosend_frequency_hint">Número de minutos</string>
     <string name="pref_logging_file_no_permissions">Esa carpeta no se escribe por GPSLogger. Por favor, seleccione otra carpeta para escribir.</string>
@@ -405,4 +405,20 @@ No marques esta opcion si quieres que el nombre de archivo sea estatico.</string
     <string name="only_log_if_significant_motion_summary">Solo bitácora si es detectadas actividad significante tal como caminar, bicicleta. La moción significante está determinada por su SO.</string>
     <string name="significant_motion_bypass_interval_title">Intervalo prolongado sin movimiento</string>
     <string name="significant_motion_bypass_interval_summary">Durante periodos prolongados sin movimiento significativo, ocasionalmente se omite la verificación y se registra el ritmo cardíaco según lo determine este intervalo. Un valor inferior a 1 minuto desactiva el intervalo.</string>
+    <string name="osm_visibility_migration_message">OpenStreetMap esta removiendo opciones de visibilidad de rastro publicas y privadas. Tu configuración fue actualizada a rastreable para evitar errores.</string>
+    <string name="listeners_fused">Fusionado</string>
+    <string name="listeners_fused_summary">Combina entradas de otros proveedores de localización para un arreglo de ubicación.</string>
+    <string name="listeners_fused_title">Registro de ubicaciones fusionadas</string>
+    <string name="fused_quality_title">Calidad de ubicaciones fusionadas</string>
+    <string name="fused_quality_summary">Aconseja al proveedor funcionado sobre cuanto debería ser gastado entre consumo de energía y precisión</string>
+    <string name="fused_quality_low_power">Bajo consumo de energía (menos preciso)</string>
+    <string name="fused_quality_balanced">Balanceado (predeterminado)</string>
+    <string name="fused_quality_high_accuracy">Alta precisión (mas consumo de energía)</string>
+    <string name="customurl_basicauth_hide_password">Ocultar contraseña</string>
+    <string name="customurl_basicauth_hide_password_summary">La contraseña no puede ser (displayeada) en texto plano y no será exportada a la (file) del perfil</string>
+    <string name="log_dawarich_discard_offline_locations">Descartar ubicaciones al estar offline</string>
+    <string name="log_dawarich_discard_offline_locations_summary">Si esta opción se activa todas las ubicaciones serán descartadas mientras se este offline en vez de ponerlas en cola para subirlas</string>
+    <string name="log_dawarich_device_id">ID del dispositivo</string>
+    <string name="dawarich_baseUrl_not_set_title">URL Base sin configurar</string>
+    <string name="dawarich_apiKey_not_set_title">Llave API sin configurar</string>
 </resources>
