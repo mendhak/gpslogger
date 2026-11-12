@@ -1,0 +1,2 @@
+* Bugfix - denegar el permiso de trabajo en segundo plano causaba que autosend crasheara la app
+* Bugfix - ajustado el layout para Android 15
