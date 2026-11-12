@@ -1,0 +1,1 @@
+* Opciones de visibilidad "publica" y "privada" de OpenStreetMap fueron depreciadas, volviendo al predeterminado "rastreable"
