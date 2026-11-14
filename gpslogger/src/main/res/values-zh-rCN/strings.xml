@@ -196,8 +196,8 @@
     <string name="menu_autosend_now">立即自动发送</string>
     <string name="autosend_sending">自动发送中</string>
     <string name="summary_autosend">自动发送至：</string>
-    <string name="pref_autosend_title">自动发送、邮件与上传</string>
-    <string name="pref_autosend_summary">邮件、分享与上传选项</string>
+    <string name="pref_autosend_title">自动上传和发送</string>
+    <string name="pref_autosend_summary">配置发送目标和规则</string>
     <string name="shortcut_start">开始</string>
     <string name="shortcut_stop">停止</string>
     <string name="shortcut_pickaction">选择一项操作</string>
@@ -308,7 +308,7 @@
     <string name="gpslogger_permissions_rationale_message_storage"><![CDATA[<b>照片、媒体和文件</b> - 此权限允许应用向存储空间写入记录和测试文件，并读取文件列表以便上传或分享。本应用不会访问您的个人照片或媒体文件。]]></string>
     <string name="gpslogger_permissions_rationale_message_location_background"><![CDATA[<b>始终允许</b> - 允许本应用在后台运行时接收位置更新。 ]]></string>
     <string name="gpslogger_permissions_rationale_message_battery_optimization"><![CDATA[<b>忽略电池优化</b>-不对本应用进行电池优化，使之可以在后台运行。 ]]></string>
-    <string name="gpslogger_permissions_permanently_denied"><![CDATA["您已拒绝本应用所需的一项或多项权限。您需要重启应用，或前往系统设置页面授予这些权限。  <br><br>如果您选择了“永久拒绝”，请在系统设置中重置权限。 "]]></string>
+    <string name="gpslogger_permissions_permanently_denied"><![CDATA["您已拒绝本应用所需的一项或多项权限。  您需要重启应用，或前往系统设置页面授予这些权限。  <br><br>如果您选择了“永久拒绝”，请在系统设置中重置权限。 "]]></string>
     <string name="gpslogger_permissions_background_location"><![CDATA[为了允许GPS记录器在后台运行，您需要授予它一个额外的权限。在下一屏幕，请选择:]]></string>
     <string name="privacy_policy">隐私权政策</string>
     <string name="debuglog_attach_to_email">将调试日志附加到邮件</string>

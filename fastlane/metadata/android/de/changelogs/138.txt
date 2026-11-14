@@ -1,0 +1,7 @@
+* Neue Option für Anbieter von Fused Location
+* Dawarich: Null senden, wenn der Standort keine Geschwindigkeit hat
+* Dawarich: Ermöglicht die Einstellung von Bewegung und Aktivität über einen Tasker-Befehl
+* Bugfix: KML – Reihenfolge der Koordinaten war falsch
+* KML: „LineString“ zur Ausgabe hinzugefügt
+* Wartung: Symbole für die Profilnamen wurden entfernt, Bibliothek wird nicht mehr gepflegt
+* Automatisierung: Protokollierung von GPS, Netzwerk, Fused und Passive aktivieren/deaktivieren

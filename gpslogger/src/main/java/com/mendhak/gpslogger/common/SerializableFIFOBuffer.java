@@ -20,17 +20,17 @@
 package com.mendhak.gpslogger.common;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import org.slf4j.Logger;
-
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 
 /**
- * Generic FIFO Buffer with file persistence
- * @param <T> Serializable datatype to use
+ * A FIFO queue that is persisted to a JSON file after every change, so it survives app restarts.
+ * Use {@link #peek(int)} then {@link #remove(int)} to only drop items once they have been processed.
  */
 public class SerializableFIFOBuffer<T extends Serializable> {
 
@@ -40,7 +40,7 @@ public class SerializableFIFOBuffer<T extends Serializable> {
     private static final Map<String, SerializableFIFOBuffer<? extends Serializable>> instance = new HashMap<>();
 
 
-    private SerializableFIFOBuffer(String filePath) {
+    SerializableFIFOBuffer(String filePath) {
         persistenceFile = new File(filePath);
         try {
             if (persistenceFile.exists() && persistenceFile.isFile() && persistenceFile.length() > 0) {
@@ -63,7 +63,7 @@ public class SerializableFIFOBuffer<T extends Serializable> {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends Serializable> SerializableFIFOBuffer<T> getInstance(String filePath) {
+    public static synchronized <T extends Serializable> SerializableFIFOBuffer<T> getInstance(String filePath) {
         if (instance.containsKey(filePath)) {
             return (SerializableFIFOBuffer<T>) instance.get(filePath);
         } else {
@@ -86,35 +86,66 @@ public class SerializableFIFOBuffer<T extends Serializable> {
         return data;
     }
 
-    public boolean isEmpty() {
+    public synchronized List<T> peek(int count) {
+        List<T> items = new ArrayList<>();
+        Iterator<T> it = buffer.iterator();
+        while (it.hasNext() && items.size() < count) {
+            items.add(it.next());
+        }
+        return items;
+    }
+
+    public synchronized void remove(int count) {
+        boolean changed = false;
+        for (int i = 0; i < count && !buffer.isEmpty(); i++) {
+            buffer.poll();
+            changed = true;
+        }
+        if (changed) {
+            persistBuffer();
+        }
+    }
+
+    public synchronized boolean isEmpty() {
         return buffer.isEmpty();
     }
 
-    public int getSize() {
+    public synchronized int getSize() {
         return buffer.size();
     }
 
     private void persistBuffer() {
-        try (FileWriter fw = new FileWriter(persistenceFile)) {
-
-            Gson gson = new Gson();
-            String jsonBuffer = gson.toJson(buffer);
-            fw.write(jsonBuffer);
-
+        // Write to a temp file then rename, so a crash mid-write can't leave a truncated queue file
+        File tempFile = new File(persistenceFile.getPath() + ".tmp");
+        try (FileWriter fw = new FileWriter(tempFile)) {
+            fw.write(new Gson().toJson(buffer));
         } catch (IOException ex) {
             LOG.error("IOException while persisting Fifo-Buffer object: {}", ex.getMessage());
+            return;
+        }
+
+        if (!tempFile.renameTo(persistenceFile)) {
+            LOG.error("Could not replace FIFO buffer file {}", persistenceFile.getAbsolutePath());
         }
     }
 
     private void loadFromFile() {
         try (FileReader reader = new FileReader(persistenceFile)) {
-
-            Gson gson = new Gson();
             Type dequeTyp = new TypeToken<ArrayDeque<SerializableLocation>>() {}.getType();
-            buffer = gson.fromJson(reader, dequeTyp);
-
+            ArrayDeque<T> loaded = new Gson().fromJson(reader, dequeTyp);
+            if (loaded != null) {
+                buffer = loaded;
+            }
         } catch (IOException ex) {
             LOG.error("IOException while loading Fifo-Buffer object: {}", ex.getMessage());
+        } catch (JsonParseException ex) {
+            // Keep the unreadable file for troubleshooting
+            File corruptFile = new File(persistenceFile.getPath() + ".corrupt-" + System.currentTimeMillis());
+            LOG.error("FIFO buffer file {} is not valid JSON, moving it to {} and starting empty",
+                    persistenceFile.getAbsolutePath(), corruptFile.getName(), ex);
+            if (!persistenceFile.renameTo(corruptFile)) {
+                LOG.error("Could not move corrupt FIFO buffer file");
+            }
         }
     }
 }

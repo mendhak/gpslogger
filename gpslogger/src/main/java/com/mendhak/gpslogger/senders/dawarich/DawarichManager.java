@@ -19,77 +19,50 @@
 
 package com.mendhak.gpslogger.senders.dawarich;
 
-import com.mendhak.gpslogger.R;
-import com.mendhak.gpslogger.common.*;
-import com.mendhak.gpslogger.common.events.UploadEvents;
+import androidx.work.ExistingWorkPolicy;
+import com.mendhak.gpslogger.common.PreferenceHelper;
+import com.mendhak.gpslogger.common.Strings;
+import com.mendhak.gpslogger.common.Systems;
 import com.mendhak.gpslogger.common.slf4j.Logs;
 import com.mendhak.gpslogger.senders.FileSender;
-import com.mendhak.gpslogger.ui.Dialogs;
-import de.greenrobot.event.EventBus;
-import okhttp3.*;
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
 import org.slf4j.Logger;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 public class DawarichManager extends FileSender {
 
-    private final PreferenceHelper preferenceHelper;
     private static final Logger LOG = Logs.of(DawarichManager.class);
-    private SerializableFIFOBuffer<SerializableLocation> buffer;
+
+    static final String UPLOAD_WORK_NAME = "DawarichUpload";
+
+    private final PreferenceHelper preferenceHelper;
 
     public DawarichManager(PreferenceHelper preferenceHelper) {
         this.preferenceHelper = preferenceHelper;
-        registerEventBus();
     }
 
-    private void registerEventBus() {
-        EventBus.getDefault().register(this);
+    public static String getBufferPath(String folder) {
+        return folder + "/buffer.json";
     }
 
-    private void unregisterEventBus(){
-        try {
-            EventBus.getDefault().unregister(this);
-        } catch (Throwable t){
-            //this may crash if registration did not go through. just be safe
-        }
-    }
-
-    public void send(SerializableFIFOBuffer<SerializableLocation> buffer) throws JSONException, IOException {
-        this.buffer = buffer;
-        ArrayDeque<SerializableLocation> sendBuffer = new ArrayDeque<>();
-        for (int i = 0; i < preferenceHelper.getDawarichBatchMax() && !buffer.isEmpty(); i++) {
-            sendBuffer.add(buffer.pop());
+    // If an upload is already pending or running it sends the new locations too, so nothing new is scheduled
+    public void uploadQueue() {
+        if (!isAvailable()) {
+            LOG.debug("Dawarich is not configured, not uploading");
+            return;
         }
 
-        HashMap<String, Object> dataMap = new HashMap<String, Object>() {
-            {
-                put("sendBuffer", Strings.serializeTojson(sendBuffer));
-            }
-        };
-        String tag = "DaWarIch_" + Systems.DateTimeUtil.currentDateTime("yyyy-MM-dd_HH:mm:ss");
-        Systems.startWorkManagerRequest(DawarichWorker.class, dataMap, tag);
+        HashMap<String, Object> dataMap = new HashMap<>();
+        dataMap.put(DawarichWorker.BUFFER_PATH, getBufferPath(preferenceHelper.getGpsLoggerFolder()));
+        Systems.startWorkManagerRequest(DawarichWorker.class, dataMap, UPLOAD_WORK_NAME, ExistingWorkPolicy.KEEP);
     }
 
-    @EventBusHook
-    public void onEventMainThread(UploadEvents.Dawarich upload){
-        if(!upload.success){
-            for (int i=0; !upload.sendBuffer.isEmpty(); i++){
-                try {
-                    this.buffer.push(upload.sendBuffer.poll());
-                } catch (Exception e) {
-                    LOG.error(String.valueOf(e.getCause()));
-                }
-            }
-        }
-    }
-
+    // Dawarich doesn't upload files, an auto send or manual upload sends the queued locations instead
     @Override
     public void uploadFile(List<File> files) {
-
+        uploadQueue();
     }
 
     @Override

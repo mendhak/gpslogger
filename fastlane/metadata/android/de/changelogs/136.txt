@@ -1,0 +1,7 @@
+* HTTP-Ziel für Datei-Uploads (unabhängig vom normalen Custom-URL-Logger)
+* Einstellung des Intervalls für signifikante Herzschlagbewegungen; erzwingt Protokollierung, wenn eine bestimmte Zeit verstrichen ist
+* Anmeldung bei Dawarich
+* Bugfix: GPX-Track-Segmente in derselben Datei wurden nicht korrekt erstellt
+* Bugfix: es wurden ungenaue passive Standorte erfasst
+* Bugfix: keine neue Datei anlegen, wenn bereits in eine Datei protokolliert wird
+* Optionen für Stapelgröße und Verzögerung beim automatischen Senden
