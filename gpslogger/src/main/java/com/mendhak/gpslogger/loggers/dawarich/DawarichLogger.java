@@ -10,7 +10,7 @@ public class DawarichLogger implements FileLogger {
     private final SerializableFIFOBuffer<SerializableLocation> buffer;
 
     public DawarichLogger (String persistenceFilePath) {
-        this.buffer = SerializableFIFOBuffer.getInstance(persistenceFilePath + "/buffer.json");
+        this.buffer = SerializableFIFOBuffer.getInstance(DawarichManager.getBufferPath(persistenceFilePath));
     }
 
     @Override
@@ -26,13 +26,17 @@ public class DawarichLogger implements FileLogger {
         SerializableLocation sloc = new SerializableLocation(loc);
 
         if(!Systems.isNetworkAvailable((AppSettings.getInstance())) && preferenceHelper.shouldDawarichLoggingDiscardOfflineLocations()) return;
-        this.buffer.push(sloc);
-        if (!Systems.isNetworkAvailable(AppSettings.getInstance())) return;
 
+        BatteryInfo batteryInfo = Systems.getBatteryInfo(AppSettings.getInstance());
+        sloc.setBatteryLevel(batteryInfo.BatteryLevel);
+        sloc.setBatteryCharging(batteryInfo.IsCharging);
+        sloc.setMotion(preferenceHelper.getDawarichMotion());
+        sloc.setActivity(preferenceHelper.getDawarichActivity());
+
+        this.buffer.push(sloc);
 
         if (this.buffer.getSize() >= preferenceHelper.getDawarichBatchMin()) {
-            DawarichManager manager = new DawarichManager(preferenceHelper);
-            manager.send(buffer);
+            new DawarichManager(preferenceHelper).uploadQueue();
         }
 
     }
