@@ -44,6 +44,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertStoreException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -102,6 +106,45 @@ public class Networks {
         finally {
             fos.close();
         }
+    }
+
+    /**
+     * Reads one or more certificates from the given stream.
+     */
+    public static List<Certificate> readCertificatesFromStream(InputStream in)
+            throws CertificateException, NoSuchAlgorithmException {
+        List<Certificate> certificates = new ArrayList<>();
+
+        try {
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            Collection<? extends Certificate> generated = cf.generateCertificates(in);
+            if (generated != null && !generated.isEmpty()) {
+                certificates.addAll(generated);
+            }
+        } catch (Exception ex) {
+            LOG.debug("Could not read the X509 cert, trying PKCS?", ex);
+            CertificateFactory cf7 = CertificateFactory.getInstance("PKCS7");
+            Collection<? extends Certificate> pkcs7 = cf7.generateCertificates(in);
+            if (pkcs7 != null) {
+                certificates.addAll(pkcs7);
+            }
+        }
+
+        return certificates;
+    }
+
+    /**
+     * Adds every certificate in the given chain stream to the local
+     * known-servers truststore. Returns the number of certificates added.
+     */
+    public static int addChainToKnownServersStore(InputStream in, Context context)
+            throws CertificateException, NoSuchAlgorithmException, IOException, KeyStoreException {
+        List<Certificate> certificates = readCertificatesFromStream(in);
+        for (Certificate cert : certificates) {
+            addCertToKnownServersStore(cert, context);
+        }
+        LOG.debug("Added " + certificates.size() + " certificate(s) to the known-servers store");
+        return certificates.size();
     }
 
     public static CertificateValidationException extractCertificateValidationException(Exception e) {

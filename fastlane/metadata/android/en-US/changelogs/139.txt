@@ -1,1 +1,2 @@
 * Stability/improvements to dawarich logger
+* Ability to add a certificate chain file

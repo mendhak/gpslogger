@@ -20,9 +20,16 @@
 
 package com.mendhak.gpslogger.ui.fragments.settings;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import java.io.InputStream;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
@@ -90,6 +97,7 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
 
         findPreference("customurl_legend_1").setOnPreferenceClickListener(this);
         findPreference("customurl_validatecustomsslcert").setOnPreferenceClickListener(this);
+        findPreference("customurl_upload_custom_cert").setOnPreferenceClickListener(this);
 
         findPreference("log_customurl_basicauth").setOnPreferenceClickListener(this);
         if(!Strings.isNullOrEmpty(preferenceHelper.getCustomLoggingBasicAuthUsername())){
@@ -204,6 +212,14 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
             return true;
         }
 
+        if (preference.getKey().equals("customurl_upload_custom_cert")){
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("*/*");
+            filePickerLauncher.launch(intent);
+            return true;
+        }
+
         if(preference.getKey().equals("log_customurl_basicauth")){
 
             boolean hidePassword = preferenceHelper.shouldHideCustomLoggingBasicAuthPassword();
@@ -294,6 +310,42 @@ public class CustomUrlFragment extends PreferenceFragmentCompat implements
         return false;
     }
 
+
+    private final ActivityResultLauncher<Intent> filePickerLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() != Activity.RESULT_OK) {
+                        LOG.debug("File picker did not return OK (code " + String.valueOf(result.getResultCode()) + ")");
+                        return;
+                    }
+                    Intent data = result.getData();
+                    if (data == null || data.getData() == null) {
+                        LOG.debug("No file selected");
+                        return;
+                    }
+
+                    final android.net.Uri uri = data.getData();
+
+
+                    new Thread(() -> {
+                        try (InputStream in = getActivity().getContentResolver().openInputStream(uri)) {
+                            Networks.addChainToKnownServersStore(in, getActivity());
+                            getActivity().runOnUiThread(() ->
+                                    Dialogs.alert(getString(R.string.customurl_upload_custom_cert),
+                                            getString(R.string.success),
+                            getActivity()));
+                        } catch (Exception e) {
+                            LOG.error("Could not add custom certificate to the truststore", e);
+                            getActivity().runOnUiThread(() ->
+                                    Dialogs.showError(getString(R.string.error), e.getMessage(), e.getMessage(), e, getActivity()));
+                        }
+                    }).start();
+                }
+            }
+    );
 
     @Override
     public boolean onResult(@NonNull String dialogTag, int which, @NonNull Bundle extras) {

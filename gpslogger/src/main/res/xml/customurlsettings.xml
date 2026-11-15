@@ -69,6 +69,11 @@
         app:iconSpaceReserved="false" />
 
     <Preference
+        android:key="customurl_upload_custom_cert"
+        android:title="@string/customurl_upload_custom_cert"
+        app:iconSpaceReserved="false"/>
+
+    <Preference
         android:key="custom_url_batch_size"
         android:title="@string/customurl_autosend_batch_size"
         app:iconSpaceReserved="false" />
