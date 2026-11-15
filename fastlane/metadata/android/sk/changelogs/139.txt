@@ -1,0 +1,2 @@
+* Stabilita/vylepšenia pre dawarich logger
+* Možnosť pridať súbor reťazca certifikátov
