@@ -1,0 +1,2 @@
+* Dawarich logger stabilitásának növelése / fejlesztések
+* Tanúsítványlánc-fájl hozzáadásának lehetősége
