@@ -435,4 +435,5 @@
     <string name="fused_quality_low_power">省電力(低精度)</string>
     <string name="fused_quality_balanced">バランス(標準)</string>
     <string name="fused_quality_high_accuracy">高精度(より電力が必要)</string>
+    <string name="customurl_upload_custom_cert">カスタムCA証明書をアップロード</string>
 </resources>
