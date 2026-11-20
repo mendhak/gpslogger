@@ -1,0 +1,2 @@
+* Stabilität/Verbesserungen am Dawarich-Logger
+* Möglichkeit, eine Zertifikatsketten-Datei hinzuzufügen

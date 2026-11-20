@@ -438,4 +438,5 @@
     <string name="fused_quality_high_accuracy">Hohe Genauigkeit (höherer Stromverbrauch)</string>
     <string name="listeners_fused">Zusammengeführt</string>
     <string name="listeners_fused_summary">Kombiniert Daten von anderen Standortanbietern zur Standortbestimmung.</string>
+    <string name="customurl_upload_custom_cert">Eigene CA hochladen</string>
 </resources>
