@@ -752,7 +752,9 @@ public class GpsLoggingService extends Service  {
             fusedLocationlistener = new GeneralLocationListener(this, "FUSED");
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        // Only one callback: stopGpsManager unregisters just this one, and this method runs again for every point
+        // while the GPS is kept on between fixes, so a new callback each time would leave all earlier ones registered.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && gnssStatusCallback == null) {
             gnssStatusCallback = new GnssStatus.Callback() {
                 @Override
                 public void onStarted() {
