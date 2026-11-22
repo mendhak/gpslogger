@@ -1,2 +1,3 @@
-* Dawarich logger stabilitásának növelése / fejlesztések
+* Dawarich logger fejlesztése/stabilitás növelése
 * Tanúsítványlánc-fájl hozzáadásának lehetősége
+* Hibajavítás: memóriaszivárgás bekapcsolt GPS mellett a pozíciómérések közötti időszakban
