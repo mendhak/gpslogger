@@ -1,2 +1,3 @@
 * Stability/improvements to dawarich logger
 * Ability to add a certificate chain file
+* Bugfix: memory leak when 'gps on' between fixes
