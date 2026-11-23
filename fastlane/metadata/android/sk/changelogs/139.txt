@@ -1,2 +1,3 @@
 * Stabilita/vylepšenia pre dawarich logger
 * Možnosť pridať súbor reťazca certifikátov
+* Oprava chyby: únik z pamäte ak je aktívne 'gps on' medzi opravami
