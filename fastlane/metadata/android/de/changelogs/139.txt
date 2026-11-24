@@ -1,2 +1,3 @@
 * Stabilität/Verbesserungen am Dawarich-Logger
 * Möglichkeit, eine Zertifikatsketten-Datei hinzuzufügen
+* Bugfix: Speicherleck bei „GPS ein“ zwischen Positionsbestimmungen
