@@ -27,6 +27,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.mendhak.gpslogger.BuildConfig;
 import com.mendhak.gpslogger.R;
+import mil.nga.mgrs.MGRS;
+import mil.nga.mgrs.grid.GridType;
+import mil.nga.sf.Point;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
@@ -488,6 +491,39 @@ public class Strings {
         return ("" + deg + "° " + min + "' " + cardinality);
     }
 
+    public static String getMGRS(double lat, double lon, int precision) {
+        mil.nga.grid.features.Point point = new mil.nga.grid.features.Point(lon, lat);
+        MGRS mgrs = MGRS.from(point);
+
+        String GZD = mgrs.coordinate(GridType.GZD);
+        String hundredK = mgrs.coordinate(GridType.HUNDRED_KILOMETER).substring(3);
+        String eastNorth = mgrs.coordinate(GridType.METER).substring(5);
+        String east = eastNorth.substring(0, eastNorth.length() / 2);
+        String north = eastNorth.substring(eastNorth.length() / 2);
+
+
+        switch (precision) {
+            case 0:
+                return GZD + " " +  hundredK;
+
+            case 1:
+                return GZD + " " +  hundredK + " " +  east.substring(0, 1) + " " + north.substring(0, 1);
+
+            case 2:
+                return GZD + " " +  hundredK + " " +  east.substring(0, 2) + " " + north.substring(0, 2);
+
+            case 3:
+                return GZD + " " +  hundredK + " " +  east.substring(0, 3) + " " + north.substring(0, 3);
+
+            case 4:
+                return GZD + " " +  hundredK + " " +  east.substring(0, 4) + " " + north.substring(0, 4);
+
+            case 5:
+            default:
+                return GZD + " " +  hundredK + " " +  east + " " + north;
+        }
+    }
+
     public static String getDecimalDegrees(double decimaldegrees) {
         NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(6);
@@ -500,6 +536,42 @@ public class Strings {
 
     public static String getFormattedLongitude(double decimaldegrees){
         return getFormattedDegrees(decimaldegrees, false, PreferenceHelper.getInstance());
+    }
+
+    public static String getCoordinate (double lat, double lon, String seperator) {
+        PreferenceHelper ph = PreferenceHelper.getInstance();
+        switch(ph.getDisplayLatLongFormat()){
+            case MGRS:
+                return getMGRS(lat, lon, 5);
+
+            case DEGREES_MINUTES_SECONDS:
+                return getDegreesMinutesSeconds(lat, true) + seperator + getDegreesMinutesSeconds(lon, false) + " ";
+
+            case DEGREES_DECIMAL_MINUTES:
+                return getDegreesDecimalMinutes(lat, true) + seperator +  getDegreesDecimalMinutes(lon, false) + " ";
+
+            case DECIMAL_DEGREES:
+            default:
+                return getDecimalDegrees(lat) + seperator +  getDecimalDegrees(lon) + " ";
+        }
+    }
+
+    public static String getCoordinate (double val, boolean isLat) {
+        PreferenceHelper ph = PreferenceHelper.getInstance();
+        switch(ph.getDisplayLatLongFormat()){
+            case MGRS:
+                return "";
+
+            case DEGREES_MINUTES_SECONDS:
+                return getDegreesMinutesSeconds(val, isLat);
+
+            case DEGREES_DECIMAL_MINUTES:
+                return getDegreesDecimalMinutes(val, isLat);
+
+            case DECIMAL_DEGREES:
+            default:
+                return getDecimalDegrees(val);
+        }
     }
 
     static String getFormattedDegrees(double decimaldegrees, boolean isLatitude, PreferenceHelper ph){

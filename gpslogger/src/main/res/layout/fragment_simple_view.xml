@@ -17,7 +17,10 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true">
 
-            <TableRow>
+            <TableRow
+                    android:id="@+id/simple_lat_row"
+                    android:visibility="visible"
+            >
 
                 <HorizontalScrollView
                     android:layout_width="wrap_content"
@@ -51,7 +54,10 @@
                 </HorizontalScrollView>
             </TableRow>
 
-            <TableRow>
+            <TableRow
+                    android:id="@+id/simple_lon_row"
+                    android:visibility="visible"
+            >
 
                 <HorizontalScrollView
                     android:layout_width="wrap_content"
@@ -81,6 +87,43 @@
                             android:textIsSelectable="true"
                             android:textSize="@dimen/simpleview_latlong_textsize"
                             android:textStyle="italic" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </TableRow>
+
+            <TableRow
+                    android:id="@+id/simple_mgrs_row"
+                    android:visibility="gone"
+            >
+
+                <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fillViewport="true"
+                        android:gravity="center">
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                        <EditText
+                                android:id="@+id/simple_mgrs_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:fontFamily="sans-serif"
+                                android:gravity="center"
+                                android:inputType="none"
+                                android:selectAllOnFocus="true"
+                                android:textAlignment="center"
+                                android:textIsSelectable="true"
+                                android:textSize="@dimen/simpleview_mgrs_textsize"
+                                android:textStyle="italic" />
                     </LinearLayout>
                 </HorizontalScrollView>
             </TableRow>
