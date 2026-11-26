@@ -95,8 +95,11 @@ public class DawarichWorker extends Worker {
         DawarichBatch batch = new DawarichBatch();
         for (SerializableLocation location : locations) {
             try {
-                batch.appendLocation(DawarichBatchLocation.fromSerializableLocationExtended(location, preferenceHelper));
-            } catch (RuntimeException e) {
+                DawarichBatchLocation batchLocation = DawarichBatchLocation.fromSerializableLocationExtended(location, preferenceHelper);
+                // Serialize up front so one bad point is skipped here instead of failing the whole batch forever
+                batchLocation.toJSON();
+                batch.appendLocation(batchLocation);
+            } catch (RuntimeException | JSONException e) {
                 LOG.error("Skipping a location that can't be converted for Dawarich", e);
             }
         }

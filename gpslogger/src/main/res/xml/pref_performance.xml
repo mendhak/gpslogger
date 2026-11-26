@@ -134,6 +134,40 @@
         app:iconSpaceReserved="false" />
 
     <PreferenceCategory
+        android:title="@string/smart_stationary_category_title"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="smart_stationary_enabled"
+            android:title="@string/smart_stationary_enabled_title"
+            android:summary="@string/smart_stationary_enabled_summary"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:defaultValue="50"
+            android:dependency="smart_stationary_enabled"
+            android:key="smart_stationary_radius"
+            android:title="@string/smart_stationary_radius_title"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:defaultValue="5"
+            android:dependency="smart_stationary_enabled"
+            android:key="smart_stationary_count"
+            android:title="@string/smart_stationary_count_title"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            android:defaultValue="10"
+            android:dependency="smart_stationary_enabled"
+            android:key="smart_stationary_interval"
+            android:title="@string/smart_stationary_interval_title"
+            app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="Altitude"
         app:iconSpaceReserved="false">
 

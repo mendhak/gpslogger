@@ -156,7 +156,7 @@ public class DawarichBatchLocation {
         return horizontal_accuracy;
     }
 
-    public double getVertical_accuracy() {
+    public Double getVertical_accuracy() {
         return vertical_accuracy;
     }
 
@@ -249,9 +249,9 @@ public class DawarichBatchLocation {
         if (location.hasSpeed()) {
             b.withSpeed(location.getSpeed());
         }
-        if (!Strings.isNullOrEmpty(location.getHDOP()) &&  !Strings.isNullOrEmpty(location.getVDOP())) {
-            // Calc vert. accuracy from hor. accuracy, vdop & hdop via acc*(vdop/hdop)
-            b.withVerticalAccuracy(location.getAccuracy() * (Double.parseDouble(location.getVDOP()) / Double.parseDouble(location.getHDOP())));
+        Double verticalAccuracy = verticalAccuracyFrom(location.getAccuracy(), location.getHDOP(), location.getVDOP());
+        if (verticalAccuracy != null) {
+            b.withVerticalAccuracy(verticalAccuracy);
         }
         String[] motion = parseMotion(location.getMotion());
         if (motion.length > 0) {
@@ -261,6 +261,31 @@ public class DawarichBatchLocation {
             b.withActivity(location.getActivity());
         }
         return b.build();
+    }
+
+    /**
+     * Vertical accuracy estimated as acc * (vdop / hdop).
+     * Returns null when the DOP values are missing, unparseable, or would give a non-finite result
+     * (e.g. HDOP of 0), because JSONObject refuses NaN/Infinity and that would block the whole queue.
+     */
+    static Double verticalAccuracyFrom(double horizontalAccuracy, String hdop, String vdop) {
+        if (Strings.isNullOrEmpty(hdop) || Strings.isNullOrEmpty(vdop)) {
+            return null;
+        }
+        try {
+            double h = Double.parseDouble(hdop);
+            double v = Double.parseDouble(vdop);
+            if (h <= 0) {
+                return null;
+            }
+            double result = horizontalAccuracy * (v / h);
+            if (Double.isNaN(result) || Double.isInfinite(result)) {
+                return null;
+            }
+            return result;
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
     static String[] parseMotion(String motion) {
@@ -357,9 +382,9 @@ public class DawarichBatchLocation {
          */
         double horizontal_accuracy;
         /**
-         * Vertical accuracy in meters
+         * Vertical accuracy in meters, null when it can't be estimated
          */
-        double vertical_accuracy;
+        Double vertical_accuracy;
         /**
          * Motion type, for example: automotive_navigation, fitness, other_navigation or other<br>
          * Example: {@code ["walking","running","driving","cycling","stationary"]}

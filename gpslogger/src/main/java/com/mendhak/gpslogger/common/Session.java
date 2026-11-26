@@ -58,6 +58,44 @@ public class Session {
     }
 
 
+    public boolean isSmartStationary() {
+        return Boolean.valueOf(get("smartStationary", "false"));
+    }
+
+    public void setSmartStationary(boolean stationary) {
+        set("smartStationary", String.valueOf(stationary));
+    }
+
+    public boolean isSmartCheckPending() {
+        return Boolean.valueOf(get("smartCheckPending", "false"));
+    }
+
+    public void setSmartCheckPending(boolean pending) {
+        set("smartCheckPending", String.valueOf(pending));
+    }
+
+    public StationaryDetector.State getSmartStationaryState() {
+        return new StationaryDetector.State(
+                isSmartStationary(),
+                Boolean.valueOf(get("smartHasAnchor", "false")),
+                Double.parseDouble(get("smartAnchorLat", "0")),
+                Double.parseDouble(get("smartAnchorLon", "0")),
+                Integer.parseInt(get("smartCount", "0")));
+    }
+
+    public void setSmartStationaryState(StationaryDetector.State state) {
+        setSmartStationary(state.stationary);
+        set("smartHasAnchor", String.valueOf(state.hasAnchor));
+        set("smartAnchorLat", String.valueOf(state.anchorLat));
+        set("smartAnchorLon", String.valueOf(state.anchorLon));
+        set("smartCount", String.valueOf(state.count));
+    }
+
+    public void resetSmartStationaryState() {
+        setSmartStationaryState(StationaryDetector.State.initial());
+        setSmartCheckPending(false);
+    }
+
     public boolean isSinglePointMode() {
         return Boolean.valueOf(get("isSinglePointMode", "false"));
     }

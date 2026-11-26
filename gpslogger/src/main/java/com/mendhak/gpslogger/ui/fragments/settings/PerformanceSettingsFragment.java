@@ -34,6 +34,7 @@ import com.mendhak.gpslogger.R;
 import com.mendhak.gpslogger.common.AppSettings;
 import com.mendhak.gpslogger.common.PreferenceHelper;
 import com.mendhak.gpslogger.common.PreferenceNames;
+import com.mendhak.gpslogger.common.Strings;
 import eltos.simpledialogfragment.SimpleDialog;
 import eltos.simpledialogfragment.form.Input;
 import eltos.simpledialogfragment.form.SimpleFormDialog;
@@ -72,6 +73,11 @@ public class PerformanceSettingsFragment
 
         findPreference(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL).setOnPreferenceClickListener(this);
         findPreference(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL).setSummary(String.valueOf(preferenceHelper.getSignificantMotionBypassInterval()) + " " + getString(R.string.minutes));
+
+        findPreference(PreferenceNames.SMART_STATIONARY_RADIUS).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.SMART_STATIONARY_COUNT).setOnPreferenceClickListener(this);
+        findPreference(PreferenceNames.SMART_STATIONARY_INTERVAL).setOnPreferenceClickListener(this);
+        setSmartStationarySummaries();
 
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.S){
             findPreference(PreferenceNames.LOG_FUSED_LOCATIONS).setEnabled(false);
@@ -224,6 +230,24 @@ public class PerformanceSettingsFragment
             return true;
         }
 
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.SMART_STATIONARY_RADIUS)){
+            showSmartStationaryDialog(PreferenceNames.SMART_STATIONARY_RADIUS, R.string.settings_enter_meters,
+                    R.string.smart_stationary_radius_summary, preferenceHelper.getSmartStationaryRadius());
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.SMART_STATIONARY_COUNT)){
+            showSmartStationaryDialog(PreferenceNames.SMART_STATIONARY_COUNT, R.string.smart_stationary_count_dialog_title,
+                    R.string.smart_stationary_count_summary, preferenceHelper.getSmartStationaryCount());
+            return true;
+        }
+
+        if(preference.getKey().equalsIgnoreCase(PreferenceNames.SMART_STATIONARY_INTERVAL)){
+            showSmartStationaryDialog(PreferenceNames.SMART_STATIONARY_INTERVAL, R.string.time_in_minutes_dialog_title,
+                    R.string.smart_stationary_interval_summary, preferenceHelper.getSmartStationaryInterval());
+            return true;
+        }
+
         return false;
     }
 
@@ -288,6 +312,48 @@ public class PerformanceSettingsFragment
             return true;
         }
 
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SMART_STATIONARY_RADIUS)){
+            preferenceHelper.setSmartStationaryRadius(Strings.toInt(extras.getString(PreferenceNames.SMART_STATIONARY_RADIUS), 50));
+            setSmartStationarySummaries();
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SMART_STATIONARY_COUNT)){
+            preferenceHelper.setSmartStationaryCount(Strings.toInt(extras.getString(PreferenceNames.SMART_STATIONARY_COUNT), 5));
+            setSmartStationarySummaries();
+            return true;
+        }
+
+        if(dialogTag.equalsIgnoreCase(PreferenceNames.SMART_STATIONARY_INTERVAL)){
+            preferenceHelper.setSmartStationaryInterval(Strings.toInt(extras.getString(PreferenceNames.SMART_STATIONARY_INTERVAL), 10));
+            setSmartStationarySummaries();
+            return true;
+        }
+
         return false;
+    }
+
+    private void showSmartStationaryDialog(String key, int titleRes, int msgRes, int currentValue) {
+        SimpleFormDialog.build()
+                .title(titleRes)
+                .msg(msgRes)
+                .fields(
+                        Input.plain(key)
+                                .inputType(InputType.TYPE_CLASS_NUMBER)
+                                .required()
+                                .text(String.valueOf(currentValue))
+                                .max(4)
+                )
+                .show(this, key);
+    }
+
+    private void setSmartStationarySummaries() {
+        // The getters clamp the values, so the summary shows what will actually be used
+        // The warnings sit under the values so they're visible without opening the dialogs
+        findPreference(PreferenceNames.SMART_STATIONARY_RADIUS).setSummary(String.valueOf(preferenceHelper.getSmartStationaryRadius()) + getString(R.string.meters)
+                + "\n" + getString(R.string.smart_stationary_radius_hint));
+        findPreference(PreferenceNames.SMART_STATIONARY_COUNT).setSummary(String.valueOf(preferenceHelper.getSmartStationaryCount()) + " " + getString(R.string.smart_stationary_count_points));
+        findPreference(PreferenceNames.SMART_STATIONARY_INTERVAL).setSummary(String.valueOf(preferenceHelper.getSmartStationaryInterval()) + getString(R.string.minutes)
+                + "\n" + getString(R.string.smart_stationary_interval_hint));
     }
 }

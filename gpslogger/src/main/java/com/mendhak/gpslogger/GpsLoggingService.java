@@ -475,6 +475,7 @@ public class GpsLoggingService extends Service  {
         }
 
         session.setStarted(true);
+        session.resetSmartStationaryState();
 
         resetAutoSendTimersIfNecessary();
         showNotification();
@@ -586,6 +587,8 @@ public class GpsLoggingService extends Service  {
         session.setStarted(false);
         session.setUserStillSinceTimeStamp(0);
         session.setLatestTimeStamp(0);
+        session.resetSmartStationaryState();
+        disarmSmartMotionSensor();
         stopAbsoluteTimer();
         // Email log file before setting location info to null
         autoSendLogFileOnStop();
@@ -1060,9 +1063,11 @@ public class GpsLoggingService extends Service  {
         // Don't log a point until the user-defined time has elapsed
         // However, if user has set an annotation, just log the point, disregard time and distance filters
         // However, if it's a passive location, disregard the time filter
+        // A smart mode motion check also ignores the time filter, the sensor asked for a fix right now
         if (!isPassiveLocation && !session.hasDescription()
                 && !session.isSinglePointMode()
-                && (currentTimeStamp - session.getLatestTimeStamp()) < (preferenceHelper.getMinimumLoggingInterval() * 1000)) {
+                && !session.isSmartCheckPending()
+                && (currentTimeStamp - session.getLatestTimeStamp()) < (getEffectiveLoggingIntervalSeconds() * 1000L)) {
             LOG.debug("Received location, but minimum logging interval has not passed. Ignoring.");
             return;
         }
@@ -1208,6 +1213,9 @@ public class GpsLoggingService extends Service  {
             session.setLatestPassiveTimeStamp(loc.getTime());
         }
 
+        // Before stopManagerAndResetAlarm below, so the next alarm uses the new interval
+        updateSmartStationaryState(loc);
+
         writeToFile(loc);
         resetAutoSendTimersIfNecessary();
         stopManagerAndResetAlarm();
@@ -1307,12 +1315,107 @@ public class GpsLoggingService extends Service  {
     }
 
     protected void stopManagerAndResetAlarm() {
-        if (!preferenceHelper.shouldKeepGPSOnBetweenFixes()) {
+        boolean smartStationary = isSmartStationaryActive();
+
+        // While stationary there's nothing to gain from keeping the GPS on between checks
+        if (!preferenceHelper.shouldKeepGPSOnBetweenFixes() || smartStationary) {
             stopGpsManager();
+        }
+
+        // This check (timer or motion triggered) is over, whether or not it got a fix
+        session.setSmartCheckPending(false);
+        if (smartStationary) {
+            // Re-arm on every check: the trigger is one-shot and can go quiet after long idle periods
+            armSmartMotionSensor();
+        } else {
+            disarmSmartMotionSensor();
         }
 
         stopAbsoluteTimer();
         setAlarmForNextPoint();
+    }
+
+    private boolean isSmartStationaryActive() {
+        return preferenceHelper.isSmartStationaryModeEnabled() && session.isSmartStationary();
+    }
+
+    /**
+     * The interval between points: the normal one, or the longer smart mode one while stationary.
+     */
+    private int getEffectiveLoggingIntervalSeconds() {
+        if (isSmartStationaryActive()) {
+            return preferenceHelper.getSmartStationaryInterval() * 60;
+        }
+        return preferenceHelper.getMinimumLoggingInterval();
+    }
+
+    private void updateSmartStationaryState(Location loc) {
+        if (!preferenceHelper.isSmartStationaryModeEnabled()) {
+            if (session.isSmartStationary()) {
+                session.resetSmartStationaryState();
+            }
+            return;
+        }
+
+        StationaryDetector.State previous = session.getSmartStationaryState();
+        StationaryDetector.State next = StationaryDetector.next(previous, loc.getLatitude(), loc.getLongitude(),
+                preferenceHelper.getSmartStationaryRadius(), preferenceHelper.getSmartStationaryCount());
+        session.setSmartStationaryState(next);
+
+        if (!previous.stationary && next.stationary) {
+            LOG.info("Smart mode: {} points within {}m, stationary. Logging every {} min until moved.",
+                    next.count, preferenceHelper.getSmartStationaryRadius(), preferenceHelper.getSmartStationaryInterval());
+        } else if (previous.stationary && !next.stationary) {
+            LOG.info("Smart mode: moved {}m from the stationary point, back to every {}s.",
+                    (long) StationaryDetector.distanceFromAnchor(previous, loc.getLatitude(), loc.getLongitude()),
+                    preferenceHelper.getMinimumLoggingInterval());
+        } else if (next.stationary) {
+            LOG.debug("Smart mode: still within {}m of the stationary point", preferenceHelper.getSmartStationaryRadius());
+        }
+    }
+
+    private TriggerEventListener smartMotionListener;
+
+    private void armSmartMotionSensor() {
+        SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        Sensor significantMotionSensor = sensorManager == null ? null : sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);
+        if (significantMotionSensor == null) {
+            // No sensor, the stationary interval timer alone will do the checks
+            return;
+        }
+
+        if (smartMotionListener == null) {
+            smartMotionListener = new TriggerEventListener() {
+                @Override
+                public void onTrigger(TriggerEvent event) {
+                    onSmartMotionDetected();
+                }
+            };
+        }
+
+        sensorManager.cancelTriggerSensor(smartMotionListener, significantMotionSensor);
+        sensorManager.requestTriggerSensor(smartMotionListener, significantMotionSensor);
+    }
+
+    private void disarmSmartMotionSensor() {
+        if (smartMotionListener == null) {
+            return;
+        }
+        SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        Sensor significantMotionSensor = sensorManager == null ? null : sensorManager.getDefaultSensor(Sensor.TYPE_SIGNIFICANT_MOTION);
+        if (significantMotionSensor != null) {
+            sensorManager.cancelTriggerSensor(smartMotionListener, significantMotionSensor);
+        }
+    }
+
+    private void onSmartMotionDetected() {
+        if (!session.isStarted() || !isSmartStationaryActive()) {
+            return;
+        }
+        LOG.info("Smart mode: significant motion detected, checking location now");
+        session.setSmartCheckPending(true);
+        stopAlarm();
+        startGpsManager();
     }
 
 
@@ -1329,15 +1432,16 @@ public class GpsLoggingService extends Service  {
         PendingIntent pi = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_MUTABLE);
         nextPointAlarmManager.cancel(pi);
 
+        int intervalSeconds = getEffectiveLoggingIntervalSeconds();
         if(AlarmManagerCompat.canScheduleExactAlarms(nextPointAlarmManager)){
-            LOG.debug("Setting exact alarm for {}s", preferenceHelper.getMinimumLoggingInterval());
+            LOG.debug("Setting exact alarm for {}s", intervalSeconds);
             AlarmManagerCompat.setExactAndAllowWhileIdle(nextPointAlarmManager, AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000L, pi);
+                    SystemClock.elapsedRealtime() + intervalSeconds * 1000L, pi);
         }
         else {
-            LOG.debug("Setting inexact alarm for {}s (exact alarm disallowed/not available)", preferenceHelper.getMinimumLoggingInterval());
+            LOG.debug("Setting inexact alarm for {}s (exact alarm disallowed/not available)", intervalSeconds);
             AlarmManagerCompat.setAndAllowWhileIdle(nextPointAlarmManager, AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                    SystemClock.elapsedRealtime() + preferenceHelper.getMinimumLoggingInterval() * 1000L, pi);
+                    SystemClock.elapsedRealtime() + intervalSeconds * 1000L, pi);
         }
     }
 

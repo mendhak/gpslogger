@@ -1496,6 +1496,55 @@ public class PreferenceHelper {
         prefs.edit().putString(PreferenceNames.SIGNIFICANT_MOTION_BYPASS_INTERVAL, String.valueOf(value)).apply();
     }
 
+    /**
+     * Smart stationary mode: when enough consecutive points stay within a radius,
+     * log at a slower interval until a point (or significant motion check) falls outside it.
+     */
+    @ProfilePreference(name= PreferenceNames.SMART_STATIONARY_ENABLED)
+    public boolean isSmartStationaryModeEnabled() {
+        return prefs.getBoolean(PreferenceNames.SMART_STATIONARY_ENABLED, false);
+    }
+
+    public void setSmartStationaryModeEnabled(boolean value){
+        prefs.edit().putBoolean(PreferenceNames.SMART_STATIONARY_ENABLED, value).apply();
+    }
+
+    /**
+     * Radius in meters that points must stay within to count as stationary
+     */
+    @ProfilePreference(name= PreferenceNames.SMART_STATIONARY_RADIUS)
+    public int getSmartStationaryRadius() {
+        return Math.max(1, Strings.toInt(prefs.getString(PreferenceNames.SMART_STATIONARY_RADIUS, "50"), 50));
+    }
+
+    public void setSmartStationaryRadius(int meters){
+        prefs.edit().putString(PreferenceNames.SMART_STATIONARY_RADIUS, String.valueOf(meters)).apply();
+    }
+
+    /**
+     * Number of consecutive points within the radius (including the first) before switching to the stationary interval
+     */
+    @ProfilePreference(name= PreferenceNames.SMART_STATIONARY_COUNT)
+    public int getSmartStationaryCount() {
+        return Math.max(StationaryDetector.MIN_REQUIRED_COUNT, Strings.toInt(prefs.getString(PreferenceNames.SMART_STATIONARY_COUNT, "5"), 5));
+    }
+
+    public void setSmartStationaryCount(int count){
+        prefs.edit().putString(PreferenceNames.SMART_STATIONARY_COUNT, String.valueOf(count)).apply();
+    }
+
+    /**
+     * Logging interval in minutes while stationary
+     */
+    @ProfilePreference(name= PreferenceNames.SMART_STATIONARY_INTERVAL)
+    public int getSmartStationaryInterval() {
+        return Math.max(1, Strings.toInt(prefs.getString(PreferenceNames.SMART_STATIONARY_INTERVAL, "10"), 10));
+    }
+
+    public void setSmartStationaryInterval(int minutes){
+        prefs.edit().putString(PreferenceNames.SMART_STATIONARY_INTERVAL, String.valueOf(minutes)).apply();
+    }
+
     @SuppressWarnings("unchecked")
     public void savePropertiesFromPreferences(File f) throws IOException {
 

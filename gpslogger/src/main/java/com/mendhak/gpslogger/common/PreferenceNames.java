@@ -176,4 +176,9 @@ public  class PreferenceNames {
     public static final String ONLY_LOG_IF_SIGNIFICANT_MOTION = "only_log_if_significant_motion";
     public static final String SIGNIFICANT_MOTION_BYPASS_INTERVAL = "significant_motion_bypass_interval";
 
+    public static final String SMART_STATIONARY_ENABLED = "smart_stationary_enabled";
+    public static final String SMART_STATIONARY_RADIUS = "smart_stationary_radius";
+    public static final String SMART_STATIONARY_COUNT = "smart_stationary_count";
+    public static final String SMART_STATIONARY_INTERVAL = "smart_stationary_interval";
+
 }
